@@ -39,6 +39,8 @@ import {
   SelectItem,
 } from '@/components/ui/select';
 import { ModeToggle } from './ModeToggle';
+import { Icon } from './Icon';
+import { ArrowLeftIcon } from '@hugeicons/core-free-icons';
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -54,7 +56,13 @@ export function DesignSystemPreview() {
 
   return (
     <div className="space-y-12">
-      <div className="flex items-center justify-end">
+      <div className="flex items-center justify-between">
+        <a href="/">
+          <Button variant="outline">
+            <Icon icon={ArrowLeftIcon} />
+            Back to home
+          </Button>
+        </a>
         <ModeToggle />
       </div>
       {/* Colors */}
