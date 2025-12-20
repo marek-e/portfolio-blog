@@ -1,0 +1,40 @@
+---
+import { ModeToggle } from '@/components/react/ModeToggle';
+import { Star } from '@hugeicons/core-free-icons';
+import { Icon } from '@/components/react/Icon';
+---
+
+<nav class="fixed top-6 left-1/2 z-50 w-fit -translate-x-1/2">
+  <div
+    class="relative flex items-center gap-6 rounded-full border border-white/40 bg-white/10 px-6 py-3 shadow-xl shadow-black/5 backdrop-blur-lg before:pointer-events-none before:absolute before:inset-0 before:rounded-full before:bg-linear-to-b before:from-white/30 before:via-transparent before:to-transparent dark:border-white/20 dark:bg-black/10 dark:shadow-black/40 dark:before:from-white/10"
+  >
+    <a
+      href="/"
+      class="text-foreground flex items-center gap-2 font-semibold transition-opacity hover:opacity-80"
+    >
+      <Icon icon={Star} strokeWidth={2} fill="currentColor" className="text-primary size-4" />
+      <span>melmayan</span>
+    </a>
+
+    <div class="hidden items-center gap-6 md:flex">
+      <a href="/" class="text-foreground/80 hover:text-foreground text-sm transition-colors">Home</a
+      >
+      <a href="/projects" class="text-foreground/80 hover:text-foreground text-sm transition-colors"
+        >Projects</a
+      >
+      <a href="/blog" class="text-foreground/80 hover:text-foreground text-sm transition-colors"
+        >Blog</a
+      >
+      <a href="/about" class="text-foreground/80 hover:text-foreground text-sm transition-colors"
+        >About</a
+      >
+      <a href="/contact" class="text-foreground/80 hover:text-foreground text-sm transition-colors"
+        >Contact</a
+      >
+    </div>
+
+    <div class="flex items-center gap-4">
+      <ModeToggle client:load />
+    </div>
+  </div>
+</nav>

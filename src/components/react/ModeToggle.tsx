@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ComputerIcon, MoonIcon, SunIcon } from '@hugeicons/core-free-icons';
+import { ComputerIcon, Moon02Icon, SunIcon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
 
 import { Button } from '@/components/ui/button';
@@ -27,20 +27,27 @@ export function ModeToggle() {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger>
-        <Button variant="outline" size="icon" aria-label="Toggle theme">
-          <HugeiconsIcon
-            icon={SunIcon}
-            strokeWidth={2}
-            className="size-5 scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90"
+      <DropdownMenuTrigger
+        render={
+          <Button
+            variant="outline"
+            size="icon"
+            aria-label="Toggle theme"
+            className="rounded-full"
           />
-          <HugeiconsIcon
-            icon={MoonIcon}
-            strokeWidth={2}
-            className="absolute size-5 scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0"
-          />
-          <span className="sr-only">Toggle theme</span>
-        </Button>
+        }
+      >
+        <HugeiconsIcon
+          icon={SunIcon}
+          strokeWidth={2}
+          className="size-5 scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90"
+        />
+        <HugeiconsIcon
+          icon={Moon02Icon}
+          strokeWidth={2}
+          className="absolute size-5 scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0"
+        />
+        <span className="sr-only">Toggle theme</span>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuItem onClick={() => setThemeState('theme-light')}>
@@ -48,7 +55,7 @@ export function ModeToggle() {
           Light
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setThemeState('dark')}>
-          <HugeiconsIcon icon={MoonIcon} strokeWidth={2} />
+          <HugeiconsIcon icon={Moon02Icon} strokeWidth={2} />
           Dark
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setThemeState('system')}>
