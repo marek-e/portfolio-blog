@@ -1,65 +1,58 @@
-# melmayan.fr - Developer Portfolio
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Project Overview
 
-Personal developer portfolio + blog built with Astro and React. Static-first architecture with interactive islands for specific features.
+Personal developer portfolio + blog at https://melmayan.fr. Built with Astro (static-first SSG), React 19 islands for interactivity, Tailwind CSS v4 + shadcn/ui. Deployed to Cloudflare Pages.
 
-**Domain:** https://melmayan.fr
+## Commands
 
-## Tech Stack
+```bash
+pnpm dev             # Start dev server (localhost:4321)
+pnpm build           # Production build to dist/
+pnpm preview         # Preview production build
+pnpm lint            # Run ESLint
+pnpm lint:fix        # Run ESLint with auto-fix
+pnpm format          # Format all files with Prettier
+pnpm format:check    # Check formatting without writing
 
-- **Framework:** Astro 5.x (static-first SSG)
-- **UI Islands:** React 19 (only for interactive components)
-- **Styling:** Tailwind CSS v4 + shadcn/ui components
-- **Content:** Astro Content Collections (MD/MDX)
-- **Linting:** ESLint + Prettier
-- **Build:** Static output for Cloudflare Pages
+# Slash commands (Claude Code)
+/validate            # Run format + lint + build checks
+/learn               # Analyze session mistakes, update docs
+/update-docs         # Refresh docs from codebase
+```
 
-## Project Structure
+## Adding shadcn Components
+
+```bash
+pnpm dlx shadcn@latest add <component-name>
+```
+
+## Architecture
 
 ```
 src/
 ├── components/
 │   ├── astro/       # Static Astro components (zero JS)
 │   ├── react/       # React island wrappers (interactive)
-│   └── ui/          # shadcn/ui primitives
-├── content/
+│   └── ui/          # shadcn/ui primitives (don't edit manually)
+├── content/         # Astro Content Collections (MD/MDX)
 │   ├── projects/    # Project markdown files
 │   └── blog/        # Blog post markdown files
-├── layouts/
-│   └── Layout.astro # Base layout with SEO
+├── layouts/         # Base layouts with SEO
 ├── pages/           # File-based routing
-└── styles/
-    └── global.css   # Tailwind + theme variables
-```
-
-## Key Commands
-
-```bash
-pnpm dev           # Start dev server
-pnpm build         # Production build
-pnpm lint          # Run ESLint
-pnpm format        # Run Prettier
-/validate          # Run all checks (format + lint + build)
-/learn             # Capture mistakes, update docs
-/update-docs       # Refresh docs from codebase
+└── styles/global.css # Tailwind + theme variables
 ```
 
 ## Critical Conventions
-
-### Component Patterns
-
-1. **Static components** → `.astro` files in `components/astro/`
-2. **Interactive features** → `.tsx` wrappers in `components/react/`
-3. **shadcn primitives** → Auto-generated in `components/ui/`
 
 ### React Context in Astro (IMPORTANT)
 
 shadcn components using React Context (Dialog, DropdownMenu, Accordion, Select) **must be wrapped** in a single `.tsx` file. Astro creates separate islands that can't share context.
 
 ```tsx
-// CORRECT: Single wrapper component
-// src/components/react/ProjectModal.tsx
+// CORRECT: Single wrapper in src/components/react/
 export function ProjectModal() {
   return (
     <Dialog>
@@ -70,47 +63,50 @@ export function ProjectModal() {
 }
 ```
 
+### Component Placement
+
+- **Static content** → `.astro` in `components/astro/`
+- **Interactive features** → `.tsx` in `components/react/`
+- **shadcn primitives** → `components/ui/` (use CLI to add)
+
 ### Client Directives
 
 ```astro
 <Component client:load />     <!-- Critical, load immediately -->
 <Component client:visible />  <!-- Below fold, lazy load -->
-<Component client:media="(max-width: 768px)" />  <!-- Conditional -->
 ```
 
-### Import Aliases
+### Imports
 
-Always use `@/` prefix for imports:
+Always use `@/` alias:
 ```typescript
 import { Button } from '@/components/ui/button';
-import Layout from '@/layouts/Layout.astro';
+```
+
+### Styling
+
+Use semantic theme colors, not raw values:
+```tsx
+// ✓ bg-background text-foreground bg-primary
+// ✗ bg-white text-black bg-blue-500
 ```
 
 ## Forbidden Patterns
 
-- ❌ Skill percentages or charts
-- ❌ Full-page constant motion
-- ❌ Heavy parallax effects
-- ❌ Motion that blocks reading
-- ❌ Overconfident claims ("expert", "10x dev")
-- ❌ Generic template language
+- Skill percentages or charts
+- Full-page constant motion / heavy parallax
+- Overconfident claims ("expert", "10x dev")
+- Generic template language
 
-## Accessibility Requirements
+## Accessibility
 
 - Respect `prefers-reduced-motion`
 - Keyboard navigable everywhere
-- Clear focus states
-- ARIA labels where needed
+- ARIA labels on icon-only buttons
 
-## Documentation
+## Extended Documentation
 
-- `docs/ARCHITECTURE.md` - System design details
-- `docs/CONVENTIONS.md` - Code patterns and rules
+- `docs/ARCHITECTURE.md` - System design, data flow, rendering modes
+- `docs/CONVENTIONS.md` - Detailed code patterns, file naming, content schemas
 - `docs/COMPONENTS.md` - UI component guide
-- `docs/LESSONS.md` - Learned lessons from mistakes
-
-## Current Lessons
-
-<!-- Updated by /learn command -->
-
-_No lessons recorded yet. Run `/learn` after encountering issues._
+- `docs/LESSONS.md` - Learned lessons (updated by `/learn`)
