@@ -1,5 +1,12 @@
 {
   "permissions": {
-    "allow": ["Bash(pnpm remove:*)", "Bash(pnpm astro add:*)", "Bash(pnpm add:*)"]
+    "allow": [
+      "Bash(pnpm:*)",
+      "Bash(node .claude/hooks:*)",
+      "Edit(.claude/**)",
+      "Edit(docs/**)",
+      "Write(.claude/**)",
+      "Write(docs/**)"
+    ]
   }
 }
