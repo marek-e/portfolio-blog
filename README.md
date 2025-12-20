@@ -1,46 +1,195 @@
-# Astro Starter Kit: Basics
+🔥 Developer Portfolio + Blog (Astro + React)
 
-```sh
-pnpm create astro@latest -- --template basics
-```
+GOAL
+Create a personal portfolio that proves real competence, shows enthusiasm, and tells a memorable technical story.
+Audience priority:
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+1. HR (30–60s scan): clarity, competence, fit
+2. Developers: depth, problem-solving, humility, growth
 
-## 🚀 Project Structure
+CORE PRINCIPLES
 
-Inside of your Astro project, you'll see the following folders and files:
+- Content > effects
+- Depth > breadth
+- Static-first, JS only where it adds value
+- Motion must improve comprehension, not distract
+- Accessibility is mandatory, not optional
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
+TECH STACK (DECIDED)
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+- Framework: Astro (static-first)
+- UI: React used only for interactive islands
+- Content: Astro Content Collections + MD/MDX
+- Animations: CSS first, then Framer Motion / GSAP if needed
+- Game module: client-only React + Canvas (Phaser recommended)
+- Hosting: Static hosting (Cloudflare Pages recommended)
+- Custom domain enabled
 
-## 🧞 Commands
+SITE STRUCTURE
 
-All commands are run from the root of the project, from a terminal:
+HOMEPAGE (required)
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
+- About Me
+  - Conversational, human, specific
+  - Personal anecdotes, motivation, background
+  - No corporate speak, no bragging
+- Featured Projects
+  - 2–5 max
+  - Each links to its own Project Detail page
+- Contact
+  - Email or form (not only socials)
+- Optional portrait/photo
 
-## 👀 Want to learn more?
+PROJECTS SECTION
+Two modes (user-toggle):
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+MODE A — Default (Lightweight, SEO-first)
+
+- Grid or list
+- Fast, scannable
+- Filters/search allowed
+- Mandatory deep links to project detail pages
+- This is the primary hiring surface
+
+MODE B — 2D Exploration (Opt-in)
+
+- Separate toggle: “Explore in 2D”
+- Heavy JS loaded ONLY after user opts in
+- Treat as a delight / easter egg, never required
+- Keyboard accessible + clear controls
+- Always-visible exit + “switch to list view”
+- If prefers-reduced-motion → default to Mode A
+- Project pages still exist separately and are indexable
+
+ANIMATION GUIDELINES (CRITICAL)
+
+Allowed / Recommended:
+
+- Subtle entrance sequencing (hero, cards)
+- Micro-interactions (hover, focus, button feedback)
+- Scroll reveal ONLY below the fold
+- ONE signature flourish max (parallax shape, animated accent)
+
+Forbidden:
+
+- Full-page constant motion
+- Heavy parallax everywhere
+- Large motion distances or bouncy easing
+- Motion that blocks reading or navigation
+- Skill bars, percentages, gimmicks
+
+Accessibility:
+
+- Respect prefers-reduced-motion (disable non-essential motion)
+- Keyboard navigable everywhere
+- Clear focus states
+- No auto-scrolling or disorienting motion
+
+PROJECT SELECTION RULES
+Include projects that show:
+
+- Real problems solved
+- Shipped work (even small audience)
+- Open-source with clearly stated role
+- Initiative, autonomy, creativity
+
+Avoid:
+
+- Tutorial-only projects
+- Confidential work
+- Non-dev projects (put in About)
+- Listing the portfolio itself unless it has deep technical value
+
+Quantity:
+
+- Ideal: 2–5 projects
+- If only 1: add a small second or a WIP with disclaimer
+
+PROJECT DETAIL PAGE — MANDATORY TEMPLATE
+
+Each project MUST include:
+
+1. Introduction
+
+- What it is
+- Key features
+- Your role
+- Tech stack
+- Links (repo/demo, low priority)
+
+2. Purpose & Goal
+
+- Why you built it
+- Problem it solves
+- Initial design intent
+
+3. Spotlight (Core)
+
+- Hardest / most interesting technical problem
+- Constraints and trade-offs
+- How you solved it
+- Deep technical explanation (for dev reviewers)
+
+4. Current Status (optional)
+
+- Usage, feedback, impact
+
+5. Lessons Learned
+
+- Technical lessons
+- Non-technical lessons
+- Accessibility considerations
+- How it shaped later decisions
+
+6. Visuals
+
+- Screenshots placed to support the story
+- Diagrams/sketches encouraged
+
+Style:
+
+- Short paragraphs
+- Headings + bullet points
+- Highly scannable
+- Story-driven, not academic
+
+BLOG
+
+- MD/MDX
+- Minimal animation
+- Readability first
+- RSS + sitemap enabled
+
+DESIGN GUIDELINES
+
+- Clean, modern, trustworthy
+- Consistent spacing
+- Borrow inspiration from multiple sources, never copy one
+- Small “sprinkles” only (hover, theme toggle, easter eggs)
+- Light/dark mode allowed
+
+FORBIDDEN ELEMENTS
+
+- Skill percentages or charts
+- “What I do” service boxes
+- Overconfident claims (“expert”, “10x dev”)
+- Generic template language
+- Long unstructured paragraphs
+
+DEPLOYMENT
+
+- Static build output
+- Global CDN
+- HTTPS enforced
+- Custom domain configured
+- Heavy JS routes lazy-loaded (projects 2D mode)
+
+FINAL CHECK
+The portfolio must:
+
+- Be unique to the developer
+- Tell a personal technical story
+- Show real problem-solving
+- Demonstrate growth and humility
+- Be fast, accessible, and memorable
+- Avoid all clichés and gimmicks
