@@ -3,9 +3,10 @@ import { ModeToggle } from '@/components/react/ModeToggle';
 import { MobileMenu } from '@/components/react/MobileMenu';
 import { Star } from '@hugeicons/core-free-icons';
 import { Icon } from '@/components/react/Icon';
+import { NAV_LINKS } from '@/lib/navigation';
 
 const linksClasses =
-  'text-foreground/80 hover:text-foreground relative z-10 rounded-lg px-3 py-1.5 text-sm transition-colors';
+  'text-foreground/80 hover:text-foreground flex items-center gap-2 relative z-10 rounded-lg px-3 py-1.5 text-sm transition-colors';
 ---
 
 <nav class="fixed top-6 left-1/2 z-50 w-fit -translate-x-1/2">
@@ -23,13 +24,17 @@ const linksClasses =
     <div id="nav-links" class="relative hidden items-center gap-1 md:flex">
       <div
         id="nav-pill"
-        class="pointer-events-none absolute rounded-lg bg-white/35 opacity-0 shadow-[0_0_12px_rgba(255,255,255,0.3)] transition-all duration-200 ease-out dark:bg-white/15 dark:shadow-[0_0_12px_rgba(255,255,255,0.15)]"
+        class="bg-primary/20 shadow-primary/30 pointer-events-none absolute rounded-lg opacity-0 shadow-sm transition-all duration-200 ease-out"
       >
       </div>
-      <a href="/projects" class={linksClasses} data-nav-link>Projects</a>
-      <a href="/blog" class={linksClasses} data-nav-link>Blog</a>
-      <a href="/design-system" class={linksClasses} data-nav-link>Design</a>
-      <a href="/contact" class={linksClasses} data-nav-link>Contact</a>
+      {
+        NAV_LINKS.map((link) => (
+          <a href={link.href} class={linksClasses} data-nav-link>
+            <Icon icon={link.icon} strokeWidth={2} className="size-4" />
+            {link.label}
+          </a>
+        ))
+      }
     </div>
 
     <div class="flex items-center gap-2">
