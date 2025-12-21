@@ -122,8 +122,69 @@
   }
   body {
     @apply bg-background text-foreground font-sans;
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
   }
   html {
     @apply font-sans;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body {
+    transition: none;
+  }
+}
+
+/* Page transitions - fade */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.2s;
+  animation-timing-function: ease-out;
+}
+
+::view-transition-old(root) {
+  animation-name: fade-out;
+}
+
+::view-transition-new(root) {
+  animation-name: fade-in;
+}
+
+@keyframes fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+/* Theme transitions - circular reveal */
+html:active-view-transition-type(theme-transition)::view-transition-old(root),
+html:active-view-transition-type(theme-transition)::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+html:active-view-transition-type(theme-transition)::view-transition-old(root) {
+  z-index: 1;
+}
+
+html:active-view-transition-type(theme-transition)::view-transition-new(root) {
+  z-index: 2;
+  animation: theme-reveal 0.5s ease-out forwards;
+}
+
+@keyframes theme-reveal {
+  from {
+    clip-path: circle(0 at var(--theme-x, 50%) var(--theme-y, 50%));
+  }
+  to {
+    clip-path: circle(var(--theme-radius, 100%) at var(--theme-x, 50%) var(--theme-y, 50%));
   }
 }

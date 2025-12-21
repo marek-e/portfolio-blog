@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useRef } from 'react';
 import { ComputerIcon, Moon02Icon, SunIcon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
 
@@ -11,29 +11,55 @@ import {
 } from '@/components/ui/dropdown-menu';
 
 export function ModeToggle() {
-  const [theme, setThemeState] = useState<'theme-light' | 'dark' | 'system'>('theme-light');
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
-  useEffect(() => {
-    const isDarkMode = document.documentElement.classList.contains('dark');
-    setThemeState(isDarkMode ? 'dark' : 'theme-light');
-  }, []);
-
-  useEffect(() => {
+  const applyTheme = (newTheme: 'theme-light' | 'dark' | 'system') => {
     const isDark =
-      theme === 'dark' ||
-      (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
-    document.documentElement.classList[isDark ? 'add' : 'remove']('dark');
-  }, [theme]);
+      newTheme === 'dark' ||
+      (newTheme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+    const toggleClass = () => {
+      document.documentElement.classList[isDark ? 'add' : 'remove']('dark');
+    };
+
+    if (
+      !document.startViewTransition ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ) {
+      toggleClass();
+      return;
+    }
+
+    if (buttonRef.current) {
+      const { top, left, width, height } = buttonRef.current.getBoundingClientRect();
+      const x = left + width / 2;
+      const y = top + height / 2;
+      const maxRadius = Math.hypot(
+        Math.max(x, window.innerWidth - x),
+        Math.max(y, window.innerHeight - y)
+      );
+
+      document.documentElement.style.setProperty('--theme-x', `${x}px`);
+      document.documentElement.style.setProperty('--theme-y', `${y}px`);
+      document.documentElement.style.setProperty('--theme-radius', `${maxRadius}px`);
+    }
+
+    document.startViewTransition({
+      update: toggleClass,
+      types: ['theme-transition'],
+    });
+  };
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
         render={
           <Button
+            ref={buttonRef}
             variant="outline"
             size="icon"
             aria-label="Toggle theme"
-            className="rounded-full"
+            className="hover:text-primary active:bg-primary/20 rounded-full"
           />
         }
       >
@@ -50,15 +76,15 @@ export function ModeToggle() {
         <span className="sr-only">Toggle theme</span>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setThemeState('theme-light')}>
+        <DropdownMenuItem onClick={() => applyTheme('theme-light')}>
           <HugeiconsIcon icon={SunIcon} strokeWidth={2} />
           Light
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setThemeState('dark')}>
+        <DropdownMenuItem onClick={() => applyTheme('dark')}>
           <HugeiconsIcon icon={Moon02Icon} strokeWidth={2} />
           Dark
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setThemeState('system')}>
+        <DropdownMenuItem onClick={() => applyTheme('system')}>
           <HugeiconsIcon icon={ComputerIcon} strokeWidth={2} />
           System
         </DropdownMenuItem>

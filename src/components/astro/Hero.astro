@@ -1,5 +1,5 @@
 ---
-import { Button } from '@/components/ui/button';
+import { Link } from '@/components/ui/button';
 ---
 
 <section class="relative flex min-h-screen items-center justify-center overflow-hidden">
@@ -25,7 +25,7 @@ import { Button } from '@/components/ui/button';
       src="/bg-light.webp"
       srcset="/bg-light.webp 1920w"
       sizes="100vw"
-      alt=""
+      alt="Wide valley at sunrise with green hills, wildflowers in the foreground, and tall rocky cliffs on both sides, softly lit by warm sunlight and light mist."
       class="h-full w-full object-cover"
       fetchpriority="high"
       decoding="async"
@@ -37,7 +37,7 @@ import { Button } from '@/components/ui/button';
       src="/bg-dark.webp"
       srcset="/bg-dark.webp 1920w"
       sizes="100vw"
-      alt=""
+      alt="Moonlit valley at night with rolling hills, mist over the grass, wildflowers in the foreground, tall cliffs on both sides, and a bright full moon in a starry sky."
       class="h-full w-full object-cover"
       fetchpriority="high"
       decoding="async"
@@ -58,39 +58,41 @@ import { Button } from '@/components/ui/button';
     <span
       class="text-foreground mb-6 inline-flex items-center gap-1 rounded-full border border-white/20 bg-white/80 px-3 py-1 text-xs font-medium backdrop-blur-sm dark:border-white/10 dark:bg-black/50 dark:text-white"
     >
-      We just raised 20M🚀
+      Available for freelance work
     </span>
 
     <!-- Headline -->
     <h1
       class="text-foreground mb-6 text-5xl font-bold drop-shadow-lg sm:text-6xl lg:text-7xl dark:text-white"
     >
-      Design with ease.
+      Hi, I'm a Developer
     </h1>
 
     <!-- Subtitle -->
     <p
       class="text-foreground/90 mx-auto mb-8 max-w-2xl text-lg drop-shadow-md sm:text-xl lg:text-2xl dark:text-white/90"
     >
-      Design smarter with AI that understands you.<br />
-      So you can take a breath.
+      I build things for the web with modern tools.<br />
+      Clean code, great user experiences.
     </p>
 
     <!-- CTAs -->
     <div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
-      <Button
+      <Link
         size="lg"
+        href="#projects"
         className="text-foreground rounded-full bg-white px-8 py-6 text-base font-medium shadow-lg hover:bg-white/90 dark:bg-white dark:text-black dark:hover:bg-white/90"
       >
-        Get Started →
-      </Button>
-      <Button
+        View Projects
+      </Link>
+      <Link
         variant="ghost"
         size="lg"
+        href="#contact"
         className="text-foreground rounded-full border border-white/20 bg-white/10 px-8 py-6 text-base font-medium backdrop-blur-sm hover:bg-white/20 dark:border-white/10 dark:bg-black/30 dark:text-white dark:hover:bg-black/50"
       >
-        Watch Demo
-      </Button>
+        Get in Touch
+      </Link>
     </div>
   </div>
 </section>
@@ -107,57 +109,68 @@ import { Button } from '@/components/ui/button';
   picture img {
     image-rendering: -webkit-optimize-contrast;
     image-rendering: crisp-edges;
-    will-change: opacity;
   }
 
-  /* Fade in images when loaded */
+  /* Images start visible by default (for cached/fast loads) */
   picture img {
+    opacity: 1;
+  }
+
+  /* Only apply fade-in when explicitly marked as loading */
+  picture img.is-loading {
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
   }
 
-  picture img.loaded {
+  picture img.is-loading.loaded {
     opacity: 1;
   }
 </style>
 
 <script>
-  // Fade out placeholder and fade in images when loaded
-  document.addEventListener('DOMContentLoaded', () => {
+  // Run immediately (not on DOMContentLoaded) to avoid flash
+  (() => {
     const placeholder = document.getElementById('bg-placeholder');
     const images = document.querySelectorAll<HTMLImageElement>('picture img');
 
     let loadedCount = 0;
     const totalImages = images.length;
 
+    const hidePlaceholder = () => {
+      if (placeholder) {
+        placeholder.style.opacity = '0';
+        setTimeout(() => {
+          placeholder.style.display = 'none';
+        }, 1000);
+      }
+    };
+
     images.forEach((img) => {
-      if (img.complete) {
-        img.classList.add('loaded');
+      // If already loaded (cached), don't animate - just count it
+      if (img.complete && img.naturalHeight > 0) {
         loadedCount++;
       } else {
+        // Not loaded yet - add loading class for fade effect
+        img.classList.add('is-loading');
         img.addEventListener('load', () => {
           img.classList.add('loaded');
           loadedCount++;
-          if (loadedCount === totalImages && placeholder) {
-            placeholder.style.opacity = '0';
-            setTimeout(() => {
-              placeholder.style.display = 'none';
-            }, 1000);
+          if (loadedCount === totalImages) {
+            hidePlaceholder();
           }
         });
         img.addEventListener('error', () => {
-          // If image fails to load, keep placeholder visible
           console.warn('Background image failed to load');
         });
       }
     });
 
-    // If all images are already loaded
-    if (loadedCount === totalImages && placeholder) {
-      placeholder.style.opacity = '0';
-      setTimeout(() => {
+    // If all images are already loaded (cached), hide placeholder immediately
+    if (loadedCount === totalImages) {
+      if (placeholder) {
+        placeholder.style.opacity = '0';
         placeholder.style.display = 'none';
-      }, 1000);
+      }
     }
-  });
+  })();
 </script>
