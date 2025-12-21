@@ -1,5 +1,6 @@
 ---
 import { ModeToggle } from '@/components/react/ModeToggle';
+import { MobileMenu } from '@/components/react/MobileMenu';
 import { Star } from '@hugeicons/core-free-icons';
 import { Icon } from '@/components/react/Icon';
 ---
@@ -17,8 +18,6 @@ import { Icon } from '@/components/react/Icon';
     </a>
 
     <div class="hidden items-center gap-6 md:flex">
-      <a href="/" class="text-foreground/80 hover:text-foreground text-sm transition-colors">Home</a
-      >
       <a href="/projects" class="text-foreground/80 hover:text-foreground text-sm transition-colors"
         >Projects</a
       >
@@ -34,7 +33,8 @@ import { Icon } from '@/components/react/Icon';
       >
     </div>
 
-    <div class="flex items-center gap-4">
+    <div class="flex items-center gap-2">
+      <MobileMenu client:load />
       <ModeToggle client:load />
     </div>
   </div>

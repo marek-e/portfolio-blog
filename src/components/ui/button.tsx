@@ -1,8 +1,8 @@
-import { forwardRef } from 'react';
 import { Button as ButtonPrimitive } from '@base-ui/react/button';
 import { cva, type VariantProps } from 'class-variance-authority';
 
 import { cn } from '@/lib/utils';
+import { forwardRef } from 'react';
 
 type ButtonProps = ButtonPrimitive.Props & VariantProps<typeof buttonVariants>;
 
@@ -57,4 +57,20 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 );
 Button.displayName = 'Button';
 
-export { Button, buttonVariants };
+type LinkProps = React.ComponentPropsWithRef<'a'> & VariantProps<typeof buttonVariants>;
+
+const Link = forwardRef<HTMLAnchorElement, LinkProps>(
+  ({ className, variant = 'default', size = 'default', ...props }, ref) => {
+    return (
+      <a
+        ref={ref}
+        data-slot="link"
+        className={cn(buttonVariants({ variant, size, className }))}
+        {...props}
+      />
+    );
+  }
+);
+Link.displayName = 'Link';
+
+export { Button, Link, buttonVariants };
