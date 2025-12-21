@@ -1,10 +1,18 @@
 ---
-import Navbar from '../components/astro/Navbar.astro';
-import Hero from '../components/astro/Hero.astro';
-import Layout from '../layouts/Layout.astro';
+import Navbar from '@/components/astro/Navbar.astro';
+import Hero from '@/components/astro/Hero.astro';
+import AboutSection from '@/components/astro/AboutSection.astro';
+import FeaturedProjects from '@/components/astro/FeaturedProjects.astro';
+import ContactSection from '@/components/astro/ContactSection.astro';
+import Layout from '@/layouts/Layout.astro';
 ---
 
 <Layout title="Home | melmayan.fr" description="Developer portfolio and blog">
   <Navbar />
-  <Hero />
+  <main>
+    <Hero />
+    <AboutSection />
+    <FeaturedProjects />
+    <ContactSection />
+  </main>
 </Layout>
