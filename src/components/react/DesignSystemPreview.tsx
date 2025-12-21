@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button } from '@/components/ui/button';
+import { Button, Link } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import {
   Card,
@@ -57,12 +57,10 @@ export function DesignSystemPreview() {
   return (
     <div className="space-y-12">
       <div className="flex items-center justify-between">
-        <a href="/">
-          <Button variant="outline">
-            <Icon icon={ArrowLeftIcon} />
-            Back to home
-          </Button>
-        </a>
+        <Link href="/" variant="outline" className="flex h-11 items-center gap-2 bg-white">
+          <Icon icon={ArrowLeftIcon} strokeWidth={2} />
+          <span className="text-sm font-medium">Back to home</span>
+        </Link>
         <ModeToggle />
       </div>
       {/* Colors */}

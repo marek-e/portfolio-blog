@@ -15,10 +15,15 @@ const linksClasses =
   >
     <a
       href="/"
-      class="text-foreground flex items-center gap-2 font-semibold transition-opacity hover:opacity-80"
+      class="text-foreground group/logo flex items-center gap-2 font-semibold transition-all duration-300 ease-in-out hover:-rotate-3 hover:opacity-80 motion-reduce:hover:rotate-0"
     >
-      <Icon icon={Star} strokeWidth={2} fill="currentColor" className="text-primary size-4" />
-      <span>melmayan</span>
+      <Icon
+        icon={Star}
+        strokeWidth={2}
+        fill="currentColor"
+        className="text-primary size-4 transition-transform duration-300 ease-in-out group-hover/logo:rotate-360 motion-reduce:group-hover/logo:animate-none"
+      />
+      <span class="inline-block">melmayan</span>
     </a>
 
     <div id="nav-links" class="relative hidden items-center gap-1 md:flex">
@@ -45,30 +50,38 @@ const linksClasses =
 </nav>
 
 <script>
-  const container = document.getElementById('nav-links');
-  const pill = document.getElementById('nav-pill');
-  const links = document.querySelectorAll('[data-nav-link]');
+  function initNavPillEffect() {
+    const container = document.getElementById('nav-links');
+    const pill = document.getElementById('nav-pill');
+    const links = document.querySelectorAll('[data-nav-link]');
 
-  if (container && pill) {
-    const updatePill = (el: HTMLElement) => {
-      const containerRect = container.getBoundingClientRect();
-      const linkRect = el.getBoundingClientRect();
+    if (container && pill) {
+      const updatePill = (el: HTMLElement) => {
+        const containerRect = container.getBoundingClientRect();
+        const linkRect = el.getBoundingClientRect();
 
-      pill.style.width = `${linkRect.width}px`;
-      pill.style.height = `${linkRect.height}px`;
-      pill.style.left = `${linkRect.left - containerRect.left}px`;
-      pill.style.top = `${linkRect.top - containerRect.top}px`;
-      pill.style.opacity = '1';
-    };
+        pill.style.width = `${linkRect.width}px`;
+        pill.style.height = `${linkRect.height}px`;
+        pill.style.left = `${linkRect.left - containerRect.left}px`;
+        pill.style.top = `${linkRect.top - containerRect.top}px`;
+        pill.style.opacity = '1';
+      };
 
-    const hidePill = () => {
-      pill.style.opacity = '0';
-    };
+      const hidePill = () => {
+        pill.style.opacity = '0';
+      };
 
-    links.forEach((link) => {
-      link.addEventListener('mouseenter', () => updatePill(link as HTMLElement));
-    });
+      links.forEach((link) => {
+        link.addEventListener('mouseenter', () => updatePill(link as HTMLElement));
+      });
 
-    container.addEventListener('mouseleave', hidePill);
+      container.addEventListener('mouseleave', hidePill);
+    }
   }
+
+  // Initialize on page load
+  initNavPillEffect();
+
+  // Re-initialize after View Transitions navigation
+  document.addEventListener('astro:after-swap', initNavPillEffect);
 </script>

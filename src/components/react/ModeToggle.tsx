@@ -61,7 +61,7 @@ export function ModeToggle() {
             variant="outline"
             size="icon"
             aria-label="Toggle theme"
-            className="hover:text-primary active:bg-primary/20 rounded-full"
+            className="hover:text-primary active:bg-primary/20 rounded-full bg-white"
           />
         }
       >
