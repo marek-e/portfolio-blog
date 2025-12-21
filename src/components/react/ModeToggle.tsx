@@ -13,7 +13,9 @@ import {
 export function ModeToggle() {
   const buttonRef = useRef<HTMLButtonElement>(null);
 
-  const applyTheme = (newTheme: 'theme-light' | 'dark' | 'system') => {
+  const applyTheme = (newTheme: 'light' | 'dark' | 'system') => {
+    localStorage.setItem('theme', newTheme);
+
     const isDark =
       newTheme === 'dark' ||
       (newTheme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
@@ -76,7 +78,7 @@ export function ModeToggle() {
         <span className="sr-only">Toggle theme</span>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => applyTheme('theme-light')}>
+        <DropdownMenuItem onClick={() => applyTheme('light')}>
           <HugeiconsIcon icon={SunIcon} strokeWidth={2} />
           Light
         </DropdownMenuItem>
