@@ -19,6 +19,7 @@ This project uses shadcn/ui components built on Radix primitives. Components are
 | Dropdown Menu | **Needs wrapper** | Yes | Wrap in React component |
 | Select | **Needs wrapper** | Yes | Wrap in React component |
 | Combobox | **Needs wrapper** | Yes | Wrap in React component |
+| Sheet | **Needs wrapper** | Yes | Wrap in React component |
 
 ## Adding New Components
 
@@ -204,4 +205,47 @@ Usage in Tailwind:
 <div className="bg-background text-foreground">
 <button className="bg-primary text-primary-foreground">
 <p className="text-muted-foreground">
+```
+
+## Custom React Components
+
+Located in `src/components/react/`:
+
+### ModeToggle
+
+Theme switcher with circular reveal animation (View Transitions API).
+
+```astro
+<ModeToggle client:load />
+```
+
+- Three modes: Light, Dark, System
+- Circular reveal animation on supported browsers
+- Fade fallback on Firefox
+- Respects `prefers-reduced-motion`
+
+### MobileMenu
+
+Hamburger menu for mobile navigation.
+
+```astro
+<MobileMenu client:load />
+```
+
+- Opens a Sheet (slide-out drawer) from right
+- Automatically hidden on `md:` breakpoint and above
+- Contains all navigation links
+- Close on link click or backdrop tap
+
+### Icon
+
+Wrapper for Hugeicons that works in both Astro and React.
+
+```astro
+---
+import { Icon } from '@/components/react/Icon';
+import { Star } from '@hugeicons/core-free-icons';
+---
+
+<Icon icon={Star} className="size-5" />
 ```

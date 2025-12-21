@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Personal developer portfolio + blog at https://melmayan.fr. Built with Astro (static-first SSG), React 19 islands for interactivity, Tailwind CSS v4 + shadcn/ui. Deployed to Cloudflare Pages.
+Personal developer portfolio + blog at https://melmayan.fr. Built with Astro (static-first SSG), React 19 islands for interactivity, Tailwind CSS v4 + shadcn/ui. Deployed to Cloudflare Pages. Has to be responsive and accessible.
 
 ## Commands
 
@@ -72,13 +72,16 @@ export function ProjectModal() {
 ### Client Directives
 
 ```astro
-<Component client:load />     <!-- Critical, load immediately -->
-<Component client:visible />  <!-- Below fold, lazy load -->
+<Component client:load />
+<!-- Critical, load immediately -->
+<Component client:visible />
+<!-- Below fold, lazy load -->
 ```
 
 ### Imports
 
 Always use `@/` alias:
+
 ```typescript
 import { Button } from '@/components/ui/button';
 ```
@@ -86,6 +89,7 @@ import { Button } from '@/components/ui/button';
 ### Styling
 
 Use semantic theme colors, not raw values:
+
 ```tsx
 // ✓ bg-background text-foreground bg-primary
 // ✗ bg-white text-black bg-blue-500
@@ -97,6 +101,14 @@ Use semantic theme colors, not raw values:
 - Full-page constant motion / heavy parallax
 - Overconfident claims ("expert", "10x dev")
 - Generic template language
+
+## Responsive Design
+
+- Mobile-first approach
+- Two primary breakpoints:
+  - Default: < 768px
+  - `md:`: ≥ 768px
+  - `lg:`: ≥ 1024px
 
 ## Accessibility
 

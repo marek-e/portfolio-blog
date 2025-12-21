@@ -118,10 +118,63 @@ Use theme variables, not raw colors:
 
 ### Responsive Design
 
-Mobile-first approach:
+Mobile-first approach with two primary breakpoints:
 
+| Breakpoint | Width | Use Case |
+|------------|-------|----------|
+| Default | < 768px | Mobile phones |
+| `md:` | ≥ 768px | Tablets and desktop |
+| `lg:` | ≥ 1024px | Large desktop (optional refinement) |
+
+#### Common Patterns
+
+**Grid layouts:**
 ```tsx
 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+```
+
+**Typography scaling:**
+```tsx
+<h1 className="text-3xl md:text-5xl lg:text-6xl">
+```
+
+**Spacing:**
+```tsx
+<div className="px-4 md:px-6 lg:px-8">
+```
+
+**Show/hide elements:**
+```tsx
+// Hide on mobile, show on desktop
+<nav className="hidden md:flex">
+
+// Show on mobile, hide on desktop
+<button className="md:hidden">
+```
+
+**Flex direction:**
+```tsx
+<div className="flex flex-col md:flex-row">
+```
+
+#### Mobile Navigation
+
+Use the `MobileMenu` component for navigation on mobile:
+- Renders a hamburger icon that opens a Sheet (slide-out drawer)
+- Automatically hidden on `md:` and above via `md:hidden`
+- Desktop nav links use `hidden md:flex`
+
+```astro
+<!-- In Navbar.astro -->
+<div class="hidden md:flex"><!-- Desktop links --></div>
+<MobileMenu client:load />
+```
+
+#### Touch Targets
+
+Ensure touch targets are at least 44x44px on mobile:
+```tsx
+<Button size="icon" className="size-11">
 ```
 
 ## Content Collections
