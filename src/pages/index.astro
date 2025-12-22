@@ -4,10 +4,15 @@ import Hero from '@/components/astro/Hero.astro';
 import AboutSection from '@/components/astro/AboutSection.astro';
 import FeaturedProjects from '@/components/astro/FeaturedProjects.astro';
 import ContactSection from '@/components/astro/ContactSection.astro';
+import Footer from '@/components/astro/Footer.astro';
+import { BackToTop } from '@/components/react/BackToTop';
 import Layout from '@/layouts/Layout.astro';
 ---
 
-<Layout title="Home | melmayan.fr" description="Developer portfolio and blog">
+<Layout
+  title="Marek Elmayan | Developer portfolio"
+  description="Full-stack developer portfolio and blog"
+>
   <Navbar />
   <main>
     <Hero />
@@ -15,4 +20,6 @@ import Layout from '@/layouts/Layout.astro';
     <FeaturedProjects />
     <ContactSection />
   </main>
+  <Footer />
+  <BackToTop client:load />
 </Layout>

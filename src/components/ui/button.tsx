@@ -35,21 +35,26 @@ const buttonVariants = cva(
           'size-7 rounded-[min(var(--radius-md),12px)] in-data-[slot=button-group]:rounded-lg',
         'icon-lg': 'size-9',
       },
+      animation: {
+        none: '',
+        scale: 'motion-safe:hover:scale-101 motion-safe:active:scale-99',
+      },
     },
     defaultVariants: {
       variant: 'default',
       size: 'default',
+      animation: 'none',
     },
   }
 );
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = 'default', size = 'default', ...props }, ref) => {
+  ({ className, variant = 'default', size = 'default', animation = 'none', ...props }, ref) => {
     return (
       <ButtonPrimitive
         ref={ref}
         data-slot="button"
-        className={cn(buttonVariants({ variant, size, className }))}
+        className={cn(buttonVariants({ variant, size, animation, className }))}
         {...props}
       />
     );
@@ -60,12 +65,12 @@ Button.displayName = 'Button';
 type LinkProps = React.ComponentPropsWithRef<'a'> & VariantProps<typeof buttonVariants>;
 
 const Link = forwardRef<HTMLAnchorElement, LinkProps>(
-  ({ className, variant = 'default', size = 'default', ...props }, ref) => {
+  ({ className, variant = 'default', size = 'default', animation = 'none', ...props }, ref) => {
     return (
       <a
         ref={ref}
         data-slot="link"
-        className={cn(buttonVariants({ variant, size, className }))}
+        className={cn(buttonVariants({ variant, size, animation, className }))}
         {...props}
       />
     );
