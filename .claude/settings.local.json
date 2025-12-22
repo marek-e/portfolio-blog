@@ -6,7 +6,8 @@
       "Edit(.claude/**)",
       "Edit(docs/**)",
       "Write(.claude/**)",
-      "Write(docs/**)"
+      "Write(docs/**)",
+      "Skill(validate)"
     ]
   }
 }
