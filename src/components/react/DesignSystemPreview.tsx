@@ -41,6 +41,7 @@ import {
 import { ModeToggle } from './ModeToggle';
 import { Icon } from './Icon';
 import { ArrowLeftIcon } from '@hugeicons/core-free-icons';
+import { getTranslatedPath, type Lang } from '@/i18n';
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -51,13 +52,18 @@ function Section({ title, children }: { title: string; children: React.ReactNode
   );
 }
 
-export function DesignSystemPreview() {
+export function DesignSystemPreview({ lang }: { lang: Lang }) {
   const [inputValue, setInputValue] = useState('');
+  const translatePath = getTranslatedPath(lang);
 
   return (
     <div className="space-y-12">
       <div className="flex items-center justify-between">
-        <Link href="/" variant="outline" className="flex h-11 items-center gap-2 bg-white">
+        <Link
+          href={translatePath('/')}
+          variant="outline"
+          className="flex h-11 items-center gap-2 bg-white"
+        >
           <Icon icon={ArrowLeftIcon} strokeWidth={2} />
           <span className="text-sm font-medium">Back to home</span>
         </Link>
@@ -213,9 +219,7 @@ export function DesignSystemPreview() {
       {/* Dropdown Menu */}
       <Section title="Dropdown Menu">
         <DropdownMenu>
-          <DropdownMenuTrigger>
-            <Button variant="outline">Open Menu</Button>
-          </DropdownMenuTrigger>
+          <DropdownMenuTrigger render={<Button variant="outline">Open Menu</Button>} />
           <DropdownMenuContent>
             <DropdownMenuItem>Profile</DropdownMenuItem>
             <DropdownMenuItem>Settings</DropdownMenuItem>
@@ -228,9 +232,7 @@ export function DesignSystemPreview() {
       {/* Alert Dialog */}
       <Section title="Alert Dialog">
         <AlertDialog>
-          <AlertDialogTrigger>
-            <Button variant="destructive">Delete Item</Button>
-          </AlertDialogTrigger>
+          <AlertDialogTrigger render={<Button variant="destructive">Delete Item</Button>} />
           <AlertDialogContent>
             <AlertDialogHeader>
               <AlertDialogTitle>Are you sure?</AlertDialogTitle>
