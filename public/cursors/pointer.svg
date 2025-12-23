@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <!-- Glassmorphism blur filter -->
+    <filter id="glass-blur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="1.5" result="blur" />
+      <feOffset in="blur" dx="0.5" dy="1" result="shadow" />
+      <feFlood flood-color="#000000" flood-opacity="0.15" />
+      <feComposite in2="shadow" operator="in" result="shadow" />
+      <feMerge>
+        <feMergeNode in="shadow" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <!-- Glossy gradient -->
+    <linearGradient id="glass-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9" />
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#e0e0e0" stop-opacity="0.7" />
+    </linearGradient>
+  </defs>
+
+  <!-- Rounded hand pointer with glassmorphism -->
+  <path
+    d="M12 4
+       Q12 2, 14 2
+       L16 2
+       Q18 2, 18 4
+       L18 10
+       Q20 9, 22 10
+       L22 12
+       Q24 11, 26 12
+       L26 22
+       Q26 26, 22 28
+       L14 28
+       Q10 28, 8 24
+       L6 20
+       Q4 18, 6 16
+       Q8 14, 10 16
+       L12 18
+       L12 4
+       Z"
+    fill="url(#glass-gradient)"
+    stroke="rgba(255,255,255,0.8)"
+    stroke-width="1"
+    stroke-linejoin="round"
+    stroke-linecap="round"
+    filter="url(#glass-blur)"
+  />
+
+  <!-- Outer subtle border for visibility -->
+  <path
+    d="M12 4
+       Q12 2, 14 2
+       L16 2
+       Q18 2, 18 4
+       L18 10
+       Q20 9, 22 10
+       L22 12
+       Q24 11, 26 12
+       L26 22
+       Q26 26, 22 28
+       L14 28
+       Q10 28, 8 24
+       L6 20
+       Q4 18, 6 16
+       Q8 14, 10 16
+       L12 18
+       L12 4
+       Z"
+    fill="none"
+    stroke="rgba(0,0,0,0.3)"
+    stroke-width="0.5"
+    stroke-linejoin="round"
+    stroke-linecap="round"
+  />
+
+  <!-- Finger separations -->
+  <line x1="18" y1="12" x2="18" y2="20" stroke="rgba(0,0,0,0.15)" stroke-width="0.5" stroke-linecap="round" />
+  <line x1="22" y1="14" x2="22" y2="20" stroke="rgba(0,0,0,0.15)" stroke-width="0.5" stroke-linecap="round" />
+</svg>

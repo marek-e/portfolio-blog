@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <!-- Glassmorphism blur filter -->
+    <filter id="glass-blur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="1.5" result="blur" />
+      <feOffset in="blur" dx="0.5" dy="1" result="shadow" />
+      <feFlood flood-color="#000000" flood-opacity="0.15" />
+      <feComposite in2="shadow" operator="in" result="shadow" />
+      <feMerge>
+        <feMergeNode in="shadow" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <!-- Glossy gradient -->
+    <linearGradient id="glass-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9" />
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#e0e0e0" stop-opacity="0.7" />
+    </linearGradient>
+    <!-- Inner highlight -->
+    <linearGradient id="highlight" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+    </linearGradient>
+  </defs>
+
+  <!-- Rounded arrow with glassmorphism -->
+  <path
+    d="M5 3
+       Q4 2, 5 2
+       L5 22
+       Q5 24, 7 22
+       L10 19
+       Q11 18, 12 19
+       L14.5 25
+       Q15 26, 16 25.5
+       L17.5 24.5
+       Q18.5 24, 18 23
+       L15.5 17
+       Q15 16, 16 16
+       L20 16
+       Q22 16, 20 14
+       L6 2
+       Q5 1, 5 3
+       Z"
+    fill="url(#glass-gradient)"
+    stroke="rgba(255,255,255,0.8)"
+    stroke-width="1"
+    stroke-linejoin="round"
+    filter="url(#glass-blur)"
+  />
+
+  <!-- Outer subtle border for visibility -->
+  <path
+    d="M5 3
+       Q4 2, 5 2
+       L5 22
+       Q5 24, 7 22
+       L10 19
+       Q11 18, 12 19
+       L14.5 25
+       Q15 26, 16 25.5
+       L17.5 24.5
+       Q18.5 24, 18 23
+       L15.5 17
+       Q15 16, 16 16
+       L20 16
+       Q22 16, 20 14
+       L6 2
+       Q5 1, 5 3
+       Z"
+    fill="none"
+    stroke="rgba(0,0,0,0.3)"
+    stroke-width="0.5"
+    stroke-linejoin="round"
+  />
+</svg>

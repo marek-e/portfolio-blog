@@ -141,6 +141,7 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    cursor: url('/cursors/arrow.svg') 4 2, auto;
   }
   body {
     @apply bg-background text-foreground font-sans;
@@ -150,6 +151,32 @@
   }
   html {
     @apply font-sans;
+  }
+
+  /* Custom pointer cursor for interactive elements */
+  a,
+  button,
+  [role='button'],
+  input[type='submit'],
+  input[type='button'],
+  input[type='reset'],
+  select,
+  summary,
+  [tabindex]:not([tabindex='-1']) {
+    cursor: url('/cursors/pointer.svg') 10 8, pointer;
+  }
+
+  /* Text cursor for text inputs */
+  input[type='text'],
+  input[type='email'],
+  input[type='password'],
+  input[type='search'],
+  input[type='tel'],
+  input[type='url'],
+  input[type='number'],
+  textarea,
+  [contenteditable='true'] {
+    cursor: text;
   }
 }
 
