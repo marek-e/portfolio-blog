@@ -1,60 +1,14 @@
 ---
 import { Link } from '@/components/ui/button';
 import { getTranslations, getLangFromUrl } from '@/i18n';
+import BackgroundImage from './BackgroundImage.astro';
 
 const lang = getLangFromUrl(Astro.url);
 const t = getTranslations(lang);
 ---
 
 <section class="relative flex min-h-screen items-center justify-center overflow-hidden">
-  <!-- Preload appropriate image based on theme -->
-  <link
-    rel="preload"
-    as="image"
-    href="/bg-light.webp"
-    media="(prefers-color-scheme: light)"
-    fetchpriority="high"
-  />
-  <link
-    rel="preload"
-    as="image"
-    href="/bg-dark.webp"
-    media="(prefers-color-scheme: dark)"
-    fetchpriority="high"
-  />
-
-  <!-- Background Images with responsive srcset -->
-  <picture class="absolute inset-0 -z-10 dark:hidden">
-    <img
-      src="/bg-light.webp"
-      srcset="/bg-light.webp 1920w"
-      sizes="100vw"
-      alt="Wide valley at sunrise with green hills, wildflowers in the foreground, and tall rocky cliffs on both sides, softly lit by warm sunlight and light mist."
-      class="h-full w-full object-cover"
-      fetchpriority="high"
-      decoding="async"
-      loading="eager"
-    />
-  </picture>
-  <picture class="absolute inset-0 -z-10 hidden dark:block">
-    <img
-      src="/bg-dark.webp"
-      srcset="/bg-dark.webp 1920w"
-      sizes="100vw"
-      alt="Moonlit valley at night with rolling hills, mist over the grass, wildflowers in the foreground, tall cliffs on both sides, and a bright full moon in a starry sky."
-      class="h-full w-full object-cover"
-      fetchpriority="high"
-      decoding="async"
-      loading="eager"
-    />
-  </picture>
-
-  <!-- Low-quality placeholder overlay (fades out when image loads) -->
-  <div
-    class="from-primary/20 via-secondary/10 to-primary/20 dark:from-primary/30 dark:via-secondary/20 dark:to-primary/30 absolute inset-0 -z-10 bg-linear-to-br opacity-100 transition-opacity duration-1000"
-    id="bg-placeholder"
-  >
-  </div>
+  <BackgroundImage />
 
   <!-- Content -->
   <div class="relative z-10 mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
@@ -107,81 +61,3 @@ const t = getTranslations(lang);
     </div>
   </div>
 </section>
-
-<style>
-  @media (prefers-reduced-motion: reduce) {
-    * {
-      transition: none !important;
-      animation: none !important;
-    }
-  }
-
-  /* Optimize image rendering */
-  picture img {
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
-  }
-
-  /* Images start visible by default (for cached/fast loads) */
-  picture img {
-    opacity: 1;
-  }
-
-  /* Only apply fade-in when explicitly marked as loading */
-  picture img.is-loading {
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
-  }
-
-  picture img.is-loading.loaded {
-    opacity: 1;
-  }
-</style>
-
-<script>
-  // Run immediately (not on DOMContentLoaded) to avoid flash
-  (() => {
-    const placeholder = document.getElementById('bg-placeholder');
-    const images = document.querySelectorAll<HTMLImageElement>('picture img');
-
-    let loadedCount = 0;
-    const totalImages = images.length;
-
-    const hidePlaceholder = () => {
-      if (placeholder) {
-        placeholder.style.opacity = '0';
-        setTimeout(() => {
-          placeholder.style.display = 'none';
-        }, 1000);
-      }
-    };
-
-    images.forEach((img) => {
-      // If already loaded (cached), don't animate - just count it
-      if (img.complete && img.naturalHeight > 0) {
-        loadedCount++;
-      } else {
-        // Not loaded yet - add loading class for fade effect
-        img.classList.add('is-loading');
-        img.addEventListener('load', () => {
-          img.classList.add('loaded');
-          loadedCount++;
-          if (loadedCount === totalImages) {
-            hidePlaceholder();
-          }
-        });
-        img.addEventListener('error', () => {
-          console.warn('Background image failed to load');
-        });
-      }
-    });
-
-    // If all images are already loaded (cached), hide placeholder immediately
-    if (loadedCount === totalImages) {
-      if (placeholder) {
-        placeholder.style.opacity = '0';
-        placeholder.style.display = 'none';
-      }
-    }
-  })();
-</script>
