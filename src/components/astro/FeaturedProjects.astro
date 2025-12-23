@@ -1,8 +1,15 @@
 ---
 import { getCollection } from 'astro:content';
 import ProjectCard from './ProjectCard.astro';
+import { getTranslations, getLangFromUrl, getTranslatedPath } from '@/i18n';
 
-const featuredProjects = (await getCollection('projects'))
+const lang = getLangFromUrl(Astro.url);
+const t = getTranslations(lang);
+const translatePath = getTranslatedPath(lang);
+
+const allProjects = await getCollection('projects');
+const featuredProjects = allProjects
+  .filter((project) => project.id.startsWith(`${lang}/`))
   .filter((project) => project.data.featured)
   .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
   .slice(0, 5);
@@ -13,15 +20,15 @@ const featuredProjects = (await getCollection('projects'))
     <div class="mb-12 flex items-end justify-between">
       <div>
         <h2 class="text-foreground text-3xl font-bold tracking-tight md:text-4xl">
-          Featured Projects
+          {t.projects.title}
         </h2>
-        <p class="text-muted-foreground mt-2">A selection of things I've built</p>
+        <p class="text-muted-foreground mt-2">{t.projects.subtitle}</p>
       </div>
       <a
-        href="/projects"
+        href={translatePath('/projects')}
         class="text-primary hover:text-primary/80 hidden text-sm font-medium transition-colors md:block"
       >
-        View all projects →
+        {t.projects.viewAll}
       </a>
     </div>
 
@@ -33,16 +40,16 @@ const featuredProjects = (await getCollection('projects'))
           ))}
         </div>
       ) : (
-        <p class="text-muted-foreground">No featured projects yet.</p>
+        <p class="text-muted-foreground">{t.projects.noProjects}</p>
       )
     }
 
     <div class="mt-8 text-center md:hidden">
       <a
-        href="/projects"
+        href={translatePath('/projects')}
         class="text-primary hover:text-primary/80 text-sm font-medium transition-colors"
       >
-        View all projects →
+        {t.projects.viewAll}
       </a>
     </div>
   </div>

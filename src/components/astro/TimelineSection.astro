@@ -1,0 +1,34 @@
+---
+import { TimelineCards } from '@/components/react/TimelineCards';
+import { getLocalizedTimeline } from '@/data/timeline';
+import { getTranslations, getLangFromUrl } from '@/i18n';
+
+const lang = getLangFromUrl(Astro.url);
+const t = getTranslations(lang);
+const timelineEntries = getLocalizedTimeline(lang);
+---
+
+<section id="timeline" class="relative py-20 md:py-32" aria-labelledby="timeline-heading">
+  <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+    <!-- Section header -->
+    <div class="mb-16 text-center">
+      <h2
+        id="timeline-heading"
+        class="text-foreground text-3xl font-bold tracking-tight md:text-4xl"
+      >
+        {t.timeline.title}
+      </h2>
+      <p class="text-muted-foreground mx-auto mt-4 max-w-2xl text-lg">
+        {t.timeline.subtitle}
+      </p>
+    </div>
+
+    <!-- Timeline cards with curved path -->
+    <TimelineCards
+      client:visible
+      entries={timelineEntries}
+      presentLabel={t.timeline.present}
+      lang={lang}
+    />
+  </div>
+</section>

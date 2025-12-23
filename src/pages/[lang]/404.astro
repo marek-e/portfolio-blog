@@ -1,19 +1,18 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Navbar from '../components/astro/Navbar.astro';
+import Layout from '@/layouts/Layout.astro';
+import Navbar from '@/components/astro/Navbar.astro';
 import { Link } from '@/components/ui/button';
 import { Icon } from '@/components/react/Icon';
 import { Home } from '@hugeicons/core-free-icons';
-import { getLangFromUrl, getTranslatedPath } from '@/i18n/config';
-import { getTranslations } from '@/i18n';
+import { getLangFromUrl, getTranslatedPath, getTranslations } from '@/i18n';
 
 const lang = getLangFromUrl(Astro.url);
 const t = getTranslations(lang);
 const translatePath = getTranslatedPath(lang);
 ---
 
-<Layout title={t.notFound.pageTitle} description={t.notFound.pageDescription} lang={lang}>
-  <Navbar lang={lang} />
+<Layout title={t.notFound.pageTitle} description={t.notFound.pageDescription}>
+  <Navbar />
   <section class="relative flex min-h-screen items-center justify-center overflow-hidden">
     <div
       class="from-primary/20 via-secondary/10 to-primary/20 dark:from-primary/30 dark:via-secondary/20 dark:to-primary/30 absolute inset-0 -z-10 bg-linear-to-br"

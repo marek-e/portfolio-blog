@@ -1,5 +1,9 @@
 ---
 import { Link } from '@/components/ui/button';
+import { getTranslations, getLangFromUrl } from '@/i18n';
+
+const lang = getLangFromUrl(Astro.url);
+const t = getTranslations(lang);
 ---
 
 <section class="relative flex min-h-screen items-center justify-center overflow-hidden">
@@ -58,7 +62,7 @@ import { Link } from '@/components/ui/button';
     <span
       class="text-foreground mb-6 inline-flex items-center gap-1 rounded-full border border-white/20 bg-white/80 px-3 py-1 text-xs font-medium backdrop-blur-sm dark:border-white/10 dark:bg-black/50 dark:text-white"
     >
-      Available for freelance work
+      {t.hero.badge}
     </span>
 
     <!-- Headline -->
@@ -66,15 +70,21 @@ import { Link } from '@/components/ui/button';
       id="hello"
       class="text-foreground mb-6 text-4xl font-bold drop-shadow-lg sm:text-5xl lg:text-6xl dark:text-white"
     >
-      Hi, I'm Marek Elmayan
+      {t.hero.headline}
     </h1>
 
     <!-- Subtitle -->
     <p
       class="text-foreground/90 mx-auto mb-8 max-w-2xl text-lg drop-shadow-md sm:text-xl lg:text-2xl dark:text-white/90"
     >
-      I build things for the web with modern tools.<br />
-      Clean code, great user experiences.
+      {
+        t.hero.subtitle.split('\n').map((line, i) => (
+          <>
+            {i > 0 && <br />}
+            {line}
+          </>
+        ))
+      }
     </p>
 
     <!-- CTAs -->
@@ -84,7 +94,7 @@ import { Link } from '@/components/ui/button';
         href="#projects"
         className="text-foreground bg-white px-8 py-6 text-base font-medium shadow-lg hover:bg-white/80 dark:bg-white dark:text-black dark:hover:bg-white/90"
       >
-        View Projects
+        {t.hero.ctaProjects}
       </Link>
       <Link
         variant="ghost"
@@ -92,7 +102,7 @@ import { Link } from '@/components/ui/button';
         href="#contact"
         className="text-foreground border border-white/20 bg-white/10 px-8 py-6 text-base font-medium backdrop-blur-sm hover:bg-white/20 dark:border-white/10 dark:bg-black/30 dark:text-white dark:hover:bg-black/50"
       >
-        Get in Touch
+        {t.hero.ctaContact}
       </Link>
     </div>
   </div>

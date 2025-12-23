@@ -10,13 +10,19 @@ import {
 } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Link } from '@/components/ui/button';
+import { getTranslations, getTranslatedPath, getLangFromUrl } from '@/i18n';
 
 interface Props {
   project: CollectionEntry<'projects'>;
 }
-
 const { project } = Astro.props;
 const { title, description, techStack, links, image } = project.data;
+
+const lang = getLangFromUrl(Astro.url);
+
+const t = getTranslations(lang);
+const translatePath = getTranslatedPath(lang);
+const projectSlug = project.id.replace(/^(fr|en)\//, '');
 ---
 
 <article>
@@ -70,7 +76,7 @@ const { title, description, techStack, links, image } = project.data;
             target="_blank"
             rel="noopener noreferrer"
           >
-            Live Demo
+            {t.projects.liveDemo}
           </Link>
         )
       }
@@ -83,17 +89,17 @@ const { title, description, techStack, links, image } = project.data;
             target="_blank"
             rel="noopener noreferrer"
           >
-            Code
+            {t.projects.code}
           </Link>
         )
       }
       {
         !links?.demo && !links?.repo && (
           <a
-            href={`/projects/${project.id}`}
+            href={translatePath(`/projects/${projectSlug}`)}
             class="text-primary text-sm font-medium hover:underline"
           >
-            View Details →
+            {t.projects.viewDetails}
           </a>
         )
       }

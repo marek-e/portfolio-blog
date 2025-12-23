@@ -4,8 +4,24 @@ import { Icon } from '../react/Icon';
 import { Link } from '../ui/button';
 import { Separator } from '../ui/separator';
 import { SOCIALS } from '@/lib/socials';
+import { getTranslations, getLangFromUrl, getTranslatedPath } from '@/i18n';
+
+const lang = getLangFromUrl(Astro.url);
+const t = getTranslations(lang);
+const translatePath = getTranslatedPath(lang);
 
 const currentYear = new Date().getFullYear();
+
+const sitemapLinks = [
+  { href: '/', label: t.footer.home },
+  { href: '/about', label: t.footer.about },
+  { href: '/privacy', label: t.footer.privacy },
+  { href: '/terms', label: t.footer.terms },
+  { href: '/contact', label: t.footer.contact },
+  { href: '/blog', label: t.footer.blog },
+  { href: '/projects', label: t.footer.projects },
+  { href: '/services', label: t.footer.services },
+];
 ---
 
 <footer
@@ -14,56 +30,19 @@ const currentYear = new Date().getFullYear();
 >
   <div class="flex flex-col items-center justify-between gap-4 sm:flex-row">
     <div>
-      <h3 class="text-sm font-medium">Sitemap</h3>
+      <h3 class="text-sm font-medium">{t.footer.sitemap}</h3>
       <div class="mt-2 grid grid-cols-3 gap-0 sm:grid-cols-4">
-        <Link
-          href="/"
-          variant="link"
-          className="text-muted-foreground hover:text-foreground w-fit text-sm transition-colors"
-          >Home</Link
-        >
-        <Link
-          href="/about"
-          variant="link"
-          className="text-muted-foreground hover:text-foreground w-fit text-sm transition-colors"
-          >About</Link
-        >
-        <Link
-          href="/privacy"
-          variant="link"
-          className="text-muted-foreground hover:text-foreground w-fit text-sm transition-colors"
-          >Privacy Policy</Link
-        >
-        <Link
-          href="/terms"
-          variant="link"
-          className="text-muted-foreground hover:text-foreground w-fit text-sm transition-colors"
-          >Terms of Service</Link
-        >
-        <Link
-          href="/contact"
-          variant="link"
-          className="text-muted-foreground hover:text-foreground w-fit text-sm transition-colors"
-          >Contact</Link
-        >
-        <Link
-          href="/blog"
-          variant="link"
-          className="text-muted-foreground hover:text-foreground w-fit text-sm transition-colors"
-          >Blog</Link
-        >
-        <Link
-          href="/projects"
-          variant="link"
-          className="text-muted-foreground hover:text-foreground w-fit text-sm transition-colors"
-          >Projects</Link
-        >
-        <Link
-          href="/services"
-          variant="link"
-          className="text-muted-foreground hover:text-foreground w-fit text-sm transition-colors"
-          >Services</Link
-        >
+        {
+          sitemapLinks.map((link) => (
+            <Link
+              href={translatePath(link.href)}
+              variant="link"
+              className="text-muted-foreground hover:text-foreground w-fit text-sm transition-colors"
+            >
+              {link.label}
+            </Link>
+          ))
+        }
       </div>
     </div>
     <div class="flex items-center justify-center gap-1">
@@ -73,7 +52,7 @@ const currentYear = new Date().getFullYear();
             href={social.href}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label={`Follow on ${social.name}`}
+            aria-label={t.aria.followOn.replace('{platform}', social.name)}
             class="text-muted-foreground hover:text-foreground hover:animate-wiggle p-2 transition-colors"
           >
             <Icon icon={social.icon} strokeWidth={2} className="size-5" />
@@ -94,7 +73,7 @@ const currentYear = new Date().getFullYear();
       variant="link"
       className="text-muted-foreground hover:text-foreground text-sm transition-colors"
     >
-      Back to top
+      {t.footer.backToTop}
       <Icon icon={ArrowUp04Icon} strokeWidth={2} className="size-4" data-icon="inline-end" />
     </Link>
   </div>

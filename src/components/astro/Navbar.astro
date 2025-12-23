@@ -1,9 +1,16 @@
 ---
 import { ModeToggle } from '@/components/react/ModeToggle';
 import { MobileMenu } from '@/components/react/MobileMenu';
+import { LanguageSwitcher } from '@/components/react/LanguageSwitcher';
 import { Star } from '@hugeicons/core-free-icons';
 import { Icon } from '@/components/react/Icon';
-import { NAV_LINKS } from '@/lib/navigation';
+import { getNavLinks } from '@/lib/navigation';
+import { getLangFromUrl, getTranslatedPath } from '@/i18n';
+
+const lang = getLangFromUrl(Astro.url);
+const translatePath = getTranslatedPath(lang);
+const navLinks = getNavLinks(lang);
+const currentPath = Astro.url.pathname;
 
 const linksClasses =
   'text-foreground/80 hover:text-foreground flex items-center gap-2 relative z-10 rounded-lg px-3 py-1.5 text-sm transition-colors';
@@ -14,7 +21,7 @@ const linksClasses =
     class="relative flex items-center gap-6 rounded-full border border-white/40 bg-white/10 px-6 py-3 shadow-xl shadow-black/5 backdrop-blur-lg before:pointer-events-none before:absolute before:inset-0 before:rounded-full before:bg-linear-to-b before:from-white/30 before:via-transparent before:to-transparent dark:border-white/20 dark:bg-black/10 dark:shadow-black/40 dark:before:from-white/10"
   >
     <a
-      href="/"
+      href={translatePath('/')}
       class="text-foreground group/logo flex items-center gap-2 font-semibold transition-all duration-300 ease-in-out hover:-rotate-3 hover:opacity-80 motion-reduce:hover:rotate-0"
     >
       <Icon
@@ -33,7 +40,7 @@ const linksClasses =
       >
       </div>
       {
-        NAV_LINKS.map((link) => (
+        navLinks.map((link) => (
           <a href={link.href} class={linksClasses} data-nav-link>
             <Icon icon={link.icon} strokeWidth={2} className="size-4" />
             {link.label}
@@ -44,6 +51,7 @@ const linksClasses =
 
     <div class="flex items-center gap-2">
       <MobileMenu client:load />
+      <LanguageSwitcher client:load currentLang={lang} currentPath={currentPath} />
       <ModeToggle client:load />
     </div>
   </div>

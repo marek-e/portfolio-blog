@@ -9,6 +9,13 @@ export default defineConfig({
   site: 'https://melmayan.fr',
   output: 'static',
   prefetch: true,
+  i18n: {
+    defaultLocale: 'fr',
+    locales: ['fr', 'en'],
+    routing: {
+      prefixDefaultLocale: false,
+    },
+  },
   integrations: [react(), mdx(), sitemap()],
   vite: {
     plugins: [tailwindcss()],

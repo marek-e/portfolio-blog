@@ -2,17 +2,20 @@
 import { Link } from '@/components/ui/button';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { Sent02Icon } from '@hugeicons/core-free-icons';
-
 import { EMAIL, SOCIALS } from '@/lib/socials';
+import { getTranslations, getLangFromUrl } from '@/i18n';
+
+const lang = getLangFromUrl(Astro.url);
+const t = getTranslations(lang);
 ---
 
 <section id="contact" class="relative py-20 md:py-32">
   <div class="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
-    <h2 class="text-foreground mb-4 text-3xl font-bold tracking-tight md:text-4xl">Get in Touch</h2>
+    <h2 class="text-foreground mb-4 text-3xl font-bold tracking-tight md:text-4xl">
+      {t.contact.title}
+    </h2>
     <p class="text-muted-foreground mx-auto mb-8 max-w-lg text-lg">
-      Have a project in mind or just want to say hi?
-      <br />
-      I'd love to hear from you.
+      {t.contact.subtitle}
     </p>
 
     <div class="mb-12">
@@ -21,14 +24,14 @@ import { EMAIL, SOCIALS } from '@/lib/socials';
         className="gap-2"
         href={`mailto:${EMAIL}`}
         animation="scale"
-        aria-label="Send me an email"
+        aria-label={t.aria.sendEmail}
       >
-        Send me an email
+        {t.contact.cta}
         <HugeiconsIcon icon={Sent02Icon} className="size-5" data-icon="inline-start" />
       </Link>
     </div>
     <p class="text-muted-foreground mx-auto mb-8 max-w-lg text-lg">
-      You can find me or see my work on the following platforms:
+      {t.contact.socialIntro}
     </p>
     <div class="flex items-center justify-center gap-4">
       {
@@ -37,7 +40,7 @@ import { EMAIL, SOCIALS } from '@/lib/socials';
             href={social.href}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label={`Follow on ${social.name}`}
+            aria-label={t.aria.followOn.replace('{platform}', social.name)}
             class="text-muted-foreground hover:text-foreground hover:bg-muted rounded-full p-3 transition-colors"
           >
             <HugeiconsIcon icon={social.icon} className="size-6" />
