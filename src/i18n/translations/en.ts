@@ -10,11 +10,12 @@ export const en: UITranslations = {
   hero: {
     pageTitle: 'Marek Elmayan | Developer portfolio',
     pageDescription: 'Full-stack developer portfolio and blog',
-    badge: 'Available for freelance work',
+    badge: '#OpenToWork',
     headline: "Hi, I'm Marek Elmayan",
     subtitle: 'I build things for the web with modern tools.\nClean code, great user experiences.',
     ctaProjects: 'View Projects',
     ctaContact: 'Get in Touch',
+    ctaCv: 'View my CV',
   },
   about: {
     title: 'About Me',
@@ -80,5 +81,18 @@ export const en: UITranslations = {
     pageDescription: 'Component library and design tokens preview',
     title: 'Design System',
     description: 'A preview of all available components and design tokens.',
+  },
+  cv: {
+    pageTitle: 'Marek_Elmayan_CV_EN',
+    pageDescription: 'Resume of Marek Elmayan, full-stack developer',
+    downloadPdf: 'Download PDF',
+    sections: {
+      experience: 'Professional Experience',
+      education: 'Education',
+      skills: 'Skills',
+      languages: 'Languages',
+      hobbies: 'Hobbies & Interests',
+    },
+    present: 'Present',
   },
 };

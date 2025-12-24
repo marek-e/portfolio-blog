@@ -1,0 +1,33 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import CV from '@/components/astro/CV.astro';
+import { getTranslations } from '@/i18n';
+import { getLangFromUrl } from '@/i18n/config';
+import { HugeiconsIcon } from '@hugeicons/react';
+import { PrinterIcon } from '@hugeicons/core-free-icons';
+import Navbar from '@/components/astro/Navbar.astro';
+import Footer from '@/components/astro/Footer.astro';
+
+const lang = getLangFromUrl(Astro.url);
+const t = getTranslations(lang);
+---
+
+<Layout title={t.cv.pageTitle} description={t.cv.pageDescription}>
+  <Navbar />
+  <main class="bg-background mt-24 min-h-screen py-8">
+    <div class="container mx-auto px-4">
+      <div class="no-print mb-4 flex justify-end">
+        <button
+          onclick="window.print()"
+          class="bg-primary text-primary-foreground hover:bg-primary/90 inline-flex cursor-pointer items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-colors"
+          aria-label={t.cv.downloadPdf}
+        >
+          <HugeiconsIcon icon={PrinterIcon} className="size-4" />
+          {t.cv.downloadPdf}
+        </button>
+      </div>
+      <CV lang={lang} />
+    </div>
+  </main>
+  <Footer />
+</Layout>

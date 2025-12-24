@@ -13,6 +13,7 @@ export interface UITranslations {
     subtitle: string;
     ctaProjects: string;
     ctaContact: string;
+    ctaCv: string;
   };
   about: {
     title: string;
@@ -74,5 +75,18 @@ export interface UITranslations {
     pageDescription: string;
     title: string;
     description: string;
+  };
+  cv: {
+    pageTitle: string;
+    pageDescription: string;
+    downloadPdf: string;
+    sections: {
+      experience: string;
+      education: string;
+      skills: string;
+      languages: string;
+      hobbies: string;
+    };
+    present: string;
   };
 }

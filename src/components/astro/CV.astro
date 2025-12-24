@@ -1,0 +1,208 @@
+---
+import { getLocalizedCV } from '@/data/cv';
+import { getTranslations, type Lang } from '@/i18n';
+import { HugeiconsIcon } from '@hugeicons/react';
+import {
+  Mail01Icon,
+  Location01Icon,
+  Linkedin01Icon,
+  Github01Icon,
+  Globe02Icon,
+} from '@hugeicons/core-free-icons';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getTranslations(lang);
+const cv = getLocalizedCV(lang);
+
+function formatDate(date: string | null, presentLabel: string): string {
+  if (!date) return presentLabel;
+  return date;
+}
+---
+
+<div
+  class="cv-container bg-card border-border mx-auto border p-8 font-[Geist] text-black shadow-lg md:p-12"
+>
+  <header class="cv-section mb-6">
+    <div class="flex items-start gap-6">
+      <!-- Profile Picture -->
+      <div
+        class="profile-picture bg-secondary flex aspect-auto h-30 w-25 shrink-0 items-center justify-center overflow-hidden rounded-md"
+      >
+        <img
+          src="/images/mareke.jpg"
+          alt={cv.name}
+          class="size-full object-cover"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+        />
+        <span class="text-muted-foreground hidden items-center justify-center text-2xl font-bold">
+          {
+            cv.name
+              .split(' ')
+              .map((n) => n[0])
+              .join('')
+          }
+        </span>
+      </div>
+
+      <div class="flex-1">
+        <h1 class="text-3xl font-bold">{cv.name}</h1>
+        <p class="text-primary mt-1 text-xl font-medium">{cv.title}</p>
+
+        <div class="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-sm text-black">
+          <a
+            href={`mailto:${cv.email}`}
+            class="flex items-center gap-1.5 transition-colors hover:underline"
+          >
+            <HugeiconsIcon icon={Mail01Icon} className="size-4" />
+            {cv.email}
+          </a>
+          <span class="flex items-center gap-1.5">
+            <HugeiconsIcon icon={Location01Icon} className="size-4" />
+            {cv.location}
+          </span>
+          <a
+            href={`https://${cv.linkedin}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center gap-1.5 transition-colors hover:underline"
+          >
+            <HugeiconsIcon icon={Linkedin01Icon} className="size-4" />
+            LinkedIn
+          </a>
+          <a
+            href={`https://${cv.github}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center gap-1.5 transition-colors hover:underline"
+          >
+            <HugeiconsIcon icon={Github01Icon} className="size-4" />
+            GitHub
+          </a>
+          <a
+            href={`https://${cv.website}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center gap-1.5 transition-colors hover:underline"
+          >
+            <HugeiconsIcon icon={Globe02Icon} className="size-4" />
+            {cv.website}
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <hr class="border-border my-6" />
+
+  <!-- Experience -->
+  <section class="cv-section mb-6">
+    <h2 class="mb-4 text-lg font-semibold text-black">{t.cv.sections.experience}</h2>
+    {
+      cv.experience.map((exp) => (
+        <div class="mb-5 last:mb-0">
+          <div class="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between">
+            <div>
+              <h3 class="font-medium">{exp.title}</h3>
+              <p class="text-sm">
+                {exp.company} - {exp.location}
+              </p>
+            </div>
+            <span class="text-sm whitespace-nowrap">
+              {formatDate(exp.startDate, t.cv.present)} - {formatDate(exp.endDate, t.cv.present)}
+            </span>
+          </div>
+          <ul class="mt-2 list-inside list-disc space-y-1 text-sm">
+            {exp.description.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
+  </section>
+
+  <hr class="border-border my-6" />
+
+  <!-- Education -->
+  <section class="cv-section mb-6">
+    <h2 class="mb-4 text-lg font-semibold text-black">{t.cv.sections.education}</h2>
+    {
+      cv.education.map((edu) => (
+        <div class="mb-4 last:mb-0">
+          <div class="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between">
+            <div>
+              <h3 class="font-medium">{edu.degree}</h3>
+              <p class="text-sm">
+                {edu.institution} - {edu.location}
+              </p>
+            </div>
+            <span class="text-sm whitespace-nowrap">
+              {edu.startDate} - {edu.endDate}
+            </span>
+          </div>
+        </div>
+      ))
+    }
+  </section>
+
+  <hr class="border-border my-6" />
+
+  <!-- Skills -->
+  <section class="cv-section mb-6">
+    <h2 class="mb-4 text-lg font-semibold text-black">{t.cv.sections.skills}</h2>
+    <div class="space-y-3">
+      {
+        cv.skills.map((category) => (
+          <div class="flex flex-wrap items-start gap-2">
+            <span class="min-w-[100px] text-sm font-medium">{category.category}:</span>
+            <div class="flex flex-wrap gap-1.5">
+              {category.skills.map((skill) => (
+                <span class="bg-secondary inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium">
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <hr class="border-border my-6" />
+
+  <!-- Languages & Hobbies -->
+  <div class="cv-section grid grid-cols-2 gap-8">
+    <section>
+      <h2 class="mb-4 text-lg font-semibold">{t.cv.sections.languages}</h2>
+      <div class="flex flex-col gap-1">
+        {
+          cv.languages.map((lang) => (
+            <span class="text-sm">
+              <span class="font-medium">{lang.language}</span>
+              <span> - {lang.level}</span>
+            </span>
+          ))
+        }
+      </div>
+    </section>
+
+    <section>
+      <h2 class="mb-4 text-lg font-semibold">{t.cv.sections.hobbies}</h2>
+      <div class="flex flex-wrap gap-2">
+        {
+          cv.hobbies.map((hobby) => (
+            <span class="bg-secondary inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-sm">
+              <span>{hobby.icon}</span>
+              <span>{hobby.name}</span>
+            </span>
+          ))
+        }
+      </div>
+    </section>
+  </div>
+</div>
