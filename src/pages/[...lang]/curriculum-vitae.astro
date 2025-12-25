@@ -1,18 +1,20 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 import CV from '@/components/astro/CV.astro';
-import { getTranslations } from '@/i18n';
-import { getLangFromUrl } from '@/i18n/config';
+import { getTranslations, defaultLang } from '@/i18n';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { PrinterIcon } from '@hugeicons/core-free-icons';
-import Footer from '@/components/astro/Footer.astro';
 import Navbar from '@/components/astro/Navbar.astro';
+import Footer from '@/components/astro/Footer.astro';
 
 export function getStaticPaths() {
-  return [{ params: { lang: 'en' as const } }, { params: { lang: 'fr' as const } }];
+  return [
+    { params: { lang: undefined } }, // / → French (default)
+    { params: { lang: 'en' } as const }, // /en/ → English
+  ];
 }
 
-const lang = getLangFromUrl(Astro.url);
+const lang = Astro.params.lang ?? defaultLang;
 const t = getTranslations(lang);
 ---
 
