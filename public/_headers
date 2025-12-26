@@ -10,8 +10,8 @@
   Permissions-Policy: geolocation=(), microphone=(), camera=()
 
   # Content Security Policy
-  # Tailored for Astro + React + shadcn/ui with theme switching
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'
+  # Tailored for Astro + React + shadcn/ui with theme switching + Cloudflare Analytics
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://cloudflareinsights.com; frame-ancestors 'self'; base-uri 'self'; form-action 'self'
 
   # Performance & Caching
   Cache-Control: public, max-age=3600, must-revalidate

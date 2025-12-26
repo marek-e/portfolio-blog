@@ -83,5 +83,12 @@ const enURL = new URL(enPath, Astro.site);
   <body class="bg-background text-foreground min-h-screen antialiased">
     <BookmarkLanguageToggle client:load currentLang={lang} currentPath={currentPath} />
     <slot />
+
+    <!-- Cloudflare Web Analytics -->
+    <script
+      is:inline
+      defer
+      src="https://static.cloudflareinsights.com/beacon.min.js"
+      data-cf-beacon='{"token": "YOUR_TOKEN"}'></script>
   </body>
 </html>
