@@ -36,7 +36,7 @@ export function H1({ children, className, ...props }: HeadingProps) {
   return (
     <h1
       className={cn(
-        'group cursor-pointer scroll-mt-24 text-4xl font-bold tracking-tight lg:text-5xl',
+        'not-prose group cursor-pointer scroll-mt-24 text-4xl font-bold tracking-tight lg:text-5xl',
         className
       )}
       onClick={handleClick}
@@ -62,7 +62,7 @@ export function H2({ children, id, className, ...props }: HeadingProps) {
     <h2
       id={headingId}
       className={cn(
-        'group cursor-pointer scroll-mt-24 text-2xl font-semibold tracking-tight',
+        'not-prose group cursor-pointer scroll-mt-24 text-2xl font-semibold tracking-tight',
         className
       )}
       onClick={handleClick}
@@ -94,7 +94,7 @@ export function H3({ children, id, className, ...props }: HeadingProps) {
     <h3
       id={headingId}
       className={cn(
-        'group cursor-pointer scroll-mt-24 text-xl font-semibold tracking-tight',
+        'not-prose group cursor-pointer scroll-mt-24 text-xl font-semibold tracking-tight',
         className
       )}
       onClick={handleClick}
@@ -125,7 +125,7 @@ export function H4({ children, id, className, ...props }: HeadingProps) {
   return (
     <h4
       id={headingId}
-      className={cn('group cursor-pointer scroll-mt-24 text-lg font-semibold', className)}
+      className={cn('not-prose group cursor-pointer scroll-mt-24 text-lg font-semibold', className)}
       onClick={handleClick}
       {...props}
     >

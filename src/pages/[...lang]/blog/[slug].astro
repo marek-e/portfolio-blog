@@ -147,29 +147,35 @@ const readingTime = estimateReadingTime(post.body ?? '');
     color: oklch(from var(--color-primary) l c h / 0.8);
   }
 
+  .prose h1,
+  .prose h2,
+  .prose h3,
+  .prose h4 {
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+  }
+
   .prose h1 a,
   .prose h2 a,
   .prose h3 a,
   .prose h4 a {
     text-decoration: none;
     color: inherit;
-    margin-bottom: 0.5rem;
-    margin-top: 1rem;
-  }
-
-  .prose h1 a:hover,
-  .prose h2 a:hover,
-  .prose h3 a:hover,
-  .prose h4 a:hover {
-    color: inherit;
-    text-decoration: underline;
+    &:hover {
+      color: inherit;
+      text-decoration: underline;
+    }
   }
 
   .prose code:not(pre code) {
-    background-color: var(--color-muted);
+    background-color: oklch(from var(--color-primary) l c h / 0.3);
     padding: 0.2em 0.4em;
     border-radius: 0.25rem;
     font-size: 0.875em;
+    &::before,
+    &::after {
+      content: '';
+    }
   }
 
   .prose pre {
