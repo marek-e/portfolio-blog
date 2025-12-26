@@ -148,11 +148,44 @@ export function DesignSystemPreview({ lang }: { lang: Lang }) {
 
       {/* Badge */}
       <Section title="Badge">
-        <div className="flex flex-wrap gap-3">
-          <Badge variant="default">Default</Badge>
-          <Badge variant="secondary">Secondary</Badge>
-          <Badge variant="outline">Outline</Badge>
-          <Badge variant="destructive">Destructive</Badge>
+        <div className="space-y-4">
+          <div>
+            <p className="text-muted-foreground mb-3 text-sm font-medium">Standard</p>
+            <div className="flex flex-wrap gap-3">
+              <Badge variant="default">Default</Badge>
+              <Badge variant="secondary">Secondary</Badge>
+              <Badge variant="outline">Outline</Badge>
+              <Badge variant="destructive">Destructive</Badge>
+            </div>
+          </div>
+          <Separator />
+          <div>
+            <p className="text-muted-foreground mb-3 text-sm font-medium">Pastel (Filled)</p>
+            <div className="flex flex-wrap gap-3">
+              <Badge variant="pastel-blue">Blue</Badge>
+              <Badge variant="pastel-green">Green</Badge>
+              <Badge variant="pastel-yellow">Yellow</Badge>
+              <Badge variant="pastel-pink">Pink</Badge>
+              <Badge variant="pastel-purple">Purple</Badge>
+              <Badge variant="pastel-orange">Orange</Badge>
+              <Badge variant="pastel-teal">Teal</Badge>
+              <Badge variant="pastel-rose">Rose</Badge>
+            </div>
+          </div>
+          <Separator />
+          <div>
+            <p className="text-muted-foreground mb-3 text-sm font-medium">Pastel (Outlined)</p>
+            <div className="flex flex-wrap gap-3">
+              <Badge variant="pastel-blue-outline">Blue</Badge>
+              <Badge variant="pastel-green-outline">Green</Badge>
+              <Badge variant="pastel-yellow-outline">Yellow</Badge>
+              <Badge variant="pastel-pink-outline">Pink</Badge>
+              <Badge variant="pastel-purple-outline">Purple</Badge>
+              <Badge variant="pastel-orange-outline">Orange</Badge>
+              <Badge variant="pastel-teal-outline">Teal</Badge>
+              <Badge variant="pastel-rose-outline">Rose</Badge>
+            </div>
+          </div>
         </div>
       </Section>
 
