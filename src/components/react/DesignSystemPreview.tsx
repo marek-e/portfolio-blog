@@ -46,6 +46,15 @@ import {
   InputGroupAddon,
   InputGroupButton,
 } from '@/components/ui/input-group';
+import {
+  Breadcrumb,
+  BreadcrumbList,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+  BreadcrumbEllipsis,
+} from '@/components/ui/breadcrumb';
 import { ModeToggle } from './ModeToggle';
 import { Icon } from './Icon';
 import { ArrowLeftIcon, Search01Icon, Mail01Icon } from '@hugeicons/core-free-icons';
@@ -372,6 +381,53 @@ export function DesignSystemPreview({ lang }: { lang: Lang }) {
               <InputGroupInput placeholder="Enter email..." />
               <InputGroupButton>Subscribe</InputGroupButton>
             </InputGroup>
+          </div>
+        </div>
+      </Section>
+
+      {/* Breadcrumb */}
+      <Section title="Breadcrumb">
+        <div className="space-y-6">
+          <div>
+            <p className="text-muted-foreground mb-3 text-sm font-medium">Basic</p>
+            <Breadcrumb>
+              <BreadcrumbList>
+                <BreadcrumbItem>
+                  <BreadcrumbLink href="#">Home</BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                  <BreadcrumbLink href="#">Blog</BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                  <BreadcrumbPage>Current Page</BreadcrumbPage>
+                </BreadcrumbItem>
+              </BreadcrumbList>
+            </Breadcrumb>
+          </div>
+          <Separator />
+          <div>
+            <p className="text-muted-foreground mb-3 text-sm font-medium">With ellipsis</p>
+            <Breadcrumb>
+              <BreadcrumbList>
+                <BreadcrumbItem>
+                  <BreadcrumbLink href="#">Home</BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                  <BreadcrumbEllipsis />
+                </BreadcrumbItem>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                  <BreadcrumbLink href="#">Category</BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                  <BreadcrumbPage>Current Page</BreadcrumbPage>
+                </BreadcrumbItem>
+              </BreadcrumbList>
+            </Breadcrumb>
           </div>
         </div>
       </Section>
