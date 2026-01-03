@@ -48,15 +48,12 @@ export const en: UITranslations = {
   footer: {
     sitemap: 'Sitemap',
     home: 'Home',
-    about: 'About',
-    privacy: 'Privacy Policy',
-    terms: 'Terms of Service',
     contact: 'Contact',
     blog: 'Blog',
     projects: 'Projects',
-    services: 'Services',
+    designSystem: 'Design System',
     backToTop: 'Back to top',
-    copyright: '© {year} Marek Elmayan',
+    cv: 'CV',
   },
   notFound: {
     pageTitle: '404 - Page Not Found | melmayan.fr',

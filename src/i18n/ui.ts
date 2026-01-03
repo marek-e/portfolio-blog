@@ -42,15 +42,12 @@ export interface UITranslations {
   footer: {
     sitemap: string;
     home: string;
-    about: string;
-    privacy: string;
-    terms: string;
     contact: string;
     blog: string;
     projects: string;
-    services: string;
+    designSystem: string;
+    cv: string;
     backToTop: string;
-    copyright: string;
   };
   notFound: {
     pageTitle: string;
