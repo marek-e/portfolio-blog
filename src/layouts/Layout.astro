@@ -84,7 +84,7 @@ const enURL = new URL(enPath, Astro.site);
       document.addEventListener('astro:after-swap', applyStoredTheme);
     </script>
   </head>
-  <body class="bg-background text-foreground min-h-screen antialiased">
+  <body class="bg-background text-foreground min-h-dvh antialiased">
     <BookmarkLanguageToggle client:load currentLang={lang} currentPath={currentPath} />
     <slot />
   </body>
