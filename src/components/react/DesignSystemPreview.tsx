@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Button, Link } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import {
@@ -436,10 +436,36 @@ export function DesignSystemPreview({ lang }: { lang: Lang }) {
 }
 
 function ColorSwatch({ name, className }: { name: string; className: string }) {
+  const [colorValue, setColorValue] = useState<string>('');
+  const [copied, setCopied] = useState(false);
+  const swatchRef = useRef<HTMLDivElement>(null);
+
+  const setSwatchRef = (el: HTMLDivElement | null) => {
+    swatchRef.current = el;
+    if (el && !colorValue) {
+      setColorValue(getComputedStyle(el).backgroundColor);
+    }
+  };
+
+  const handleCopy = async () => {
+    if (!colorValue) return;
+    await navigator.clipboard.writeText(colorValue);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1500);
+  };
+
   return (
     <div className="space-y-2">
-      <div className={`border-border h-12 w-full rounded-lg border ${className}`} />
-      <p className="text-muted-foreground text-xs">{name}</p>
+      <div
+        ref={setSwatchRef}
+        onClick={handleCopy}
+        className={`border-border h-12 w-full cursor-pointer rounded-lg border transition-transform hover:scale-103 active:scale-97 ${className}`}
+        title="Click to copy"
+      />
+      <div className="flex flex-col justify-between gap-1">
+        <p className="text-foreground text-semibold text-sm">{name}</p>
+        <p className="text-muted-foreground text-xs">{copied ? '✓ Copied' : colorValue}</p>
+      </div>
     </div>
   );
 }
