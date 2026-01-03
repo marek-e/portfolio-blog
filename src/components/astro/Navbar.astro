@@ -1,7 +1,6 @@
 ---
 import { ModeToggle } from '@/components/react/ModeToggle';
 import { MobileMenu } from '@/components/react/MobileMenu';
-import { Star } from '@hugeicons/core-free-icons';
 import { Icon } from '@/components/react/Icon';
 import { getNavLinks } from '@/lib/navigation';
 import { getLangFromUrl, getTranslatedPath } from '@/i18n';
@@ -23,13 +22,7 @@ const linksClasses =
       href={translatePath('/')}
       class="text-foreground group/logo flex items-center gap-2 font-semibold transition-all duration-300 ease-in-out hover:opacity-80 motion-safe:hover:-rotate-3 motion-reduce:hover:underline"
     >
-      <Icon
-        icon={Star}
-        strokeWidth={2}
-        fill="currentColor"
-        className="text-primary size-4 transition-transform duration-300 ease-in-out motion-safe:group-hover/logo:rotate-360"
-      />
-      <span class="inline-block">melmayan</span>
+      <img src="/logo.svg" alt="logo - ME" class="size-8" />
     </a>
 
     <div id="nav-links" class="relative hidden items-center gap-1 md:flex">
