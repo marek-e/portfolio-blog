@@ -120,15 +120,14 @@ export function RunningStats({ stats, lang = 'fr' }: RunningStatsProps) {
 
   return (
     <div className="space-y-4">
-      {/* Toggle Switch */}
       <div className="flex justify-center">
-        <div className="bg-muted inline-flex rounded-lg p-1">
+        <div className="bg-muted inline-flex gap-1 rounded-lg p-1">
           <button
             onClick={() => setMode('allTime')}
-            className={`cursor-pointer rounded-md px-4 py-2 text-sm font-medium transition-all ${
+            className={`rounded-md px-4 py-2 text-sm font-medium transition-all ${
               mode === 'allTime'
                 ? 'bg-background text-foreground shadow-sm'
-                : 'text-muted-foreground hover:text-foreground'
+                : 'text-muted-foreground hover:text-foreground hover:bg-background/50 cursor-pointer'
             }`}
             aria-pressed={mode === 'allTime'}
           >
@@ -136,10 +135,10 @@ export function RunningStats({ stats, lang = 'fr' }: RunningStatsProps) {
           </button>
           <button
             onClick={() => setMode('thisYear')}
-            className={`cursor-pointer rounded-md px-4 py-2 text-sm font-medium transition-all ${
+            className={`rounded-md px-4 py-2 text-sm font-medium transition-all ${
               mode === 'thisYear'
                 ? 'bg-background text-foreground shadow-sm'
-                : 'text-muted-foreground hover:text-foreground'
+                : 'text-muted-foreground hover:text-foreground hover:bg-background/50 cursor-pointer'
             }`}
             aria-pressed={mode === 'thisYear'}
           >
