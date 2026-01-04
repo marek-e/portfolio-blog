@@ -22,4 +22,3 @@ export function CardTitle({ title }: CardTitleProps) {
     </h3>
   );
 }
-

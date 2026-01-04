@@ -1,10 +1,10 @@
-import type { IconType } from '@hugeicons/core-free-icons';
+import type { IconSvgElement } from '@hugeicons/react';
 import { Icon } from '../Icon';
 
 interface CardFieldProps {
   label: string;
   value: string;
-  icon?: IconType;
+  icon?: IconSvgElement;
   highlight?: boolean;
   showDivider?: boolean;
 }
@@ -26,4 +26,3 @@ export function CardField({ label, value, icon, highlight, showDivider }: CardFi
     </div>
   );
 }
-

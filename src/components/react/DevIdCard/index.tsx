@@ -90,7 +90,7 @@ export function DevIdCard({ lang }: DevIdCardProps) {
               {/* Portrait */}
               <div className="border-primary/30 bg-muted hidden w-32 shrink-0 items-center justify-center overflow-hidden rounded-lg border-2 md:flex md:w-40">
                 <img
-                  src="/src/assets/portrait.png"
+                  src="/images/portrait.png"
                   alt="Portrait"
                   aria-hidden="true"
                   className="h-full w-full object-contain p-2"

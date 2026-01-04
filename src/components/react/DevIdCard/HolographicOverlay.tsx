@@ -42,4 +42,3 @@ export function HolographicOverlay({ rotateY, glareX, glareY }: HolographicOverl
     </>
   );
 }
-

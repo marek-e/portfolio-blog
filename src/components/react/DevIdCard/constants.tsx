@@ -8,27 +8,26 @@ interface TechItem {
 export const TECH_STACK: TechItem[] = [
   {
     name: 'React',
-    icon: <img src="/src/assets/react-logo.svg" alt="React" />,
+    icon: <img src="/icons/react-logo.svg" alt="React" />,
   },
   {
     name: 'TypeScript',
-    icon: <img src="/src/assets/typescript-logo.svg" alt="TypeScript" />,
+    icon: <img src="/icons/typescript-logo.svg" alt="TypeScript" />,
   },
   {
     name: 'Python',
-    icon: <img src="/src/assets/python-logo.svg" alt="Python" />,
+    icon: <img src="/icons/python-logo.svg" alt="Python" />,
   },
   {
     name: 'AWS Serverless',
-    icon: <img src="/src/assets/aws-lambda-logo.svg" alt="AWS Lambda" />,
+    icon: <img src="/icons/aws-lambda-logo.svg" alt="AWS Lambda" />,
   },
   {
     name: 'Next.js',
-    icon: <img src="/src/assets/next-js-logo.svg" alt="Next.js" className="dark:invert" />,
+    icon: <img src="/icons/next-js-logo.svg" alt="Next.js" className="dark:invert" />,
   },
   {
     name: 'More to come',
-    icon: <img src="/src/assets/empty_badge.svg" alt="More to come" />,
+    icon: <img src="/icons/empty_badge.svg" alt="More to come" />,
   },
 ];
-
