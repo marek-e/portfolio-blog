@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import type { RunningStats as RunningStatsType } from '@/types/strava';
 import type { Lang } from '@/i18n/config';
 import { getTranslations } from '@/i18n';
+import { useReducedMotion } from '@/lib/useReducedMotion';
 
 interface RunningStatsProps {
   stats: RunningStatsType;
@@ -16,24 +17,15 @@ interface AnimatedCounterProps {
 
 function AnimatedCounter({ value, duration = 1500, suffix = '' }: AnimatedCounterProps) {
   const [displayValue, setDisplayValue] = useState(0);
-  const [isReducedMotion, setIsReducedMotion] = useState(false);
+  const isReducedMotion = useReducedMotion();
   const counterRef = useRef<HTMLSpanElement>(null);
   const hasAnimated = useRef(false);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    setIsReducedMotion(mediaQuery.matches);
-    if (mediaQuery.matches) {
+    if (isReducedMotion) {
       setDisplayValue(value);
     }
-
-    const handler = (e: MediaQueryListEvent) => {
-      setIsReducedMotion(e.matches);
-      if (e.matches) setDisplayValue(value);
-    };
-    mediaQuery.addEventListener('change', handler);
-    return () => mediaQuery.removeEventListener('change', handler);
-  }, [value]);
+  }, [isReducedMotion, value]);
 
   useEffect(() => {
     if (isReducedMotion || hasAnimated.current) return;

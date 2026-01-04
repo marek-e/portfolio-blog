@@ -4,6 +4,7 @@ import { formatDateRange, type TimelineEntry } from '@/types/timeline';
 import { Briefcase01Icon, Mortarboard01Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
 import type { Lang } from '@/i18n/config';
+import { useReducedMotion } from '@/lib/useReducedMotion';
 
 interface TimelineCardsProps {
   entries: TimelineEntry[];
@@ -264,17 +265,7 @@ export function TimelineCards({
 }: TimelineCardsProps) {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [isReducedMotion, setIsReducedMotion] = useState(false);
-
-  // Check for reduced motion preference
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    setIsReducedMotion(mediaQuery.matches);
-
-    const handler = (e: MediaQueryListEvent) => setIsReducedMotion(e.matches);
-    mediaQuery.addEventListener('change', handler);
-    return () => mediaQuery.removeEventListener('change', handler);
-  }, []);
+  const isReducedMotion = useReducedMotion();
 
   // Handle scroll progress calculation
   useEffect(() => {

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
+import { useReducedMotion } from '@/lib/useReducedMotion';
 
 interface TiltState {
   rotateX: number;
@@ -33,19 +34,10 @@ export function useTiltEffect(options: UseTiltEffectOptions = {}) {
   const cardRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<number | null>(null);
 
-  const [isReducedMotion, setIsReducedMotion] = useState(false);
+  const isReducedMotion = useReducedMotion();
   const [isHovering, setIsHovering] = useState(false);
   const [currentTilt, setCurrentTilt] = useState<TiltState>(INITIAL_TILT);
   const [targetTilt, setTargetTilt] = useState<TiltState>(INITIAL_TILT);
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    setIsReducedMotion(mediaQuery.matches);
-
-    const handler = (e: MediaQueryListEvent) => setIsReducedMotion(e.matches);
-    mediaQuery.addEventListener('change', handler);
-    return () => mediaQuery.removeEventListener('change', handler);
-  }, []);
 
   const calculateTilt = useCallback(
     (clientX: number, clientY: number): TiltState => {
