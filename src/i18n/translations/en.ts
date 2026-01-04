@@ -130,4 +130,22 @@ export const en: UITranslations = {
       location: 'Nantes, France',
     },
   },
+  strava: {
+    title: 'My Runs',
+    subtitle: 'Tracing my route, one kilometer at a time',
+    intro:
+      'Sports are part of my daily routine. I play handball at a club and run regularly to keep a healthy balance between the keyboard and the field. Here are my latest running activities.',
+    totalDistance: 'Total Distance',
+    thisMonth: 'This Month',
+    thisYear: 'This Year',
+    allTime: 'All Time',
+    runs: 'runs',
+    avgPace: 'Average Pace',
+    viewOnStrava: 'View on Strava',
+    noActivities: 'No activities available. Try again later.',
+    elevation: 'Elevation',
+    duration: 'Duration',
+    pace: 'Pace',
+    heartRate: 'bpm',
+  },
 };

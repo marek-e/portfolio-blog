@@ -1,0 +1,114 @@
+---
+import { getRunningActivities, getAthleteStats, STRAVA_ATHLETE_ID } from '@/lib/strava';
+import { ActivityCard } from '@/components/react/ActivityCard';
+import { RunningStats } from '@/components/react/RunningStats';
+import { getTranslations, getLangFromUrl } from '@/i18n';
+import type { RunningActivity, RunningStats as RunningStatsType } from '@/types/strava';
+
+const lang = getLangFromUrl(Astro.url);
+const t = getTranslations(lang);
+
+let activities: RunningActivity[] = [];
+let stats: RunningStatsType | null = null;
+
+try {
+  const [fetchedActivities, fetchedStats] = await Promise.all([
+    getRunningActivities(6),
+    getAthleteStats(),
+  ]);
+
+  if (fetchedActivities.length > 0) {
+    activities = fetchedActivities;
+    stats = fetchedStats;
+  }
+} catch (error) {
+  console.warn('[StravaSection] Failed to fetch Strava data:', error);
+}
+
+const stravaOrange = '#FC4C02';
+const hasData = activities.length > 0;
+---
+
+<section id="running" class="relative py-20 md:py-32">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <div class="mb-8 flex items-end justify-between">
+      <div>
+        <h2 class="text-foreground text-3xl font-bold tracking-tight md:text-4xl">
+          {t.strava.title}
+        </h2>
+        <p class="text-muted-foreground mt-2">{t.strava.subtitle}</p>
+      </div>
+      <a
+        href={`https://www.strava.com/athletes/${STRAVA_ATHLETE_ID}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="border-border bg-card hover:bg-muted hover:text-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50 aria-expanded:bg-muted aria-expanded:text-foreground flex items-center gap-2 rounded-lg border px-4 py-2"
+        aria-label="View profile on Strava"
+      >
+        <svg viewBox="0 0 24 24" class="h-5 w-5" fill={stravaOrange} aria-hidden="true">
+          <path
+            d="M15.387 17.944l-2.089-4.116h-3.065L15.387 24l5.15-10.172h-3.066m-7.008-5.599l2.836 5.598h4.172L10.463 0l-7 13.828h4.169"
+          ></path>
+        </svg>
+        <span class="text-sm font-medium">{t.strava.viewOnStrava}</span>
+      </a>
+    </div>
+
+    <p class="text-foreground/80 mb-10 max-w-3xl text-lg leading-relaxed">
+      {t.strava.intro}
+    </p>
+
+    {
+      hasData ? (
+        <>
+          {stats && (
+            <div class="mb-10">
+              <RunningStats client:visible stats={stats} lang={lang} />
+            </div>
+          )}
+
+          {/* Activities Grid */}
+          <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {activities.map((activity) => (
+              <ActivityCard client:visible activity={activity} lang={lang} />
+            ))}
+          </div>
+        </>
+      ) : (
+        <div class="flex flex-col items-center justify-center gap-8 py-8">
+          <p class="text-muted-foreground text-center">{t.strava.noActivities}</p>
+          <a
+            href={`https://www.strava.com/athletes/${STRAVA_ATHLETE_ID}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 rounded-lg bg-[#FC4C02] px-6 py-3 font-medium text-white transition-colors hover:bg-[#e04502]"
+          >
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor" aria-hidden="true">
+              <path d="M15.387 17.944l-2.089-4.116h-3.065L15.387 24l5.15-10.172h-3.066m-7.008-5.599l2.836 5.598h4.172L10.463 0l-7 13.828h4.169" />
+            </svg>
+            {t.strava.viewOnStrava}
+          </a>
+        </div>
+      )
+    }
+
+    <!-- Mobile Strava Link (only show if we have data) -->
+    {
+      hasData && (
+        <div class="mt-8 text-center md:hidden">
+          <a
+            href={`https://www.strava.com/athletes/${STRAVA_ATHLETE_ID}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-muted-foreground hover:text-foreground inline-flex items-center gap-2 text-sm font-medium transition-colors"
+          >
+            <svg viewBox="0 0 24 24" class="h-4 w-4" fill={stravaOrange} aria-hidden="true">
+              <path d="M15.387 17.944l-2.089-4.116h-3.065L15.387 24l5.15-10.172h-3.066m-7.008-5.599l2.836 5.598h4.172L10.463 0l-7 13.828h4.169" />
+            </svg>
+            {t.strava.viewOnStrava}
+          </a>
+        </div>
+      )
+    }
+  </div>
+</section>

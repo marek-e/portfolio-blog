@@ -128,4 +128,22 @@ export const fr: UITranslations = {
       location: 'Nantes, France',
     },
   },
+  strava: {
+    title: 'Mes courses',
+    subtitle: 'Je trace ma route, un kilomètre à la fois',
+    intro:
+      "Le sport fait partie de mon quotidien. Je joue au handball en club et je cours régulièrement pour garder l'équilibre entre le clavier et le terrain. Voici mes dernières sorties running.",
+    totalDistance: 'Distance totale',
+    thisMonth: 'Ce mois-ci',
+    thisYear: 'Cette année',
+    allTime: 'Depuis toujours',
+    runs: 'courses',
+    avgPace: 'Allure moyenne',
+    viewOnStrava: 'Voir sur Strava',
+    noActivities: 'Aucune activité disponible. Essayez plus tard.',
+    elevation: 'Dénivelé',
+    duration: 'Durée',
+    pace: 'Allure',
+    heartRate: 'bpm',
+  },
 };

@@ -120,4 +120,21 @@ export interface UITranslations {
       location: string;
     };
   };
+  strava: {
+    title: string;
+    subtitle: string;
+    intro: string;
+    totalDistance: string;
+    thisMonth: string;
+    thisYear: string;
+    allTime: string;
+    runs: string;
+    avgPace: string;
+    viewOnStrava: string;
+    noActivities: string;
+    elevation: string;
+    duration: string;
+    pace: string;
+    heartRate: string;
+  };
 }
