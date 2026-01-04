@@ -102,4 +102,22 @@ export interface UITranslations {
     minRead: string;
     noPosts: string;
   };
+  devCard: {
+    cardTitle: string;
+    ariaLabel: string;
+    fields: {
+      name: string;
+      job: string;
+      nature: string;
+      gameTime: string;
+      location: string;
+    };
+    values: {
+      name: string;
+      job: string;
+      nature: string;
+      gameTime: string;
+      location: string;
+    };
+  };
 }

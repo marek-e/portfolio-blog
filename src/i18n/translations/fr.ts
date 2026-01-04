@@ -48,7 +48,8 @@ export const fr: UITranslations = {
   },
   contactPage: {
     pageTitle: 'Contact | Marek Elmayan',
-    pageDescription: 'Contactez Marek Elmayan pour vos projets, collaborations, ou simplement pour dire bonjour.',
+    pageDescription:
+      'Contactez Marek Elmayan pour vos projets, collaborations, ou simplement pour dire bonjour.',
   },
   footer: {
     sitemap: 'Liens utiles',
@@ -108,5 +109,23 @@ export const fr: UITranslations = {
     updatedOn: 'Mis à jour le',
     minRead: 'min de lecture',
     noPosts: "Pas encore d'articles. Revenez bientôt !",
+  },
+  devCard: {
+    cardTitle: 'Carte Développeur',
+    ariaLabel: 'Carte développeur de Marek Elmayan',
+    fields: {
+      name: 'NOM',
+      job: 'MÉTIER',
+      nature: 'NATURE',
+      gameTime: 'TEMPS DE JEU',
+      location: 'LIEU',
+    },
+    values: {
+      name: 'Marek Elmayan',
+      job: 'Ingénieur Logiciel',
+      nature: 'Curieux',
+      gameTime: '25 ans',
+      location: 'Nantes, France',
+    },
   },
 };

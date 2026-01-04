@@ -1,31 +1,20 @@
 ---
 import { getTranslations, getLangFromUrl } from '@/i18n';
+import { DevIdCard } from '@/components/react/DevIdCard';
 
 const lang = getLangFromUrl(Astro.url);
 const t = getTranslations(lang);
 ---
 
-<section id="about" class="relative py-20 md:py-32">
-  <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-    <h2 class="text-foreground mb-12 text-3xl font-bold tracking-tight md:text-4xl">
-      {t.about.title}
-    </h2>
-
-    <div class="grid gap-12 md:grid-cols-[2fr_1fr] md:items-start">
-      <div class="text-foreground/80 space-y-6 text-lg leading-relaxed">
-        {t.about.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
-      </div>
-
-      <div class="order-first md:order-last">
-        <div class="bg-muted aspect-square overflow-hidden rounded-2xl">
-          <div
-            class="text-muted-foreground flex h-full items-center justify-center text-sm"
-            aria-hidden="true"
-          >
-            Portrait
-          </div>
-        </div>
-      </div>
-    </div>
+<section
+  id="about"
+  class="container mx-auto flex flex-col gap-12 px-4 py-20 sm:px-6 md:py-32 lg:px-8"
+>
+  <h2 class="text-foreground text-3xl font-bold tracking-tight md:text-4xl">
+    {t.about.title}
+  </h2>
+  <DevIdCard client:visible lang={lang} />
+  <div class="text-foreground/80 space-y-6 text-lg leading-relaxed">
+    {t.about.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
   </div>
 </section>

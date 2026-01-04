@@ -112,4 +112,22 @@ export const en: UITranslations = {
     minRead: 'min read',
     noPosts: 'No posts yet. Check back soon!',
   },
+  devCard: {
+    cardTitle: 'Developer ID Card',
+    ariaLabel: 'Developer ID card for Marek Elmayan',
+    fields: {
+      name: 'NAME',
+      job: 'JOB',
+      nature: 'NATURE',
+      gameTime: 'GAME TIME',
+      location: 'LOCATION',
+    },
+    values: {
+      name: 'Marek Elmayan',
+      job: 'Software Engineer',
+      nature: 'Curious',
+      gameTime: '25 years',
+      location: 'Nantes, France',
+    },
+  },
 };
