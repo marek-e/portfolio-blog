@@ -1,0 +1,22 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Navbar from '@/components/astro/Navbar.astro';
+import Footer from '@/components/astro/Footer.astro';
+import { getTranslations, defaultLang } from '@/i18n';
+import ContactSection from '@/components/astro/ContactSection.astro';
+
+export function getStaticPaths() {
+  return [{ params: { lang: undefined } }, { params: { lang: 'en' } as const }];
+}
+
+const lang = Astro.params.lang ?? defaultLang;
+const t = getTranslations(lang);
+---
+
+<Layout title={t.contactPage.pageTitle} description={t.contactPage.pageDescription}>
+  <Navbar />
+  <main class="bg-background min-h-dvh py-16 md:py-24">
+    <ContactSection />
+  </main>
+  <Footer />
+</Layout>
