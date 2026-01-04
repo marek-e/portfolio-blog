@@ -17,7 +17,7 @@ export interface UITranslations {
   };
   about: {
     title: string;
-    paragraphs: [string, string, string];
+    paragraphs: string[];
   };
   timeline: {
     title: string;
@@ -38,6 +38,10 @@ export interface UITranslations {
     subtitle: string;
     cta: string;
     socialIntro: string;
+  };
+  contactPage: {
+    pageTitle: string;
+    pageDescription: string;
   };
   footer: {
     sitemap: string;

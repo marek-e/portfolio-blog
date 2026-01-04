@@ -12,7 +12,8 @@ export const en: UITranslations = {
     pageDescription: 'Full-stack developer portfolio and blog',
     badge: '#OpenToWork',
     headline: "Hi, I'm Marek Elmayan",
-    subtitle: 'I build things for the web with modern tools.\nClean code, great user experiences.',
+    subtitle:
+      'I enjoy building apps with impact for users.\n I care greatly about UX but I like having control about my full-stack.\n And my other battle field is cyber-security.',
     ctaProjects: 'View Projects',
     ctaContact: 'Get in Touch',
     ctaCv: 'View my CV',
@@ -20,9 +21,11 @@ export const en: UITranslations = {
   about: {
     title: 'About Me',
     paragraphs: [
-      'I started coding when I was 16 after discovering you could build anything with just a computer and curiosity. What began as tinkering with simple websites turned into a career I genuinely love.',
+      'Everything started in High school during my Math classes. I was pretty good and always finished exercises early so I was spending time on my calculator. A TI-83CE. It is there a nex thing: programming language. At first I created a program that help me solve 2nd degree equations, then I started to create small 2D games. My first one was a Snake which was some dozens of line of code but then I was yearning for more challenge and was aiming for a Bataille Navale. I spent a lot of time on this and it was not an easy journey but here is the result. Thousand of line of codes for a basic interface but a working game and a new passion.',
+      'In France to attend the best engineering school you have to attend preparatory classes to pass an exam. It was mainly scientific subjects but not much computer science. I did learn some stuff about Python, Mathlab and Arduino. It also confirmed my yearn for programming. But since it was a very demanding period in term of teaching, self-commitment, ... It learned me to manage my time, my stress and having an efficient way of learning a lot of stuff in a small time.',
+      'In my engineering school I learned a lot of various concepts necessary to CS.',
       'These days, I focus on building web applications with modern tools like React, TypeScript, and Node.js. I care deeply about performance, accessibility, and creating interfaces that feel good to use.',
-      "When I'm not coding, you'll find me reading about software architecture, contributing to open source, or exploring new technologies. I believe in writing clean, maintainable code and learning something new every day.",
+      'I like to share my learnings with others and, I firmly believe to open source, thus I would like to try contributing more to it.',
     ],
   },
   timeline: {
@@ -44,6 +47,11 @@ export const en: UITranslations = {
     subtitle: 'Have a project in mind or just want to say hi?',
     cta: 'Send me an email',
     socialIntro: 'You can find me or see my work on the following platforms:',
+  },
+  contactPage: {
+    pageTitle: 'Marek Elmayan | Contact me',
+    pageDescription:
+      'Get in touch with Marek Elmayan for projects, collaborations, or just to say hi.',
   },
   footer: {
     sitemap: 'Sitemap',

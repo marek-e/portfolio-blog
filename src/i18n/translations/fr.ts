@@ -46,6 +46,10 @@ export const fr: UITranslations = {
     cta: 'Envoyer un email',
     socialIntro: 'Vous pouvez aussi me retrouver sur ces plateformes :',
   },
+  contactPage: {
+    pageTitle: 'Contact | Marek Elmayan',
+    pageDescription: 'Contactez Marek Elmayan pour vos projets, collaborations, ou simplement pour dire bonjour.',
+  },
   footer: {
     sitemap: 'Liens utiles',
     home: 'Accueil',
