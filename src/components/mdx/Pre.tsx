@@ -19,7 +19,7 @@ export function Pre({ children, className, 'data-language': language, ...props }
           </div>
         </div>
       )}
-      <div className="relative">
+      <div className="relative bg-(--shiki-bg)">
         <pre className={cn('overflow-x-auto p-4 text-sm leading-relaxed', className)} {...props}>
           {children}
         </pre>
