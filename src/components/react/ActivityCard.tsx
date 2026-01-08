@@ -1,6 +1,15 @@
 import type { RunningActivity } from '@/types/strava';
 import type { Lang } from '@/i18n/config';
 import { getTranslations } from '@/i18n';
+import { Icon } from './Icon';
+import {
+  WorkoutRunIcon,
+  DashboardSpeed01Icon,
+  MountainIcon,
+  HeartCheckIcon,
+  Clock05Icon,
+  Calendar01Icon,
+} from '@hugeicons/core-free-icons';
 
 interface ActivityCardProps {
   activity: RunningActivity;
@@ -109,7 +118,12 @@ export function ActivityCard({ activity, lang = 'fr' }: ActivityCardProps) {
         {/* Header: Date and Route Preview */}
         <div className="mb-3 flex items-start justify-between">
           <div>
-            <p className="text-muted-foreground text-xs tracking-wide uppercase">{formattedDate}</p>
+            <div className="text-muted-foreground flex items-center gap-1">
+              <Icon icon={Calendar01Icon} size={14} strokeWidth={2} />
+              <p className="text-muted-foreground text-xs tracking-wide uppercase">
+                {formattedDate}
+              </p>
+            </div>
             <h3 className="text-foreground mt-0.5 line-clamp-1 text-sm font-semibold">
               {activity.name}
             </h3>
@@ -134,24 +148,34 @@ export function ActivityCard({ activity, lang = 'fr' }: ActivityCardProps) {
         </div>
 
         {/* Stats Grid */}
-        <div
-          className={`grid gap-2 ${activity.averageHeartRate ? 'grid-cols-4' : 'grid-cols-3'}`}
-        >
+        <div className={`grid gap-2 ${activity.averageHeartRate ? 'grid-cols-4' : 'grid-cols-3'}`}>
           <div className="text-center">
-            <p className="text-foreground text-lg font-bold">{activity.distanceKm.toFixed(1)}</p>
+            <div className="text-muted-foreground mb-1 flex justify-center">
+              <Icon icon={WorkoutRunIcon} size={14} strokeWidth={2} />
+            </div>
+            <p className="text-foreground text-base font-bold">{activity.distanceKm.toFixed(1)}</p>
             <p className="text-muted-foreground text-xs">km</p>
           </div>
           <div className="text-center">
-            <p className="text-foreground text-lg font-bold">{activity.paceMinPerKm}</p>
+            <div className="text-muted-foreground mb-1 flex justify-center">
+              <Icon icon={DashboardSpeed01Icon} size={14} strokeWidth={2} />
+            </div>
+            <p className="text-foreground text-base font-bold">{activity.paceMinPerKm}</p>
             <p className="text-muted-foreground text-xs">{t.strava.pace}</p>
           </div>
           <div className="text-center">
-            <p className="text-foreground text-lg font-bold">{activity.elevationGain}</p>
+            <div className="text-muted-foreground mb-1 flex justify-center">
+              <Icon icon={MountainIcon} size={14} strokeWidth={2} />
+            </div>
+            <p className="text-foreground text-base font-bold">{activity.elevationGain}</p>
             <p className="text-muted-foreground text-xs">m</p>
           </div>
           {activity.averageHeartRate && (
             <div className="text-center">
-              <p className="text-foreground text-lg font-bold">{activity.averageHeartRate}</p>
+              <div className="text-muted-foreground mb-1 flex justify-center">
+                <Icon icon={HeartCheckIcon} size={14} strokeWidth={2} />
+              </div>
+              <p className="text-foreground text-base font-bold">{activity.averageHeartRate}</p>
               <p className="text-muted-foreground text-xs">{t.strava.heartRate}</p>
             </div>
           )}
@@ -159,7 +183,10 @@ export function ActivityCard({ activity, lang = 'fr' }: ActivityCardProps) {
 
         {/* Footer: Duration */}
         <div className="border-border/50 mt-3 flex items-center justify-between border-t pt-3">
-          <span className="text-muted-foreground text-xs">{activity.durationMinutes} min</span>
+          <span className="text-muted-foreground flex items-center gap-1 text-xs">
+            <Icon icon={Clock05Icon} size={14} strokeWidth={2} />
+            {activity.durationMinutes} min
+          </span>
           <span className="text-primary text-xs opacity-0 transition-opacity group-hover:opacity-100">
             {t.strava.viewOnStrava} →
           </span>

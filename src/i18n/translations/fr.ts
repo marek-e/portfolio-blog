@@ -143,7 +143,7 @@ export const fr: UITranslations = {
     noActivities: 'Aucune activité disponible. Essayez plus tard.',
     elevation: 'Dénivelé',
     duration: 'Durée',
-    pace: 'Allure',
+    pace: 'min/km',
     heartRate: 'bpm',
   },
 };

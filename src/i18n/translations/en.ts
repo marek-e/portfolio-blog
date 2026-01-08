@@ -145,7 +145,7 @@ export const en: UITranslations = {
     noActivities: 'No activities available. Try again later.',
     elevation: 'Elevation',
     duration: 'Duration',
-    pace: 'Pace',
+    pace: 'min/km',
     heartRate: 'bpm',
   },
 };
