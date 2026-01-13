@@ -18,8 +18,32 @@ const { lang } = Astro.props;
 const t = getTranslations(lang);
 const cv = getLocalizedCV(lang);
 
-function formatDate(date: string | null, presentLabel: string): string {
+function formatDate(date: string | null, presentLabel: string, lang: Lang): string {
   if (!date) return presentLabel;
+
+  // Handle YYYY-MM format
+  if (date.includes('-') && date.length === 7) {
+    const [year, month] = date.split('-');
+    const monthNames = {
+      fr: [
+        'Janv.',
+        'Fév.',
+        'Mars',
+        'Avr.',
+        'Mai',
+        'Juin',
+        'Juil.',
+        'Août',
+        'Sept.',
+        'Oct.',
+        'Nov.',
+        'Déc.',
+      ],
+      en: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+    };
+    return `${monthNames[lang][parseInt(month) - 1]} ${year}`;
+  }
+
   return date;
 }
 ---
@@ -34,7 +58,7 @@ function formatDate(date: string | null, presentLabel: string): string {
         class="profile-picture bg-secondary flex aspect-auto h-30 w-25 shrink-0 items-center justify-center overflow-hidden rounded-md"
       >
         <img
-          src="/images/mareke.jpg"
+          src="/images/mareke.avif"
           alt={cv.name}
           class="size-full object-cover"
           onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
@@ -97,7 +121,7 @@ function formatDate(date: string | null, presentLabel: string): string {
     </div>
   </header>
 
-  <hr class="border-border my-6" />
+  <hr class="border-border my-3" />
 
   <!-- Experience -->
   <section class="cv-section mb-6">
@@ -109,11 +133,12 @@ function formatDate(date: string | null, presentLabel: string): string {
             <div>
               <h3 class="font-medium">{exp.title}</h3>
               <p class="text-sm">
-                {exp.company} - {exp.location}
+                <span class="font-bold">{exp.company}</span> - {exp.location}
               </p>
             </div>
             <span class="text-sm whitespace-nowrap">
-              {formatDate(exp.startDate, t.cv.present)} - {formatDate(exp.endDate, t.cv.present)}
+              {formatDate(exp.startDate, t.cv.present, lang)} →
+              {formatDate(exp.endDate, t.cv.present, lang)}
             </span>
           </div>
           <ul class="mt-2 list-inside list-disc space-y-1 text-sm">
@@ -126,7 +151,7 @@ function formatDate(date: string | null, presentLabel: string): string {
     }
   </section>
 
-  <hr class="border-border my-6" />
+  <hr class="border-border my-3" />
 
   <!-- Education -->
   <section class="cv-section mb-6">
@@ -138,11 +163,12 @@ function formatDate(date: string | null, presentLabel: string): string {
             <div>
               <h3 class="font-medium">{edu.degree}</h3>
               <p class="text-sm">
-                {edu.institution} - {edu.location}
+                <span class="font-bold">{edu.institution}</span> - {edu.location}
               </p>
+              {edu.note && <p class="text-muted-foreground mt-0.5 text-xs italic">{edu.note}</p>}
             </div>
             <span class="text-sm whitespace-nowrap">
-              {edu.startDate} - {edu.endDate}
+              {formatDate(edu.startDate, '', lang)} → {formatDate(edu.endDate, '', lang)}
             </span>
           </div>
         </div>
@@ -150,7 +176,7 @@ function formatDate(date: string | null, presentLabel: string): string {
     }
   </section>
 
-  <hr class="border-border my-6" />
+  <hr class="border-border my-3" />
 
   <!-- Skills -->
   <section class="cv-section mb-6">
@@ -173,36 +199,20 @@ function formatDate(date: string | null, presentLabel: string): string {
     </div>
   </section>
 
-  <hr class="border-border my-6" />
+  <hr class="border-border my-3" />
 
-  <!-- Languages & Hobbies -->
-  <div class="cv-section grid grid-cols-2 gap-8">
-    <section>
-      <h2 class="mb-4 text-lg font-semibold">{t.cv.sections.languages}</h2>
-      <div class="flex flex-col gap-1">
-        {
-          cv.languages.map((lang) => (
-            <span class="text-sm">
-              <span class="font-medium">{lang.language}</span>
-              <span> - {lang.level}</span>
-            </span>
-          ))
-        }
-      </div>
-    </section>
-
-    <section>
-      <h2 class="mb-4 text-lg font-semibold">{t.cv.sections.hobbies}</h2>
-      <div class="flex flex-wrap gap-2">
-        {
-          cv.hobbies.map((hobby) => (
-            <span class="inline-flex items-center gap-1.5 rounded-full bg-amber-100 px-3 py-1 text-sm dark:bg-violet-900/40">
-              <span>{hobby.icon}</span>
-              <span>{hobby.name}</span>
-            </span>
-          ))
-        }
-      </div>
-    </section>
-  </div>
+  <!-- Languages -->
+  <section class="cv-section">
+    <h2 class="mb-3 text-lg font-semibold">{t.cv.sections.languages}</h2>
+    <div class="flex flex-wrap gap-x-6 gap-y-1">
+      {
+        cv.languages.map((lang) => (
+          <span class="text-sm">
+            <span class="font-medium">{lang.language}</span>
+            <span> - {lang.level}</span>
+          </span>
+        ))
+      }
+    </div>
+  </section>
 </div>

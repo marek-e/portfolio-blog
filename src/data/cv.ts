@@ -15,8 +15,8 @@ interface CVEducation {
   startDate: string;
   endDate: string;
   translations: {
-    fr: { degree: string; institution: string; location: string };
-    en: { degree: string; institution: string; location: string };
+    fr: { degree: string; institution: string; location: string; note?: string };
+    en: { degree: string; institution: string; location: string; note?: string };
   };
 }
 
@@ -70,62 +70,66 @@ const cvData: CVData = {
   linkedin: 'linkedin.com/in/marek-elmayan',
   github: 'github.com/marek-e',
   website: 'melmayan.fr',
-  profilePicture: '/images/profile.jpg', // TODO: Add your profile picture
+  profilePicture: '/images/profile.jpg',
   title: {
-    fr: 'Développeur Full-Stack',
-    en: 'Full-Stack Developer',
+    fr: 'Ingénieur Logiciel Full-Stack',
+    en: 'Full-Stack Software Engineer',
   },
   experience: [
     {
-      id: 'current-role',
+      id: 'theodo',
       startDate: '2023-01',
       endDate: null,
       translations: {
         fr: {
-          title: 'Développeur Full-Stack',
+          title: 'Ingénieur Logiciel Full-Stack',
           company: 'Theodo',
-          location: 'Paris, France',
+          location: 'Nantes, France',
           description: [
-            "Construction d'applications web à fort impact pour des clients dans la fintech et le e-commerce",
-            'Prise de décisions techniques et mentorat de développeurs juniors',
-            'Technologies utilisées : React, TypeScript, Node.js, AWS',
+            "Développement d'applications web à fort impact pour des clients variés",
+            'Prise de décisions techniques et accompagnement de développeurs juniors',
+            'Gestion de projet suivant les principes Agile & Lean Tech',
+            'Workflows de développement assistés par IA',
+            'Audit de sécurité web et implémentation',
           ],
         },
         en: {
-          title: 'Full-Stack Developer',
+          title: 'Full-Stack Software Engineer',
           company: 'Theodo',
-          location: 'Paris, France',
+          location: 'Nantes, France',
           description: [
-            'Building high-impact web applications for clients across fintech and e-commerce',
+            'Building high-impact web applications for various clients',
             'Leading technical decisions and mentoring junior developers',
-            'Tech stack: React, TypeScript, Node.js, AWS',
+            'Project management following Agile & Lean Tech principles',
+            'AI assisted development workflows',
+            'Web security audit and implementation',
           ],
         },
       },
     },
     {
-      id: 'previous-role',
+      id: 'schneider-electric',
       startDate: '2021-06',
-      endDate: '2022-12',
+      endDate: '2021-08',
       translations: {
         fr: {
-          title: 'Ingénieur Logiciel',
-          company: 'Entreprise précédente',
-          location: 'Paris, France',
+          title: 'Stage Assistant Ingénieur ',
+          company: 'Schneider Electric',
+          location: 'Písek, République Tchèque',
           description: [
-            'Développement et maintenance de fonctionnalités pour une plateforme SaaS',
-            'Amélioration des pipelines CI/CD et réduction du temps de déploiement de 40%',
-            'Technologies utilisées : Vue.js, Python, PostgreSQL',
+            "Déploiement d'outils de digitalisation au sein du département qualité et satisfaction client",
+            "Développement de programmes pour l'automatisation de mesures 3D sur pièces critiques",
+            "Développement d'une application Power Apps pour le suivi de maintenance des équipements",
           ],
         },
         en: {
-          title: 'Software Engineer',
-          company: 'Previous Company',
-          location: 'Paris, France',
+          title: 'Assistant Engineer Intern',
+          company: 'Schneider Electric',
+          location: 'Písek, Czech Republic',
           description: [
-            'Developed and maintained customer-facing features for a SaaS platform',
-            'Improved CI/CD pipelines and reduced deployment time by 40%',
-            'Tech stack: Vue.js, Python, PostgreSQL',
+            'Supported deployment of digitalization tools in quality and customer satisfaction department',
+            'Developed programs for automated 3D measurements on critical parts',
+            'Built a Power Apps application for equipment maintenance tracking',
           ],
         },
       },
@@ -133,36 +137,57 @@ const cvData: CVData = {
   ],
   education: [
     {
-      id: 'masters',
-      startDate: '2019',
-      endDate: '2021',
+      id: 'ensimag',
+      startDate: '2020-09',
+      endDate: '2023-06',
       translations: {
         fr: {
-          degree: 'Master en Informatique',
-          institution: "Nom de l'université",
-          location: 'Paris, France',
+          degree: "Diplôme d'Ingénieur en Informatique et Mathématiques Appliquées",
+          institution: 'Grenoble INP - Ensimag, UGA',
+          location: 'Grenoble, France',
+          note: "École d'ingénieurs de référence en informatique et mathématiques appliquées",
         },
         en: {
-          degree: 'Master of Computer Science',
-          institution: 'University Name',
-          location: 'Paris, France',
+          degree: 'Engineering Degree in Computer Science & Applied Mathematics',
+          institution: 'Grenoble INP - Ensimag, UGA',
+          location: 'Grenoble, France',
+          note: 'Top French engineering school in CS and applied mathematics',
         },
       },
     },
     {
-      id: 'bachelors',
-      startDate: '2016',
-      endDate: '2019',
+      id: 'aalto',
+      startDate: '2022-09',
+      endDate: '2022-12',
       translations: {
         fr: {
-          degree: 'Licence en Informatique',
-          institution: "Nom de l'université",
-          location: 'Paris, France',
+          degree: "Semestre d'échange",
+          institution: 'Aalto University',
+          location: 'Helsinki, Finlande',
         },
         en: {
-          degree: 'Bachelor of Computer Science',
-          institution: 'University Name',
-          location: 'Paris, France',
+          degree: 'Exchange Semester',
+          institution: 'Aalto University',
+          location: 'Helsinki, Finland',
+        },
+      },
+    },
+    {
+      id: 'cpge',
+      startDate: '2018-09',
+      endDate: '2020-06',
+      translations: {
+        fr: {
+          degree: 'CPGE PCSI/PSI*',
+          institution: 'Lycée Chateaubriand',
+          location: 'Rennes, France',
+          note: 'Classes préparatoires aux grandes écoles',
+        },
+        en: {
+          degree: 'Preparatory Classes (Math & Physics)',
+          institution: 'Lycée Chateaubriand',
+          location: 'Rennes, France',
+          note: 'Intensive 2-year program for top engineering school entrance exams',
         },
       },
     },
@@ -172,11 +197,11 @@ const cvData: CVData = {
       translations: {
         fr: {
           category: 'Frontend',
-          skills: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS', 'Vue.js'],
+          skills: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS', 'Astro', 'HTML', 'CSS'],
         },
         en: {
           category: 'Frontend',
-          skills: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS', 'Vue.js'],
+          skills: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS', 'Astro', 'HTML', 'CSS'],
         },
       },
     },
@@ -184,11 +209,11 @@ const cvData: CVData = {
       translations: {
         fr: {
           category: 'Backend',
-          skills: ['Node.js', 'Python', 'PostgreSQL', 'REST APIs', 'GraphQL'],
+          skills: ['Node.js', 'Python', 'PostgreSQL', 'REST APIs', 'GraphQL', 'AWS Serverless'],
         },
         en: {
           category: 'Backend',
-          skills: ['Node.js', 'Python', 'PostgreSQL', 'REST APIs', 'GraphQL'],
+          skills: ['Node.js', 'Python', 'PostgreSQL', 'REST APIs', 'GraphQL', 'AWS Serverless'],
         },
       },
     },
@@ -221,7 +246,7 @@ const cvData: CVData = {
     {
       translations: {
         fr: { language: '🇬🇧 Anglais', level: 'Courant (C1)' },
-        en: { language: '🇬🇧 English', level: 'Fluent (C1)' },
+        en: { language: '🇬🇧 English', level: 'Fluent' },
       },
     },
   ],
@@ -268,9 +293,11 @@ export interface LocalizedCV {
     id: string;
     startDate: string;
     endDate: string;
+    highlight?: boolean;
     degree: string;
     institution: string;
     location: string;
+    note?: string;
   }[];
   skills: { category: string; skills: string[] }[];
   languages: { language: string; level: string }[];
