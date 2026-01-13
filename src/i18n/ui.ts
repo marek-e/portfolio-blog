@@ -137,4 +137,26 @@ export interface UITranslations {
     pace: string;
     heartRate: string;
   };
+  projectsPage: {
+    pageTitle: string;
+    pageDescription: string;
+    title: string;
+    subtitle: string;
+    noProjects: string;
+    role: string;
+    duration: string;
+    team: string;
+    techStack: string;
+    highlights: string;
+    lessons: string;
+    status: string;
+    statusCompleted: string;
+    statusInProgress: string;
+    statusArchived: string;
+    statusConcept: string;
+    backToProjects: string;
+    viewLive: string;
+    viewCode: string;
+    gallery: string;
+  };
 }

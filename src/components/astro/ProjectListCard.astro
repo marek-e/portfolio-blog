@@ -1,0 +1,105 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { Badge } from '@/components/ui/badge';
+import { getTranslations, getTranslatedPath, getLangFromUrl } from '@/i18n';
+import { getProjectSlug, getTechColor, getStatusVariant, formatProjectDate } from '@/lib/projects';
+import { Icon } from '@/components/react/Icon';
+import { ArrowRight02Icon, StarIcon } from '@hugeicons/core-free-icons';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+  featured?: boolean;
+}
+
+const { project, featured = false } = Astro.props;
+const { title, description, techStack, image, imageAlt, publishDate, status } = project.data;
+
+const lang = getLangFromUrl(Astro.url);
+const t = getTranslations(lang);
+const translatePath = getTranslatedPath(lang);
+const projectSlug = getProjectSlug(project.id, lang);
+const projectUrl = translatePath(`/projects/${projectSlug}`);
+
+const statusKey = `status${status.charAt(0).toUpperCase()}${status.slice(1).replace('-', '')}` as
+  | 'statusCompleted'
+  | 'statusInProgress'
+  | 'statusArchived'
+  | 'statusConcept';
+---
+
+<article class="group h-full">
+  <a
+    href={projectUrl}
+    class="ring-foreground/10 bg-card text-card-foreground hover:ring-primary/30 hover:shadow-primary/5 relative flex h-full flex-col overflow-hidden rounded-xl ring-1 transition-all duration-200 hover:shadow-lg hover:ring-2"
+  >
+    {
+      image && (
+        <div class="bg-muted relative aspect-video overflow-hidden">
+          <img
+            src={image}
+            alt={imageAlt || `Screenshot of ${title}`}
+            class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+            loading="lazy"
+          />
+          {featured && (
+            <div class="bg-primary text-primary-foreground absolute top-3 right-3 rounded-full p-1.5 shadow-md">
+              <Icon icon={StarIcon} strokeWidth={2} className="size-4" />
+            </div>
+          )}
+        </div>
+      )
+    }
+
+    <div class="flex flex-1 flex-col gap-3 p-4">
+      <div class="text-muted-foreground flex items-center justify-between text-xs">
+        <time datetime={publishDate.toISOString()}>
+          {formatProjectDate(publishDate, lang)}
+        </time>
+        {
+          status && status !== 'completed' && (
+            <Badge variant={getStatusVariant(status)} className="text-[10px]">
+              {t.projectsPage[statusKey]}
+            </Badge>
+          )
+        }
+      </div>
+
+      <div class="flex-1">
+        <h3 class="group-hover:text-primary line-clamp-1 text-lg font-semibold transition-colors">
+          {title}
+        </h3>
+        <p class="text-muted-foreground mt-1 line-clamp-2 text-sm">
+          {description}
+        </p>
+      </div>
+
+      <div class="flex flex-wrap gap-1.5">
+        {
+          techStack.slice(0, 3).map((tech) => (
+            <Badge variant={getTechColor(tech)} className="text-xs">
+              {tech}
+            </Badge>
+          ))
+        }
+        {
+          techStack.length > 3 && (
+            <Badge variant="outline" className="text-xs">
+              +{techStack.length - 3}
+            </Badge>
+          )
+        }
+      </div>
+
+      <div
+        class="border-border/50 text-primary flex items-center gap-2 border-t pt-2 text-sm font-medium"
+      >
+        <span class="group-hover:underline">{t.projects.viewDetails}</span>
+        <Icon
+          icon={ArrowRight02Icon}
+          strokeWidth={2}
+          className="size-4 transition-transform group-hover:translate-x-1"
+        />
+      </div>
+    </div>
+  </a>
+</article>

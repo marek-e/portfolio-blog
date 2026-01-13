@@ -6,8 +6,10 @@ techStack: ['Astro', 'React', 'TypeScript', 'Tailwind CSS', 'shadcn/ui']
 role: 'Full-stack Developer'
 links:
   demo: 'https://melmayan.fr'
-  repo: 'https://github.com/melmayan/portfolio'
-publishDate: 2024-12-01
+  repo: 'https://github.com/marek-e/portfolio-blog'
+publishDate: 2026-01-01
+image: '/logo.svg'
+status: 'completed'
 ---
 
 Built this portfolio to showcase my work and share my thoughts on web development. The site uses Astro's island architecture for optimal performance, loading JavaScript only where interactivity is needed.

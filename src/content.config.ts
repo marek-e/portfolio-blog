@@ -8,15 +8,32 @@ const projects = defineCollection({
     description: z.string(),
     featured: z.boolean().default(false),
     techStack: z.array(z.string()),
-    role: z.string(),
+    role: z.string().optional(),
     links: z
       .object({
         demo: z.string().url().optional(),
         repo: z.string().url().optional(),
       })
       .optional(),
-    image: z.string().optional(),
+    image: z.string(),
+    imageAlt: z.string().optional(),
+    objectFit: z.enum(['cover', 'contain', 'fill', 'none', 'scale-down']).default('contain'),
     publishDate: z.coerce.date(),
+    // Optional fields for richer detail pages
+    status: z.enum(['completed', 'in-progress', 'archived', 'concept']).default('completed'),
+    duration: z.string().optional(),
+    team: z.string().optional(),
+    highlights: z.array(z.string()).optional(),
+    lessons: z.array(z.string()).optional(),
+    gallery: z
+      .array(
+        z.object({
+          src: z.string(),
+          alt: z.string(),
+          caption: z.string().optional(),
+        })
+      )
+      .optional(),
   }),
 });
 

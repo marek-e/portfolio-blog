@@ -1,0 +1,373 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Navbar from '@/components/astro/Navbar.astro';
+import Footer from '@/components/astro/Footer.astro';
+import { Badge } from '@/components/ui/badge';
+import {
+  Breadcrumb,
+  BreadcrumbList,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from '@/components/ui/breadcrumb';
+import { Link } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
+import { getCollection, render } from 'astro:content';
+import { getTranslations, defaultLang } from '@/i18n';
+import { getTranslatedPath } from '@/i18n/config';
+import { mdxComponents } from '@/components/mdx';
+import { Icon } from '@/components/react/Icon';
+import {
+  ArrowLeft02Icon,
+  HomeIcon,
+  Globe02Icon,
+  SourceCodeIcon,
+  UserIcon,
+  TimeQuarterIcon,
+  UserMultiple02Icon,
+  CheckmarkCircle02Icon,
+  Bulb,
+} from '@hugeicons/core-free-icons';
+import { getTechColor, getStatusVariant, formatProjectDate } from '@/lib/projects';
+
+type Project = Awaited<ReturnType<typeof getCollection<'projects'>>>[number];
+
+type StaticPaths = {
+  params: { lang: 'en' | undefined; slug: string };
+  props: { project: Project };
+};
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  const staticPaths: StaticPaths[] = [];
+
+  projects.forEach((project) => {
+    const [lang, ...slugParts] = project.id.split('/');
+    const slug = slugParts.join('/').replace(/\.(md|mdx)$/, '');
+
+    if (lang === 'en') {
+      staticPaths.push({ params: { lang: 'en', slug }, props: { project } });
+    } else {
+      staticPaths.push({ params: { lang: undefined, slug }, props: { project } });
+    }
+  });
+
+  return staticPaths;
+}
+
+const { project } = Astro.props;
+const lang = Astro.params.lang ?? defaultLang;
+const t = getTranslations(lang);
+const translatePath = getTranslatedPath(lang);
+
+const { Content } = await render(project);
+const {
+  title,
+  description,
+  techStack,
+  role,
+  links,
+  image,
+  publishDate,
+  status = 'completed',
+  duration,
+  team,
+  highlights,
+  lessons,
+  gallery,
+} = project.data;
+
+const statusKey = `status${status.charAt(0).toUpperCase()}${status.slice(1).replace('-', '')}` as
+  | 'statusCompleted'
+  | 'statusInProgress'
+  | 'statusArchived'
+  | 'statusConcept';
+---
+
+<Layout title={`${title} | ${t.projectsPage.title}`} description={description}>
+  <Navbar />
+  <main class="container mx-auto max-w-5xl px-4 pt-32 pb-8">
+    <Breadcrumb className="mb-10">
+      <BreadcrumbList>
+        <BreadcrumbItem>
+          <BreadcrumbLink href={translatePath('/')}>
+            <Icon icon={HomeIcon} strokeWidth={2} className="size-4" />
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbSeparator />
+        <BreadcrumbItem>
+          <BreadcrumbLink href={translatePath('/projects')}>
+            {t.nav.projects}
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbSeparator />
+        <BreadcrumbItem>
+          <BreadcrumbPage>{title}</BreadcrumbPage>
+        </BreadcrumbItem>
+      </BreadcrumbList>
+    </Breadcrumb>
+
+    <article>
+      <header class="mb-10 space-y-6">
+        <div class="text-muted-foreground flex flex-wrap items-center gap-4 text-sm">
+          <Badge variant={getStatusVariant(status)}>
+            {t.projectsPage[statusKey]}
+          </Badge>
+          <time datetime={publishDate.toISOString()}>
+            {formatProjectDate(publishDate, lang)}
+          </time>
+        </div>
+
+        <h1 class="text-4xl font-bold tracking-tight lg:text-5xl">
+          <span class="text-primary">{title}</span>
+        </h1>
+
+        <p class="text-muted-foreground max-w-3xl text-lg">{description}</p>
+
+        {
+          (links?.demo || links?.repo) && (
+            <div class="flex flex-wrap gap-3">
+              {links.demo && (
+                <Link href={links.demo} target="_blank" rel="noopener noreferrer" variant="default">
+                  <Icon icon={Globe02Icon} strokeWidth={2} className="size-4" />
+                  {t.projectsPage.viewLive}
+                </Link>
+              )}
+              {links.repo && (
+                <Link href={links.repo} target="_blank" rel="noopener noreferrer" variant="outline">
+                  <Icon icon={SourceCodeIcon} strokeWidth={2} className="size-4" />
+                  {t.projectsPage.viewCode}
+                </Link>
+              )}
+            </div>
+          )
+        }
+      </header>
+
+      {
+        image && (
+          <div class="bg-muted mb-10 aspect-video overflow-hidden rounded-xl">
+            <img src={image} alt={`Screenshot of ${title}`} class="h-full w-full object-cover" />
+          </div>
+        )
+      }
+
+      <div class="ring-foreground/10 mb-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          role && (
+            <div class="bg-card rounded-lg p-4 ring-1 ring-inherit">
+              <div class="text-muted-foreground mb-1 flex items-center gap-2 text-sm">
+                <Icon icon={UserIcon} strokeWidth={2} className="size-4" />
+                {t.projectsPage.role}
+              </div>
+              <p class="font-medium">{role}</p>
+            </div>
+          )
+        }
+
+        {
+          duration && (
+            <div class="bg-card rounded-lg p-4 ring-1 ring-inherit">
+              <div class="text-muted-foreground mb-1 flex items-center gap-2 text-sm">
+                <Icon icon={TimeQuarterIcon} strokeWidth={2} className="size-4" />
+                {t.projectsPage.duration}
+              </div>
+              <p class="font-medium">{duration}</p>
+            </div>
+          )
+        }
+
+        {
+          team && (
+            <div class="bg-card rounded-lg p-4 ring-1 ring-inherit">
+              <div class="text-muted-foreground mb-1 flex items-center gap-2 text-sm">
+                <Icon icon={UserMultiple02Icon} strokeWidth={2} className="size-4" />
+                {t.projectsPage.team}
+              </div>
+              <p class="font-medium">{team}</p>
+            </div>
+          )
+        }
+      </div>
+
+      <section class="mb-10">
+        <h2 class="mb-4 text-lg font-semibold">{t.projectsPage.techStack}</h2>
+        <div class="flex flex-wrap gap-2">
+          {techStack.map((tech) => <Badge variant={getTechColor(tech)}>{tech}</Badge>)}
+        </div>
+      </section>
+
+      {
+        highlights && highlights.length > 0 && (
+          <section class="bg-primary/5 mb-10 rounded-xl p-6">
+            <h2 class="mb-4 flex items-center gap-2 text-lg font-semibold">
+              <Icon icon={CheckmarkCircle02Icon} strokeWidth={2} className="text-primary size-5" />
+              {t.projectsPage.highlights}
+            </h2>
+            <ul class="space-y-2">
+              {highlights.map((highlight) => (
+                <li class="flex items-start gap-3">
+                  <span class="text-primary mt-1.5">•</span>
+                  <span>{highlight}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )
+      }
+
+      <Separator className="my-8" />
+
+      <div class="prose prose-neutral dark:prose-invert max-w-none">
+        <Content components={mdxComponents} />
+      </div>
+
+      {
+        lessons && lessons.length > 0 && (
+          <>
+            <Separator className="my-8" />
+            <section class="rounded-xl bg-amber-50 p-6 dark:bg-amber-950/20">
+              <h2 class="mb-4 flex items-center gap-2 text-lg font-semibold">
+                <Icon
+                  icon={Bulb}
+                  strokeWidth={2}
+                  className="size-5 text-amber-600 dark:text-amber-400"
+                />
+                {t.projectsPage.lessons}
+              </h2>
+              <ul class="space-y-2">
+                {lessons.map((lesson) => (
+                  <li class="flex items-start gap-3">
+                    <span class="mt-1.5 text-amber-600 dark:text-amber-400">•</span>
+                    <span>{lesson}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          </>
+        )
+      }
+
+      {
+        gallery && gallery.length > 0 && (
+          <>
+            <Separator className="my-8" />
+            <section>
+              <h2 class="mb-6 text-lg font-semibold">{t.projectsPage.gallery}</h2>
+              <div class="grid gap-4 sm:grid-cols-2">
+                {gallery.map((item) => (
+                  <figure class="bg-muted overflow-hidden rounded-lg">
+                    <img
+                      src={item.src}
+                      alt={item.alt}
+                      class="aspect-video w-full object-cover"
+                      loading="lazy"
+                    />
+                    {item.caption && (
+                      <figcaption class="text-muted-foreground p-3 text-center text-sm">
+                        {item.caption}
+                      </figcaption>
+                    )}
+                  </figure>
+                ))}
+              </div>
+            </section>
+          </>
+        )
+      }
+
+      <hr class="border-border my-8" />
+
+      <Link href={translatePath('/projects')} variant="link">
+        <Icon icon={ArrowLeft02Icon} strokeWidth={2} className="size-4" />
+        {t.projectsPage.backToProjects}
+      </Link>
+    </article>
+  </main>
+</Layout>
+<Footer />
+
+<style is:global>
+  .prose {
+    --tw-prose-body: var(--color-foreground);
+    --tw-prose-headings: var(--color-foreground);
+    --tw-prose-links: var(--color-primary);
+    --tw-prose-bold: var(--color-foreground);
+    --tw-prose-counters: var(--color-muted-foreground);
+    --tw-prose-bullets: var(--color-muted-foreground);
+    --tw-prose-hr: var(--color-border);
+    --tw-prose-quotes: var(--color-foreground);
+    --tw-prose-quote-borders: var(--color-border);
+    --tw-prose-captions: var(--color-muted-foreground);
+    --tw-prose-code: var(--color-foreground);
+    --tw-prose-pre-code: var(--color-foreground);
+    --tw-prose-pre-bg: var(--color-card);
+    --tw-prose-th-borders: var(--color-border);
+    --tw-prose-td-borders: var(--color-border);
+  }
+
+  .prose a {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .prose a:hover {
+    color: oklch(from var(--color-primary) l c h / 0.8);
+  }
+
+  .prose h1,
+  .prose h2,
+  .prose h3,
+  .prose h4 {
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+  }
+
+  .prose h1 a,
+  .prose h2 a,
+  .prose h3 a,
+  .prose h4 a {
+    text-decoration: none;
+    color: inherit;
+    &:hover {
+      color: inherit;
+      text-decoration: underline;
+    }
+  }
+
+  .prose code:not(pre code) {
+    background-color: oklch(from var(--color-primary) l c h / 0.3);
+    padding: 0.2em 0.4em;
+    border-radius: 0.25rem;
+    font-size: 0.875em;
+    &::before,
+    &::after {
+      content: '';
+    }
+  }
+
+  .prose pre {
+    margin: 0;
+    padding: 1rem;
+    background: transparent;
+    border: none;
+  }
+
+  html.dark .prose pre[style*='--shiki-dark-bg'] {
+    background: var(--shiki-dark-bg) !important;
+  }
+
+  html.dark .prose pre[style*='--shiki-dark-bg'] span {
+    color: var(--shiki-dark) !important;
+    font-style: var(--shiki-dark-font-style) !important;
+    font-weight: var(--shiki-dark-font-weight) !important;
+    text-decoration: var(--shiki-dark-text-decoration) !important;
+  }
+
+  .prose mark {
+    background-color: transparent;
+    padding: 0;
+    border-radius: 0;
+  }
+</style>
