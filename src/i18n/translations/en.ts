@@ -162,7 +162,7 @@ export const en: UITranslations = {
     lessons: 'Lessons Learned',
     status: 'Status',
     statusCompleted: 'Completed',
-    statusInProgress: 'In Progress',
+    statusInprogress: 'In Progress',
     statusArchived: 'Archived',
     statusConcept: 'Concept',
     backToProjects: 'Back to projects',

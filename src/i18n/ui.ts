@@ -151,7 +151,7 @@ export interface UITranslations {
     lessons: string;
     status: string;
     statusCompleted: string;
-    statusInProgress: string;
+    statusInprogress: string;
     statusArchived: string;
     statusConcept: string;
     backToProjects: string;
