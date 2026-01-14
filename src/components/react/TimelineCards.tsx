@@ -299,7 +299,7 @@ export function TimelineCards({
   return (
     <div
       ref={sectionRef}
-      className="relative mx-auto w-full max-w-4xl"
+      className="relative mx-auto w-full max-w-6xl"
       style={{ minHeight: totalHeight }}
     >
       {/* Curved dotted path */}
