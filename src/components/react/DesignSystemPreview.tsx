@@ -58,6 +58,7 @@ import {
 import { ModeToggle } from './ModeToggle';
 import { Icon } from './Icon';
 import { ArrowLeftIcon, Search01Icon, Mail01Icon } from '@hugeicons/core-free-icons';
+import { toast } from '@/lib/toast';
 import { getTranslatedPath, type Lang } from '@/i18n';
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
@@ -428,6 +429,59 @@ export function DesignSystemPreview({ lang }: { lang: Lang }) {
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>
+          </div>
+        </div>
+      </Section>
+
+      {/* Toast */}
+      <Section title="Toast">
+        <div className="space-y-4">
+          <p className="text-muted-foreground text-sm">
+            Click buttons to trigger toast notifications (bottom-right).
+          </p>
+          <div className="flex flex-wrap gap-3">
+            <Button
+              variant="outline"
+              onClick={() =>
+                toast.default('Default toast', { description: 'This is a default notification' })
+              }
+            >
+              Default
+            </Button>
+            <Button
+              variant="outline"
+              className="border-green-500/50 text-green-600 hover:bg-green-50 dark:text-green-400 dark:hover:bg-green-950"
+              onClick={() =>
+                toast.success('Success!', { description: 'Your action was completed successfully' })
+              }
+            >
+              Success
+            </Button>
+            <Button
+              variant="outline"
+              className="border-destructive/50 text-destructive hover:bg-destructive/10"
+              onClick={() =>
+                toast.error('Error', { description: 'Something went wrong. Please try again.' })
+              }
+            >
+              Error
+            </Button>
+            <Button
+              variant="outline"
+              className="border-amber-500/50 text-amber-600 hover:bg-amber-50 dark:text-amber-400 dark:hover:bg-amber-950"
+              onClick={() =>
+                toast.warning('Warning', { description: 'Please review before continuing' })
+              }
+            >
+              Warning
+            </Button>
+            <Button
+              variant="outline"
+              className="border-blue-500/50 text-blue-600 hover:bg-blue-50 dark:text-blue-400 dark:hover:bg-blue-950"
+              onClick={() => toast.info('Info', { description: 'Here is some useful information' })}
+            >
+              Info
+            </Button>
           </div>
         </div>
       </Section>

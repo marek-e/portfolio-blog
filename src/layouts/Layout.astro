@@ -3,6 +3,7 @@ import { ClientRouter } from 'astro:transitions';
 import '../styles/global.css';
 import { getAlternatePath, getLangFromUrl } from '@/i18n/config';
 import { BookmarkLanguageToggle } from '@/components/react/BookmarkLanguageToggle';
+import { ToastProvider } from '@/components/react/ToastProvider';
 
 interface Props {
   title: string;
@@ -87,5 +88,6 @@ const enURL = new URL(enPath, Astro.site);
   <body class="bg-background text-foreground min-h-dvh antialiased">
     <BookmarkLanguageToggle client:load currentLang={lang} currentPath={currentPath} />
     <slot />
+    <ToastProvider client:load />
   </body>
 </html>
