@@ -314,7 +314,8 @@ html:active-view-transition-type(theme-transition)::view-transition-new(root) {
 
   @page {
     size: A4;
-    margin: 12mm 15mm;
+    margin: 0;
+    padding: 9mm 12mm;
   }
 
   main {
