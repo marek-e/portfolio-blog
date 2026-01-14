@@ -10,8 +10,8 @@ export const en: UITranslations = {
   hero: {
     pageTitle: 'Marek Elmayan | Portfolio',
     pageDescription: 'Portfolio and blog of Marek Elmayan, full-stack software engineer.',
-    badge: '#OpenToWork',
-    headline: "Hi, I'm Marek Elmayan",
+    badges: ['#UX', '#AI', '#Cybersecurity', '#LeanTech'],
+    headline: "Hi, I'm Marek Elmayan 👋",
     subtitle:
       'I enjoy building apps with impact for users.\n I care greatly about UX but I like having control about my full-stack.\n And my other battle field is cyber-security.',
     ctaProjects: 'View Projects',

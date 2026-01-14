@@ -3,6 +3,7 @@ import { Link } from '@/components/ui/button';
 import { getTranslations, getLangFromUrl, getTranslatedPath } from '@/i18n';
 import BackgroundImage from './BackgroundImage.astro';
 import CursorSpotlight from './CursorSpotlight.astro';
+import { Badge } from '../ui/badge';
 
 const lang = getLangFromUrl(Astro.url);
 const t = getTranslations(lang);
@@ -16,11 +17,9 @@ const translatePath = getTranslatedPath(lang);
     <!-- Content -->
     <div class="relative z-10 mx-auto max-w-6xl px-4 text-center sm:px-6 lg:px-8">
       <!-- Announcement Badge -->
-      <span
-        class="text-foreground mb-6 inline-flex items-center gap-1 rounded-full border border-white/20 bg-white/80 px-3 py-1 text-xs font-medium backdrop-blur-sm dark:border-white/10 dark:bg-black/50 dark:text-white"
-      >
-        {t.hero.badge}
-      </span>
+      <div class="mb-6 flex items-center justify-center gap-2">
+        {t.hero.badges.map((badge) => <Badge variant="glass">{badge}</Badge>)}
+      </div>
 
       <!-- Headline -->
       <h1

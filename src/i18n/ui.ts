@@ -8,7 +8,7 @@ export interface UITranslations {
   hero: {
     pageTitle: string;
     pageDescription: string;
-    badge: string;
+    badges: string[];
     headline: string;
     subtitle: string;
     ctaProjects: string;

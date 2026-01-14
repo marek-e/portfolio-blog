@@ -16,6 +16,8 @@ const badgeVariants = cva(
         outline: 'border-border text-foreground [a]:hover:bg-muted [a]:hover:text-muted-foreground',
         ghost: 'hover:bg-muted hover:text-muted-foreground dark:hover:bg-muted/50',
         link: 'text-primary underline-offset-4 hover:underline',
+        glass:
+          'backdrop-blur-xl bg-white/20 dark:bg-white/5 border-white/30 dark:border-white/10 text-foreground shadow-lg [a]:hover:bg-white/20 dark:[a]:hover:bg-white/10',
         // Pastel variants (filled)
         'pastel-blue': 'bg-sky-100 text-sky-700 dark:bg-sky-900/40 dark:text-sky-300',
         'pastel-green':
