@@ -164,6 +164,18 @@
       transform: rotate(4deg);
     }
   }
+
+  --animate-cursor-blink: cursor-blink 1s step-end infinite;
+  @keyframes cursor-blink {
+    0%,
+    50% {
+      opacity: 1;
+    }
+    51%,
+    100% {
+      opacity: 0;
+    }
+  }
 }
 
 @utility shadow-code {
@@ -188,6 +200,10 @@
 @media (prefers-reduced-motion: reduce) {
   body {
     transition: none;
+  }
+  .animate-cursor-blink {
+    animation: none !important;
+    opacity: 1;
   }
 }
 

@@ -14,6 +14,10 @@ export interface UITranslations {
     ctaProjects: string;
     ctaContact: string;
     ctaCv: string;
+    typingGreeting: string;
+    typingName: string;
+    typingRole: string;
+    typingSeoText: string;
   };
   about: {
     title: string;

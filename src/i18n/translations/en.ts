@@ -17,6 +17,10 @@ export const en: UITranslations = {
     ctaProjects: 'View Projects',
     ctaContact: 'Get in Touch',
     ctaCv: 'View my CV',
+    typingGreeting: "Hey I'm",
+    typingName: 'Marek Elmayan 👋',
+    typingRole: 'a Software Engineer 💻',
+    typingSeoText: "Hey I'm Marek Elmayan, a Software Engineer",
   },
   about: {
     title: 'About Me',

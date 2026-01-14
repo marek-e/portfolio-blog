@@ -3,10 +3,18 @@ import { Link } from '@/components/ui/button';
 import { getTranslations, getLangFromUrl, getTranslatedPath } from '@/i18n';
 import BackgroundImage from './BackgroundImage.astro';
 import CursorSpotlight from './CursorSpotlight.astro';
+import { TypingAnimation } from '@/components/react/TypingAnimation';
 
 const lang = getLangFromUrl(Astro.url);
 const t = getTranslations(lang);
 const translatePath = getTranslatedPath(lang);
+
+const typingTranslations = {
+  greeting: t.hero.typingGreeting,
+  name: t.hero.typingName,
+  role: t.hero.typingRole,
+  seoText: t.hero.typingSeoText,
+};
 ---
 
 <CursorSpotlight>
@@ -23,12 +31,11 @@ const translatePath = getTranslatedPath(lang);
       </span>
 
       <!-- Headline -->
-      <h1
-        id="hello"
-        class="text-foreground mb-6 text-4xl font-bold drop-shadow-lg sm:text-5xl lg:text-6xl dark:text-white"
-      >
-        {t.hero.headline}
-      </h1>
+      <TypingAnimation
+        client:load
+        translations={typingTranslations}
+        className="text-foreground mb-6 text-4xl font-bold drop-shadow-lg sm:text-5xl lg:text-6xl dark:text-white"
+      />
 
       <!-- Subtitle -->
       <p
