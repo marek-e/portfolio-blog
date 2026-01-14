@@ -3,9 +3,8 @@ title: 'Elexim'
 description: 'A minimal React-like framework in TypeScript. Fast, tiny, and hackable.'
 featured: true
 techStack: ['TypeScript', 'React']
-role: 'Creator & Maintainer'
 links:
-  repo: 'https://github.com/mareke-e/elemix'
+  repo: 'https://github.com/marek-e/elemix'
 publishDate: 2024-05-20
 image: '/projects/elemix.svg'
 imageAlt: 'Elexim logo'

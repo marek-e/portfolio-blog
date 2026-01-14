@@ -4,7 +4,7 @@ description: 'NextJs middleware pour sécuriser votre serveur Next avec flexibil
 featured: true
 techStack: ['TypeScript', 'Next.js', 'Node.js']
 links:
-  repo: 'https://github.com/mareke-e/next-armored'
+  repo: 'https://github.com/marek-e/next-armored'
 publishDate: 2026-01-01
 image: 'https://raw.githubusercontent.com/marek-e/next-armored/master/assets/n-armor.svg'
 imageAlt: 'Next Armored logo - armor with N letter'

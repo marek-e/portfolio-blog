@@ -69,6 +69,8 @@ const {
   role,
   links,
   image,
+  imageAlt,
+  objectFit,
   publishDate,
   status = 'completed',
   duration,
@@ -148,7 +150,12 @@ const statusKey = `status${status.charAt(0).toUpperCase()}${status.slice(1).repl
       {
         image && (
           <div class="bg-muted mb-10 aspect-video overflow-hidden rounded-xl">
-            <img src={image} alt={`Screenshot of ${title}`} class="h-full w-full object-cover" />
+            <img
+              src={image}
+              alt={imageAlt || `Screenshot of ${title}`}
+              class="h-full w-full object-cover"
+              style={{ objectFit }}
+            />
           </div>
         )
       }

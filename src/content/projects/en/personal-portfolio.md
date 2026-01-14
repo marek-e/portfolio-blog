@@ -3,7 +3,6 @@ title: 'Personal Portfolio'
 description: 'A blazing-fast developer portfolio built with Astro, React islands, and shadcn/ui. Features dark mode, glassmorphic design, and optimized performance.'
 featured: true
 techStack: ['Astro', 'React', 'TypeScript', 'Tailwind CSS', 'shadcn/ui']
-role: 'Full-stack Developer'
 links:
   demo: 'https://melmayan.fr'
   repo: 'https://github.com/marek-e/portfolio-blog'
