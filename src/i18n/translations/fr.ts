@@ -10,10 +10,10 @@ export const fr: UITranslations = {
   hero: {
     pageTitle: 'Marek Elmayan | Portfolio',
     pageDescription: 'Portfolio et blog de Marek Elmayan, ingénieur logiciel full-stack.',
-    badges: ['#UX', '#AI', '#Cybersecurity', '#LeanTech'],
+    badges: ['#UX', '#Cybersecurity', '#AI', '#DevX', '#OpenSource'],
     headline: 'Hey, je suis Marek Elmayan 👋',
     subtitle:
-      'Je construis des applications web avec des outils modernes.\nCode propre, expériences utilisateur soignées.',
+      "J'aime créer des produits qui ont un impact réel pour les utilisateurs.\nDe l'UX au Backend, avec une passion pour la cyber et l'IA.",
     ctaProjects: 'Voir mes projets',
     ctaContact: 'Me contacter',
     ctaCv: 'Voir mon CV',
@@ -21,9 +21,10 @@ export const fr: UITranslations = {
   about: {
     title: 'À propos',
     paragraphs: [
-      "J'ai commencé à coder à 16 ans après avoir découvert qu'on pouvait construire n'importe quoi avec juste un ordinateur et de la curiosité. Ce qui a commencé comme du bricolage sur des sites simples est devenu une carrière que j'adore.",
-      "Aujourd'hui, je me concentre sur la création d'applications web avec des outils modernes comme React, TypeScript et Node.js. Je porte une attention particulière à la performance, l'accessibilité et la création d'interfaces agréables à utiliser.",
-      "Quand je ne code pas, je lis sur l'architecture logicielle, je contribue à l'open source ou j'explore de nouvelles technologies. Je crois en l'écriture de code propre et maintenable, et en l'apprentissage quotidien.",
+      "Tout a commencé en classe de maths au lycée. Je finissais toujours mes exercices en avance, alors je passais mon temps sur ma calculatrice TI. D'abord un programme pour résoudre les équations du second degré, puis un Snake, et finalement un jeu de bataille navale complet. Des milliers de lignes de code pour une interface basique, mais un jeu qui fonctionnait — et une nouvelle passion.",
+      "En prépa, j'ai continué à coder : un jeu de pétanque en Python pour simuler la loi de Newton. Plus tard en école d'ingénieur, j'ai découvert le HTML, CSS et JavaScript. C'est là que j'ai réalisé qu'on pouvait créer des choses qui comptent vraiment pour les utilisateurs.",
+      "Aujourd'hui, je me concentre sur le bout en bout — de l'UX au backend. Je n'ai pas l'étincelle du designer pour choisir les bonnes couleurs, mais ce qui me passionne, ce sont tous ces petits détails UX : une animation fluide, une interface intuitive qui ne force pas l'utilisateur à réfléchir. Des produits qui livrent une vraie valeur.",
+      "Je suis aussi fasciné par la cybersécurité, et j'embrasse l'avènement de l'IA dans notre secteur — je l'utilise et m'instruis dessus au maximum. Je crois en l'importance de la DevX et de l'open-source. Mon mantra : construire des choses qui comptent.",
     ],
   },
   timeline: {
@@ -32,11 +33,11 @@ export const fr: UITranslations = {
     present: "Aujourd'hui",
   },
   projects: {
-    title: 'Projets phares',
+    title: 'Mes projets',
     subtitle: "Une sélection de ce que j'ai construit",
     viewAll: 'Voir tous les projets →',
     noProjects: 'Pas encore de projets mis en avant.',
-    liveDemo: 'Démo',
+    liveDemo: 'Live',
     code: 'Code',
     viewDetails: 'Voir les détails',
   },
@@ -87,7 +88,7 @@ export const fr: UITranslations = {
   },
   cv: {
     pageTitle: 'Marek_Elmayan_CV_FR',
-    pageDescription: 'Curriculum Vitae de Marek Elmayan, développeur full-stack',
+    pageDescription: 'Curriculum Vitae de Marek Elmayan, ingénieur logiciel full-stack',
     downloadPdf: 'Télécharger en PDF',
     sections: {
       experience: 'Expérience professionnelle',
@@ -100,9 +101,10 @@ export const fr: UITranslations = {
   },
   blog: {
     pageTitle: 'Blog | Marek Elmayan',
-    pageDescription: 'Articles sur le développement web, le code et la tech',
+    pageDescription:
+      "Articles techniques sur le développement web, le code, l'UX, la cybersécurité et l'IA",
     title: 'Blog',
-    subtitle: 'Réflexions sur le code, le design et le développement web.',
+    subtitle: "Réflexions sur le code, le design, l'UX, la cybersécurité et l'IA.",
     readMore: 'Lire la suite',
     backToBlog: 'Retour à tous les articles',
     publishedOn: 'Publié le',
@@ -111,18 +113,18 @@ export const fr: UITranslations = {
     noPosts: "Pas encore d'articles. Revenez bientôt !",
   },
   devCard: {
-    cardTitle: 'Carte Développeur',
+    cardTitle: 'Carte de développeur',
     ariaLabel: 'Carte développeur de Marek Elmayan',
     fields: {
       name: 'NOM',
       job: 'MÉTIER',
       nature: 'NATURE',
-      gameTime: 'TEMPS DE JEU',
+      gameTime: "Temps d'apprentissage",
       location: 'LIEU',
     },
     values: {
       name: 'Marek Elmayan',
-      job: 'Ingénieur Logiciel',
+      job: 'Ingénieur Logiciel Full-Stack',
       nature: 'Curieux',
       gameTime: '25 ans',
       location: 'Nantes, France',

@@ -10,10 +10,10 @@ export const en: UITranslations = {
   hero: {
     pageTitle: 'Marek Elmayan | Portfolio',
     pageDescription: 'Portfolio and blog of Marek Elmayan, full-stack software engineer.',
-    badges: ['#UX', '#AI', '#Cybersecurity', '#LeanTech'],
+    badges: ['#UX', '#Cybersecurity', '#AI', '#DevX', '#OpenSource'],
     headline: "Hi, I'm Marek Elmayan 👋",
     subtitle:
-      'I enjoy building apps with impact for users.\n I care greatly about UX but I like having control about my full-stack.\n And my other battle field is cyber-security.',
+      'I love building products that deliver real user impact.\nFrom UX to Backend, with a passion for cybersecurity and AI.',
     ctaProjects: 'View Projects',
     ctaContact: 'Get in Touch',
     ctaCv: 'View my CV',
@@ -21,11 +21,10 @@ export const en: UITranslations = {
   about: {
     title: 'About Me',
     paragraphs: [
-      'Everything started in High school during my Math classes. I was pretty good and always finished exercises early so I was spending time on my calculator. A TI-83CE. It is there a nex thing: programming language. At first I created a program that help me solve 2nd degree equations, then I started to create small 2D games. My first one was a Snake which was some dozens of line of code but then I was yearning for more challenge and was aiming for a Bataille Navale. I spent a lot of time on this and it was not an easy journey but here is the result. Thousand of line of codes for a basic interface but a working game and a new passion.',
-      'In France to attend the best engineering school you have to attend preparatory classes to pass an exam. It was mainly scientific subjects but not much computer science. I did learn some stuff about Python, Mathlab and Arduino. It also confirmed my yearn for programming. But since it was a very demanding period in term of teaching, self-commitment, ... It learned me to manage my time, my stress and having an efficient way of learning a lot of stuff in a small time.',
-      'In my engineering school I learned a lot of various concepts necessary to CS.',
-      'These days, I focus on building web applications with modern tools like React, TypeScript, and Node.js. I care deeply about performance, accessibility, and creating interfaces that feel good to use.',
-      'I like to share my learnings with others and, I firmly believe to open source, thus I would like to try contributing more to it.',
+      'Everything started in high school during my math classes. I was pretty good and always finished exercises early, so I spent time on my TI calculator. First, a program to solve second-degree equations, then a Snake game, and finally a full battleship game. Thousands of lines of code for a basic interface, but a working game — and a new passion ignited.',
+      "In prépa (French prep school for engineering), I coded a petanque game in Python to simulate Newton's laws. Later in engineering school, I discovered HTML, CSS, and JavaScript. That's when I realized you could build things that truly matter to users.",
+      "Today, I'm at a point in my career where I've taken a deep breath to understand what really drives me. I love frontend and UX — not the designer spark of picking perfect colors (that looks like a 5-year-old choosing random colors), but all those UX tweaks: smooth animations, intuitive interfaces that don't make users overthink. Building user-friendly products that deliver actual value.",
+      "I also love end-to-end development, so I'm full-stack. Cybersecurity is another battlefield I'm passionate about. The advent of AI is inevitable in our sector, so I embrace it — using it and learning as much as I can about it. I believe in DevX and open-source. My mantra: build things that matter.",
     ],
   },
   timeline: {
@@ -34,11 +33,11 @@ export const en: UITranslations = {
     present: 'Present',
   },
   projects: {
-    title: 'Featured Projects',
+    title: 'My Projects',
     subtitle: "A selection of things I've built",
     viewAll: 'View all projects →',
     noProjects: 'No featured projects yet.',
-    liveDemo: 'Live Demo',
+    liveDemo: 'Live',
     code: 'Code',
     viewDetails: 'View Details',
   },
@@ -89,7 +88,7 @@ export const en: UITranslations = {
   },
   cv: {
     pageTitle: 'Marek_Elmayan_CV_EN',
-    pageDescription: 'Resume of Marek Elmayan, full-stack developer',
+    pageDescription: 'Resume of Marek Elmayan, full-stack software engineer',
     downloadPdf: 'Download PDF',
     sections: {
       experience: 'Professional Experience',
@@ -102,9 +101,9 @@ export const en: UITranslations = {
   },
   blog: {
     pageTitle: 'Blog | Marek Elmayan',
-    pageDescription: 'Articles about web development, coding, and tech',
+    pageDescription: 'Technical articles about web development, coding, UX, cybersecurity and AI',
     title: 'Blog',
-    subtitle: 'Thoughts on code, design, and building for the web.',
+    subtitle: 'Thoughts on code, design, UX, cybersecurity and AI.',
     readMore: 'Read more',
     backToBlog: 'Back to all posts',
     publishedOn: 'Published on',
@@ -119,12 +118,12 @@ export const en: UITranslations = {
       name: 'NAME',
       job: 'JOB',
       nature: 'NATURE',
-      gameTime: 'GAME TIME',
+      gameTime: 'Learning Time',
       location: 'LOCATION',
     },
     values: {
       name: 'Marek Elmayan',
-      job: 'Software Engineer',
+      job: 'Full-Stack Software Engineer',
       nature: 'Curious',
       gameTime: '25 years',
       location: 'Nantes, France',
