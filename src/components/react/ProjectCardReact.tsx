@@ -73,7 +73,7 @@ export function ProjectCardReact({ project, projectUrl, translations }: ProjectC
           </div>
         </CardContent>
 
-        <CardFooter className="flex justify-between">
+        <CardFooter className="bg-card flex justify-between border-t-0">
           <div className="flex gap-2">
             {links?.demo && (
               <Link
