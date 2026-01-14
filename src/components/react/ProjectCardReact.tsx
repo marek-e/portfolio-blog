@@ -42,7 +42,7 @@ export function ProjectCardReact({ project, projectUrl, translations }: ProjectC
     <article className="h-full">
       <Card className="group hover:ring-primary/20 relative flex h-full flex-col overflow-hidden pt-0 transition-all hover:ring-2">
         {image && (
-          <div className="bg-muted aspect-video overflow-hidden">
+          <div className="bg-muted/70 aspect-video overflow-hidden">
             <img
               src={image}
               alt={imageAlt || `Screenshot of ${title}`}
