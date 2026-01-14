@@ -126,7 +126,7 @@ export function RunningStats({ stats, lang = 'fr' }: RunningStatsProps) {
             onClick={() => setMode('allTime')}
             className={`rounded-md px-4 py-2 text-sm font-medium transition-all ${
               mode === 'allTime'
-                ? 'bg-background text-foreground shadow-sm'
+                ? 'text-foreground dark:bg-background bg-white shadow-sm'
                 : 'text-muted-foreground hover:text-foreground hover:bg-background/50 cursor-pointer'
             }`}
             aria-pressed={mode === 'allTime'}
@@ -137,7 +137,7 @@ export function RunningStats({ stats, lang = 'fr' }: RunningStatsProps) {
             onClick={() => setMode('thisYear')}
             className={`rounded-md px-4 py-2 text-sm font-medium transition-all ${
               mode === 'thisYear'
-                ? 'bg-background text-foreground shadow-sm'
+                ? 'text-foreground dark:bg-background bg-white shadow-sm'
                 : 'text-muted-foreground hover:text-foreground hover:bg-background/50 cursor-pointer'
             }`}
             aria-pressed={mode === 'thisYear'}
