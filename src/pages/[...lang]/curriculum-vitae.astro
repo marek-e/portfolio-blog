@@ -19,6 +19,25 @@ const t = getTranslations(lang);
 ---
 
 <Layout title={t.cv.pageTitle} description={t.cv.pageDescription}>
+  <script
+    is:inline
+    slot="head"
+    type="application/ld+json"
+    set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'ProfilePage',
+      name: 'CV - Marek Elmayan',
+      url: 'https://melmayan.fr/curriculum-vitae',
+      description: 'Curriculum Vitae de Marek Elmayan, ingénieur logiciel full-stack.',
+      mainEntity: {
+        '@type': 'Person',
+        name: 'Marek Elmayan',
+        jobTitle: 'Full-Stack Software Engineer',
+        url: 'https://melmayan.fr',
+        email: 'melmayan.dev@gmail.com',
+      },
+    })}
+  />
   <Navbar />
   <main class="bg-background mt-24 min-h-dvh py-8">
     <div class="container mx-auto px-4">

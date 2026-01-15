@@ -67,6 +67,40 @@ const enURL = new URL(enPath, Astro.site);
 
     <meta name="color-scheme" content="light dark" />
 
+    <!-- Structured Data for Person -->
+    <script is:inline type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Marek Elmayan",
+        "url": "https://melmayan.fr",
+        "image": "https://melmayan.fr/favicon.svg",
+        "jobTitle": "Full-Stack Software Engineer",
+        "description": "Portfolio et blog de Marek Elmayan, ingénieur logiciel full-stack. Spécialisation en UX, cybersécurité, IA et DevX.",
+        "email": "melmayan.dev@gmail.com",
+        "sameAs": [
+          "https://github.com/marek-e",
+          "https://www.linkedin.com/in/marek-elmayan",
+          "https://x.com/__mareke__"
+        ]
+      }
+    </script>
+
+    <!-- Structured Data for Website -->
+    <script is:inline type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Marek Elmayan",
+        "url": "https://melmayan.fr",
+        "author": {
+          "@type": "Person",
+          "name": "Marek Elmayan"
+        },
+        "inLanguage": ["fr", "en"]
+      }
+    </script>
+
     <ClientRouter />
     <script is:inline>
       function applyStoredTheme() {

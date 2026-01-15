@@ -63,6 +63,28 @@ const readingTime = estimateReadingTime(post.body ?? '');
 ---
 
 <Layout title={`${post.data.title} | ${t.blog.title}`} description={post.data.description}>
+  <script
+    is:inline
+    slot="head"
+    type="application/ld+json"
+    set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'BlogPosting',
+      headline: post.data.title,
+      description: post.data.description,
+      author: {
+        '@type': 'Person',
+        name: 'Marek Elmayan',
+        url: 'https://melmayan.fr',
+      },
+      datePublished: post.data.publishDate.toISOString(),
+      dateModified: (post.data.updatedDate || post.data.publishDate).toISOString(),
+      url: Astro.url.href,
+      inLanguage: lang,
+      keywords: post.data.tags.join(', '),
+      timeRequired: `PT${readingTime}M`,
+    })}
+  />
   <Navbar />
   <main class="container mx-auto max-w-5xl px-4 pt-32 pb-8">
     <Breadcrumb className="mb-10">

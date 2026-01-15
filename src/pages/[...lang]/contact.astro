@@ -14,6 +14,20 @@ const t = getTranslations(lang);
 ---
 
 <Layout title={t.contactPage.pageTitle} description={t.contactPage.pageDescription}>
+  <script is:inline slot="head" type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ContactPage",
+      "name": "Me contacter - Marek Elmayan",
+      "url": "https://melmayan.fr/contact",
+      "description": "Contactez Marek Elmayan pour discuter de vos projets ou opportunités.",
+      "mainEntity": {
+        "@type": "Person",
+        "name": "Marek Elmayan",
+        "email": "melmayan.dev@gmail.com"
+      }
+    }
+  </script>
   <Navbar />
   <main class="bg-background min-h-dvh py-16 md:py-24">
     <ContactSection />

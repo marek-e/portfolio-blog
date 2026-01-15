@@ -5,7 +5,7 @@ import Footer from '@/components/astro/Footer.astro';
 import { Badge } from '@/components/ui/badge';
 import { getCollection } from 'astro:content';
 import { getTranslations, defaultLang } from '@/i18n';
-import { getTranslatedPath } from '@/i18n/config';
+import { getTranslatedPath, languages } from '@/i18n/config';
 import { ArrowRight02Icon } from '@hugeicons/core-free-icons';
 import { Icon } from '@/components/react/Icon';
 import { formatDate, getSlug, estimateReadingTime, getTagColor } from '@/lib/blog';
@@ -26,6 +26,23 @@ const posts = allPosts
 ---
 
 <Layout title={t.blog.pageTitle} description={t.blog.pageDescription}>
+  <script
+    is:inline
+    slot="head"
+    type="application/ld+json"
+    set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Blog',
+      name: 'Blog - Marek Elmayan',
+      url: 'https://melmayan.fr/blog',
+      description: "Articles sur le développement web, l'UX, la cybersécurité et l'IA.",
+      author: {
+        '@type': 'Person',
+        name: 'Marek Elmayan',
+      },
+      inLanguage: Object.keys(languages),
+    })}
+  />
   <Navbar />
   <main class="container mx-auto min-h-dvh w-full max-w-5xl px-4 pt-32 pb-16">
     <header class="mb-12 space-y-4">

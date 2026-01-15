@@ -88,6 +88,29 @@ const statusKey = `status${status.charAt(0).toUpperCase()}${status.slice(1).repl
 ---
 
 <Layout title={`${title} | ${t.projectsPage.title}`} description={description}>
+  <script
+    is:inline
+    slot="head"
+    type="application/ld+json"
+    set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'CreativeWork',
+      name: title,
+      description: description,
+      author: {
+        '@type': 'Person',
+        name: 'Marek Elmayan',
+        url: 'https://melmayan.fr',
+      },
+      datePublished: publishDate.toISOString(),
+      url: Astro.url.href,
+      inLanguage: lang,
+      keywords: techStack.join(', '),
+      ...(image && { image: new URL(image, Astro.site).toString() }),
+      ...(links?.demo && { url: links.demo }),
+      ...(links?.repo && { codeRepository: links.repo }),
+    })}
+  />
   <Navbar />
   <main class="container mx-auto max-w-5xl px-4 pt-32 pb-8">
     <Breadcrumb className="mb-10">
