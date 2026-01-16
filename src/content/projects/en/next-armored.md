@@ -4,7 +4,7 @@ description: 'NextJs middleware toolkit to secure your next server with flexibil
 featured: true
 techStack: ['TypeScript', 'Next.js', 'Node.js']
 links:
-  demo: 'https://next-armored.vercel.app'
+  demo: 'https://www.npmjs.com/package/next-armored'
   repo: 'https://github.com/marek-e/next-armored'
 publishDate: 2026-01-01
 image: 'https://raw.githubusercontent.com/marek-e/next-armored/master/assets/n-armor.svg'
