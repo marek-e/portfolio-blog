@@ -8,8 +8,8 @@ import { useReducedMotion } from '@/lib/useReducedMotion';
 
 interface TimelineCardsProps {
   entries: TimelineEntry[];
-  presentLabel?: string;
-  lang?: Lang;
+  presentLabel: string;
+  lang: Lang;
 }
 
 function clamp(value: number, min: number, max: number): number {
@@ -32,16 +32,18 @@ function TimelineCard({
   progress,
   isLeft,
   isReducedMotion,
-  lang = 'fr',
-  presentLabel = "Aujourd'hui",
+  isMobile,
+  lang,
+  presentLabel,
 }: {
   entry: TimelineEntry;
   index: number;
   progress: number;
   isLeft: boolean;
   isReducedMotion: boolean;
-  lang?: Lang;
-  presentLabel?: string;
+  isMobile?: boolean;
+  lang: Lang;
+  presentLabel: string;
 }) {
   // Card appears when scroll progress reaches its position
   const cardThreshold = index * 0.2;
@@ -54,7 +56,32 @@ function TimelineCard({
   const easedProgress = easeOutBack(cardProgress);
   const fadeProgress = easeOutExpo(cardProgress);
 
-  // Complex 3D animation values
+  // Mobile: simpler animations (slide from side + slide up + fade)
+  if (isMobile) {
+    const translateX = isReducedMotion ? 0 : (isLeft ? -40 : 40) * (1 - easedProgress);
+    const translateY = isReducedMotion ? 0 : 30 * (1 - easedProgress);
+    const opacity = isReducedMotion ? 1 : fadeProgress;
+    const scale = isReducedMotion ? 1 : 0.9 + easedProgress * 0.1;
+
+    return (
+      <article
+        className={`timeline-card bg-card/80 text-card-foreground ring-foreground/10 w-full max-w-sm rounded-2xl p-5 ring-1 backdrop-blur-xs md:max-w-md md:p-6 ${
+          isLeft ? 'mr-auto' : 'ml-auto'
+        }`}
+        style={{
+          opacity,
+          transform: `translateX(${translateX}px) translateY(${translateY}px) scale(${scale})`,
+          transition: isReducedMotion ? 'none' : 'transform 0.15s ease-out, opacity 0.15s ease-out',
+          visibility: isVisible || isReducedMotion ? 'visible' : 'hidden',
+          willChange: 'transform, opacity',
+        }}
+      >
+        <CardContent entry={entry} icon={icon} lang={lang} presentLabel={presentLabel} />
+      </article>
+    );
+  }
+
+  // Desktop: Complex 3D animation values
   // Horizontal slide - cards come from their respective sides
   const translateX = isReducedMotion ? 0 : (isLeft ? -80 : 80) * (1 - easedProgress);
 
@@ -82,7 +109,7 @@ function TimelineCard({
 
   return (
     <article
-      className={`timeline-card bg-card text-card-foreground ring-foreground/10 w-full max-w-sm rounded-2xl p-5 ring-1 md:max-w-md md:p-6 ${
+      className={`timeline-card bg-card/80 text-card-foreground ring-foreground/10 w-full max-w-sm rounded-2xl p-5 ring-1 backdrop-blur-xs md:max-w-md md:p-6 ${
         isLeft ? 'md:mr-auto' : 'md:ml-auto'
       }`}
       style={{
@@ -94,6 +121,24 @@ function TimelineCard({
         willChange: 'transform, opacity',
       }}
     >
+      <CardContent entry={entry} icon={icon} lang={lang} presentLabel={presentLabel} />
+    </article>
+  );
+}
+
+function CardContent({
+  entry,
+  icon,
+  lang,
+  presentLabel,
+}: {
+  entry: TimelineEntry;
+  icon: typeof Mortarboard01Icon | typeof Briefcase01Icon;
+  lang: Lang;
+  presentLabel: string;
+}) {
+  return (
+    <>
       {/* Date badge */}
       <div className="mb-3 flex items-center gap-3">
         <div className="bg-primary/10 text-primary flex h-9 w-9 items-center justify-center rounded-full">
@@ -103,16 +148,13 @@ function TimelineCard({
           {formatDateRange(entry.startDate, entry.endDate, lang, presentLabel)}
         </time>
       </div>
-
       {/* Title and organization */}
       <header className="mb-2">
-        <h3 className="text-foreground text-lg font-bold md:text-xl">{entry.title}</h3>
-        <p className="text-primary text-sm font-medium">{entry.organization}</p>
+        <h3 className="text-foreground mb-2 text-lg font-bold md:text-xl">{entry.title}</h3>
+        <h4 className="text-primary text-md font-medium">{entry.organization}</h4>
       </header>
-
       {/* Description */}
       <p className="text-muted-foreground mb-3 text-sm leading-relaxed">{entry.description}</p>
-
       {/* Tags */}
       {entry.tags && entry.tags.length > 0 && (
         <div className="flex flex-wrap gap-1.5">
@@ -123,19 +165,29 @@ function TimelineCard({
           ))}
         </div>
       )}
-    </article>
+      {entry.logo && (
+        <div className="mt-5 flex justify-center">
+          <img src={entry.logo} alt={`${entry.organization} logo`} className="h-8 object-cover" />
+        </div>
+      )}
+    </>
   );
 }
 
 // Generate a smooth curved path for the timeline
-function generateCurvePath(height: number, amplitude: number, periods: number): string {
+function generateCurvePath(
+  height: number,
+  amplitude: number,
+  periods: number,
+  centerOffset: number
+): string {
   const points: string[] = [];
   const segments = 100;
 
   for (let i = 0; i <= segments; i++) {
     const t = i / segments;
     const y = t * height;
-    const x = 50 + Math.sin(t * Math.PI * periods) * amplitude;
+    const x = centerOffset + Math.sin(t * Math.PI * periods) * amplitude;
 
     if (i === 0) {
       points.push(`M ${x} ${y}`);
@@ -151,10 +203,12 @@ function TimelinePath({
   progress,
   height,
   isReducedMotion,
+  isMobile,
 }: {
   progress: number;
   height: number;
   isReducedMotion: boolean;
+  isMobile?: boolean;
 }) {
   const pathRef = useRef<SVGPathElement>(null);
   const [pathLength, setPathLength] = useState(0);
@@ -186,15 +240,19 @@ function TimelinePath({
     );
   }
 
-  const curvePath = generateCurvePath(height, 25, 2.5);
+  // Mobile uses larger amplitude and adjusted positioning
+  const amplitude = isMobile ? 40 : 25;
+  const centerOffset = 50; // Keep center for mobile
+  const svgWidth = isMobile ? 120 : 100;
+  const curvePath = generateCurvePath(height, amplitude, 2.5, centerOffset);
   const dashOffset = isReducedMotion ? 0 : pathLength * (1 - progress);
 
   return (
     <svg
       className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2"
-      width="100"
+      width={svgWidth}
       height={height}
-      viewBox={`0 0 100 ${height}`}
+      viewBox={`0 0 ${svgWidth} ${height}`}
       fill="none"
       preserveAspectRatio="none"
     >
@@ -258,14 +316,21 @@ function GlowingDot({
   );
 }
 
-export function TimelineCards({
-  entries,
-  presentLabel = "Aujourd'hui",
-  lang = 'fr',
-}: TimelineCardsProps) {
+export function TimelineCards({ entries, presentLabel, lang }: TimelineCardsProps) {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
   const isReducedMotion = useReducedMotion();
+
+  // Detect mobile screen size
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Handle scroll progress calculation
   useEffect(() => {
@@ -277,7 +342,7 @@ export function TimelineCards({
 
       // Start when section enters viewport, end when it exits
       const start = viewportHeight;
-      const end = -rect.height;
+      const end = -rect.height + 200; // add 200px to the end to avoid the last card to be hidden
       const current = rect.top;
 
       const progress = clamp((start - current) / (start - end), 0, 1);
@@ -292,8 +357,8 @@ export function TimelineCards({
     };
   }, []);
 
-  // Calculate vertical spacing for cards
-  const cardSpacing = 280; // pixels between card centers
+  // Calculate vertical spacing for cards - more space on mobile to prevent overlap
+  const cardSpacing = isMobile ? 450 : 280; // pixels between card centers
   const totalHeight = entries.length * cardSpacing + 100;
 
   return (
@@ -302,27 +367,13 @@ export function TimelineCards({
       className="relative mx-auto w-full max-w-6xl"
       style={{ minHeight: totalHeight }}
     >
-      {/* Curved dotted path */}
-      <div className="absolute inset-x-0 top-0 hidden md:block" style={{ height: totalHeight }}>
+      {/* Curved dotted path - visible on all screen sizes */}
+      <div className="absolute inset-x-0 top-0" style={{ height: totalHeight }}>
         <TimelinePath
           progress={scrollProgress}
           height={totalHeight}
           isReducedMotion={isReducedMotion}
-        />
-      </div>
-
-      {/* Mobile: simple vertical line */}
-      <div
-        className="bg-foreground/10 absolute top-0 left-6 w-0.5 md:hidden"
-        style={{ height: totalHeight }}
-      >
-        <div
-          className="bg-primary w-full origin-top"
-          style={{
-            height: '100%',
-            transform: `scaleY(${isReducedMotion ? 1 : scrollProgress})`,
-            transition: isReducedMotion ? 'none' : 'transform 0.1s ease-out',
-          }}
+          isMobile={isMobile}
         />
       </div>
 
@@ -349,6 +400,7 @@ export function TimelineCards({
                         progress={scrollProgress}
                         isLeft={true}
                         isReducedMotion={isReducedMotion}
+                        isMobile={false}
                         lang={lang}
                         presentLabel={presentLabel}
                       />
@@ -367,6 +419,7 @@ export function TimelineCards({
                         progress={scrollProgress}
                         isLeft={false}
                         isReducedMotion={isReducedMotion}
+                        isMobile={false}
                         lang={lang}
                         presentLabel={presentLabel}
                       />
@@ -375,17 +428,20 @@ export function TimelineCards({
                 )}
               </div>
 
-              {/* Mobile: all cards on right of line */}
-              <div className="pl-12 md:hidden">
-                <TimelineCard
-                  entry={entry}
-                  index={index}
-                  progress={scrollProgress}
-                  isLeft={false}
-                  isReducedMotion={isReducedMotion}
-                  lang={lang}
-                  presentLabel={presentLabel}
-                />
+              {/* Mobile: alternating left/right */}
+              <div className="md:hidden">
+                <div className={`px-4 ${isLeft ? 'mr-auto' : 'ml-auto'}`}>
+                  <TimelineCard
+                    entry={entry}
+                    index={index}
+                    progress={scrollProgress}
+                    isLeft={isLeft}
+                    isReducedMotion={isReducedMotion}
+                    isMobile={true}
+                    lang={lang}
+                    presentLabel={presentLabel}
+                  />
+                </div>
               </div>
             </div>
           );

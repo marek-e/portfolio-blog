@@ -6,6 +6,7 @@ interface TimelineEntryWithTranslations {
   type: 'education' | 'work';
   startDate: string;
   endDate: string | null;
+  logo?: string;
   tags?: string[];
   translations: {
     fr: { title: string; organization: string; description: string };
@@ -15,86 +16,105 @@ interface TimelineEntryWithTranslations {
 
 const timelineDataWithTranslations: TimelineEntryWithTranslations[] = [
   {
-    id: 'current-role',
+    id: 'theodo',
     type: 'work',
     startDate: '2023-01',
     endDate: null,
-    tags: ['React', 'TypeScript', 'Node.js', 'AWS'],
+    tags: ['React', 'TypeScript', 'Node.js', 'AWS', 'Agile'],
+    logo: '/icons/theodo_logo.svg',
     translations: {
       fr: {
-        title: 'Développeur Full-Stack',
+        title: 'Ingénieur Logiciel Full-Stack',
         organization: 'Theodo',
         description:
-          "Construction d'applications web à fort impact pour des clients dans la fintech et le e-commerce. Prise de décisions techniques et mentorat de développeurs juniors.",
+          "Développement d'applications web à fort impact pour des clients variés. Prise de décisions techniques et accompagnement de développeurs juniors. Gestion de projet suivant les principes Agile & Lean Tech.",
       },
       en: {
-        title: 'Full-Stack Developer',
+        title: 'Full-Stack Software Engineer',
         organization: 'Theodo',
         description:
-          'Building high-impact web applications for clients across fintech and e-commerce. Leading technical decisions and mentoring junior developers.',
+          'Building high-impact web applications for various clients. Leading technical decisions and mentoring junior developers. Project management following Agile & Lean Tech principles.',
       },
     },
   },
   {
-    id: 'previous-role',
+    id: 'ensimag',
+    type: 'education',
+    startDate: '2020-09',
+    endDate: '2023-06',
+    tags: ['Algorithms', 'Computer Science', 'Applied Mathematics'],
+    logo: '/icons/ensimag_logo.png',
+    translations: {
+      fr: {
+        title: "Diplôme d'Ingénieur en Informatique et Mathématiques Appliquées",
+        organization: 'Grenoble INP - Ensimag, UGA',
+        description: "École d'ingénieurs de référence en informatique et mathématiques appliquées.",
+      },
+      en: {
+        title: 'Engineering Degree in Computer Science & Applied Mathematics',
+        organization: 'Grenoble INP - Ensimag, UGA',
+        description: 'Top French engineering school in CS and applied mathematics.',
+      },
+    },
+  },
+  {
+    id: 'aalto',
+    type: 'education',
+    startDate: '2022-09',
+    endDate: '2022-12',
+    tags: ['Exchange', 'International'],
+    logo: '/icons/aalto_logo.png',
+    translations: {
+      fr: {
+        title: "Semestre d'échange",
+        organization: 'Aalto University',
+        description: "Semestre d'échange académique à Helsinki, Finlande.",
+      },
+      en: {
+        title: 'Exchange Semester',
+        organization: 'Aalto University',
+        description: 'Academic exchange semester in Helsinki, Finland.',
+      },
+    },
+  },
+  {
+    id: 'schneider-electric',
     type: 'work',
     startDate: '2021-06',
-    endDate: '2022-12',
-    tags: ['Vue.js', 'Python', 'PostgreSQL'],
+    endDate: '2021-08',
+    tags: ['Python', 'Power Apps', 'Automation'],
+    logo: '/icons/se_logo.png',
     translations: {
       fr: {
-        title: 'Ingénieur Logiciel',
-        organization: 'Entreprise précédente',
+        title: 'Stage Assistant Ingénieur',
+        organization: 'Schneider Electric',
         description:
-          'Développement et maintenance de fonctionnalités pour une plateforme SaaS. Amélioration des pipelines CI/CD et réduction du temps de déploiement de 40%.',
+          "Déploiement d'outils de digitalisation au sein du département qualité. Développement de programmes pour l'automatisation de mesures 3D et d'une application Power Apps pour le suivi de maintenance.",
       },
       en: {
-        title: 'Software Engineer',
-        organization: 'Previous Company',
+        title: 'Assistant Engineer Intern',
+        organization: 'Schneider Electric',
         description:
-          'Developed and maintained customer-facing features for a SaaS platform. Improved CI/CD pipelines and reduced deployment time by 40%.',
+          'Deployment of digitalization tools in quality department. Developed programs for automated 3D measurements and a Power Apps application for equipment maintenance tracking.',
       },
     },
   },
   {
-    id: 'masters',
+    id: 'cpge',
     type: 'education',
-    startDate: '2019-09',
-    endDate: '2021-06',
-    tags: ['Algorithms', 'Distributed Systems', 'Research'],
+    startDate: '2018-09',
+    endDate: '2020-06',
+    tags: ['Mathematics', 'Physics', 'Preparatory Classes'],
     translations: {
       fr: {
-        title: 'Master en Informatique',
-        organization: "Nom de l'université",
-        description:
-          "Spécialisation en systèmes distribués et génie logiciel. Thèse sur les algorithmes d'édition collaborative en temps réel.",
+        title: 'CPGE PCSI/PSI*',
+        organization: 'Lycée Chateaubriand',
+        description: "Classes préparatoires aux grandes écoles d'ingénieurs.",
       },
       en: {
-        title: 'Master of Computer Science',
-        organization: 'University Name',
-        description:
-          'Specialized in distributed systems and software engineering. Thesis on real-time collaborative editing algorithms.',
-      },
-    },
-  },
-  {
-    id: 'bachelors',
-    type: 'education',
-    startDate: '2016-09',
-    endDate: '2019-06',
-    tags: ['Programming', 'Mathematics', 'Databases'],
-    translations: {
-      fr: {
-        title: 'Licence en Informatique',
-        organization: "Nom de l'université",
-        description:
-          "Fondamentaux de l'informatique, structures de données et pratiques de développement logiciel.",
-      },
-      en: {
-        title: 'Bachelor of Computer Science',
-        organization: 'University Name',
-        description:
-          'Foundation in computer science fundamentals, data structures, and software development practices.',
+        title: 'Preparatory Classes (Math & Physics)',
+        organization: 'Lycée Chateaubriand',
+        description: 'Intensive 2-year program for top engineering school entrance exams.',
       },
     },
   },
@@ -106,6 +126,7 @@ export function getLocalizedTimeline(lang: Lang): TimelineEntry[] {
     type: entry.type,
     startDate: entry.startDate,
     endDate: entry.endDate,
+    logo: entry.logo,
     tags: entry.tags,
     title: entry.translations[lang].title,
     organization: entry.translations[lang].organization,
