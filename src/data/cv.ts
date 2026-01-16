@@ -52,6 +52,7 @@ interface CVData {
   website: string;
   profilePicture: string;
   title: { fr: string; en: string };
+  summary: { fr: string; en: string };
   experience: CVExperience[];
   education: CVEducation[];
   skills: CVSkillCategory[];
@@ -75,6 +76,10 @@ const cvData: CVData = {
     fr: 'Ingénieur Logiciel Full-Stack',
     en: 'Full-Stack Software Engineer',
   },
+  summary: {
+    fr: "Ingénieur logiciel full-stack avec 3+ ans d'expérience en développement web, spécialisé en TypeScript, React et Node.js. Conception et livraison de fonctionnalités full-stack (Next.js, REST APIs, AWS Serverless) visant l'amélioration de l'expérience utilisateur et la maintenabilité du code. Passionné par la sécurité web et l'intégration d'IA dans les workflows de développement. Autonome et orienté qualité.",
+    en: 'Full-stack software engineer with 3+ years of experience in web development, specialized in TypeScript, React, and Node.js. Design and delivery of full-stack features (Next.js, REST APIs, AWS Serverless) focused on user experience and code maintainability. Passionate about web security and integrating AI into development workflows. Self-driven and quality-oriented.',
+  },
   experience: [
     {
       id: 'theodo',
@@ -87,7 +92,7 @@ const cvData: CVData = {
           location: 'Nantes, France',
           description: [
             "Développement d'applications web à fort impact pour des clients variés",
-            'Prise de décisions techniques et accompagnement de développeurs juniors',
+            "Prise de décisions techniques et conception d'architecture logicielle",
             'Gestion de projet suivant les principes Agile & Lean Tech',
             'Workflows de développement assistés par IA',
             'Audit de sécurité web et implémentation',
@@ -99,7 +104,7 @@ const cvData: CVData = {
           location: 'Nantes, France',
           description: [
             'Building high-impact web applications for various clients',
-            'Leading technical decisions and mentoring junior developers',
+            'Leading technical decisions and software architecture design',
             'Project management following Agile & Lean Tech principles',
             'AI assisted development workflows',
             'Web security audit and implementation',
@@ -280,6 +285,7 @@ export interface LocalizedCV {
   website: string;
   profilePicture: string;
   title: string;
+  summary: string;
   experience: {
     id: string;
     startDate: string;
@@ -315,6 +321,7 @@ export function getLocalizedCV(lang: Lang): LocalizedCV {
     website: cvData.website,
     profilePicture: cvData.profilePicture,
     title: cvData.title[lang],
+    summary: cvData.summary[lang],
     experience: cvData.experience.map((exp) => ({
       id: exp.id,
       startDate: exp.startDate,
