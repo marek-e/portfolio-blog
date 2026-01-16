@@ -3,6 +3,8 @@ import { H1, H2, H3, H4 } from './Heading';
 import { Highlight } from './Highlight';
 import { Callout } from './Callout';
 import { Citation } from './Citation';
+import { Figure } from './Figure';
+import { Mermaid } from './Mermaid';
 
 export const mdxComponents = {
   pre: Pre,
@@ -13,6 +15,8 @@ export const mdxComponents = {
   Highlight,
   Callout,
   Citation,
+  Figure,
+  Mermaid,
 };
 
-export { Pre, H1, H2, H3, H4, Highlight, Callout, Citation };
+export { Pre, H1, H2, H3, H4, Highlight, Callout, Citation, Figure, Mermaid };

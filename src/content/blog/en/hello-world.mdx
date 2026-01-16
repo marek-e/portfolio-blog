@@ -62,6 +62,50 @@ export function Greeter() {
 }
 ```
 
+## Visual Elements
+
+Here's an example of including images with captions:
+
+<Figure
+  src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&q=80"
+  alt="Code on a computer screen"
+  caption="Writing code is both an art and a science"
+  objectFit="contain"
+/>
+
+And here's a Mermaid diagram showing a simple git flow:
+
+<Mermaid
+  chart={`
+    gitGraph
+      commit
+      commit
+      branch develop
+      checkout develop
+      commit
+      commit
+      checkout main
+      merge develop
+      commit
+  `}
+  caption="A typical git branching workflow"
+/>
+
+You can also create flowcharts:
+
+<Mermaid
+  chart={`
+    flowchart LR
+      A[Start] --> B{Is it working?}
+      B -->|Yes| C[Great!]
+      B -->|No| D[Debug]
+      D --> B
+  `}
+  caption="The developer debugging loop"
+  title="The developer debugging loop"
+  className="mx-auto w-1/2"
+/>
+
 ## What's Next?
 
 I'll be writing about:

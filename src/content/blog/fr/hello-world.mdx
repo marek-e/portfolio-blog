@@ -63,6 +63,49 @@ export function Greeter() {
 }
 ```
 
+## Éléments visuels
+
+Voici un exemple d'inclusion d'images avec légendes :
+
+<Figure
+  src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&q=80"
+  alt="Code sur un écran d'ordinateur"
+  caption="Écrire du code est à la fois un art et une science"
+/>
+
+Et voici un diagramme Mermaid montrant un flux git simple :
+
+<Mermaid
+  chart={`
+    gitGraph
+      commit
+      commit
+      branch develop
+      checkout develop
+      commit
+      commit
+      checkout main
+      merge develop
+      commit
+  `}
+  caption="Un workflow de branches git typique"
+/>
+
+Vous pouvez également créer des organigrammes :
+
+<Mermaid
+  chart={`
+    flowchart LR
+      A[Début] --> B{Ça marche ?}
+      B -->|Oui| C[Super !]
+      B -->|Non| D[Débugger]
+      D --> B
+  `}
+  caption="La boucle de débogage du développeur"
+  title="La boucle de débogage du développeur"
+  className="mx-auto w-1/2"
+/>
+
 ## Et maintenant ?
 
 Je vais écrire sur :

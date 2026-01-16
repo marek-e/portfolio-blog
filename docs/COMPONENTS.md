@@ -386,3 +386,133 @@ import {
 - Supports buttons, icons, and text addons
 - Focus ring on input focus
 - Invalid state styling
+
+## MDX Components
+
+Located in `src/components/mdx/`. These components are available in all MDX blog posts via the `mdxComponents` object.
+
+### Architecture: Why `.tsx` and Not `.astro`?
+
+**Important**: MDX components must be React components (`.tsx`), not Astro components (`.astro`), because they are passed through the `components` prop of `<Content>`:
+
+```astro
+<Content components={mdxComponents} />
+```
+
+This prop expects React components. The components render as **static HTML during build** - React hooks like `useEffect`, `useState` do NOT run because there's no client-side hydration.
+
+### Client-Side Interactivity Pattern
+
+For MDX components that need client-side JavaScript (like Mermaid diagrams), use the **data attribute + script** pattern:
+
+1. **Component (`.tsx`)**: Renders a placeholder with data attributes
+2. **Page script (`[slug].astro`)**: Initializes the feature client-side
+
+```tsx
+// Component: renders placeholder with data
+export function MyComponent({ data }: Props) {
+  return (
+    <div data-my-component data-config={JSON.stringify(data)}>
+      <div className="animate-spin" /> {/* Loading state */}
+    </div>
+  );
+}
+```
+
+```astro
+<!-- Page: client-side initialization -->
+<script>
+  function initMyComponents() {
+    document.querySelectorAll('[data-my-component]').forEach((el) => {
+      const config = JSON.parse(el.getAttribute('data-config') || '{}');
+      // Initialize with config...
+    });
+  }
+  initMyComponents();
+  document.addEventListener('astro:after-swap', initMyComponents);
+</script>
+```
+
+### Available MDX Components
+
+| Component   | Purpose                          | Client JS? |
+| ----------- | -------------------------------- | ---------- |
+| `Highlight` | Colored text highlighting        | No         |
+| `Callout`   | Alert boxes (info, warning, tip) | No         |
+| `Citation`  | Block quotes with attribution    | No         |
+| `Figure`    | Images with captions             | No         |
+| `Mermaid`   | Diagrams (flowchart, sequence)   | Yes        |
+| `Pre`       | Code blocks with copy button     | Yes\*      |
+| `H1-H4`     | Headings with anchor links       | Yes\*      |
+
+\*Copy buttons and heading anchors are initialized via scripts in `[slug].astro`.
+
+### Figure
+
+Image with optional caption and styling.
+
+```mdx
+<Figure
+  src="/images/example.png"
+  alt="Description of the image"
+  caption="Optional caption text"
+  width={800}
+  height={600}
+/>
+```
+
+### Mermaid
+
+Renders Mermaid diagrams. Supports all diagram types: flowchart, sequence, gitGraph, etc.
+
+```mdx
+<Mermaid
+  chart={`
+    flowchart LR
+      A[Start] --> B{Decision}
+      B -->|Yes| C[Done]
+      B -->|No| D[Retry]
+      D --> B
+  `}
+  caption="Optional caption"
+/>
+```
+
+Features:
+
+- Client-side rendering (dynamically imports Mermaid library)
+- Auto theme switching (light/dark mode)
+- Loading spinner while rendering
+- Error display if diagram syntax is invalid
+
+### Callout
+
+Alert boxes for important information.
+
+```mdx
+<Callout variant="tip" title="Pro Tip">
+  This is helpful advice.
+</Callout>
+```
+
+Variants: `info`, `warning`, `success`, `tip`, `danger`
+
+### Highlight
+
+Inline text highlighting with colors.
+
+```mdx
+Learn <Highlight color="red">JavaScript</Highlight> and <Highlight color="blue">TypeScript</Highlight>.
+```
+
+Colors: `red`, `blue`, `green`, `yellow`, `purple`, `orange`
+
+### Citation
+
+Block quotes with attribution.
+
+```mdx
+<Citation author="Kent Beck" source="Extreme Programming Explained" url="https://example.com">
+  Make it work, make it right, make it fast.
+</Citation>
+```
