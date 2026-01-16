@@ -67,6 +67,21 @@ const enURL = new URL(enPath, Astro.site);
 
     <meta name="color-scheme" content="light dark" />
 
+    <!-- DNS prefetch for fastest resolution -->
+    <link rel="dns-prefetch" href="https://static.cloudflareinsights.com" />
+
+    <!-- Preconnect to external origins -->
+    <link rel="preconnect" href="https://static.cloudflareinsights.com" crossorigin />
+
+    <!-- Preload critical font -->
+    <link
+      rel="preload"
+      href="/fonts/MapleMono-Regular.ttf.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
     <!-- Structured Data for Person -->
     <script is:inline type="application/ld+json">
       {

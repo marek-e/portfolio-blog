@@ -94,6 +94,7 @@ export function DevIdCard({ lang }: DevIdCardProps) {
                   alt="Portrait"
                   aria-hidden="true"
                   className="h-full w-full object-contain p-2"
+                  loading="lazy"
                 />
               </div>
             </div>
