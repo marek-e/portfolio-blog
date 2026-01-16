@@ -73,42 +73,45 @@ export function ProjectCardReact({ project, projectUrl, translations }: ProjectC
           </div>
         </CardContent>
 
-        <CardFooter className="bg-card flex justify-between border-t-0">
-          <div className="flex gap-2">
-            {links?.demo && (
-              <Link
-                variant="default"
-                size="sm"
-                href={links.demo}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {translations.liveDemo}
-              </Link>
-            )}
-            {links?.repo && (
-              <Link
-                variant="outline"
-                size="sm"
-                href={links.repo}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {translations.code}
-              </Link>
-            )}
+        <CardFooter className="bg-card flex flex-col gap-4 border-t-0">
+          <span className="bg-border/50 h-0.5 w-full rounded-full" />
+          <div className="flex w-full justify-between gap-2">
+            <div className="flex gap-2">
+              {links?.demo && (
+                <Link
+                  variant="default"
+                  size="sm"
+                  href={links.demo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {translations.liveDemo}
+                </Link>
+              )}
+              {links?.repo && (
+                <Link
+                  variant="outline"
+                  size="sm"
+                  href={links.repo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {translations.code}
+                </Link>
+              )}
+            </div>
+            <a
+              href={projectUrl}
+              className="group/link text-primary flex items-center gap-1 text-sm font-medium transition-all hover:underline"
+            >
+              <span>{translations.viewDetails}</span>
+              <HugeiconsIcon
+                icon={ArrowRight02Icon}
+                strokeWidth={2}
+                className="size-4 transition-transform duration-300 motion-safe:group-hover/link:translate-x-1"
+              />
+            </a>
           </div>
-          <a
-            href={projectUrl}
-            className="group/link text-primary flex items-center gap-1 text-sm font-medium transition-all hover:underline"
-          >
-            <span>{translations.viewDetails}</span>
-            <HugeiconsIcon
-              icon={ArrowRight02Icon}
-              strokeWidth={2}
-              className="size-4 transition-transform duration-300 motion-safe:group-hover/link:translate-x-1"
-            />
-          </a>
         </CardFooter>
       </Card>
     </article>
