@@ -31,6 +31,10 @@ export default defineConfig({
             if (id.includes('@base-ui')) {
               return 'base-ui-vendor';
             }
+            // Bundle mermaid and its deps to prevent splitting
+            if (id.includes('node_modules/mermaid')) {
+              return 'mermaid-vendor';
+            }
             // Bundle your UI components together
             if (id.includes('/src/components/')) {
               return 'ui-components';

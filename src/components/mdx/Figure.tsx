@@ -10,7 +10,9 @@ interface FigureProps {
   height?: number;
   objectFit?: 'cover' | 'contain' | 'fill' | 'none' | 'scale-down';
 }
-
+/**
+ * @deprecated Use <Figure> component from @/components/astro/Figure.astro instead
+ */
 export function Figure({ src, alt, caption, className, width, height, objectFit }: FigureProps) {
   return (
     <figure className={cn('not-prose my-8 flex w-full flex-col items-center', className)}>

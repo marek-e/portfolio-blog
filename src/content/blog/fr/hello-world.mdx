@@ -6,6 +6,8 @@ tags: ['intro', 'astro', 'web-dev']
 draft: false
 ---
 
+import Figure from '@/components/astro/Figure.astro';
+
 Bienvenue sur mon blog ! Je suis ravi d'avoir enfin un espace pour partager mes réflexions sur le développement web, mes aventures de codeur et les leçons apprises en chemin.
 
 Apprenez le <Highlight color="red">JavaScript</Highlight>, <Highlight color="blue">TypeScript</Highlight> et <Highlight color="green">Node.js</Highlight> à travers différents articles et vidéos.
@@ -68,9 +70,11 @@ export function Greeter() {
 Voici un exemple d'inclusion d'images avec légendes :
 
 <Figure
-  src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&q=80"
+  src="/src/content/blog/_images/hello-world/unsplash.jpg"
   alt="Code sur un écran d'ordinateur"
   caption="Écrire du code est à la fois un art et une science"
+  width={800}
+  height={600}
 />
 
 Et voici un diagramme Mermaid montrant un flux git simple :

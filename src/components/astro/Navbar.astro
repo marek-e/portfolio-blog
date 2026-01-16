@@ -4,6 +4,7 @@ import { MobileMenu } from '@/components/react/MobileMenu';
 import { Icon } from '@/components/react/Icon';
 import { getNavLinks } from '@/lib/navigation';
 import { getLangFromUrl, getTranslatedPath } from '@/i18n';
+import { Image } from 'astro:assets';
 
 const lang = getLangFromUrl(Astro.url);
 const translatePath = getTranslatedPath(lang);
@@ -22,7 +23,15 @@ const linksClasses =
       href={translatePath('/')}
       class="text-foreground group/logo flex items-center gap-2 font-semibold transition-all duration-300 ease-in-out hover:opacity-80 motion-safe:hover:-rotate-3 motion-reduce:hover:underline"
     >
-      <img src="/logo.svg" alt="logo - ME" class="size-8" />
+      <Image
+        src="/logo.svg"
+        alt="logo - ME"
+        width={32}
+        height={32}
+        loading="lazy"
+        decoding="async"
+        class="size-8"
+      />
     </a>
 
     <div id="nav-links" class="relative hidden items-center gap-1 md:flex">

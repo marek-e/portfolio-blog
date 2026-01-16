@@ -1,0 +1,42 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props extends ImageMetadata {
+  alt: string;
+  objectFit?: 'cover' | 'contain' | 'fill' | 'none' | 'scale-down';
+  fetchpriority?: 'high' | 'low';
+  caption?: string;
+  className?: string;
+}
+
+const {
+  src,
+  alt,
+  width,
+  height,
+  objectFit = 'contain',
+  fetchpriority = 'low',
+  caption,
+  className = '',
+} = Astro.props;
+---
+
+<figure class={`not-prose my-8 flex w-full flex-col items-center ${className}`}>
+  <Image
+    src={src}
+    alt={alt}
+    width={width}
+    height={height}
+    loading="lazy"
+    decoding="async"
+    fetchpriority={fetchpriority}
+    class="border-border bg-muted/30 overflow-hidden rounded-lg border"
+    style={{ objectFit }}
+  />
+  {
+    caption && (
+      <figcaption class="text-muted-foreground mt-4 text-center text-sm">{caption}</figcaption>
+    )
+  }
+</figure>

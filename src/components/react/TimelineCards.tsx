@@ -171,7 +171,6 @@ function CardContent({
             src={entry.logo}
             alt={`${entry.organization} logo`}
             className={`h-8 object-cover ${entry.logoInverted ? 'dark:invert' : ''}`}
-            width={32}
             height={32}
             loading="lazy"
           />

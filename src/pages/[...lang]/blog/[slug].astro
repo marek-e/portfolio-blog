@@ -90,9 +90,13 @@ const readingTime = estimateReadingTime(post.body ?? '');
     <Breadcrumb className="mb-10">
       <BreadcrumbList>
         <BreadcrumbItem>
-          <BreadcrumbLink href={translatePath('/')}
-            ><Icon icon={HomeIcon} strokeWidth={2} className="size-4" /></BreadcrumbLink
-          >
+          <BreadcrumbLink href={translatePath('/')} aria-label="Home">
+            <Icon
+              icon={HomeIcon}
+              strokeWidth={2}
+              className="motion-safe:hover:animate-wiggle size-4 transition-transform duration-300 ease-in-out"
+            />
+          </BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
@@ -167,195 +171,16 @@ const readingTime = estimateReadingTime(post.body ?? '');
 </Layout>
 <Footer />
 
-<style is:global>
-  .prose {
-    --tw-prose-body: var(--color-foreground);
-    --tw-prose-headings: var(--color-foreground);
-    --tw-prose-links: var(--color-primary);
-    --tw-prose-bold: var(--color-foreground);
-    --tw-prose-counters: var(--color-muted-foreground);
-    --tw-prose-bullets: var(--color-muted-foreground);
-    --tw-prose-hr: var(--color-border);
-    --tw-prose-quotes: var(--color-foreground);
-    --tw-prose-quote-borders: var(--color-border);
-    --tw-prose-captions: var(--color-muted-foreground);
-    --tw-prose-code: var(--color-foreground);
-    --tw-prose-pre-code: var(--color-foreground);
-    --tw-prose-pre-bg: var(--color-card);
-    --tw-prose-th-borders: var(--color-border);
-    --tw-prose-td-borders: var(--color-border);
-  }
-
-  .prose a {
-    text-decoration: underline;
-    text-underline-offset: 4px;
-  }
-
-  .prose a:hover {
-    color: oklch(from var(--color-primary) l c h / 0.8);
-  }
-
-  .prose h1,
-  .prose h2,
-  .prose h3,
-  .prose h4 {
-    margin-top: 1.5em;
-    margin-bottom: 0.5em;
-  }
-
-  .prose h1 a,
-  .prose h2 a,
-  .prose h3 a,
-  .prose h4 a {
-    text-decoration: none;
-    color: inherit;
-    &:hover {
-      color: inherit;
-      text-decoration: underline;
-    }
-  }
-
-  .prose code:not(pre code) {
-    background-color: oklch(from var(--color-primary) l c h / 0.3);
-    padding: 0.2em 0.4em;
-    border-radius: 0.25rem;
-    font-size: 0.875em;
-    &::before,
-    &::after {
-      content: '';
-    }
-  }
-
-  .prose pre {
-    margin: 0;
-    padding: 1rem;
-    background: transparent;
-    border: none;
-  }
-
-  html.dark .prose pre[style*='--shiki-dark-bg'] {
-    background: var(--shiki-dark-bg) !important;
-  }
-
-  html.dark .prose pre[style*='--shiki-dark-bg'] span {
-    color: var(--shiki-dark) !important;
-    font-style: var(--shiki-dark-font-style) !important;
-    font-weight: var(--shiki-dark-font-weight) !important;
-    text-decoration: var(--shiki-dark-text-decoration) !important;
-  }
-
-  .prose mark {
-    background-color: transparent;
-    padding: 0;
-    border-radius: 0;
-  }
-</style>
-
 <script>
-  function initCopyButtons() {
-    document.querySelectorAll('[data-copy-button]').forEach((button) => {
-      if (button.hasAttribute('data-copy-initialized')) return;
-      button.setAttribute('data-copy-initialized', '');
-
-      button.addEventListener('click', async () => {
-        const pre = button.closest('.relative')?.querySelector('pre');
-        if (!pre) return;
-
-        const code = pre.textContent ?? '';
-        await navigator.clipboard.writeText(code);
-
-        const copyIcon = button.querySelector('[data-copy-icon]');
-        const checkIcon = button.querySelector('[data-check-icon]');
-
-        // Animate out copy icon
-        copyIcon?.classList.add('scale-0');
-
-        setTimeout(() => {
-          copyIcon?.classList.add('hidden');
-          checkIcon?.classList.remove('hidden');
-          checkIcon?.classList.add('flex');
-          // Trigger reflow for animation
-          if (checkIcon instanceof HTMLElement) void checkIcon.offsetWidth;
-          checkIcon?.classList.remove('scale-0');
-          checkIcon?.classList.add('scale-100');
-          button.setAttribute('aria-label', 'Copied!');
-        }, 150);
-
-        setTimeout(() => {
-          // Animate out check icon
-          checkIcon?.classList.remove('scale-100');
-          checkIcon?.classList.add('scale-0');
-
-          setTimeout(() => {
-            checkIcon?.classList.add('hidden');
-            checkIcon?.classList.remove('flex');
-            copyIcon?.classList.remove('hidden');
-            if (copyIcon instanceof HTMLElement) void copyIcon.offsetWidth;
-            copyIcon?.classList.remove('scale-0');
-            button.setAttribute('aria-label', 'Copy code');
-          }, 150);
-        }, 2000);
-      });
-    });
-  }
+  import { initCopyButtons } from '@/lib/copy-buttons';
+  import { initMermaidDiagrams, setupMermaidThemeObserver } from '@/lib/mermaid-diagrams';
 
   initCopyButtons();
-  document.addEventListener('astro:after-swap', initCopyButtons);
-</script>
-
-<script>
-  async function initMermaidDiagrams() {
-    const containers = document.querySelectorAll('[data-mermaid-chart]');
-    if (containers.length === 0) return;
-
-    const mermaid = (await import('mermaid')).default;
-    const isDark = document.documentElement.classList.contains('dark');
-
-    mermaid.initialize({
-      startOnLoad: false,
-      theme: isDark ? 'dark' : 'base',
-      securityLevel: 'loose',
-      fontFamily: 'inherit',
-    });
-
-    containers.forEach(async (container, index) => {
-      const chart = container.getAttribute('data-chart');
-      if (!chart || container.hasAttribute('data-mermaid-rendered')) return;
-
-      container.setAttribute('data-mermaid-rendered', '');
-
-      try {
-        const { svg } = await mermaid.render(`mermaid-diagram-${index}-${Date.now()}`, chart);
-        container.innerHTML = svg;
-        container.classList.remove('min-h-32');
-      } catch (err) {
-        container.innerHTML = `
-          <div class="text-red-600 dark:text-red-400">
-            <p class="font-medium">Mermaid diagram error:</p>
-            <pre class="mt-2 text-xs overflow-auto">${err instanceof Error ? err.message : 'Failed to render'}</pre>
-          </div>
-        `;
-      }
-    });
-  }
-
-  // Re-render on theme change
-  function setupThemeObserver() {
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        if (mutation.attributeName === 'class') {
-          // Remove rendered flag to allow re-render
-          document.querySelectorAll('[data-mermaid-rendered]').forEach((el) => {
-            el.removeAttribute('data-mermaid-rendered');
-          });
-          initMermaidDiagrams();
-        }
-      });
-    });
-    observer.observe(document.documentElement, { attributes: true });
-  }
-
   initMermaidDiagrams();
-  setupThemeObserver();
-  document.addEventListener('astro:after-swap', initMermaidDiagrams);
+  setupMermaidThemeObserver();
+
+  document.addEventListener('astro:after-swap', () => {
+    initCopyButtons();
+    initMermaidDiagrams();
+  });
 </script>

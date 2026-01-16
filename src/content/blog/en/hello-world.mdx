@@ -6,6 +6,8 @@ tags: ['intro', 'astro', 'web-dev']
 draft: false
 ---
 
+import Figure from '@/components/astro/Figure.astro';
+
 Welcome to my blog! I'm excited to finally have a space where I can share my thoughts on web development, coding adventures, and lessons learned along the way.
 
 Learn <Highlight color="red">JavaScript</Highlight>, <Highlight color="blue">TypeScript</Highlight> and <Highlight color="green">Node.js</Highlight> through various articles and videos.
@@ -67,7 +69,9 @@ export function Greeter() {
 Here's an example of including images with captions:
 
 <Figure
-  src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&q=80"
+  src="/src/content/blog/_images/hello-world/unsplash.jpg"
+  width={800}
+  height={600}
   alt="Code on a computer screen"
   caption="Writing code is both an art and a science"
   objectFit="contain"

@@ -6,6 +6,7 @@ import { Separator } from '../ui/separator';
 import { SOCIALS } from '@/lib/socials';
 import { getTranslations, getLangFromUrl, getTranslatedPath } from '@/i18n';
 import { LanguageSwitcher } from '../react/LanguageSwitcher';
+import { Image } from 'astro:assets';
 
 const lang = getLangFromUrl(Astro.url);
 const t = getTranslations(lang);
@@ -64,7 +65,15 @@ const sitemapLinks = [
   <Separator className="bg-primary/50 my-8" />
   <div class="flex flex-col items-center justify-between gap-4 sm:flex-row">
     <div class="flex items-center gap-5">
-      <img src="/logo.svg" alt="logo - ME" class="size-12" />
+      <Image
+        src="/logo.svg"
+        alt="logo - ME"
+        width={48}
+        height={48}
+        loading="lazy"
+        decoding="async"
+        class="size-12"
+      />
       <p class="text-sm">
         © {currentYear} Marek Elmayan
       </p>

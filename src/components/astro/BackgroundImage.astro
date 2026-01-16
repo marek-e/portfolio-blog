@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+
 interface Props {
   lightSrc?: string;
   darkSrc?: string;
@@ -32,11 +34,13 @@ const {
 
 <!-- Background Images with responsive srcset -->
 <picture class="absolute inset-0 -z-10 dark:hidden">
-  <img
+  <Image
     src={lightSrc}
     srcset={`${lightSrc} 1920w`}
     sizes="100vw"
     alt={lightAlt}
+    width={1920}
+    height={1080}
     class="h-full w-full object-cover"
     fetchpriority="high"
     decoding="async"
@@ -44,11 +48,13 @@ const {
   />
 </picture>
 <picture class="absolute inset-0 -z-10 hidden dark:block">
-  <img
+  <Image
     src={darkSrc}
     srcset={`${darkSrc} 1920w`}
     sizes="100vw"
     alt={darkAlt}
+    width={1920}
+    height={1080}
     class="h-full w-full object-cover"
     fetchpriority="high"
     decoding="async"
