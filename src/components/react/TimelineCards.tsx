@@ -167,7 +167,11 @@ function CardContent({
       )}
       {entry.logo && (
         <div className="mt-5 flex justify-center">
-          <img src={entry.logo} alt={`${entry.organization} logo`} className="h-8 object-cover" />
+          <img
+            src={entry.logo}
+            alt={`${entry.organization} logo`}
+            className={`h-8 object-cover ${entry.logoInverted ? 'dark:invert' : ''}`}
+          />
         </div>
       )}
     </>

@@ -9,14 +9,15 @@ export interface TimelineEntry {
   endDate: string | null;
   description: string;
   logo?: string;
+  logoInverted?: boolean;
   tags?: string[];
 }
 
 export function formatDateRange(
   startDate: string,
   endDate: string | null,
-  lang: Lang = 'fr',
-  presentLabel: string = "Aujourd'hui"
+  lang: Lang,
+  presentLabel: string
 ): string {
   const locale = lang === 'fr' ? 'fr-FR' : 'en-US';
 

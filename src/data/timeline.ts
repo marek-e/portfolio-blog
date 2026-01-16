@@ -8,6 +8,7 @@ interface TimelineEntryWithTranslations {
   endDate: string | null;
   logo?: string;
   tags?: string[];
+  logoInverted?: boolean;
   translations: {
     fr: { title: string; organization: string; description: string };
     en: { title: string; organization: string; description: string };
@@ -64,6 +65,7 @@ const timelineDataWithTranslations: TimelineEntryWithTranslations[] = [
     endDate: '2022-12',
     tags: ['Exchange', 'International'],
     logo: '/icons/aalto_logo.png',
+    logoInverted: true,
     translations: {
       fr: {
         title: "Semestre d'échange",
@@ -127,6 +129,7 @@ export function getLocalizedTimeline(lang: Lang): TimelineEntry[] {
     startDate: entry.startDate,
     endDate: entry.endDate,
     logo: entry.logo,
+    logoInverted: entry.logoInverted,
     tags: entry.tags,
     title: entry.translations[lang].title,
     organization: entry.translations[lang].organization,
