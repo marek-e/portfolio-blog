@@ -21,10 +21,12 @@ export const fr: UITranslations = {
   about: {
     title: 'À propos',
     paragraphs: [
-      "Tout a commencé en classe de maths au lycée. Je finissais toujours mes exercices en avance, alors je passais mon temps sur ma calculatrice TI. D'abord un programme pour résoudre les équations du second degré, puis un Snake, et finalement un jeu de bataille navale complet. Des milliers de lignes de code pour une interface basique, mais un jeu qui fonctionnait — et une nouvelle passion.",
-      "En prépa, j'ai continué à coder : un jeu de pétanque en Python pour simuler la loi de Newton. Plus tard en école d'ingénieur, j'ai découvert le HTML, CSS et JavaScript. C'est là que j'ai réalisé qu'on pouvait créer des choses qui comptent vraiment pour les utilisateurs.",
-      "Aujourd'hui, je me concentre sur le bout en bout — de l'UX au backend. Je n'ai pas l'étincelle du designer pour choisir les bonnes couleurs, mais ce qui me passionne, ce sont tous ces petits détails UX : une animation fluide, une interface intuitive qui ne force pas l'utilisateur à réfléchir. Des produits qui livrent une vraie valeur.",
-      "Je suis aussi fasciné par la cybersécurité, et j'embrasse l'avènement de l'IA dans notre secteur — je l'utilise et m'instruis dessus au maximum. Je crois en l'importance de la DevX et de l'open-source. Mon mantra : construire des choses qui comptent.",
+      "Tout a commencé en classe de maths au lycée. Je finissais toujours mes exercices en avance, alors je passais mon temps sur ma calculatrice TI. D'abord un programme pour résoudre les équations du second degré, puis un Snake, et finalement un jeu de bataille navale complet. Des milliers de lignes de code pour une interface basique, mais un jeu qui fonctionnait et surtout une nouvelle passion.",
+      "En prépa, j'ai continué à coder : un jeu de pétanque en Python pour simuler la 2ème loi de Newton. Plus tard en école d'ingénieur, j'ai découvert le HTML, CSS et JavaScript. C'est là que j'ai réalisé qu'on pouvait créer des choses qui comptent vraiment pour les utilisateurs et toute les compléxités que cela implique.",
+      "Aujourd'hui, je me concentre sur le bout en bout, de l'UX au backend. Je n'ai pas l'étincelle du designer pour construire une UI parfait (ça ressemble souvent à un enfant qui choisit des couleurs aléatoires) mais ce qui me passionne, ce sont tous ces petits détails UX : une animation fluide, une interface intuitive qui ne force pas l'utilisateur à réfléchir. Des produits qui livrent une réelle valeur.",
+      "Je suis aussi fasciné par la cybersécurité, je me forme, j'essaye d'appliquer les bonnes pratiques et j'audite du code. Il m'arrive de participer à des CTF à mes heures perdues pour m'exercer et apprendre de nouvelles techniques.",
+      "J'apporte une grande attention a la DevX, or avec l'apparition de nouveaux outils comme les LLMs, notre flux de travail en tant que développeur est en pleine évolution. Et je suis convaincu que maitriser les outils IA est une compétence essentielle pour le futur.",
+      "Mon mantra : construire des choses qui comptent.",
     ],
   },
   timeline: {
@@ -135,7 +137,7 @@ export const fr: UITranslations = {
     title: 'Mes courses',
     subtitle: 'Je trace ma route, un kilomètre à la fois',
     intro:
-      "Le sport fait partie de mon quotidien. Je joue au handball en club et je cours régulièrement pour garder l'équilibre entre le clavier et le terrain. Voici mes dernières sorties running.",
+      "Le sport fait partie de mon quotidien. Je joue au handball en club et je cours régulièrement pour garder l'équilibre entre le clavier et le terrain. Voici mes dernières sorties running 🏃🏻",
     totalDistance: 'Distance totale',
     thisMonth: 'Ce mois-ci',
     thisYear: 'Cette année',

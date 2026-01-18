@@ -24,7 +24,7 @@ export function CopyEmailButton({ copiedText = 'Copied!' }: CopyEmailButtonProps
     <Button
       variant="ghost"
       size="lg"
-      className="w-1/2 cursor-pointer md:w-auto"
+      className="w-3/4 cursor-pointer md:w-auto"
       onClick={handleCopy}
       aria-label={copied ? 'Email copied' : 'Copy email'}
     >

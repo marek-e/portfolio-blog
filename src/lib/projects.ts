@@ -34,16 +34,16 @@ export function formatProjectDate(date: Date, lang: Lang): string {
  */
 export function getStatusVariant(
   status: string
-): 'default' | 'secondary' | 'outline' | 'pastel-green' | 'pastel-yellow' | 'pastel-blue' {
+): 'default' | 'outline' | 'pastel-green' | 'pastel-yellow' | 'pastel-blue' | 'pastel-rose' {
   switch (status) {
     case 'completed':
       return 'pastel-green';
     case 'in-progress':
-      return 'pastel-yellow';
-    case 'archived':
-      return 'secondary';
-    case 'concept':
       return 'pastel-blue';
+      case 'archived':
+        return 'pastel-rose';
+      case 'concept':
+        return 'pastel-yellow';
     default:
       return 'outline';
   }
@@ -53,7 +53,7 @@ export function getStatusVariant(
  * Get a consistent pastel color variant for a tech stack item
  */
 export function getTechColor(tech: string) {
-  const hash = tech.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+  const hash = tech.split('').reduce((acc, char) => acc + char.charCodeAt(0) + 99, 0);
   return pastelVariants[hash % pastelVariants.length];
 }
 

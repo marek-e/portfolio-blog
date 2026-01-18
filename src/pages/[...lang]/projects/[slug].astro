@@ -148,7 +148,7 @@ const galleryImages = gallery?.map((item) => ({
     </Breadcrumb>
 
     <article>
-      <header class="mb-10 space-y-6">
+      <header class="mb-6 space-y-6">
         <div class="text-muted-foreground flex flex-wrap items-center gap-4 text-sm">
           <Badge variant={getStatusVariant(status)}>
             {t.projectsPage[statusKey]}
@@ -183,18 +183,21 @@ const galleryImages = gallery?.map((item) => ({
           )
         }
       </header>
+      <div class="bg-primary mb-6 h-0.5 w-10 rounded-full"></div>
 
       {
         image && (
-          <div class="bg-muted mb-10 aspect-video overflow-hidden rounded-xl">
-            <Image
-              src={projectImage}
-              fetchpriority="low"
-              loading="lazy"
-              alt={imageAlt || `Screenshot of ${title}`}
-              class="h-full w-full object-cover"
-              style={{ objectFit }}
-            />
+          <div class="mb-10 flex items-center">
+            <div class="bg-muted border-border h-60 overflow-hidden rounded-xl border">
+              <Image
+                src={projectImage}
+                fetchpriority="low"
+                loading="lazy"
+                alt={imageAlt || `Screenshot of ${title}`}
+                class="h-full w-full object-cover"
+                style={{ objectFit }}
+              />
+            </div>
           </div>
         )
       }

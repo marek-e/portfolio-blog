@@ -21,10 +21,12 @@ export const en: UITranslations = {
   about: {
     title: 'About Me',
     paragraphs: [
-      'Everything started in high school during my math classes. I was pretty good and always finished exercises early, so I spent time on my TI calculator. First, a program to solve second-degree equations, then a Snake game, and finally a full battleship game. Thousands of lines of code for a basic interface, but a working game — and a new passion ignited.',
-      "In prépa (French prep school for engineering), I coded a petanque game in Python to simulate Newton's laws. Later in engineering school, I discovered HTML, CSS, and JavaScript. That's when I realized you could build things that truly matter to users.",
-      "Today, I'm at a point in my career where I've taken a deep breath to understand what really drives me. I love frontend and UX — not the designer spark of picking perfect colors (that looks like a 5-year-old choosing random colors), but all those UX tweaks: smooth animations, intuitive interfaces that don't make users overthink. Building user-friendly products that deliver actual value.",
-      "I also love end-to-end development, so I'm full-stack. Cybersecurity is another battlefield I'm passionate about. The advent of AI is inevitable in our sector, so I embrace it — using it and learning as much as I can about it. I believe in DevX and open-source. My mantra: build things that matter.",
+      'Everything started in high school during my math classes. I was pretty good and always finished exercises early, so I spent time on my calculator. First, a program to solve second-degree equations, then a Snake game, and finally a full battleship game. Thousands of lines of code for a basic interface, but a working game, and above all a new passion ignited.',
+      "In prépa (French prep school for engineering), I coded a petanque game in Python to simulate Newton's laws. Later in engineering school, I discovered HTML, CSS, and JavaScript. That's when I realized you could build things that truly matter to users and all the complexities that come with it.",
+      "Today, I'm at a point in my career where I've taken a deep breath to understand what really drives me. I love frontend and UX, I don't have the designer spark of building a perfect UI (mine looks like a 5-year-old choosing random colors), but all those UX tweaks: smooth animations, intuitive interfaces that don't make users overthink. Building user-friendly products that deliver actual value.",
+      "I also love cybersecurity, I follow the news, I train and apply best practices to my code. It happens to me to participate in CTFs in my free time to practice and learn new techniques.",
+      "I pay a lot of attention to DevX, as the advent of LLMs is changing our workflow as a developer. And I'm convinced that mastering AI tools is an essential skill for the future.",
+      "My mantra: build things that matter.",
     ],
   },
   timeline: {
@@ -134,7 +136,7 @@ export const en: UITranslations = {
     title: 'My Runs',
     subtitle: 'Tracing my route, one kilometer at a time',
     intro:
-      'Sports are part of my daily routine. I play handball at a club and run regularly to keep a healthy balance between the keyboard and the field. Here are my latest running activities.',
+      'Sports are part of my daily routine. I play handball at a club and run regularly to keep a healthy balance between the keyboard and the field. Here are my latest running activities 🏃🏻',
     totalDistance: 'Total Distance',
     thisMonth: 'This Month',
     thisYear: 'This Year',

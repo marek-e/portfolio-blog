@@ -167,7 +167,7 @@
 }
 
 @utility shadow-code {
-  box-shadow: 4px 4px 0 var(--color-border);
+  box-shadow: 6px 6px 0 var(--color-border);
 }
 
 @layer base {
