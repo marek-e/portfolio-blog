@@ -1,9 +1,10 @@
 ---
-import { Button, Link } from '@/components/ui/button';
+import { Link } from '@/components/ui/button';
 import { HugeiconsIcon } from '@hugeicons/react';
-import { Copy01Icon, Sent02Icon } from '@hugeicons/core-free-icons';
+import { Sent02Icon } from '@hugeicons/core-free-icons';
 import { EMAIL, SOCIALS } from '@/lib/socials';
 import { getTranslations, getLangFromUrl } from '@/i18n';
+import { CopyEmailButton } from '@/components/react/CopyEmailButton';
 
 const lang = getLangFromUrl(Astro.url);
 const t = getTranslations(lang);
@@ -29,18 +30,7 @@ const t = getTranslations(lang);
         {t.contact.cta}
         <HugeiconsIcon icon={Sent02Icon} className="size-5" data-icon="inline-start" />
       </Link>
-      <Button
-        variant="ghost"
-        size="lg"
-        className="w-1/2 cursor-pointer md:w-auto"
-        onClick={() => {
-          navigator.clipboard.writeText(EMAIL);
-        }}
-        aria-label="Copy email"
-      >
-        {EMAIL}
-        <HugeiconsIcon icon={Copy01Icon} className="ml-2 size-5" />
-      </Button>
+      <CopyEmailButton copiedText={t.contact.copied} client:load />
     </div>
     <p class="text-muted-foreground mx-auto mb-8 max-w-lg text-lg">
       {t.contact.socialIntro}

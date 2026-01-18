@@ -38,6 +38,7 @@ export interface UITranslations {
     subtitle: string;
     cta: string;
     socialIntro: string;
+    copied: string;
   };
   contactPage: {
     pageTitle: string;
