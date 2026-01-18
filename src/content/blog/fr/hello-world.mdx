@@ -7,6 +7,7 @@ draft: false
 ---
 
 import Figure from '@/components/astro/Figure.astro';
+import image from '@/assets/blog/hello-world/unsplash.jpg';
 
 Bienvenue sur mon blog ! Je suis ravi d'avoir enfin un espace pour partager mes réflexions sur le développement web, mes aventures de codeur et les leçons apprises en chemin.
 
@@ -70,11 +71,9 @@ export function Greeter() {
 Voici un exemple d'inclusion d'images avec légendes :
 
 <Figure
-  src="/src/content/blog/_images/hello-world/unsplash.jpg"
+  src={image}
   alt="Code sur un écran d'ordinateur"
   caption="Écrire du code est à la fois un art et une science"
-  width={800}
-  height={600}
 />
 
 Et voici un diagramme Mermaid montrant un flux git simple :

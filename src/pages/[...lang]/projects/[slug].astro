@@ -31,6 +31,7 @@ import {
 } from '@hugeicons/core-free-icons';
 import { Image } from 'astro:assets';
 import { getTechColor, getStatusVariant, formatProjectDate } from '@/lib/projects';
+import { getProjectImage, getProjectImageSafe } from '@/lib/images';
 
 type Project = Awaited<ReturnType<typeof getCollection<'projects'>>>[number];
 
@@ -62,6 +63,8 @@ const lang = Astro.params.lang ?? defaultLang;
 const t = getTranslations(lang);
 const translatePath = getTranslatedPath(lang);
 
+const projectImage = getProjectImage(project.data.image);
+
 const { Content } = await render(project);
 const {
   title,
@@ -86,6 +89,12 @@ const statusKey = `status${status.charAt(0).toUpperCase()}${status.slice(1).repl
   | 'statusInprogress'
   | 'statusArchived'
   | 'statusConcept';
+
+// Prepare gallery images with optimized sources
+const galleryImages = gallery?.map((item) => ({
+  ...item,
+  image: getProjectImageSafe(item.src),
+}));
 ---
 
 <Layout title={`${title} | ${t.projectsPage.title}`} description={description}>
@@ -179,11 +188,9 @@ const statusKey = `status${status.charAt(0).toUpperCase()}${status.slice(1).repl
         image && (
           <div class="bg-muted mb-10 aspect-video overflow-hidden rounded-xl">
             <Image
-              src={image}
-              width={100}
-              height={100}
+              src={projectImage}
+              fetchpriority="low"
               loading="lazy"
-              decoding="async"
               alt={imageAlt || `Screenshot of ${title}`}
               class="h-full w-full object-cover"
               style={{ objectFit }}
@@ -289,30 +296,29 @@ const statusKey = `status${status.charAt(0).toUpperCase()}${status.slice(1).repl
       }
 
       {
-        gallery && gallery.length > 0 && (
+        galleryImages && galleryImages.length > 0 && (
           <>
             <Separator className="my-8" />
             <section>
               <h2 class="mb-6 text-lg font-semibold">{t.projectsPage.gallery}</h2>
               <div class="grid gap-4 sm:grid-cols-2">
-                {gallery.map((item) => (
-                  <figure class="bg-muted overflow-hidden rounded-lg">
-                    <Image
-                      width={100}
-                      height={100}
-                      decoding="async"
-                      src={item.src}
-                      alt={item.alt}
-                      class="aspect-video w-full object-cover"
-                      loading="lazy"
-                    />
-                    {item.caption && (
-                      <figcaption class="text-muted-foreground p-3 text-center text-sm">
-                        {item.caption}
-                      </figcaption>
-                    )}
-                  </figure>
-                ))}
+                {galleryImages.map((item) =>
+                  item.image ? (
+                    <figure class="bg-muted overflow-hidden rounded-lg">
+                      <Image
+                        src={item.image}
+                        alt={item.alt}
+                        class="aspect-video w-full object-cover"
+                        loading="lazy"
+                      />
+                      {item.caption && (
+                        <figcaption class="text-muted-foreground p-3 text-center text-sm">
+                          {item.caption}
+                        </figcaption>
+                      )}
+                    </figure>
+                  ) : null
+                )}
               </div>
             </section>
           </>

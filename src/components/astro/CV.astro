@@ -10,6 +10,7 @@ import {
   Globe02Icon,
 } from '@hugeicons/core-free-icons';
 import { Image } from 'astro:assets';
+import profilePicture from '@/assets/mareke.avif';
 
 interface Props {
   lang: Lang;
@@ -59,11 +60,7 @@ function formatDate(date: string | null, presentLabel: string, lang: Lang): stri
         class="profile-picture bg-secondary flex aspect-auto h-30 w-25 shrink-0 items-center justify-center overflow-hidden rounded-md"
       >
         <Image
-          src="/images/mareke.avif"
-          width={100}
-          height={100}
-          loading="lazy"
-          decoding="async"
+          src={profilePicture}
           alt={cv.name}
           class="size-full object-cover"
           onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"

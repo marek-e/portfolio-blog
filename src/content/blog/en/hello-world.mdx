@@ -7,6 +7,7 @@ draft: false
 ---
 
 import Figure from '@/components/astro/Figure.astro';
+import image from '@/assets/blog/hello-world/unsplash.jpg';
 
 Welcome to my blog! I'm excited to finally have a space where I can share my thoughts on web development, coding adventures, and lessons learned along the way.
 
@@ -69,12 +70,9 @@ export function Greeter() {
 Here's an example of including images with captions:
 
 <Figure
-  src="/src/content/blog/_images/hello-world/unsplash.jpg"
-  width={800}
-  height={600}
+  src={image}
   alt="Code on a computer screen"
   caption="Writing code is both an art and a science"
-  objectFit="contain"
 />
 
 And here's a Mermaid diagram showing a simple git flow:
