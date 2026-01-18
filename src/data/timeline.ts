@@ -9,6 +9,7 @@ interface TimelineEntryWithTranslations {
   logo?: string;
   tags?: string[];
   logoInverted?: boolean;
+  link?: string;
   translations: {
     fr: { title: string; organization: string; description: string };
     en: { title: string; organization: string; description: string };
@@ -23,6 +24,7 @@ const timelineDataWithTranslations: TimelineEntryWithTranslations[] = [
     endDate: null,
     tags: ['React', 'TypeScript', 'Node.js', 'AWS', 'Agile'],
     logo: '/icons/theodo_logo.svg',
+    link: 'https://www.theodo.fr',
     translations: {
       fr: {
         title: 'Ingénieur Logiciel Full-Stack',
@@ -45,6 +47,7 @@ const timelineDataWithTranslations: TimelineEntryWithTranslations[] = [
     endDate: '2023-06',
     tags: ['Algorithms', 'Computer Science', 'Applied Mathematics'],
     logo: '/icons/ensimag_logo.png',
+    link: 'https://ensimag.grenoble-inp.fr',
     translations: {
       fr: {
         title: "Diplôme d'Ingénieur en Informatique et Mathématiques Appliquées",
@@ -66,6 +69,7 @@ const timelineDataWithTranslations: TimelineEntryWithTranslations[] = [
     tags: ['Exchange', 'International'],
     logo: '/icons/aalto_logo.png',
     logoInverted: true,
+    link: 'https://www.aalto.fi',
     translations: {
       fr: {
         title: "Semestre d'échange",
@@ -86,6 +90,7 @@ const timelineDataWithTranslations: TimelineEntryWithTranslations[] = [
     endDate: '2021-08',
     tags: ['Python', 'Power Apps', 'Automation'],
     logo: '/icons/se_logo.png',
+    link: 'https://www.se.com',
     translations: {
       fr: {
         title: 'Stage Assistant Ingénieur',
@@ -131,6 +136,7 @@ export function getLocalizedTimeline(lang: Lang): TimelineEntry[] {
     logo: entry.logo,
     logoInverted: entry.logoInverted,
     tags: entry.tags,
+    link: entry.link,
     title: entry.translations[lang].title,
     organization: entry.translations[lang].organization,
     description: entry.translations[lang].description,

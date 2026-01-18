@@ -65,7 +65,7 @@ function TimelineCard({
 
     return (
       <article
-        className={`timeline-card bg-card/80 text-card-foreground ring-foreground/10 w-full max-w-sm rounded-2xl p-5 ring-1 backdrop-blur-xs md:max-w-md md:p-6 ${
+        className={`timeline-card pointer-events-auto bg-card/80 text-card-foreground ring-foreground/10 w-full max-w-sm rounded-2xl p-5 ring-1 backdrop-blur-xs md:max-w-md md:p-6 ${
           isLeft ? 'mr-auto' : 'ml-auto'
         }`}
         style={{
@@ -109,7 +109,7 @@ function TimelineCard({
 
   return (
     <article
-      className={`timeline-card bg-card/80 text-card-foreground ring-foreground/10 w-full max-w-sm rounded-2xl p-5 ring-1 backdrop-blur-xs md:max-w-md md:p-6 ${
+      className={`timeline-card pointer-events-auto bg-card/80 text-card-foreground ring-foreground/10 w-full max-w-sm rounded-2xl p-5 ring-1 backdrop-blur-xs md:max-w-md md:p-6 ${
         isLeft ? 'md:mr-auto' : 'md:ml-auto'
       }`}
       style={{
@@ -167,13 +167,31 @@ function CardContent({
       )}
       {entry.logo && (
         <div className="mt-5 flex justify-center">
-          <img
-            src={entry.logo}
-            alt={`${entry.organization} logo`}
-            className={`h-8 object-cover ${entry.logoInverted ? 'dark:invert' : ''}`}
-            height={32}
-            loading="lazy"
-          />
+          {entry.link ? (
+            <a
+              href={entry.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Visit ${entry.organization} website`}
+              className="transition-opacity hover:opacity-70"
+            >
+              <img
+                src={entry.logo}
+                alt={`${entry.organization} logo`}
+                className={`h-8 object-cover ${entry.logoInverted ? 'dark:invert' : ''}`}
+                height={32}
+                loading="lazy"
+              />
+            </a>
+          ) : (
+            <img
+              src={entry.logo}
+              alt={`${entry.organization} logo`}
+              className={`h-8 object-cover ${entry.logoInverted ? 'dark:invert' : ''}`}
+              height={32}
+              loading="lazy"
+            />
+          )}
         </div>
       )}
     </>
@@ -392,7 +410,7 @@ export function TimelineCards({ entries, presentLabel, lang }: TimelineCardsProp
           return (
             <div
               key={entry.id}
-              className="absolute right-0 left-0 px-4 md:px-0"
+              className="pointer-events-none absolute right-0 left-0 px-4 md:px-0"
               style={{ top: topOffset }}
             >
               {/* Desktop: alternating left/right with gap for curve */}

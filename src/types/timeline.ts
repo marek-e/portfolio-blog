@@ -11,6 +11,7 @@ export interface TimelineEntry {
   logo?: string;
   logoInverted?: boolean;
   tags?: string[];
+  link?: string;
 }
 
 export function formatDateRange(
