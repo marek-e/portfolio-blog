@@ -23,24 +23,17 @@ export default defineConfig({
       rollupOptions: {
         output: {
           manualChunks: (id) => {
-            // Bundle all React/React-DOM together
-            if (id.includes('node_modules/react') || id.includes('node_modules/react-dom')) {
-              return 'react-vendor';
-            }
-            // Bundle Base-UI components together
-            if (id.includes('@base-ui')) {
-              return 'base-ui-vendor';
-            }
-            // Bundle mermaid and its deps to prevent splitting
-            if (id.includes('node_modules/mermaid')) {
+            // Bundle mermaid and its heavy deps together (prevents splitting)
+            if (id.includes('node_modules/mermaid') || id.includes('node_modules/d3')) {
               return 'mermaid-vendor';
             }
-            // Bundle your UI components together
-            if (id.includes('/src/components/')) {
-              return 'ui-components';
+            // Bundle KaTeX separately (large but rarely used)
+            if (id.includes('node_modules/katex')) {
+              return 'katex-vendor';
             }
+            // Let Rollup handle React, base-ui, and components naturally
+            // to avoid circular dependency issues
           },
-          // Increase chunk size warning limit
           chunkFileNames: '_astro/[name].[hash].js',
         },
       },
