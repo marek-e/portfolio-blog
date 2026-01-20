@@ -26,8 +26,8 @@ export const fr: UITranslations = {
       "Aujourd'hui, je me concentre sur le bout en bout, de l'UX au backend. Je n'ai pas l'étincelle du designer pour construire une UI parfait (ça ressemble souvent à un enfant qui choisit des couleurs aléatoires) mais ce qui me passionne, ce sont tous ces petits détails UX : une animation fluide, une interface intuitive qui ne force pas l'utilisateur à réfléchir. Des produits qui livrent une réelle valeur.",
       "Je suis aussi fasciné par la cybersécurité, je me forme, j'essaye d'appliquer les bonnes pratiques et j'audite du code. Il m'arrive de participer à des CTF à mes heures perdues pour m'exercer et apprendre de nouvelles techniques.",
       "J'apporte une grande attention a la DevX, or avec l'apparition de nouveaux outils comme les LLMs, notre flux de travail en tant que développeur est en pleine évolution. Et je suis convaincu que maitriser les outils IA est une compétence essentielle pour le futur.",
-      "Mon mantra : construire des choses qui comptent.",
     ],
+    mantra: "Mon mantra : construire des choses qui comptent. Être utile en ajoutant de la valeur.",
   },
   timeline: {
     title: 'Mon parcours',

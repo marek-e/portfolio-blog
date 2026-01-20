@@ -1,6 +1,7 @@
 ---
 import { getTranslations, getLangFromUrl } from '@/i18n';
 import { DevIdCard } from '@/components/react/DevIdCard';
+import { Citation } from '../mdx/Citation';
 
 const lang = getLangFromUrl(Astro.url);
 const t = getTranslations(lang);
@@ -17,4 +18,5 @@ const t = getTranslations(lang);
   <div class="text-foreground/80 space-y-6 text-lg leading-relaxed">
     {t.about.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
   </div>
+  <Citation>{t.about.mantra}</Citation>
 </section>

@@ -26,8 +26,8 @@ export const en: UITranslations = {
       "Today, I'm at a point in my career where I've taken a deep breath to understand what really drives me. I love frontend and UX, I don't have the designer spark of building a perfect UI (mine looks like a 5-year-old choosing random colors), but all those UX tweaks: smooth animations, intuitive interfaces that don't make users overthink. Building user-friendly products that deliver actual value.",
       "I also love cybersecurity, I follow the news, I train and apply best practices to my code. It happens to me to participate in CTFs in my free time to practice and learn new techniques.",
       "I pay a lot of attention to DevX, as the advent of LLMs is changing our workflow as a developer. And I'm convinced that mastering AI tools is an essential skill for the future.",
-      "My mantra: build things that matter.",
     ],
+    mantra: "My mantra: build things that matter. Being useful by adding value.",
   },
   timeline: {
     title: 'My Journey',
