@@ -60,6 +60,8 @@
   *::-moz-selection {
     background-color: oklch(from var(--primary-invert) l c h / 0.6);
   }
+
+  interpolate-size: allow-keywords;
 }
 
 .dark {

@@ -1,0 +1,397 @@
+---
+title: 'Petanque'
+description: "A Petanque game in Python to simulate Newton's laws."
+featured: false
+techStack: ['Python']
+publishDate: 2019-05-07
+image: '/projects/petanque.png'
+imageAlt: 'Petanque game screenshot'
+status: 'completed'
+---
+In the context of the computer science course in the first year of prep school, we had to develop a project in Python.
+The objective was to create a game to simulate Newton's laws.
+My group and I chose to create a petanque game.
+
+<Callout variant="warning">
+    This is my first project in Python and it's very ugly. At the time, I didn't even know git yet. So be indulgent 🤣
+</Callout>
+
+<video controls width="100%" class="rounded-lg" autoplay loop muted>
+    <source src="/projects/petanque.mp4" type="video/mp4" />
+    Your browser doesn't support video playback.
+</video>
+
+
+<Toggle title="View the Python source code">
+
+```python
+### Importation
+import numpy as np
+import math as m
+import tkinter as tk
+from tkinter import *
+import random as r
+import os as os
+from tkinter.messagebox import *
+
+
+### Declaration of variables
+m=0.7 #kg mass of the ball
+rayon=3.7e-2 #m radius of the ball
+n=1.08e-5 #SI viscosity coefficient of the air
+g=9.81 #m.s^-2 gravity
+h0=1 #m initial height
+N=5000 # nb of point in the Euler function
+tfinal=5 # final time in the Euler function
+
+# definition of global variables
+v0=0.
+alpha=0
+abscisse_cochonnet=0.
+sol_x_z=np.zeros((N+1,4))
+n_sup_a_0=0
+annotation=''
+dernier_lancer=0
+gagnant=''
+joueur_en_cours=''
+joueur1=''
+joueur2=''
+
+
+#### Definition des fonctions
+def Jouer():
+    ''' Cache la page 1 et affiche la page 2'''
+    Page1.forget()
+    Page2.pack()
+
+
+def Suivant():
+    ''' Fonction actionner par un boutton qui recupère le nom des joueurs et initialise la partie'''
+    global joueur1
+    global joueur2
+    global abscisse_cochonnet
+    global annotation
+    
+    joueur1=name1.get() #recupere les noms des joueurs dans les Etry
+    joueur2=name2.get()
+    if joueur1 != joueur2: #verifie que les 2 joueurs on des noms differents
+        abscisse_cochonnet=r.random()*9 +3 #abscisse du cochonnet determiné aléatoirement entre 3 et 12 m
+        x_coch=50+abscisse_cochonnet*50 #abscisse du cochonnet en pixel pour l'affichage dans un canvas
+        graph.create_oval((x_coch-5,295),(x_coch+5,305),fill='red', tag='tag1')
+        annotation=graph.create_text(x_coch, 325, text="Cochonnet", fill="red", tag='tag1')   # dessine le cochonnet et ajoute des annotations
+        annotation2=graph.create_text((40,320), text=joueur1, fill='magenta', tag='tag1')
+        annotation3=graph.create_text((40,345), text=joueur2, fill='green', tag='tag1')
+        
+        txt3.config(text="C'est au tour de "+joueur1+" de jouer !\n Tu tires ou tu pointes ?", fg='white')
+        graph.itemconfig('perso_tshirt', fill='magenta')
+        
+        Page2.forget()
+        Page3.pack()
+
+def LANCER():
+    '''Effectue un lancer'''
+    global alpha
+    global v0
+    global joueur_en_cours
+    global sol_x_z
+    global n_sup_a_0
+    global annotation
+    global abscisse_boule
+    global gagnant
+    global dernier_lancer
+    
+    v0=vit.get() #on recupère les paramètres de lancer
+    alpha=angle.get()
+    
+    graph.itemconfig(annotation,text="") # supprime l'annotation, non nescessaire sur le long terme
+    graph.delete(dernier_lancer)
+    
+    joueur_en_cours=a_qui_de_jouer()
+    h0=r.uniform(0.95,1.05) # hauteur initiale aléatoire entre 0.95m et 1.05m
+    Y0=[0, v0*np.cos(alpha*2*np.pi/360) , h0 , v0*np.sin(alpha*2*np.pi/360)] #conditions initiales
+    temps, sol_x_z = Euler(Phi,Y0,tfinal,N) # résolution de l'equa diff : determine une solution numerique
+    abscisse_boule , n_sup_a_0 = dichoto(sol_x_z[:,2],sol_x_z[:,0]) # recherche de l'abscisse où la boule touche le sol
+    prise_en_compte_du_lancer(joueur_en_cours,abscisse_boule,emplacement_boule)
+    
+    if joueur1==a_qui_de_jouer(): #Gestion du prochain lancer
+        txt3.config(text="C'est au tour de "+joueur1+" de jouer !\n Tu tires ou tu pointes ?", fg='white')
+        graph.itemconfig('perso_tshirt', fill='magenta')
+    else :
+        txt3.config(text="C'est au tour de "+joueur2+" de jouer !\n Tu tires ou tu pointes ?", fg='white')
+        graph.itemconfig('perso_tshirt', fill='green')
+
+    if nb_boule1==0 and nb_boule2==0 : #arrete la boucle si toutes les boules ont été lancées
+        txt3.config(text="C'est fini !\n ", fg='black')
+        graph.update()
+        throw_but.config(text='Suivant',command=Fin, bg='#0D2FCC',fg='#EFFF1E')
+    else:
+        x_coch=50+abscisse_cochonnet*50 #abscisse du cochonnet en pixel
+        graph.create_oval((x_coch-5,295),(x_coch+5,305),fill='red', tag='tag1') #reaffiche le cochonnet pour qu'il soit au premier plan
+        graph.update()
+        vit.set(0.5)#Remets a zero les curseurs
+        angle.set(5)
+    
+def Fin():
+    '''Determine le gagnant et l'affiche'''
+    Page3.forget()
+    Page4.pack()
+    gagnant = boule_la_plus_proche()
+    vic.config(text=gagnant+'\n remporte la manche \n avec '+str(nb_de_points_a_gagner())+' points')
+    
+def Rejouer():
+    ''' Réinitialise les variables et renvoie à la page1'''
+    global nb_boule2
+    global nb_boule1
+    global emplacement_boule
+    
+    nb_boule1=3 # réinitialisation des données
+    nb_boule2=3
+    emplacement_boule=np.zeros((3,2)) 
+    throw_but.config(text='Lancer',command=LANCER,bg="#238DF4",fg='white')
+    graph.delete('tag1') #supprime les elements comportants le tag afin d'enlever les lancers effectués du canvas 
+    
+    Page4.forget()
+    Page1.pack() #retourne a la page 1
+
+def Phi(Y,t):
+    xpoint=Y[1]
+    zpoint=Y[3]
+    x2point=xpoint*(-6*np.pi*n*rayon)/m
+    z2point=zpoint*(-6*np.pi*n*rayon)/m -g
+    return np.array([xpoint,x2point,zpoint,z2point])
+    
+def Euler(phi,Y0,tfinal,N):
+    h=tfinal/N
+    t=np.linspace(0,tfinal,N+1)
+    Y=np.zeros((N+1,4))
+    Y[0,:]=Y0[:]
+    for k in range(0,N):
+        Y[k+1,:]=Y[k,:]+h*phi(Y[k,:],t[k])
+    return t, Y 
+    
+
+def dichoto(Y,X):
+    n=0
+    a=0
+    b=np.size(X)-1 #nb d'élément dans les listes Y et X
+    while b!=a+1: 
+        c=int((a+b)/2)
+        if Y[a]*Y[c]>0:
+            a=c
+        else:
+            b=c
+        n=n+1
+    if abs(Y[a])>abs(Y[b]):
+        return(X[b],b) # renvoie l'abscisse de la boule et le rang dans le tableau
+    else:
+        return (X[a],a)
+
+def prise_en_compte_du_lancer(joueur_en_cours,abscisse_boule,emplacement_boule):
+    '''Stock les données du lancer effectué et trace la trajectoire ainsi que la boule  sur le sol'''
+    global nb_boule1
+    global nb_boule2
+    global sol_x_z
+    global n_sup_a_0
+    global dernier_lancer
+    
+    if joueur_en_cours == joueur1 :
+        emplacement_boule[3-nb_boule1 , 0] = abscisse_boule
+        nb_boule1=nb_boule1 - 1
+        
+        x_boule=50+abscisse_boule*50
+        graph.create_oval((x_boule-5,295),(x_boule+5,305),fill='magenta', tag='tag1')
+        dernier_lancer = graph.create_line(convertForCanvas(sol_x_z[0:n_sup_a_0+1 , 0],sol_x_z[0:n_sup_a_0+1 , 2]),fill='magenta', tag='tag1')
+        
+    if joueur_en_cours == joueur2 :
+        emplacement_boule[3-nb_boule2 , 1] = abscisse_boule
+        nb_boule2=nb_boule2 - 1
+        
+        x_boule=50+abscisse_boule*50
+        graph.create_oval((x_boule-5,295),(x_boule+5,305),fill='green', tag='tag1')
+        dernier_lancer = graph.create_line(convertForCanvas(sol_x_z[0:n_sup_a_0+1 , 0],sol_x_z[0:n_sup_a_0+1 , 2]),fill='green', tag='tag1')
+
+def a_qui_de_jouer():
+    ''' Renvoi le joueur qui doit effectuer le prohain lancer'''
+    if nb_boule1+nb_boule2==6:
+        return joueur1
+        
+    if nb_boule1+nb_boule2==5:
+        return joueur2
+        
+    if nb_boule1 == 0 :
+        return joueur2
+        
+    if nb_boule2 == 0 :
+        return joueur1
+    else:
+        if boule_la_plus_proche() == joueur1 :
+            return joueur2
+        
+        if boule_la_plus_proche() == joueur2 :
+            return joueur1
+
+def boule_la_plus_proche():
+    '''Fonction qui renvoie le joueur qui possède la boule la plus proche du cochonnet'''
+    dist_b_c_1=abs( emplacement_boule[0,0] - abscisse_cochonnet ) #distance boule n°1 - cochonnet du joueur 1
+    dist_b_c_2=abs( emplacement_boule[0,1] - abscisse_cochonnet ) #distance boule n°1 - cochonnet du joueur 2
+    for j in range(1,3):
+        if dist_b_c_1 > abs( emplacement_boule[j,0] - abscisse_cochonnet ) :
+            dist_b_c_1 = abs( emplacement_boule[j,0] - abscisse_cochonnet )
+        if dist_b_c_2 > abs( emplacement_boule[j,1] - abscisse_cochonnet ) :
+            dist_b_c_2 = abs( emplacement_boule[j,1] - abscisse_cochonnet )
+            
+    if dist_b_c_1 < dist_b_c_2 : #compare la boule la plus proche du joueur1 avec celle du joueur2
+        return joueur1
+    else :
+        return joueur2
+        
+def convertForCanvas(x,y):
+    '''Convertie 2 listes en une seule dont les elements sont des couples avec les valeurs des 2 listes de même indice'''
+    l=[]
+    for k in range(len(x)):
+        X=50+x[k]*50
+        Y=300 - y[k]*50
+        l.append(( X , Y))
+    return l
+
+def nb_de_points_a_gagner():
+    '''Renvoie le nombre de point remporté par le gagnant en fonction du nombre de boules qui sont plus proches que la boule adversaire la plus             proche'''
+    Boule1=emplacement_boule[0,0]
+    Boule2=emplacement_boule[0,1]
+    if boule_la_plus_proche()==joueur1:
+        for k in range(1,3):
+            if abs(emplacement_boule[k,1]-abscisse_cochonnet)<abs(Boule2-abscisse_cochonnet):
+                Boule2=emplacement_boule[k,1] #prend la boule du joueur 2 la plus proche
+        point_joueur1=0
+        for i in range (3):
+            if abs(emplacement_boule[i,0]-abscisse_cochonnet)<abs(Boule2-abscisse_cochonnet):
+                point_joueur1=point_joueur1+1 #compte le nombre de boule du j1 qui sont plus proche que la boule la plus proche du joueur 2
+        return point_joueur1
+    if boule_la_plus_proche()==joueur2:
+        for k in range(1,3):
+            if abs(emplacement_boule[k,0]-abscisse_cochonnet)<abs(Boule1-abscisse_cochonnet):
+                Boule1=emplacement_boule[k,0] #prend la boule du joueur 1 la plus proche
+        point_joueur2=0
+        for i in range (3):
+            if abs(emplacement_boule[i,1]-abscisse_cochonnet)<abs(Boule1-abscisse_cochonnet):
+                point_joueur2=point_joueur2+1 #compte le nombre de boule du j1 qui sont plus proche que la boule la plus proche du joueur 2
+        return point_joueur2
+    
+        
+def quitter(event):
+    ''' Evenement qui affiche une confirmation de fermeture de la fenetre'''
+    if askyesno('Quitter', 'Êtes-vous sûr de vouloir quitter le jeu ?'):
+        fenetre.destroy()
+
+
+#### Gestion du jeu et de l'interface
+
+
+fenetre=tk.Tk() # création d'une fenetre
+fenetre.title("Jeux de pétanque")
+fenetre.geometry("1080x750")
+fenetre.minsize(1080,750)
+    # fenetre.iconbitmap("D:\Marek\AAAdoc\Programmation\Python\Projet_Pétanque\icone.ico")
+fenetre.config(background="#238DF4")
+
+fenetre.bind('<Escape>',quitter) #associe l'evenement quitter a la touche echap pour la fenetre
+
+# 1ere Page : Page d'acceuil
+Page1=tk.Frame(fenetre, bg="#238DF4")
+Page1.pack()
+
+label = tk.Label(Page1, text='1 vs 1 pétanque', font=("Arial",50),bg="#238DF4")
+label.pack(pady=100,padx=10)
+
+boite=tk.Frame(Page1,bg="#238DF4")
+boite.pack(expand=tk.YES)
+bouton1=tk.Button(boite,text="Jouer" ,font=("Arial",35),bg="white",fg="#238DF4",command=Jouer  )
+bouton1.pack(pady=10 , fill=X)
+
+    # bouton2=tk.Button(boite,text="Options",font=("Arial",35),bg="white",fg="#238DF4" )
+    # bouton2.pack(pady=10)
+
+bouton3=tk.Button(boite,text="Quitter",font=("Arial",35),bg="white",fg="#238DF4" , command=fenetre.destroy)
+bouton3.pack(pady=10, fill=X)
+
+
+nb_boule1=3 # initialisation du nombre de boules de chaque joueur
+nb_boule2=3
+emplacement_boule=np.zeros((3,2)) # tableau qui va contenir les abscisses des boules
+
+# 2eme Page : Choix des noms des joueurs
+Page2=tk.Frame(fenetre, bg="#238DF4")
+
+label = tk.Label(Page2, text="Choisissez vos noms", font=("Arial",35),bg="#238DF4")
+label.pack(expand=tk.YES, pady=40)
+
+boite1=tk.Frame(Page2,bg="#238DF4")
+boite1.pack(expand=tk.YES, pady=10)
+txt1=tk.Label(boite1, text="Joueur 1",font=("Arial",25),bg="#238DF4",fg="white")
+txt1.pack(expand=tk.YES)
+name1=tk.Entry(boite1,font=("Arial",25),bg="white",fg="black", justify="center")
+name1.pack()
+
+boite2=tk.Frame(Page2,bg="#238DF4")
+boite2.pack()
+txt2=tk.Label(boite2, text="Joueur 2",font=("Arial",25),bg="#238DF4",fg="white")
+txt2.pack(expand=tk.YES)
+name2=tk.Entry(boite2,font=("Arial",25),bg="white",fg="black", justify="center")
+name2.pack(expand=tk.YES, pady=10)
+
+play_but = tk.Button(Page2, text="C'est parti",font=("Arial",30), fg="#238DF4", bg="white", command=Suivant)
+play_but.pack(expand=tk.YES, pady=60)
+
+# 3eme page : Gestion des lancers
+Page3=tk.Frame(fenetre,bg="#238DF4")
+
+boite3=tk.Frame(Page3,bg="#238DF4")
+boite3.pack(pady=20)
+throw_but = tk.Button(boite3, text="Lancer",font=("Arial",30), fg="#238DF4", bg="white", command=LANCER )
+throw_but.pack(side=RIGHT, padx=20)
+txt3=tk.Label(boite3, text="C'est au tour de "+joueur1+" de jouer ! \n Tu tires ou tu pointes ?", font=("Arial",30), bg="#238DF4", fg='white' )
+txt3.pack(side=LEFT, padx=20)
+
+graph=tk.Canvas(Page3, width=720, height=360, background='white')
+
+graph.create_line((0,305),(720,305),fill='#F38D02') #trace le sol
+graph.pack()
+
+    # dessine une personnage
+graph.create_oval(17,229,33,245,fill='#FFA07A', tag='perso') #la tete
+graph.create_line((25,245),(25,280),(25,255),(31,258),fill='magenta', tag='perso_tshirt', width=2) #haut du corps
+graph.create_line((25,280),(40,295),(38,305),(42,305),fill='black', tag='perso', width=2) #jambe droite
+graph.create_line((25,280),(32,297),(30,305),(34,305),fill='black', tag='perso', width=2) #jambe gauche
+graph.create_line((31,258),(37,261),(50,255),fill='#FFA07A', tag='perso', width=2) #bras
+
+
+    #curseur permettant de selectionner les conditions initiales
+angle=Scale(Page3, orient='horizontal', from_=5, to=85, resolution=1, tickinterval=10, length=500, bg='#0D2FCC', label='Angle de tir (en degré)',digits=1, bd=0)
+angle.pack(pady=20)
+vit=Scale(Page3, orient='horizontal', from_=0.5, to=10, resolution=0.1, tickinterval=1, length=500, bg='#0D2FCC', label='Vitesse initial (en m/s)',bd=0)
+vit.pack()
+
+
+
+# 4eme Page : Affiche le gagnant et propose de rejouer
+Page4=tk.Frame(fenetre,bg="#238DF4")
+
+vic = tk.Label(Page4, text=gagnant+'remporte la manche avec'+str(nb_de_points_a_gagner())+' points', font=("Arial",50),bg="#238DF4")
+vic.pack(pady=100,padx=10)
+
+boite4=tk.Frame(Page4,bg="#238DF4")
+boite4.pack()
+but4_1 = tk.Button(boite4, text="Rejouer",font=("Arial",30),bg="white",fg="#238DF4",command=Rejouer )
+but4_1.pack(expand=tk.YES)
+
+but4_2 = tk.Button(boite4, text="Quitter",font=("Arial",30),bg="white",fg="#238DF4",command=fenetre.destroy )
+but4_2.pack(expand=tk.YES, fill=X, pady=20)
+
+
+
+
+fenetre.mainloop()
+
+```
+
+</Toggle>

@@ -1,0 +1,15 @@
+---
+import { Toggle as ToggleReact } from '@/components/mdx/Toggle';
+
+interface Props {
+  title?: string;
+  defaultOpen?: boolean;
+  className?: string;
+}
+
+const { title, defaultOpen, className } = Astro.props;
+---
+
+<ToggleReact client:load title={title} defaultOpen={defaultOpen} className={className}>
+  <slot />
+</ToggleReact>

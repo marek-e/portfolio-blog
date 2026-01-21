@@ -17,6 +17,7 @@ import { getCollection, render } from 'astro:content';
 import { getTranslations, defaultLang } from '@/i18n';
 import { getTranslatedPath } from '@/i18n/config';
 import { mdxComponents } from '@/components/mdx';
+import Toggle from '@/components/astro/Toggle.astro';
 import { Icon } from '@/components/react/Icon';
 import {
   ArrowLeft02Icon,
@@ -269,7 +270,7 @@ const galleryImages = gallery?.map((item) => ({
       <Separator className="my-8" />
 
       <div class="prose prose-neutral dark:prose-invert max-w-none">
-        <Content components={mdxComponents} />
+        <Content components={{ ...mdxComponents, Toggle }} />
       </div>
 
       {

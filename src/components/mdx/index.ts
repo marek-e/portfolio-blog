@@ -4,6 +4,7 @@ import { Highlight } from './Highlight';
 import { Callout } from './Callout';
 import { Citation } from './Citation';
 import { Mermaid } from './Mermaid';
+import { Toggle } from './Toggle';
 
 export const mdxComponents = {
   pre: Pre,
@@ -15,6 +16,7 @@ export const mdxComponents = {
   Callout,
   Citation,
   Mermaid,
+  // Toggle is added in the page files with client:load
 };
 
-export { Pre, H1, H2, H3, H4, Highlight, Callout, Citation, Mermaid };
+export { Pre, H1, H2, H3, H4, Highlight, Callout, Citation, Mermaid, Toggle };

@@ -16,7 +16,7 @@ const t = getTranslations(lang);
   </h2>
   <DevIdCard client:visible lang={lang} />
   <div class="text-foreground/80 space-y-6 text-lg leading-relaxed">
-    {t.about.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+    {t.about.paragraphs.map((paragraph) => <p set:html={paragraph} />)}
   </div>
   <Citation>{t.about.mantra}</Citation>
 </section>
