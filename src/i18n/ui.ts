@@ -72,6 +72,7 @@ export interface UITranslations {
     closeMenu: string;
     sendEmail: string;
     followOn: string;
+    subscribeRss: string;
   };
   designSystem: {
     pageTitle: string;

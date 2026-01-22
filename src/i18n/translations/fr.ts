@@ -82,6 +82,7 @@ export const fr: UITranslations = {
     closeMenu: 'Fermer le menu',
     sendEmail: 'Envoyer un email',
     followOn: 'Suivre sur {platform}',
+    subscribeRss: "S'abonner au flux RSS",
   },
   designSystem: {
     pageTitle: 'Design System | melmayan.fr',
