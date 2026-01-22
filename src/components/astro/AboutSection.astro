@@ -18,5 +18,5 @@ const t = getTranslations(lang);
   <div class="text-foreground/80 space-y-6 text-lg leading-relaxed">
     {t.about.paragraphs.map((paragraph) => <p set:html={paragraph} />)}
   </div>
-  <Citation>{t.about.mantra}</Citation>
+  <Citation source={t.about.mantraTitle}>{t.about.mantraContent}</Citation>
 </section>

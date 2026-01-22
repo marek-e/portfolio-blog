@@ -18,7 +18,8 @@ export interface UITranslations {
   about: {
     title: string;
     paragraphs: string[];
-    mantra: string;
+    mantraContent: string;
+    mantraTitle: string;
   };
   timeline: {
     title: string;

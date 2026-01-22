@@ -22,12 +22,14 @@ export const fr: UITranslations = {
     title: 'À propos',
     paragraphs: [
       "Tout a commencé en classe de maths au lycée. Je finissais toujours mes exercices en avance, alors je passais mon temps sur ma calculatrice TI. D'abord un programme pour résoudre les équations du second degré, puis un Snake, et finalement un jeu de bataille navale complet. Des milliers de lignes de code pour une interface basique, mais un jeu qui fonctionnait et surtout une nouvelle passion.",
-      'En prépa, j\'ai continué à coder : <a href="/projects/petanque" class="text-primary hover:underline">un jeu de pétanque en Python</a> pour simuler la 2ème loi de Newton. Plus tard en école d\'ingénieur, j\'ai découvert le HTML, CSS et JavaScript. C\'est là que j\'ai réalisé qu\'on pouvait créer des choses qui comptent vraiment pour les utilisateurs et toute les compléxités que cela implique.',
+      "En prépa, j'ai continué à coder : <a href=\"/projects/petanque\" class=\"text-primary hover:underline\">un jeu de pétanque en Python</a> pour simuler la 2ème loi de Newton. Plus tard en école d'ingénieur, j'ai découvert le HTML, CSS et JavaScript. C'est là que j'ai réalisé qu'on pouvait créer des choses qui comptent vraiment pour les utilisateurs et toute les compléxités que cela implique.",
       "Aujourd'hui, je me concentre sur le bout en bout, de l'UX au backend. Je n'ai pas l'étincelle du designer pour construire une UI parfait (ça ressemble souvent à un enfant qui choisit des couleurs aléatoires) mais ce qui me passionne, ce sont tous ces petits détails UX : une animation fluide, une interface intuitive qui ne force pas l'utilisateur à réfléchir. Des produits qui livrent une réelle valeur.",
       "Je suis aussi fasciné par la cybersécurité, je me forme, j'essaye d'appliquer les bonnes pratiques et j'audite du code. Il m'arrive de participer à des CTF à mes heures perdues pour m'exercer et apprendre de nouvelles techniques.",
       "J'apporte une grande attention a la DevX, or avec l'apparition de nouveaux outils comme les LLMs, notre flux de travail en tant que développeur est en pleine évolution. Et je suis convaincu que maitriser les outils IA est une compétence essentielle pour le futur.",
     ],
-    mantra: "Mon mantra : construire des choses qui comptent. Être utile en ajoutant de la valeur.",
+    mantraContent:
+      'Construire des choses qui comptent. Être utile en ajoutant une réelle valeur. Et continuer à apprendre au quotidien.',
+    mantraTitle: 'Mon mantra',
   },
   timeline: {
     title: 'Mon parcours',
