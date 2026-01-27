@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project uses shadcn/ui components built on Base UI primitives. Components are in `src/components/ui/`, with custom Astro and React components in their respective directories.
+This project uses shadcn/ui components built on Radix primitives (except Tooltip which uses Base UI). Components are in `src/components/ui/`, with custom Astro and React components in their respective directories.
 A design system page is present at `/[lang]/design-system`.
 This page is generated automatically by the `DesignSystemPreview` component inside the `src/pages/design-system.astro` file.
 
@@ -174,41 +174,6 @@ import { DeleteConfirm } from '@/components/react/DeleteConfirm';
   </div>
   <Button type="submit">Send</Button>
 </div>
-```
-
-## Client Directives Reference
-
-| Directive              | When to Use                                |
-| ---------------------- | ------------------------------------------ |
-| `client:load`          | Critical interactivity (theme toggle, nav) |
-| `client:visible`       | Below-fold content, modals                 |
-| `client:idle`          | Non-critical, after page is idle           |
-| `client:media="(...)"` | Responsive (mobile nav)                    |
-| (none)                 | Static render only                         |
-
-## Theme Colors
-
-Available CSS variables for styling:
-
-```css
---background
---foreground
---primary / --primary-foreground
---secondary / --secondary-foreground
---muted / --muted-foreground
---accent / --accent-foreground
---destructive
---border
---input
---ring
-```
-
-Usage in Tailwind:
-
-```tsx
-<div className="bg-background text-foreground">
-<button className="bg-primary text-primary-foreground">
-<p className="text-muted-foreground">
 ```
 
 ## Custom React Components
@@ -389,49 +354,7 @@ import {
 
 ## MDX Components
 
-Located in `src/components/mdx/`. These components are available in all MDX blog posts via the `mdxComponents` object.
-
-### Architecture: Why `.tsx` and Not `.astro`?
-
-**Important**: MDX components must be React components (`.tsx`), not Astro components (`.astro`), because they are passed through the `components` prop of `<Content>`:
-
-```astro
-<Content components={mdxComponents} />
-```
-
-This prop expects React components. The components render as **static HTML during build** - React hooks like `useEffect`, `useState` do NOT run because there's no client-side hydration.
-
-### Client-Side Interactivity Pattern
-
-For MDX components that need client-side JavaScript (like Mermaid diagrams), use the **data attribute + script** pattern:
-
-1. **Component (`.tsx`)**: Renders a placeholder with data attributes
-2. **Page script (`[slug].astro`)**: Initializes the feature client-side
-
-```tsx
-// Component: renders placeholder with data
-export function MyComponent({ data }: Props) {
-  return (
-    <div data-my-component data-config={JSON.stringify(data)}>
-      <div className="animate-spin" /> {/* Loading state */}
-    </div>
-  );
-}
-```
-
-```astro
-<!-- Page: client-side initialization -->
-<script>
-  function initMyComponents() {
-    document.querySelectorAll('[data-my-component]').forEach((el) => {
-      const config = JSON.parse(el.getAttribute('data-config') || '{}');
-      // Initialize with config...
-    });
-  }
-  initMyComponents();
-  document.addEventListener('astro:after-swap', initMyComponents);
-</script>
-```
+Located in `src/components/mdx/`. See [ASTRO-REACT.md](./ASTRO-REACT.md) for architecture details (why `.tsx`, client-side interactivity pattern).
 
 ### Available MDX Components
 
