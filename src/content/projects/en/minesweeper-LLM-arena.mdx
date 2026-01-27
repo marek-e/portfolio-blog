@@ -1,0 +1,103 @@
+---
+title: 'Minesweeper LLM Arena'
+description: 'AI Gateway Hackathon project — LLMs compete to solve Minesweeper on the same hidden board.'
+featured: true
+techStack: ['TypeScript', 'React', 'Vercel AI SDK', 'AI Gateway', 'Vercel', 'Next.js']
+links:
+  repo: 'https://github.com/marek-e/minesweeper-battle'
+publishDate: 2026-01-01
+image: '/projects/minesweeper-battle.png'
+imageAlt: 'Minesweeper LLM Arena logo'
+status: 'in-progress'
+---
+
+For the AI Gateway launch, Vercel organized a hackathon with the goal of building an application that compares the performance of different LLM models on the same problem. They provided $5 worth of tokens.
+
+I chose to create an application that compares the performance of different LLM models on the Minesweeper game.
+
+1. **Game Interface**: The first step was to create a game interface initially playable by a human.
+
+2. **Configuration Page**: The configuration page allows choosing the LLM models to compare and configuring the game parameters.
+
+3. **Backend**: It generates a random game board and simulates the game deterministically. It handles the game logic and manages interactions with LLM models through the AI Gateway toolkit. A single API key allows testing all LLM models.
+
+4. **Arena Page**: Page that displays the different moves played in real-time by the LLM models and shows results once each model has finished playing.
+
+5. **Replays Page**: Page that allows replaying the different moves played by the LLM models and comparing each decision move by move.
+
+6. **History Page**: I added Redis storage to store each game's results. This allows comparing LLM model performance over time and revisiting past games.
+
+7. **Vercel Deployment**: I deployed the application on Vercel. However, my first implementation executed all games following an API request to my backend, which opened a Server-Sent Events (SSE) connection to the game interface to display results in real-time. The problem was that Vercel functions used by the backend routes defined in my Next.js app exceeded the 300-second timeout and couldn't complete the game. So I modified the implementation so that each game is played move by move with round-trips between backend and frontend.
+
+<Mermaid
+  chart={`
+flowchart TB
+    subgraph Frontend["🟨 Frontend"]
+        setup["/setup"]
+        arena["/arena"]
+    end
+
+    subgraph Backend["🟩 Backend - Vercel Function"]
+        api["API Routes"]
+        timeout["⚠️ Timeout 300sec"]
+    end
+
+    subgraph Storage["🟦 Upstash Redis DB"]
+        redis[(Redis)]
+    end
+
+    subgraph AI["🟪 AI Gateway"]
+        gateway["LLM Models"]
+    end
+
+    setup -->|"POST /api/battle"| api
+    api -->|"createBattle"| redis
+    arena -->|"GET /api/battle/[id]/stream"| api
+    api -.->|"SSE: init"| arena
+    api -.->|"SSE: move"| arena
+    api -.->|"SSE: complete"| arena
+    api -->|"generateText"| gateway
+
+`}
+caption="❌ Before: SSE Architecture (timeout exceeded)"
+/>
+
+<Mermaid
+  chart={`
+flowchart TB
+    subgraph Frontend["🟨 Frontend"]
+        setup["/setup"]
+        arena["/arena"]
+    end
+
+    subgraph Backend["🟩 Backend - Vercel Function"]
+        api["API Routes"]
+        logic["get current position per model<br/>and generate prompt"]
+    end
+
+    subgraph Storage["🟦 Upstash Redis DB"]
+        redis[(Redis)]
+    end
+
+    subgraph AI["🟪 AI Gateway"]
+        gateway["LLM Models"]
+    end
+
+    setup -->|"POST /api/battle"| api
+    api -->|"createBattle"| redis
+    arena -->|"GET /api/battle/[id]/move"| api
+    api -.->|"getBattleById"| redis
+    api --> logic
+    logic -->|"generateText"| gateway
+    gateway -.->|"move"| api
+    api -.->|"move"| arena
+    arena -.->|"loop until complete"| arena
+
+`}
+caption="✅ After: Polling Architecture (short requests)"
+/>
+
+8. **LLM Optimization**: I optimized the prompt so that LLM models could play the game optimally. By explicitly stating the game rules and constraints, I got more satisfactory results. I then tried allowing them to play multiple moves in a row to save time.
+
+Conclusion:
+Some LLM models managed to solve the game with easy configurations, but for larger grids, games became very long. When substituting models with others that were less capable but faster, games ended more quickly but in defeat.

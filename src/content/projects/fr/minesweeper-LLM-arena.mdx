@@ -1,0 +1,104 @@
+---
+title: 'Minesweeper LLM Arena'
+description: 'Projet de hackathon AI Gateway — LLMs compétition pour résoudre une partie de Démineur sur le même plateau caché.'
+featured: true
+techStack: ['TypeScript', 'React', 'Vercel AI SDK', 'AI Gateway', 'Vercel', 'Next.js']
+links:
+  repo: 'https://github.com/marek-e/minesweeper-battle'
+  demo: 'https://minesweeper-battle-mu.vercel.app'
+publishDate: 2025-12-04
+image: '/projects/minesweeper-battle.png'
+imageAlt: 'Minesweeper LLM Arena logo'
+status: 'in-progress'
+---
+
+Pour le lancement de AI Gateway, Vercel a organisé un hackathon avec pour objectif de construire une application qui permette de comparer les performances de différents modèles LLM sur un même problème. Et il mettait à disposition 5 euros de token.
+
+J'ai choisi de créer une application qui permette de comparer les performances de différents modèles LLM sur le jeu du Démineur.
+
+1. **Interface de jeu** : La première étape a été de créer l'interface de jeu dans un premier temps jouable par un humain.
+
+2. **Page de configuration** : La page de configuration permet de choisir les modèles LLM à comparer et de configurer les paramètres du jeu.
+
+3. **Backend** : Il permet de générer un plateau de jeu aléatoire et de simuler le jeu de manière déterministe. C'est lui qui va gérer la logique du jeu, gérer les interactions avec les modèles LLM grâce au toolkit AI Gateway. Une seule clé d'API permet de tester tous les modèles LLM.
+
+4. **Page d'arène** : Page qui permet de retranscrire les différents coups joués en temps réel par les modèles LLM et afficher les résultats une fois que chaque modèle a terminé de jouer.
+
+5. **Page de replays** : Page qui permet de rejouer les différents coups joués par les modèles LLM et compater chaque decision coup par coup.
+
+6. **Page d'historique** : J'ai ajouté un stockage redis pour stocker les résultats de chaque partie. Cela permet de comparer les performances des modèles LLM au fil du temps et de revisiter les parties passées.
+
+7. **Déploiement sur Vercel** : J'ai déployé l'application sur Vercel. Cependant ma 1ère implémentation effectuait toutes les parties à la suite d'une requête API vers mon backend et celui-ci ouvrait une connexion Server-Sent Events (SSE) vers l'interface de jeu pour afficher les résultats en temps réel. Le problème était que les fonctions Vercel utilisées par les routes back définies dans mon application Next.js dépassaient le timeout de 300 secondes et ne permettaient pas d'aller au bout de la partie. J'ai donc modifié l'implémentation pour que chaque partie soit jouée au coup par coup avec des allers-retours entre le backend et le frontend.
+
+<Mermaid
+  chart={`
+flowchart TB
+    subgraph Frontend["🟨 Frontend"]
+        setup["/setup"]
+        arena["/arena"]
+    end
+
+    subgraph Backend["🟩 Backend - Vercel Function"]
+        api["API Routes"]
+        timeout["⚠️ Timeout 300sec"]
+    end
+
+    subgraph Storage["🟦 Upstash Redis DB"]
+        redis[(Redis)]
+    end
+
+    subgraph AI["🟪 AI Gateway"]
+        gateway["LLM Models"]
+    end
+
+    setup -->|"POST /api/battle"| api
+    api -->|"createBattle"| redis
+    arena -->|"GET /api/battle/[id]/stream"| api
+    api -.->|"SSE: init"| arena
+    api -.->|"SSE: move"| arena
+    api -.->|"SSE: complete"| arena
+    api -->|"generateText"| gateway
+
+`}
+caption="❌ Avant : Architecture SSE (timeout dépassé)"
+/>
+
+<Mermaid
+  chart={`
+flowchart TB
+    subgraph Frontend["🟨 Frontend"]
+        setup["/setup"]
+        arena["/arena"]
+    end
+
+    subgraph Backend["🟩 Backend - Vercel Function"]
+        api["API Routes"]
+        logic["get current position per model<br/>and generate prompt"]
+    end
+
+    subgraph Storage["🟦 Upstash Redis DB"]
+        redis[(Redis)]
+    end
+
+    subgraph AI["🟪 AI Gateway"]
+        gateway["LLM Models"]
+    end
+
+    setup -->|"POST /api/battle"| api
+    api -->|"createBattle"| redis
+    arena -->|"GET /api/battle/[id]/move"| api
+    api -.->|"getBattleById"| redis
+    api --> logic
+    logic -->|"generateText"| gateway
+    gateway -.->|"move"| api
+    api -.->|"move"| arena
+    arena -.->|"loop until complete"| arena
+
+`}
+caption="✅ Après : Architecture Polling (requêtes courtes)"
+/>
+
+8. **Optimisation des LLM** : J'ai optimisé le prompt pour que les modèles LLM puissent jouer le jeu de manière optimale. En leur explicitant les règles du jeu et les contraintes, j'ai pu obtenir des résultats plus satisfaisants. J'ai ensuite essayé de leur authoriser de jouer plusieurs coups à la suite pour gagner du temps.
+
+Conclusion :
+Certains modèles LLM ont réussi à résoudre le jeu avec des config facile mais pour des grilles plus grandes, les parties devenaient très longues et en substituant les modèles par d'autres, moins bons mais plus rapides, les parties se terminaient plus rapidement mais par une défaite.
