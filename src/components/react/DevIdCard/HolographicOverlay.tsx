@@ -7,9 +7,8 @@ interface HolographicOverlayProps {
 export function HolographicOverlay({ rotateY, glareX, glareY }: HolographicOverlayProps) {
   return (
     <>
-      {/* Holographic rainbow effect */}
       <div
-        className="pointer-events-none absolute inset-0 rounded-2xl opacity-30 transition-opacity duration-300 group-hover:opacity-50"
+        className="pointer-events-none absolute inset-0 rounded-2xl opacity-10 transition-opacity duration-300 group-hover:opacity-20"
         style={{
           background: `linear-gradient(
             ${125 + rotateY * 2}deg,

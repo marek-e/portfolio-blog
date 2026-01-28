@@ -26,8 +26,8 @@ export const TECH_STACK: TechItem[] = [
     name: 'Next.js',
     icon: <img src="/icons/next-js-logo.svg" alt="Next.js" className="dark:invert" />,
   },
-  {
-    name: 'More to come',
-    icon: <img src="/icons/empty_badge.svg" alt="More to come" />,
-  },
+  // {
+  //   name: 'More to come',
+  //   icon: <img src="/icons/empty_badge.svg" alt="More to come" />,
+  // },
 ];

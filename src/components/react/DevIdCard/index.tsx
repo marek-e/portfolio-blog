@@ -13,6 +13,7 @@ import { useTiltEffect } from './useTiltEffect';
 import { HolographicOverlay } from './HolographicOverlay';
 import { CardField } from './CardField';
 import { CardTitle } from './CardTitle';
+import { StatusBadge } from './StatusBadge';
 import { TechStackBadge } from './TechStackBadge';
 import { TECH_STACK } from './constants';
 
@@ -68,11 +69,10 @@ export function DevIdCard({ lang }: DevIdCardProps) {
             glareY={currentTilt.glareY}
           />
 
-          {/* Inner card content */}
           <div className="border-border bg-card relative z-10 flex flex-1 flex-col rounded-xl border-2 p-4">
+            <StatusBadge />
             <CardTitle title={t.devCard.cardTitle} />
 
-            {/* Content: fields + portrait */}
             <div className="relative z-10 flex flex-1 gap-4">
               <div className="flex flex-1 flex-col justify-between space-y-2">
                 {fields.map((field, index) => (
@@ -99,8 +99,6 @@ export function DevIdCard({ lang }: DevIdCardProps) {
               </div>
             </div>
           </div>
-
-          {/* Tech stack footer */}
           <div className="border-border bg-card z-10 mt-2 flex items-center justify-around rounded-xl border-2 px-3 py-2">
             {TECH_STACK.map((tech) => (
               <TechStackBadge key={tech.name} name={tech.name} icon={tech.icon} />
