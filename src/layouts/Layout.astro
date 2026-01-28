@@ -10,11 +10,7 @@ interface Props {
   image?: string;
 }
 
-const {
-  title,
-  description = 'Developer portfolio and blog',
-  image = '/og-image.png',
-} = Astro.props;
+const { title, description, image = '/og-image.png' } = Astro.props;
 
 const lang = getLangFromUrl(Astro.url);
 
@@ -65,14 +61,14 @@ const enURL = new URL(enPath, Astro.site);
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={new URL(image, Astro.site)} />
+    <meta property="og:image" content={image} />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content={canonicalURL} />
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={new URL(image, Astro.site)} />
+    <meta property="twitter:image" content={image} />
 
     <meta name="color-scheme" content="light dark" />
 

@@ -25,7 +25,7 @@ const posts = allPosts
   .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
 ---
 
-<Layout title={t.blog.pageTitle} description={t.blog.pageDescription}>
+<Layout title={t.blog.pageTitle} description={t.blog.pageDescription} image={'/og-image_blog.png'}>
   <script
     is:inline
     slot="head"
@@ -33,9 +33,9 @@ const posts = allPosts
     set:html={JSON.stringify({
       '@context': 'https://schema.org',
       '@type': 'Blog',
-      name: 'Blog - Marek Elmayan',
-      url: 'https://melmayan.fr/blog',
-      description: "Articles sur le développement web, l'UX, la cybersécurité et l'IA.",
+      name: t.blog.pageTitle,
+      url: Astro.url.href,
+      description: t.blog.pageDescription,
       author: {
         '@type': 'Person',
         name: 'Marek Elmayan',
