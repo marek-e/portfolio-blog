@@ -77,8 +77,8 @@ const cvData: CVData = {
     en: 'Full-Stack Software Engineer',
   },
   summary: {
-    fr: "Ingénieur logiciel full-stack avec 3+ ans d'expérience en développement web, spécialisé en TypeScript, React et Node.js. Conception et livraison de fonctionnalités full-stack (Next.js, REST APIs, AWS Serverless) visant l'amélioration de l'expérience utilisateur et la maintenabilité du code. Passionné par la sécurité web et l'intégration d'IA dans les workflows de développement. Autonome et orienté qualité.",
-    en: 'Full-stack software engineer with 3+ years of experience in web development, specialized in TypeScript, React, and Node.js. Design and delivery of full-stack features (Next.js, REST APIs, AWS Serverless) focused on user experience and code maintainability. Passionate about web security and integrating AI into development workflows. Self-driven and quality-oriented.',
+    fr: "Ingénieur logiciel full-stack avec 3+ ans d'expérience en développement web, spécialisé en TypeScript, React et Node.js. Conception et livraison de fonctionnalités full-stack (Next.js, REST APIs, AWS Serverless) visant l'amélioration de l'expérience utilisateur et la maintenabilité du code. Passionné par la sécurité web et l'intégration d'IA dans les workflows de développement. Autonome et curieux.",
+    en: 'Full-stack software engineer with 3+ years of experience in web development, specialized in TypeScript, React, and Node.js. Design and delivery of full-stack features (Next.js, REST APIs, AWS Serverless) focused on user experience and code maintainability. Passionate about web security and integrating AI into development workflows. Self-driven and curious.',
   },
   experience: [
     {
@@ -95,7 +95,7 @@ const cvData: CVData = {
             "Prise de décisions techniques et conception d'architecture logicielle",
             'Gestion de projet suivant les principes Agile & Lean Tech',
             'Workflows de développement assistés par IA',
-            'Audit de sécurité web et implémentation',
+            'Audit de sécurité web et mise en place des bonnes pratiques de sécurité',
           ],
         },
         en: {
@@ -107,7 +107,7 @@ const cvData: CVData = {
             'Leading technical decisions and software architecture design',
             'Project management following Agile & Lean Tech principles',
             'AI assisted development workflows',
-            'Web security audit and implementation',
+            'Web security audit and implementation of security best practices',
           ],
         },
       },
@@ -150,7 +150,7 @@ const cvData: CVData = {
           degree: "Diplôme d'Ingénieur en Informatique et Mathématiques Appliquées",
           institution: 'Grenoble INP - Ensimag, UGA',
           location: 'Grenoble, France',
-          note: "École d'ingénieurs de référence en informatique et mathématiques appliquées",
+          note: "École d'ingénieurs de référence en informatique et mathématiques appliquées. Filière Ingénierie des systèmes d'information (ISI).",
         },
         en: {
           degree: 'Engineering Degree in Computer Science & Applied Mathematics',
@@ -174,6 +174,7 @@ const cvData: CVData = {
           degree: 'Exchange Semester',
           institution: 'Aalto University',
           location: 'Helsinki, Finland',
+          note: 'Exchange semester in Helsinki, Finland. Computer Science Master courses.',
         },
       },
     },
