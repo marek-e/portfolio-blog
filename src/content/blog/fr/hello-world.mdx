@@ -7,6 +7,7 @@ draft: false
 ---
 
 import Figure from '@/components/astro/Figure.astro';
+import FileTree from '@/components/mdx/FileTree.astro';
 import image from '@/assets/blog/hello-world/unsplash.jpg';
 
 Bienvenue sur mon blog ! Je suis ravi d'avoir enfin un espace pour partager mes réflexions sur le développement web, mes aventures de codeur et les leçons apprises en chemin.
@@ -65,6 +66,31 @@ export function Greeter() {
   );
 }
 ```
+
+## Structure de projet
+
+Voici un exemple de visualisation de la structure d'un projet avec le composant FileTree :
+
+<FileTree>
+- src
+  - components
+    - **mdx**
+      - FileTree.tsx
+      - Callout.tsx
+      - Mermaid.tsx
+    - astro
+      - Figure.astro
+  - content
+    - blog
+      - fr
+        - hello-world.mdx
+      - en
+        - hello-world.mdx
+  - layouts
+    - Layout.astro
+  - pages
+    - index.astro
+</FileTree>
 
 ## Éléments visuels
 
