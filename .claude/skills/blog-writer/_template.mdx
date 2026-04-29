@@ -1,0 +1,59 @@
+---
+title: 'Your punchy title here'
+description: 'One-sentence TL;DR that makes someone want to read this.'
+publishDate: 2026-01-01
+tags: ['tag1', 'tag2']
+draft: true
+---
+
+{/* Uncomment imports as needed */}
+{/* import Figure from '@/components/astro/Figure.astro'; */}
+{/* import FileTree from '@/components/mdx/FileTree.astro'; */}
+{/* import myImage from '@/assets/blog/your-post/image.png'; */}
+
+[Hook: one sentence that makes the reader feel seen — a pain point, a surprising fact, or a bad pun.]
+
+[Context: one short paragraph. What problem are we solving? Who cares?]
+
+## The Problem
+
+[State the problem concretely. Real example > abstract description.]
+
+<Callout variant="warning" title="The trap">
+  [The thing everyone gets wrong, including past you.]
+</Callout>
+
+## The Solution
+
+[Explain the key insight in plain language first, then show the code.]
+
+```typescript
+// The interesting part — keep this focused
+```
+
+<Toggle title="Full implementation (if you're curious)">
+  ```typescript
+  // The complete, verbose version that would've killed the flow above
+  ```
+</Toggle>
+
+## How It Works
+
+[One diagram is worth two paragraphs.]
+
+<Mermaid
+  chart={`
+    flowchart LR
+      A[Input] --> B[Your thing]
+      B --> C[Output]
+  `}
+  caption="The flow, simplified"
+/>
+
+## The Takeaway
+
+[One sentence. What should the reader do differently tomorrow morning?]
+
+<Callout variant="success" title="TL;DR">
+  [The entire post in two sentences, for the people who scrolled straight here.]
+</Callout>
