@@ -1,0 +1,23 @@
+.claude/skills/blog-writer/SKILL.md
+  13aeba1167dbfd69 21
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "eacd824d5ac25d579e96f9b93b21b358f1b2212f",
+  "prompts": {
+    "13aeba1167dbfd69": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "d23d747c-3c3a-4b58-920e-25cb3e102818",
+        "model": "claude-opus-4-7"
+      },
+      "human_author": "Marek Elmayan",
+      "messages": [],
+      "total_additions": 1,
+      "total_deletions": 1,
+      "accepted_lines": 1,
+      "overriden_lines": 0
+    }
+  }
+}
