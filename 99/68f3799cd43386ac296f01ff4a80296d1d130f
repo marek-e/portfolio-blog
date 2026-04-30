@@ -1,0 +1,34 @@
+src/content/blog/fr/agent-skills-the-missing-piece-of-your-ai-workflow.mdx
+  h_b7c268b0e33ac7 1-300
+src/content/blog/fr/hello-world.mdx
+  h_b7c268b0e33ac7 6
+src/content/blog/en/agent-skills-the-missing-piece-of-your-ai-workflow.mdx
+  h_b7c268b0e33ac7 1-302
+src/content/blog/en/hello-world.mdx
+  h_b7c268b0e33ac7 6
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "9968f3799cd43386ac296f01ff4a80296d1d130f",
+  "prompts": {
+    "74d7d1e4bd63f520": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "dee8a0d5-75ea-4305-88a6-0e8afaa59c70",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Marek Elmayan",
+      "messages": [],
+      "total_additions": 282,
+      "total_deletions": 32,
+      "accepted_lines": 0,
+      "overriden_lines": 10
+    }
+  },
+  "humans": {
+    "h_b7c268b0e33ac7": {
+      "author": "Marek Elmayan"
+    }
+  }
+}
