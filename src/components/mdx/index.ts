@@ -5,6 +5,7 @@ import { Callout } from './Callout';
 import { Citation } from './Citation';
 import { Mermaid } from './Mermaid';
 import { Toggle } from './Toggle';
+import { PastelCard, PastelCards } from './PastelCard';
 
 export const mdxComponents = {
   pre: Pre,
@@ -16,7 +17,9 @@ export const mdxComponents = {
   Callout,
   Citation,
   Mermaid,
+  PastelCard,
+  PastelCards,
   // Toggle is added in the page files with client:load
 };
 
-export { Pre, H1, H2, H3, H4, Highlight, Callout, Citation, Mermaid, Toggle };
+export { Pre, H1, H2, H3, H4, Highlight, Callout, Citation, Mermaid, Toggle, PastelCard, PastelCards };
