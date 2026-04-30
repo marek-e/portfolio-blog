@@ -55,6 +55,7 @@ import {
   BreadcrumbSeparator,
   BreadcrumbEllipsis,
 } from '@/components/ui/breadcrumb';
+import { PastelCard, PastelCards } from '@/components/mdx/PastelCard';
 import { ModeToggle } from './ModeToggle';
 import { Icon } from './Icon';
 import { ArrowLeftIcon, Search01Icon, Mail01Icon } from '@hugeicons/core-free-icons';
@@ -381,6 +382,71 @@ export function DesignSystemPreview({ lang }: { lang: Lang }) {
               <InputGroupInput placeholder="Enter email..." />
               <InputGroupButton>Subscribe</InputGroupButton>
             </InputGroup>
+          </div>
+        </div>
+      </Section>
+
+      {/* PastelCard */}
+      <Section title="PastelCard">
+        <div className="space-y-6">
+          <div>
+            <p className="text-muted-foreground mb-3 text-sm font-medium">Color variants</p>
+            <PastelCards>
+              <PastelCard label="Slate" emoji="⚪" title="Slate variant" color="slate">
+                The slate pastel card.
+              </PastelCard>
+              <PastelCard label="Stone" emoji="🪨" title="Stone variant" color="stone">
+                The stone pastel card.
+              </PastelCard>
+              <PastelCard label="Red" emoji="🔴" title="Red variant" color="red">
+                The red pastel card.
+              </PastelCard>
+              <PastelCard label="Orange" emoji="🟠" title="Orange variant" color="orange">
+                The orange pastel card.
+              </PastelCard>
+              <PastelCard label="Green" emoji="🟢" title="Green variant" color="green">
+                The green pastel card.
+              </PastelCard>
+              <PastelCard label="Blue" emoji="🔵" title="Blue variant" color="blue">
+                The blue pastel card.
+              </PastelCard>
+              <PastelCard label="Purple" emoji="🟣" title="Purple variant" color="purple">
+                The purple pastel card.
+              </PastelCard>
+              <PastelCard label="Pink" emoji="🩷" title="Pink variant" color="pink">
+                The pink pastel card.
+              </PastelCard>
+            </PastelCards>
+          </div>
+          <Separator />
+          <div>
+            <p className="text-muted-foreground mb-3 text-sm font-medium">
+              Optional props (label, emoji, title, children)
+            </p>
+            <PastelCards>
+              <PastelCard label="All" emoji="✨" title="Everything" color="blue">
+                Label, emoji, title and children.
+              </PastelCard>
+              <PastelCard emoji="🎨" title="No label" color="purple">
+                Without the uppercase chip in the corner.
+              </PastelCard>
+              <PastelCard label="No emoji" title="No emoji" color="green">
+                The big icon at the top is gone.
+              </PastelCard>
+              <PastelCard label="No title" emoji="📦" color="orange">
+                Just a label, an emoji and some body text.
+              </PastelCard>
+              <PastelCard label="No children" emoji="🪄" title="No children" color="pink" />
+              <PastelCard emoji="🌙" title="Title only" color="slate" />
+              <PastelCard label="Label only" color="red" />
+              <PastelCard emoji="👻" color="stone" />
+              <PastelCard title="Title + body" color="blue">
+                A card with just a title and some children.
+              </PastelCard>
+              <PastelCard color="purple">Children only — no label, emoji, or title.</PastelCard>
+              <PastelCard label="Empty" color="green" />
+              <PastelCard color="pink" />
+            </PastelCards>
           </div>
         </div>
       </Section>
