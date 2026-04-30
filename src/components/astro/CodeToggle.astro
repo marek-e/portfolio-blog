@@ -1,0 +1,14 @@
+---
+import { CodeToggle as CodeToggleReact } from '@/components/mdx/CodeToggle';
+
+interface Props {
+  title?: string;
+  defaultOpen?: boolean;
+}
+
+const { title, defaultOpen } = Astro.props;
+---
+
+<CodeToggleReact client:load title={title} defaultOpen={defaultOpen}>
+  <slot />
+</CodeToggleReact>
