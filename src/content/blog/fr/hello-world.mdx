@@ -3,7 +3,7 @@ title: 'Hello World : Bienvenue sur mon blog'
 description: 'Mon premier article de blog pour me présenter et tester mes différents composants mdx.'
 publishDate: 2026-01-01
 tags: ['intro', 'astro', 'web-dev']
-draft: false
+draft: true
 ---
 
 import Figure from '@/components/astro/Figure.astro';
@@ -72,24 +72,9 @@ export function Greeter() {
 Voici un exemple de visualisation de la structure d'un projet avec le composant FileTree :
 
 <FileTree>
-- src
-  - components
-    - **mdx**
-      - FileTree.tsx
-      - Callout.tsx
-      - Mermaid.tsx
-    - astro
-      - Figure.astro
-  - content
-    - blog
-      - fr
-        - hello-world.mdx
-      - en
-        - hello-world.mdx
-  - layouts
-    - Layout.astro
-  - pages
-    - index.astro
+  - src - components - **mdx** - FileTree.tsx - Callout.tsx - Mermaid.tsx - astro - Figure.astro -
+  content - blog - fr - hello-world.mdx - en - hello-world.mdx - layouts - Layout.astro - pages -
+  index.astro
 </FileTree>
 
 ## Éléments visuels

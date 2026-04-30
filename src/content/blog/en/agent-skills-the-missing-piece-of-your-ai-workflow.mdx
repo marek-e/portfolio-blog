@@ -1,0 +1,302 @@
+---
+title: 'Agent skills: the missing piece of your AI workflow'
+description: "Skills, MCPs, custom instructions... everyone is adding context to their agents. Here's why skills are different, and how the ecosystem converged in under a year."
+publishDate: 2026-04-30
+tags: ['agents', 'skills', 'AI', 'DX']
+draft: false
+---
+
+import FileTree from '@/components/mdx/FileTree.astro';
+import Figure from '@/components/astro/Figure.astro';
+import contextImageDark from '@/assets/blog/agent-skills-the-missing-piece-of-your-ai-workflow/context_dark.png';
+import contextImageLight from '@/assets/blog/agent-skills-the-missing-piece-of-your-ai-workflow/context_light.png';
+
+Your AI assistant knows TypeScript, React, and probably half the patterns in your codebase. What it doesn't know is _you_: your conventions, your context, how you like to work. Every new session, you re-explain. Skills fix that.
+
+Skills are the ecosystem's answer to a concrete problem: how do you give an agent <Highlight color="red">reusable</Highlight>, <Highlight color="blue">versioned</Highlight>, and <Highlight color="green">contextual</Highlight> instructions, without pasting them into every prompt by hand.
+
+## What is a skill?
+
+A skill is a <Highlight color="yellow">folder</Highlight> containing everything an agent needs to approach a specific task. The entry point is a `SKILL.md` file with a `description` field in its frontmatter, followed by the skill content. You can add references, templates, scripts: whatever helps.
+
+{/* prettier-ignore */}
+<FileTree>
+- .claude/
+  - skills/
+    - **blog-writer/**
+      - SKILL.md
+      - references/
+        - components.md
+    - code-review/
+      - SKILL.md
+      - templates/
+        - pr-checklist.md
+</FileTree>
+
+Here's what a minimal skill looks like:
+
+<CodeToggle title="See a full skill example">
+
+````markdown
+---
+name: git-commit
+description: 'Execute git commit with conventional commit message analysis, intelligent staging, and message generation. Use when user asks to commit changes, create a git commit, or mentions "/commit". Supports: (1) Auto-detecting type and scope from changes, (2) Generating conventional commit messages from diff, (3) Interactive commit with optional type/scope/description overrides, (4) Intelligent file staging for logical grouping'
+license: MIT
+allowed-tools: Bash
+---
+
+# Git Commit with Conventional Commits
+
+## Overview
+
+Create standardized, semantic git commits using the Conventional Commits specification. Analyze the actual diff to determine appropriate type, scope, and message.
+
+## Conventional Commit Format
+
+<type>[optional scope]: <description>
+
+[optional body]
+
+[optional footer(s)]
+
+## Commit Types
+
+| Type       | Purpose                        |
+| ---------- | ------------------------------ |
+| `feat`     | New feature                    |
+| `fix`      | Bug fix                        |
+| `docs`     | Documentation only             |
+| `style`    | Formatting/style (no logic)    |
+| `refactor` | Code refactor (no feature/fix) |
+| `perf`     | Performance improvement        |
+| `test`     | Add/update tests               |
+| `build`    | Build system/dependencies      |
+| `ci`       | CI/config changes              |
+| `chore`    | Maintenance/misc               |
+| `revert`   | Revert commit                  |
+
+## Breaking Changes
+
+# Exclamation mark after type/scope
+
+feat!: remove deprecated endpoint
+
+# BREAKING CHANGE footer
+
+feat: allow config to extend other configs
+
+BREAKING CHANGE: `extends` key behavior changed
+
+## Workflow
+
+### 1. Analyze Diff
+
+```bash
+# If files are staged, use staged diff
+git diff --staged
+
+# If nothing staged, use working tree diff
+git diff
+
+# Also check status
+git status --porcelain
+```
+
+### 2. Stage Files (if needed)
+
+If nothing is staged or you want to group changes differently:
+
+```bash
+# Stage specific files
+git add path/to/file1 path/to/file2
+
+# Stage by pattern
+git add *.test.*
+git add src/components/*
+
+# Interactive staging
+git add -p
+```
+
+**Never commit secrets** (.env, credentials.json, private keys).
+
+### 3. Generate Commit Message
+
+Analyze the diff to determine:
+
+- **Type**: What kind of change is this?
+- **Scope**: What area/module is affected?
+- **Description**: One-line summary of what changed (present tense, imperative mood, less than 72 characters)
+
+### 4. Execute Commit
+
+```bash
+# Single line
+git commit -m "<type>[scope]: <description>"
+
+# Multi-line with body/footer
+git commit -m "$(cat <<'EOF'
+<type>[scope]: <description>
+
+<optional body>
+
+<optional footer>
+EOF
+)"
+```
+
+## Best Practices
+
+- One logical change per commit
+- Present tense: "add" not "added"
+- Imperative mood: "fix bug" not "fixes bug"
+- Reference issues: `Closes #123`, `Refs #456`
+- Keep description under 72 characters
+
+## Git Safety Protocol
+
+- NEVER update git config
+- NEVER run destructive commands (--force, hard reset) without explicit request
+- NEVER skip hooks (--no-verify) unless user asks
+- NEVER force push to main/master
+- If commit fails due to hooks, fix and create NEW commit (don't amend)
+````
+
+</CodeToggle>
+
+Two invocation modes:
+
+- **Explicit**: `/blog-writer`, `/code-review`. You call the skill by name.
+- **Automatic**: the agent loads all skill descriptions at session start, then semantically matches them against your message.
+
+That's why the `description` field is the most important part of a skill. It's what determines whether the agent loads it or ignores it.
+
+{/* prettier-ignore */}
+<Callout variant="tip" title="Writing a good description">
+  The description isn't a title for you. It's the condition the agent evaluates to decide whether to
+  load the skill. Think of it as "if the user says X, load this skill".
+  - **Too vague:** _"Helps write blog posts"_. The agent will miss it if you type "I want to write
+    about skills".
+  - **Better:** _"Use this skill whenever the user wants to write, draft or improve a blog post,
+    even if they just say 'I want to write about X'"_. Covers synonyms, casual phrasing, edge
+    cases.
+</Callout>
+
+### How it works in practice
+
+<Mermaid
+  chart={`
+    sequenceDiagram
+      actor U as User
+      participant A as Agent
+      participant S as Skill
+
+      U->>A: /code-review (or task detected)
+      A->>S: Loads matching skill
+      S-->>A: Instructions + context
+      A->>U: Responds with skill as guide
+
+`}
+caption="The agent loads the skill before acting, not after."
+title="Skill execution flow"
+/>
+
+This is where skills differ from tools and MCPs on context management. An MCP loads its tool schemas at startup whether it gets used or not. A skill only loads its description at startup, a few dozen tokens, and its full content only if triggered. With 20 skills installed, the overhead stays negligible.
+
+<Figure
+  src={contextImageLight}
+  srcDark={contextImageDark}
+  alt="Claude Code context breakdown: skills at 2.3k tokens (1.1%), messages at 55.2k (27.6%)"
+  caption="38 skills available, 2.3k tokens used. Descriptions are lightweight; full content only loads when the agent actually needs it."
+/>
+
+## The ecosystem in 2026
+
+In under a year, every major dev assistant adopted the same concept and the same format: a folder with a `SKILL.md`, a `name` + `description` frontmatter, the rest in markdown. Claude Code, Copilot, Gemini CLI, Cursor, opencode.ai, Codex: same structure, same logic.
+
+The one real difference is the path. <Highlight color="green">.agents/skills/</Highlight> is becoming the cross-tool standard: Copilot, Gemini, Cursor, Opencode, and Codex all read it natively. Only Claude Code continues to be different by using `.claude/skills/`, but a symlink is all it takes to align everything.
+
+### A shared registry: skills.sh
+
+Vercel launched [skills.sh](https://skills.sh), an open-source registry of community skills with a CLI to install them:
+
+```bash
+npx skills add vercel-labs/agent-skills
+```
+
+The command installs the skill in `.agents/skills/` (the canonical path) and offers two modes: symlinks to `.claude/skills/`, `.cursor/skills/`, etc. (recommended, single source of truth) or direct copies into each tool's folder (useful if you want divergent versions per assistant).
+
+<Callout variant="tip" title="Portability">
+  Use `npx skills add`: the CLI automatically creates symlinks for Claude Code, Cursor, Copilot, and
+  the rest. One file to maintain, all your assistants in sync.
+</Callout>
+
+## Why not just use an MCP / a prompt / a tool?
+
+All three already exist. The question is fair.
+
+<Mermaid
+  chart={`
+    flowchart TB
+      P["📋 System instructions
+      Global project context
+      (always in memory)"]
+      S["🎯 Skills
+      Task-specific expertise
+      (loaded on demand)"]
+      T["⚡ Tools and MCPs
+      Action capabilities"]
+      P --> A[Agent]
+      S --> A
+      T --> A
+      A --> R[Response]
+  `}
+  caption="Three distinct primitives. Skills sit in the middle: not always loaded, not just capabilities."
+  title="The three agent primitives"
+/>
+
+**System instructions** (CLAUDE.md, .cursorrules...) are always loaded, every session, whether relevant or not. That's fine for global project conventions. But if you have 10 different workflows, you can't dump everything into CLAUDE.md without drowning the agent in context it doesn't need three quarters of the time.
+
+**MCPs** give the agent capabilities: querying a database, calling an API, accessing remote files. They answer "what <Highlight color="orange">can</Highlight> the agent do?". Skills answer "how <Highlight color="orange">should</Highlight> the agent approach this?". Not the same question. A web search MCP doesn't know which sources you prioritize, or what format you want results in. A skill specifies that. And a skill can describe _how_ and _when_ to use a specific tool or MCP right in its content.
+
+**Tools** (function calling) follow the same logic as MCPs: action capabilities. A tool can write a file. It doesn't know your naming conventions, or how you structure your components.
+
+You could load this context manually before each task. A lot of people do, with prompt snippets pasted into their editor. That works, until you forget, or switch machines, or onboard someone new. Skills make the loading automatic, versioned, and shareable. You stop re-explaining yourself.
+
+<Callout variant="info" title="A useful mental model">
+  Prompts, MCPs and tools answer the "what". Skills answer the "how". And the "how" is what varies
+  from team to team, project to project.
+</Callout>
+
+## Best practices and the security trap
+
+### What to commit, what to keep local
+
+Project skills live in `.agents/skills/` or `.claude/skills/` at the repo root. Commit them: they're <Highlight color="green">team artifacts</Highlight>, the same as linters or CI configs. Any dev who clones the repo gets the same workflows.
+
+Personal skills go in `~/.claude/skills/` or `~/.agents/skills/`. Your personal conventions, shortcuts, quirks. Not in the repo.
+
+`settings.local.json` stays local. It contains your personal agent configuration: permissions, preferences, overrides. It's not meant to be shared.
+
+### The trap: prompt injection
+
+<Callout variant="warning" title="Don't copy skills without reading them">
+  A skill loads content directly into your agent's context with a high level of trust. A malicious
+  skill can redirect the agent's behavior, exfiltrate information, or bypass your instructions.
+
+Before installing a skill from skills.sh or any random repo, read the `SKILL.md`. It's markdown,
+not an opaque binary.
+
+</Callout>
+
+This isn't theoretical. The attack vector is straightforward: you install a "handy" skill found online, it contains hidden instructions in the content, your agent executes them without you noticing. Same risk as copying a shell script without reading it.
+
+The rule is the same as with any third-party code: trust sources you know, verify the rest.
+
+## Takeaway
+
+Skills don't replace your tools, MCPs, or system instructions. They fill what was missing between the three: a layer of <Highlight color="purple">procedural expertise</Highlight>, loaded on demand, versioned with your code, shareable across a team.
+
+If you're using Claude Code, Cursor, Copilot, or Gemini CLI today, you can create your first skill in 10 minutes. One `SKILL.md` file, a well-written description, and your next repetitive workflow becomes a command.
+
+The next question is how to organize and share skills as the collection grows. That's what my next post will be about, covering a tool I'm building: SkillForge. 👀
