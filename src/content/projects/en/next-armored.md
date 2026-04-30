@@ -2,7 +2,7 @@
 title: 'Next Armored'
 description: 'NextJs middleware toolkit to secure your application with flexibility and ease. Default configurations are based on best practices and security standards.'
 featured: true
-techStack: ['TypeScript', 'Next.js', 'Node.js', "Security"]
+techStack: ['TypeScript', 'Next.js', 'Node.js', 'Security']
 links:
   demo: 'https://www.npmjs.com/package/next-armored'
   repo: 'https://github.com/marek-e/next-armored'
@@ -12,7 +12,7 @@ imageAlt: 'Next Armored logo - armor with N letter'
 status: 'in-progress'
 ---
 
-Next Armored is a npm package to secure your Next.Js application with flexibility and ease. Default configurations are based on best practices and security standards. 
+Next Armored is a npm package to secure your Next.Js application with flexibility and ease. Default configurations are based on best practices and security standards.
 
 It's my first open-source project. The idea is to create a npm package that allows to secure a Next.Js application, without requiring excessive configuration and knowledge of cybersecurity.
 

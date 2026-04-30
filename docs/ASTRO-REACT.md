@@ -2,18 +2,21 @@
 
 ## Component Placement
 
-| Type | Location | Use Case |
-|------|----------|----------|
-| Static content | `src/components/astro/*.astro` | Headers, cards, layout sections (zero JS) |
-| Interactive | `src/components/react/*.tsx` | State, event handlers, context-dependent UI |
-| shadcn primitives | `src/components/ui/` | Use CLI: `pnpm dlx shadcn@latest add <name>` |
+| Type              | Location                       | Use Case                                     |
+| ----------------- | ------------------------------ | -------------------------------------------- |
+| Static content    | `src/components/astro/*.astro` | Headers, cards, layout sections (zero JS)    |
+| Interactive       | `src/components/react/*.tsx`   | State, event handlers, context-dependent UI  |
+| shadcn primitives | `src/components/ui/`           | Use CLI: `pnpm dlx shadcn@latest add <name>` |
 
 ## Client Directives
 
 ```astro
-<Component client:load />    <!-- Critical: load immediately -->
-<Component client:visible /> <!-- Below fold: lazy load -->
-<Component client:idle />    <!-- Non-critical: after page idle -->
+<Component client:load />
+<!-- Critical: load immediately -->
+<Component client:visible />
+<!-- Below fold: lazy load -->
+<Component client:idle />
+<!-- Non-critical: after page idle -->
 ```
 
 ## React Context in Astro
@@ -51,6 +54,7 @@ MDX components must be React (`.tsx`), not Astro. They render as **static HTML d
 For MDX components needing JavaScript, use the **data-attribute + script** pattern:
 
 **1. Component renders placeholder with data:**
+
 ```tsx
 export function Mermaid({ chart }: Props) {
   return (
@@ -62,6 +66,7 @@ export function Mermaid({ chart }: Props) {
 ```
 
 **2. Page script initializes client-side:**
+
 ```astro
 <script>
   function initMermaid() {
@@ -79,9 +84,9 @@ export function Mermaid({ chart }: Props) {
 
 ## Rendering Modes
 
-| Content | Rendering | JavaScript |
-|---------|-----------|------------|
-| Pages, blog posts, project details | Static (SSG) | None |
-| Theme toggle | React island | ~2KB |
-| Mobile nav | React island | ~5KB |
-| Contact form | React island | ~3KB |
+| Content                            | Rendering    | JavaScript |
+| ---------------------------------- | ------------ | ---------- |
+| Pages, blog posts, project details | Static (SSG) | None       |
+| Theme toggle                       | React island | ~2KB       |
+| Mobile nav                         | React island | ~5KB       |
+| Contact form                       | React island | ~3KB       |

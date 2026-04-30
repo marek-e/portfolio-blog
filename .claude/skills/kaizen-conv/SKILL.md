@@ -1,6 +1,6 @@
 ---
 description: Analyze Claude conversation export to identify friction points and automation improvements
-argument-hint: "[conversation-file]"
+argument-hint: '[conversation-file]'
 disable-model-invocation: true
 ---
 
@@ -44,14 +44,17 @@ You are provided with a path to a conversation file (exported by `scripts/export
 </instructions>
 
 <output_structure>
+
 # Kaizen Analysis for {conversation filename}
 
 ## Human Feedback Analysis
 
 Flat bullet list of friction points. For each:
+
 - Brief quote or paraphrase of user message → what went wrong
 
 Example:
+
 - User pasted CI `format:verify` failure output → `/validate` should have caught this
 - User said "no, revert your changes" → assistant changed DTO field names instead of recognizing schema mismatch
 - User had to provide "run db:reset" → assistant didn't recognize jOOQ type mismatch pattern
@@ -62,19 +65,21 @@ Indented tree structure where each indent level answers "why?" to the parent.
 When you reach an actionable root cause, number it with an emoji (1️⃣, 2️⃣, 3️⃣, etc.)
 
 To build this tree:
+
 - **Read the relevant slash commands** in `.claude/commands/`
 - **Read the relevant documentation** in `docs/`
 - **Read the relevant scripts** in `scripts/`
 - Keep asking "why?" until you find something we can fix
 
 Example:
+
 - Assistant tried wrong fixes twice before user provided correct command (`db:reset`)
-    - Assistant didn't recognize that jOOQ type errors mean schema mismatch
-        - No documentation explains this pattern in `docs/backend/migrations.md` 1️⃣
-        - `/validate` command has no diagnostic guidance for common failures 2️⃣
-    - User had to interrupt twice before assistant stopped
-        - Assistant kept trying code fixes instead of stepping back
-            - No instruction in commands to pause and ask user when hitting repeated failures 3️⃣
+  - Assistant didn't recognize that jOOQ type errors mean schema mismatch
+    - No documentation explains this pattern in `docs/backend/migrations.md` 1️⃣
+    - `/validate` command has no diagnostic guidance for common failures 2️⃣
+  - User had to interrupt twice before assistant stopped
+    - Assistant kept trying code fixes instead of stepping back
+      - No instruction in commands to pause and ask user when hitting repeated failures 3️⃣
 
 ## Improvement Suggestions
 
@@ -85,6 +90,7 @@ Reference the numbered root causes and propose concrete changes:
 - 3️⃣ `{file path}`: {specific change to make}
 
 Example:
+
 - 1️⃣ `docs/backend/migrations.md`: Add section "Common jOOQ errors" explaining that type mismatches require `db:reset`, not code changes
 - 2️⃣ `.claude/commands/validate.md`: Add troubleshooting guidance: "If jOOQ compilation fails, run `npm run db:reset`"
 - 3️⃣ `CLAUDE.md`: Add rule: "After 2 failed fix attempts, stop and ask user for guidance"

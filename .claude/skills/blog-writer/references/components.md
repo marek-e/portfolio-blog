@@ -22,17 +22,13 @@ Colors: `yellow` (default) · `red` · `blue` · `green` · `purple` · `orange`
   This breaks in Safari 15.
 </Callout>
 
-<Callout variant="danger">
-  Never commit your .env file.
-</Callout>
+<Callout variant="danger">Never commit your .env file.</Callout>
 
 <Callout variant="success" title="TL;DR">
   The whole post in two sentences.
 </Callout>
 
-<Callout variant="info">
-  Background context worth knowing.
-</Callout>
+<Callout variant="info">Background context worth knowing.</Callout>
 ```
 
 Variants: `info` · `tip` · `warning` · `success` · `danger`
@@ -46,9 +42,7 @@ Variants: `info` · `tip` · `warning` · `success` · `danger`
   Write tests. Not too many. Mostly integration.
 </Citation>
 
-<Citation author="Past me, 2am">
-  It works on my machine is not a deployment strategy.
-</Citation>
+<Citation author="Past me, 2am">It works on my machine is not a deployment strategy.</Citation>
 ```
 
 Props: `author` · `source` · `url` (all optional, but at least one adds credibility)
@@ -57,11 +51,12 @@ Props: `author` · `source` · `url` (all optional, but at least one adds credib
 
 ## `<Toggle>` — collapsible section
 
-```mdx
+````mdx
 <Toggle title="See the full config">
   ```ts
   // verbose config that would break the flow inline
-  ```
+````
+
 </Toggle>
 
 <Toggle title="Why does this even work?" defaultOpen={false}>
@@ -101,13 +96,8 @@ Diagram types: `flowchart` · `sequenceDiagram` · `gitGraph` · `classDiagram` 
 import FileTree from '@/components/mdx/FileTree.astro';
 
 <FileTree>
-- src
-  - components
-    - **mdx**       ← bold = highlighted
-      - Callout.tsx
-  - content
-    - blog
-      - **your-post.mdx**
+  - src - components - **mdx** ← bold = highlighted - Callout.tsx - content - blog -
+  **your-post.mdx**
 </FileTree>
 ```
 

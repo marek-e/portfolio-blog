@@ -13,10 +13,12 @@ description: |
 ## Context
 
 This is a personal dev blog at melmayan.fr (Astro SSG). Blog posts live in:
+
 - `src/content/blog/fr/your-slug.mdx` — French
 - `src/content/blog/en/your-slug.mdx` — English
 
 The full writing guide and component reference are in:
+
 - `docs/BLOG-SCOPE.md` — style philosophy, frontmatter schema, component usage
 - `.claude/skills/blog-writer/_template.mdx` — ready-to-use skeleton (copy into `src/content/blog/<lang>/<slug>.mdx`)
 
@@ -32,7 +34,7 @@ This is an interactive, back-and-forth collaboration — not a one-shot generato
 
 Ask only what you genuinely don't know. If the user gave an outline, extract from it rather than re-asking. Typical gaps to fill:
 
-- **Angle**: what's the *one thing* the reader should walk away knowing?
+- **Angle**: what's the _one thing_ the reader should walk away knowing?
 - **Audience**: fellow devs? beginners? both?
 - **Language**: French, English, or both? (default: both)
 - **Tone**: any specific vibe — tutorial, rant, story, comparison?
@@ -43,6 +45,7 @@ Don't ask all of these as a list. Be conversational. If the outline already answ
 ### 2. Propose a structure
 
 Before writing anything, present a lightweight outline:
+
 - Title (2-3 options)
 - H2 sections with one-line descriptions
 - Where MDX components could add value (suggest specific ones, not generic "add a callout here")
@@ -52,6 +55,7 @@ Get a thumbs up or let the user reshape it.
 ### 3. Write section by section
 
 Write one or two sections at a time. After each batch:
+
 - Show the MDX (formatted, ready to paste)
 - Note component choices and why
 - Ask: "Happy with this direction? Want me to adjust tone/depth before continuing?"
@@ -61,6 +65,7 @@ This catches misalignment early rather than after writing 1500 words.
 ### 4. Produce the final file(s)
 
 When the post is complete and approved, write the actual `.mdx` file(s) to disk:
+
 - French: `src/content/blog/fr/[slug].mdx`
 - English: `src/content/blog/en/[slug].mdx`
 
@@ -70,7 +75,7 @@ Set `draft: true` by default — Marek flips it to `false` when ready to publish
 
 ## Writing Principles (internalize these, don't just follow them)
 
-These come from BLOG-SCOPE.md — understand the *why*:
+These come from BLOG-SCOPE.md — understand the _why_:
 
 **Cut ruthlessly.** The reader's time is finite. If a sentence doesn't move the idea forward, it's a liability. Three tight sentences > one bloated paragraph.
 
@@ -89,6 +94,7 @@ These come from BLOG-SCOPE.md — understand the *why*:
 ## Language
 
 When writing both versions:
+
 - Write FR first (native language, will feel more natural)
 - EN is a translation but not a literal one — adapt idioms, adjust cultural references
 - The slug should be the same in both directories
@@ -100,15 +106,15 @@ When writing both versions:
 
 See `references/components.md` for detailed props and examples.
 
-| When | Use |
-|------|-----|
-| Emphasize a key term inline | `<Highlight color="yellow">` |
-| Flag a gotcha or key warning | `<Callout variant="warning">` |
-| Share a memorable quote or principle | `<Citation>` |
-| Hide verbose code or bonus explainer | `<Toggle>` |
-| Explain a flow or architecture | `<Mermaid>` |
-| Show a file/folder structure | `<FileTree>` (needs import) |
-| Show a screenshot with caption | `<Figure>` (needs import) |
+| When                                 | Use                           |
+| ------------------------------------ | ----------------------------- |
+| Emphasize a key term inline          | `<Highlight color="yellow">`  |
+| Flag a gotcha or key warning         | `<Callout variant="warning">` |
+| Share a memorable quote or principle | `<Citation>`                  |
+| Hide verbose code or bonus explainer | `<Toggle>`                    |
+| Explain a flow or architecture       | `<Mermaid>`                   |
+| Show a file/folder structure         | `<FileTree>` (needs import)   |
+| Show a screenshot with caption       | `<Figure>` (needs import)     |
 
 `Highlight`, `Callout`, `Citation`, `Mermaid`, `Toggle` are globally available — no import needed.
 `FileTree` and `Figure` require an import at the top of the MDX file.

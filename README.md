@@ -19,25 +19,25 @@ pnpm install
 
 Create a `.env` file at the root with the following variables:
 
-| Variable | Description | Required |
-|----------|-------------|----------|
-| `STRAVA_CLIENT_ID` | Strava API client ID | Optional |
-| `STRAVA_CLIENT_SECRET` | Strava API client secret | Optional |
+| Variable               | Description                | Required |
+| ---------------------- | -------------------------- | -------- |
+| `STRAVA_CLIENT_ID`     | Strava API client ID       | Optional |
+| `STRAVA_CLIENT_SECRET` | Strava API client secret   | Optional |
 | `STRAVA_REFRESH_TOKEN` | Strava OAuth refresh token | Optional |
 
 > **Note:** Strava integration is optional. The site builds fine without it—running stats section will just be empty.
 
 ### Commands
 
-| Command | Description |
-|---------|-------------|
-| `pnpm dev` | Start dev server at `localhost:4321` |
-| `pnpm build` | Build production site to `./dist/` |
-| `pnpm preview` | Preview production build locally |
-| `pnpm lint` | Run ESLint |
-| `pnpm lint:fix` | Run ESLint with auto-fix |
-| `pnpm format` | Format code with Prettier |
-| `pnpm format:check` | Check code formatting |
+| Command             | Description                          |
+| ------------------- | ------------------------------------ |
+| `pnpm dev`          | Start dev server at `localhost:4321` |
+| `pnpm build`        | Build production site to `./dist/`   |
+| `pnpm preview`      | Preview production build locally     |
+| `pnpm lint`         | Run ESLint                           |
+| `pnpm lint:fix`     | Run ESLint with auto-fix             |
+| `pnpm format`       | Format code with Prettier            |
+| `pnpm format:check` | Check code formatting                |
 
 ### Project Structure
 
@@ -63,9 +63,11 @@ src/
 ## Design Spec
 
 ### Goal
+
 Create a personal portfolio that proves real competence, shows enthusiasm, and tells a memorable technical story.
 
 **Audience priority:**
+
 1. HR (30–60s scan): clarity, competence, fit
 2. Developers: depth, problem-solving, humility, growth
 

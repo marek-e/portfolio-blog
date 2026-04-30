@@ -65,7 +65,7 @@ function TimelineCard({
 
     return (
       <article
-        className={`timeline-card pointer-events-auto bg-card/80 text-card-foreground ring-foreground/10 w-full max-w-sm rounded-2xl p-5 ring-1 backdrop-blur-xs md:max-w-md md:p-6 ${
+        className={`timeline-card bg-card/80 text-card-foreground ring-foreground/10 pointer-events-auto w-full max-w-sm rounded-2xl p-5 ring-1 backdrop-blur-xs md:max-w-md md:p-6 ${
           isLeft ? 'mr-auto' : 'ml-auto'
         }`}
         style={{
@@ -109,7 +109,7 @@ function TimelineCard({
 
   return (
     <article
-      className={`timeline-card pointer-events-auto bg-card/80 text-card-foreground ring-foreground/10 w-full max-w-sm rounded-2xl p-5 ring-1 backdrop-blur-xs md:max-w-md md:p-6 ${
+      className={`timeline-card bg-card/80 text-card-foreground ring-foreground/10 pointer-events-auto w-full max-w-sm rounded-2xl p-5 ring-1 backdrop-blur-xs md:max-w-md md:p-6 ${
         isLeft ? 'md:mr-auto' : 'md:ml-auto'
       }`}
       style={{

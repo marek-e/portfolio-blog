@@ -1,15 +1,7 @@
 import { type ReactNode } from 'react';
 import { cn } from '@/lib/utils';
 
-type PastelColor =
-  | 'slate'
-  | 'stone'
-  | 'red'
-  | 'orange'
-  | 'green'
-  | 'blue'
-  | 'purple'
-  | 'pink';
+type PastelColor = 'slate' | 'stone' | 'red' | 'orange' | 'green' | 'blue' | 'purple' | 'pink';
 
 interface PastelCardProps {
   label?: string;
@@ -64,7 +56,7 @@ export function PastelCard({ label, emoji, title, color = 'slate', children }: P
   return (
     <div
       className={cn(
-        'not-prose relative flex h-full flex-col rounded-2xl border bg-white p-4 dark:bg-card',
+        'not-prose dark:bg-card relative flex h-full flex-col rounded-2xl border bg-white p-4',
         label ? 'pt-10' : 'pt-4',
         card
       )}
@@ -72,7 +64,7 @@ export function PastelCard({ label, emoji, title, color = 'slate', children }: P
       {label && (
         <span
           className={cn(
-            'absolute left-3 top-3 rounded-lg border px-2 py-0.5 text-[10px] font-semibold tracking-wide uppercase',
+            'absolute top-3 left-3 rounded-lg border px-2 py-0.5 text-[10px] font-semibold tracking-wide uppercase',
             chip
           )}
         >
@@ -82,9 +74,7 @@ export function PastelCard({ label, emoji, title, color = 'slate', children }: P
 
       {emoji && <div className="mb-2 text-3xl">{emoji}</div>}
 
-      {title && (
-        <div className="font-bold text-gray-900 dark:text-gray-100">{title}</div>
-      )}
+      {title && <div className="font-bold text-gray-900 dark:text-gray-100">{title}</div>}
 
       {children && (
         <div className="mt-1 flex-1 text-sm text-gray-600 dark:text-gray-400 [&>p]:m-0">

@@ -1,6 +1,6 @@
 ---
 description: Create a Dantotsu root cause analysis document (in French) after debugging a defect
-argument-hint: "[issue-description]"
+argument-hint: '[issue-description]'
 disable-model-invocation: true
 ---
 
@@ -24,18 +24,19 @@ The Dantotsu will be written in French and saved in `path/to/dantotsus/` to shar
 
 1. **User-facing perspective**: Start with what the user experienced, not technical details
 2. **Causal chain**: Trace events from user impact back to the faulty code line
-3. **Root cause of occurrence**: The misconception that led to writing faulty code ("The developer thought ___, but actually ___")
+3. **Root cause of occurrence**: The misconception that led to writing faulty code ("The developer thought **_, but actually _**")
 4. **Detection failure causes**: Why existing safeguards (typing, linting, tests, code review) didn't catch it
 5. **Countermeasure**: The minimal fix that restores functionality
 6. **Eradication**: Preventing similar defects (code patterns, linter config, team training, similar bugs in codebase)
 
 **Avoid typical mistakes:**
+
 - ❌ "It was just a careless mistake" → No learning
 - ❌ Overly technical perspective → Missing business value
 - ❌ "The code that should have been written" → Not understanding the pattern
 - ❌ Overly vague root causes → Can't connect to daily coding
 - ❌ Unnecessary context → Unclear thinking
-</dantotsu-principles>
+  </dantotsu-principles>
 
 <workflow>
 ## Phase 1: Understanding
@@ -99,9 +100,8 @@ The Dantotsu will be written in French and saved in `path/to/dantotsus/` to shar
    - Explain why this restores functionality
 
    **Root cause analysis & contre-mesures:**
-
    - **Analyse de l'introduction: Pourquoi la ligne a-t-elle été écrite ?**
-     - Dig deep: "The developer thought ___, but actually ___"
+     - Dig deep: "The developer thought **_, but actually _**"
      - Use nested bullet points to show reasoning chain
      - Avoid "I wasn't paying attention" - find the real misconception
 
@@ -136,20 +136,24 @@ The Dantotsu will be written in French and saved in `path/to/dantotsus/` to shar
 <quality-standards>
 
 **Be specific, not vague:**
+
 - ❌ "Le développeur a fait une erreur"
 - ✅ "Le développeur pensait que 'origin' était une URL, mais c'est en fait scheme + hostname + port"
 
 **Focus on learning:**
+
 - Every Dantotsu should teach something new
 - Connect to known patterns and mental models
 - Help the developer improve their business and technical understanding
 
 **User-centric perspective:**
+
 - Start with what the user experienced
 - Technical details serve to explain the user impact
 - Business value should be clear
 
 **Actionable eradication:**
+
 - Specific code patterns to adopt
 - Concrete linter rules to add
 - Clear training topics for the team

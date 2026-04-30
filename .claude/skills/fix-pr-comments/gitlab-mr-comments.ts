@@ -46,7 +46,9 @@ function main(): void {
   const projectPath = getProjectPath();
   const mrInfo = JSON.parse(exec(`glab api "/projects/${projectPath}/merge_requests/${mrId}"`));
 
-  const discussionsOutput = exec(`glab api "/projects/${projectPath}/merge_requests/${mrId}/discussions" --paginate`);
+  const discussionsOutput = exec(
+    `glab api "/projects/${projectPath}/merge_requests/${mrId}/discussions" --paginate`
+  );
   const allNotes: Note[] = discussionsOutput
     .trim()
     .split('\n')
@@ -63,7 +65,8 @@ function main(): void {
       const lineEnd = n.position.new_line ?? n.position.line_range.end.new_line ?? 1;
       const rangeStart = n.position.line_range.start.new_line;
       const rangeEnd = n.position.line_range.end.new_line;
-      const lineStart = (rangeStart !== null && rangeEnd !== null && rangeEnd === lineEnd) ? rangeStart : lineEnd;
+      const lineStart =
+        rangeStart !== null && rangeEnd !== null && rangeEnd === lineEnd ? rangeStart : lineEnd;
       return {
         author: n.author.username,
         body: n.body,

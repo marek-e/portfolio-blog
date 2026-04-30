@@ -31,7 +31,7 @@ export function CopyEmailButton({ copiedText = 'Copied!' }: CopyEmailButtonProps
       <span
         className={cn(
           'motion-safe:transition-all motion-safe:duration-300',
-          copied ? 'opacity-0 scale-95' : 'opacity-100 scale-100'
+          copied ? 'scale-95 opacity-0' : 'scale-100 opacity-100'
         )}
       >
         {EMAIL}
@@ -39,7 +39,7 @@ export function CopyEmailButton({ copiedText = 'Copied!' }: CopyEmailButtonProps
       <span
         className={cn(
           'absolute motion-safe:transition-all motion-safe:duration-300',
-          copied ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+          copied ? 'scale-100 opacity-100' : 'scale-95 opacity-0'
         )}
       >
         {copiedText}
@@ -49,14 +49,14 @@ export function CopyEmailButton({ copiedText = 'Copied!' }: CopyEmailButtonProps
           icon={Copy01Icon}
           className={cn(
             'absolute inset-0 size-5 motion-safe:transition-all motion-safe:duration-300',
-            copied ? 'opacity-0 scale-75 rotate-12' : 'opacity-100 scale-100 rotate-0'
+            copied ? 'scale-75 rotate-12 opacity-0' : 'scale-100 rotate-0 opacity-100'
           )}
         />
         <HugeiconsIcon
           icon={Check}
           className={cn(
             'absolute inset-0 size-5 text-green-500 motion-safe:transition-all motion-safe:duration-300',
-            copied ? 'opacity-100 scale-100 rotate-0' : 'opacity-0 scale-75 -rotate-12'
+            copied ? 'scale-100 rotate-0 opacity-100' : 'scale-75 -rotate-12 opacity-0'
           )}
         />
       </span>

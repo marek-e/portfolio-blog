@@ -16,6 +16,7 @@ GitHub auth: !`gh auth status 2>&1`
 GitLab auth: !`glab auth status 2>&1`
 
 Based on the remote URL above:
+
 - If it contains "github":
   - First check the GitHub auth output above. If it shows "Failed to log in" or "not logged in", stop immediately and tell the user to run `gh auth login`
   - Otherwise run: `github-pr-comments.ts $ARGUMENTS`

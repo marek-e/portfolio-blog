@@ -30,10 +30,10 @@ Use theme variables, not raw colors:
 
 Mobile-first with two primary breakpoints:
 
-| Breakpoint | Width | Use Case |
-|------------|-------|----------|
-| Default | < 768px | Mobile |
-| `md:` | ≥ 768px | Tablets and desktop |
+| Breakpoint | Width   | Use Case            |
+| ---------- | ------- | ------------------- |
+| Default    | < 768px | Mobile              |
+| `md:`      | ≥ 768px | Tablets and desktop |
 
 (`lg:` at 1024px is available for optional refinement but not a primary breakpoint)
 

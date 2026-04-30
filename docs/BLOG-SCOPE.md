@@ -33,9 +33,9 @@ Hook (1-2 sentences) → Problem/Context → Solution/Insight → Takeaway
 title: 'Your punchy title here'
 description: 'One-sentence TL;DR that makes someone want to read this.'
 publishDate: 2026-01-01
-tags: ['tag1', 'tag2']        # 2-4 tags max
-draft: true                    # flip to false when ready
-updatedDate: 2026-01-15        # optional, only if meaningfully revised
+tags: ['tag1', 'tag2'] # 2-4 tags max
+draft: true # flip to false when ready
+updatedDate: 2026-01-15 # optional, only if meaningfully revised
 ---
 ```
 
@@ -71,9 +71,7 @@ Use to flag gotchas, tips, warnings. Don't overuse — one per section max.
   This breaks in Safari 15. Yes, really.
 </Callout>
 
-<Callout variant="danger">
-  Never commit your `.env` file. I'm serious.
-</Callout>
+<Callout variant="danger">Never commit your `.env` file. I'm serious.</Callout>
 ```
 
 Variants: `info` · `tip` · `warning` · `success` · `danger`
@@ -89,9 +87,7 @@ Use for memorable quotes from docs, people, or your own past mistakes.
   Write tests. Not too many. Mostly integration.
 </Citation>
 
-<Citation author="Past me, 2am">
-  "It works on my machine" is not a deployment strategy.
-</Citation>
+<Citation author="Past me, 2am">"It works on my machine" is not a deployment strategy.</Citation>
 ```
 
 ---
@@ -100,11 +96,12 @@ Use for memorable quotes from docs, people, or your own past mistakes.
 
 Use for long code examples, "bonus" content, or details that break flow.
 
-```mdx
+````mdx
 <Toggle title="See the full config">
   ```ts
   // 50-line config that would kill the reading flow
-  ```
+````
+
 </Toggle>
 
 <Toggle title="Why does this even work? (bonus explainer)" defaultOpen={false}>
@@ -144,14 +141,8 @@ Use when explaining repo structure or showing "where to put this file".
 import FileTree from '@/components/mdx/FileTree.astro';
 
 <FileTree>
-- src
-  - components
-    - **mdx**          ← the fun stuff lives here
-      - Callout.tsx
-      - Mermaid.tsx
-  - content
-    - blog
-      - **your-post.mdx**
+  - src - components - **mdx** ← the fun stuff lives here - Callout.tsx - Mermaid.tsx - content -
+  blog - **your-post.mdx**
 </FileTree>
 ```
 
@@ -192,16 +183,16 @@ function theInterestingPart(input: string) {
 
 ## Component Cheat Sheet
 
-| Goal | Component |
-|------|-----------|
-| Emphasize a term inline | `<Highlight color="yellow">` |
-| Flag a gotcha | `<Callout variant="warning">` |
-| Share a memorable quote | `<Citation>` |
-| Hide verbose details | `<Toggle>` |
-| Explain a flow/architecture | `<Mermaid>` |
-| Show file structure | `<FileTree>` |
-| Display a screenshot | `<Figure>` |
-| Show code | fenced code block |
+| Goal                        | Component                     |
+| --------------------------- | ----------------------------- |
+| Emphasize a term inline     | `<Highlight color="yellow">`  |
+| Flag a gotcha               | `<Callout variant="warning">` |
+| Share a memorable quote     | `<Citation>`                  |
+| Hide verbose details        | `<Toggle>`                    |
+| Explain a flow/architecture | `<Mermaid>`                   |
+| Show file structure         | `<FileTree>`                  |
+| Display a screenshot        | `<Figure>`                    |
+| Show code                   | fenced code block             |
 
 ---
 

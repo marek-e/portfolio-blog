@@ -22,4 +22,17 @@ export const mdxComponents = {
   // Toggle is added in the page files with client:load
 };
 
-export { Pre, H1, H2, H3, H4, Highlight, Callout, Citation, Mermaid, Toggle, PastelCard, PastelCards };
+export {
+  Pre,
+  H1,
+  H2,
+  H3,
+  H4,
+  Highlight,
+  Callout,
+  Citation,
+  Mermaid,
+  Toggle,
+  PastelCard,
+  PastelCards,
+};

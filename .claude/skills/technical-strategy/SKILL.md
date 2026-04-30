@@ -1,6 +1,6 @@
 ---
 description: Create technical implementation plan from product requirements through discovery, discussion, and strategy phases
-argument-hint: "[feature-or-PRD-link]"
+argument-hint: '[feature-or-PRD-link]'
 disable-model-invocation: true
 ---
 
@@ -47,8 +47,8 @@ Wait for the user's responses before proceeding to Phase 3.
 
 1. **Analysis completion**: Analyze the codebase again with the answers provided by the user. READ all the files you consider important, especially those that are relevant to the feature or examples of similar functionality.
 2. **Create a complete Technical Strategy** using the format template provided below. You are free to adapt it depending on the given task.
-3. **Split it in 
-3. **Ensure consistency** with existing codebase patterns and architectural decisions.
+3. \*\*Split it in
+4. **Ensure consistency** with existing codebase patterns and architectural decisions.
 
 ## Guidelines for Quality Technical Strategies
 
@@ -137,7 +137,6 @@ OR
 <rule></rule>
 ]
 
-
 ## Future Enhancements - Out of scope
 
 [Technical and functional improvements not covered in this strategy]
@@ -153,4 +152,3 @@ The user will provide feature description after this prompt. Process it accordin
 **Feature Description:** $ARGUMENTS
 
 </user-input>
-

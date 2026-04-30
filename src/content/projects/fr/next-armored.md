@@ -2,7 +2,7 @@
 title: 'Next Armored'
 description: 'Toolkit de middleware NextJs pour sécuriser votre application avec flexibilité et simplicité. Les configurations par défaut sont basées sur les meilleures pratiques de sécurité.'
 featured: true
-techStack: ['TypeScript', 'Next.js', 'Node.js', "Security"]
+techStack: ['TypeScript', 'Next.js', 'Node.js', 'Security']
 links:
   repo: 'https://github.com/marek-e/next-armored'
   demo: 'https://www.npmjs.com/package/next-armored'

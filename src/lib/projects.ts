@@ -40,10 +40,10 @@ export function getStatusVariant(
       return 'pastel-green';
     case 'in-progress':
       return 'pastel-blue';
-      case 'archived':
-        return 'pastel-rose';
-      case 'concept':
-        return 'pastel-yellow';
+    case 'archived':
+      return 'pastel-rose';
+    case 'concept':
+      return 'pastel-yellow';
     default:
       return 'outline';
   }

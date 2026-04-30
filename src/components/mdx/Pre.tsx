@@ -11,9 +11,15 @@ interface PreProps {
 
 export function Pre({ children, className, 'data-language': language, ...props }: PreProps) {
   return (
-    <div data-pre className="group border-border shadow-code shadow-primary relative my-6 overflow-hidden rounded-lg border">
+    <div
+      data-pre
+      className="group border-border shadow-code shadow-primary relative my-6 overflow-hidden rounded-lg border"
+    >
       {language && (
-        <div data-language-header className="border-border bg-muted dark:bg-muted/40 relative flex h-10 items-center justify-between">
+        <div
+          data-language-header
+          className="border-border bg-muted dark:bg-muted/40 relative flex h-10 items-center justify-between"
+        >
           <div className="border-primary text-foreground absolute ml-8 h-full rounded-t-lg border-t-2 bg-(--shiki-bg) px-4 py-2 font-mono text-sm">
             {language}
           </div>

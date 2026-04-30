@@ -38,7 +38,9 @@ function main(): void {
   const prInfo = JSON.parse(exec(`gh pr view ${prId} --json number,title,headRefName`)) as GHPRInfo;
 
   // Get review comments (these are the inline code comments)
-  const reviewComments = JSON.parse(exec(`gh api repos/{owner}/{repo}/pulls/${prId}/comments --paginate`)) as GHReviewComment[];
+  const reviewComments = JSON.parse(
+    exec(`gh api repos/{owner}/{repo}/pulls/${prId}/comments --paginate`)
+  ) as GHReviewComment[];
 
   // GitHub doesn't have a "resolved" concept for review comments, but we can check if they're part of a resolved review thread
   // For simplicity, we'll treat all comments as unresolved unless --all is passed

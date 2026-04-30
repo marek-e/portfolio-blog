@@ -8,19 +8,20 @@ image: '/projects/petanque.png'
 imageAlt: 'Petanque game screenshot'
 status: 'completed'
 ---
+
 Dans le cadre du cours d'informatique en première année de prépa, nous avons eu un projet à réaliser en Python.
 L'objectif était de créer un jeu afin de simuler la 2ème loi de Newton.
 Mon groupe et moi avons choisi de créer un jeu de pétanque.
 
 <Callout variant="warning">
-    C'est mon premier projet en Python et c'est très moche. A l'époque, je ne connaissais même pas encore git. Donc soyez indulgents 🤣
+  C'est mon premier projet en Python et c'est très moche. A l'époque, je ne connaissais même pas
+  encore git. Donc soyez indulgents 🤣
 </Callout>
 
-<video controls width="100%" class="rounded-lg" autoplay loop muted >
-    <source src="/projects/petanque.mp4" type="video/mp4" />
-    Your browser doesn't support video playback.
+<video controls width="100%" class="rounded-lg" autoplay loop muted>
+  <source src="/projects/petanque.mp4" type="video/mp4" />
+  Your browser doesn't support video playback.
 </video>
-
 
 <Toggle title="Voir le code source Python">
 
@@ -71,7 +72,7 @@ def Suivant():
     global joueur2
     global abscisse_cochonnet
     global annotation
-    
+
     joueur1=name1.get() #recupere les noms des joueurs dans les Etry
     joueur2=name2.get()
     if joueur1 != joueur2: #verifie que les 2 joueurs on des noms differents
@@ -81,10 +82,10 @@ def Suivant():
         annotation=graph.create_text(x_coch, 325, text="Cochonnet", fill="red", tag='tag1')   # dessine le cochonnet et ajoute des annotations
         annotation2=graph.create_text((40,320), text=joueur1, fill='magenta', tag='tag1')
         annotation3=graph.create_text((40,345), text=joueur2, fill='green', tag='tag1')
-        
+
         txt3.config(text="C'est au tour de "+joueur1+" de jouer !\n Tu tires ou tu pointes ?", fg='white')
         graph.itemconfig('perso_tshirt', fill='magenta')
-        
+
         Page2.forget()
         Page3.pack()
 
@@ -99,20 +100,20 @@ def LANCER():
     global abscisse_boule
     global gagnant
     global dernier_lancer
-    
+
     v0=vit.get() #on recupère les paramètres de lancer
     alpha=angle.get()
-    
+
     graph.itemconfig(annotation,text="") # supprime l'annotation, non nescessaire sur le long terme
     graph.delete(dernier_lancer)
-    
+
     joueur_en_cours=a_qui_de_jouer()
     h0=r.uniform(0.95,1.05) # hauteur initiale aléatoire entre 0.95m et 1.05m
     Y0=[0, v0*np.cos(alpha*2*np.pi/360) , h0 , v0*np.sin(alpha*2*np.pi/360)] #conditions initiales
     temps, sol_x_z = Euler(Phi,Y0,tfinal,N) # résolution de l'equa diff : determine une solution numerique
     abscisse_boule , n_sup_a_0 = dichoto(sol_x_z[:,2],sol_x_z[:,0]) # recherche de l'abscisse où la boule touche le sol
     prise_en_compte_du_lancer(joueur_en_cours,abscisse_boule,emplacement_boule)
-    
+
     if joueur1==a_qui_de_jouer(): #Gestion du prochain lancer
         txt3.config(text="C'est au tour de "+joueur1+" de jouer !\n Tu tires ou tu pointes ?", fg='white')
         graph.itemconfig('perso_tshirt', fill='magenta')
@@ -130,26 +131,26 @@ def LANCER():
         graph.update()
         vit.set(0.5)#Remets a zero les curseurs
         angle.set(5)
-    
+
 def Fin():
     '''Determine le gagnant et l'affiche'''
     Page3.forget()
     Page4.pack()
     gagnant = boule_la_plus_proche()
     vic.config(text=gagnant+'\n remporte la manche \n avec '+str(nb_de_points_a_gagner())+' points')
-    
+
 def Rejouer():
     ''' Réinitialise les variables et renvoie à la page1'''
     global nb_boule2
     global nb_boule1
     global emplacement_boule
-    
+
     nb_boule1=3 # réinitialisation des données
     nb_boule2=3
-    emplacement_boule=np.zeros((3,2)) 
+    emplacement_boule=np.zeros((3,2))
     throw_but.config(text='Lancer',command=LANCER,bg="#238DF4",fg='white')
-    graph.delete('tag1') #supprime les elements comportants le tag afin d'enlever les lancers effectués du canvas 
-    
+    graph.delete('tag1') #supprime les elements comportants le tag afin d'enlever les lancers effectués du canvas
+
     Page4.forget()
     Page1.pack() #retourne a la page 1
 
@@ -159,7 +160,7 @@ def Phi(Y,t):
     x2point=xpoint*(-6*np.pi*n*rayon)/m
     z2point=zpoint*(-6*np.pi*n*rayon)/m -g
     return np.array([xpoint,x2point,zpoint,z2point])
-    
+
 def Euler(phi,Y0,tfinal,N):
     h=tfinal/N
     t=np.linspace(0,tfinal,N+1)
@@ -167,14 +168,14 @@ def Euler(phi,Y0,tfinal,N):
     Y[0,:]=Y0[:]
     for k in range(0,N):
         Y[k+1,:]=Y[k,:]+h*phi(Y[k,:],t[k])
-    return t, Y 
-    
+    return t, Y
+
 
 def dichoto(Y,X):
     n=0
     a=0
     b=np.size(X)-1 #nb d'élément dans les listes Y et X
-    while b!=a+1: 
+    while b!=a+1:
         c=int((a+b)/2)
         if Y[a]*Y[c]>0:
             a=c
@@ -193,19 +194,19 @@ def prise_en_compte_du_lancer(joueur_en_cours,abscisse_boule,emplacement_boule):
     global sol_x_z
     global n_sup_a_0
     global dernier_lancer
-    
+
     if joueur_en_cours == joueur1 :
         emplacement_boule[3-nb_boule1 , 0] = abscisse_boule
         nb_boule1=nb_boule1 - 1
-        
+
         x_boule=50+abscisse_boule*50
         graph.create_oval((x_boule-5,295),(x_boule+5,305),fill='magenta', tag='tag1')
         dernier_lancer = graph.create_line(convertForCanvas(sol_x_z[0:n_sup_a_0+1 , 0],sol_x_z[0:n_sup_a_0+1 , 2]),fill='magenta', tag='tag1')
-        
+
     if joueur_en_cours == joueur2 :
         emplacement_boule[3-nb_boule2 , 1] = abscisse_boule
         nb_boule2=nb_boule2 - 1
-        
+
         x_boule=50+abscisse_boule*50
         graph.create_oval((x_boule-5,295),(x_boule+5,305),fill='green', tag='tag1')
         dernier_lancer = graph.create_line(convertForCanvas(sol_x_z[0:n_sup_a_0+1 , 0],sol_x_z[0:n_sup_a_0+1 , 2]),fill='green', tag='tag1')
@@ -214,19 +215,19 @@ def a_qui_de_jouer():
     ''' Renvoi le joueur qui doit effectuer le prohain lancer'''
     if nb_boule1+nb_boule2==6:
         return joueur1
-        
+
     if nb_boule1+nb_boule2==5:
         return joueur2
-        
+
     if nb_boule1 == 0 :
         return joueur2
-        
+
     if nb_boule2 == 0 :
         return joueur1
     else:
         if boule_la_plus_proche() == joueur1 :
             return joueur2
-        
+
         if boule_la_plus_proche() == joueur2 :
             return joueur1
 
@@ -239,12 +240,12 @@ def boule_la_plus_proche():
             dist_b_c_1 = abs( emplacement_boule[j,0] - abscisse_cochonnet )
         if dist_b_c_2 > abs( emplacement_boule[j,1] - abscisse_cochonnet ) :
             dist_b_c_2 = abs( emplacement_boule[j,1] - abscisse_cochonnet )
-            
+
     if dist_b_c_1 < dist_b_c_2 : #compare la boule la plus proche du joueur1 avec celle du joueur2
         return joueur1
     else :
         return joueur2
-        
+
 def convertForCanvas(x,y):
     '''Convertie 2 listes en une seule dont les elements sont des couples avec les valeurs des 2 listes de même indice'''
     l=[]
@@ -276,8 +277,8 @@ def nb_de_points_a_gagner():
             if abs(emplacement_boule[i,1]-abscisse_cochonnet)<abs(Boule1-abscisse_cochonnet):
                 point_joueur2=point_joueur2+1 #compte le nombre de boule du j1 qui sont plus proche que la boule la plus proche du joueur 2
         return point_joueur2
-    
-        
+
+
 def quitter(event):
     ''' Evenement qui affiche une confirmation de fermeture de la fenetre'''
     if askyesno('Quitter', 'Êtes-vous sûr de vouloir quitter le jeu ?'):
