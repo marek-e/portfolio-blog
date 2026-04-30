@@ -1,0 +1,28 @@
+.claude/skills/blog-writer/SKILL.md
+  112787e085dd1bd4 85-86,115-116
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "0e1544a78d1f1e711a834efe5aa600de84a35ef9",
+  "prompts": {
+    "112787e085dd1bd4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "09ee026e-415a-4c30-a152-90520936e39f",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Marek Elmayan",
+      "messages": [],
+      "total_additions": 0,
+      "total_deletions": 0,
+      "accepted_lines": 8,
+      "overriden_lines": 0
+    }
+  },
+  "humans": {
+    "h_b7c268b0e33ac7": {
+      "author": "Marek Elmayan"
+    }
+  }
+}
