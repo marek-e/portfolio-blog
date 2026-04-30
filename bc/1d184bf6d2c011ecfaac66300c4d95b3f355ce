@@ -1,0 +1,30 @@
+src/content/blog/fr/hello-world.mdx
+  481fb0fb89efb496 125-135
+src/content/blog/en/hello-world.mdx
+  481fb0fb89efb496 124-134
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "bc1d184bf6d2c011ecfaac66300c4d95b3f355ce",
+  "prompts": {
+    "481fb0fb89efb496": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3beb42f8-b363-462a-8b14-c87cf18dbf6b",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Marek Elmayan",
+      "messages": [],
+      "total_additions": 0,
+      "total_deletions": 0,
+      "accepted_lines": 22,
+      "overriden_lines": 0
+    }
+  },
+  "humans": {
+    "h_b7c268b0e33ac7": {
+      "author": "Marek Elmayan"
+    }
+  }
+}
