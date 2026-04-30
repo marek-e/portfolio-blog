@@ -1,0 +1,51 @@
+src/styles/global.css
+  112787e085dd1bd4 472-517
+src/components/astro/Figure.astro
+  112787e085dd1bd4 7,17,31,34-44
+src/components/mdx/Pre.tsx
+  74d7d1e4bd63f520 14,16
+src/components/astro/CodeToggle.astro
+  74d7d1e4bd63f520 1-14
+src/components/mdx/CodeToggle.tsx
+  74d7d1e4bd63f520 1-41
+src/pages/[...lang]/blog/[slug].astro
+  74d7d1e4bd63f520 19,181
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "0b69e83d34f2f6c41bfab5381d17b1a2c68820e9",
+  "prompts": {
+    "112787e085dd1bd4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "09ee026e-415a-4c30-a152-90520936e39f",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Marek Elmayan",
+      "messages": [],
+      "total_additions": 618,
+      "total_deletions": 198,
+      "accepted_lines": 349,
+      "overriden_lines": 33
+    },
+    "74d7d1e4bd63f520": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "dee8a0d5-75ea-4305-88a6-0e8afaa59c70",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Marek Elmayan",
+      "messages": [],
+      "total_additions": 68,
+      "total_deletions": 16,
+      "accepted_lines": 64,
+      "overriden_lines": 0
+    }
+  },
+  "humans": {
+    "h_b7c268b0e33ac7": {
+      "author": "Marek Elmayan"
+    }
+  }
+}
