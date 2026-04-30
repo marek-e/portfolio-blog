@@ -1,0 +1,28 @@
+src/pages/[...lang]/blog/index.astro
+  481fb0fb89efb496 24
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "b38fb51e2e287d35622b728cb379a9dd44cd61fd",
+  "prompts": {
+    "481fb0fb89efb496": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3beb42f8-b363-462a-8b14-c87cf18dbf6b",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Marek Elmayan",
+      "messages": [],
+      "total_additions": 225,
+      "total_deletions": 99,
+      "accepted_lines": 141,
+      "overriden_lines": 0
+    }
+  },
+  "humans": {
+    "h_b7c268b0e33ac7": {
+      "author": "Marek Elmayan"
+    }
+  }
+}
