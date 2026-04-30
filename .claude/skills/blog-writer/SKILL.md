@@ -82,6 +82,8 @@ These come from BLOG-SCOPE.md — understand the *why*:
 
 **Callouts sparingly.** One `<Callout>` per post is often enough. Three is already too many. Reserve them for genuine gotchas or key insights the reader must not miss.
 
+**Never use em dashes (—).** They are a telltale sign of AI-generated text. Rewrite around them: use a comma, a colon, a period, or restructure the sentence entirely.
+
 ---
 
 ## Language
@@ -110,3 +112,5 @@ See `references/components.md` for detailed props and examples.
 
 `Highlight`, `Callout`, `Citation`, `Mermaid`, `Toggle` are globally available — no import needed.
 `FileTree` and `Figure` require an import at the top of the MDX file.
+
+**`FileTree` always needs a `{/* prettier-ignore */}` comment on the line before it.** Prettier collapses its content into one line on save, which breaks the rendered tree.
