@@ -111,7 +111,13 @@ const readingTime = estimateReadingTime(post.body ?? '');
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbPage>{post.data.title}</BreadcrumbPage>
+            <BreadcrumbPage>
+              <span
+                class="bg-primary/10 text-primary ring-primary/20 rounded-md px-2 py-0.5 font-medium ring-1"
+              >
+                {post.data.title}
+              </span>
+            </BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
