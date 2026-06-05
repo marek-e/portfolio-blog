@@ -4,6 +4,8 @@ export interface StravaActivityRaw {
   name: string;
   type: string;
   sport_type: string;
+  workout_type?: number; // 0=default, 1=race, 2=long run, 3=workout
+  pr_count?: number; // number of personal records set
   distance: number; // meters
   moving_time: number; // seconds
   elapsed_time: number; // seconds
@@ -56,12 +58,15 @@ export interface RunningActivity {
   date: Date;
   distanceKm: number;
   durationMinutes: number;
+  durationSeconds: number; // raw moving_time, used for precise finish time display
   paceMinPerKm: string; // e.g., "5:30"
   elevationGain: number; // meters
   averageHeartRate?: number; // bpm
   routePolyline?: string;
   stravaUrl: string;
   kudos: number;
+  isRace: boolean;
+  isPB: boolean;
 }
 
 export interface RunningStats {

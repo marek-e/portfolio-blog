@@ -90,12 +90,15 @@ function transformActivity(raw: StravaActivityRaw): RunningActivity {
     date: new Date(raw.start_date_local),
     distanceKm: Math.round((raw.distance / 1000) * 100) / 100,
     durationMinutes: Math.round(raw.moving_time / 60),
+    durationSeconds: raw.moving_time,
     paceMinPerKm: speedToPace(raw.average_speed),
     elevationGain: Math.round(raw.total_elevation_gain),
     averageHeartRate: raw.average_heartrate ? Math.round(raw.average_heartrate) : undefined,
     routePolyline: raw.map?.summary_polyline || undefined,
     stravaUrl: `https://www.strava.com/activities/${raw.id}`,
     kudos: raw.kudos_count,
+    isRace: raw.workout_type === 1,
+    isPB: (raw.pr_count ?? 0) > 0,
   };
 }
 
@@ -118,6 +121,7 @@ export async function getRunningActivities(limit: number = 6): Promise<RunningAc
     }
 
     const activities: StravaActivityRaw[] = await response.json();
+    console.log("🚀 ~ getRunningActivities ~ activities:", activities)
 
     // Filter for running activities only
     const runningActivities = activities
