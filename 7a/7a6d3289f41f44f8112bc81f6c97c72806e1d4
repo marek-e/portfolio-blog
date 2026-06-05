@@ -1,0 +1,41 @@
+src/components/mdx/Link.tsx
+  34e280928d32429b 1-16,19-42
+  h_b7c268b0e33ac7 17-18
+src/lib/mermaid-diagrams.ts
+  h_b7c268b0e33ac7 11
+src/pages/[...lang]/blog/[slug].astro
+  h_b7c268b0e33ac7 96,138-139,180
+src/components/mdx/Highlight.tsx
+  h_b7c268b0e33ac7 13-18,25-26
+src/components/mdx/Callout.tsx
+  h_b7c268b0e33ac7 27-28,33-34,39-40,45-46,51-52
+src/components/mdx/index.ts
+  34e280928d32429b 9,13,22,39
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.3",
+  "base_commit_sha": "7a7a6d3289f41f44f8112bc81f6c97c72806e1d4",
+  "prompts": {
+    "34e280928d32429b": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "95c9de1a-9be8-49c1-97b1-fe1a4cea6065",
+        "model": "claude-opus-4-7"
+      },
+      "human_author": "Marek Elmayan",
+      "total_additions": 0,
+      "total_deletions": 0,
+      "accepted_lines": 248,
+      "overriden_lines": 0
+    }
+  },
+  "humans": {
+    "h_34454149dac528": {
+      "author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    },
+    "h_b7c268b0e33ac7": {
+      "author": "Marek Elmayan"
+    }
+  }
+}
