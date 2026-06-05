@@ -1,0 +1,21 @@
+.agents/skills/blog-writer/SKILL.md
+  ai_agent 1-122
+.agents/skills/blog-writer/_template.mdx
+  ai_agent 1-57
+.agents/skills/blog-writer/references/components.md
+  ai_agent 1-122
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.3",
+  "base_commit_sha": "bb496594d02b8ffa4daaf1a96f358542ff6c0db1",
+  "prompts": {},
+  "humans": {
+    "h_34454149dac528": {
+      "author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    },
+    "h_b7c268b0e33ac7": {
+      "author": "Marek Elmayan"
+    }
+  }
+}
