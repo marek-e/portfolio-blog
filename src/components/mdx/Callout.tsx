@@ -24,32 +24,32 @@ const variantConfig: Record<
 > = {
   info: {
     icon: InformationCircleIcon,
-    classes: 'bg-sky-50 border-sky-300 dark:bg-sky-950/30 dark:border-sky-700',
-    iconColor: 'text-sky-600 dark:text-sky-400',
+    classes: 'bg-sky-50 border-sky-300 dark:bg-sky-800/40 dark:border-sky-500',
+    iconColor: 'text-sky-600 dark:text-sky-500',
     titleColor: 'text-sky-800 dark:text-sky-200',
   },
   warning: {
     icon: Alert02Icon,
-    classes: 'bg-amber-50 border-amber-300 dark:bg-amber-950/30 dark:border-amber-700',
-    iconColor: 'text-amber-600 dark:text-amber-400',
+    classes: 'bg-amber-50 border-amber-300 dark:bg-amber-800/40 dark:border-amber-500',
+    iconColor: 'text-amber-600 dark:text-amber-500',
     titleColor: 'text-amber-800 dark:text-amber-200',
   },
   success: {
     icon: CheckmarkCircle03Icon,
-    classes: 'bg-emerald-50 border-emerald-300 dark:bg-emerald-950/30 dark:border-emerald-700',
-    iconColor: 'text-emerald-600 dark:text-emerald-400',
+    classes: 'bg-emerald-50 border-emerald-300 dark:bg-emerald-800/40 dark:border-emerald-500',
+    iconColor: 'text-emerald-600 dark:text-emerald-500',
     titleColor: 'text-emerald-800 dark:text-emerald-200',
   },
   tip: {
     icon: Bulb,
-    classes: 'bg-violet-50 border-violet-300 dark:bg-violet-950/30 dark:border-violet-700',
-    iconColor: 'text-violet-600 dark:text-violet-400',
+    classes: 'bg-violet-50 border-violet-300 dark:bg-violet-900/30 dark:border-violet-500',
+    iconColor: 'text-violet-600 dark:text-violet-500',
     titleColor: 'text-violet-800 dark:text-violet-200',
   },
   danger: {
     icon: CancelCircleIcon,
-    classes: 'bg-red-50 border-red-300 dark:bg-red-950/30 dark:border-red-700',
-    iconColor: 'text-red-600 dark:text-red-400',
+    classes: 'bg-red-50 border-red-300 dark:bg-red-800/40 dark:border-red-500',
+    iconColor: 'text-red-600 dark:text-red-500',
     titleColor: 'text-red-800 dark:text-red-200',
   },
 };

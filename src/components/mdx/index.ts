@@ -6,9 +6,11 @@ import { Citation } from './Citation';
 import { Mermaid } from './Mermaid';
 import { Toggle } from './Toggle';
 import { PastelCard, PastelCards } from './PastelCard';
+import { Link } from './Link';
 
 export const mdxComponents = {
   pre: Pre,
+  a: Link,
   h1: H1,
   h2: H2,
   h3: H3,
@@ -17,6 +19,7 @@ export const mdxComponents = {
   Callout,
   Citation,
   Mermaid,
+  Link,
   PastelCard,
   PastelCards,
   // Toggle is added in the page files with client:load
@@ -33,6 +36,7 @@ export {
   Citation,
   Mermaid,
   Toggle,
+  Link,
   PastelCard,
   PastelCards,
 };

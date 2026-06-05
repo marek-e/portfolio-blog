@@ -8,7 +8,7 @@ export async function initMermaidDiagrams() {
   mermaid.initialize({
     startOnLoad: false,
     theme: isDark ? 'dark' : 'base',
-    securityLevel: 'loose',
+    securityLevel: 'strict',
     fontFamily: 'inherit',
   });
 

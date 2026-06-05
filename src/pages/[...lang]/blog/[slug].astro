@@ -93,7 +93,7 @@ const readingTime = estimateReadingTime(post.body ?? '');
   />
   <Navbar />
   <main class="container mx-auto max-w-6xl px-4 pt-32 pb-8">
-    <div class="mb-10 flex items-center justify-between gap-4">
+    <div class="mb-6 flex items-center justify-between gap-4">
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
@@ -135,6 +135,8 @@ const readingTime = estimateReadingTime(post.body ?? '');
       </a>
     </div>
 
+    <div class="bg-primary/80 mb-6 h-0.5 w-8 rounded-full"></div>
+
     <article>
       <header class="mb-10 space-y-4">
         <div class="text-muted-foreground flex flex-wrap items-center gap-16 text-sm">
@@ -175,7 +177,7 @@ const readingTime = estimateReadingTime(post.body ?? '');
 
       {
         post.data.updatedDate && (
-          <p class="text-muted-foreground text-sm italic">
+          <p class="text-muted-foreground mt-4 text-sm italic">
             {t.blog.updatedOn} {formatDate(post.data.updatedDate, lang)}
           </p>
         )
