@@ -1,0 +1,27 @@
+src/pages/llms.txt.ts
+  s_be34340504cb69::t_885c6838e004e9 1-55
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.3",
+  "base_commit_sha": "ff91a60f9ef24ffdcbad6f5ae2468f196e318919",
+  "prompts": {},
+  "humans": {
+    "h_34454149dac528": {
+      "author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    },
+    "h_b7c268b0e33ac7": {
+      "author": "Marek Elmayan"
+    }
+  },
+  "sessions": {
+    "s_be34340504cb69": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c8f4771f-8b39-4ba7-9d4a-0cf94d518be8",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
