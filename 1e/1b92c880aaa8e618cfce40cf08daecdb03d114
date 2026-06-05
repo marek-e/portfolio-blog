@@ -1,0 +1,38 @@
+src/lib/strava.ts
+  s_0e49a7a6175415::t_01f388afb94dfa 93,100-101
+  h_34454149dac528 124
+src/types/strava.ts
+  s_0e49a7a6175415::t_7e0f117cb1e408 61,68-69
+  s_0e49a7a6175415::t_4eb8113309fa7b 7-8
+src/components/react/RaceActivityCard.tsx
+  s_0e49a7a6175415::t_d68da72d75a6d7 64-66,69,73,78-82
+  s_0e49a7a6175415::t_aa0c367e86d806 1-10,12-46,48-63,67-68,70-72,74-77,83-121,124-126,128-129,131-134,136,138-139,141-147,149-153,155-160,162-167,169-171,174-175,177-179,181-185
+  h_34454149dac528 11,47,122-123,127,130,135,137,140,148,154,161,168,172-173,176,180
+src/components/astro/StravaSection.astro
+  s_0e49a7a6175415::t_08c319c636a02b 4
+  s_0e49a7a6175415::t_219255d01e7587 73-76,78
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.3",
+  "base_commit_sha": "1e1b92c880aaa8e618cfce40cf08daecdb03d114",
+  "prompts": {},
+  "humans": {
+    "h_34454149dac528": {
+      "author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    },
+    "h_b7c268b0e33ac7": {
+      "author": "Marek Elmayan"
+    }
+  },
+  "sessions": {
+    "s_0e49a7a6175415": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "481e35f3-9588-4aa8-b5a9-8efd443f79ea",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
