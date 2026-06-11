@@ -121,7 +121,6 @@ export async function getRunningActivities(limit: number = 6): Promise<RunningAc
     }
 
     const activities: StravaActivityRaw[] = await response.json();
-    console.log("🚀 ~ getRunningActivities ~ activities:", activities)
 
     // Filter for running activities only
     const runningActivities = activities
