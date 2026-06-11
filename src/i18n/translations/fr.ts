@@ -4,6 +4,7 @@ export const fr: UITranslations = {
   nav: {
     projects: 'Projets',
     blog: 'Blog',
+    presentations: 'Présentations',
     design: 'Design',
     contact: 'Contact',
   },
@@ -62,6 +63,7 @@ export const fr: UITranslations = {
     home: 'Accueil',
     blog: 'Blog',
     projects: 'Projets',
+    presentations: 'Présentations',
     contact: 'Contact',
     designSystem: 'Design System',
     backToTop: 'Haut de page',

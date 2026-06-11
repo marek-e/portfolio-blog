@@ -2,6 +2,7 @@ export interface UITranslations {
   nav: {
     projects: string;
     blog: string;
+    presentations: string;
     design: string;
     contact: string;
   };
@@ -52,6 +53,7 @@ export interface UITranslations {
     contact: string;
     blog: string;
     projects: string;
+    presentations: string;
     designSystem: string;
     cv: string;
     backToTop: string;

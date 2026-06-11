@@ -70,6 +70,7 @@ export function MobileMenu({ lang, currentPath }: MobileMenuProps) {
               key={link.href}
               href={link.href}
               className="text-foreground/80 hover:text-foreground hover:bg-primary/20 active:bg-primary/30 flex items-center gap-2 rounded-lg px-4 py-3 text-lg font-medium transition-colors"
+              {...(link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
             >
               <Icon icon={link.icon} strokeWidth={2} className="size-4" />
               {link.label}

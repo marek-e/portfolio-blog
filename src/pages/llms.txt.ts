@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
+import { PRESENTATIONS_URL } from '@/lib/sites';
 
 export const GET: APIRoute = async ({ site }) => {
   const baseUrl = site?.toString().replace(/\/$/, '') ?? 'https://melmayan.fr';
@@ -47,6 +48,7 @@ ${projectLines}
 - [CV/Resume](${baseUrl}/en/curriculum-vitae/): Full professional resume
 - [RSS Feed](${baseUrl}/en/rss.xml): Subscribe to blog updates
 - [Blog index](${baseUrl}/en/blog/): All blog posts
+- [Talks & Presentations](${PRESENTATIONS_URL}): Slide decks from conference talks and meetups
 `;
 
   return new Response(content, {

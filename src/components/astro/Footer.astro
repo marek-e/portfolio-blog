@@ -4,6 +4,7 @@ import { Icon } from '../react/Icon';
 import { Link } from '../ui/button';
 import { Separator } from '../ui/separator';
 import { SOCIALS } from '@/lib/socials';
+import { PRESENTATIONS_URL } from '@/lib/sites';
 import { getTranslations, getLangFromUrl, getTranslatedPath } from '@/i18n';
 import { LanguageSwitcher } from '../react/LanguageSwitcher';
 import { Image } from 'astro:assets';
@@ -23,6 +24,7 @@ const sitemapLinks = [
   { href: '/design-system', label: t.footer.designSystem },
   { href: '/contact', label: t.footer.contact },
   { href: '/curriculum-vitae', label: t.footer.cv },
+  { href: PRESENTATIONS_URL, label: t.footer.presentations, external: true },
 ];
 ---
 
@@ -37,9 +39,10 @@ const sitemapLinks = [
         {
           sitemapLinks.map((link) => (
             <Link
-              href={translatePath(link.href)}
+              href={link.external ? link.href : translatePath(link.href)}
               variant="link"
-              className="text-muted-foreground hover:text-foreground w-fit text-sm transition-colors"
+              className="text-muted-foreground hover:text-foreground h-auto w-fit justify-start p-0 text-sm transition-colors"
+              {...(link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
             >
               {link.label}
             </Link>

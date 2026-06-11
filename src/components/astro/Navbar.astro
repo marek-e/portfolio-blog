@@ -34,7 +34,12 @@ const linksClasses =
       </div>
       {
         navLinks.map((link) => (
-          <a href={link.href} class={linksClasses} data-nav-link>
+          <a
+            href={link.href}
+            class={linksClasses}
+            data-nav-link
+            {...(link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+          >
             <Icon icon={link.icon} strokeWidth={2} className="size-4" />
             {link.label}
           </a>
