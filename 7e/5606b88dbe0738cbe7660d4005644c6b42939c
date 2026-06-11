@@ -1,0 +1,49 @@
+src/lib/navigation.ts
+  s_bdf57b38b9b859::t_2de916a49430d2 1,5,14-19
+src/i18n/translations/fr.ts
+  s_bdf57b38b9b859::t_2153e10d7551df 7
+  s_bdf57b38b9b859::t_16e236835b40ce 66
+src/lib/sites.ts
+  s_bdf57b38b9b859::t_9dcf2896eb7a38 1
+src/i18n/ui.ts
+  s_bdf57b38b9b859::t_5af3b6af5ebd35 56
+  s_bdf57b38b9b859::t_ceb379dd3d0904 5
+src/i18n/translations/en.ts
+  s_bdf57b38b9b859::t_85452bae58dbfe 7
+  s_bdf57b38b9b859::t_fa5ced8ef1c224 67
+src/components/react/MobileMenu.tsx
+  s_bdf57b38b9b859::t_dab0c4bb209b6b 73
+src/components/astro/Footer.astro
+  s_bdf57b38b9b859::t_0872aa48b14b62 42,44-45
+  s_bdf57b38b9b859::t_b948bbe99bae85 27
+  s_bdf57b38b9b859::t_e62e38268062fc 7
+src/pages/llms.txt.ts
+  s_bdf57b38b9b859::t_b077f5b19dd567 3
+  s_bdf57b38b9b859::t_111be9ebae4673 51
+src/components/astro/Navbar.astro
+  s_bdf57b38b9b859::t_2582b8f5cb6d5d 37-42
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "7e5606b88dbe0738cbe7660d4005644c6b42939c",
+  "prompts": {},
+  "humans": {
+    "h_34454149dac528": {
+      "author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    },
+    "h_b7c268b0e33ac7": {
+      "author": "Marek Elmayan"
+    }
+  },
+  "sessions": {
+    "s_bdf57b38b9b859": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "092f1f17-40ea-4076-b335-94a9ba155e5b",
+        "model": "composer-2.5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
