@@ -33,6 +33,22 @@ The combination of Slidev and an LLM at your side has quietly crossed a threshol
 
 Slidev compiles a single `slides.md` file into a [Vite](https://vitejs.dev/) + [Vue 3](https://vuejs.org/) SPA. Slides are separated by `---`. Frontmatter sets layout, theme, transitions. You drop Vue components inline, style with [Tailwind](https://tailwindcss.com/), run logic in `<script setup>` blocks. That's the whole mental model.
 
+As the deck grew, I split content into imported files instead of one giant markdown blob:
+
+```md
+---
+src: ./slides/02-the-attack.md
+---
+
+---
+
+src: ./slides/05-dcj.md
+---
+
+```
+
+Slidev merges them at build time. Each section stays small enough for the model to edit without losing context.
+
 ```md
 ---
 layout: center
@@ -136,7 +152,7 @@ That asymmetry is the whole game. AI stops being a productivity tool and becomes
 
 ## Where it actually bites
 
-The model doesn't know everything. When it fails, it fails confidently, with code that looks reasonable, runs without errors, and just quietly does the wrong thing. Two examples from this same deck.
+The model doesn't know everything. When it fails, it fails confidently, with code that looks reasonable, runs without errors, and just quietly does the wrong thing. Four examples from this same deck.
 
 ### The invisible h1
 
@@ -174,9 +190,21 @@ The fix was Slidev's reactive `$clicks` counter:
 
 Adding a brand new `animation` property always starts fresh. No `:has()` trickery needed.
 
+### `mdc: true` ate my layouts
+
+Enabling `mdc: true` globally seemed like a good idea until every `layout: two-cols` slide broke. Slidev's `::left::` / `::right::` slot markers conflict with MDC parsing. The model suggested MDC because it's in the docs. It didn't know this repo uses two-column layouts on half the defense slides.
+
+Fix: leave `mdc: false`, use plain markdown and Vue components instead.
+
+### Self-closing iframes swallowed the rest of the slide
+
+Another silent killer: `<iframe src="..." />` in slide markdown. The self-closing tag confused the parser and ate everything after it on that slide. The model writes JSX-style self-closing tags by default.
+
+Fix: always `<iframe ...></iframe>`. Obvious once you know. Invisible until you don't.
+
 ### The pattern
 
-The model writes code that's idiomatic, modern, and would work in isolation. It breaks at the integration boundary, where Slidev's lifecycle, CSS specificity, or theme defaults intrude. The model can't see those interactions. You have to.
+The model writes code that's idiomatic, modern, and would work in isolation. It breaks at the integration boundary, where Slidev's lifecycle, CSS specificity, theme defaults, or markdown parsing intrude. The model can't see those interactions. You have to.
 
 <Callout variant="warning" title="What you actually need">
   You don't need to know Vue. You need to read code well enough to look at a broken element, form a
@@ -215,6 +243,8 @@ That's fine. Premature optimization for reuse, before you know what's worth reus
 If you give talks, install [Slidev](https://sli.dev/) tonight. Run `npx skills add slidevjs/slidev`. Describe the slide you wish you could build. See what you can pull off.
 
 The presentation tool that feels most like coding is also the one that benefits most from AI. That correlation isn't an accident.
+
+My clickjacking deck started as one animated title and three iframe demos. It ended as a deployed talk with live OAuth, extension clickjacking, a reusable card system, and a `CLAUDE.md` full of pitfalls the model kept stepping in. Same toolchain the whole way.
 
 From there, <Highlight color="blue">your imagination is the only limit</Highlight>.
 
