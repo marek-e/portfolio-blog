@@ -1,0 +1,31 @@
+src/content/blog/en/slidev-ai-stunning-presentations-as-a-developer.mdx
+  s_5666f96c7e0dee::t_d43bf592db2fb5 190
+  s_5666f96c7e0dee::t_276d2d1c15bbaa 260
+  s_5666f96c7e0dee::t_042b6bb7b864d9 46-47
+  s_5666f96c7e0dee::t_0ea39b278d3b76 169
+  s_5666f96c7e0dee::t_3ce7c31154be05 192,194,196,198,200,203-209,212,214,216,218-225,227,229,231,233,235
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "9bc14eb41e4c4afbb87672c82c6c01cdf54b7556",
+  "prompts": {},
+  "humans": {
+    "h_34454149dac528": {
+      "author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    },
+    "h_b7c268b0e33ac7": {
+      "author": "Marek Elmayan"
+    }
+  },
+  "sessions": {
+    "s_5666f96c7e0dee": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "77f4f6a7-e943-4352-ba4b-d48ed6f5b448",
+        "model": "composer-2.5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
