@@ -44,7 +44,6 @@ src: ./slides/02-the-attack.md
 
 src: ./slides/05-dcj.md
 ---
-
 ```
 
 Slidev merges them at build time. Each section stays small enough for the model to edit without losing context.
@@ -129,7 +128,7 @@ Three reasons that matter for developers specifically.
 
 **2. You own the source.** Your deck lives in git as markdown and Vue. You can version it, fork it, host it offline, copy snippets between projects. Gamma and Tome host your decks on their platforms. If they sunset, raise prices, or break the export feature, your work is hostage.
 
-**3. When AI fails, you can fix it.** The bugs from "Where it actually bites" later in this post? On Slidev I opened the file, inspected the element, and pushed back. On Gamma, when the model gets it wrong, you're stuck with a "regenerate" button and hope.
+**3. When AI fails, you can fix it.** On Slidev I opened the file, inspected the element, and pushed back. On Gamma, when the model gets it wrong, you're stuck with a "regenerate" button and hope.
 
 Honest caveat: if you're building a corporate deck with bullet points and stock photos, no-code tools will ship faster than Slidev. The argument here is about _technical talks_, where the <Highlight color="yellow">demos are the message</Highlight>.
 
@@ -150,67 +149,52 @@ The freedom this unlocks is hard to overstate. You can ask the model to _try som
 
 That asymmetry is the whole game. AI stops being a productivity tool and becomes a creative partner.
 
-## Where it actually bites
+## Ship the talk, not just the deck
 
-The model doesn't know everything. When it fails, it fails confidently, with code that looks reasonable, runs without errors, and just quietly does the wrong thing. Four examples from this same deck.
+Slidev isn't just "markdown that renders slides." It ships the whole presentation pipeline, and most of it is what made the clickjacking talk shippable beyond my laptop.
 
-### The invisible h1
+### Deploy in minutes
 
-I picked Slidev's `seriph` theme because the screenshots looked nice. Then my title slide rendered with a giant blank space where "Click" was supposed to be. The text was there in the DOM. It just wasn't visible.
+`pnpm build` exports a static SPA to `dist/`. Point Vercel or Netlify at it, add a SPA fallback rewrite, done. My deck is [live](https://presentations.melmayan.fr/clickjacking): audience can replay the demos after the talk, I send one URL instead of a PDF, and OAuth callbacks get their own route rules in `vercel.json`. No separate hosting setup for "the app" versus "the slides." It's one Vite project.
 
-Turns out seriph applies a gradient effect to every `h1` via `-webkit-text-fill-color: transparent`. My explicit `text-red-600` class did nothing because the fill rule won. The model's first three "fixes" were variations on adding more color classes. None worked. The actual fix was switching themes:
+### HTML files that coexist with your slides
 
-```yaml
----
-theme: geist
----
+Anything in `public/` is served as static files at the root URL. That's how the demos work:
+
+```
+public/
+  victims/
+    bank.html              ← fake SecureBank transfer page
+    dcj-victim.html        ← DoubleClickjacking popup demo
+    ext-clickjack-demo.html
+  callback/
+    index.html             ← GitHub OAuth redirect handler
 ```
 
-Twenty minutes of debugging for a one-line frontmatter change. The model couldn't see that the _theme_ was the problem because it had no view of seriph's compiled CSS. I had to inspect the element myself, find the offending rule, and feed it back.
+Reference them from Vue components (`victim-url="/victims/bank.html"`), plain slide iframes, or popup launchers. No CDN upload step, no "paste this embed URL" workflow. Drop an HTML file in `public/`, reload, it works in dev and in production. For a security talk where the victim pages _are_ the demo, that alone beats every slide tool I've used.
 
-### Animations that wouldn't retrigger
+### Presenter mode and speaker notes
 
-The cursor animation on the title slide uses `v-click` to stay paused at frame 0 until the user presses space. When the cursor presses down, the word "Click" should grow. Easy, right?
+Press `P` during the talk (or open `/presenter`) for the speaker view: current slide, next slide preview, timer, click step counter. HTML comments at the bottom of a slide become presenter notes, invisible to the audience:
 
-The model's first proposal used a `:has()` selector to react to the cursor's pressing state:
-
-```css
-.title:has(.cursor.pressing) .word {
-  animation: grow 0.4s forwards;
-}
+```md
+<!--
+PRESENTER NOTE:
+Start with opacity at 0 so the audience only sees the prize page.
+Slowly drag the slider to reveal the bank transfer underneath.
+Don't click Authorize on the real GitHub demo.
+-->
 ```
 
-Looks elegant. Doesn't work. `:has()` doesn't reliably re-trigger paused animations when the class mutation happens, because the animation was already started (paused) and the selector match doesn't restart it.
+Every live demo slide in my deck has notes like this. Rehearsal script lives in the repo, versioned with the slides, not scribbled in Keynote's speaker notes panel where nobody else can see it.
 
-The fix was Slidev's reactive `$clicks` counter:
+### Export when someone asks for "the slides"
 
-```vue
-<span :class="{ 'cj-growing': $clicks >= 1 }">Click</span>
-```
+`pnpm export` (backed by `slidev export`) spits out PDF or PPTX when an organizer needs a file attachment. I still present from the live SPA because the interactive demos are the point. But having export one command away means you're not maintaining two formats by hand.
 
-Adding a brand new `animation` property always starts fresh. No `:has()` trickery needed.
+### Dev server with hot reload
 
-### `mdc: true` ate my layouts
-
-Enabling `mdc: true` globally seemed like a good idea until every `layout: two-cols` slide broke. Slidev's `::left::` / `::right::` slot markers conflict with MDC parsing. The model suggested MDC because it's in the docs. It didn't know this repo uses two-column layouts on half the defense slides.
-
-Fix: leave `mdc: false`, use plain markdown and Vue components instead.
-
-### Self-closing iframes swallowed the rest of the slide
-
-Another silent killer: `<iframe src="..." />` in slide markdown. The self-closing tag confused the parser and ate everything after it on that slide. The model writes JSX-style self-closing tags by default.
-
-Fix: always `<iframe ...></iframe>`. Obvious once you know. Invisible until you don't.
-
-### The pattern
-
-The model writes code that's idiomatic, modern, and would work in isolation. It breaks at the integration boundary, where Slidev's lifecycle, CSS specificity, theme defaults, or markdown parsing intrude. The model can't see those interactions. You have to.
-
-<Callout variant="warning" title="What you actually need">
-  You don't need to know Vue. You need to read code well enough to look at a broken element, form a
-  hypothesis ("the gradient rule is winning"), and feed it back to the model. Without that baseline
-  literacy, you'd be stuck in a "make the title visible please" loop.
-</Callout>
+`pnpm dev` opens the deck at `localhost:3030` with instant reload on save. Edit a Vue component, see it on the slide immediately. Same loop as frontend dev, which is exactly why AI pair-programming on slides feels natural.
 
 ## When you give a lot of talks: building a factory
 
@@ -244,7 +228,7 @@ If you give talks, install [Slidev](https://sli.dev/) tonight. Run `npx skills a
 
 The presentation tool that feels most like coding is also the one that benefits most from AI. That correlation isn't an accident.
 
-My clickjacking deck started as one animated title and three iframe demos. It ended as a deployed talk with live OAuth, extension clickjacking, a reusable card system, and a `CLAUDE.md` full of pitfalls the model kept stepping in. Same toolchain the whole way.
+My clickjacking deck started as one animated title and three iframe demos. It ended as a deployed talk with live OAuth, extension clickjacking, a reusable card system, and speaker notes on every demo slide. Same toolchain the whole way.
 
 From there, <Highlight color="blue">your imagination is the only limit</Highlight>.
 
