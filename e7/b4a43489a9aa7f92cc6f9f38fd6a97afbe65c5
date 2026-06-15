@@ -1,0 +1,14 @@
+src/content/blog/en/slidev-ai-stunning-presentations-as-a-developer.mdx
+  h_34454149dac528 45,130,151,153,155,157,159,161,164-170,173,175,177,179-186,188,190,192,194,196,230
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "e7b4a43489a9aa7f92cc6f9f38fd6a97afbe65c5",
+  "prompts": {},
+  "humans": {
+    "h_34454149dac528": {
+      "author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
