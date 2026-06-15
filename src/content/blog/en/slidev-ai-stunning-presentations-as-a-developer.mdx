@@ -1,0 +1,226 @@
+---
+title: 'Slidev + AI: easily create stunning presentations as a developer'
+description: 'Why Slidev + AI is the most underrated combo for developers who present. Real examples from a live security demo that would have taken me days to code by hand.'
+publishDate: 2026-05-01
+tags: ['slidev', 'AI', 'vue', 'DX', 'presentations', 'developer-tools']
+draft: false
+---
+
+import Figure from '@/components/astro/Figure.astro';
+import titleAnimation from '@/assets/blog/slidev-ai-stunning-presentations-as-a-developer/clickjacking_start_animation.mp4';
+import bankDemo from '@/assets/blog/slidev-ai-stunning-presentations-as-a-developer/bank_demo.mp4';
+import pastelCardComp from '@/assets/blog/slidev-ai-stunning-presentations-as-a-developer/pastel_card_comp.png';
+
+Last week I built a security talk in [Slidev](https://sli.dev/). Here's the title slide:
+
+<div class="flex justify-center">
+  <video
+    src={titleAnimation}
+    autoplay
+    loop
+    muted
+    playsinline
+    class="border-border my-8 w-1/2 rounded-lg border"
+    aria-label="Slidev title slide: an SVG cursor drops onto the word 'Click', presses, a red ripple expands, and the word grows before auto-advancing"
+  />
+</div>
+
+The cursor drop, the red ripple, the word growth, the auto-advance: I described it in plain English and got working Vue + CSS on the second try. I wrote maybe 10% of the actual code.
+
+The combination of Slidev and an LLM at your side has quietly crossed a threshold for developers who present. Things that used to take <Highlight color="red">four hours of fiddling in Keynote</Highlight>, or weren't reachable at all, are now thirty seconds of describing what you want.
+
+## Why Slidev is built for this
+
+Slidev compiles a single `slides.md` file into a [Vite](https://vitejs.dev/) + [Vue 3](https://vuejs.org/) SPA. Slides are separated by `---`. Frontmatter sets layout, theme, transitions. You drop Vue components inline, style with [Tailwind](https://tailwindcss.com/), run logic in `<script setup>` blocks. That's the whole mental model.
+
+```md
+---
+layout: center
+---
+
+# Clickjacking
+
+<ClickjackDemo
+  victim-url="/victims/bank.html"
+  attacker-title="🎉 You've been selected!"
+  attacker-button="Claim Prize Now 🎁"
+/>
+```
+
+What makes it click with AI isn't a special integration or a clever plugin. It's that Slidev presentations _are_ the web stack. <Highlight color="blue">Markdown, Vue, Tailwind, Vite</Highlight>: four things every coding model has consumed at industrial scale. When you ask for "a cursor that drops onto the title, presses down, bounces, with a red ripple expanding on impact", the model doesn't have to translate from a proprietary slide format. It writes CSS keyframes and a `v-click` directive.
+
+Compare that to Keynote, where your "AI integration" is asking ChatGPT which menu to click in. Or PowerPoint VBA, which every model has seen but none of them want to write.
+
+### And the Slidev team leans into it
+
+This isn't a happy accident. The Slidev team ships an [official skill](https://github.com/slidevjs/slidev/tree/main/skills/slidev) you install in one command:
+
+```bash
+npx skills add slidevjs/slidev
+```
+
+The same CLI I covered in [Agent Skills: The Missing Piece of Your AI Workflow](/en/blog/agent-skills-the-missing-piece-of-your-ai-workflow). Once installed, your agent stops guessing: it knows the layout names, the click directives, the magic-move syntax, the transition options. The hallucination rate on Slidev-specific syntax drops to near zero.
+
+There's also a [VSCode extension](https://sli.dev/guide/work-with-ai) exposing Language Model Tools, so Copilot can introspect your running deck while you build: "what's on the active slide?", "find slides matching this title", "jump to slide N". The model isn't just generating slides anymore. It's navigating the deck with you.
+
+<Callout variant="tip" title="Install it before your next deck">
+  Run `npx skills add slidevjs/slidev` once and your agent gains a real working knowledge of Slidev.
+  Skip this and you'll spend half your prompts correcting frontmatter syntax.
+</Callout>
+
+## No prior Vue experience. Thirty minutes. Working component.
+
+Here's the demo I keep coming back to. Three slides in my [clickjacking deck](https://github.com/marek-e/clickjacking-slidev) need the same trick: an attacker page on the bottom layer with cheesy "🎉 Claim your prize!" copy, a real victim iframe stacked on top at controlled opacity, and a slider that lets the audience drag the deception away in real time. The whole thing lives in one reusable Vue component:
+
+```md
+<ClickjackDemo
+  victim-url="/victims/bank.html"
+  attacker-title="🎉 You've been selected!"
+  attacker-body="Click below to claim your €500 Amazon voucher."
+  attacker-button="Claim Prize Now 🎁"
+  victim-label="SecureBank — Confirm Transfer $500"
+  :height="270"
+/>
+```
+
+That's it. Six props, three slides reuse it with different victim pages. Try doing that in Keynote.
+
+<div class="flex justify-center">
+  <video
+    src={bankDemo}
+    autoplay
+    loop
+    muted
+    playsinline
+    class="border-border my-8 w-3/4 rounded-lg border"
+    aria-label="The bank clickjacking demo: a fake 'Claim your prize' page sits on top, the audience drags a slider, and the real bank transfer page is revealed underneath in real time"
+  />
+</div>
+
+I described what I wanted: "an iframe loading a real page, a fake attacker page underneath visible by default, a range slider that controls the iframe's opacity from 0 to 100, with labels showing what each layer is". The model wrote the whole component: the styling for the slider, the layered `z-index` dance, the `pointer-events: none` trick to keep the attacker layer clickable while the iframe is invisible. <Highlight color="green">Twenty minutes from prompt to a live demo that landed.</Highlight>
+
+The cursor animation from the title slide above? Same story. I described the choreography in plain English (cursor drops in, presses down, ripple expands, word grows, auto-advance after 1.2 seconds) and got it. The model knew about `v-click`, `useNav()`, and Slidev's reactive `$clicks` counter. I didn't.
+
+This is the part PowerPoint and Keynote can't compete with. It's not that their feature set is too small. It's that the gap between _describing what you want_ and _getting working code_ is two orders of magnitude larger when there's no code in the loop.
+
+## "Why not just use a no-code AI tool?"
+
+Fair question. [Gamma](https://gamma.app/), [Tome](https://tomeapp.ai/), [Beautiful.ai](https://www.beautiful.ai/) and others generate entire decks from a single prompt. Polished templates, zero learning curve. Why bother with Slidev?
+
+Three reasons that matter for developers specifically.
+
+**1. The customization ceiling.** No-code tools have a fixed component library. Perfect for "Q3 revenue, bullet points, a chart". A wall when you want a live iframe with an opacity slider, a Monaco editor running real code, or a custom SVG cursor animation. Slidev's ceiling is "anything you can build with Vue + Tailwind", which means: <Highlight color="yellow">anything</Highlight>.
+
+**2. You own the source.** Your deck lives in git as markdown and Vue. You can version it, fork it, host it offline, copy snippets between projects. Gamma and Tome host your decks on their platforms. If they sunset, raise prices, or break the export feature, your work is hostage.
+
+**3. When AI fails, you can fix it.** The bugs from "Where it actually bites" later in this post? On Slidev I opened the file, inspected the element, and pushed back. On Gamma, when the model gets it wrong, you're stuck with a "regenerate" button and hope.
+
+Honest caveat: if you're building a corporate deck with bullet points and stock photos, no-code tools will ship faster than Slidev. The argument here is about _technical talks_, where the <Highlight color="yellow">demos are the message</Highlight>.
+
+## Throwaway code is the feature
+
+Open my [clickjacking repo](https://github.com/marek-e/clickjacking-slidev) and notice what's missing: no linter, no tests, no CI, no PR review. The `CLAUDE.md` literally says "No linter or test runner is configured." That's not laziness, it's the right call.
+
+A presentation lives 30 minutes. The audience doesn't review your code. The component you wrote at midnight to float a fake bank page over a real iframe will never be opened again after the talk ends. Optimizing it for maintainability is like writing unit tests for a Post-it note.
+
+<Callout variant="info" title="The mental model that unlocks this">
+  Stop coding presentations like production. No tests. No abstraction. No "what if we need this in
+  six months". You won't. Ship the deck, give the talk, move on.
+</Callout>
+
+This is where Slidev + AI really earns its keep, and where the usual "AI generates slop" critique inverts. In production, slop compounds: every shortcut becomes a 2am page six months later. In a slide deck, slop _evaporates_. The talk happens, the deck gets archived, the worst case is that some animation looked slightly janky for five seconds.
+
+The freedom this unlocks is hard to overstate. You can ask the model to _try something weird_ without weighing it against a maintenance cost. "Make the title shake when I press space." "Add a confetti burst when I reach the conclusion." "Animate every code block character by character on reveal." If it works, it ships. If not, delete the slide and move on. The cost of experimentation drops to zero.
+
+That asymmetry is the whole game. AI stops being a productivity tool and becomes a creative partner.
+
+## Where it actually bites
+
+The model doesn't know everything. When it fails, it fails confidently, with code that looks reasonable, runs without errors, and just quietly does the wrong thing. Two examples from this same deck.
+
+### The invisible h1
+
+I picked Slidev's `seriph` theme because the screenshots looked nice. Then my title slide rendered with a giant blank space where "Click" was supposed to be. The text was there in the DOM. It just wasn't visible.
+
+Turns out seriph applies a gradient effect to every `h1` via `-webkit-text-fill-color: transparent`. My explicit `text-red-600` class did nothing because the fill rule won. The model's first three "fixes" were variations on adding more color classes. None worked. The actual fix was switching themes:
+
+```yaml
+---
+theme: geist
+---
+```
+
+Twenty minutes of debugging for a one-line frontmatter change. The model couldn't see that the _theme_ was the problem because it had no view of seriph's compiled CSS. I had to inspect the element myself, find the offending rule, and feed it back.
+
+### Animations that wouldn't retrigger
+
+The cursor animation on the title slide uses `v-click` to stay paused at frame 0 until the user presses space. When the cursor presses down, the word "Click" should grow. Easy, right?
+
+The model's first proposal used a `:has()` selector to react to the cursor's pressing state:
+
+```css
+.title:has(.cursor.pressing) .word {
+  animation: grow 0.4s forwards;
+}
+```
+
+Looks elegant. Doesn't work. `:has()` doesn't reliably re-trigger paused animations when the class mutation happens, because the animation was already started (paused) and the selector match doesn't restart it.
+
+The fix was Slidev's reactive `$clicks` counter:
+
+```vue
+<span :class="{ 'cj-growing': $clicks >= 1 }">Click</span>
+```
+
+Adding a brand new `animation` property always starts fresh. No `:has()` trickery needed.
+
+### The pattern
+
+The model writes code that's idiomatic, modern, and would work in isolation. It breaks at the integration boundary, where Slidev's lifecycle, CSS specificity, or theme defaults intrude. The model can't see those interactions. You have to.
+
+<Callout variant="warning" title="What you actually need">
+  You don't need to know Vue. You need to read code well enough to look at a broken element, form a
+  hypothesis ("the gradient rule is winning"), and feed it back to the model. Without that baseline
+  literacy, you'd be stuck in a "make the title visible please" loop.
+</Callout>
+
+## When you give a lot of talks: building a factory
+
+The "delete the slide and move on" approach works for a one-off talk. It starts to creak when you give a lot of them.
+
+Present once a quarter and you'll notice patterns: every deck has a similar intro structure, the same transition style, comparable code-walkthrough layouts. You'll also notice you're re-prompting the model for the same components each time. That's the moment to build a factory.
+
+Slidev supports this out of the box:
+
+- **Custom themes** are npm packages exposing layouts and global styles. Build one, reuse it across every deck.
+- **`components/`** ships with every project. Pull your `<ClickjackDemo>`-style helpers into a personal collection.
+- A **snippets folder** for the prompt templates and slide patterns you keep retyping.
+
+Take this three-card explainer from the deck:
+
+<Figure
+  src={pastelCardComp}
+  alt="Three pastel concept cards labelled 'User sees', 'User clicks', and 'Result', explaining clickjacking visually"
+  caption="One Vue component, three props. The kind of thing I'll happily lift into my next deck instead of re-prompting for it."
+/>
+
+It's a single Vue component taking three card props (label, title, body). Designed once, useable in any deck where I need to break a concept into "before / during / after". That's how a factory grows: organically, one "wait, I want this again" at a time.
+
+In practice I haven't done much of this yet. The clickjacking deck is my first non-trivial Slidev project. By talk five or six I'll have extracted my own theme. Until then, every new deck starts as a fresh `npm create slidev`.
+
+That's fine. Premature optimization for reuse, before you know what's worth reusing, is its own trap.
+
+## The takeaway
+
+If you give talks, install [Slidev](https://sli.dev/) tonight. Run `npx skills add slidevjs/slidev`. Describe the slide you wish you could build. See what you can pull off.
+
+The presentation tool that feels most like coding is also the one that benefits most from AI. That correlation isn't an accident.
+
+From there, <Highlight color="blue">your imagination is the only limit</Highlight>.
+
+<Callout variant="success" title="TL;DR">
+  Slidev decks are markdown + Vue + Tailwind: three things every coding model nails. The throwaway
+  lifespan of a slide deck means you can ship AI-generated code without thinking about maintenance.
+  Result: stunning talks built faster than you thought possible, even if (like me) you've never
+  written Vue.
+</Callout>
