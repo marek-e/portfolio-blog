@@ -71,21 +71,31 @@ When the post is complete and approved, write the actual `.mdx` file(s) to disk:
 
 Set `draft: true` by default — Marek flips it to `false` when ready to publish.
 
+### 5. Verify before publishing
+
+Before Marek flips `draft: false`, run the verification battery in BLOG-SCOPE.md. Run the mechanical checks automatically and report the _specific failing sentences_: the intensifier sweep (superlatives in the body with no referent), byline-swap suspects (sentences a generic dev could have written), sections missing an unfakeable detail, and the deletion pass. Leave the judgment calls (thesis, objection, abandonment, voice) to Marek. The single proxy for the whole thing: would he send this to one smart friend in the domain who'd learn something new?
+
 ---
 
 ## Writing Principles (internalize these, don't just follow them)
 
-These come from BLOG-SCOPE.md — understand the _why_:
+These come from BLOG-SCOPE.md — understand the _why_. The full quality model and the pre-publish verification battery live there; read it first.
 
-**Cut ruthlessly.** The reader's time is finite. If a sentence doesn't move the idea forward, it's a liability. Three tight sentences > one bloated paragraph.
+**North star: earned insight density.** Maximise non-obvious claims only Marek could make because he did the thing, per minute of reading, under a hard non-abandonment cap. Everything below serves this. The model's two enemies here pull opposite ways: padding (lowers density) and exaggeration (destroys the "earned" half, reads as confidence).
 
-**Human first.** Marek has opinions, makes mistakes, has been burned by bad DX. Let that show. "I wasted two hours on this" is more valuable than "this approach has drawbacks".
+**One contestable thesis.** One sentence, written before drafting, that a competent peer could disagree with. A topic is not a thesis. Every section feeds it; tangents die for it.
 
-**Humor as punctuation.** One dry observation per section is better than trying to be funny every line. Real experience beats invented jokes.
+**Earn it or cut it.** Each load-bearing section needs a verifiable artifact plus one unfakeable detail (a number, a trick, a scar). A section a generic dev could have written without doing the thing is off-mission.
 
-**Show the component, don't just describe.** If you're explaining a concept, a `<Mermaid>` diagram or `<FileTree>` is often clearer than a paragraph. Always ask: is there a visual that replaces this text?
+**Density wins; brevity is the side effect.** Judge each sentence by insight-per-word: cut flabby ones at any length, protect dense-but-long ones at any length. No target length. "5-line paragraph" is a smell test, never a reason to split a dense passage. Pace the load: a short release line after every dense passage.
 
-**Callouts sparingly.** One `<Callout>` per post is often enough. Three is already too many. Reserve them for genuine gotchas or key insights the reader must not miss.
+**Hype is a check the title writes and the body cashes.** Title and description may use intensifiers (the click, the SEO). The body may not: every superlative there points to a referent or gets cut. Quantify, don't amplify.
+
+**Voice is visible judgment.** Opinions, taste, verdicts a neutral writer would never commit to, not just contractions. Byline-swap test: if another competent dev could have written the sentence unchanged, it's generic. Pull opinions out of Marek; don't generate them.
+
+**Steelman the strongest objection.** Name the one counter that would nag the reader, give it its best version, then concede a bounded case or refute it. Caveats bound the claim, never hedge it.
+
+**Show the component, two classes.** Load-bearing visuals (the insight IS the visual: demo video, flow diagram) — maximise. Emphasis components (`<Highlight>`, `<Callout>`: point at insight, add none) — ration; one Callout is often enough, three is too many (advisory).
 
 **Never use em dashes (—).** They are a telltale sign of AI-generated text. Rewrite around them: use a comma, a colon, a period, or restructure the sentence entirely.
 
