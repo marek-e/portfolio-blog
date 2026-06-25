@@ -1,0 +1,23 @@
+docs/BLOG-SCOPE.md
+  s_e103b693a22227::t_486f6d8b55ee45 5,7,9,11-33
+  s_e103b693a22227::t_69d0f3432b3564 221-235,237-241
+.claude/skills/blog-writer/SKILL.md
+  s_e103b693a22227::t_5c8a21c2e9a704 74-77
+  s_e103b693a22227::t_9ec3b24a1728a4 82-88,90,92,94,96,98
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.1",
+  "base_commit_sha": "e03686c78954f8d582e81861649e52074651398b",
+  "prompts": {},
+  "sessions": {
+    "s_e103b693a22227": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "78f43ba7-976b-4262-a7b3-21d0262cb12c",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
