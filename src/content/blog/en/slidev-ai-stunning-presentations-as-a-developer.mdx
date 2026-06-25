@@ -1,8 +1,8 @@
 ---
 title: 'Slidev + AI: easily create stunning presentations as a developer'
 description: 'Why Slidev + AI is the most underrated combo for developers who present. Real examples from a live security demo that would have taken me days to code by hand.'
-publishDate: 2026-05-01
-tags: ['slidev', 'AI', 'vue', 'DX', 'presentations', 'developer-tools']
+publishDate: 2026-06-25
+tags: ['slidev', 'AI', 'vue', 'DX', 'talks', 'developer-tools']
 draft: false
 ---
 
@@ -11,7 +11,7 @@ import titleAnimation from '@/assets/blog/slidev-ai-stunning-presentations-as-a-
 import bankDemo from '@/assets/blog/slidev-ai-stunning-presentations-as-a-developer/bank_demo.mp4';
 import pastelCardComp from '@/assets/blog/slidev-ai-stunning-presentations-as-a-developer/pastel_card_comp.png';
 
-Last week I built a security talk in [Slidev](https://sli.dev/). Here's the title slide:
+Last week I built a security talk with AI and [Slidev](https://sli.dev/). Here's the title slide:
 
 <div class="flex justify-center">
   <video
@@ -35,34 +35,22 @@ Slidev compiles a single `slides.md` file into a [Vite](https://vitejs.dev/) + [
 
 As the deck grew, I split content into imported files instead of one giant markdown blob:
 
+{/* prettier-ignore */}
 ```md
 ---
 src: ./slides/02-the-attack.md
 ---
 
----
+<!-- ... other slides ... -->
 
+---
 src: ./slides/05-dcj.md
 ---
 ```
 
 Slidev merges them at build time. Each section stays small enough for the model to edit without losing context.
 
-```md
----
-layout: center
----
-
-# Clickjacking
-
-<ClickjackDemo
-  victim-url="/victims/bank.html"
-  attacker-title="🎉 You've been selected!"
-  attacker-button="Claim Prize Now 🎁"
-/>
-```
-
-What makes it click with AI isn't a special integration or a clever plugin. It's that Slidev presentations _are_ the web stack. <Highlight color="blue">Markdown, Vue, Tailwind, Vite</Highlight>: four things every coding model has consumed at industrial scale. When you ask for "a cursor that drops onto the title, presses down, bounces, with a red ripple expanding on impact", the model doesn't have to translate from a proprietary slide format. It writes CSS keyframes and a `v-click` directive.
+**What makes it click with AI** isn't a special integration or a clever plugin. It's that Slidev presentations _are_ the web stack. <Highlight color="blue">Markdown, Vue, Tailwind, Vite</Highlight>: four things every coding model has consumed at industrial scale. When you ask for "a cursor that drops onto the title, presses down, bounces, with a red ripple expanding on impact", the model doesn't have to translate from a proprietary slide format. It writes CSS keyframes and a `v-click` directive.
 
 Compare that to Keynote, where your "AI integration" is asking ChatGPT which menu to click in. Or PowerPoint VBA, which every model has seen but none of them want to write.
 
@@ -87,16 +75,18 @@ There's also a [VSCode extension](https://sli.dev/guide/work-with-ai) exposing L
 
 Here's the demo I keep coming back to. Three slides in my [clickjacking deck](https://github.com/marek-e/clickjacking-slidev) need the same trick: an attacker page on the bottom layer with cheesy "🎉 Claim your prize!" copy, a real victim iframe stacked on top at controlled opacity, and a slider that lets the audience drag the deception away in real time. The whole thing lives in one reusable Vue component:
 
-```md
+<div class="mx-auto max-w-xl">
+```vue
 <ClickjackDemo
   victim-url="/victims/bank.html"
   attacker-title="🎉 You've been selected!"
   attacker-body="Click below to claim your €500 Amazon voucher."
   attacker-button="Claim Prize Now 🎁"
-  victim-label="SecureBank — Confirm Transfer $500"
+  victim-label="SecureBank: Confirm Transfer $500"
   :height="270"
 />
 ```
+</div>
 
 That's it. Six props, three slides reuse it with different victim pages. Try doing that in Keynote.
 
@@ -238,3 +228,5 @@ From there, <Highlight color="blue">your imagination is the only limit</Highligh
   Result: stunning talks built faster than you thought possible, even if (like me) you've never
   written Vue.
 </Callout>
+
+The talk is now live at [https://presentations.melmayan.fr/clickjacking](https://presentations.melmayan.fr/clickjacking).
