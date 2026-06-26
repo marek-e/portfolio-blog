@@ -1,0 +1,226 @@
+---
+title: 'Slidev + IA : créer des présentations bluffantes quand on est dev'
+description: "Pourquoi Slidev + IA est le combo le plus sous-coté pour les devs qui présentent, avec des exemples concrets tirés d'une démo de sécurité live qui m'aurait pris des jours à coder à la main."
+publishDate: 2026-06-25
+tags: ['slidev', 'AI', 'vue', 'DX', 'talks']
+draft: false
+---
+
+import Figure from '@/components/astro/Figure.astro';
+import titleAnimation from '@/assets/blog/slidev-ai-stunning-presentations-as-a-developer/clickjacking_start_animation.mp4';
+import bankDemo from '@/assets/blog/slidev-ai-stunning-presentations-as-a-developer/bank_demo.mp4';
+import pastelCardComp from '@/assets/blog/slidev-ai-stunning-presentations-as-a-developer/pastel_card_comp.png';
+
+La semaine dernière, j'ai préparé un talk de cybersécurité avec un agent IA et [Slidev](https://sli.dev/). Voici la slide de titre :
+
+<div class="flex justify-center">
+  <video
+    src={titleAnimation}
+    autoplay
+    loop
+    muted
+    playsinline
+    class="border-border my-8 w-1/2 rounded-lg border"
+    aria-label="Slide de titre Slidev : un curseur SVG tombe sur le mot « Click », appuie, un ripple rouge s'étend, puis le mot grossit avant l'auto-advance"
+  />
+</div>
+
+Le curseur qui tombe, l'onde rouge, le mot qui grossit, l'auto-advance : je l'ai décrit en langage naturel et j'ai obtenu du code Vue et CSS fonctionnel à la 2ème tentative. J'ai écrit peut-être 10 % du code réel.
+
+Le combo Slidev + un LLM à vos côtés a franchi un cap pour les devs qui présentent : plus un outil de présentation est proche du code, plus l'IA en décuple la puissance. Ce qui demandait <Highlight color="red">quatre heures de bricolage dans Keynote</Highlight>, ou n'était tout simplement pas atteignable, tient désormais en trente secondes : décrire ce qu'on veut.
+
+## Pourquoi Slidev est fait pour ça
+
+Slidev compile un unique fichier `slides.md` en une SPA [Vite](https://vitejs.dev/) + [Vue 3](https://vuejs.org/). Les slides sont séparées par `---`. Le frontmatter définit le layout, le thème et les transitions. On ajoute des composants Vue inline, on décrit le style avec [Tailwind](https://tailwindcss.com/), on met de la logique dans des blocs `<script>`.
+
+Quand j'ai vu que mon deck de slide commençait à devenir gros, j'ai découpé le contenu en fichiers importés plutôt qu'en un seul gros blob markdown :
+
+{/* prettier-ignore */}
+```md
+---
+src: ./slides/02-the-attack.md
+---
+
+<!-- ... autres slides ... -->
+
+---
+src: ./slides/05-dcj.md
+---
+```
+
+Slidev les fusionne au build. Et ainsi chaque section reste assez petite pour que le modèle l'édite sans perdre le contexte.
+
+**Ce qui fait que ça matche avec l'IA**, ce n'est pas une intégration spéciale ni un plugin. C'est qu'une présentation Slidev _est_ la stack web. <Highlight color="blue">Markdown, Vue, Tailwind, Vite</Highlight> : quatre choses que tous les modèles de code ont avalées à l'échelle industrielle. Quand vous demandez « un curseur qui tombe sur le titre, appuie, rebondit, avec une onde rouge qui s'étend à l'impact », le modèle n'a rien à traduire depuis un format de slides propriétaire. Il écrit des keyframes CSS et une directive `v-click`.
+
+Comparez à Keynote, où votre « intégration IA » consiste à demander à ChatGPT sur quel menu cliquer. Ou au VBA de PowerPoint, que tous les modèles ont vu passer mais qu'aucun n'a envie d'écrire.
+
+### Et l'équipe Slidev joue le jeu
+
+Ce n'est pas un hasard. L'équipe Slidev a publié un [skill officiel](https://github.com/slidevjs/slidev/tree/main/skills/slidev) qui s'installe en une commande :
+
+```bash
+npx skills add slidevjs/slidev
+```
+
+Le même CLI que celui dont je parlais dans [Agent skills : la pièce manquante de votre workflow IA](/fr/blog/agent-skills-the-missing-piece-of-your-ai-workflow). Une fois installé, votre agent arrête de deviner : il connaît les noms de layouts, les directives de clic, la syntaxe magic-move, les options de transition. Le taux d'hallucination sur la syntaxe propre à Slidev tombe quasi à zéro.
+
+Il y a aussi une [extension VSCode](https://sli.dev/guide/work-with-ai) qui expose des Language Model Tools : Copilot peut inspecter votre deck en cours d'exécution pendant que vous êtes en train de l'éditer. « Qu'y a-t-il sur la slide active ? », « trouve les slides dont le titre correspond à ça », « saute à la slide N ». Le modèle ne se contente plus de générer des slides. Il navigue dans le deck avec vous.
+
+<Callout variant="tip" title="Installez-le avant votre prochain deck">
+  Lancez `npx skills add slidevjs/slidev` une fois et votre agent acquiert une vraie connaissance
+  pratique de Slidev. Sautez cette étape et vous passerez la moitié de vos prompts à corriger la
+  syntaxe du frontmatter.
+</Callout>
+
+## Zéro expérience Vue. Trente minutes. Un composant qui marche.
+
+Voici la démo sur laquelle je reviens plusieurs fois dans mon talk. Trois slides de mon [deck sur le clickjacking](https://github.com/marek-e/clickjacking-slidev) ont besoin du même tour : une page d'un hacker en couche basse avec un texte aguichant « 🎉 Réclamez votre cadeau ! », une vraie iframe avec le site cible empilée par-dessus à opacité contrôlée, et un slider qui permet de faire glisser la tromperie en temps réel. Le tout tient dans un seul composant Vue réutilisable :
+
+<div class="mx-auto max-w-xl">
+```vue
+<ClickjackDemo
+  victim-url="/victims/bank.html"
+  attacker-title="🎉 You've been selected!"
+  attacker-body="Click below to claim your €500 Amazon voucher."
+  attacker-button="Claim Prize Now 🎁"
+  victim-label="SecureBank: Confirm Transfer $500"
+  :height="270"
+/>
+```
+</div>
+
+C'est tout. Six props, trois slides le réutilisent avec des pages victimes différentes. Essayez de faire ça dans Keynote.
+
+<div class="flex justify-center">
+  <video
+    src={bankDemo}
+    autoplay
+    loop
+    muted
+    playsinline
+    class="border-border my-8 w-3/4 rounded-lg border"
+    aria-label="La démo de clickjacking bancaire : une fausse page « Réclamez votre cadeau » est posée par-dessus, le public fait glisser un slider, et la vraie page de virement bancaire est révélée en dessous en temps réel."
+  />
+</div>
+
+J'ai décrit ce que je voulais : « une iframe qui charge une vraie page, une fausse page attaquante en dessous visible par défaut, un slider qui contrôle l'opacité de l'iframe de 0 à 100, avec des labels indiquant ce qu'est chaque couche ». Le modèle a écrit tout le composant : le style du slider, la chorégraphie des `z-index` empilés, l'astuce `pointer-events: none` pour garder la couche attaquante cliquable tant que l'iframe est invisible. <Highlight color="green">Vingt minutes entre le prompt et une démo live qui a fait mouche.</Highlight>
+
+C'est là que PowerPoint et Keynote ne peuvent pas suivre. Ce n'est pas que leur palette de fonctionnalités est trop maigre. C'est que l'écart entre _décrire ce qu'on veut_ et _obtenir du code qui marche_ est deux ordres de grandeur plus grand quand il n'y a pas de code dans la boucle.
+
+## « Pourquoi pas juste un outil IA no-code ? »
+
+Bonne question. [Gamma](https://gamma.app/), [Tome](https://tomeapp.ai/), [Beautiful.ai](https://www.beautiful.ai/) et consorts génèrent des decks entiers à partir d'un seul prompt. Templates soignés, courbe d'apprentissage nulle. Pourquoi s'embêter avec Slidev ?
+
+Trois raisons qui comptent spécifiquement pour les devs.
+
+**1. Le niveau de personnalisation.** Les outils no-code ont une bibliothèque de composants figée. Parfait pour « chiffre d'affaires du Q3, des bullet points, un graphe ». Un mur dès que vous voulez une iframe live avec un slider d'opacité, un éditeur Monaco qui exécute du vrai code, ou une animation de curseur SVG maison. Le plafond de Slidev, c'est « tout ce que vous pouvez construire avec Vue + Tailwind », c'est-à-dire : <Highlight color="yellow">tout</Highlight>.
+
+**2. Vous possédez la source.** Votre deck vit dans git, en markdown et Vue. Vous le versionnez, le forkez, l'hébergez hors ligne, copiez des bouts d'un projet à l'autre. Gamma et Tome hébergent vos decks sur leurs plateformes. S'ils ferment, augmentent leurs prix ou cassent l'export, votre travail est pris en otage.
+
+**3. Quand l'IA échoue, vous corrigez.** Sur Slidev, j'ouvre le fichier, j'inspecte l'élément, je reprends la main. Sur Gamma, quand le modèle se trompe, vous pouvez appuyer une enième fois sur le bouton « regénérer » et prier pour que ça marche.
+
+Mise en garde honnête : si vous montez un deck corporate avec des bullet points et des photos de banque d'images, les outils no-code iront plus vite que Slidev. L'argument ici porte sur les _talks techniques_, où les <Highlight color="yellow">démos portent le message</Highlight> que vous voulez véhiculer.
+
+## Le code jetable, c'est la fonctionnalité
+
+Ouvrez mon [repo clickjacking](https://github.com/marek-e/clickjacking-slidev) et remarquez ce qui manque : pas de linter, pas de tests, pas de CI, pas de revue de PR. Le `CLAUDE.md` dit littéralement « No linter or test runner is configured. » Ce n'est pas de la flemme, c'est le bon choix.
+
+Une présentation vit 30 minutes. Le public ne relit pas votre code. Le composant écrit à minuit pour faire flotter une fausse page de banque par-dessus une vraie iframe ne sera plus jamais rouvert après le talk. L'optimiser pour la maintenabilité, c'est comme écrire des tests unitaires pour un Post-it.
+
+<Callout variant="info" title="Le modèle mental qui débloque tout">
+  Arrêtez de coder vos présentations comme de la prod. Pas de tests. Pas d'abstraction. Pas de « et
+  si on en a besoin dans six mois ». Vous n'en aurez pas besoin. Livrez le deck, donnez le talk,
+  passez à autre chose.
+</Callout>
+
+C'est là que Slidev + IA justifie vraiment son existence, et là où la critique habituelle « l'IA génère du slop » s'inverse. En prod, les erreurs s'accumulent : chaque raccourci peut devenir une alerte à 2h du matin six mois plus tard. Dans un deck, le slop _s'évapore_. Le talk a lieu, le deck est archivé, le pire scénario c'est qu'une animation a eu l'air un peu bancale pendant cinq secondes.
+
+Vous pouvez demander au modèle de _tenter un truc bizarre_ sans réfléchir au coût derrière. « Fais trembler le titre quand j'appuie sur espace. » « Ajoute une explosion de confettis quand j'arrive à la conclusion. » « Anime chaque bloc de code caractère par caractère à l'apparition. » Si ça marche, ça part. Sinon, on supprime la slide et on avance. Le coût de l'expérimentation tombe à zéro. Cette asymétrie, c'est tout l'enjeu. L'IA cesse d'être un outil de productivité pour devenir un partenaire créatif.
+
+## Livrez le talk, pas seulement le deck
+
+Slidev, ce n'est pas juste « du markdown qui rend des slides ». Il embarque toute la chaîne de présentation, et c'est en grande partie ce qui a rendu le talk clickjacking livrable au-delà de mon pc.
+
+### Déployer en quelques minutes
+
+`pnpm build` exporte une SPA statique dans `dist/`. Pointez Vercel ou Netlify dessus, ajoutez une règle de réécriture SPA fallback, terminé. Mon deck est [en ligne](https://presentations.melmayan.fr/clickjacking) : le public peut rejouer les démos après le talk, j'envoie une URL au lieu d'un PDF, et les callbacks OAuth ont leurs propres règles de routage dans `vercel.json`. Pas d'hébergement séparé pour « l'app » d'un côté et « les slides » de l'autre. C'est un seul projet Vite.
+
+### Des fichiers HTML qui cohabitent avec vos slides
+
+Tout ce qui est dans `public/` est servi comme fichier statique à la racine. C'est comme ça que les démos fonctionnent :
+
+```
+public/
+  victims/
+    bank.html              ← fausse page de virement SecureBank
+    dcj-victim.html        ← démo popup DoubleClickjacking
+    ext-clickjack-demo.html
+  callback/
+    index.html             ← handler de redirection OAuth GitHub
+```
+
+Référencez-les depuis des composants Vue (`victim-url="/victims/bank.html"`), des iframes de slide classiques ou des lanceurs de popup. Pas d'étape d'upload sur un CDN, pas de workflow « collez cette URL d'embed ». Déposez un fichier HTML dans `public/`, rechargez, ça marche en dev comme en prod. Pour un talk de cyber où les pages victimes _sont_ la démo, ça suffit à battre tous les autres outils de slides que j'aurais pu utiliser.
+
+### Mode présentateur et notes
+
+Appuyez sur `P` pendant le talk (ou ouvrez `/presenter`) pour la vue présentateur : slide actuelle, aperçu de la suivante, chrono, compteur d'étapes de clic. Les commentaires HTML en bas d'une slide deviennent des notes de présentateur, invisibles pour le public :
+
+```md
+<!--
+NOTE PRÉSENTATEUR :
+Commencer avec l'opacité à 0 pour que le public ne voie que la page cadeau.
+Glisser lentement le slider pour révéler le virement bancaire en dessous.
+Ne pas cliquer sur Authorize sur la vraie démo GitHub.
+-->
+```
+
+Chaque slide de démo live de mon deck a des notes comme ça. Le script de répétition vit dans le repo, versionné avec les slides, pas griffonné dans le panneau de notes de Keynote où personne d'autre ne peut le voir.
+
+### Exporter quand on vous demande « les slides »
+
+`pnpm export` (basé sur `slidev export`) génère un PDF ou un PPTX quand un organisateur a besoin d'une pièce jointe. Je présente quand même depuis la SPA live parce que les démos interactives sont tout l'intérêt. Mais avoir l'export à une commande près veut dire qu'on ne maintient pas deux formats à la main.
+
+### Serveur de dev avec hot reload
+
+`pnpm dev` donne la même feedback loop que pour le dev front classique: modifiez un composant Vue, il est sur la slide avant même que vous ayez changé de fenêtre. C'est cette boucle qui fait que pair-programmer des slides avec une IA paraît naturel.
+
+## Si vous donnez beaucoup de talks : construisez votre usine
+
+Présentez plusieurs fois dans l'année et vous repérerez des patterns : chaque deck a une structure d'intro similaire, le même style de transition, des layouts de code-walkthrough comparables. Vous remarquerez aussi que vous re-promptez le modèle pour les mêmes composants à chaque fois. C'est le moment de construire une usine.
+
+Slidev gère ça nativement :
+
+- Les **thèmes custom** sont des paquets npm exposant layouts et styles globaux. Construisez-en un, réutilisez-le sur chaque deck.
+- Le dossier **`components/`** est livré avec chaque projet. Regroupez vos helpers façon `<ClickjackDemo>` dans une collection perso.
+- Un **dossier de snippets** pour les templates de prompt et les patterns de slides que vous retapez sans arrêt.
+
+Prenez cet explicatif en trois cartes tiré du deck :
+
+<Figure
+  src={pastelCardComp}
+  alt="Trois cartes pastel intitulées « L'utilisateur voit », « L'utilisateur clique » et « Résultat », expliquant le clickjacking visuellement"
+  caption="Un seul composant Vue, trois props. Le genre de truc que je relèverai avec plaisir dans mon prochain deck au lieu de le re-prompter."
+/>
+
+C'est un seul composant Vue qui prend trois props de carte (label, titre, corps). Conçu une fois, utilisable dans n'importe quel deck où j'ai besoin de découper un concept en « avant / pendant / après ». C'est comme ça qu'une usine grandit : organiquement, un « tiens, je reveux ça » à la fois.
+
+En pratique, je n'en ai pas encore fait grand-chose de tout cela. Le deck clickjacking est mon premier projet Slidev. D'ici le cinquième ou sixième talk, j'aurai extrait mon propre thème. En attendant, chaque nouveau deck peut démarrer sur un `npm create slidev` tout neuf.
+
+Et c'est très bien. L'optimisation prématurée de la réutilisation, avant de savoir ce qui mérite d'être réutilisé, est un piège en soi.
+
+## En résumé
+
+Si vous donnez des talks, installez [Slidev](https://sli.dev/) ce soir. Lancez `npx skills add slidevjs/slidev`. Décrivez la slide que vous rêveriez de construire. Voyez ce que vous arrivez à obtenir.
+
+L'outil de présentation qui ressemble le plus à du code est aussi celui qui profite le plus de l'IA. Cette corrélation n'est pas fortuite.
+
+Mon deck clickjacking a démarré avec un titre animé et trois démos d'iframe. Il a fini en talk déployé avec OAuth live, clickjacking d'extension, un système de cartes réutilisable et des notes sur chaque slide de démo. La même toolchain du début à la fin.
+
+À partir de là, la limite, c'est <Highlight color="blue">tout ce que vous arrivez à décrire depuis votre imagination</Highlight>.
+
+<Callout variant="success" title="TL;DR">
+  Les decks Slidev, c'est du markdown + Vue + Tailwind : trois choses que tous les modèles de code
+  maîtrisent. La durée de vie d'un deck fait que vous pouvez livrer du code généré par IA sans
+  penser à la maintenance. Résultat : des talks interactifs et déployés que vous construisez en les
+  décrivant, même si (comme moi) vous n'avez jamais écrit de Vue.
+</Callout>
