@@ -1,0 +1,21 @@
+src/content/blog/en/slidev-ai-stunning-presentations-as-a-developer.mdx
+  s_0d18b95f27733d::t_60e50f65a9bd37 30
+src/content/blog/fr/slidev-ai-stunning-presentations-as-a-developer.mdx
+  s_0d18b95f27733d::t_95298fcdb96511 30
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "642628b134fd5c3894408a082d885909b26288f5",
+  "prompts": {},
+  "sessions": {
+    "s_0d18b95f27733d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2fddfbf1-5e0a-4039-8217-b632e4e6fe98",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
