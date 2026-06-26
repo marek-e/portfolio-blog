@@ -1,8 +1,8 @@
 ---
 title: 'Slidev + AI: easily create stunning presentations as a developer'
-description: 'Why Slidev + AI is the most underrated combo for developers who present. Real examples from a live security demo that would have taken me days to code by hand.'
+description: 'Why Slidev + AI is the most underrated combo for developers who present, with real examples from a live security demo that would have taken me days to code by hand.'
 publishDate: 2026-06-25
-tags: ['slidev', 'AI', 'vue', 'DX', 'talks', 'developer-tools']
+tags: ['slidev', 'AI', 'vue', 'DX', 'talks']
 draft: false
 ---
 
@@ -27,7 +27,7 @@ Last week I built a security talk with AI and [Slidev](https://sli.dev/). Here's
 
 The cursor drop, the red ripple, the word growth, the auto-advance: I described it in plain English and got working Vue + CSS on the second try. I wrote maybe 10% of the actual code.
 
-The combination of Slidev and an LLM at your side has quietly crossed a threshold for developers who present. Things that used to take <Highlight color="red">four hours of fiddling in Keynote</Highlight>, or weren't reachable at all, are now thirty seconds of describing what you want.
+The combination of Slidev and an LLM at your side has quietly crossed a threshold for developers who present, and it points to something counterintuitive: the presentation tool that feels most like writing code is the one AI multiplies hardest. Things that used to take <Highlight color="red">four hours of fiddling in Keynote</Highlight>, or weren't reachable at all, are now thirty seconds of describing what you want.
 
 ## Why Slidev is built for this
 
@@ -135,7 +135,7 @@ A presentation lives 30 minutes. The audience doesn't review your code. The comp
 
 This is where Slidev + AI really earns its keep, and where the usual "AI generates slop" critique inverts. In production, slop compounds: every shortcut becomes a 2am page six months later. In a slide deck, slop _evaporates_. The talk happens, the deck gets archived, the worst case is that some animation looked slightly janky for five seconds.
 
-The freedom this unlocks is hard to overstate. You can ask the model to _try something weird_ without weighing it against a maintenance cost. "Make the title shake when I press space." "Add a confetti burst when I reach the conclusion." "Animate every code block character by character on reveal." If it works, it ships. If not, delete the slide and move on. The cost of experimentation drops to zero.
+You can ask the model to _try something weird_ without weighing it against a maintenance cost. "Make the title shake when I press space." "Add a confetti burst when I reach the conclusion." "Animate every code block character by character on reveal." If it works, it ships. If not, delete the slide and move on. The cost of experimentation drops to zero.
 
 That asymmetry is the whole game. AI stops being a productivity tool and becomes a creative partner.
 
@@ -184,7 +184,7 @@ Every live demo slide in my deck has notes like this. Rehearsal script lives in 
 
 ### Dev server with hot reload
 
-`pnpm dev` opens the deck at `localhost:3030` with instant reload on save. Edit a Vue component, see it on the slide immediately. Same loop as frontend dev, which is exactly why AI pair-programming on slides feels natural.
+`pnpm dev` gives the same edit-and-see-it loop as frontend dev: change a Vue component, it's live on the slide before you've switched windows. That shared loop is exactly why pair-programming slides with an AI feels natural instead of bolted on.
 
 ## When you give a lot of talks: building a factory
 
@@ -220,12 +220,12 @@ The presentation tool that feels most like coding is also the one that benefits 
 
 My clickjacking deck started as one animated title and three iframe demos. It ended as a deployed talk with live OAuth, extension clickjacking, a reusable card system, and speaker notes on every demo slide. Same toolchain the whole way.
 
-From there, <Highlight color="blue">your imagination is the only limit</Highlight>.
+From there, the <Highlight color="blue">ceiling is whatever you can describe in plain English</Highlight>.
 
 <Callout variant="success" title="TL;DR">
   Slidev decks are markdown + Vue + Tailwind: three things every coding model nails. The throwaway
   lifespan of a slide deck means you can ship AI-generated code without thinking about maintenance.
-  Result: stunning talks built faster than you thought possible, even if (like me) you've never
+  Result: interactive, deployed talks you build by describing them, even if (like me) you've never
   written Vue.
 </Callout>
 
