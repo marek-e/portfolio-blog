@@ -1,0 +1,35 @@
+docs/feature/projects-world-p0-plan.md
+  s_94403a7e1e90a0::t_799bbe00b02c1f 70-73
+  s_94403a7e1e90a0::t_c256bc41c0b84b 276-277
+  s_94403a7e1e90a0::t_c21ceb413c9518 25-26,28-30
+  s_94403a7e1e90a0::t_ad171a3fb394f8 407
+  s_94403a7e1e90a0::t_ed994de23bacd7 1-23,27,31-35,37-50,57-63,69,74-99,102-119,138-148,153-168,171-177,184-203,206-224,249,260-275,278-298,306-325,327-329,331-406,408
+  s_94403a7e1e90a0::t_95df6ff123a2d0 64-68
+  s_94403a7e1e90a0::t_2452ae50c048ab 36
+  s_94403a7e1e90a0::t_7de0133929ba02 24,299-305
+  s_94403a7e1e90a0::t_a798d5479c72b3 100-101
+  s_94403a7e1e90a0::t_246088129c984a 225-236
+  s_94403a7e1e90a0::t_31d1057ee260e6 326,330
+  s_94403a7e1e90a0::t_213c397cd9d597 51-56
+  s_94403a7e1e90a0::t_987c638b438c41 237-248,250-259
+  s_94403a7e1e90a0::t_f3422a5f347a12 178-183
+  s_94403a7e1e90a0::t_ee1bbc617c703d 120-137,149-152
+  s_94403a7e1e90a0::t_67f86fc332a72c 169-170
+  s_94403a7e1e90a0::t_3c8668fcacf5b7 204-205
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.9",
+  "base_commit_sha": "0f5518f4cf297d43956598fd823ed6eb1c9da7dd",
+  "prompts": {},
+  "sessions": {
+    "s_94403a7e1e90a0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "ccf560ea-b041-4a91-a079-fa2cde93027d",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
