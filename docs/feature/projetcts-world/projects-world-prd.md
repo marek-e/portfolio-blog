@@ -1,11 +1,11 @@
 # PRD — Projects World: an interactive 2D island for discovering projects
 
-| | |
-|---|---|
-| **Status** | Draft — approved decisions, pre-implementation |
-| **Route** | `/projects/world` (fr) · `/en/projects/world` (en) |
-| **Owner** | Marek Elmayan |
-| **Date** | 2026-07-02 |
+|            |                                                    |
+| ---------- | -------------------------------------------------- |
+| **Status** | Draft — approved decisions, pre-implementation     |
+| **Route**  | `/projects/world` (fr) · `/en/projects/world` (en) |
+| **Owner**  | Marek Elmayan                                      |
+| **Date**   | 2026-07-02                                         |
 
 ## 1. Overview
 
@@ -13,7 +13,7 @@ A hand-crafted, chill 2D world — a small island village in a clean, modern (no
 
 The existing text-based `/projects` page remains the default, SEO-safe, mobile-friendly variant. The world is a second, cross-linked variant at its own URL. The page is itself a work sample: its polish is the point.
 
-**Why:** the projects page is currently a plain card grid. A memorable, explorable world differentiates the portfolio, showcases front-end craft directly (the medium is the proof), and gives visitors a reason to see *every* project, not just the first row of cards.
+**Why:** the projects page is currently a plain card grid. A memorable, explorable world differentiates the portfolio, showcases front-end craft directly (the medium is the proof), and gives visitors a reason to see _every_ project, not just the first row of cards.
 
 ## 2. Goals
 
@@ -30,31 +30,31 @@ The existing text-based `/projects` page remains the default, SEO-safe, mobile-f
 - **No night/dark variant** of the world — day only (night is phase 2).
 - **No changes to `/projects`** beyond the entry banner and the variant-parity fix (§6.1) — no redesign of the grid.
 - **No multiplayer, no server state** — everything is static build output + `localStorage`.
-- **No blog/contact/CV zones** — the map *hints* at them (a locked building, see §6.3) but they hold no content.
+- **No blog/contact/CV zones** — the map _hints_ at them (a locked building, see §6.3) but they hold no content.
 
 ## 4. Decision record
 
 Decisions locked during the design interview (2026-07-02):
 
-| # | Decision | Choice |
-|---|---|---|
-| 1 | World scope | Projects-first, map designed expandable |
-| 2 | Project representation | Themed landmark + in-game info card linking to detail page |
-| 3 | Spawn house role | Intro/tutorial + 2–3 about-me props |
-| 4 | Map ↔ data | All 6 projects, hand-placed; card content from content collection at build time |
-| 5 | Variant coexistence | Separate route `/projects/world`, cross-linked, no auto-redirect |
-| 6 | Mobile | Desktop V1; mobile teaser page; touch as phase 2; input layer abstract from day 1 |
-| 7 | Engine | Phaser 3, lazy-loaded only on the world route |
-| 8 | Art sourcing | Fully AI-generated first (prompt kit for coherence); HD cartoon pack as fallback |
-| 9 | Map construction | Large painted backgrounds + invisible Tiled collision/interaction shapes + layered prop sprites |
-| 10 | Player character | Cartoon avatar of Marek, 4 static directional poses + procedural motion |
-| 11 | Ambience | Ambient motion layers, no NPCs; simple animals nice-to-have |
-| 12 | Audio | Lofi loop + soft SFX after explicit entry click; persistent mute |
-| 13 | Theme | Day-only V1; night variant phase 2 |
-| 14 | Progression | Discreet "X/6 discovered" tracker, `localStorage`, celebration at 6/6 |
-| 15 | Entry points | Animated banner on `/projects` + footer sitemap link; navbar unchanged |
-| 16 | Setting | Small island village (water bounds the map naturally) |
-| 17 | Rollout | Route stays unlinked until fully polished; single reveal |
+| #   | Decision               | Choice                                                                                          |
+| --- | ---------------------- | ----------------------------------------------------------------------------------------------- |
+| 1   | World scope            | Projects-first, map designed expandable                                                         |
+| 2   | Project representation | Themed landmark + in-game info card linking to detail page                                      |
+| 3   | Spawn house role       | Intro/tutorial + 2–3 about-me props                                                             |
+| 4   | Map ↔ data             | All 6 projects, hand-placed; card content from content collection at build time                 |
+| 5   | Variant coexistence    | Separate route `/projects/world`, cross-linked, no auto-redirect                                |
+| 6   | Mobile                 | Desktop V1; mobile teaser page; touch as phase 2; input layer abstract from day 1               |
+| 7   | Engine                 | Phaser 3, lazy-loaded only on the world route                                                   |
+| 8   | Art sourcing           | Fully AI-generated first (prompt kit for coherence); HD cartoon pack as fallback                |
+| 9   | Map construction       | Large painted backgrounds + invisible Tiled collision/interaction shapes + layered prop sprites |
+| 10  | Player character       | Cartoon avatar of Marek, 4 static directional poses + procedural motion                         |
+| 11  | Ambience               | Ambient motion layers, no NPCs; simple animals nice-to-have                                     |
+| 12  | Audio                  | Lofi loop + soft SFX after explicit entry click; persistent mute                                |
+| 13  | Theme                  | Day-only V1; night variant phase 2                                                              |
+| 14  | Progression            | Discreet "X/6 discovered" tracker, `localStorage`, celebration at 6/6                           |
+| 15  | Entry points           | Animated banner on `/projects` + footer sitemap link; navbar unchanged                          |
+| 16  | Setting                | Small island village (water bounds the map naturally)                                           |
+| 17  | Rollout                | Route stays unlinked until fully polished; single reveal                                        |
 
 ## 5. Users & stories
 
@@ -79,7 +79,7 @@ Decisions locked during the design interview (2026-07-02):
 ### 6.2 Loading & entry screen
 
 1. Navigating to the world route renders instantly: page shell, title, and a branded **loading screen** (island illustration crop, progress bar, one rotating hint like "WASD / arrows to move").
-2. Asset preload runs (paintings, character, props, UI sounds). Music is *not* preloaded — it streams after entry.
+2. Asset preload runs (paintings, character, props, UI sounds). Music is _not_ preloaded — it streams after entry.
 3. When ready, the progress bar becomes an **"Enter the island" button**. This explicit click is the audio-unlock gesture (§10) and the moment the canvas takes focus.
 4. Mobile / small viewports (`< 1024px` or coarse pointer, evaluated once at mount): skip all of the above; render the **teaser** instead — a screenshot of the island, "Best experienced on a desktop", and a prominent link to the text projects page. No engine or world-asset bytes are downloaded (the island's own shell JS — React + teaser/HUD code — necessarily loads before the gate can run; only Phaser and assets sit behind it).
 5. `prefers-reduced-motion`: world loads normally but with ambience animation disabled (§6.9).
@@ -88,7 +88,7 @@ Decisions locked during the design interview (2026-07-02):
 
 A compact island village, ~3–4 viewport-widths across (30–60 s to walk end-to-end). Water bounds every edge — no invisible walls. Layout anchors (final placement during map painting, P1):
 
-- **Marek's house on a small hill** (north) — spawn building. A wooden sign at its door is the *Personal Portfolio* landmark: the house is the portfolio, meta and true.
+- **Marek's house on a small hill** (north) — spawn building. A wooden sign at its door is the _Personal Portfolio_ landmark: the house is the portfolio, meta and true.
 - **Village center** with a fountain or plaza — natural hub the paths radiate from.
 - **Beach + pier** (south) — chill anchor: waves, moored boat, gulls.
 - **The 5 remaining landmarks** (§7) spread so no two are visible in the same screen — exploration must pay off.
@@ -104,16 +104,16 @@ Single small interior room. Purpose: teach the two mechanics (move, interact) th
   2. **Bookshelf** — one-liner about learning/writing (light hook toward the blog).
   3. **Running shoes by the door** — one-liner nodding to the Strava/running section.
 - Interacting with any prop teaches the interact key; the door to outside glows subtly once the player has moved.
-- **Return visits**: spawn *outside* the front door. The house stays enterable. The `world:intro-done` flag is set **the first time the player exits through the front door** (movement + door interaction completed = tutorial done); a visitor who quits mid-intro replays it next visit.
+- **Return visits**: spawn _outside_ the front door. The house stays enterable. The `world:intro-done` flag is set **the first time the player exits through the front door** (movement + door interaction completed = tutorial done); a visitor who quits mid-intro replays it next visit.
 
 ### 6.5 Controls (desktop V1)
 
-| Input | Action |
-|---|---|
+| Input               | Action                                                |
+| ------------------- | ----------------------------------------------------- |
 | `WASD` / arrow keys | Move (8-directional, walk speed only — chill, no run) |
-| `E` / `Enter` | Interact with highlighted landmark/prop |
-| `Esc` | Close card / dismiss |
-| `M` | Toggle mute |
+| `E` / `Enter`       | Interact with highlighted landmark/prop               |
+| `Esc`               | Close card / dismiss                                  |
+| `M`                 | Toggle mute                                           |
 
 - Input goes through an **abstraction layer** (intent-based: `move(vector)`, `interact()`, `dismiss()`) so phase-2 touch (virtual joystick + tap) plugs in without touching game logic (decision #6).
 - When a card is open, world input pauses; focus moves into the card (§6.7).
@@ -127,7 +127,7 @@ Single small interior room. Purpose: teach the two mechanics (move, interact) th
 
 ### 6.7 Project info card
 
-- **DOM overlay** (React + existing shadcn design system) rendered above the canvas — *not* canvas-drawn UI. This buys accessibility, i18n, theme-awareness, and reuse of `Badge`/`Card`/button styles for free.
+- **DOM overlay** (React + existing shadcn design system) rendered above the canvas — _not_ canvas-drawn UI. This buys accessibility, i18n, theme-awareness, and reuse of `Badge`/`Card`/button styles for free.
 - Content, per project, from the content collection at build time: title, description, tech stack badges, status badge, project image, **"View full project"** button → existing detail page (`/projects/[slug]` or `/en/projects/[slug]`).
 - Opens with a quick scale/fade (Pokemon-dialog energy, not a modal thud). Closes via `Esc`, close button, or clicking outside.
 - Card follows the site theme (light/dark); the world behind stays day-lit (decision #13).
@@ -174,14 +174,14 @@ Single small interior room. Purpose: teach the two mechanics (move, interact) th
 
 Card data (title, description, techStack, status, image, detail-page link) is **always** sourced from the content collection — the map only stores slugs. Landmark art is bespoke per project:
 
-| Project | Landmark concept | Why |
-|---|---|---|
-| Personal Portfolio | **The spawn house itself** — wooden sign at the door | The house *is* the portfolio; frees an island slot |
-| Elemix | **Building under construction** — scaffolding, glowing blue component blocks | A framework is scaffolding you build with |
-| Minesweeper LLM Arena | **Mine entrance** — numbered crates, warning flags planted outside | Literal minesweeper iconography |
-| Next-Armored | **Small shield tower / armory** — banner with a shield crest | Security hardening = fortification |
-| Equinox Theme | **Sundial monument** in a clearing — half in warm light, half in cool shadow | Equinox = day/night balance |
-| Petanque | **Petanque court under plane trees** — boules and cochonnet on the ground | Literal, and peak chill |
+| Project               | Landmark concept                                                             | Why                                                |
+| --------------------- | ---------------------------------------------------------------------------- | -------------------------------------------------- |
+| Personal Portfolio    | **The spawn house itself** — wooden sign at the door                         | The house _is_ the portfolio; frees an island slot |
+| Elemix                | **Building under construction** — scaffolding, glowing blue component blocks | A framework is scaffolding you build with          |
+| Minesweeper LLM Arena | **Mine entrance** — numbered crates, warning flags planted outside           | Literal minesweeper iconography                    |
+| Next-Armored          | **Small shield tower / armory** — banner with a shield crest                 | Security hardening = fortification                 |
+| Equinox Theme         | **Sundial monument** in a clearing — half in warm light, half in cool shadow | Equinox = day/night balance                        |
+| Petanque              | **Petanque court under plane trees** — boules and cochonnet on the ground    | Literal, and peak chill                            |
 
 **Adding project #7** (the scaling contract, decision #4): generate one landmark sprite with the prompt kit → in Tiled, place the sprite reference plus a collision shape and an interaction zone carrying the project's slug. The Tiled file is the single source of the slug ↔ zone mapping (§9.3) — no code changes.
 
@@ -202,18 +202,18 @@ Fixed style parameters:
 
 ### 8.2 Asset inventory & technical specs
 
-| Asset | Spec | Notes |
-|---|---|---|
-| Island painting | 4096×4096 master, exported WebP q80 (~1.5–2.5 MB) | 4096 is the safe GPU texture ceiling; chunk into quadrants if needed (coords stay authoritative, §9.3) |
-| House interior painting | ~1536×1024 WebP | Single room; regenerate at 2× if cover-zoom blur shows on large displays (§6.10) |
-| Character poses | 1 sheet → 4 sliced PNGs, ~256px tall source, rendered ~96–128px | Front / back / left / right (§8.3 sheet trick) |
-| Landmark sprites ×5 + house door sign | Transparent PNG, 512–1024px (sign smaller) | **Always** layered sprites above the painting — required by the §6.6 affordances (glow/outline, checkmark). The map painting leaves cleared sites for them |
-| Ambient sprites | Small transparent PNGs: butterfly (2 frames), gull (2 frames), smoke puff, sparkle, leaf/pollen particle | Forgiving, low consistency risk. Sparkle doubles as the undiscovered-landmark marker (§6.6) |
-| Ambience techniques (not sprites) | Cloud/light drift: large soft translucent shapes scrolled slowly; water shimmer: subtle tween/shader on the shoreline | Implementation techniques, no generation needed |
-| Entry banner strip | ~1600×400 WebP for `/projects` | Dedicated prompt (Step 7) or a crop of the master painting; produced at P2 |
-| Loading-screen crop + teaser image | Crops of the master painting, sized at implementation | Produced at P1/P2 |
-| OG share image | 1200×630 crop of the master painting | Produced at P2 |
-| UI/HUD | None generated — DOM + existing design system | |
+| Asset                                 | Spec                                                                                                                  | Notes                                                                                                                                                      |
+| ------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Island painting                       | 4096×4096 master, exported WebP q80 (~1.5–2.5 MB)                                                                     | 4096 is the safe GPU texture ceiling; chunk into quadrants if needed (coords stay authoritative, §9.3)                                                     |
+| House interior painting               | ~1536×1024 WebP                                                                                                       | Single room; regenerate at 2× if cover-zoom blur shows on large displays (§6.10)                                                                           |
+| Character poses                       | 1 sheet → 4 sliced PNGs, ~256px tall source, rendered ~96–128px                                                       | Front / back / left / right (§8.3 sheet trick)                                                                                                             |
+| Landmark sprites ×5 + house door sign | Transparent PNG, 512–1024px (sign smaller)                                                                            | **Always** layered sprites above the painting — required by the §6.6 affordances (glow/outline, checkmark). The map painting leaves cleared sites for them |
+| Ambient sprites                       | Small transparent PNGs: butterfly (2 frames), gull (2 frames), smoke puff, sparkle, leaf/pollen particle              | Forgiving, low consistency risk. Sparkle doubles as the undiscovered-landmark marker (§6.6)                                                                |
+| Ambience techniques (not sprites)     | Cloud/light drift: large soft translucent shapes scrolled slowly; water shimmer: subtle tween/shader on the shoreline | Implementation techniques, no generation needed                                                                                                            |
+| Entry banner strip                    | ~1600×400 WebP for `/projects`                                                                                        | Dedicated prompt (Step 7) or a crop of the master painting; produced at P2                                                                                 |
+| Loading-screen crop + teaser image    | Crops of the master painting, sized at implementation                                                                 | Produced at P1/P2                                                                                                                                          |
+| OG share image                        | 1200×630 crop of the master painting                                                                                  | Produced at P2                                                                                                                                             |
+| UI/HUD                                | None generated — DOM + existing design system                                                                         |                                                                                                                                                            |
 
 All world art lives in `public/world/` (Phaser loads assets at runtime, so they must be in `public/`, not `src/assets/` — note this differs from project card images, which live in `src/assets/projects/` and are served content-hashed via `astro:assets`). **A new `/world/*` rule must be added to `public/_headers`** — today only `/_astro/*`, `/bg-*.webp` and `/favicon.svg` get long-lived caching; everything else defaults to 1-hour revalidation, which would re-fetch the multi-MB painting hourly. Use the 1-year-immutable pattern with versioned filenames (e.g. `island-v1.webp`).
 
@@ -221,19 +221,24 @@ All world art lives in `public/world/` (Phaser loads assets at runtime, so they 
 
 **Generation order matters** — each step feeds the next as a reference image:
 
-**Step 1 — Master style frame** (generate first, iterate until loved; it becomes the attached reference for *everything* else):
+**Step 1 — Master style frame** (generate first, iterate until loved; it becomes the attached reference for _everything_ else):
+
 > {STYLE BIBLE}. A small cozy island village seen from above: a wooden house on a grassy hill to the north, a tiny village plaza with a fountain, a sandy beach with a wooden pier to the south, scattered pine and palm trees, flower patches, dirt paths connecting everything, calm turquoise sea surrounding the island. No characters, no text, no UI.
 
 **Step 2 — Full island map** (attach master frame + style bible). The landmarks themselves are **not** painted into the map — they are layered sprites (§6.6/§8.2); the map provides cleared, prepared sites for them:
+
 > Using the exact same art style, palette, perspective and lighting as the attached reference: a complete orthographic game map of the whole island, 1:1 square. Layout: {explicit layout description — house on north hill, plaza center with fountain, beach+pier south, one shuttered library building near the plaza, viewpoint bench on a sea cliff, and five cleared open sites (flattened grass/dirt patches, no structures) at north-east, west, south-west, east, and south-east where landmark objects will be placed separately}. Uniform scale, every area walkable-looking with connecting paths, no characters, no text labels.
 
 **Step 3 — House interior** (attach master frame):
+
 > Same style/perspective/lighting as reference: interior of a small cozy one-room wooden house seen from above — bed, desk with a computer, bookshelf, rug, running shoes by the door, warm morning light through the window. No characters, no text.
 
-**Step 4 — Character sheet** (attach master frame; *one image, four poses* — the single-image trick is what keeps the four directions consistent):
+**Step 4 — Character sheet** (attach master frame; _one image, four poses_ — the single-image trick is what keeps the four directions consistent):
+
 > Same art style as reference: character sheet of one young man ({Marek's description — hair, glasses?, outfit e.g. casual dev: t-shirt, jeans, sneakers}), chibi proportions about 3 heads tall, standing relaxed, shown in exactly 4 views side by side in a row: facing camera, facing away, facing left, facing right. Identical character in all four. Plain flat background, full body, no shadows on ground, no text.
 
 **Step 5 — Landmark sprites** (attach master frame; template per landmark):
+
 > Same style/perspective/lighting as reference: {LANDMARK_DESC from §7 table}, single isolated object/building on a plain flat single-color background for cutout, top-down 3/4 angle matching the reference map. No characters, no text.
 
 **Step 6 — Ambient sprites** (same pattern, tiny subjects).
@@ -242,9 +247,9 @@ All world art lives in `public/world/` (Phaser loads assets at runtime, so they 
 
 ### 8.4 Consistency workflow
 
-1. Never generate without attaching the master style frame *and* pasting the style bible verbatim.
+1. Never generate without attaching the master style frame _and_ pasting the style bible verbatim.
 2. Accept/reject at the **style** level first (palette, outline weight, perspective) before judging content.
-3. Keep a `docs/feature/art/` folder (or Figma page) with every accepted asset — the growing reference set *is* the style guide.
+3. Keep a `docs/feature/art/` folder (or Figma page) with every accepted asset — the growing reference set _is_ the style guide.
 4. Post-process pass per asset: background removal (landmark and ambient sprites), color-balance nudge toward the palette anchors, downscale with sharpening.
 5. **Kill criterion**: if after ~2 focused sessions the island painting can't hold one coherent style, switch to the fallback — buy one HD cartoon top-down pack family (single artist, CraftPix/itch.io, ~$20–60) for terrain/interior/character and keep AI generation only for the 5 landmark sprites + house sign (decision #8).
 
@@ -284,13 +289,13 @@ src/pages/[...lang]/projects/world.astro   ← static page, SEO shell, teaser, l
 - Collision polygons, interaction zones, spawn points, landmark sprite anchors, and depth hints are drawn as object layers. Export JSON → loaded by Phaser.
 - **Object schema**:
 
-| Object type | Properties | Meaning |
-|---|---|---|
-| `project` | `slug`, `promptOffset: {x, y}` px | Interaction zone; slug is the canonical project slug (§9.4). The zone in Tiled is the **single source** of the slug ↔ landmark mapping |
-| `prop` | `id`, `promptOffset` | House props (desk, bookshelf, shoes), bench, locked building |
-| `door` | `target: sceneKey`, `spawn: name` | Scene transition trigger |
-| `spawn` | `name` | Named spawn point — V1 needs at least `bed` (house) and `outside-front-door` (island) |
-| `landmark-anchor` | `sprite`, `sortY?` | Where a landmark sprite renders; optional `sortY` overrides y-sorted depth |
+| Object type       | Properties                        | Meaning                                                                                                                                |
+| ----------------- | --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| `project`         | `slug`, `promptOffset: {x, y}` px | Interaction zone; slug is the canonical project slug (§9.4). The zone in Tiled is the **single source** of the slug ↔ landmark mapping |
+| `prop`            | `id`, `promptOffset`              | House props (desk, bookshelf, shoes), bench, locked building                                                                           |
+| `door`            | `target: sceneKey`, `spawn: name` | Scene transition trigger                                                                                                               |
+| `spawn`           | `name`                            | Named spawn point — V1 needs at least `bed` (house) and `outside-front-door` (island)                                                  |
+| `landmark-anchor` | `sprite`, `sortY?`                | Where a landmark sprite renders; optional `sortY` overrides y-sorted depth                                                             |
 
 - The painting itself is dumb pixels; **all** gameplay data lives in the Tiled files. Re-generating art never breaks gameplay, and adding a project never touches code (§7).
 
@@ -298,7 +303,7 @@ src/pages/[...lang]/projects/world.astro   ← static page, SEO shell, teaser, l
 
 - `world.astro` calls `getCollection('projects')`, filters by language the way existing pages do (`entry.id.startsWith(`${lang}/`)` — the glob loader has no lang parameter and entries expose `id`, not `slug`), and maps to a minimal DTO: `{ slug, title, description, techStack, status, imageUrl, detailUrl }`, passed as island props. No client-side fetching, no duplication of content — frontmatter stays the single source of truth (decision #4).
 - **Canonical slug** = entry `id` with the language prefix and extension stripped (exactly how `[slug].astro` derives it). It is identical across fr/en, so Tiled zone slugs and `world:discovered` are **language-agnostic by construction** — discovery state survives switching languages.
-- **`imageUrl`**: the frontmatter `image` string is *not* servable as-is (real files live in `src/assets/projects/` and are resolved via `getProjectImage()` in `src/lib/images.ts`; several have no `public/` copy). `world.astro` must resolve it at build time via the existing helper + `astro:assets` `getImage()` and put the resulting optimized URL in the DTO.
+- **`imageUrl`**: the frontmatter `image` string is _not_ servable as-is (real files live in `src/assets/projects/` and are resolved via `getProjectImage()` in `src/lib/images.ts`; several have no `public/` copy). `world.astro` must resolve it at build time via the existing helper + `astro:assets` `getImage()` and put the resulting optimized URL in the DTO.
 - **`detailUrl`**: built at build time with the site's language-aware path pattern (`/projects/${slug}` for fr, `/en/projects/${slug}` for en).
 - There is **no separate landmark registry file** — the slug property on each Tiled `project` zone is the only world ↔ content mapping (§9.3).
 
@@ -309,24 +314,24 @@ src/pages/[...lang]/projects/world.astro   ← static page, SEO shell, teaser, l
 
 ### 9.6 State persistence (`localStorage`)
 
-| Key | Value | Purpose |
-|---|---|---|
-| `world:discovered` | `string[]` of slugs | Tracker + checkmarks + celebration |
-| `world:intro-done` | `boolean` | Return visits spawn outside the house |
-| `world:muted` | `boolean` | Audio preference |
+| Key                | Value               | Purpose                               |
+| ------------------ | ------------------- | ------------------------------------- |
+| `world:discovered` | `string[]` of slugs | Tracker + checkmarks + celebration    |
+| `world:intro-done` | `boolean`           | Return visits spawn outside the house |
+| `world:muted`      | `boolean`           | Audio preference                      |
 
 Slugs are the canonical language-agnostic form (§9.4). No positional save; sessions always start at a designed spawn. All access degrades gracefully when storage is unavailable (§6.12).
 
 ### 9.7 Performance budget (hard limits)
 
-| Metric | Budget |
-|---|---|
-| Game-route initial payload (engine + paintings + character + props + SFX) | ≤ 4 MB compressed |
-| Music | Streamed after entry click, excluded from budget |
-| Time from navigation → "Enter the island" ready (broadband) | ≤ 3 s |
-| Frame rate | 60 fps on a mid-tier 2020 laptop; degrade ambience first if below |
-| Every other page on the site | 0 added bytes |
-| Canvas resolution | Cap `devicePixelRatio` at 2 |
+| Metric                                                                    | Budget                                                            |
+| ------------------------------------------------------------------------- | ----------------------------------------------------------------- |
+| Game-route initial payload (engine + paintings + character + props + SFX) | ≤ 4 MB compressed                                                 |
+| Music                                                                     | Streamed after entry click, excluded from budget                  |
+| Time from navigation → "Enter the island" ready (broadband)               | ≤ 3 s                                                             |
+| Frame rate                                                                | 60 fps on a mid-tier 2020 laptop; degrade ambience first if below |
+| Every other page on the site                                              | 0 added bytes                                                     |
+| Canvas resolution                                                         | Cap `devicePixelRatio` at 2                                       |
 
 Browser support: last 2 versions of desktop Chrome, Firefox, Safari, and Edge.
 
@@ -339,7 +344,7 @@ Browser support: last 2 versions of desktop Chrome, Firefox, Safari, and Edge.
 
 - **Music**: one royalty-free chill/lofi ambient loop (license permitting web embedding, attribution documented). Starts after the "Enter the island" click (the click is the browser autoplay-unlock gesture). Gentle fade-in; ~2–4 MB, streamed, never blocks entry.
 - **SFX** (short, quiet): footsteps (surface-agnostic), interact blip, card open/close, discovery chime, confetti pop, door transition whoosh. Sourced royalty-free.
-- **Mute** toggle in HUD + `M` key; persisted; muted state kills music *and* SFX. Music fades out when the tab is hidden and back in on return (§6.11).
+- **Mute** toggle in HUD + `M` key; persisted; muted state kills music _and_ SFX. Music fades out when the tab is hidden and back in on return (§6.11).
 - Ambient layer (waves, birds) only if it stays subtle — nice-to-have, not required for launch.
 
 ## 11. Measurement
@@ -384,7 +389,7 @@ Colored rectangles for everything; proves the whole pipeline before any art exis
 - [ ] A11y pass: card focus trap + focus restore, canvas `role`/`aria-label`, visually-hidden descriptive paragraph with links to every project (§6.9).
 - [ ] SEO: title/description/OG image on the world route (§9.8); banner strip, teaser, and OG assets produced (§8.2).
 - [ ] Performance budget (§9.7) verified on a mid-tier laptop; browser matrix (§9.7) passes.
-- [ ] *(Optional stretch, cut without blocking launch)* Simple animals: sleeping cat, pond ducks (2-frame loops) — the decision-#11 nice-to-have.
+- [ ] _(Optional stretch, cut without blocking launch)_ Simple animals: sleeping cat, pond ducks (2-frame loops) — the decision-#11 nice-to-have.
 - [ ] Entry banner on `/projects` + footer link added — **the reveal moment** (route was unlinked until now).
 - [ ] `/validate` (format + lint + build) green.
 
@@ -397,14 +402,14 @@ Colored rectangles for everything; proves the whole pipeline before any art exis
 
 ## 13. Risks & mitigations
 
-| Risk | Likelihood | Mitigation |
-|---|---|---|
-| AI art won't hold one coherent style across assets | **High** — the top project risk | Master-style-frame workflow (§8.3), style bible verbatim in every prompt, single-image character sheet, explicit kill criterion → HD pack fallback (§8.4) |
-| Island painting too heavy (4096² WebP) | Medium | q75–80 WebP, quadrant chunking, cap DPR at 2; budget enforced at P2 gate |
-| Phaser bundle bloat leaking to other pages | Low | `client:only` + dynamic import + manual chunk; P0 acceptance criterion checks bundle diff = 0 |
-| Scope creep (NPCs, quests, night, mobile "while we're at it") | High | Non-goals list (§3) + phased backlog; anything new goes to Phase 2 backlog by default |
-| Perspective/scale drift between painting and character/props | Medium | Orthographic rule + fixed light direction in style bible; test-composite each asset over the map before acceptance |
-| Polished-only rollout stalls (perfectionism, no ship pressure) | Medium | P0/P1/P2 gates each have binary acceptance criteria; "polished" = P2 checklist done, not a feeling |
+| Risk                                                           | Likelihood                      | Mitigation                                                                                                                                                |
+| -------------------------------------------------------------- | ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| AI art won't hold one coherent style across assets             | **High** — the top project risk | Master-style-frame workflow (§8.3), style bible verbatim in every prompt, single-image character sheet, explicit kill criterion → HD pack fallback (§8.4) |
+| Island painting too heavy (4096² WebP)                         | Medium                          | q75–80 WebP, quadrant chunking, cap DPR at 2; budget enforced at P2 gate                                                                                  |
+| Phaser bundle bloat leaking to other pages                     | Low                             | `client:only` + dynamic import + manual chunk; P0 acceptance criterion checks bundle diff = 0                                                             |
+| Scope creep (NPCs, quests, night, mobile "while we're at it")  | High                            | Non-goals list (§3) + phased backlog; anything new goes to Phase 2 backlog by default                                                                     |
+| Perspective/scale drift between painting and character/props   | Medium                          | Orthographic rule + fixed light direction in style bible; test-composite each asset over the map before acceptance                                        |
+| Polished-only rollout stalls (perfectionism, no ship pressure) | Medium                          | P0/P1/P2 gates each have binary acceptance criteria; "polished" = P2 checklist done, not a feeling                                                        |
 
 ## 14. Open questions
 
