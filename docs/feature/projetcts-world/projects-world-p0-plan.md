@@ -1,11 +1,11 @@
 # Projects World — P0 Implementation Plan
 
-| | |
-|---|---|
-| **Status** | Approved plan — implementation not started |
-| **PRD** | [projects-world-prd.md](./projects-world-prd.md) (§12 P0 acceptance criteria) |
-| **Owner** | Marek Elmayan |
-| **Date** | 2026-07-02 |
+|            |                                                                               |
+| ---------- | ----------------------------------------------------------------------------- |
+| **Status** | Approved plan — implementation not started                                    |
+| **PRD**    | [projects-world-prd.md](./projects-world-prd.md) (§12 P0 acceptance criteria) |
+| **Owner**  | Marek Elmayan                                                                 |
+| **Date**   | 2026-07-02                                                                    |
 
 P0 = playable skeleton with placeholder art: both world routes build statically, mobile gets the
 teaser, a player walks with Tiled collision, house ↔ island doors work, one zone opens the real
@@ -14,32 +14,32 @@ pipeline before any art exists.
 
 ## Decisions locked in the planning interview (2026-07-02)
 
-| # | Question | Decision |
-|---|---|---|
-| 1 | Plan location & PR granularity | This doc + slice tracker below; **one PR per slice** against `main` (route unlinked, so partial merges are safe) |
-| 2 | Test tooling | **None.** No vitest/jest. The input-layer criterion is verified by a dev-only `?input=fake-touch` runtime stub |
-| 3 | Bundle-isolation check | **Committed script** `scripts/check-world-isolation.mjs`, run per slice PR |
-| 4 | Tiled maps | **Hand-written `.tmj`** (Tiled 1.10 JSON) in `public/world/maps/`; validated by opening once in the Tiled editor. GUI editor deferred to P1 |
-| 5 | Placeholder paintings | **Real image files at final dimensions**: flat-color `island-v1.webp` 4096×4096, `house-v1.webp` 1536×1024. Locks the coordinate space for P1 |
-| 6 | Info card | Add dialog via the **repo-pinned** CLI `pnpm exec shadcn add dialog` (Base UI variant per `components.json`; **not** `dlx shadcn@latest`, which bypasses the pinned `^3.6.2`), composed with existing `Card`/`Badge`/`Button`. Input layer is the single owner of "world input paused" |
-| 7 | `BookmarkLanguageToggle` | **Keep it** on the world route (zero Layout changes); it is the route's only language switch. Note: it is `hidden` below `md` (768px), so the mobile teaser has **no** language switch — accepted (the teaser CTA leads to the fully-chromed text page). HUD elements go **top-left** to avoid it |
-| 8 | P0 UI scope | Bare loading→"Enter" screen; HUD = "view as list" button only; **no `localStorage` in P0** (`state.ts` lands at P1); world i18n keys only for what ships |
-| 9 | Slices | Six PRs as tracked below |
-| 10 | World i18n location *(adversarial review)* | Separate module **`src/i18n/translations/world.ts`**, imported **only** by `world.astro`. The shared `fr.ts`/`en.ts` are bundled into client chunks on *every* page (`MobileMenu` is `client:load` on every page and imports `getTranslations`, which statically imports both files) — adding keys there would break the bundle-diff-0 criterion. Deliberate deviation from PRD §9.5; backport to the PRD at P1 |
-| 11 | DPR handling *(adversarial review)* | P0 renders at **CSS pixels**: Phaser 3 has no `resolution` config option and `Scale.RESIZE` ignores `zoom`, so CSS-pixel rendering is the native behavior — and it trivially satisfies the §9.7 "cap DPR at 2" budget. Retina sharpness re-evaluated at P1 with real art |
-| 12 | `/world/` caching *(adversarial review)* | Immutable rule narrowed to **`/world/*.webp`** (versioned paintings only). The `.tmj` maps are unversioned and edited across slices 3–5 and heavily in P1 — they stay on the default 1-hour revalidation until they stabilize |
+| #   | Question                                   | Decision                                                                                                                                                                                                                                                                                                                                                                                                        |
+| --- | ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | Plan location & PR granularity             | This doc + slice tracker below; **one PR per slice** against `main` (route unlinked, so partial merges are safe)                                                                                                                                                                                                                                                                                                |
+| 2   | Test tooling                               | **None.** No vitest/jest. The input-layer criterion is verified by a dev-only `?input=fake-touch` runtime stub                                                                                                                                                                                                                                                                                                  |
+| 3   | Bundle-isolation check                     | **Committed script** `scripts/check-world-isolation.mjs`, run per slice PR                                                                                                                                                                                                                                                                                                                                      |
+| 4   | Tiled maps                                 | **Hand-written `.tmj`** (Tiled 1.10 JSON) in `public/world/maps/`; validated by opening once in the Tiled editor. GUI editor deferred to P1                                                                                                                                                                                                                                                                     |
+| 5   | Placeholder paintings                      | **Real image files at final dimensions**: flat-color `island-v1.webp` 4096×4096, `house-v1.webp` 1536×1024. Locks the coordinate space for P1                                                                                                                                                                                                                                                                   |
+| 6   | Info card                                  | Add dialog via the **repo-pinned** CLI `pnpm exec shadcn add dialog` (Base UI variant per `components.json`; **not** `dlx shadcn@latest`, which bypasses the pinned `^3.6.2`), composed with existing `Card`/`Badge`/`Button`. Input layer is the single owner of "world input paused"                                                                                                                          |
+| 7   | `BookmarkLanguageToggle`                   | **Keep it** on the world route (zero Layout changes); it is the route's only language switch. Note: it is `hidden` below `md` (768px), so the mobile teaser has **no** language switch — accepted (the teaser CTA leads to the fully-chromed text page). HUD elements go **top-left** to avoid it                                                                                                               |
+| 8   | P0 UI scope                                | Bare loading→"Enter" screen; HUD = "view as list" button only; **no `localStorage` in P0** (`state.ts` lands at P1); world i18n keys only for what ships                                                                                                                                                                                                                                                        |
+| 9   | Slices                                     | Six PRs as tracked below                                                                                                                                                                                                                                                                                                                                                                                        |
+| 10  | World i18n location _(adversarial review)_ | Separate module **`src/i18n/translations/world.ts`**, imported **only** by `world.astro`. The shared `fr.ts`/`en.ts` are bundled into client chunks on _every_ page (`MobileMenu` is `client:load` on every page and imports `getTranslations`, which statically imports both files) — adding keys there would break the bundle-diff-0 criterion. Deliberate deviation from PRD §9.5; backport to the PRD at P1 |
+| 11  | DPR handling _(adversarial review)_        | P0 renders at **CSS pixels**: Phaser 3 has no `resolution` config option and `Scale.RESIZE` ignores `zoom`, so CSS-pixel rendering is the native behavior — and it trivially satisfies the §9.7 "cap DPR at 2" budget. Retina sharpness re-evaluated at P1 with real art                                                                                                                                        |
+| 12  | `/world/` caching _(adversarial review)_   | Immutable rule narrowed to **`/world/*.webp`** (versioned paintings only). The `.tmj` maps are unversioned and edited across slices 3–5 and heavily in P1 — they stay on the default 1-hour revalidation until they stabilize                                                                                                                                                                                   |
 
 ## Slice tracker
 
-| # | Slice | Status |
-|---|---|---|
-| 0 | Plan doc (this file) | done |
-| 1 | Route shell + teaser + isolation guard | todo |
-| 2 | Engine boots | todo |
-| 3 | Player + input + collision | todo |
-| 4 | House + door transitions | todo |
-| 5 | Info card | todo |
-| 6 | Fake-touch stub + acceptance sweep | todo |
+| #   | Slice                                  | Status                                            |
+| --- | -------------------------------------- | ------------------------------------------------- |
+| 0   | Plan doc (this file)                   | done                                              |
+| 1   | Route shell + teaser + isolation guard | in-progress (implemented + validated; PR pending) |
+| 2   | Engine boots                           | todo                                              |
+| 3   | Player + input + collision             | todo                                              |
+| 4   | House + door transitions               | todo                                              |
+| 5   | Info card                              | todo                                              |
+| 6   | Fake-touch stub + acceptance sweep     | todo                                              |
 
 Update the status column (`todo / in-progress / done` + PR link) as slices land.
 
@@ -95,6 +95,7 @@ Update the status column (`todo / in-progress / done` + PR link) as slices land.
 **No Phaser anywhere yet** — the isolation script gets a clean baseline first.
 
 **Files**
+
 - `src/pages/[...lang]/projects/world.astro` (new)
 - `src/components/react/world/ProjectsWorld.tsx` (new)
 - `src/i18n/translations/world.ts` (new — decision 10; **not** the shared `ui.ts`/`fr.ts`/`en.ts`)
@@ -102,6 +103,7 @@ Update the status column (`todo / in-progress / done` + PR link) as slices land.
 - `astro.config.mjs` (sitemap filter only)
 
 **Steps**
+
 1. `world.astro`: `getStaticPaths` returning `{ lang: undefined }` and `{ lang: 'en' }` (same as
    `projects/index.astro`); resolve `lang`, `t`. `getCollection('projects')`, filter by lang prefix,
    map **all 6 projects** to the DTO
@@ -126,13 +128,20 @@ Update the status column (`todo / in-progress / done` + PR link) as slices land.
      **except** `dist/projects/world/index.html` and `dist/en/projects/world/index.html`; fail if
      any references a chunk matching `/phaser/i` or any `/world/` asset path (covers `<script>`,
      module preloads, and inline import maps).
-   - **Baseline check** (the real "unchanged" signal): for a fixed set of non-world pages
-     (`/`, `/projects`, `/en/projects`, `/blog`, `/contact`), extract the sorted list of referenced
-     `_astro/*.js` + `_astro/*.css` **filenames** and compare against
-     `scripts/world-isolation-baseline.json`. Any addition/removal/hash-change fails with a diff.
-     A legitimate unrelated change to those pages is handled by regenerating the baseline in the
-     same PR (`--update-baseline` flag) and calling it out in review — so world slices can never
-     silently alter a shared page.
+   - **Baseline check** (the real "unchanged" signal) _(strengthened at implementation vs the
+     original 5-page plan — adversarial review)_: extract the sorted **union** of every
+     `_astro/*.js` + `_astro/*.css` filename referenced by **all** non-world pages (not a fixed
+     5-page subset) and compare against `scripts/world-isolation-baseline.json`. The 5-page subset
+     gave a false PASS: world code that Rollup merges into a **non-baseline** page's own chunk (e.g.
+     `/design-system`, or a `[slug]` detail page — the slice-5 Dialog concern) keeps its non-world
+     name and only its content hash changes, which neither the name-based leak check nor a 5-page
+     baseline would catch. The union covers every non-world page, so any world code reaching one
+     shifts a hash → a filename appears/disappears → FAIL. World-only additions (Phaser, game
+     scenes) never touch the union, so genuine world slices don't churn the baseline. A legitimate
+     unrelated change is handled by regenerating in the same PR (`--update-baseline` flag) and
+     calling it out in review — so world slices can never silently alter a shared page. (Verified
+     with negative tests: injected phaser chunk, injected `/world/` asset, and a simulated
+     hash-drift on `/design-system` all FAIL; a benign text edit still PASSES.)
    - Print a one-line PASS/FAIL summary. Slice 1 generates the initial baseline (pre-Phaser, so it
      captures the true zero-world state).
 6. `astro.config.mjs`: `sitemap({ filter: (page) => !page.includes('/projects/world') })` —
@@ -142,6 +151,7 @@ Update the status column (`todo / in-progress / done` + PR link) as slices land.
 **Out of scope:** any Phaser, loading screen, HUD, canvas.
 
 **QA checklist**
+
 - [ ] `pnpm build` emits `dist/projects/world/index.html` and `dist/en/projects/world/index.html`.
 - [ ] Narrow window or DevTools mobile emulation → teaser, in both languages; CTA navigates to the
       right-language projects page.
@@ -159,6 +169,7 @@ Update the status column (`todo / in-progress / done` + PR link) as slices land.
 with a camera; navigation away tears the game down cleanly.
 
 **Files**
+
 - `package.json` (add `phaser`, latest 3.x)
 - `astro.config.mjs` (`phaser-vendor` branch in `manualChunks`)
 - `src/components/react/world/GameCanvas.tsx`, `bridge.ts`, `WorldHud.tsx`,
@@ -170,6 +181,7 @@ with a camera; navigation away tears the game down cleanly.
   decision 12: `.webp` only; `.tmj` maps stay on the 1-hour default until they stabilize)
 
 **Steps**
+
 1. `bridge.ts`: hand-rolled typed emitter (~20 lines, no dependency) over an event map:
    `boot:progress {value}`, `boot:ready`, `card:open {slug}`, `card:close` (card events used from
    slice 5). One instance created by `ProjectsWorld`, passed to both the game and the DOM side.
@@ -194,6 +206,7 @@ with a camera; navigation away tears the game down cleanly.
    This must survive `ClientRouter` view-transition navigation.
 
 **QA checklist**
+
 - [ ] Desktop: loading → Enter → flat-green island fills the viewport; window resize resizes the
       canvas (no teaser swap).
 - [ ] Navigate to `/projects` via HUD and back **3×**: exactly one canvas each time, no console
@@ -212,13 +225,15 @@ with a camera; navigation away tears the game down cleanly.
 Tiled shapes, camera follows.
 
 **Files**
+
 - `src/components/react/world/input/types.ts`, `input/keyboardSource.ts`, `input/manager.ts` (new)
 - `scenes/IslandScene.ts` (player, collision, camera follow)
 - `public/world/maps/island.tmj` (new)
 
 **Steps**
+
 1. **Input layer** (the PRD's phase-2 touch contract — design it here, once):
-   - `types.ts`: `InputSource` interface — sources push *intents*, never keys:
+   - `types.ts`: `InputSource` interface — sources push _intents_, never keys:
      `onMove(vector: {x,y})` (normalized, zero on release), `onInteract()`, `onDismiss()`.
    - `keyboardSource.ts`: **window-level** `keydown`/`keyup` (PRD §6.11 — HUD clicks must not kill
      movement). WASD + arrows → move vector; `E`/`Enter` → interact; `Esc` → dismiss. `M` reserved
@@ -238,9 +253,22 @@ Tiled shapes, camera follows.
    `ParseTilesets`/`CreateGroupLayer` read `json.tilesets.length` and `json.layers` with no guard —
    omitting `tilesets` throws `TypeError` inside `make.tilemap`, even though the map has none):
    ```json
-   { "type": "map", "version": "1.10", "tiledversion": "1.10.2", "orientation": "orthogonal",
-     "renderorder": "right-down", "infinite": false, "width": 128, "height": 128,
-     "tilewidth": 32, "tileheight": 32, "tilesets": [], "layers": [ /* objectgroups below */ ] }
+   {
+     "type": "map",
+     "version": "1.10",
+     "tiledversion": "1.10.2",
+     "orientation": "orthogonal",
+     "renderorder": "right-down",
+     "infinite": false,
+     "width": 128,
+     "height": 128,
+     "tilewidth": 32,
+     "tileheight": 32,
+     "tilesets": [],
+     "layers": [
+       /* objectgroups below */
+     ]
+   }
    ```
    (128×32 = 4096 px, matching the painting.) **No `imagelayer`** in the committed P0 file — Phaser
    adds the painting as a plain image (slice 2), and an `imagelayer` with a relative `../` image
@@ -269,6 +297,7 @@ Tiled shapes, camera follows.
    without warnings (decision 4's pipeline proof); screenshot in the PR description.
 
 **QA checklist**
+
 - [ ] WASD and arrows both move the player, 8 directions, constant speed on diagonals.
 - [ ] Player cannot cross any collision rect or leave the painting.
 - [ ] Click a HUD element, then press keys — movement still works (window-level listeners).
@@ -284,11 +313,13 @@ Tiled shapes, camera follows.
 spawn points; the house's cover-zoom rule works.
 
 **Files**
+
 - `public/world/maps/house.tmj`, `public/world/house-v1.webp` (new; 1536×1024 flat color)
 - `src/components/react/world/scenes/HouseScene.ts` (new)
 - `scenes/IslandScene.ts` (door object + spawn rename), shared scene helpers as needed
 
 **Steps**
+
 1. `house.tmj` (48×32 tiles of 32 px → 1536×1024): collision border + one interior block;
    `spawn "bed"`; `door` object at the bottom edge with properties `target: "island"`,
    `spawn: "outside-front-door"`.
@@ -299,7 +330,7 @@ spawn points; the house's cover-zoom rule works.
 4. Doors trigger on **overlap** (walk into the zone), not on interact. `fadeOut` is **non-blocking**,
    so the transition must chain off its completion event, not the next line:
    `this.cameras.main.fadeOut(400)` → `this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE,
-   () => this.scene.start(target, { spawn }))`; the **target scene's `create()`** calls
+() => this.scene.start(target, { spawn }))`; the **target scene's `create()`** calls
    `this.cameras.main.fadeIn(400)`. A `transitioning` boolean guards against re-triggering while
    the fade runs (also prevents registering the `once` listener twice). Spawn the player at the
    named point, offset one body-height off the door zone so re-overlap doesn't instantly bounce back.
@@ -309,6 +340,7 @@ spawn points; the house's cover-zoom rule works.
    that's P1 `state.ts`).
 
 **QA checklist**
+
 - [ ] Boot spawns in the house; walking into the door fades to the island at `outside-front-door`;
       walking back returns to `bed`. Repeat 5× without stuck states.
 - [ ] House painting always covers the viewport (test a small and a very wide window).
@@ -323,6 +355,7 @@ spawn points; the house's cover-zoom rule works.
 card in fr and en; "View full project" navigates to the detail page.
 
 **Files**
+
 - `src/components/ui/dialog.tsx` (via `pnpm exec shadcn add dialog` — Base UI variant, pinned CLI)
 - `src/components/react/world/ProjectCardOverlay.tsx` (new)
 - `scenes/IslandScene.ts` (interaction zone handling), `public/world/maps/island.tmj` (Elemix zone)
@@ -330,6 +363,7 @@ card in fr and en; "View full project" navigates to the detail page.
 - `src/i18n/translations/world.ts` (add `card.viewProject` + any card labels — the world module, not shared)
 
 **Steps**
+
 1. `island.tmj`: add `project` zone (`slug: "elemix"`, `promptOffset`) with a placeholder colored
    rectangle standing in for the landmark sprite.
 2. `IslandScene`: proximity check (player body vs zone + radius). In range: show a minimal floating
@@ -346,6 +380,7 @@ card in fr and en; "View full project" navigates to the detail page.
    verify explicitly.
 
 **QA checklist**
+
 - [ ] Walk to the Elemix zone: prompt appears in radius, disappears out of radius.
 - [ ] `E` and `Enter` open the card; movement is dead while open; `Esc`, close button, and
       outside-click all close it; movement resumes; a held movement key during open/close doesn't
@@ -363,11 +398,13 @@ card in fr and en; "View full project" navigates to the detail page.
 P0 checklist and close the milestone.
 
 **Files**
+
 - `src/components/react/world/input/fakeTouchSource.ts` (new)
 - `ProjectsWorld.tsx` or `manager.ts` (source selection by query param)
 - this doc (statuses, sweep results)
 
 **Steps**
+
 1. `fakeTouchSource.ts`: pointer-driven source mimicking phase-2 touch semantics — press-drag on
    the canvas emits a move vector toward the pointer; a short tap emits `interact()`. Same
    `InputSource` interface, zero changes to game code — that absence of change **is** the
@@ -380,6 +417,7 @@ P0 checklist and close the milestone.
    rows to `done`.
 
 **QA checklist**
+
 - [ ] With `?input=fake-touch` and hands off the keyboard: walk to a door, transition, walk to the
       Elemix zone, tap to open the card.
 - [ ] Full P0 acceptance table verified and recorded below.
@@ -388,21 +426,21 @@ P0 checklist and close the milestone.
 
 ## P0 acceptance criteria → slice traceability
 
-| PRD §12 P0 criterion | Slice(s) | Verified |
-|---|---|---|
-| Both world routes build statically; every other page unchanged (bundle diff = 0) | 1, 2 + script every slice | ☐ |
-| Mobile/coarse-pointer visitors get the teaser; no game assets downloaded | 1, 2 | ☐ |
-| Player moves (WASD/arrows) with collision against Tiled shapes | 3 | ☐ |
-| House → island door transition works both ways | 4 | ☐ |
-| Interaction zone opens real Elemix card, both languages; button → detail page | 5 | ☐ |
-| Input goes through the abstraction layer (fake touch source proof) | 3 (design), 6 (proof) | ☐ |
+| PRD §12 P0 criterion                                                             | Slice(s)                  | Verified |
+| -------------------------------------------------------------------------------- | ------------------------- | -------- |
+| Both world routes build statically; every other page unchanged (bundle diff = 0) | 1, 2 + script every slice | ☐        |
+| Mobile/coarse-pointer visitors get the teaser; no game assets downloaded         | 1, 2                      | ☐        |
+| Player moves (WASD/arrows) with collision against Tiled shapes                   | 3                         | ☐        |
+| House → island door transition works both ways                                   | 4                         | ☐        |
+| Interaction zone opens real Elemix card, both languages; button → detail page    | 5                         | ☐        |
+| Input goes through the abstraction layer (fake touch source proof)               | 3 (design), 6 (proof)     | ☐        |
 
 ## P0-specific risks
 
-| Risk | Mitigation |
-|---|---|
-| `client:only` + `ClientRouter` teardown leaks (first `client:only` in the repo) | Explicit `game.destroy(true)` in effect cleanup; 3× navigation QA in slice 2; if islands don't unmount cleanly under view transitions, fall back to an `astro:before-swap` listener |
-| 4096² texture too heavy for a mid-tier GPU | Known in slice 2 already (placeholder is full-size by design); if it janks, quadrant chunking is the PRD's sanctioned fallback (§8.2) and only touches slice 2 code |
-| Base UI Dialog focus behavior fights canvas focus | Input pause protocol has one owner (manager); refocus canvas on close is explicit in slice 5 |
-| Hand-written `.tmj` drifts from what Phaser accepts (missing `tilesets: []`, wrong object-kind key) | Required-skeleton snippet in slice 3; objects use `"type"`; re-save from Tiled before commit so the file is editor-normalized |
-| Isolation regressions after P0 (shared code importing world modules) | The script is permanent and runs in every future slice's checklist |
+| Risk                                                                                                | Mitigation                                                                                                                                                                          |
+| --------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `client:only` + `ClientRouter` teardown leaks (first `client:only` in the repo)                     | Explicit `game.destroy(true)` in effect cleanup; 3× navigation QA in slice 2; if islands don't unmount cleanly under view transitions, fall back to an `astro:before-swap` listener |
+| 4096² texture too heavy for a mid-tier GPU                                                          | Known in slice 2 already (placeholder is full-size by design); if it janks, quadrant chunking is the PRD's sanctioned fallback (§8.2) and only touches slice 2 code                 |
+| Base UI Dialog focus behavior fights canvas focus                                                   | Input pause protocol has one owner (manager); refocus canvas on close is explicit in slice 5                                                                                        |
+| Hand-written `.tmj` drifts from what Phaser accepts (missing `tilesets: []`, wrong object-kind key) | Required-skeleton snippet in slice 3; objects use `"type"`; re-save from Tiled before commit so the file is editor-normalized                                                       |
+| Isolation regressions after P0 (shared code importing world modules)                                | The script is permanent and runs in every future slice's checklist                                                                                                                  |

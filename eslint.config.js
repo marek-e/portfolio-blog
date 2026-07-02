@@ -46,6 +46,14 @@ export default [
     },
   },
   {
+    files: ['scripts/**/*.{js,mjs}'],
+    languageOptions: {
+      globals: {
+        ...globals.node,
+      },
+    },
+  },
+  {
     ignores: ['dist/', 'node_modules/', '.astro/', '.claude/', '.agents/', '.deepsec/'],
   },
 ];
