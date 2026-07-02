@@ -1,0 +1,40 @@
+docs/feature/projetcts-world/projects-world-p0-plan.md
+  s_1005447721ad33::t_16141acd2ae4fb 3-8,17-30,34-42,98,106,131-132,154,172,184,209,228,234,236,256-271,300,316,322,333,343,358,366,383,401,407,420,429-436,440-446
+  s_1005447721ad33::t_9dbf82c157efe6 133-144
+scripts/check-world-isolation.mjs
+  s_1005447721ad33::t_8885069b265810 68,71-74,76-78,83,86-89,97-104,107,120-128,130-132,139
+  s_1005447721ad33::t_99e883935058d8 1-22,24-67,69-70,75,79-82,84-85,90-96,105-106,108-119,129,133-138,140
+  s_1005447721ad33::t_b256eb46a5cd77 23
+astro.config.mjs
+  s_1005447721ad33::t_a08b3da44d513f 19-24
+eslint.config.js
+  s_1005447721ad33::t_b6bb5258fe7c9e 50
+  s_1005447721ad33::t_ae329f22430fc1 42-48
+  s_1005447721ad33::t_81f5b6ed4216e3 49
+scripts/world-isolation-baseline.json
+  s_1005447721ad33::t_2bd6ca89cf01e0 1,3-6,8,10-15,17,20-23
+  s_1005447721ad33::t_b49a5a1c55f955 2,7,9,16,18-19
+src/i18n/translations/world.ts
+  s_1005447721ad33::t_ab5dd5ad60bf2d 1-35,37-69
+  s_1005447721ad33::t_26657501c071db 36
+src/pages/[...lang]/projects/world.astro
+  s_1005447721ad33::t_e2c137828c81b5 1-57
+src/components/react/world/ProjectsWorld.tsx
+  s_1005447721ad33::t_942c02e13c5d40 1-66
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.9",
+  "base_commit_sha": "12039ff28c4291377d7e34f78445dca5796191b6",
+  "prompts": {},
+  "sessions": {
+    "s_1005447721ad33": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e38d6c2f-5af7-4701-a9b9-0939fee1a41f",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
