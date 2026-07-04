@@ -1,0 +1,41 @@
+docs/feature/projetcts-world/projects-world-prd.md
+  s_a1cb8e7589e874::t_48c5e58d7286d2 5,374-379,383-389,393-404
+src/i18n/translations/en.ts
+  s_a1cb8e7589e874::t_66ee0812fee194 69
+  s_a1cb8e7589e874::t_e8c9c44e8500df 164-166
+src/i18n/ui.ts
+  s_a1cb8e7589e874::t_e8c9c44e8500df 59,152-154
+src/components/astro/Footer.astro
+  s_a1cb8e7589e874::t_4e817922f0a199 23
+scripts/check-world-isolation.mjs
+  s_a1cb8e7589e874::t_d868efbc6aa594 26-29
+  s_a1cb8e7589e874::t_36ef5d570f3884 87
+astro.config.mjs
+  s_a1cb8e7589e874::t_269f63f123be4c 19
+src/i18n/translations/fr.ts
+  s_a1cb8e7589e874::t_66ee0812fee194 69
+  s_a1cb8e7589e874::t_e8c9c44e8500df 165-167
+src/pages/[...lang]/projects/index.astro
+  s_a1cb8e7589e874::t_c76d38c02ffd72 51-80
+scripts/world-isolation-baseline.json
+  s_a1cb8e7589e874::t_48c5e58d7286d2 10,13,17
+docs/feature/projetcts-world/projects-world-p0-plan.md
+  s_a1cb8e7589e874::t_b7b8e6ad275c77 465-500
+  s_a1cb8e7589e874::t_1273e76f65ff6a 5
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "106892353b23b5b6510d43c1ab7da5bdfd06407f",
+  "prompts": {},
+  "sessions": {
+    "s_a1cb8e7589e874": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1db9f4e0-681d-468c-a46f-9f8e52046ab7",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
