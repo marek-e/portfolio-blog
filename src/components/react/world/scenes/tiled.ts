@@ -21,10 +21,27 @@ export interface DoorObject {
   spawn: string;
 }
 
+export interface ProjectZone {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  /** Canonical project slug — the Tiled zone is the single source of this mapping (PRD §9.3). */
+  slug: string;
+  /** Where the interaction prompt anchors, relative to the zone center. */
+  promptOffset: Point;
+}
+
 export function getStringProperty(obj: TiledObject, name: string): string | undefined {
   const properties = obj.properties as { name: string; value: unknown }[] | undefined;
   const property = properties?.find((p) => p.name === name);
   return typeof property?.value === 'string' ? property.value : undefined;
+}
+
+export function getNumberProperty(obj: TiledObject, name: string): number | undefined {
+  const properties = obj.properties as { name: string; value: unknown }[] | undefined;
+  const property = properties?.find((p) => p.name === name);
+  return typeof property?.value === 'number' ? property.value : undefined;
 }
 
 export function readSpawns(map: Phaser.Tilemaps.Tilemap, layer: string): Map<string, Point> {
@@ -35,6 +52,27 @@ export function readSpawns(map: Phaser.Tilemaps.Tilemap, layer: string): Map<str
     }
   }
   return spawns;
+}
+
+export function readProjectZones(map: Phaser.Tilemaps.Tilemap, layer: string): ProjectZone[] {
+  const zones: ProjectZone[] = [];
+  for (const obj of map.getObjectLayer(layer)?.objects ?? []) {
+    if (obj.type !== 'project') continue;
+    const slug = getStringProperty(obj, 'slug');
+    if (!slug) continue;
+    zones.push({
+      x: obj.x!,
+      y: obj.y!,
+      width: obj.width!,
+      height: obj.height!,
+      slug,
+      promptOffset: {
+        x: getNumberProperty(obj, 'promptOffsetX') ?? 0,
+        y: getNumberProperty(obj, 'promptOffsetY') ?? 0,
+      },
+    });
+  }
+  return zones;
 }
 
 export function readDoors(map: Phaser.Tilemaps.Tilemap, layer: string): DoorObject[] {

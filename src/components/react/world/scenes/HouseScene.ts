@@ -13,7 +13,7 @@ export class HouseScene extends WorldSceneBase {
   }
 
   create(data: SceneTransitionData): void {
-    const painting = this.buildWorld('house', 'house-map', data, 'bed');
+    const { painting } = this.buildWorld('house', 'house-map', data, 'bed');
     this.cameras.main.setBounds(0, 0, painting.width, painting.height);
     this.cameras.main.startFollow(this.player, false, 0.1, 0.1);
 

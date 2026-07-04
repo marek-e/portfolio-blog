@@ -22,6 +22,10 @@ export interface WorldTranslations {
   hud: {
     viewAsList: string;
   };
+  card: {
+    viewProject: string;
+    status: Record<string, string>;
+  };
 }
 
 const fr: WorldTranslations = {
@@ -43,6 +47,17 @@ const fr: WorldTranslations = {
   hud: {
     viewAsList: 'Voir la liste',
   },
+  card: {
+    viewProject: 'Voir le projet complet',
+    // Mirrors the shared projectsPage status wording (kept in sync manually — this module
+    // must stay isolated from the shared translation files, see header comment).
+    status: {
+      completed: 'Terminé',
+      'in-progress': 'En cours',
+      archived: 'Archivé',
+      concept: 'Concept',
+    },
+  },
 };
 
 const en: WorldTranslations = {
@@ -63,6 +78,15 @@ const en: WorldTranslations = {
   },
   hud: {
     viewAsList: 'View as list',
+  },
+  card: {
+    viewProject: 'View full project',
+    status: {
+      completed: 'Completed',
+      'in-progress': 'In Progress',
+      archived: 'Archived',
+      concept: 'Concept',
+    },
   },
 };
 

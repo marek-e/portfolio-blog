@@ -38,7 +38,7 @@ pipeline before any art exists.
 | 2   | Engine boots                           | done                                              |
 | 3   | Player + input + collision             | done                                              |
 | 4   | House + door transitions               | done                                              |
-| 5   | Info card                              | todo                                              |
+| 5   | Info card                              | done                                              |
 | 6   | Fake-touch stub + acceptance sweep     | todo                                              |
 
 Update the status column (`todo / in-progress / done` + PR link) as slices land.

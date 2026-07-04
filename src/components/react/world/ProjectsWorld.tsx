@@ -5,6 +5,7 @@ import { createWorldBridge } from './bridge';
 import { createInputManager } from './input/manager';
 import { createKeyboardSource } from './input/keyboardSource';
 import { GameCanvas } from './GameCanvas';
+import { ProjectCardOverlay } from './ProjectCardOverlay';
 import { WorldHud } from './WorldHud';
 
 export interface WorldProjectDTO {
@@ -30,7 +31,7 @@ function detectSmallViewport(): boolean {
   return window.innerWidth < 1024 || window.matchMedia('(pointer: coarse)').matches;
 }
 
-export function ProjectsWorld({ t, lang }: ProjectsWorldProps) {
+export function ProjectsWorld({ projects, t, lang }: ProjectsWorldProps) {
   // Evaluated once at mount: resizing after entry never swaps to the teaser (PRD §6.10).
   const [isSmallViewport] = useState(detectSmallViewport);
   const [bridge] = useState(createWorldBridge);
@@ -60,6 +61,21 @@ export function ProjectsWorld({ t, lang }: ProjectsWorldProps) {
     return () => inputManager.destroy();
   }, [inputManager, isSmallViewport]);
 
+  // Input pause protocol (plan decision 6): world input dies while a card is open; on close
+  // the world resumes and the canvas regains focus so keyboard play continues seamlessly.
+  useEffect(() => {
+    if (isSmallViewport) return;
+    const offOpen = bridge.on('card:open', () => inputManager.setPaused(true));
+    const offClose = bridge.on('card:close', () => {
+      inputManager.setPaused(false);
+      canvasContainerRef.current?.focus();
+    });
+    return () => {
+      offOpen();
+      offClose();
+    };
+  }, [bridge, inputManager, isSmallViewport]);
+
   if (isSmallViewport) {
     return (
       <section className="bg-card border-border mx-auto flex max-w-md flex-col items-center gap-4 rounded-2xl border p-8 text-center shadow-sm">
@@ -88,6 +104,8 @@ export function ProjectsWorld({ t, lang }: ProjectsWorldProps) {
   return (
     <div className="bg-background fixed inset-0 z-30">
       <GameCanvas bridge={bridge} inputManager={inputManager} containerRef={canvasContainerRef} />
+
+      <ProjectCardOverlay bridge={bridge} projects={projects} t={t} />
 
       {phase === 'entered' ? (
         <WorldHud t={t} listUrl={listUrl} />

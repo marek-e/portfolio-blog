@@ -10,7 +10,7 @@
   "tilewidth": 32,
   "tileheight": 32,
   "nextlayerid": 3,
-  "nextobjectid": 9,
+  "nextobjectid": 10,
   "tilesets": [],
   "layers": [
     {
@@ -133,6 +133,34 @@
               "name": "spawn",
               "type": "string",
               "value": "bed"
+            }
+          ]
+        },
+        {
+          "id": 9,
+          "name": "landmark-elemix",
+          "type": "project",
+          "x": 2560,
+          "y": 1720,
+          "width": 128,
+          "height": 128,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "slug",
+              "type": "string",
+              "value": "elemix"
+            },
+            {
+              "name": "promptOffsetX",
+              "type": "int",
+              "value": 0
+            },
+            {
+              "name": "promptOffsetY",
+              "type": "int",
+              "value": -88
             }
           ]
         }

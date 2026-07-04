@@ -25,13 +25,13 @@ export abstract class WorldSceneBase extends Phaser.Scene {
   protected inputManager!: InputManager;
   private transitioning = false;
 
-  /** Builds the common world; returns the painting so scenes can size their cameras. */
+  /** Builds the common world; returns the painting (camera sizing) and map (scene extras). */
   protected buildWorld(
     paintingKey: string,
     mapKey: string,
     data: SceneTransitionData,
     defaultSpawn: string
-  ): Phaser.GameObjects.Image {
+  ): { painting: Phaser.GameObjects.Image; map: Phaser.Tilemaps.Tilemap } {
     this.transitioning = false;
     this.inputManager = this.registry.get(INPUT_REGISTRY_KEY) as InputManager;
 
@@ -53,7 +53,7 @@ export abstract class WorldSceneBase extends Phaser.Scene {
     this.buildDoors(map);
 
     this.cameras.main.fadeIn(TRANSITION_FADE_MS);
-    return painting;
+    return { painting, map };
   }
 
   update(): void {
