@@ -1,0 +1,61 @@
+src/components/react/world/bridge.ts
+  s_a1cb8e7589e874::t_4d70ae10365eb7 5-6
+  s_a1cb8e7589e874::t_b9c97143f602a8 24-25
+src/components/react/world/audio.ts
+  s_a1cb8e7589e874::t_dea8ecfc13df46 1-209
+  s_a1cb8e7589e874::t_2898fbc01190e8 210-215
+src/i18n/translations/world.ts
+  s_a1cb8e7589e874::t_5ba5e592b097ca 125-126
+  s_a1cb8e7589e874::t_ca6ff40a4fe389 26-27
+  s_a1cb8e7589e874::t_027e2b1ce38ffe 64-65
+src/components/react/world/scenes/IslandScene.ts
+  s_a1cb8e7589e874::t_8f0a2b2c7b1604 35-36
+  s_a1cb8e7589e874::t_99486b90a5bfdf 43
+src/components/react/world/scenes/WorldSceneBase.ts
+  s_a1cb8e7589e874::t_0a71aef50f5bf1 2-3
+  s_a1cb8e7589e874::t_7322a7a0bdba44 97-101
+  s_a1cb8e7589e874::t_1db4b4ee7229ef 38,43
+  s_a1cb8e7589e874::t_4574f5207419de 165
+  s_a1cb8e7589e874::t_5016aaee91e4f4 54
+src/components/react/world/WorldHud.tsx
+  s_a1cb8e7589e874::t_1b3a9a8220ad82 10-11
+  s_a1cb8e7589e874::t_bc97ce7a886381 43-51
+  s_a1cb8e7589e874::t_9dd2d9eded972e 18-26
+src/components/react/world/input/manager.ts
+  s_a1cb8e7589e874::t_da9d45cd789518 33-36
+  s_a1cb8e7589e874::t_a05d4d27cb5f9c 19
+  s_a1cb8e7589e874::t_b93f2dc04ba45a 65-71
+  s_a1cb8e7589e874::t_2020f04085f4ac 85
+src/components/react/world/input/types.ts
+  s_a1cb8e7589e874::t_3ac0cc67ce0eaf 16-17
+src/components/react/world/input/keyboardSource.ts
+  s_a1cb8e7589e874::t_085f9d4ddfbb9c 10
+  s_a1cb8e7589e874::t_7dc1b35db2b69e 70-71
+src/components/react/world/ProjectsWorld.tsx
+  s_a1cb8e7589e874::t_b65b9cae16127d 48,50
+  s_a1cb8e7589e874::t_045a40618fc15b 183-184
+  s_a1cb8e7589e874::t_9d6d8767450328 92,98-101,104,110,116,120-132
+  s_a1cb8e7589e874::t_9890e6042a5293 8-9,13
+  s_a1cb8e7589e874::t_100bccae1e348a 133
+  s_a1cb8e7589e874::t_5d5c1903673cd7 156-157
+  s_a1cb8e7589e874::t_bd79acadccec28 51-61
+  s_a1cb8e7589e874::t_a3077416026a32 93
+  s_a1cb8e7589e874::t_d38543a24b96f9 1
+  s_a1cb8e7589e874::t_d2685f697caff9 134
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "4411c0190181ecafc94d58987d5425d2e2579612",
+  "prompts": {},
+  "sessions": {
+    "s_a1cb8e7589e874": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1db9f4e0-681d-468c-a46f-9f8e52046ab7",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
