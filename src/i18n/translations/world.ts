@@ -21,10 +21,22 @@ export interface WorldTranslations {
   };
   hud: {
     viewAsList: string;
+    /** Template with {count} and {total} placeholders. */
+    discovered: string;
+  };
+  hints: {
+    move: string;
   };
   card: {
     viewProject: string;
     status: Record<string, string>;
+  };
+  props: {
+    desk: { title: string };
+    bookshelf: { title: string; body: string };
+    shoes: { title: string; body: string };
+    library: { title: string; body: string };
+    bench: { title: string; body: string; congrats: string };
   };
 }
 
@@ -46,6 +58,10 @@ const fr: WorldTranslations = {
   },
   hud: {
     viewAsList: 'Voir la liste',
+    discovered: 'Projets découverts : {count}/{total}',
+  },
+  hints: {
+    move: 'Déplacez-vous avec ZQSD ou les flèches',
   },
   card: {
     viewProject: 'Voir le projet complet',
@@ -56,6 +72,29 @@ const fr: WorldTranslations = {
       'in-progress': 'En cours',
       archived: 'Archivé',
       concept: 'Concept',
+    },
+  },
+  props: {
+    desk: {
+      title: 'Le bureau',
+    },
+    bookshelf: {
+      title: 'La bibliothèque',
+      body: 'Apprendre, écrire, recommencer. Un coin blog se prépare sur ces étagères — les meilleures idées viennent souvent en lisant celles des autres.',
+    },
+    shoes: {
+      title: 'Chaussures de course',
+      body: "Toujours prêtes pour un footing le long de la côte. Entre deux commits, c'est ici que les bugs se résolvent tout seuls.",
+    },
+    library: {
+      title: 'Bibliothèque du village',
+      body: 'Fermée pour le moment — le coin lecture ouvrira bientôt ses portes. Revenez explorer plus tard !',
+    },
+    bench: {
+      title: 'Le banc du belvédère',
+      body: "On voit toute la mer d'ici. Un bon endroit pour souffler entre deux découvertes.",
+      congrats:
+        "Vous avez tout vu — les six projets de l'île sont découverts. Merci d'avoir pris le temps d'explorer ! 🌊",
     },
   },
 };
@@ -78,6 +117,10 @@ const en: WorldTranslations = {
   },
   hud: {
     viewAsList: 'View as list',
+    discovered: 'Projects discovered: {count}/{total}',
+  },
+  hints: {
+    move: 'Move with WASD or the arrow keys',
   },
   card: {
     viewProject: 'View full project',
@@ -86,6 +129,29 @@ const en: WorldTranslations = {
       'in-progress': 'In Progress',
       archived: 'Archived',
       concept: 'Concept',
+    },
+  },
+  props: {
+    desk: {
+      title: 'The desk',
+    },
+    bookshelf: {
+      title: 'The bookshelf',
+      body: 'Learn, write, repeat. A blog corner is brewing on these shelves — the best ideas often come from reading everyone else’s.',
+    },
+    shoes: {
+      title: 'Running shoes',
+      body: 'Always ready for a run along the coast. Between two commits, this is where bugs fix themselves.',
+    },
+    library: {
+      title: 'Village library',
+      body: 'Closed for now — the reading corner opens its doors soon. Come back and explore later!',
+    },
+    bench: {
+      title: 'The viewpoint bench',
+      body: 'You can see the whole sea from here. A good spot to catch your breath between discoveries.',
+      congrats:
+        'You’ve seen it all — every project on the island is discovered. Thanks for taking the time to explore! 🌊',
     },
   },
 };

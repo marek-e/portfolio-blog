@@ -187,6 +187,16 @@ Card data (title, description, techStack, status, image, detail-page link) is **
 
 ## 8. Art direction & prompt kit
 
+> **P1 implementation note (sourcing deviation from decision #8):** the shipped art is a
+> **committed vector pipeline** (`scripts/world-art/`, hand-crafted SVG rendered through
+> sharp — `node scripts/world-art/generate.mjs`), not AI-generated bitmaps: no image
+> generation was available in the implementation environment, and the committed generator
+> satisfies this section's reproducibility goal more strictly — style coherence is enforced
+> by construction (shared palette + shape helpers play the role of the master style frame),
+> and the generator also emits both Tiled maps from the same coordinates the art is drawn
+> from, so painting and collision cannot drift. The prompt kit below remains valid as an
+> alternative sourcing path (e.g. a future night-variant set).
+
 ### 8.1 Style bible
 
 The one paragraph that must appear **verbatim in every generation prompt**:
@@ -309,7 +319,7 @@ src/pages/[...lang]/projects/world.astro   ← static page, SEO shell, teaser, l
 
 ### 9.5 i18n
 
-- All world strings (HUD, hints, entry screen, teaser, celebration, locked-building teaser) go through the existing system: keys added to `src/i18n/ui.ts` + `fr.ts`/`en.ts`, resolved in `world.astro`, passed to the island. French default at `/projects/world`, English at `/en/projects/world` — standard `prefixDefaultLocale: false` behavior, hreflang handled by the existing Layout.
+- All world strings (HUD, hints, entry screen, teaser, celebration, locked-building teaser) live in a **separate module `src/i18n/translations/world.ts`**, imported only by `world.astro`, which resolves the language slice and passes it to the island. _(P1 backport of P0-plan decision 10: the shared `fr.ts`/`en.ts` are bundled into client chunks on every page via `MobileMenu` → `getTranslations`, so world keys there would violate the "0 added bytes elsewhere" budget.)_ French default at `/projects/world`, English at `/en/projects/world` — standard `prefixDefaultLocale: false` behavior, hreflang handled by the existing Layout.
 - Suggested world name: **"L'île de Marek" / "Marek's Island"** (final naming during P1).
 
 ### 9.6 State persistence (`localStorage`)

@@ -103,6 +103,37 @@ export function readLandmarkAnchors(map: Phaser.Tilemaps.Tilemap, layer: string)
   return anchors;
 }
 
+export interface PropZone {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  /** Prop identifier (desk, bookshelf, shoes, library, bench). */
+  id: string;
+  promptOffset: Point;
+}
+
+export function readPropZones(map: Phaser.Tilemaps.Tilemap, layer: string): PropZone[] {
+  const zones: PropZone[] = [];
+  for (const obj of map.getObjectLayer(layer)?.objects ?? []) {
+    if (obj.type !== 'prop') continue;
+    const id = getStringProperty(obj, 'id');
+    if (!id) continue;
+    zones.push({
+      x: obj.x!,
+      y: obj.y!,
+      width: obj.width!,
+      height: obj.height!,
+      id,
+      promptOffset: {
+        x: getNumberProperty(obj, 'promptOffsetX') ?? 0,
+        y: getNumberProperty(obj, 'promptOffsetY') ?? 0,
+      },
+    });
+  }
+  return zones;
+}
+
 export function readDoors(map: Phaser.Tilemaps.Tilemap, layer: string): DoorObject[] {
   const doors: DoorObject[] = [];
   for (const obj of map.getObjectLayer(layer)?.objects ?? []) {

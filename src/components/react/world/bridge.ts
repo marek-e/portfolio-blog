@@ -11,8 +11,14 @@ export interface WorldEventMap {
   'game:enter': void;
   /** A project interaction zone was activated (game → DOM). */
   'card:open': { slug: string };
-  /** The project card overlay closed (DOM → game). */
+  /** A prop interaction zone was activated — house props, library, bench (game → DOM). */
+  'prop:open': { id: string };
+  /** Whatever overlay was open has closed (DOM → game). */
   'card:close': void;
+  /** Discovery list changed; scenes update their sparkle/checkmark markers (DOM → game). */
+  'discovery:changed': { discovered: string[] };
+  /** Show/hide a translated tutorial hint chip (game → DOM). */
+  hint: { id: 'move'; visible: boolean };
 }
 
 type EventKey = keyof WorldEventMap;

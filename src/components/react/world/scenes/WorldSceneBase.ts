@@ -1,9 +1,10 @@
 import Phaser from 'phaser';
 import type { InputManager } from '../input/manager';
 import { INPUT_REGISTRY_KEY } from '../input/manager';
+import { InteractionZones } from './interactions';
 import { readDoors, readSpawns } from './tiled';
 
-/** Walk speed in world-px/s — PRD §6.10 starting value, tuned at P1. */
+/** Walk speed in world-px/s — PRD §6.10 starting value, confirmed at P1 (island crossing ≈30 s). */
 const WALK_SPEED = 150;
 const TRANSITION_FADE_MS = 400;
 /** Source poses are 192×256; rendered at half size ≈ 96×128 (PRD §8.2). */
@@ -23,13 +24,17 @@ function facingTexture(x: number, y: number): string {
 
 /**
  * Shared plumbing for the walkable scenes (island, house): painting + Tiled map loading,
- * collision bodies, player, door overlap zones with guarded fade transitions, and the
- * per-frame movement read from the input manager.
+ * collision bodies, player with procedural walk motion, interaction zones, door overlap
+ * zones with guarded fade transitions, and the per-frame movement read from the input
+ * manager.
  */
 export abstract class WorldSceneBase extends Phaser.Scene {
   protected player!: Phaser.Physics.Arcade.Sprite;
   protected inputManager!: InputManager;
+  protected interactions!: InteractionZones;
+  private playerShadow!: Phaser.GameObjects.Ellipse;
   private transitioning = false;
+  private walkTime = 0;
 
   /** Builds the common world; returns the painting (camera sizing) and map (scene extras). */
   protected buildWorld(
@@ -40,6 +45,7 @@ export abstract class WorldSceneBase extends Phaser.Scene {
   ): { painting: Phaser.GameObjects.Image; map: Phaser.Tilemaps.Tilemap } {
     this.transitioning = false;
     this.inputManager = this.registry.get(INPUT_REGISTRY_KEY) as InputManager;
+    this.interactions = new InteractionZones(this);
 
     const painting = this.add.image(0, 0, paintingKey).setOrigin(0);
     this.physics.world.setBounds(0, 0, painting.width, painting.height);
@@ -51,6 +57,7 @@ export abstract class WorldSceneBase extends Phaser.Scene {
       y: painting.height / 2,
     };
 
+    this.playerShadow = this.add.ellipse(spawn.x, spawn.y, 52, 16, 0x1e281e, 0.18);
     this.player = this.physics.add.sprite(spawn.x, spawn.y, 'player-front');
     this.player.setScale(PLAYER_SCALE);
     const body = this.player.body as Phaser.Physics.Arcade.Body;
@@ -61,21 +68,46 @@ export abstract class WorldSceneBase extends Phaser.Scene {
     this.physics.add.collider(this.player, this.buildCollisionBodies(map));
     this.buildDoors(map);
 
+    const offInteract = this.inputManager.onInteract(() => {
+      this.interactions.triggerActive();
+    });
+    this.events.once(Phaser.Scenes.Events.SHUTDOWN, offInteract);
+
     this.cameras.main.fadeIn(TRANSITION_FADE_MS);
     return { painting, map };
   }
 
-  update(): void {
+  update(_time: number, delta: number): void {
     if (!this.player) return;
     const vector = this.inputManager.getMoveVector();
     const body = this.player.body as Phaser.Physics.Arcade.Body;
     body.setVelocity(vector.x * WALK_SPEED, vector.y * WALK_SPEED);
 
-    if (vector.x !== 0 || vector.y !== 0) {
+    const moving = vector.x !== 0 || vector.y !== 0;
+    if (moving) {
       this.player.setTexture(facingTexture(vector.x, vector.y));
+      this.walkTime += delta;
+      // procedural walk bob: subtle squash-and-stretch synced to a step cadence
+      const bob = Math.sin(this.walkTime * 0.018);
+      this.player.setScale(PLAYER_SCALE * (1 - 0.015 * bob), PLAYER_SCALE * (1 + 0.025 * bob));
+      this.player.setRotation(0.02 * vector.x * bob);
+    } else if (this.walkTime !== 0) {
+      this.walkTime = 0;
+      this.player.setScale(PLAYER_SCALE);
+      this.player.setRotation(0);
     }
+
+    const feetY = this.player.y + this.player.displayHeight / 2;
     // y-sorted depth against the landmark sprites (feet position)
-    this.player.setDepth(this.player.y + this.player.displayHeight / 2);
+    this.player.setDepth(feetY);
+    this.playerShadow.setPosition(this.player.x, feetY - 4).setDepth(feetY - 1);
+
+    this.interactions.update(this.player.x, this.player.y);
+  }
+
+  /** Hook for scene-specific reactions to a door being used (e.g. the intro-done flag). */
+  protected onDoorUsed(target: string): void {
+    void target;
   }
 
   private buildCollisionBodies(map: Phaser.Tilemaps.Tilemap): Phaser.Physics.Arcade.StaticGroup {
@@ -108,6 +140,7 @@ export abstract class WorldSceneBase extends Phaser.Scene {
   private startTransition(target: string, spawn: string): void {
     if (this.transitioning) return;
     this.transitioning = true;
+    this.onDoorUsed(target);
     this.cameras.main.fadeOut(TRANSITION_FADE_MS);
     this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
       this.scene.start(target, { spawn } satisfies SceneTransitionData);

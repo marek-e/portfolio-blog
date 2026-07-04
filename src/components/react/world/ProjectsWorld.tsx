@@ -7,6 +7,8 @@ import { createInputManager } from './input/manager';
 import { createKeyboardSource } from './input/keyboardSource';
 import { GameCanvas } from './GameCanvas';
 import { ProjectCardOverlay } from './ProjectCardOverlay';
+import { PropCardOverlay } from './PropCardOverlay';
+import { addDiscovered, getDiscovered } from './state';
 import { WorldHud } from './WorldHud';
 
 export interface WorldProjectDTO {
@@ -39,6 +41,8 @@ export function ProjectsWorld({ projects, t, lang }: ProjectsWorldProps) {
   const [inputManager] = useState(createInputManager);
   const [phase, setPhase] = useState<Phase>('loading');
   const [progress, setProgress] = useState(0);
+  const [discovered, setDiscovered] = useState<string[]>(getDiscovered);
+  const [hint, setHint] = useState<string | null>(null);
   const canvasContainerRef = useRef<HTMLDivElement>(null);
 
   const listUrl = lang === 'en' ? '/en/projects' : '/projects';
@@ -64,18 +68,31 @@ export function ProjectsWorld({ projects, t, lang }: ProjectsWorldProps) {
 
   // Input pause protocol (plan decision 6): world input dies while a card is open; on close
   // the world resumes and the canvas regains focus so keyboard play continues seamlessly.
+  // First open of a project card marks it discovered (PRD §6.7) and notifies the game so
+  // its sparkle swaps for the checkmark marker.
   useEffect(() => {
     if (isSmallViewport) return;
-    const offOpen = bridge.on('card:open', () => inputManager.setPaused(true));
+    const offOpen = bridge.on('card:open', ({ slug }) => {
+      inputManager.setPaused(true);
+      const next = addDiscovered(slug);
+      setDiscovered(next);
+      bridge.emit('discovery:changed', { discovered: next });
+    });
+    const offProp = bridge.on('prop:open', () => inputManager.setPaused(true));
     const offClose = bridge.on('card:close', () => {
       inputManager.setPaused(false);
       canvasContainerRef.current?.focus();
     });
+    const offHint = bridge.on('hint', ({ id, visible }) => {
+      setHint(visible ? t.hints[id] : null);
+    });
     return () => {
       offOpen();
+      offProp();
       offClose();
+      offHint();
     };
-  }, [bridge, inputManager, isSmallViewport]);
+  }, [bridge, inputManager, isSmallViewport, t]);
 
   if (isSmallViewport) {
     return (
@@ -109,9 +126,21 @@ export function ProjectsWorld({ projects, t, lang }: ProjectsWorldProps) {
       <GameCanvas bridge={bridge} inputManager={inputManager} containerRef={canvasContainerRef} />
 
       <ProjectCardOverlay bridge={bridge} projects={projects} t={t} />
+      <PropCardOverlay
+        bridge={bridge}
+        t={t}
+        lang={lang}
+        allDiscovered={projects.length > 0 && discovered.length >= projects.length}
+      />
 
       {phase === 'entered' ? (
-        <WorldHud t={t} listUrl={listUrl} />
+        <WorldHud
+          t={t}
+          listUrl={listUrl}
+          discoveredCount={discovered.length}
+          totalCount={projects.length}
+          hint={hint}
+        />
       ) : (
         <div className="bg-background absolute inset-0 z-10 flex flex-col items-center justify-center gap-8 px-4">
           <h2 className="text-3xl font-bold tracking-tight">{t.heading}</h2>

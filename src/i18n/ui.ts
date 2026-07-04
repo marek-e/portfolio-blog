@@ -151,6 +151,7 @@ export interface UITranslations {
     pageDescription: string;
     title: string;
     subtitle: string;
+    moreProjects: string;
     noProjects: string;
     role: string;
     duration: string;

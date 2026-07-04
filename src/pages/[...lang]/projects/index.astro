@@ -18,6 +18,9 @@ const allProjects = await getCollection('projects');
 const projects = sortProjects(allProjects.filter((project) => project.id.startsWith(`${lang}/`)));
 
 const featuredProjects = projects.filter((p) => p.data.featured);
+// Variant parity with the world (PRD §6.1): every project the island shows must be
+// reachable from this grid, so non-featured entries get their own section.
+const moreProjects = projects.filter((p) => !p.data.featured);
 ---
 
 <Layout title={t.projectsPage.pageTitle} description={t.projectsPage.pageDescription}>
@@ -59,6 +62,19 @@ const featuredProjects = projects.filter((p) => p.data.featured);
               <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {featuredProjects.map((project) => (
                   <ProjectListCard project={project} featured />
+                ))}
+              </div>
+            </section>
+          )}
+          {moreProjects.length > 0 && (
+            <section>
+              <h2 class="text-muted-foreground mb-6 flex items-center gap-2 text-xl font-semibold">
+                <span class="bg-muted-foreground/60 inline-block size-2 rounded-full" />
+                {t.projectsPage.moreProjects}
+              </h2>
+              <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                {moreProjects.map((project) => (
+                  <ProjectListCard project={project} />
                 ))}
               </div>
             </section>

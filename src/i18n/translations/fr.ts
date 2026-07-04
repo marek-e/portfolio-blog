@@ -164,6 +164,7 @@ export const fr: UITranslations = {
     pageDescription: 'Découvrez mes projets de développement web, applications et expérimentations',
     title: 'Tous mes projets',
     subtitle: "Une collection de ce que j'ai construit, de l'idée à la production.",
+    moreProjects: 'Autres projets',
     noProjects: 'Aucun projet pour le moment.',
     role: 'Rôle',
     duration: 'Durée',

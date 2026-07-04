@@ -1,31 +1,26 @@
 import Phaser from 'phaser';
 import type { WorldBridge } from '../bridge';
 import { BRIDGE_REGISTRY_KEY } from '../bridge';
+import { getDiscovered } from '../state';
 import type { SceneTransitionData } from './WorldSceneBase';
 import { WorldSceneBase } from './WorldSceneBase';
-import type { ProjectZone } from './tiled';
-import { readLandmarkAnchors, readProjectZones } from './tiled';
+import { readLandmarkAnchors, readProjectZones, readPropZones } from './tiled';
 
-/** How far beyond the zone edge the player can stand and still interact. */
-const INTERACTION_RADIUS = 64;
+const MARKER_DEPTH = 9_000;
 
-interface TrackedZone {
-  zone: ProjectZone;
-  centerX: number;
-  centerY: number;
-  radius: number;
-  prompt: Phaser.GameObjects.Text;
+interface LandmarkMarker {
+  sparkle: Phaser.GameObjects.Image;
+  checkmark: Phaser.GameObjects.Image;
 }
 
 /**
- * The island exterior: full-size painting, camera at zoom 1 (1 painting px = 1 CSS px,
- * PRD §6.10) following the player within the painting bounds. Project zones from the Tiled
- * map show a floating interact prompt in range; interacting opens the DOM card overlay
- * through the bridge (the full §6.6 affordances arrive with real art at P1).
+ * The island exterior: full-size painting at camera zoom 1 (PRD §6.10), landmark sprites
+ * layered above it with the §6.6 affordances — proximity glow, floating keycap prompt,
+ * idle sparkle on undiscovered landmarks, checkmark on discovered ones.
  */
 export class IslandScene extends WorldSceneBase {
-  private trackedZones: TrackedZone[] = [];
-  private zoneInRange: TrackedZone | null = null;
+  private landmarkSprites = new Map<string, Phaser.GameObjects.Image>();
+  private markers = new Map<string, LandmarkMarker>();
 
   constructor() {
     super('island');
@@ -36,74 +31,112 @@ export class IslandScene extends WorldSceneBase {
     this.cameras.main.setBounds(0, 0, painting.width, painting.height);
     this.cameras.main.startFollow(this.player, false, 0.1, 0.1);
 
-    this.buildLandmarkSprites(map);
-    this.buildProjectZones(map);
-
     const bridge = this.registry.get(BRIDGE_REGISTRY_KEY) as WorldBridge;
-    const offInteract = this.inputManager.onInteract(() => {
-      if (this.zoneInRange) {
-        bridge.emit('card:open', { slug: this.zoneInRange.zone.slug });
-      }
+
+    this.buildLandmarkSprites(map);
+    this.buildProjectZones(map, bridge);
+    this.buildPropZones(map, bridge);
+    this.applyDiscovered(getDiscovered());
+
+    const offDiscovery = bridge.on('discovery:changed', ({ discovered }) => {
+      this.applyDiscovered(discovered);
     });
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
-      offInteract();
-      this.trackedZones = [];
-      this.zoneInRange = null;
+      offDiscovery();
+      this.landmarkSprites.clear();
+      this.markers.clear();
     });
-  }
-
-  update(): void {
-    super.update();
-    if (!this.player) return;
-
-    this.zoneInRange = null;
-    for (const tracked of this.trackedZones) {
-      const inRange =
-        Phaser.Math.Distance.Between(
-          this.player.x,
-          this.player.y,
-          tracked.centerX,
-          tracked.centerY
-        ) <= tracked.radius;
-      tracked.prompt.setVisible(inRange);
-      if (inRange) this.zoneInRange = tracked;
-    }
   }
 
   /** Layered landmark sprites above the painting (PRD §6.6), y-sorted against the player. */
   private buildLandmarkSprites(map: Phaser.Tilemaps.Tilemap): void {
     for (const anchor of readLandmarkAnchors(map, 'zones')) {
-      this.add
+      const sprite = this.add
         .image(anchor.x, anchor.y, anchor.sprite)
         .setScale(anchor.scale)
         .setDepth(anchor.sortY ?? anchor.y);
+      sprite.setData('baseScale', anchor.scale);
+      this.landmarkSprites.set(anchor.sprite, sprite);
     }
   }
 
-  private buildProjectZones(map: Phaser.Tilemaps.Tilemap): void {
+  private buildProjectZones(map: Phaser.Tilemaps.Tilemap, bridge: WorldBridge): void {
     for (const zone of readProjectZones(map, 'zones')) {
       const centerX = zone.x + zone.width / 2;
       const centerY = zone.y + zone.height / 2;
+      const markerX = centerX + zone.promptOffset.x;
+      const markerY = centerY + zone.promptOffset.y;
+      const sprite = this.landmarkSprites.get(`landmark-${zone.slug}`);
 
-      const prompt = this.add
-        .text(centerX + zone.promptOffset.x, centerY + zone.promptOffset.y, 'E', {
-          fontFamily: 'sans-serif',
-          fontSize: '24px',
-          color: '#1c1c1c',
-          backgroundColor: '#ffffff',
-          padding: { x: 10, y: 6 },
-        })
-        .setOrigin(0.5)
-        .setDepth(10000)
-        .setVisible(false);
-
-      this.trackedZones.push({
-        zone,
-        centerX,
-        centerY,
-        radius: Math.max(zone.width, zone.height) / 2 + INTERACTION_RADIUS,
-        prompt,
+      // Idle sparkle (undiscovered) / checkmark (discovered), swapped by applyDiscovered.
+      const sparkle = this.add.image(markerX, markerY, 'sparkle').setDepth(MARKER_DEPTH);
+      this.tweens.add({
+        targets: sparkle,
+        alpha: { from: 1, to: 0.35 },
+        scale: { from: 1, to: 0.7 },
+        duration: 900,
+        yoyo: true,
+        repeat: -1,
+        ease: 'Sine.easeInOut',
       });
+      const checkmark = this.add
+        .image(markerX, markerY, 'checkmark')
+        .setDepth(MARKER_DEPTH)
+        .setScale(0.7)
+        .setAlpha(0.9)
+        .setVisible(false);
+      this.markers.set(zone.slug, { sparkle, checkmark });
+
+      this.interactions.add({
+        x: centerX,
+        y: centerY,
+        width: zone.width,
+        height: zone.height,
+        promptOffset: zone.promptOffset,
+        onInteract: () => bridge.emit('card:open', { slug: zone.slug }),
+        onEnter: () => sprite && this.setGlow(sprite, true),
+        onExit: () => sprite && this.setGlow(sprite, false),
+      });
+    }
+  }
+
+  private buildPropZones(map: Phaser.Tilemaps.Tilemap, bridge: WorldBridge): void {
+    for (const zone of readPropZones(map, 'zones')) {
+      this.interactions.add({
+        x: zone.x + zone.width / 2,
+        y: zone.y + zone.height / 2,
+        width: zone.width,
+        height: zone.height,
+        promptOffset: zone.promptOffset,
+        onInteract: () => bridge.emit('prop:open', { id: zone.id }),
+      });
+    }
+  }
+
+  /** Soft glow/outline on the landmark sprite while in interaction range (PRD §6.6). */
+  private setGlow(sprite: Phaser.GameObjects.Image, on: boolean): void {
+    if (this.renderer.type === Phaser.WEBGL) {
+      if (on) {
+        sprite.postFX.addGlow(0xfff6d8, 4, 0);
+      } else {
+        sprite.postFX.clear();
+      }
+    }
+    // Canvas fallback (and extra juice on WebGL): a slight scale-up from the anchor scale
+    const baseScale = (sprite.getData('baseScale') as number) ?? 1;
+    this.tweens.add({
+      targets: sprite,
+      scale: baseScale * (on ? 1.04 : 1),
+      duration: 160,
+      ease: 'Sine.easeOut',
+    });
+  }
+
+  private applyDiscovered(discovered: string[]): void {
+    for (const [slug, marker] of this.markers) {
+      const isDiscovered = discovered.includes(slug);
+      marker.sparkle.setVisible(!isDiscovered);
+      marker.checkmark.setVisible(isDiscovered);
     }
   }
 }

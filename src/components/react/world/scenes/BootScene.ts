@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import type { WorldBridge } from '../bridge';
 import { BRIDGE_REGISTRY_KEY } from '../bridge';
+import { isIntroDone } from '../state';
 
 /**
  * Preloads every world asset, driving the DOM loading bar through the bridge, then waits for
@@ -53,9 +54,10 @@ export class BootScene extends Phaser.Scene {
   create(): void {
     const bridge = this.registry.get(BRIDGE_REGISTRY_KEY) as WorldBridge;
 
-    // First visit begins in the house (PRD §6.4); return-visit spawning arrives with P1 state.
+    // First visit begins in the house intro; returning visitors spawn outside the front
+    // door (PRD §6.4) — the island's default spawn point.
     const offEnter = bridge.on('game:enter', () => {
-      this.scene.start('house');
+      this.scene.start(isIntroDone() ? 'island' : 'house');
     });
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, offEnter);
 
