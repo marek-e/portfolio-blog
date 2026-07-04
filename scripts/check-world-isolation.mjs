@@ -23,6 +23,10 @@ const BASELINE_PATH = join(ROOT, 'scripts', 'world-isolation-baseline.json');
 // dist-relative HTML files for the two world pages, excluded from the leak walk and the baseline.
 const WORLD_PAGES = ['projects/world/index.html', 'en/projects/world/index.html'];
 
+// World assets that are *supposed* to appear on non-world pages after the P2 reveal
+// (PRD §6.1/decision #15): the entry banner on /projects. Nothing else is exempt.
+const ALLOWED_WORLD_ASSETS = new Set(['/world/banner-v1.webp']);
+
 const updateBaseline = process.argv.includes('--update-baseline');
 
 function fail(message) {
@@ -80,7 +84,7 @@ const chunkToPages = new Map();
 for (const page of nonWorldHtml) {
   const html = readFileSync(join(DIST, page), 'utf8');
   for (const ref of assetRefs(html)) {
-    if (/phaser/i.test(ref) || ref.startsWith('/world/')) {
+    if ((/phaser/i.test(ref) || ref.startsWith('/world/')) && !ALLOWED_WORLD_ASSETS.has(ref)) {
       leaks.push(`  ${page} → ${ref}`);
     }
   }

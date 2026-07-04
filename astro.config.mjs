@@ -16,12 +16,7 @@ export default defineConfig({
       prefixDefaultLocale: false,
     },
   },
-  integrations: [
-    react(),
-    mdx(),
-    // Keep the Projects World routes out of the sitemap until the P2 reveal (PRD decision #17).
-    sitemap({ filter: (page) => !page.includes('/projects/world') }),
-  ],
+  integrations: [react(), mdx(), sitemap()],
   vite: {
     plugins: [tailwindcss()],
     build: {

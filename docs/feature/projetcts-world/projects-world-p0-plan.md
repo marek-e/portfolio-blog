@@ -2,7 +2,7 @@
 
 |            |                                                                               |
 | ---------- | ----------------------------------------------------------------------------- |
-| **Status** | **P0 complete** — all six slices landed, acceptance sweep recorded below      |
+| **Status** | **Shipped** — P0 slices below; P1/P2 record at the end of this doc            |
 | **PRD**    | [projects-world-prd.md](./projects-world-prd.md) (§12 P0 acceptance criteria) |
 | **Owner**  | Marek Elmayan                                                                 |
 | **Date**   | 2026-07-02                                                                    |
@@ -265,9 +265,7 @@ Tiled shapes, camera follows.
      "tilewidth": 32,
      "tileheight": 32,
      "tilesets": [],
-     "layers": [
-       /* objectgroups below */
-     ]
+     "layers": [/* objectgroups below */]
    }
    ```
    (128×32 = 4096 px, matching the painting.) **No `imagelayer`** in the committed P0 file — Phaser
@@ -462,3 +460,39 @@ automation tab's hidden-visibility state suppresses rAF):
 | Base UI Dialog focus behavior fights canvas focus                                                   | Input pause protocol has one owner (manager); refocus canvas on close is explicit in slice 5                                                                                        |
 | Hand-written `.tmj` drifts from what Phaser accepts (missing `tilesets: []`, wrong object-kind key) | Required-skeleton snippet in slice 3; objects use `"type"`; re-save from Tiled before commit so the file is editor-normalized                                                       |
 | Isolation regressions after P0 (shared code importing world modules)                                | The script is permanent and runs in every future slice's checklist                                                                                                                  |
+
+---
+
+## P1 / P2 completion record (2026-07-04)
+
+P1 and P2 were implemented on this branch after the P0 sweep, one atomic commit per coherent
+unit (see `git log --oneline -- src/components/react/world scripts/world-art`). Deviations,
+each documented in the PRD and/or the relevant commit:
+
+1. **Art sourcing** (PRD §8 note): committed vector pipeline `scripts/world-art/` instead of
+   AI-generated bitmaps — the generator also emits both `.tmj` maps from the same coordinates
+   the art is drawn from, so painting and collision cannot drift. Regenerate everything with
+   `node scripts/world-art/generate.mjs`.
+2. **Audio** (PRD §10): fully WebAudio-synthesized (generative chord pad + shore noise +
+   pentatonic plucks; synthesized SFX). No licensing burden, zero downloaded bytes; starts on
+   the entry click as specified.
+3. **Tiled editor pass**: the maps are valid Tiled 1.10 JSON but are now generator-owned; the
+   editor re-save validation is superseded (editing by hand would be overwritten).
+4. **Isolation guard**: leak check gained a single allowlisted asset (`/world/banner-v1.webp`)
+   for the post-reveal entry banner. Baseline regenerations along the way were each root-caused
+   in their commit messages (shared-CSS utilities, base-ui re-chunking, minifier naming shifts,
+   intended shared-translation additions) — no world JS ever reached a non-world page.
+
+### P2 acceptance (PRD §12)
+
+- Ambience layers, reduced-motion handling, synthesized music/SFX with persistent mute +
+  tab-hidden fade, failure modes (loader error + 15 s watchdog → error card; renderer failure
+  → same path; storage fallback), 6/6 confetti + bench congrats card, polished entry/teaser
+  with hero art + rotating hints, a11y pass (Base UI focus trap, canvas role/aria-label,
+  sr-only project nav), OG image, banner + footer reveal, sitemap unfiltered.
+- **Performance budget** (gzip, measured on the built site): full game-route payload —
+  phaser-vendor 313 kB + world chunks 12 kB + all paintings/sprites/maps ≈ 275 kB =
+  **≈ 0.60 MB total vs the 4 MB budget**; music 0 bytes (synthesized). Non-world pages ship
+  zero game bytes (isolation guard, every commit).
+- Optional stretch (simple animals) deliberately cut, per the PRD's own "cut without blocking
+  launch".

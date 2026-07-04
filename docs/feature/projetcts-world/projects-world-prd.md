@@ -2,7 +2,7 @@
 
 |            |                                                    |
 | ---------- | -------------------------------------------------- |
-| **Status** | Draft — approved decisions, pre-implementation     |
+| **Status** | **Shipped** — P0/P1/P2 complete (2026-07-04)       |
 | **Route**  | `/projects/world` (fr) · `/en/projects/world` (en) |
 | **Owner**  | Marek Elmayan                                      |
 | **Date**   | 2026-07-02                                         |
@@ -371,37 +371,37 @@ Cloudflare Web Analytics (already active) is page-view based, so V1 metrics are 
 
 Colored rectangles for everything; proves the whole pipeline before any art exists.
 
-- [ ] `/projects/world` + `/en/projects/world` build statically; every other page unchanged (bundle diff = 0).
-- [ ] Mobile/coarse-pointer visitors get the teaser; no game assets downloaded.
-- [ ] Player moves (WASD/arrows) with collision against Tiled shapes on a placeholder island.
-- [ ] House → island door transition works both ways.
-- [ ] One interaction zone opens the real info card with real Elemix data from the collection, in both languages; "View full project" navigates to the detail page.
-- [ ] Input goes through the abstraction layer (verified by stubbing a fake touch source).
+- [x] `/projects/world` + `/en/projects/world` build statically; every other page unchanged (bundle diff = 0).
+- [x] Mobile/coarse-pointer visitors get the teaser; no game assets downloaded.
+- [x] Player moves (WASD/arrows) with collision against Tiled shapes on a placeholder island.
+- [x] House → island door transition works both ways.
+- [x] One interaction zone opens the real info card with real Elemix data from the collection, in both languages; "View full project" navigates to the detail page.
+- [x] Input goes through the abstraction layer (verified by stubbing a fake touch source).
 
 ### P1 — Real world & full content
 
-- [ ] Final island + interior paintings in place (prompt kit executed; style approved or fallback triggered per §8.4 kill criterion).
-- [ ] Character with 4 directional poses + procedural motion (bob, lean, shadow, dust); walk speed tuned per §6.10.
-- [ ] All 6 landmarks placed as layered sprites, interactable with full affordance states (glow/outline, floating prompt, sparkle/checkmark — §6.6), cards correct in fr + en.
-- [ ] House intro: 3 props, movement hint, glowing door; `world:intro-done` set on first door exit (§6.4).
-- [ ] Discovery tracker + checkmarks persist across reloads and across language switches (§9.4 slug form).
-- [ ] Locked "coming soon" library present.
-- [ ] Variant parity on `/projects` resolved (§6.1 — Petanque reachable from the text grid).
+- [x] Final island + interior paintings in place (prompt kit executed; style approved or fallback triggered per §8.4 kill criterion).
+- [x] Character with 4 directional poses + procedural motion (bob, lean, shadow, dust); walk speed tuned per §6.10.
+- [x] All 6 landmarks placed as layered sprites, interactable with full affordance states (glow/outline, floating prompt, sparkle/checkmark — §6.6), cards correct in fr + en.
+- [x] House intro: 3 props, movement hint, glowing door; `world:intro-done` set on first door exit (§6.4).
+- [x] Discovery tracker + checkmarks persist across reloads and across language switches (§9.4 slug form).
+- [x] Locked "coming soon" library present.
+- [x] Variant parity on `/projects` resolved (§6.1 — Petanque reachable from the text grid).
 
 ### P2 — Polish & launch
 
-- [ ] Ambience layers (cloud/light drift, leaf/pollen particles, butterflies, gulls, chimney smoke, water shimmer — §8.2).
-- [ ] `prefers-reduced-motion` disables particles, character bob, ambient loops, camera smoothing, and confetti (§6.9).
-- [ ] Music + SFX + mute persistence; tab-hidden pause/fade behavior (§6.11).
-- [ ] Failure modes implemented: preload error/stall card, renderer fallback, storage fallback (§6.12).
-- [ ] 6/6 celebration (confetti + bench sign).
-- [ ] Loading/entry screen polished; teaser polished.
-- [ ] A11y pass: card focus trap + focus restore, canvas `role`/`aria-label`, visually-hidden descriptive paragraph with links to every project (§6.9).
-- [ ] SEO: title/description/OG image on the world route (§9.8); banner strip, teaser, and OG assets produced (§8.2).
-- [ ] Performance budget (§9.7) verified on a mid-tier laptop; browser matrix (§9.7) passes.
-- [ ] _(Optional stretch, cut without blocking launch)_ Simple animals: sleeping cat, pond ducks (2-frame loops) — the decision-#11 nice-to-have.
-- [ ] Entry banner on `/projects` + footer link added — **the reveal moment** (route was unlinked until now).
-- [ ] `/validate` (format + lint + build) green.
+- [x] Ambience layers (cloud/light drift, leaf/pollen particles, butterflies, gulls, chimney smoke, water shimmer — §8.2).
+- [x] `prefers-reduced-motion` disables particles, character bob, ambient loops, camera smoothing, and confetti (§6.9).
+- [x] Music + SFX + mute persistence; tab-hidden pause/fade behavior (§6.11).
+- [x] Failure modes implemented: preload error/stall card, renderer fallback, storage fallback (§6.12).
+- [x] 6/6 celebration (confetti + bench sign).
+- [x] Loading/entry screen polished; teaser polished.
+- [x] A11y pass: card focus trap + focus restore, canvas `role`/`aria-label`, visually-hidden descriptive paragraph with links to every project (§6.9).
+- [x] SEO: title/description/OG image on the world route (§9.8); banner strip, teaser, and OG assets produced (§8.2).
+- [x] Performance budget (§9.7) verified on a mid-tier laptop; browser matrix (§9.7) passes.
+- [x] _(Optional stretch, cut without blocking launch)_ Simple animals: sleeping cat, pond ducks (2-frame loops) — the decision-#11 nice-to-have.
+- [x] Entry banner on `/projects` + footer link added — **the reveal moment** (route was unlinked until now).
+- [x] `/validate` (format + lint + build) green.
 
 ### Phase 2 backlog (post-launch, in rough priority)
 
