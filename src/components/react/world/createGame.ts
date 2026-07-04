@@ -7,6 +7,7 @@ import type { WorldBridge } from './bridge';
 import { BRIDGE_REGISTRY_KEY } from './bridge';
 import type { InputManager } from './input/manager';
 import { INPUT_REGISTRY_KEY } from './input/manager';
+import { REDUCED_MOTION_REGISTRY_KEY } from './motion';
 import { BootScene } from './scenes/BootScene';
 import { HouseScene } from './scenes/HouseScene';
 import { IslandScene } from './scenes/IslandScene';
@@ -33,6 +34,10 @@ export function createGame(
       preBoot: (game) => {
         game.registry.set(BRIDGE_REGISTRY_KEY, bridge);
         game.registry.set(INPUT_REGISTRY_KEY, inputManager);
+        game.registry.set(
+          REDUCED_MOTION_REGISTRY_KEY,
+          window.matchMedia('(prefers-reduced-motion: reduce)').matches
+        );
       },
     },
   });

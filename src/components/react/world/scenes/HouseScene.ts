@@ -28,7 +28,7 @@ export class HouseScene extends WorldSceneBase {
   create(data: SceneTransitionData): void {
     const { painting, map } = this.buildWorld('house', 'house-map', data, 'bed');
     this.cameras.main.setBounds(0, 0, painting.width, painting.height);
-    this.cameras.main.startFollow(this.player, false, 0.1, 0.1);
+    this.startCameraFollow();
     this.bridge = this.registry.get(BRIDGE_REGISTRY_KEY) as WorldBridge;
 
     for (const zone of readPropZones(map, 'zones')) {
@@ -96,6 +96,10 @@ export class HouseScene extends WorldSceneBase {
         0.28
       )
       .setDepth(8_000);
+    if (this.reducedMotion) {
+      this.doorGlow.setAlpha(0.6);
+      return;
+    }
     this.tweens.add({
       targets: this.doorGlow,
       alpha: { from: 0.9, to: 0.35 },

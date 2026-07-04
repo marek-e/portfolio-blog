@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 import type { WorldBridge } from '../bridge';
 import { BRIDGE_REGISTRY_KEY } from '../bridge';
 import { getDiscovered } from '../state';
+import { createIslandAmbience } from './ambience';
 import type { SceneTransitionData } from './WorldSceneBase';
 import { WorldSceneBase } from './WorldSceneBase';
 import { readLandmarkAnchors, readProjectZones, readPropZones } from './tiled';
@@ -29,7 +30,7 @@ export class IslandScene extends WorldSceneBase {
   create(data: SceneTransitionData): void {
     const { painting, map } = this.buildWorld('island', 'island-map', data, 'outside-front-door');
     this.cameras.main.setBounds(0, 0, painting.width, painting.height);
-    this.cameras.main.startFollow(this.player, false, 0.1, 0.1);
+    this.startCameraFollow();
 
     const bridge = this.registry.get(BRIDGE_REGISTRY_KEY) as WorldBridge;
 
@@ -37,6 +38,10 @@ export class IslandScene extends WorldSceneBase {
     this.buildProjectZones(map, bridge);
     this.buildPropZones(map, bridge);
     this.applyDiscovered(getDiscovered());
+
+    if (!this.reducedMotion) {
+      createIslandAmbience(this);
+    }
 
     const offDiscovery = bridge.on('discovery:changed', ({ discovered }) => {
       this.applyDiscovered(discovered);
@@ -70,15 +75,17 @@ export class IslandScene extends WorldSceneBase {
 
       // Idle sparkle (undiscovered) / checkmark (discovered), swapped by applyDiscovered.
       const sparkle = this.add.image(markerX, markerY, 'sparkle').setDepth(MARKER_DEPTH);
-      this.tweens.add({
-        targets: sparkle,
-        alpha: { from: 1, to: 0.35 },
-        scale: { from: 1, to: 0.7 },
-        duration: 900,
-        yoyo: true,
-        repeat: -1,
-        ease: 'Sine.easeInOut',
-      });
+      if (!this.reducedMotion) {
+        this.tweens.add({
+          targets: sparkle,
+          alpha: { from: 1, to: 0.35 },
+          scale: { from: 1, to: 0.7 },
+          duration: 900,
+          yoyo: true,
+          repeat: -1,
+          ease: 'Sine.easeInOut',
+        });
+      }
       const checkmark = this.add
         .image(markerX, markerY, 'checkmark')
         .setDepth(MARKER_DEPTH)
@@ -124,12 +131,12 @@ export class IslandScene extends WorldSceneBase {
     }
     // Canvas fallback (and extra juice on WebGL): a slight scale-up from the anchor scale
     const baseScale = (sprite.getData('baseScale') as number) ?? 1;
-    this.tweens.add({
-      targets: sprite,
-      scale: baseScale * (on ? 1.04 : 1),
-      duration: 160,
-      ease: 'Sine.easeOut',
-    });
+    const targetScale = baseScale * (on ? 1.04 : 1);
+    if (this.reducedMotion) {
+      sprite.setScale(targetScale);
+    } else {
+      this.tweens.add({ targets: sprite, scale: targetScale, duration: 160, ease: 'Sine.easeOut' });
+    }
   }
 
   private applyDiscovered(discovered: string[]): void {

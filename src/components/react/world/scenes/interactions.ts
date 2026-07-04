@@ -22,7 +22,7 @@ interface TrackedZone {
   spec: InteractionZoneSpec;
   radius: number;
   prompt: Phaser.GameObjects.Container;
-  promptTween: Phaser.Tweens.Tween;
+  promptTween: Phaser.Tweens.Tween | null;
   inRange: boolean;
 }
 
@@ -35,7 +35,10 @@ export class InteractionZones {
   private zones: TrackedZone[] = [];
   private active: TrackedZone | null = null;
 
-  constructor(private readonly scene: Phaser.Scene) {}
+  constructor(
+    private readonly scene: Phaser.Scene,
+    private readonly reducedMotion = false
+  ) {}
 
   add(spec: InteractionZoneSpec): void {
     const prompt = buildPrompt(
@@ -43,15 +46,17 @@ export class InteractionZones {
       spec.x + spec.promptOffset.x,
       spec.y + spec.promptOffset.y
     );
-    const promptTween = this.scene.tweens.add({
-      targets: prompt,
-      y: prompt.y - 7,
-      duration: 700,
-      yoyo: true,
-      repeat: -1,
-      ease: 'Sine.easeInOut',
-      paused: true,
-    });
+    const promptTween = this.reducedMotion
+      ? null
+      : this.scene.tweens.add({
+          targets: prompt,
+          y: prompt.y - 7,
+          duration: 700,
+          yoyo: true,
+          repeat: -1,
+          ease: 'Sine.easeInOut',
+          paused: true,
+        });
 
     this.zones.push({
       spec,
@@ -81,10 +86,10 @@ export class InteractionZones {
       zone.inRange = inRange;
       zone.prompt.setVisible(inRange);
       if (inRange) {
-        zone.promptTween.resume();
+        zone.promptTween?.resume();
         zone.spec.onEnter?.();
       } else {
-        zone.promptTween.pause();
+        zone.promptTween?.pause();
         zone.spec.onExit?.();
       }
     }

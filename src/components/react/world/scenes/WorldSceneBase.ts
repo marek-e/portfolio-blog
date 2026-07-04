@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import type { InputManager } from '../input/manager';
 import { INPUT_REGISTRY_KEY } from '../input/manager';
+import { REDUCED_MOTION_REGISTRY_KEY } from '../motion';
 import { InteractionZones } from './interactions';
 import { readDoors, readSpawns } from './tiled';
 
@@ -32,6 +33,7 @@ export abstract class WorldSceneBase extends Phaser.Scene {
   protected player!: Phaser.Physics.Arcade.Sprite;
   protected inputManager!: InputManager;
   protected interactions!: InteractionZones;
+  protected reducedMotion = false;
   private playerShadow!: Phaser.GameObjects.Ellipse;
   private transitioning = false;
   private walkTime = 0;
@@ -45,7 +47,8 @@ export abstract class WorldSceneBase extends Phaser.Scene {
   ): { painting: Phaser.GameObjects.Image; map: Phaser.Tilemaps.Tilemap } {
     this.transitioning = false;
     this.inputManager = this.registry.get(INPUT_REGISTRY_KEY) as InputManager;
-    this.interactions = new InteractionZones(this);
+    this.reducedMotion = this.registry.get(REDUCED_MOTION_REGISTRY_KEY) === true;
+    this.interactions = new InteractionZones(this, this.reducedMotion);
 
     const painting = this.add.image(0, 0, paintingKey).setOrigin(0);
     this.physics.world.setBounds(0, 0, painting.width, painting.height);
@@ -86,11 +89,13 @@ export abstract class WorldSceneBase extends Phaser.Scene {
     const moving = vector.x !== 0 || vector.y !== 0;
     if (moving) {
       this.player.setTexture(facingTexture(vector.x, vector.y));
-      this.walkTime += delta;
-      // procedural walk bob: subtle squash-and-stretch synced to a step cadence
-      const bob = Math.sin(this.walkTime * 0.018);
-      this.player.setScale(PLAYER_SCALE * (1 - 0.015 * bob), PLAYER_SCALE * (1 + 0.025 * bob));
-      this.player.setRotation(0.02 * vector.x * bob);
+      if (!this.reducedMotion) {
+        this.walkTime += delta;
+        // procedural walk bob: subtle squash-and-stretch synced to a step cadence
+        const bob = Math.sin(this.walkTime * 0.018);
+        this.player.setScale(PLAYER_SCALE * (1 - 0.015 * bob), PLAYER_SCALE * (1 + 0.025 * bob));
+        this.player.setRotation(0.02 * vector.x * bob);
+      }
     } else if (this.walkTime !== 0) {
       this.walkTime = 0;
       this.player.setScale(PLAYER_SCALE);
@@ -103,6 +108,12 @@ export abstract class WorldSceneBase extends Phaser.Scene {
     this.playerShadow.setPosition(this.player.x, feetY - 4).setDepth(feetY - 1);
 
     this.interactions.update(this.player.x, this.player.y);
+  }
+
+  /** Camera follow with gentle lerp — instant under prefers-reduced-motion (PRD §6.9). */
+  protected startCameraFollow(): void {
+    const lerp = this.reducedMotion ? 1 : 0.1;
+    this.cameras.main.startFollow(this.player, false, lerp, lerp);
   }
 
   /** Hook for scene-specific reactions to a door being used (e.g. the intro-done flag). */
