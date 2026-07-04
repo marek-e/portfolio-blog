@@ -9,6 +9,8 @@ export interface WorldEventMap {
   'boot:progress': { value: number };
   /** All assets preloaded; the entry button can be shown (game → DOM). */
   'boot:ready': void;
+  /** Asset preload or engine creation failed (game → DOM, PRD §6.12). */
+  'boot:error': void;
   /** The visitor clicked "Enter the island" (DOM → game). */
   'game:enter': void;
   /** A project interaction zone was activated (game → DOM). */

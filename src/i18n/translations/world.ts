@@ -18,7 +18,14 @@ export interface WorldTranslations {
   entry: {
     loading: string;
     enter: string;
+    /** Rotating loading-screen hints. */
+    hints: string[];
+    errorTitle: string;
+    errorBody: string;
+    retry: string;
   };
+  /** aria-label for the game canvas region. */
+  canvasLabel: string;
   hud: {
     viewAsList: string;
     /** Template with {count} and {total} placeholders. */
@@ -57,7 +64,19 @@ const fr: WorldTranslations = {
   entry: {
     loading: "Chargement de l'île…",
     enter: "Entrer sur l'île",
+    hints: [
+      'Déplacez-vous avec ZQSD ou les flèches',
+      'Appuyez sur E pour interagir',
+      'Six projets se cachent sur l’île',
+      'M coupe ou réactive le son',
+    ],
+    errorTitle: "L'île est injoignable",
+    errorBody:
+      'Le chargement a échoué ou prend trop de temps. Réessayez, ou consultez les projets dans la liste classique.',
+    retry: 'Réessayer',
   },
+  canvasLabel:
+    "L'île de Marek — un monde 2D interactif. Déplacez-vous au clavier et appuyez sur E pour découvrir les projets.",
   hud: {
     viewAsList: 'Voir la liste',
     discovered: 'Projets découverts : {count}/{total}',
@@ -118,7 +137,19 @@ const en: WorldTranslations = {
   entry: {
     loading: 'Loading the island…',
     enter: 'Enter the island',
+    hints: [
+      'Move with WASD or the arrow keys',
+      'Press E to interact',
+      'Six projects are hiding on the island',
+      'M toggles the sound',
+    ],
+    errorTitle: 'The island is unreachable',
+    errorBody:
+      'Loading failed or is taking too long. Try again, or browse the projects in the classic list.',
+    retry: 'Try again',
   },
+  canvasLabel:
+    "Marek's Island — an interactive 2D world. Walk with the keyboard and press E to discover the projects.",
   hud: {
     viewAsList: 'View as list',
     discovered: 'Projects discovered: {count}/{total}',

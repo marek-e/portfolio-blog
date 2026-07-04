@@ -388,6 +388,34 @@ async function main() {
     await render(svg, `${name}-v1.webp`);
   }
 
+  // Crops of the master painting (PRD §8.2): entry/teaser hero, OG share image (PNG for
+  // social-crawler compatibility), and the /projects entry banner strip.
+  console.log('crops:');
+  const islandPng = await sharp(Buffer.from(buildIslandSvg())).png().toBuffer();
+  const crop = async (region, size, file, format) => {
+    let pipeline = sharp(islandPng).extract(region).resize(size.width, size.height);
+    pipeline = format === 'png' ? pipeline.png() : pipeline.webp({ quality: 82 });
+    const info = await pipeline.toFile(path.join(WORLD_DIR, file));
+    console.log(`  ${file}  ${(info.size / 1024).toFixed(0)} kB`);
+  };
+  // village center: house on the hill down to the plaza
+  await crop(
+    { left: 1098, top: 866, width: 1900, height: 1069 },
+    { width: 1200, height: 675 },
+    'island-hero-v1.webp'
+  );
+  await crop(
+    { left: 948, top: 880, width: 2200, height: 1155 },
+    { width: 1200, height: 630 },
+    'og-v1.png',
+    'png'
+  );
+  await crop(
+    { left: 448, top: 980, width: 3200, height: 800 },
+    { width: 1600, height: 400 },
+    'banner-v1.webp'
+  );
+
   console.log('maps:');
   const island = buildIslandMap();
   await writeFile(path.join(MAPS_DIR, 'island.tmj'), JSON.stringify(island, null, 2) + '\n');

@@ -7,6 +7,7 @@ import { createInputManager } from './input/manager';
 import { createKeyboardSource } from './input/keyboardSource';
 import type { WorldAudio } from './audio';
 import { createWorldAudio } from './audio';
+import { Confetti } from './Confetti';
 import { GameCanvas } from './GameCanvas';
 import { ProjectCardOverlay } from './ProjectCardOverlay';
 import { PropCardOverlay } from './PropCardOverlay';
@@ -29,7 +30,11 @@ interface ProjectsWorldProps {
   lang: Lang;
 }
 
-type Phase = 'loading' | 'ready' | 'entered';
+type Phase = 'loading' | 'ready' | 'entered' | 'error';
+
+/** Preload watchdog: past this, the loading screen becomes the §6.12 error card. */
+const STALL_TIMEOUT_MS = 15_000;
+const CELEBRATION_MS = 4500;
 
 function detectSmallViewport(): boolean {
   if (typeof window === 'undefined') return false;
@@ -46,10 +51,13 @@ export function ProjectsWorld({ projects, t, lang }: ProjectsWorldProps) {
   const [discovered, setDiscovered] = useState<string[]>(getDiscovered);
   const [hint, setHint] = useState<string | null>(null);
   const [muted, setMutedState] = useState<boolean>(isMuted);
+  const [celebrating, setCelebrating] = useState(false);
+  const [hintIndex, setHintIndex] = useState(0);
   const canvasContainerRef = useRef<HTMLDivElement>(null);
   const audioRef = useRef<WorldAudio | null>(null);
   const discoveredRef = useRef(discovered);
   discoveredRef.current = discovered;
+  const pendingCelebrationRef = useRef(false);
 
   const toggleMute = useCallback(() => {
     setMutedState((current) => {
@@ -69,11 +77,32 @@ export function ProjectsWorld({ projects, t, lang }: ProjectsWorldProps) {
       setProgress(1);
       setPhase((current) => (current === 'loading' ? 'ready' : current));
     });
+    const offError = bridge.on('boot:error', () => {
+      setPhase((current) => (current === 'entered' ? current : 'error'));
+    });
     return () => {
       offProgress();
       offReady();
+      offError();
     };
   }, [bridge, isSmallViewport]);
+
+  // Preload watchdog (PRD §6.12) + rotating loading-screen hints.
+  useEffect(() => {
+    if (isSmallViewport || phase !== 'loading') return;
+    const stall = window.setTimeout(() => {
+      setPhase((current) => (current === 'loading' ? 'error' : current));
+    }, STALL_TIMEOUT_MS);
+    return () => window.clearTimeout(stall);
+  }, [isSmallViewport, phase]);
+
+  useEffect(() => {
+    if (isSmallViewport || phase === 'entered' || phase === 'error') return;
+    const rotate = window.setInterval(() => {
+      setHintIndex((index) => (index + 1) % t.entry.hints.length);
+    }, 3200);
+    return () => window.clearInterval(rotate);
+  }, [isSmallViewport, phase, t]);
 
   // Input sources detach with the island (covers ClientRouter view-transition navigation).
   useEffect(() => {
@@ -90,8 +119,12 @@ export function ProjectsWorld({ projects, t, lang }: ProjectsWorldProps) {
     const offOpen = bridge.on('card:open', ({ slug }) => {
       inputManager.setPaused(true);
       audioRef.current?.playSfx('card-open');
-      if (!discoveredRef.current.includes(slug)) audioRef.current?.playSfx('discovery');
+      const isNew = !discoveredRef.current.includes(slug);
+      if (isNew) audioRef.current?.playSfx('discovery');
       const next = addDiscovered(slug);
+      // The 6/6 celebration fires once the completing card closes (PRD §6.8) —
+      // re-triggerable only by clearing storage.
+      if (isNew && next.length === projects.length) pendingCelebrationRef.current = true;
       setDiscovered(next);
       bridge.emit('discovery:changed', { discovered: next });
     });
@@ -103,6 +136,14 @@ export function ProjectsWorld({ projects, t, lang }: ProjectsWorldProps) {
       inputManager.setPaused(false);
       audioRef.current?.playSfx('card-close');
       canvasContainerRef.current?.focus();
+      if (pendingCelebrationRef.current) {
+        pendingCelebrationRef.current = false;
+        audioRef.current?.playSfx('confetti');
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          setCelebrating(true);
+          window.setTimeout(() => setCelebrating(false), CELEBRATION_MS);
+        }
+      }
     });
     const offHint = bridge.on('hint', ({ id, visible }) => {
       setHint(visible ? t.hints[id] : null);
@@ -115,7 +156,7 @@ export function ProjectsWorld({ projects, t, lang }: ProjectsWorldProps) {
       offHint();
       offSfx();
     };
-  }, [bridge, inputManager, isSmallViewport, t]);
+  }, [bridge, inputManager, isSmallViewport, projects.length, t]);
 
   // Audio lifecycle: mute toggle (HUD button + M key), tab-hidden music fade (PRD §6.11),
   // context teardown with the island.
@@ -134,15 +175,24 @@ export function ProjectsWorld({ projects, t, lang }: ProjectsWorldProps) {
 
   if (isSmallViewport) {
     return (
-      <section className="bg-card border-border mx-auto flex max-w-md flex-col items-center gap-4 rounded-2xl border p-8 text-center shadow-sm">
-        <h2 className="text-2xl font-bold tracking-tight">{t.teaser.title}</h2>
-        <p className="text-muted-foreground">{t.teaser.body}</p>
-        <a
-          href={listUrl}
-          className="bg-primary text-primary-foreground hover:bg-primary/90 focus-visible:ring-ring/50 inline-flex items-center justify-center rounded-lg px-5 py-2.5 text-sm font-semibold transition-colors focus-visible:ring-[3px] focus-visible:outline-none"
-        >
-          {t.teaser.cta}
-        </a>
+      <section className="bg-card border-border mx-auto flex max-w-md flex-col items-center gap-4 overflow-hidden rounded-2xl border pb-8 text-center shadow-sm">
+        <img
+          src="/world/island-hero-v1.webp"
+          alt=""
+          width={1200}
+          height={675}
+          className="aspect-video w-full object-cover"
+        />
+        <div className="flex flex-col items-center gap-4 px-8">
+          <h2 className="text-2xl font-bold tracking-tight">{t.teaser.title}</h2>
+          <p className="text-muted-foreground">{t.teaser.body}</p>
+          <a
+            href={listUrl}
+            className="bg-primary text-primary-foreground hover:bg-primary/90 focus-visible:ring-ring/50 inline-flex items-center justify-center rounded-lg px-5 py-2.5 text-sm font-semibold transition-colors focus-visible:ring-[3px] focus-visible:outline-none"
+          >
+            {t.teaser.cta}
+          </a>
+        </div>
       </section>
     );
   }
@@ -163,7 +213,12 @@ export function ProjectsWorld({ projects, t, lang }: ProjectsWorldProps) {
   // The world is immersive: a fixed layer under the site's language toggle (z-40, top-right).
   return (
     <div className="bg-background fixed inset-0 z-30">
-      <GameCanvas bridge={bridge} inputManager={inputManager} containerRef={canvasContainerRef} />
+      <GameCanvas
+        bridge={bridge}
+        inputManager={inputManager}
+        containerRef={canvasContainerRef}
+        label={t.canvasLabel}
+      />
 
       <ProjectCardOverlay bridge={bridge} projects={projects} t={t} />
       <PropCardOverlay
@@ -172,6 +227,8 @@ export function ProjectsWorld({ projects, t, lang }: ProjectsWorldProps) {
         lang={lang}
         allDiscovered={projects.length > 0 && discovered.length >= projects.length}
       />
+
+      {celebrating && <Confetti />}
 
       {phase === 'entered' ? (
         <WorldHud
@@ -182,12 +239,42 @@ export function ProjectsWorld({ projects, t, lang }: ProjectsWorldProps) {
           hint={hint}
           muted={muted}
           onToggleMute={toggleMute}
+          celebrating={celebrating}
         />
       ) : (
-        <div className="bg-background absolute inset-0 z-10 flex flex-col items-center justify-center gap-8 px-4">
+        <div className="bg-background absolute inset-0 z-10 flex flex-col items-center justify-center gap-6 px-4">
+          <div className="border-border w-full max-w-lg overflow-hidden rounded-2xl border shadow-md">
+            <img
+              src="/world/island-hero-v1.webp"
+              alt=""
+              width={1200}
+              height={675}
+              className="aspect-video w-full object-cover"
+            />
+          </div>
           <h2 className="text-3xl font-bold tracking-tight">{t.heading}</h2>
 
-          {phase === 'ready' ? (
+          {phase === 'error' ? (
+            <div className="flex max-w-md flex-col items-center gap-4 text-center">
+              <p className="text-foreground font-semibold">{t.entry.errorTitle}</p>
+              <p className="text-muted-foreground text-sm">{t.entry.errorBody}</p>
+              <div className="flex items-center gap-3">
+                <button
+                  type="button"
+                  onClick={() => window.location.reload()}
+                  className="bg-primary text-primary-foreground hover:bg-primary/90 focus-visible:ring-ring/50 rounded-lg px-5 py-2.5 text-sm font-semibold transition-colors focus-visible:ring-[3px] focus-visible:outline-none"
+                >
+                  {t.entry.retry}
+                </button>
+                <a
+                  href={listUrl}
+                  className="border-border hover:bg-muted focus-visible:ring-ring/50 rounded-lg border px-5 py-2.5 text-sm font-semibold transition-colors focus-visible:ring-[3px] focus-visible:outline-none"
+                >
+                  {t.teaser.cta}
+                </a>
+              </div>
+            </div>
+          ) : phase === 'ready' ? (
             <button
               type="button"
               onClick={handleEnter}
@@ -212,6 +299,12 @@ export function ProjectsWorld({ projects, t, lang }: ProjectsWorldProps) {
               </div>
               <p className="text-muted-foreground text-sm">{t.entry.loading}</p>
             </div>
+          )}
+
+          {phase !== 'error' && (
+            <p className="text-muted-foreground/80 text-sm" aria-live="polite">
+              {t.entry.hints[hintIndex]}
+            </p>
           )}
 
           <a

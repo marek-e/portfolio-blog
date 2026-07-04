@@ -8,6 +8,8 @@ interface GameCanvasProps {
   inputManager: InputManager;
   /** Owned by ProjectsWorld so it can refocus the game after DOM overlays close. */
   containerRef: RefObject<HTMLDivElement | null>;
+  /** Translated aria-label for the application region (PRD §6.9). */
+  label: string;
 }
 
 /**
@@ -16,7 +18,7 @@ interface GameCanvasProps {
  * the game instance — mandatory because ClientRouter view transitions unmount the island on
  * client-side navigation.
  */
-export function GameCanvas({ bridge, inputManager, containerRef }: GameCanvasProps) {
+export function GameCanvas({ bridge, inputManager, containerRef, label }: GameCanvasProps) {
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
@@ -24,10 +26,16 @@ export function GameCanvas({ bridge, inputManager, containerRef }: GameCanvasPro
     let game: { destroy(removeCanvas: boolean): void } | null = null;
     let cancelled = false;
 
-    void import('./createGame').then(({ createGame }) => {
-      if (cancelled) return;
-      game = createGame(container, bridge, inputManager);
-    });
+    // Engine import or renderer creation failing (no WebGL and no Canvas2D) surfaces the
+    // same friendly error path as a preload failure (PRD §6.12).
+    void import('./createGame')
+      .then(({ createGame }) => {
+        if (cancelled) return;
+        game = createGame(container, bridge, inputManager);
+      })
+      .catch(() => {
+        if (!cancelled) bridge.emit('boot:error');
+      });
 
     return () => {
       cancelled = true;
@@ -40,6 +48,8 @@ export function GameCanvas({ bridge, inputManager, containerRef }: GameCanvasPro
     <div
       ref={containerRef}
       tabIndex={-1}
+      role="application"
+      aria-label={label}
       className="absolute inset-0 overflow-hidden outline-none"
     />
   );

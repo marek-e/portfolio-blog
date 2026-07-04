@@ -18,6 +18,9 @@ export class BootScene extends Phaser.Scene {
     this.load.on(Phaser.Loader.Events.PROGRESS, (value: number) => {
       bridge.emit('boot:progress', { value });
     });
+    this.load.on(Phaser.Loader.Events.FILE_LOAD_ERROR, () => {
+      bridge.emit('boot:error');
+    });
 
     this.load.image('island', '/world/island-v2.webp');
     this.load.image('house', '/world/house-v2.webp');

@@ -9,6 +9,8 @@ interface WorldHudProps {
   hint: string | null;
   muted: boolean;
   onToggleMute(): void;
+  /** Briefly true after the 6/6 discovery — the chip celebrates (PRD §6.8). */
+  celebrating: boolean;
 }
 
 /**
@@ -23,6 +25,7 @@ export function WorldHud({
   hint,
   muted,
   onToggleMute,
+  celebrating,
 }: WorldHudProps) {
   const discoveredLabel = t.hud.discovered
     .replace('{count}', String(discoveredCount))
@@ -37,8 +40,14 @@ export function WorldHud({
         >
           {t.hud.viewAsList}
         </a>
-        <p className="bg-background/80 text-muted-foreground border-border rounded-lg border px-3 py-1.5 text-sm shadow-sm backdrop-blur">
-          {discoveredLabel}
+        <p
+          className={
+            celebrating
+              ? 'bg-primary text-primary-foreground border-primary animate-bounce rounded-lg border px-3 py-1.5 text-sm font-semibold shadow-md'
+              : 'bg-background/80 text-muted-foreground border-border rounded-lg border px-3 py-1.5 text-sm shadow-sm backdrop-blur'
+          }
+        >
+          {celebrating ? `🎉 ${discoveredLabel}` : discoveredLabel}
         </p>
         <button
           type="button"
