@@ -1,0 +1,50 @@
+// Helpers over Phaser's Tiled object model. All gameplay data lives in the .tmj files
+// (PRD §9.3) — the painting is dumb pixels; these readers are the only bridge.
+
+import type Phaser from 'phaser';
+
+type TiledObject = Phaser.Types.Tilemaps.TiledObject;
+
+export interface Point {
+  x: number;
+  y: number;
+}
+
+export interface DoorObject {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  /** Scene key to start. */
+  target: string;
+  /** Named spawn point in the target scene. */
+  spawn: string;
+}
+
+export function getStringProperty(obj: TiledObject, name: string): string | undefined {
+  const properties = obj.properties as { name: string; value: unknown }[] | undefined;
+  const property = properties?.find((p) => p.name === name);
+  return typeof property?.value === 'string' ? property.value : undefined;
+}
+
+export function readSpawns(map: Phaser.Tilemaps.Tilemap, layer: string): Map<string, Point> {
+  const spawns = new Map<string, Point>();
+  for (const obj of map.getObjectLayer(layer)?.objects ?? []) {
+    if (obj.type === 'spawn' && obj.name) {
+      spawns.set(obj.name, { x: obj.x!, y: obj.y! });
+    }
+  }
+  return spawns;
+}
+
+export function readDoors(map: Phaser.Tilemaps.Tilemap, layer: string): DoorObject[] {
+  const doors: DoorObject[] = [];
+  for (const obj of map.getObjectLayer(layer)?.objects ?? []) {
+    if (obj.type !== 'door') continue;
+    const target = getStringProperty(obj, 'target');
+    const spawn = getStringProperty(obj, 'spawn');
+    if (!target || !spawn) continue;
+    doors.push({ x: obj.x!, y: obj.y!, width: obj.width!, height: obj.height!, target, spawn });
+  }
+  return doors;
+}

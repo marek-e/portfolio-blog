@@ -8,6 +8,7 @@ import { BRIDGE_REGISTRY_KEY } from './bridge';
 import type { InputManager } from './input/manager';
 import { INPUT_REGISTRY_KEY } from './input/manager';
 import { BootScene } from './scenes/BootScene';
+import { HouseScene } from './scenes/HouseScene';
 import { IslandScene } from './scenes/IslandScene';
 
 export function createGame(
@@ -27,7 +28,7 @@ export function createGame(
     scale: { mode: Phaser.Scale.RESIZE },
     physics: { default: 'arcade', arcade: { debug } },
     render: { roundPixels: false },
-    scene: [BootScene, IslandScene],
+    scene: [BootScene, HouseScene, IslandScene],
     callbacks: {
       preBoot: (game) => {
         game.registry.set(BRIDGE_REGISTRY_KEY, bridge);
