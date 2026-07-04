@@ -1,0 +1,45 @@
+src/components/react/world/scenes/HouseScene.ts
+  s_a1cb8e7589e874::t_aa5282d82e4388 99-102
+  s_a1cb8e7589e874::t_6ec4f60e75e2ef 31
+src/components/react/world/scenes/ambience.ts
+  s_a1cb8e7589e874::t_0df0cf720d9b4a 1-193
+  s_a1cb8e7589e874::t_60b272b60dcbe8 194-204
+src/components/react/world/scenes/interactions.ts
+  s_a1cb8e7589e874::t_2dc62ad5a868b9 89,92
+  s_a1cb8e7589e874::t_dd4a7b76fcdfbb 38-41
+  s_a1cb8e7589e874::t_aef540a367d8d8 25
+  s_a1cb8e7589e874::t_1c8d09b7dbcb9e 49-59
+src/components/react/world/scenes/IslandScene.ts
+  s_a1cb8e7589e874::t_f56a93d57d837f 33,42-44
+  s_a1cb8e7589e874::t_b22ab7d97aac22 5
+  s_a1cb8e7589e874::t_5fc48fb7e187e2 78-88
+  s_a1cb8e7589e874::t_e70c0e78571656 134-139
+  s_a1cb8e7589e874::t_491c0aab339657 45
+src/components/react/world/scenes/WorldSceneBase.ts
+  s_a1cb8e7589e874::t_ec84ba4cf9bbce 36
+  s_a1cb8e7589e874::t_fc6d08a08a8142 92-98
+  s_a1cb8e7589e874::t_83da3551446305 113-118
+  s_a1cb8e7589e874::t_f32557b9e0fe43 50-51
+  s_a1cb8e7589e874::t_16516fee83f570 4
+src/components/react/world/createGame.ts
+  s_a1cb8e7589e874::t_b466367f91ac41 37-40
+  s_a1cb8e7589e874::t_17282b9b8fb569 10
+src/components/react/world/motion.ts
+  s_a1cb8e7589e874::t_8635af1edabf60 1-6
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "9d3813dcd7b5c8922b3c8aef72e63b8ad97c3ce8",
+  "prompts": {},
+  "sessions": {
+    "s_a1cb8e7589e874": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1db9f4e0-681d-468c-a46f-9f8e52046ab7",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
