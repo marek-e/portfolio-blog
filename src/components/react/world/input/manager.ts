@@ -16,6 +16,7 @@ export function createInputManager() {
   const sources: InputSource[] = [];
   const interactListeners = new Set<() => void>();
   const dismissListeners = new Set<() => void>();
+  const toggleMuteListeners = new Set<() => void>();
 
   const handlers = {
     onMove(vector: MoveVector) {
@@ -28,6 +29,10 @@ export function createInputManager() {
     onDismiss() {
       if (paused) return;
       dismissListeners.forEach((listener) => listener());
+    },
+    onToggleMute() {
+      // Audio control is meta — it works even while a card owns world input.
+      toggleMuteListeners.forEach((listener) => listener());
     },
   };
 
@@ -57,6 +62,13 @@ export function createInputManager() {
       };
     },
 
+    onToggleMute(listener: () => void): () => void {
+      toggleMuteListeners.add(listener);
+      return () => {
+        toggleMuteListeners.delete(listener);
+      };
+    },
+
     setPaused(value: boolean): void {
       paused = value;
     },
@@ -70,6 +82,7 @@ export function createInputManager() {
       sources.length = 0;
       interactListeners.clear();
       dismissListeners.clear();
+      toggleMuteListeners.clear();
     },
   };
 }

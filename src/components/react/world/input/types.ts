@@ -13,6 +13,8 @@ export interface InputIntentHandlers {
   onMove(vector: MoveVector): void;
   onInteract(): void;
   onDismiss(): void;
+  /** Meta intent (M key): not swallowed by the pause state. */
+  onToggleMute(): void;
 }
 
 /** What a source may read back from the manager. */

@@ -7,6 +7,7 @@ const LEFT = new Set(['KeyA', 'ArrowLeft']);
 const RIGHT = new Set(['KeyD', 'ArrowRight']);
 const INTERACT = new Set(['KeyE', 'Enter']);
 const DISMISS = new Set(['Escape']);
+const TOGGLE_MUTE = new Set(['KeyM']);
 
 const MOVE_KEYS = new Set([...UP, ...DOWN, ...LEFT, ...RIGHT]);
 
@@ -66,6 +67,8 @@ export function createKeyboardSource(): InputSource {
       handlers.onInteract();
     } else if (DISMISS.has(event.code) && !event.repeat) {
       handlers.onDismiss();
+    } else if (TOGGLE_MUTE.has(event.code) && !event.repeat) {
+      handlers.onToggleMute();
     }
   }
 

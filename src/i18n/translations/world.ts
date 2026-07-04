@@ -23,6 +23,8 @@ export interface WorldTranslations {
     viewAsList: string;
     /** Template with {count} and {total} placeholders. */
     discovered: string;
+    mute: string;
+    unmute: string;
   };
   hints: {
     move: string;
@@ -59,6 +61,8 @@ const fr: WorldTranslations = {
   hud: {
     viewAsList: 'Voir la liste',
     discovered: 'Projets découverts : {count}/{total}',
+    mute: 'Couper le son (M)',
+    unmute: 'Réactiver le son (M)',
   },
   hints: {
     move: 'Déplacez-vous avec ZQSD ou les flèches',
@@ -118,6 +122,8 @@ const en: WorldTranslations = {
   hud: {
     viewAsList: 'View as list',
     discovered: 'Projects discovered: {count}/{total}',
+    mute: 'Mute sound (M)',
+    unmute: 'Unmute sound (M)',
   },
   hints: {
     move: 'Move with WASD or the arrow keys',

@@ -1,14 +1,16 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import type { Lang } from '@/i18n/config';
 import type { WorldTranslations } from '@/i18n/translations/world';
 import { createWorldBridge } from './bridge';
 import { createFakeTouchSource } from './input/fakeTouchSource';
 import { createInputManager } from './input/manager';
 import { createKeyboardSource } from './input/keyboardSource';
+import type { WorldAudio } from './audio';
+import { createWorldAudio } from './audio';
 import { GameCanvas } from './GameCanvas';
 import { ProjectCardOverlay } from './ProjectCardOverlay';
 import { PropCardOverlay } from './PropCardOverlay';
-import { addDiscovered, getDiscovered } from './state';
+import { addDiscovered, getDiscovered, isMuted, setMuted } from './state';
 import { WorldHud } from './WorldHud';
 
 export interface WorldProjectDTO {
@@ -43,7 +45,20 @@ export function ProjectsWorld({ projects, t, lang }: ProjectsWorldProps) {
   const [progress, setProgress] = useState(0);
   const [discovered, setDiscovered] = useState<string[]>(getDiscovered);
   const [hint, setHint] = useState<string | null>(null);
+  const [muted, setMutedState] = useState<boolean>(isMuted);
   const canvasContainerRef = useRef<HTMLDivElement>(null);
+  const audioRef = useRef<WorldAudio | null>(null);
+  const discoveredRef = useRef(discovered);
+  discoveredRef.current = discovered;
+
+  const toggleMute = useCallback(() => {
+    setMutedState((current) => {
+      const next = !current;
+      setMuted(next);
+      audioRef.current?.setMuted(next);
+      return next;
+    });
+  }, []);
 
   const listUrl = lang === 'en' ? '/en/projects' : '/projects';
 
@@ -74,25 +89,48 @@ export function ProjectsWorld({ projects, t, lang }: ProjectsWorldProps) {
     if (isSmallViewport) return;
     const offOpen = bridge.on('card:open', ({ slug }) => {
       inputManager.setPaused(true);
+      audioRef.current?.playSfx('card-open');
+      if (!discoveredRef.current.includes(slug)) audioRef.current?.playSfx('discovery');
       const next = addDiscovered(slug);
       setDiscovered(next);
       bridge.emit('discovery:changed', { discovered: next });
     });
-    const offProp = bridge.on('prop:open', () => inputManager.setPaused(true));
+    const offProp = bridge.on('prop:open', () => {
+      inputManager.setPaused(true);
+      audioRef.current?.playSfx('card-open');
+    });
     const offClose = bridge.on('card:close', () => {
       inputManager.setPaused(false);
+      audioRef.current?.playSfx('card-close');
       canvasContainerRef.current?.focus();
     });
     const offHint = bridge.on('hint', ({ id, visible }) => {
       setHint(visible ? t.hints[id] : null);
     });
+    const offSfx = bridge.on('sfx', ({ id }) => audioRef.current?.playSfx(id));
     return () => {
       offOpen();
       offProp();
       offClose();
       offHint();
+      offSfx();
     };
   }, [bridge, inputManager, isSmallViewport, t]);
+
+  // Audio lifecycle: mute toggle (HUD button + M key), tab-hidden music fade (PRD §6.11),
+  // context teardown with the island.
+  useEffect(() => {
+    if (isSmallViewport) return;
+    const offToggle = inputManager.onToggleMute(toggleMute);
+    const onVisibilityChange = () => audioRef.current?.setBackgrounded(document.hidden);
+    document.addEventListener('visibilitychange', onVisibilityChange);
+    return () => {
+      offToggle();
+      document.removeEventListener('visibilitychange', onVisibilityChange);
+      audioRef.current?.destroy();
+      audioRef.current = null;
+    };
+  }, [inputManager, isSmallViewport, toggleMute]);
 
   if (isSmallViewport) {
     return (
@@ -115,6 +153,8 @@ export function ProjectsWorld({ projects, t, lang }: ProjectsWorldProps) {
     // the dev-only touch stand-in — the P0 proof of the input abstraction (plan slice 6).
     const useFakeTouch = new URLSearchParams(window.location.search).get('input') === 'fake-touch';
     inputManager.addSource(useFakeTouch ? createFakeTouchSource() : createKeyboardSource());
+    // The entry click is the browser's audio-unlock gesture (PRD §10).
+    audioRef.current ??= createWorldAudio(muted);
     bridge.emit('game:enter');
     setPhase('entered');
     canvasContainerRef.current?.focus();
@@ -140,6 +180,8 @@ export function ProjectsWorld({ projects, t, lang }: ProjectsWorldProps) {
           discoveredCount={discovered.length}
           totalCount={projects.length}
           hint={hint}
+          muted={muted}
+          onToggleMute={toggleMute}
         />
       ) : (
         <div className="bg-background absolute inset-0 z-10 flex flex-col items-center justify-center gap-8 px-4">

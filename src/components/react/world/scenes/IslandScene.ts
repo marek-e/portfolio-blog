@@ -1,6 +1,5 @@
 import Phaser from 'phaser';
 import type { WorldBridge } from '../bridge';
-import { BRIDGE_REGISTRY_KEY } from '../bridge';
 import { getDiscovered } from '../state';
 import { createIslandAmbience } from './ambience';
 import type { SceneTransitionData } from './WorldSceneBase';
@@ -32,18 +31,16 @@ export class IslandScene extends WorldSceneBase {
     this.cameras.main.setBounds(0, 0, painting.width, painting.height);
     this.startCameraFollow();
 
-    const bridge = this.registry.get(BRIDGE_REGISTRY_KEY) as WorldBridge;
-
     this.buildLandmarkSprites(map);
-    this.buildProjectZones(map, bridge);
-    this.buildPropZones(map, bridge);
+    this.buildProjectZones(map, this.bridge);
+    this.buildPropZones(map, this.bridge);
     this.applyDiscovered(getDiscovered());
 
     if (!this.reducedMotion) {
       createIslandAmbience(this);
     }
 
-    const offDiscovery = bridge.on('discovery:changed', ({ discovered }) => {
+    const offDiscovery = this.bridge.on('discovery:changed', ({ discovered }) => {
       this.applyDiscovered(discovered);
     });
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {

@@ -1,4 +1,6 @@
 import Phaser from 'phaser';
+import type { WorldBridge } from '../bridge';
+import { BRIDGE_REGISTRY_KEY } from '../bridge';
 import type { InputManager } from '../input/manager';
 import { INPUT_REGISTRY_KEY } from '../input/manager';
 import { REDUCED_MOTION_REGISTRY_KEY } from '../motion';
@@ -33,10 +35,12 @@ export abstract class WorldSceneBase extends Phaser.Scene {
   protected player!: Phaser.Physics.Arcade.Sprite;
   protected inputManager!: InputManager;
   protected interactions!: InteractionZones;
+  protected bridge!: WorldBridge;
   protected reducedMotion = false;
   private playerShadow!: Phaser.GameObjects.Ellipse;
   private transitioning = false;
   private walkTime = 0;
+  private footstepTimer = 0;
 
   /** Builds the common world; returns the painting (camera sizing) and map (scene extras). */
   protected buildWorld(
@@ -47,6 +51,7 @@ export abstract class WorldSceneBase extends Phaser.Scene {
   ): { painting: Phaser.GameObjects.Image; map: Phaser.Tilemaps.Tilemap } {
     this.transitioning = false;
     this.inputManager = this.registry.get(INPUT_REGISTRY_KEY) as InputManager;
+    this.bridge = this.registry.get(BRIDGE_REGISTRY_KEY) as WorldBridge;
     this.reducedMotion = this.registry.get(REDUCED_MOTION_REGISTRY_KEY) === true;
     this.interactions = new InteractionZones(this, this.reducedMotion);
 
@@ -89,6 +94,11 @@ export abstract class WorldSceneBase extends Phaser.Scene {
     const moving = vector.x !== 0 || vector.y !== 0;
     if (moving) {
       this.player.setTexture(facingTexture(vector.x, vector.y));
+      this.footstepTimer += delta;
+      if (this.footstepTimer >= 340) {
+        this.footstepTimer = 0;
+        this.bridge.emit('sfx', { id: 'footstep' });
+      }
       if (!this.reducedMotion) {
         this.walkTime += delta;
         // procedural walk bob: subtle squash-and-stretch synced to a step cadence
@@ -152,6 +162,7 @@ export abstract class WorldSceneBase extends Phaser.Scene {
     if (this.transitioning) return;
     this.transitioning = true;
     this.onDoorUsed(target);
+    this.bridge.emit('sfx', { id: 'door' });
     this.cameras.main.fadeOut(TRANSITION_FADE_MS);
     this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
       this.scene.start(target, { spawn } satisfies SceneTransitionData);

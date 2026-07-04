@@ -1,6 +1,4 @@
 import Phaser from 'phaser';
-import type { WorldBridge } from '../bridge';
-import { BRIDGE_REGISTRY_KEY } from '../bridge';
 import { isIntroDone, setIntroDone } from '../state';
 import type { SceneTransitionData } from './WorldSceneBase';
 import { WorldSceneBase } from './WorldSceneBase';
@@ -17,7 +15,6 @@ const DOOR_GLOW_RECT = { x: 704, y: 950, width: 128, height: 64 };
  * §6.10 cover-zoom exception, recomputed on resize.
  */
 export class HouseScene extends WorldSceneBase {
-  private bridge!: WorldBridge;
   private moveHintVisible = false;
   private doorGlow: Phaser.GameObjects.Rectangle | null = null;
 
@@ -29,7 +26,6 @@ export class HouseScene extends WorldSceneBase {
     const { painting, map } = this.buildWorld('house', 'house-map', data, 'bed');
     this.cameras.main.setBounds(0, 0, painting.width, painting.height);
     this.startCameraFollow();
-    this.bridge = this.registry.get(BRIDGE_REGISTRY_KEY) as WorldBridge;
 
     for (const zone of readPropZones(map, 'zones')) {
       this.interactions.add({

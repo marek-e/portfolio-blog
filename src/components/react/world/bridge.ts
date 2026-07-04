@@ -2,6 +2,8 @@
 // project card overlay). One instance is created by `ProjectsWorld` and handed to both sides;
 // game code and DOM code never import each other.
 
+import type { SfxId } from './audio';
+
 export interface WorldEventMap {
   /** Asset preload progress, 0..1 (game → DOM). */
   'boot:progress': { value: number };
@@ -19,6 +21,8 @@ export interface WorldEventMap {
   'discovery:changed': { discovered: string[] };
   /** Show/hide a translated tutorial hint chip (game → DOM). */
   hint: { id: 'move'; visible: boolean };
+  /** Game-side sound triggers, synthesized on the DOM side (game → DOM). */
+  sfx: { id: SfxId };
 }
 
 type EventKey = keyof WorldEventMap;
