@@ -1,0 +1,26 @@
+src/components/react/world/input/fakeTouchSource.ts
+  s_a1cb8e7589e874::t_3de8efc82ef7f8 1-74
+src/components/react/world/ProjectsWorld.tsx
+  s_a1cb8e7589e874::t_0222e996f6f970 97-100
+  s_a1cb8e7589e874::t_7a3297a29e3286 5
+docs/feature/projetcts-world/projects-world-p0-plan.md
+  s_a1cb8e7589e874::t_dfd3798d8d823e 5
+  s_a1cb8e7589e874::t_22a0b7dc78b2de 34-42
+  s_a1cb8e7589e874::t_700eba9de5aa35 431-454
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "ab5691eb810cd1ac7783e973a8aaf5ea491e4f12",
+  "prompts": {},
+  "sessions": {
+    "s_a1cb8e7589e874": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1db9f4e0-681d-468c-a46f-9f8e52046ab7",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
