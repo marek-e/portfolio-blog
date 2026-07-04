@@ -1,0 +1,44 @@
+src/components/react/world/bridge.ts
+  s_a1cb8e7589e874::t_efe8ab2bd67952 22-24
+  s_a1cb8e7589e874::t_db8ba0cedcd82e 1-21,25-48
+src/components/react/world/createGame.ts
+  s_a1cb8e7589e874::t_e1565240f2f20a 1-26
+src/components/react/world/scenes/BootScene.ts
+  s_a1cb8e7589e874::t_ebfb9dd4e47037 1-34
+package.json
+  s_a1cb8e7589e874::t_72918548ac43aa 40
+src/components/react/world/GameCanvas.tsx
+  s_a1cb8e7589e874::t_9e368844f5c79c 1-44
+src/components/react/world/ProjectsWorld.tsx
+  s_a1cb8e7589e874::t_a7dc86d804f781 1,4-6,24-25,31-32,34-38,41-53,69-75,77-121
+astro.config.mjs
+  s_a1cb8e7589e874::t_ceb19b7b72d6cf 39-42
+scripts/world-isolation-baseline.json
+  s_a1cb8e7589e874::t_0e1fbfc612c679 5,8-9,11,13-15,17
+docs/feature/projetcts-world/projects-world-p0-plan.md
+  s_a1cb8e7589e874::t_c0902b09428824 37-38
+src/components/react/world/WorldHud.tsx
+  s_a1cb8e7589e874::t_048e0ddb3db5f7 1-23
+src/components/react/world/scenes/IslandScene.ts
+  s_a1cb8e7589e874::t_9fe90b734e0686 1-17
+public/_headers
+  s_a1cb8e7589e874::t_cb7f4f49053843 35-39
+pnpm-lock.yaml
+  s_a1cb8e7589e874::t_213efcb491e3ff 80-82,680,686,692,698,704,710,716,722,729,736,743,750,757,764,771,778,971,977,983,989,995,1001,1007,1013,1019,1025,1031,1132,1139,1146,1153,2392-2393,3105,3112,3119,3126,3674-3676,7268,8863,8933-8936
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "6608d4875c5d6f20d45763d369a9e94fa7bcbdd0",
+  "prompts": {},
+  "sessions": {
+    "s_a1cb8e7589e874": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1db9f4e0-681d-468c-a46f-9f8e52046ab7",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
