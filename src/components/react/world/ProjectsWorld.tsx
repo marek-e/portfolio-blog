@@ -1,6 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { Lang } from '@/i18n/config';
 import type { WorldTranslations } from '@/i18n/translations/world';
+import { createWorldBridge } from './bridge';
+import { GameCanvas } from './GameCanvas';
+import { WorldHud } from './WorldHud';
 
 export interface WorldProjectDTO {
   slug: string;
@@ -18,14 +21,35 @@ interface ProjectsWorldProps {
   lang: Lang;
 }
 
+type Phase = 'loading' | 'ready' | 'entered';
+
 function detectSmallViewport(): boolean {
   if (typeof window === 'undefined') return false;
   return window.innerWidth < 1024 || window.matchMedia('(pointer: coarse)').matches;
 }
 
-export function ProjectsWorld({ projects, t, lang }: ProjectsWorldProps) {
+export function ProjectsWorld({ t, lang }: ProjectsWorldProps) {
+  // Evaluated once at mount: resizing after entry never swaps to the teaser (PRD §6.10).
   const [isSmallViewport] = useState(detectSmallViewport);
+  const [bridge] = useState(createWorldBridge);
+  const [phase, setPhase] = useState<Phase>('loading');
+  const [progress, setProgress] = useState(0);
+  const canvasContainerRef = useRef<HTMLDivElement>(null);
+
   const listUrl = lang === 'en' ? '/en/projects' : '/projects';
+
+  useEffect(() => {
+    if (isSmallViewport) return;
+    const offProgress = bridge.on('boot:progress', ({ value }) => setProgress(value));
+    const offReady = bridge.on('boot:ready', () => {
+      setProgress(1);
+      setPhase((current) => (current === 'loading' ? 'ready' : current));
+    });
+    return () => {
+      offProgress();
+      offReady();
+    };
+  }, [bridge, isSmallViewport]);
 
   if (isSmallViewport) {
     return (
@@ -42,25 +66,58 @@ export function ProjectsWorld({ projects, t, lang }: ProjectsWorldProps) {
     );
   }
 
-  // Desktop stub shell — throwaway placeholder replaced by the loading/entry screen + canvas in
-  // slice 2. It renders the DTO delivered to the client, proving the build-time data pipeline end
-  // to end (the "full data pipeline" half of the P0 route criterion).
+  const handleEnter = () => {
+    bridge.emit('game:enter');
+    setPhase('entered');
+    canvasContainerRef.current?.focus();
+  };
+
+  // The world is immersive: a fixed layer under the site's language toggle (z-40, top-right).
   return (
-    <section className="bg-card border-border mx-auto flex w-full max-w-2xl flex-col items-center gap-6 rounded-2xl border p-8 text-center shadow-sm">
-      <p className="text-muted-foreground animate-pulse">{t.entry.loading}</p>
-      <ul className="text-foreground/80 grid w-full grid-cols-2 gap-2 text-sm sm:grid-cols-3">
-        {projects.map((project) => (
-          <li key={project.slug} className="bg-muted rounded-md px-3 py-2">
-            {project.title}
-          </li>
-        ))}
-      </ul>
-      <a
-        href={listUrl}
-        className="text-primary hover:text-primary/80 text-sm font-semibold transition-colors"
-      >
-        {t.hud.viewAsList}
-      </a>
-    </section>
+    <div className="bg-background fixed inset-0 z-30">
+      <GameCanvas bridge={bridge} containerRef={canvasContainerRef} />
+
+      {phase === 'entered' ? (
+        <WorldHud t={t} listUrl={listUrl} />
+      ) : (
+        <div className="bg-background absolute inset-0 z-10 flex flex-col items-center justify-center gap-8 px-4">
+          <h2 className="text-3xl font-bold tracking-tight">{t.heading}</h2>
+
+          {phase === 'ready' ? (
+            <button
+              type="button"
+              onClick={handleEnter}
+              className="bg-primary text-primary-foreground hover:bg-primary/90 focus-visible:ring-ring/50 rounded-lg px-6 py-3 text-base font-semibold transition-colors focus-visible:ring-[3px] focus-visible:outline-none"
+            >
+              {t.entry.enter}
+            </button>
+          ) : (
+            <div className="flex w-full max-w-xs flex-col items-center gap-3">
+              <div
+                role="progressbar"
+                aria-valuenow={Math.round(progress * 100)}
+                aria-valuemin={0}
+                aria-valuemax={100}
+                aria-label={t.entry.loading}
+                className="bg-muted h-2 w-full overflow-hidden rounded-full"
+              >
+                <div
+                  className="bg-primary h-full rounded-full transition-[width] duration-200"
+                  style={{ width: `${Math.round(progress * 100)}%` }}
+                />
+              </div>
+              <p className="text-muted-foreground text-sm">{t.entry.loading}</p>
+            </div>
+          )}
+
+          <a
+            href={listUrl}
+            className="text-muted-foreground hover:text-foreground text-sm font-medium transition-colors"
+          >
+            {t.hud.viewAsList}
+          </a>
+        </div>
+      )}
+    </div>
   );
 }

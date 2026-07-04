@@ -34,8 +34,8 @@ pipeline before any art exists.
 | #   | Slice                                  | Status                                            |
 | --- | -------------------------------------- | ------------------------------------------------- |
 | 0   | Plan doc (this file)                   | done                                              |
-| 1   | Route shell + teaser + isolation guard | in-progress (implemented + validated; PR pending) |
-| 2   | Engine boots                           | todo                                              |
+| 1   | Route shell + teaser + isolation guard | done                                              |
+| 2   | Engine boots                           | done                                              |
 | 3   | Player + input + collision             | todo                                              |
 | 4   | House + door transitions               | todo                                              |
 | 5   | Info card                              | todo                                              |
