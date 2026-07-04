@@ -1,0 +1,19 @@
+.claude/launch.json
+  s_a1cb8e7589e874::t_98531dcd8ac49e 1-11
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "00fc101cc7bae088f001d87d128e0e818a6de24b",
+  "prompts": {},
+  "sessions": {
+    "s_a1cb8e7589e874": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1db9f4e0-681d-468c-a46f-9f8e52046ab7",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
