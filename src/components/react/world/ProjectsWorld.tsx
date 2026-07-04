@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import type { Lang } from '@/i18n/config';
 import type { WorldTranslations } from '@/i18n/translations/world';
 import { createWorldBridge } from './bridge';
+import { createFakeTouchSource } from './input/fakeTouchSource';
 import { createInputManager } from './input/manager';
 import { createKeyboardSource } from './input/keyboardSource';
 import { GameCanvas } from './GameCanvas';
@@ -93,8 +94,10 @@ export function ProjectsWorld({ projects, t, lang }: ProjectsWorldProps) {
 
   const handleEnter = () => {
     // Keyboard attaches only now: on the entry screen, Enter/Tab must keep their native
-    // behavior so the entry button stays keyboard-activatable.
-    inputManager.addSource(createKeyboardSource());
+    // behavior so the entry button stays keyboard-activatable. `?input=fake-touch` swaps in
+    // the dev-only touch stand-in — the P0 proof of the input abstraction (plan slice 6).
+    const useFakeTouch = new URLSearchParams(window.location.search).get('input') === 'fake-touch';
+    inputManager.addSource(useFakeTouch ? createFakeTouchSource() : createKeyboardSource());
     bridge.emit('game:enter');
     setPhase('entered');
     canvasContainerRef.current?.focus();

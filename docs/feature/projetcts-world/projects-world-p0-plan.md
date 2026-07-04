@@ -2,7 +2,7 @@
 
 |            |                                                                               |
 | ---------- | ----------------------------------------------------------------------------- |
-| **Status** | Approved plan — implementation not started                                    |
+| **Status** | **P0 complete** — all six slices landed, acceptance sweep recorded below      |
 | **PRD**    | [projects-world-prd.md](./projects-world-prd.md) (§12 P0 acceptance criteria) |
 | **Owner**  | Marek Elmayan                                                                 |
 | **Date**   | 2026-07-02                                                                    |
@@ -31,15 +31,15 @@ pipeline before any art exists.
 
 ## Slice tracker
 
-| #   | Slice                                  | Status                                            |
-| --- | -------------------------------------- | ------------------------------------------------- |
-| 0   | Plan doc (this file)                   | done                                              |
-| 1   | Route shell + teaser + isolation guard | done                                              |
-| 2   | Engine boots                           | done                                              |
-| 3   | Player + input + collision             | done                                              |
-| 4   | House + door transitions               | done                                              |
-| 5   | Info card                              | done                                              |
-| 6   | Fake-touch stub + acceptance sweep     | todo                                              |
+| #   | Slice                                  | Status |
+| --- | -------------------------------------- | ------ |
+| 0   | Plan doc (this file)                   | done   |
+| 1   | Route shell + teaser + isolation guard | done   |
+| 2   | Engine boots                           | done   |
+| 3   | Player + input + collision             | done   |
+| 4   | House + door transitions               | done   |
+| 5   | Info card                              | done   |
+| 6   | Fake-touch stub + acceptance sweep     | done   |
 
 Update the status column (`todo / in-progress / done` + PR link) as slices land.
 
@@ -428,12 +428,30 @@ P0 checklist and close the milestone.
 
 | PRD §12 P0 criterion                                                             | Slice(s)                  | Verified |
 | -------------------------------------------------------------------------------- | ------------------------- | -------- |
-| Both world routes build statically; every other page unchanged (bundle diff = 0) | 1, 2 + script every slice | ☐        |
-| Mobile/coarse-pointer visitors get the teaser; no game assets downloaded         | 1, 2                      | ☐        |
-| Player moves (WASD/arrows) with collision against Tiled shapes                   | 3                         | ☐        |
-| House → island door transition works both ways                                   | 4                         | ☐        |
-| Interaction zone opens real Elemix card, both languages; button → detail page    | 5                         | ☐        |
-| Input goes through the abstraction layer (fake touch source proof)               | 3 (design), 6 (proof)     | ☐        |
+| Both world routes build statically; every other page unchanged (bundle diff = 0) | 1, 2 + script every slice | ☑        |
+| Mobile/coarse-pointer visitors get the teaser; no game assets downloaded         | 1, 2                      | ☑        |
+| Player moves (WASD/arrows) with collision against Tiled shapes                   | 3                         | ☑        |
+| House → island door transition works both ways                                   | 4                         | ☑        |
+| Interaction zone opens real Elemix card, both languages; button → detail page    | 5                         | ☑        |
+| Input goes through the abstraction layer (fake touch source proof)               | 3 (design), 6 (proof)     | ☑        |
+
+Sweep recorded 2026-07-04 (all in-browser, dev server, game loop stepped manually where the
+automation tab's hidden-visibility state suppresses rAF):
+
+1. **Routes/isolation** — `dist/projects/world/index.html` + `dist/en/projects/world/index.html`
+   emitted; `check-world-isolation.mjs` green at every slice. Two baseline regenerations were
+   root-caused and documented in the slice commits (shared-CSS utility growth + Rollup re-chunking
+   of base-ui internals already shipped site-wide via Sheet; no world JS on any other page).
+2. **Teaser** — mobile emulation: teaser rendered, zero Phaser / `/world/` asset / scene-module
+   requests (only the island shell JS the PRD places before the gate, §6.2).
+3. **Movement/collision** — 150 px/s straight, ~150 px/s normalized diagonals, WASD (physical
+   codes → ZQSD on AZERTY) + arrows, blur clears held keys, collision stops at exact map geometry.
+4. **Doors** — bed spawn → front door → `outside-front-door` and back, 5 rapid round-trips, no
+   stuck transition; house cover-zoom 1.042 @1600×900, 0.957 @1100×980 (resize recompute).
+5. **Card** — E/Enter open real Elemix collection data (fr 'En cours' → `/projects/elemix`, en
+   'In Progress' → `/en/projects/elemix`); movement dead while open; Esc closes and unpauses.
+6. **Abstraction proof** — `?input=fake-touch`, hands off keyboard: drag through the door,
+   drag to the Elemix zone (prompt shows), tap opens the card. Zero game-code changes.
 
 ## P0-specific risks
 
