@@ -6,13 +6,19 @@ import { readDoors, readSpawns } from './tiled';
 /** Walk speed in world-px/s — PRD §6.10 starting value, tuned at P1. */
 const WALK_SPEED = 150;
 const TRANSITION_FADE_MS = 400;
-const PLAYER_WIDTH = 48;
-const PLAYER_HEIGHT = 64;
-const PLAYER_COLOR = 0x2f6db8;
+/** Source poses are 192×256; rendered at half size ≈ 96×128 (PRD §8.2). */
+const PLAYER_SCALE = 0.5;
+/** Feet-anchored arcade body, in source-texture pixels (scaled by PLAYER_SCALE). */
+const PLAYER_BODY = { width: 112, height: 56, offsetX: 40, offsetY: 196 };
 
 export interface SceneTransitionData {
   /** Named spawn point to appear at; scenes fall back to their default. */
   spawn?: string;
+}
+
+function facingTexture(x: number, y: number): string {
+  if (Math.abs(x) > Math.abs(y)) return x > 0 ? 'player-right' : 'player-left';
+  return y > 0 ? 'player-front' : 'player-back';
 }
 
 /**
@@ -21,7 +27,7 @@ export interface SceneTransitionData {
  * per-frame movement read from the input manager.
  */
 export abstract class WorldSceneBase extends Phaser.Scene {
-  protected player!: Phaser.GameObjects.Rectangle;
+  protected player!: Phaser.Physics.Arcade.Sprite;
   protected inputManager!: InputManager;
   private transitioning = false;
 
@@ -45,9 +51,12 @@ export abstract class WorldSceneBase extends Phaser.Scene {
       y: painting.height / 2,
     };
 
-    this.player = this.add.rectangle(spawn.x, spawn.y, PLAYER_WIDTH, PLAYER_HEIGHT, PLAYER_COLOR);
-    this.physics.add.existing(this.player);
-    (this.player.body as Phaser.Physics.Arcade.Body).setCollideWorldBounds(true);
+    this.player = this.physics.add.sprite(spawn.x, spawn.y, 'player-front');
+    this.player.setScale(PLAYER_SCALE);
+    const body = this.player.body as Phaser.Physics.Arcade.Body;
+    body.setSize(PLAYER_BODY.width, PLAYER_BODY.height);
+    body.setOffset(PLAYER_BODY.offsetX, PLAYER_BODY.offsetY);
+    body.setCollideWorldBounds(true);
 
     this.physics.add.collider(this.player, this.buildCollisionBodies(map));
     this.buildDoors(map);
@@ -61,6 +70,12 @@ export abstract class WorldSceneBase extends Phaser.Scene {
     const vector = this.inputManager.getMoveVector();
     const body = this.player.body as Phaser.Physics.Arcade.Body;
     body.setVelocity(vector.x * WALK_SPEED, vector.y * WALK_SPEED);
+
+    if (vector.x !== 0 || vector.y !== 0) {
+      this.player.setTexture(facingTexture(vector.x, vector.y));
+    }
+    // y-sorted depth against the landmark sprites (feet position)
+    this.player.setDepth(this.player.y + this.player.displayHeight / 2);
   }
 
   private buildCollisionBodies(map: Phaser.Tilemaps.Tilemap): Phaser.Physics.Arcade.StaticGroup {

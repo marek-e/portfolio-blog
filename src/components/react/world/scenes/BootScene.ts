@@ -18,10 +18,36 @@ export class BootScene extends Phaser.Scene {
       bridge.emit('boot:progress', { value });
     });
 
-    this.load.image('island', '/world/island-v1.webp');
-    this.load.image('house', '/world/house-v1.webp');
+    this.load.image('island', '/world/island-v2.webp');
+    this.load.image('house', '/world/house-v2.webp');
     this.load.tilemapTiledJSON('island-map', '/world/maps/island.tmj');
     this.load.tilemapTiledJSON('house-map', '/world/maps/house.tmj');
+
+    for (const pose of ['front', 'back', 'left', 'right']) {
+      this.load.image(`player-${pose}`, `/world/player-${pose}-v1.webp`);
+    }
+    for (const landmark of [
+      'landmark-elemix',
+      'landmark-minesweeper-llm-arena',
+      'landmark-next-armored',
+      'landmark-equinox-theme',
+      'landmark-petanque',
+      'landmark-personal-portfolio',
+    ]) {
+      this.load.image(landmark, `/world/${landmark}-v1.webp`);
+    }
+    for (const ambient of [
+      'sparkle',
+      'checkmark',
+      'butterfly-1',
+      'butterfly-2',
+      'gull-1',
+      'gull-2',
+      'smoke',
+      'leaf',
+    ]) {
+      this.load.image(ambient, `/world/${ambient}-v1.webp`);
+    }
   }
 
   create(): void {

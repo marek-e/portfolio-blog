@@ -4,7 +4,7 @@ import { BRIDGE_REGISTRY_KEY } from '../bridge';
 import type { SceneTransitionData } from './WorldSceneBase';
 import { WorldSceneBase } from './WorldSceneBase';
 import type { ProjectZone } from './tiled';
-import { readProjectZones } from './tiled';
+import { readLandmarkAnchors, readProjectZones } from './tiled';
 
 /** How far beyond the zone edge the player can stand and still interact. */
 const INTERACTION_RADIUS = 64;
@@ -36,6 +36,7 @@ export class IslandScene extends WorldSceneBase {
     this.cameras.main.setBounds(0, 0, painting.width, painting.height);
     this.cameras.main.startFollow(this.player, false, 0.1, 0.1);
 
+    this.buildLandmarkSprites(map);
     this.buildProjectZones(map);
 
     const bridge = this.registry.get(BRIDGE_REGISTRY_KEY) as WorldBridge;
@@ -69,13 +70,20 @@ export class IslandScene extends WorldSceneBase {
     }
   }
 
+  /** Layered landmark sprites above the painting (PRD §6.6), y-sorted against the player. */
+  private buildLandmarkSprites(map: Phaser.Tilemaps.Tilemap): void {
+    for (const anchor of readLandmarkAnchors(map, 'zones')) {
+      this.add
+        .image(anchor.x, anchor.y, anchor.sprite)
+        .setScale(anchor.scale)
+        .setDepth(anchor.sortY ?? anchor.y);
+    }
+  }
+
   private buildProjectZones(map: Phaser.Tilemaps.Tilemap): void {
     for (const zone of readProjectZones(map, 'zones')) {
       const centerX = zone.x + zone.width / 2;
       const centerY = zone.y + zone.height / 2;
-
-      // Placeholder landmark visual — replaced by the layered landmark sprite at P1.
-      this.add.rectangle(centerX, centerY, zone.width, zone.height, 0xd97706);
 
       const prompt = this.add
         .text(centerX + zone.promptOffset.x, centerY + zone.promptOffset.y, 'E', {
@@ -86,6 +94,7 @@ export class IslandScene extends WorldSceneBase {
           padding: { x: 10, y: 6 },
         })
         .setOrigin(0.5)
+        .setDepth(10000)
         .setVisible(false);
 
       this.trackedZones.push({

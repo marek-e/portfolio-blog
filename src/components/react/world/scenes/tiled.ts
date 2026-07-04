@@ -75,6 +75,34 @@ export function readProjectZones(map: Phaser.Tilemaps.Tilemap, layer: string): P
   return zones;
 }
 
+export interface LandmarkAnchor {
+  x: number;
+  y: number;
+  /** Texture key of the layered landmark sprite. */
+  sprite: string;
+  /** Display scale of the sprite. */
+  scale: number;
+  /** Optional y-sort override (PRD §9.3) — e.g. flat ground pieces sort by their top edge. */
+  sortY?: number;
+}
+
+export function readLandmarkAnchors(map: Phaser.Tilemaps.Tilemap, layer: string): LandmarkAnchor[] {
+  const anchors: LandmarkAnchor[] = [];
+  for (const obj of map.getObjectLayer(layer)?.objects ?? []) {
+    if (obj.type !== 'landmark-anchor') continue;
+    const sprite = getStringProperty(obj, 'sprite');
+    if (!sprite) continue;
+    anchors.push({
+      x: obj.x!,
+      y: obj.y!,
+      sprite,
+      scale: getNumberProperty(obj, 'scale') ?? 1,
+      sortY: getNumberProperty(obj, 'sortY'),
+    });
+  }
+  return anchors;
+}
+
 export function readDoors(map: Phaser.Tilemaps.Tilemap, layer: string): DoorObject[] {
   const doors: DoorObject[] = [];
   for (const obj of map.getObjectLayer(layer)?.objects ?? []) {

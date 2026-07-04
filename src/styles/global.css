@@ -4,6 +4,12 @@
 @import '@fontsource/geist';
 @plugin '@tailwindcss/typography';
 
+/* The world-art generator scripts and the generated Tiled maps contain SVG path data and
+   object names that Tailwind's auto-detection misreads as utility classes (e.g. "m-190",
+   "border-e") — keep build tooling and static assets out of the content scan. */
+@source not "../../scripts";
+@source not "../../public";
+
 @custom-variant dark (&:is(.dark *));
 
 @font-face {
