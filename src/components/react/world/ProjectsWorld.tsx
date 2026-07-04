@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import type { Lang } from '@/i18n/config';
 import type { WorldTranslations } from '@/i18n/translations/world';
 import { createWorldBridge } from './bridge';
+import { createInputManager } from './input/manager';
+import { createKeyboardSource } from './input/keyboardSource';
 import { GameCanvas } from './GameCanvas';
 import { WorldHud } from './WorldHud';
 
@@ -32,6 +34,7 @@ export function ProjectsWorld({ t, lang }: ProjectsWorldProps) {
   // Evaluated once at mount: resizing after entry never swaps to the teaser (PRD §6.10).
   const [isSmallViewport] = useState(detectSmallViewport);
   const [bridge] = useState(createWorldBridge);
+  const [inputManager] = useState(createInputManager);
   const [phase, setPhase] = useState<Phase>('loading');
   const [progress, setProgress] = useState(0);
   const canvasContainerRef = useRef<HTMLDivElement>(null);
@@ -51,6 +54,12 @@ export function ProjectsWorld({ t, lang }: ProjectsWorldProps) {
     };
   }, [bridge, isSmallViewport]);
 
+  // Input sources detach with the island (covers ClientRouter view-transition navigation).
+  useEffect(() => {
+    if (isSmallViewport) return;
+    return () => inputManager.destroy();
+  }, [inputManager, isSmallViewport]);
+
   if (isSmallViewport) {
     return (
       <section className="bg-card border-border mx-auto flex max-w-md flex-col items-center gap-4 rounded-2xl border p-8 text-center shadow-sm">
@@ -67,6 +76,9 @@ export function ProjectsWorld({ t, lang }: ProjectsWorldProps) {
   }
 
   const handleEnter = () => {
+    // Keyboard attaches only now: on the entry screen, Enter/Tab must keep their native
+    // behavior so the entry button stays keyboard-activatable.
+    inputManager.addSource(createKeyboardSource());
     bridge.emit('game:enter');
     setPhase('entered');
     canvasContainerRef.current?.focus();
@@ -75,7 +87,7 @@ export function ProjectsWorld({ t, lang }: ProjectsWorldProps) {
   // The world is immersive: a fixed layer under the site's language toggle (z-40, top-right).
   return (
     <div className="bg-background fixed inset-0 z-30">
-      <GameCanvas bridge={bridge} containerRef={canvasContainerRef} />
+      <GameCanvas bridge={bridge} inputManager={inputManager} containerRef={canvasContainerRef} />
 
       {phase === 'entered' ? (
         <WorldHud t={t} listUrl={listUrl} />

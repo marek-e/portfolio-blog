@@ -1,9 +1,11 @@
 import { useEffect } from 'react';
 import type { RefObject } from 'react';
 import type { WorldBridge } from './bridge';
+import type { InputManager } from './input/manager';
 
 interface GameCanvasProps {
   bridge: WorldBridge;
+  inputManager: InputManager;
   /** Owned by ProjectsWorld so it can refocus the game after DOM overlays close. */
   containerRef: RefObject<HTMLDivElement | null>;
 }
@@ -14,7 +16,7 @@ interface GameCanvasProps {
  * the game instance — mandatory because ClientRouter view transitions unmount the island on
  * client-side navigation.
  */
-export function GameCanvas({ bridge, containerRef }: GameCanvasProps) {
+export function GameCanvas({ bridge, inputManager, containerRef }: GameCanvasProps) {
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
@@ -24,7 +26,7 @@ export function GameCanvas({ bridge, containerRef }: GameCanvasProps) {
 
     void import('./createGame').then(({ createGame }) => {
       if (cancelled) return;
-      game = createGame(container, bridge);
+      game = createGame(container, bridge, inputManager);
     });
 
     return () => {
@@ -32,7 +34,7 @@ export function GameCanvas({ bridge, containerRef }: GameCanvasProps) {
       game?.destroy(true);
       game = null;
     };
-  }, [bridge, containerRef]);
+  }, [bridge, inputManager, containerRef]);
 
   return (
     <div

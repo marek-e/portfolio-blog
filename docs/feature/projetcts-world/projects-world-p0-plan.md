@@ -36,7 +36,7 @@ pipeline before any art exists.
 | 0   | Plan doc (this file)                   | done                                              |
 | 1   | Route shell + teaser + isolation guard | done                                              |
 | 2   | Engine boots                           | done                                              |
-| 3   | Player + input + collision             | todo                                              |
+| 3   | Player + input + collision             | done                                              |
 | 4   | House + door transitions               | todo                                              |
 | 5   | Info card                              | todo                                              |
 | 6   | Fake-touch stub + acceptance sweep     | todo                                              |

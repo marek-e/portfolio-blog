@@ -1,0 +1,119 @@
+{
+  "type": "map",
+  "version": "1.10",
+  "tiledversion": "1.10.2",
+  "orientation": "orthogonal",
+  "renderorder": "right-down",
+  "infinite": false,
+  "width": 128,
+  "height": 128,
+  "tilewidth": 32,
+  "tileheight": 32,
+  "nextlayerid": 3,
+  "nextobjectid": 8,
+  "tilesets": [],
+  "layers": [
+    {
+      "type": "objectgroup",
+      "id": 1,
+      "name": "collision",
+      "opacity": 1,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "draworder": "topdown",
+      "objects": [
+        {
+          "id": 1,
+          "name": "water-north",
+          "type": "",
+          "x": 0,
+          "y": 0,
+          "width": 4096,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 2,
+          "name": "water-south",
+          "type": "",
+          "x": 0,
+          "y": 4032,
+          "width": 4096,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 3,
+          "name": "water-west",
+          "type": "",
+          "x": 0,
+          "y": 64,
+          "width": 64,
+          "height": 3968,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 4,
+          "name": "water-east",
+          "type": "",
+          "x": 4032,
+          "y": 64,
+          "width": 64,
+          "height": 3968,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 5,
+          "name": "block-house",
+          "type": "",
+          "x": 1856,
+          "y": 896,
+          "width": 384,
+          "height": 288,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 6,
+          "name": "block-fountain",
+          "type": "",
+          "x": 1952,
+          "y": 2200,
+          "width": 192,
+          "height": 192,
+          "rotation": 0,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "type": "objectgroup",
+      "id": 2,
+      "name": "zones",
+      "opacity": 1,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "draworder": "topdown",
+      "objects": [
+        {
+          "id": 7,
+          "name": "island-center",
+          "type": "spawn",
+          "point": true,
+          "x": 2048,
+          "y": 1800,
+          "width": 0,
+          "height": 0,
+          "rotation": 0,
+          "visible": true
+        }
+      ]
+    }
+  ]
+}

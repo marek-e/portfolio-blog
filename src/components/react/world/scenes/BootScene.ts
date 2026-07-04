@@ -19,6 +19,7 @@ export class BootScene extends Phaser.Scene {
     });
 
     this.load.image('island', '/world/island-v1.webp');
+    this.load.tilemapTiledJSON('island-map', '/world/maps/island.tmj');
   }
 
   create(): void {
