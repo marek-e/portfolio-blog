@@ -1,0 +1,30 @@
+.agents/skills/blog-prd/references/question-bank.md
+  s_06ffbbc4d44057::t_8c695eeb1a486f 1-71
+.claude/skills/blog-prd/SKILL.md
+  s_06ffbbc4d44057::t_12d908b33b9738 1-92
+.claude/skills/blog-prd/references/question-bank.md
+  s_06ffbbc4d44057::t_1ed0da0865f6b8 1-71
+.agents/skills/blog-prd/SKILL.md
+  s_06ffbbc4d44057::t_8c695eeb1a486f 1-92
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "f42b0ece97a0e6b557a39758050c9c4908407462",
+  "prompts": {},
+  "humans": {
+    "h_34454149dac528": {
+      "author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_06ffbbc4d44057": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "8d273fd7-c5da-46e8-95e3-d78e0b27b3f5",
+        "model": "grok-4.5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
