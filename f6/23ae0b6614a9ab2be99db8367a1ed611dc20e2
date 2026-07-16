@@ -1,0 +1,26 @@
+docs/blog-prds/examples/crafting-a-malicious-skill.md
+  s_06ffbbc4d44057::t_e5479b27de1fb4 1-91
+docs/blog-prds/crafting-a-malicious-skill.md
+  s_06ffbbc4d44057::t_8c695eeb1a486f 1-91
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "f623ae0b6614a9ab2be99db8367a1ed611dc20e2",
+  "prompts": {},
+  "humans": {
+    "h_34454149dac528": {
+      "author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_06ffbbc4d44057": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "8d273fd7-c5da-46e8-95e3-d78e0b27b3f5",
+        "model": "grok-4.5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
