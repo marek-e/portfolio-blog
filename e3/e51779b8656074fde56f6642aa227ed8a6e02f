@@ -1,0 +1,30 @@
+docs/blog-prds/_TEMPLATE.md
+  s_06ffbbc4d44057::t_39afde24423ce1 1-76
+.claude/CLAUDE.md
+  s_06ffbbc4d44057::t_b3a83f05c5965b 41-42
+docs/BLOG-SCOPE.md
+  s_06ffbbc4d44057::t_e38d0d2c82ca04 3-4
+docs/BLOG-PRD.md
+  s_06ffbbc4d44057::t_6b5caf1c48500e 1-179
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "e3e51779b8656074fde56f6642aa227ed8a6e02f",
+  "prompts": {},
+  "humans": {
+    "h_34454149dac528": {
+      "author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_06ffbbc4d44057": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "8d273fd7-c5da-46e8-95e3-d78e0b27b3f5",
+        "model": "grok-4.5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
