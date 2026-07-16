@@ -1,0 +1,28 @@
+.claude/skills/blog-writer/SKILL.md
+  s_06ffbbc4d44057::t_4dc086870ab10a 20-21,25,33,35,37-39,41-45,49,51-52,54,56
+  s_06ffbbc4d44057::t_dda9932e6578ab 5-8
+.agents/skills/blog-writer/SKILL.md
+  s_06ffbbc4d44057::t_589c0796fb3e9f 20-21,23,25,33,35,37-39,41-45,49,51-52,54,56,77-80,85-91,93,95,97,99,101
+  s_06ffbbc4d44057::t_5407f392fd536a 5-8
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "234a774c70897cc6157a744f1a42743a59e14610",
+  "prompts": {},
+  "humans": {
+    "h_34454149dac528": {
+      "author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_06ffbbc4d44057": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "8d273fd7-c5da-46e8-95e3-d78e0b27b3f5",
+        "model": "grok-4.5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
