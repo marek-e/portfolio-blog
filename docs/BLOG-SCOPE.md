@@ -1,5 +1,7 @@
 # Blog Writing Scope
 
+How every post on melmayan.fr is written. For **what this post is arguing** (thesis, evidence, scope), use a [Blog PRD](./BLOG-PRD.md) in `docs/blog-prds/<slug>.md` and lock it before drafting.
+
 ## Writing Philosophy
 
 ### North star: earned insight density

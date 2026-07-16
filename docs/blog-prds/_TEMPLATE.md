@@ -1,0 +1,76 @@
+---
+title: '' # working title
+slug: ''
+languages: [fr, en] # or [fr] / [en]
+status: grilling # idea | grilling | draft | locked | drafting | done
+related: [] # slugs of prequel/sequel posts
+updated: YYYY-MM-DD
+---
+
+# Blog PRD: <working title>
+
+## Intent
+
+**This post IS**
+
+- …
+
+**This post is NOT**
+
+- …
+
+## Thesis
+
+> One contestable sentence. A competent peer could disagree.
+
+## Audience
+
+- **For:** …
+- **Willing to lose:** …
+
+## Reader takeaways (ranked)
+
+1. …
+2. …
+3. …
+
+## Shape
+
+- **Lead:** … # mechanism-first | story-first | ladder-first | …
+- **Length posture:** … # short | medium | long
+- **Arc:**
+  1. …
+  2. …
+  3. …
+
+## Evidence plan
+
+- **Artifacts:** …
+- **Unfakeable details to capture:** …
+- **Earned ladder** (optional; only rungs you will run):
+  1. …
+  2. …
+- **Cite only (no personal reproduction):** …
+- **Mention-only (no live PoC):** …
+
+## Scope
+
+- **In:** …
+- **Out:** …
+
+## Strongest objection
+
+- **Objection:** …
+- **Response:** … # bounded concede or refute — no hedge
+
+## Payoff
+
+…
+
+## Open questions
+
+- [ ] …
+
+## Decision log
+
+- YYYY-MM-DD: …
