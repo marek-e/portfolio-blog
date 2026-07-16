@@ -2,12 +2,10 @@
 name: blog-writer
 description: |
   Collaborative blog post writer for melmayan.fr. Guides Marek through writing a polished,
-  ready-to-publish MDX blog post — from a one-liner topic or rough outline to a finished file.
-  Use this skill whenever the user wants to write, draft, brainstorm, or improve a blog post,
-  even if they just say "I want to write about X" or "help me with my next post". Produces
-  both French and English versions by default, using the site's MDX components (Callout,
-  Highlight, Mermaid, Citation, Toggle, FileTree, Figure) to make posts visually rich.
-  Also use when the user wants feedback on an existing draft or is stuck on a section.
+  ready-to-publish MDX blog post from a locked Blog PRD to finished FR/EN files.
+  Use when drafting, revising, or finishing a post after intent is locked. If no locked
+  PRD exists for the slug, hand off to blog-prd first. Also use for section feedback or
+  pre-publish verification against BLOG-SCOPE.
 ---
 
 ## Context
@@ -19,10 +17,12 @@ This is a personal dev blog at melmayan.fr (Astro SSG). Blog posts live in:
 
 The full writing guide and component reference are in:
 
+- `docs/BLOG-PRD.md` — per-post decision record (intent, thesis, evidence, scope)
+- `docs/blog-prds/<slug>.md` — locked PRD for this post (required before drafting)
 - `docs/BLOG-SCOPE.md` — style philosophy, frontmatter schema, component usage
-- `.Codex/skills/blog-writer/_template.mdx` — ready-to-use skeleton (copy into `src/content/blog/<lang>/<slug>.mdx`)
+- `.claude/skills/blog-writer/_template.mdx` — ready-to-use skeleton (copy into `src/content/blog/<lang>/<slug>.mdx`)
 
-Read these at the start of every session before doing anything else. They are the ground truth.
+Read BLOG-SCOPE and the post's Blog PRD at the start of every session before drafting. They are the ground truth.
 
 ---
 
@@ -30,27 +30,30 @@ Read these at the start of every session before doing anything else. They are th
 
 This is an interactive, back-and-forth collaboration — not a one-shot generator. The goal is a post that feels like Marek wrote it, not a blog post factory.
 
-### 1. Understand the post
+### 0. Require a locked Blog PRD
 
-Ask only what you genuinely don't know. If the user gave an outline, extract from it rather than re-asking. Typical gaps to fill:
+Before outlining or writing MDX:
 
-- **Angle**: what's the _one thing_ the reader should walk away knowing?
-- **Audience**: fellow devs? beginners? both?
-- **Language**: French, English, or both? (default: both)
-- **Tone**: any specific vibe — tutorial, rant, story, comparison?
-- **Length**: quick read (~3 min) or in-depth (~8 min)?
+1. Resolve the slug (from the user, an existing draft, or `docs/blog-prds/`).
+2. If `docs/blog-prds/<slug>.md` is missing, or `status` is not `locked`, **stop drafting**. Switch to the **blog-prd** skill (grill → lock) and only resume here after the author locks the PRD.
+3. If the PRD is `locked`, treat it as the contract: thesis, intent IS/NOT, evidence plan, scope Out, payoff. Do not silently invent a new angle.
 
-Don't ask all of these as a list. Be conversational. If the outline already answers most of them, just confirm and move on.
+Re-open **blog-prd** if drafting reveals a contradiction with the locked brief; re-lock before continuing.
+
+### 1. Confirm from the PRD (don't re-interview from scratch)
+
+Read the locked PRD and confirm only gaps that block drafting (e.g. missing title options, FR/EN preference already set). Do not re-run the full thesis grill unless the author asks.
 
 ### 2. Propose a structure
 
-Before writing anything, present a lightweight outline:
+Map the PRD arc into a lightweight outline:
 
-- Title (2-3 options)
-- H2 sections with one-line descriptions
+- Title (2-3 options; may refine the PRD working title)
+- H2 sections aligned to the PRD arc (one idea per section)
 - Where MDX components could add value (suggest specific ones, not generic "add a callout here")
+- Call out any PRD evidence rung not yet earned (don't fake it in prose)
 
-Get a thumbs up or let the user reshape it.
+Get a thumbs up or let the user reshape it — without breaking the locked thesis.
 
 ### 3. Write section by section
 
@@ -71,21 +74,31 @@ When the post is complete and approved, write the actual `.mdx` file(s) to disk:
 
 Set `draft: true` by default — Marek flips it to `false` when ready to publish.
 
+### 5. Verify before publishing
+
+Before Marek flips `draft: false`, run the verification battery in BLOG-SCOPE.md. Run the mechanical checks automatically and report the _specific failing sentences_: the intensifier sweep (superlatives in the body with no referent), byline-swap suspects (sentences a generic dev could have written), sections missing an unfakeable detail, and the deletion pass. Leave the judgment calls (thesis, objection, abandonment, voice) to Marek. The single proxy for the whole thing: would he send this to one smart friend in the domain who'd learn something new?
+
 ---
 
 ## Writing Principles (internalize these, don't just follow them)
 
-These come from BLOG-SCOPE.md — understand the _why_:
+These come from BLOG-SCOPE.md — understand the _why_. The full quality model and the pre-publish verification battery live there; read it first.
 
-**Cut ruthlessly.** The reader's time is finite. If a sentence doesn't move the idea forward, it's a liability. Three tight sentences > one bloated paragraph.
+**North star: earned insight density.** Maximise non-obvious claims only Marek could make because he did the thing, per minute of reading, under a hard non-abandonment cap. Everything below serves this. The model's two enemies here pull opposite ways: padding (lowers density) and exaggeration (destroys the "earned" half, reads as confidence).
 
-**Human first.** Marek has opinions, makes mistakes, has been burned by bad DX. Let that show. "I wasted two hours on this" is more valuable than "this approach has drawbacks".
+**One contestable thesis.** One sentence, written before drafting, that a competent peer could disagree with. A topic is not a thesis. Every section feeds it; tangents die for it.
 
-**Humor as punctuation.** One dry observation per section is better than trying to be funny every line. Real experience beats invented jokes.
+**Earn it or cut it.** Each load-bearing section needs a verifiable artifact plus one unfakeable detail (a number, a trick, a scar). A section a generic dev could have written without doing the thing is off-mission.
 
-**Show the component, don't just describe.** If you're explaining a concept, a `<Mermaid>` diagram or `<FileTree>` is often clearer than a paragraph. Always ask: is there a visual that replaces this text?
+**Density wins; brevity is the side effect.** Judge each sentence by insight-per-word: cut flabby ones at any length, protect dense-but-long ones at any length. No target length. "5-line paragraph" is a smell test, never a reason to split a dense passage. Pace the load: a short release line after every dense passage.
 
-**Callouts sparingly.** One `<Callout>` per post is often enough. Three is already too many. Reserve them for genuine gotchas or key insights the reader must not miss.
+**Hype is a check the title writes and the body cashes.** Title and description may use intensifiers (the click, the SEO). The body may not: every superlative there points to a referent or gets cut. Quantify, don't amplify.
+
+**Voice is visible judgment.** Opinions, taste, verdicts a neutral writer would never commit to, not just contractions. Byline-swap test: if another competent dev could have written the sentence unchanged, it's generic. Pull opinions out of Marek; don't generate them.
+
+**Steelman the strongest objection.** Name the one counter that would nag the reader, give it its best version, then concede a bounded case or refute it. Caveats bound the claim, never hedge it.
+
+**Show the component, two classes.** Load-bearing visuals (the insight IS the visual: demo video, flow diagram) — maximise. Emphasis components (`<Highlight>`, `<Callout>`: point at insight, add none) — ration; one Callout is often enough, three is too many (advisory).
 
 **Never use em dashes (—).** They are a telltale sign of AI-generated text. Rewrite around them: use a comma, a colon, a period, or restructure the sentence entirely.
 

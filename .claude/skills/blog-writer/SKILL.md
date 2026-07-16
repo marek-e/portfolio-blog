@@ -2,12 +2,10 @@
 name: blog-writer
 description: |
   Collaborative blog post writer for melmayan.fr. Guides Marek through writing a polished,
-  ready-to-publish MDX blog post — from a one-liner topic or rough outline to a finished file.
-  Use this skill whenever the user wants to write, draft, brainstorm, or improve a blog post,
-  even if they just say "I want to write about X" or "help me with my next post". Produces
-  both French and English versions by default, using the site's MDX components (Callout,
-  Highlight, Mermaid, Citation, Toggle, FileTree, Figure) to make posts visually rich.
-  Also use when the user wants feedback on an existing draft or is stuck on a section.
+  ready-to-publish MDX blog post from a locked Blog PRD to finished FR/EN files.
+  Use when drafting, revising, or finishing a post after intent is locked. If no locked
+  PRD exists for the slug, hand off to blog-prd first. Also use for section feedback or
+  pre-publish verification against BLOG-SCOPE.
 ---
 
 ## Context
@@ -19,11 +17,13 @@ This is a personal dev blog at melmayan.fr (Astro SSG). Blog posts live in:
 
 The full writing guide and component reference are in:
 
+- `docs/BLOG-PRD.md` — per-post decision record (intent, thesis, evidence, scope)
+- `docs/blog-prds/<slug>.md` — locked PRD for this post (required before drafting)
 - `docs/BLOG-SCOPE.md` — style philosophy, frontmatter schema, component usage
 - `.claude/skills/blog-writer/references/voice.md` — Marek's actual register, calibrated from a real rewrite (before/after evidence)
 - `.claude/skills/blog-writer/_template.mdx` — ready-to-use skeleton (copy into `src/content/blog/<lang>/<slug>.mdx`)
 
-Read these at the start of every session before doing anything else. They are the ground truth. Where BLOG-SCOPE's "punchy" guidance and voice.md conflict, voice.md wins: it is his hand, observed.
+Read BLOG-SCOPE and the post's Blog PRD at the start of every session before drafting. They are the ground truth. Where BLOG-SCOPE's "punchy" guidance and voice.md conflict, voice.md wins: it is his hand, observed.
 
 ---
 
@@ -31,27 +31,30 @@ Read these at the start of every session before doing anything else. They are th
 
 This is an interactive, back-and-forth collaboration — not a one-shot generator. The goal is a post that feels like Marek wrote it, not a blog post factory.
 
-### 1. Understand the post
+### 0. Require a locked Blog PRD
 
-Ask only what you genuinely don't know. If the user gave an outline, extract from it rather than re-asking. Typical gaps to fill:
+Before outlining or writing MDX:
 
-- **Angle**: what's the _one thing_ the reader should walk away knowing?
-- **Audience**: fellow devs? beginners? both?
-- **Language**: French, English, or both? (default: both)
-- **Tone**: any specific vibe — tutorial, rant, story, comparison?
-- **Length**: quick read (~3 min) or in-depth (~8 min)?
+1. Resolve the slug (from the user, an existing draft, or `docs/blog-prds/`).
+2. If `docs/blog-prds/<slug>.md` is missing, or `status` is not `locked`, **stop drafting**. Switch to the **blog-prd** skill (grill → lock) and only resume here after the author locks the PRD.
+3. If the PRD is `locked`, treat it as the contract: thesis, intent IS/NOT, evidence plan, scope Out, payoff. Do not silently invent a new angle.
 
-Don't ask all of these as a list. Be conversational. If the outline already answers most of them, just confirm and move on.
+Re-open **blog-prd** if drafting reveals a contradiction with the locked brief; re-lock before continuing.
+
+### 1. Confirm from the PRD (don't re-interview from scratch)
+
+Read the locked PRD and confirm only gaps that block drafting (e.g. missing title options, FR/EN preference already set). Do not re-run the full thesis grill unless the author asks.
 
 ### 2. Propose a structure
 
-Before writing anything, present a lightweight outline:
+Map the PRD arc into a lightweight outline:
 
-- Title (2-3 options)
-- H2 sections with one-line descriptions
+- Title (2-3 options; may refine the PRD working title)
+- H2 sections aligned to the PRD arc (one idea per section)
 - Where MDX components could add value (suggest specific ones, not generic "add a callout here")
+- Call out any PRD evidence rung not yet earned (don't fake it in prose)
 
-Get a thumbs up or let the user reshape it.
+Get a thumbs up or let the user reshape it — without breaking the locked thesis.
 
 ### 3. Write section by section
 
