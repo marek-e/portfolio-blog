@@ -38,4 +38,6 @@ export function ProjectModal() {
 - [docs/STYLING.md](../docs/STYLING.md) - Tailwind, theme colors, responsive design
 - [docs/COMPONENTS.md](../docs/COMPONENTS.md) - shadcn/ui usage, custom components
 - [docs/CONTENT.md](../docs/CONTENT.md) - Content collections, frontmatter schemas
+- [docs/BLOG-SCOPE.md](../docs/BLOG-SCOPE.md) - Blog voice, MDX components, pre-publish checks
+- [docs/BLOG-PRD.md](../docs/BLOG-PRD.md) - Per-post Blog PRD standard (lock before drafting)
 - [docs/LESSONS.md](../docs/LESSONS.md) - Learned mistakes (updated by `/learn`)

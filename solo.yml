@@ -1,3 +1,10 @@
 name: astro-perso-website
 icon: public/web-app-manifest-512x512.png
-processes: {}
+processes:
+  pnpm dev:
+    command: pnpm dev
+    working_dir: null
+    auto_start: false
+    auto_restart: false
+    restart_when_changed: []
+    env: {}
