@@ -1,0 +1,28 @@
+src/styles/global.css
+  s_259b0913ab4558::t_4ea10e05ec85c0 17-40
+  h_34454149dac528 442,446,451,456
+  s_259b0913ab4558::t_e28f84ba1b0afd 441,443-445,447-450,452-455,457-458
+src/layouts/Layout.astro
+  s_259b0913ab4558::t_73bcb615eb2b14 89-95
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "e0335b2d8c739a2daa74e2b9342c5fc32059266f",
+  "prompts": {},
+  "humans": {
+    "h_34454149dac528": {
+      "author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_259b0913ab4558": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f2f9b2cc-8117-47d6-8c0f-715a8133a068",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
