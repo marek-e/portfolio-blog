@@ -1,0 +1,51 @@
+docs/blog-prds/crafting-a-malicious-skill.md
+  s_06ffbbc4d44057::t_c361b22556b1bf 5,39,51,75-76,80,92
+.claude/skills/3-git-hygiene/SKILL.md
+  h_34454149dac528 1-16
+src/content/blog/en/crafting-a-malicious-skill.mdx
+  s_06ffbbc4d44057::t_c531cea2566bd1 207
+  h_34454149dac528 1-2,5-8,10,12,14-17,19,28,32-33,35-92,94-96,98-119,124-146,148,150,157,159,161-169,171-172,177-178,183-184,190,192,194-195,197,199,202,204,206,208-218,222,224,226-229,232,234,236,238-248,250,253,255,257,259,261,263,270-271,273-275,277,279-284,287,289-290,295
+  s_06ffbbc4d44057::t_dfd5797ec4bfe7 23,93,173
+  s_81ec31e7f6e67a::t_df77aaec46a4e5 120-121,123,147,149,151-156,158,160
+  s_06ffbbc4d44057::t_3c8967c1cdb657 3-4,9,11,13,18,20-22,24-27,29-31,34,97,122,174-176,179-182,185-189,191,193,196,198,200-201,203,205,219-221,223,225,230-231,233,235,237,249,251-252,254,256,258,260,262,264-269,272,276,278,285-286,288,291-294
+  s_81ec31e7f6e67a::t_614b496d2c7edd 170
+src/content/blog/fr/crafting-a-malicious-skill.mdx
+  s_e77c46d345da49::t_54f5096f1e1e76 1-118
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "d4dd6167eb516378a3230a546e078e11af2168cc",
+  "prompts": {},
+  "humans": {
+    "h_34454149dac528": {
+      "author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_06ffbbc4d44057": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "8d273fd7-c5da-46e8-95e3-d78e0b27b3f5",
+        "model": "grok-4.5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    },
+    "s_81ec31e7f6e67a": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "ad701318-9609-4705-9453-479e0a042cad",
+        "model": "grok-4.5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    },
+    "s_e77c46d345da49": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "92c2a5b9-da9e-44f1-91ef-fb6c97b549f7",
+        "model": "unknown"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
