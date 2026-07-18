@@ -1,0 +1,28 @@
+src/content/blog/en/clickjacking.mdx
+  h_34454149dac528 4
+src/content/blog/fr/clickjacking.mdx
+  h_34454149dac528 4
+src/components/blog/ClickjackingLayers.tsx
+  s_4c1397bee7d028::t_9779d572b7d39e 334-336,338,344-346
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "7418b4d1d7c0b5940d2ae3724b812be287de11ba",
+  "prompts": {},
+  "humans": {
+    "h_34454149dac528": {
+      "author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_4c1397bee7d028": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "afba82c0-ae3b-4d94-ba60-07d70c38360b",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
