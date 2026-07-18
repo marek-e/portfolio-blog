@@ -20,7 +20,78 @@ const BTN_H = 28;
 const BTN_RIGHT = 12;
 const BTN_BOTTOM = 6;
 
-export function ClickjackingLayers() {
+// UI strings per language. The mock GitHub page stays in English on purpose:
+// it depicts github.com, whose real UI is English.
+const STRINGS = {
+  en: {
+    header: 'X-Ray the Attack',
+    victimView: "Victim's view",
+    xrayView: 'X-ray view',
+    flat: 'Flat',
+    sliderAria: "Rotation angle, from the victim's flat view to a profile X-ray view",
+    degrees: 'degrees',
+    iframeTag: 'Invisible iframe',
+    iframeSub: 'the real target · opacity 0.001 · gets the click',
+    lureTag: "Attacker's lure page",
+    lureSub: 'what the victim actually sees',
+    fire: 'Fire the click',
+    fired: 'Click stolen ⭐',
+    captionFlat1: 'This is exactly what the victim sees: a single page with an ',
+    captionFlatAccept: '“Accept all cookies”',
+    captionFlat2: ' button. ',
+    captionFlatDrag: 'Drag the slider',
+    captionFlat3: ' to rotate the scene and reveal what is really stacked on top.',
+    captionXray1: 'The ',
+    captionXrayIframe: 'invisible iframe',
+    captionXray2: ' floats above the lure, its hidden ',
+    captionXrayStar: 'Star',
+    captionXray3:
+      ' button pinned exactly over “Accept all cookies.” The click never reaches the button the victim aimed for.',
+    lureCategory: 'Web Security',
+    lureHeadline: 'Top 10 open-source security tools',
+    lureNav1: 'Articles',
+    lureNav2: 'Jobs',
+    cookieNotice: 'This site uses cookies',
+    acceptBtn: 'Accept all cookies',
+  },
+  fr: {
+    header: "L'attaque aux rayons X",
+    victimView: 'Vue de la victime',
+    xrayView: 'Vue rayons X',
+    flat: 'À plat',
+    sliderAria:
+      'Angle de rotation, de la vue à plat de la victime à une vue de profil aux rayons X',
+    degrees: 'degrés',
+    iframeTag: 'Iframe invisible',
+    iframeSub: 'la vraie cible · opacity 0.001 · reçoit le clic',
+    lureTag: "Page leurre de l'attaquant",
+    lureSub: 'ce que la victime voit vraiment',
+    fire: 'Déclencher le clic',
+    fired: 'Clic volé ⭐',
+    captionFlat1: "C'est exactement ce que voit la victime : une seule page avec un bouton ",
+    captionFlatAccept: '« Accepter tous les cookies »',
+    captionFlat2: '. ',
+    captionFlatDrag: 'Faites glisser le curseur',
+    captionFlat3: ' pour faire pivoter la scène et révéler ce qui est réellement empilé au-dessus.',
+    captionXray1: "L'",
+    captionXrayIframe: 'iframe invisible',
+    captionXray2: ' flotte au-dessus du leurre, son bouton ',
+    captionXrayStar: 'Star',
+    captionXray3:
+      " caché est épinglé exactement sur « Accepter tous les cookies ». Le clic n'atteint jamais le bouton que la victime visait.",
+    lureCategory: 'Sécurité Web',
+    lureHeadline: 'Top 10 des outils de sécurité open-source',
+    lureNav1: 'Articles',
+    lureNav2: 'Emplois',
+    cookieNotice: 'Ce site utilise des cookies',
+    acceptBtn: 'Accepter tous les cookies',
+  },
+} as const;
+
+type Lang = keyof typeof STRINGS;
+
+export function ClickjackingLayers({ lang = 'en' }: { lang?: Lang }) {
+  const t9n = STRINGS[lang];
   const [angle, setAngle] = useState(0); // 0° = victim's view, MAX_ANGLE = full profile
   const [animate, setAnimate] = useState(false); // smooth tween only for presets
   const [firing, setFiring] = useState(false);
@@ -84,7 +155,7 @@ export function ClickjackingLayers() {
       {/* Header */}
       <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
         <span className="bg-linear-to-r from-cyan-600 to-fuchsia-600 bg-clip-text text-xs font-black tracking-widest text-transparent uppercase dark:from-cyan-300 dark:to-fuchsia-400">
-          X-Ray the Attack
+          {t9n.header}
         </span>
         <div className="flex gap-1.5">
           <button
@@ -95,7 +166,7 @@ export function ClickjackingLayers() {
                 : 'bg-muted text-muted-foreground hover:bg-accent'
             }`}
           >
-            Victim's view
+            {t9n.victimView}
           </button>
           <button
             onClick={() => toView(XRAY_ANGLE)}
@@ -105,7 +176,7 @@ export function ClickjackingLayers() {
                 : 'bg-muted text-muted-foreground hover:bg-accent'
             }`}
           >
-            X-ray view
+            {t9n.xrayView}
           </button>
         </div>
       </div>
@@ -113,9 +184,15 @@ export function ClickjackingLayers() {
       {/* Rotation slider */}
       <div className="mb-4 flex items-center gap-3">
         <span className="text-muted-foreground w-10 shrink-0 text-[10px] font-medium tracking-wide uppercase">
-          Flat
+          {t9n.flat}
         </span>
-        <AngleSlider value={angle} max={MAX_ANGLE} onChange={onSlide} />
+        <AngleSlider
+          value={angle}
+          max={MAX_ANGLE}
+          onChange={onSlide}
+          ariaLabel={t9n.sliderAria}
+          degreesLabel={t9n.degrees}
+        />
         <span className="w-10 shrink-0 text-right text-[11px] font-bold text-fuchsia-600 tabular-nums dark:text-fuchsia-300">
           {Math.round(angle)}°
         </span>
@@ -149,7 +226,7 @@ export function ClickjackingLayers() {
             accent="cyan"
             glow="0 0 34px -6px rgba(34,211,238,0.45)"
           >
-            <LurePage />
+            <LurePage t9n={t9n} />
           </Layer>
 
           {/* Alignment spine: shows the Star and Accept buttons share one (x,y) at
@@ -259,22 +336,13 @@ export function ClickjackingLayers() {
           className="pointer-events-none absolute top-4 left-4 max-w-[180px]"
           style={{ opacity: labelOpacity, transition: 'opacity 0.4s' }}
         >
-          <LayerTag
-            color="fuchsia"
-            title="Invisible iframe"
-            sub="the real target · opacity 0.001 · gets the click"
-          />
+          <LayerTag color="fuchsia" title={t9n.iframeTag} sub={t9n.iframeSub} />
         </div>
         <div
           className="pointer-events-none absolute right-4 bottom-4 max-w-[180px] text-right"
           style={{ opacity: labelOpacity, transition: 'opacity 0.4s' }}
         >
-          <LayerTag
-            color="cyan"
-            title="Attacker's lure page"
-            sub="what the victim actually sees"
-            alignRight
-          />
+          <LayerTag color="cyan" title={t9n.lureTag} sub={t9n.lureSub} alignRight />
         </div>
 
         {/* Fire-click control */}
@@ -282,7 +350,7 @@ export function ClickjackingLayers() {
           onClick={fireClick}
           className="absolute bottom-3 left-1/2 -translate-x-1/2 cursor-pointer rounded-full bg-linear-to-r from-amber-400 to-orange-500 px-4 py-1.5 text-[11px] font-black tracking-wide text-orange-950 uppercase shadow-[0_0_20px_-2px_rgba(251,146,60,0.6)] transition hover:brightness-110 active:scale-95"
         >
-          {firing ? 'Click stolen ⭐' : 'Fire the click'}
+          {firing ? t9n.fired : t9n.fire}
         </button>
       </div>
 
@@ -290,26 +358,27 @@ export function ClickjackingLayers() {
       <p className="text-muted-foreground mt-4 text-center text-xs leading-relaxed">
         {t < 0.15 ? (
           <>
-            This is exactly what the victim sees: a single page with an{' '}
+            {t9n.captionFlat1}
             <span className="font-semibold text-cyan-600 dark:text-cyan-300">
-              “Accept all cookies”
-            </span>{' '}
-            button.{' '}
+              {t9n.captionFlatAccept}
+            </span>
+            {t9n.captionFlat2}
             <span className="font-semibold text-fuchsia-600 dark:text-fuchsia-300">
-              Drag the slider
-            </span>{' '}
-            to rotate the scene and reveal what is really stacked on top.
+              {t9n.captionFlatDrag}
+            </span>
+            {t9n.captionFlat3}
           </>
         ) : (
           <>
-            The{' '}
+            {t9n.captionXray1}
             <span className="font-semibold text-fuchsia-600 dark:text-fuchsia-300">
-              invisible iframe
-            </span>{' '}
-            floats above the lure, its hidden{' '}
-            <span className="font-semibold text-amber-600 dark:text-amber-300">Star</span> button
-            pinned exactly over “Accept all cookies.” The click never reaches the button the victim
-            aimed for.
+              {t9n.captionXrayIframe}
+            </span>
+            {t9n.captionXray2}
+            <span className="font-semibold text-amber-600 dark:text-amber-300">
+              {t9n.captionXrayStar}
+            </span>
+            {t9n.captionXray3}
           </>
         )}
       </p>
@@ -324,10 +393,14 @@ function AngleSlider({
   value,
   max,
   onChange,
+  ariaLabel,
+  degreesLabel,
 }: {
   value: number;
   max: number;
   onChange: (deg: number) => void;
+  ariaLabel: string;
+  degreesLabel: string;
 }) {
   const trackRef = useRef<HTMLDivElement>(null);
   const pct = (value / max) * 100;
@@ -363,11 +436,11 @@ function AngleSlider({
       ref={trackRef}
       role="slider"
       tabIndex={0}
-      aria-label="Rotation angle, from the victim's flat view to a profile X-ray view"
+      aria-label={ariaLabel}
       aria-valuemin={0}
       aria-valuemax={max}
       aria-valuenow={Math.round(value)}
-      aria-valuetext={`${Math.round(value)} degrees`}
+      aria-valuetext={`${Math.round(value)} ${degreesLabel}`}
       className="focus-visible:ring-ring relative h-6 flex-1 cursor-ew-resize touch-none rounded-full select-none focus-visible:ring-2 focus-visible:outline-none"
       onPointerDown={(e) => {
         e.currentTarget.setPointerCapture(e.pointerId);
@@ -484,7 +557,7 @@ function LayerTag({
 // ── Layer content (compact mock pages) ────────────────────────────────────────
 // The mock pages stay light-on-white in both themes: they depict real websites,
 // not UI of this site.
-function LurePage() {
+function LurePage({ t9n }: { t9n: (typeof STRINGS)[Lang] }) {
   return (
     <div className="relative h-full w-full text-neutral-900">
       <div className="flex h-8 items-center justify-between border-b border-neutral-100 px-3">
@@ -493,17 +566,15 @@ function LurePage() {
           <span className="text-[11px] font-black">devnews.io</span>
         </div>
         <div className="flex gap-1.5 text-[8px] text-neutral-400">
-          <span>Articles</span>
-          <span>Jobs</span>
+          <span>{t9n.lureNav1}</span>
+          <span>{t9n.lureNav2}</span>
         </div>
       </div>
       <div className="px-3 pt-2.5">
         <div className="text-[7px] font-bold tracking-widest text-cyan-600 uppercase">
-          Web Security
+          {t9n.lureCategory}
         </div>
-        <div className="mt-0.5 text-[12px] leading-tight font-black">
-          Top 10 open-source security tools
-        </div>
+        <div className="mt-0.5 text-[12px] leading-tight font-black">{t9n.lureHeadline}</div>
         <div className="mt-1.5 h-1.5 w-full rounded bg-neutral-100" />
         <div className="mt-1 h-1.5 w-4/5 rounded bg-neutral-100" />
         <div className="mt-1 h-1.5 w-3/5 rounded bg-neutral-100" />
@@ -512,14 +583,14 @@ function LurePage() {
       <div className="absolute right-0 bottom-0 left-0 flex h-10 items-center border-t border-neutral-200 bg-neutral-50 px-3">
         <div className="flex items-center gap-1">
           <span className="text-xs">🍪</span>
-          <span className="text-[8px] font-semibold text-neutral-600">This site uses cookies</span>
+          <span className="text-[8px] font-semibold text-neutral-600">{t9n.cookieNotice}</span>
         </div>
         {/* aligned button — same shared box as the target's Star button */}
         <div
           className="absolute flex items-center justify-center rounded-md bg-neutral-900 text-[9px] font-bold whitespace-nowrap text-white"
           style={{ right: BTN_RIGHT, bottom: BTN_BOTTOM, width: BTN_W, height: BTN_H }}
         >
-          Accept all cookies
+          {t9n.acceptBtn}
         </div>
       </div>
     </div>
