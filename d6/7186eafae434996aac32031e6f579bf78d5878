@@ -1,0 +1,30 @@
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "d67186eafae434996aac32031e6f579bf78d5878",
+  "prompts": {},
+  "humans": {
+    "h_34454149dac528": {
+      "author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_0d18b95f27733d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2fddfbf1-5e0a-4039-8217-b632e4e6fe98",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    },
+    "s_ac5af0b92901bb": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6df77b32-96bc-456f-9656-2b0528f7d616",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}

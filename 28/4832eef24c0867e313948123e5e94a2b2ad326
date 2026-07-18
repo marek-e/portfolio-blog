@@ -1,0 +1,17 @@
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.1",
+  "base_commit_sha": "284832eef24c0867e313948123e5e94a2b2ad326",
+  "prompts": {},
+  "sessions": {
+    "s_e103b693a22227": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "78f43ba7-976b-4262-a7b3-21d0262cb12c",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
