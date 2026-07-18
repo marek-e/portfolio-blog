@@ -2,7 +2,7 @@
 import { ClientRouter } from 'astro:transitions';
 import '../styles/global.css';
 import { getAlternatePath, getLangFromUrl } from '@/i18n/config';
-import { BookmarkLanguageToggle } from '@/components/react/BookmarkLanguageToggle';
+import { BookmarkLanguageToggle } from '@/components/layout/BookmarkLanguageToggle';
 
 interface Props {
   title: string;
@@ -82,6 +82,13 @@ const enURL = new URL(enPath, Astro.site);
     <link
       rel="preload"
       href="/fonts/MapleMono-Regular.ttf.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/MapleMono-Bold.ttf.woff2"
       as="font"
       type="font/woff2"
       crossorigin

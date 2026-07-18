@@ -56,8 +56,8 @@ import {
   BreadcrumbEllipsis,
 } from '@/components/ui/breadcrumb';
 import { PastelCard, PastelCards } from '@/components/mdx/PastelCard';
-import { ModeToggle } from './ModeToggle';
-import { Icon } from './Icon';
+import { ModeToggle } from '../layout/ModeToggle';
+import { Icon } from '../shared/Icon';
 import { ArrowLeftIcon, Search01Icon, Mail01Icon } from '@hugeicons/core-free-icons';
 import { getTranslatedPath, type Lang } from '@/i18n';
 

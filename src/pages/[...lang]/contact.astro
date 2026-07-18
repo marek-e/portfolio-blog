@@ -1,9 +1,9 @@
 ---
 import Layout from '@/layouts/Layout.astro';
-import Navbar from '@/components/astro/Navbar.astro';
-import Footer from '@/components/astro/Footer.astro';
+import Navbar from '@/components/layout/Navbar.astro';
+import Footer from '@/components/layout/Footer.astro';
 import { getTranslations, defaultLang } from '@/i18n';
-import ContactSection from '@/components/astro/ContactSection.astro';
+import ContactSection from '@/components/portfolio/ContactSection.astro';
 
 export function getStaticPaths() {
   return [{ params: { lang: undefined } }, { params: { lang: 'en' } as const }];

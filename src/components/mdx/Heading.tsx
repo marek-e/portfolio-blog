@@ -1,6 +1,6 @@
 import { type ReactNode } from 'react';
 import { cn } from '@/lib/utils';
-import { Icon } from '../react/Icon';
+import { Icon } from '../shared/Icon';
 import { Link02Icon } from '@hugeicons/core-free-icons';
 
 interface HeadingProps {

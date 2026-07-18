@@ -1,8 +1,8 @@
 ---
 import { getRunningActivities, getAthleteStats, STRAVA_ATHLETE_ID } from '@/lib/strava';
-import { ActivityCard } from '@/components/react/ActivityCard';
-import { RaceActivityCard } from '@/components/react/RaceActivityCard';
-import { RunningStats } from '@/components/react/RunningStats';
+import { ActivityCard } from '@/components/portfolio/ActivityCard';
+import { RaceActivityCard } from '@/components/portfolio/RaceActivityCard';
+import { RunningStats } from '@/components/portfolio/RunningStats';
 import { getTranslations, getLangFromUrl } from '@/i18n';
 import type { RunningActivity, RunningStats as RunningStatsType } from '@/types/strava';
 
@@ -74,7 +74,7 @@ const hasData = activities.length > 0;
               activity.isRace ? (
                 <RaceActivityCard client:visible activity={activity} lang={lang} />
               ) : (
-              <ActivityCard client:visible activity={activity} lang={lang} />
+                <ActivityCard client:visible activity={activity} lang={lang} />
               )
             )}
           </div>

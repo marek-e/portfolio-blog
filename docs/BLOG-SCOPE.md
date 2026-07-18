@@ -177,7 +177,7 @@ Wrap a filename in `**bold**` to highlight it.
 Use for screenshots, diagrams exported as images, hero visuals.
 
 ```mdx
-import Figure from '@/components/astro/Figure.astro';
+import Figure from '@/components/mdx/Figure.astro';
 import myImage from '@/assets/blog/your-post/screenshot.png';
 
 <Figure

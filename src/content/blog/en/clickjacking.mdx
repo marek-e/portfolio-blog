@@ -1,0 +1,280 @@
+---
+title: 'Clickjacking: How Five Lines of CSS Can Steal a Click'
+description: 'The invisible iframe attack that tricks users into clicking something they never chose, and how to protect against it.'
+publishDate: 2026-07-19
+tags: ['security', 'web', 'CSS']
+---
+
+import { ClickjackingLayers } from '@/components/blog/ClickjackingLayers';
+
+You think you are accepting cookies. But you are actually starring a repo you've never heard of.
+
+That's <Highlight>clickjacking</Highlight>, a UI attack so simple it fits in a `<style>` block.
+
+The principle is quite simple: it's to <strong>trick the user into clicking something different from what they perceive</strong> they are clicking and thus <Highlight color="blue">diverting the click from its initial intent</Highlight> to trigger silently a sensitive action.
+
+You are probably wondering <strong>why do victims fall for this?</strong> That's because nowadays it is very common to have to accept cookies or dismiss a banner before accessing the page when visiting a website. Attackers only have to <strong>mimic those same intrusive elements.</strong>
+
+Clickjacking or UI Redressing is a quite old attack with many countermeasures in place today. But I decided to write about it because I find it still interesting since it's quite visual which changes from the usual misconfigured server attacks.
+
+Also means of protection exist and are used but not everyone is really aware of them.
+
+## How Clickjacking works: Five lines of CSS
+
+The attack has two layers. The attacker hosts a page the victim navigates to, for instance with a displayed cookie banner. On top of that page sits an invisible `iframe` loaded from the real target.
+
+```html
+<style>
+  iframe {
+    position: absolute;
+    opacity: 0.001;
+    z-index: 10;
+    top: 0;
+    left: 0;
+  }
+</style>
+
+<!-- The lure the victim sees -->
+<button>Accept cookies</button>
+
+<!-- The real target, invisible -->
+<iframe src="https://github.com/some-repo/star-toggle"></iframe>
+```
+
+Three CSS properties do all the work:
+| Property | Role |
+| -------- | ----------- |
+| `opacity: 0.001` | Makes the iframe invisible (!= 0 because some browsers would let click events pass through otherwise) |
+| `z-index: 10` | Places it on top so it receives the click |
+| `position: absolute` | Aligns the iframe pixel-perfectly over the lure button |
+
+The victim clicks "Accept cookies." The browser dispatches that click to the iframe underneath. GitHub registers a star from an authenticated user. Send this lure to 10,000 developers and you've manufactured a trending repository out of nothing.
+
+<ClickjackingLayers client:visible />
+
+<Callout variant="warning" title="This was real">
+  GitHub lacked framing protections before roughly 2013. Star-farming campaigns at scale were a
+  known attack vector. Self-hosted GitLab and Gitea instances without custom security headers are
+  still vulnerable today.
+</Callout>
+
+## How to keep the victim fooled?
+
+A click is only half the attack. A smart attacker also needs the victim to not immediately realize something went wrong.
+
+The solution is to listen for the click and swap the page content the moment it fires:
+
+```js
+window.addEventListener('blur', () => {
+  // The iframe just stole focus: the victim clicked
+  showFakeConfirmation();
+});
+```
+
+When the victim clicks, the browser briefly shifts focus to the iframe. The attacker's page detects that `blur` event and immediately replaces the lure with a natural looking screen. The victim closes the tab satisfied. The damage is already done.
+
+## How your session ends up in that iframe
+
+The attack requires the victim to be logged into the target site. Here's why that happens automatically, without the victim doing anything extra.
+
+When you log into GitHub, the server issues a session cookie and the browser stores it. On every subsequent request to `github.com`, including requests made by an `iframe` on a completely different page, the browser attaches that cookie automatically. It has no way to ask "did the user intend this request?" It just sends the credential.
+
+So when the attacker's page loads `github.com` inside a hidden iframe, GitHub sees a valid authenticated session and renders your full account.
+
+<Mermaid
+  chart={`
+    sequenceDiagram
+      actor V as Victim
+      participant B as Browser
+      participant G as github.com
+
+      Note over V,G: Days earlier
+      V->>B: Logs into GitHub
+      B->>G: POST /login
+      G-->>B: Set-Cookie session=abc123
+      Note over B: Cookie stored for github.com
+
+      Note over V,G: Attack day
+      V->>B: Opens attacker page
+      B->>G: iframe loads github.com<br/>cookie attached automatically
+      G-->>B: Logged-in page, buttons live
+      Note over V: One click away
+
+`}
+caption="The browser attaches the cookie to the iframe request on its own: the victim does nothing."
+title="How the session ends up in the iframe"
+/>
+
+<Callout variant="info" title="What about JWTs in localStorage?">
+  If the target app uses a JWT stored in `localStorage` instead of a cookie, the picture changes
+  slightly. Modern browsers partition storage by top-level site: a cross-origin iframe gets its own
+  empty storage context, so it cannot read the JWT from the parent tab. The iframe loads the target
+  site as a logged-out user. No session, no sensitive action: the attack fails at the session stage.
+  Frame headers are still the right fix, but the cookie model is what makes the classic attack work.
+</Callout>
+
+### SameSite cookies: a partial fix
+
+Browsers now default session cookies to `SameSite=Lax`, which tells them not to attach the cookie to cross-site subresource requests, including iframes. The target site loads inside the attacker's frame as a logged-out page, which breaks the attack.
+
+```http
+Set-Cookie: session=abc123; SameSite=Lax; Secure; HttpOnly
+```
+
+## What attackers actually get
+
+Impact scales with what the target site allows in a single click. Financial
+actions are the dramatic example, but the real breadth is wider:
+
+- <Highlight color="blue">Social manipulation</Highlight>: forced likes, follows, GitHub stars, fake
+  reviews. Reputation manufactured at scale, all from legitimate authenticated accounts.
+- <Highlight color="yellow">Account takeover</Highlight>: forced OAuth consent grants, email or
+  password changes, 2FA device registration. One click can hand an attacker persistent access.
+- <Highlight color="purple">Privacy breaches</Highlight>: microphone and camera permission grants,
+  file uploads to attacker-controlled endpoints, location sharing.
+- <Highlight color="green">Financial actions</Highlight>: subscription signups, forced purchases,
+  anything a single authenticated click can trigger.
+
+The through-line: every server log, every audit trail looks completely clean.
+No exploit, no injection, no anomaly. A legitimate user clicked a legitimate
+button in a legitimate session.
+
+Some real cases from the past two decades:
+
+| Year | Target                                                                                             | What happened                                                      |
+| ---- | -------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| 2008 | [Adobe Flash Player](https://blog.guya.net/2008/10/07/malicious-camera-spying-using-clickjacking/) | Mic and camera access granted via invisible Flash settings panel   |
+| 2009 | [Twitter](https://www.theregister.com/2009/02/13/twitter_clickjack_attack/)                        | "Don't Click" worm: forced tweets sent at scale from real accounts |
+| 2010 | [Facebook](https://www.theregister.com/2010/06/01/facebook_clickjacking_worm/)                     | Mass likejacking campaign, millions of involuntary likes           |
+| 2015 | [LinkedIn](https://www.securityweek.com/linkedin-patches-clickjacking-flaw-exploitable-css/)       | CSS-only invisible action buttons, no iframe needed                |
+| 2018 | [Yelp](https://hackerone.com/reports/355859)                                                       | Stored credit card charged via hijacked reservation confirm button |
+
+## The 3 prerequisites for a successful attack
+
+An attack only lands if all three conditions are true simultaneously:
+
+**1. The target page can be embedded in an iframe.**
+No defensive headers in place. (we will cover them shortly later)
+The browser loads the target inside any attacker-controlled frame without complaint.
+
+**2. A sensitive action fires on a single click.**
+No re-authentication, no confirmation dialog, no CAPTCHA. The victim is already
+logged in and the action executes immediately on click.
+
+**3. The attacker can predict the button's position.**
+The target UI is public and stable. The attacker inspects it once, measures
+pixel offsets, then positions the iframe until the lure sits exactly over the
+target. This is not reliably preventable, which is why prerequisites 1 and 2
+are the only real fixes.
+
+<Callout variant="tip" title="The practical checklist">
+  Any page that handles authenticated actions and lacks frame headers is vulnerable. Any action that
+  fires on a single click without confirmation is a target. Fix those two things and the attack has
+  nowhere to land.
+</Callout>
+
+## The defenses
+
+As a website owner, you will need to configure the server to prevent the page from being embedded in an iframe.
+For this two headers are available. During the initial request to the page, the server will send a response header to the browser to indicate if the page can be embedded in an iframe.
+
+### X-Frame-Options
+
+The original fix, shipped in 2009 ([MDN docs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options)). It's now legacy but it's still useful.
+
+```http
+# Block all framing
+X-Frame-Options: DENY
+
+# Allow framing from the same origin only
+X-Frame-Options: SAMEORIGIN
+
+# Allow framing from specific origins (does not work in Chrome or Safari)
+X-Frame-Options: ALLOW-FROM https://trusted-partner.com
+```
+
+`DENY` blocks all framing. `SAMEORIGIN` allows framing from the same origin only.
+A third value, `ALLOW-FROM`, was supposed to allowlist specific origins, but it
+was never implemented in Chrome or Safari and is effectively dead.
+
+### CSP frame-ancestors
+
+I will suppose you know what CSP is and how it works. If not, you can read the [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy) to get started.
+
+The modern standard, strictly better than XFO is the [frame-ancestors directive](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/frame-ancestors). It supports multiple allowed
+origins, wildcard subdomains, and a report-only mode for auditing before
+enforcing:
+
+```http
+# Block all framing
+Content-Security-Policy: frame-ancestors 'none';
+
+# Allow same origin only
+Content-Security-Policy: frame-ancestors 'self';
+
+# Allowlist specific partners
+Content-Security-Policy: frame-ancestors 'self' https://trusted-partner.com;
+```
+
+When both headers are present and conflict, `frame-ancestors` takes precedence
+in modern browsers.
+
+**Best practice: ship both.** XFO covers older browsers; CSP covers everything
+else. The cost is two lines of server config.
+
+```http
+X-Frame-Options: DENY
+Content-Security-Policy: frame-ancestors 'none';
+```
+
+### Why JavaScript framebusting doesn't work
+
+Before HTTP headers existed for this, developers wrote client-side scripts
+to detect iframe nesting and force a redirect:
+
+```js
+if (window.top !== window.self) {
+  window.top.location = window.self.location;
+}
+```
+
+This was broken almost immediately after it appeared. The HTML5 `sandbox`
+attribute lets an attacker disable top-level navigation on an iframe:
+
+```html
+<iframe src="https://target.com" sandbox="allow-forms allow-scripts">
+  <!-- allow-top-navigation is absent: framebusting JS can't redirect -->
+</iframe>
+```
+
+<Callout variant="danger">
+  If you have a framebusting script in your codebase, delete it when you add the headers. It
+  provides no protection and gives a false sense of security.
+</Callout>
+
+## Takeaways
+
+Scan your app's response headers tonight at [securityheaders.com](https://securityheaders.com).
+If `X-Frame-Options` or `Content-Security-Policy` with `frame-ancestors` is
+missing, check your server configuration and add them before anything
+else.
+
+```http
+X-Frame-Options: DENY
+Content-Security-Policy: frame-ancestors 'none';
+Set-Cookie: session=…; SameSite=Lax; Secure; HttpOnly
+```
+
+The [OWASP Clickjacking Defense Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Clickjacking_Defense_Cheat_Sheet.html) is a good resource to dive a bit deeper into the topic.
+
+---
+
+That's it for classic clickjacking. Headers kill it dead.
+
+But it's not over yet. New modern variants, that aren't using iframes at all, are emerging.
+
+For instance, DoubleClickjacking and DOM-based extension clickjacking bypass
+every defense covered here but the idea behind them is the same, divert the click from its initial intent to trigger a sensitive action.
+
+<br />I have given a talk about this topic so if you prefer to check the slides, here you can find
+my [deck](https://presentations.melmayan.fr/clickjacking/1).

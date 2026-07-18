@@ -1,7 +1,7 @@
 ---
 import Layout from '@/layouts/Layout.astro';
-import Navbar from '@/components/astro/Navbar.astro';
-import Footer from '@/components/astro/Footer.astro';
+import Navbar from '@/components/layout/Navbar.astro';
+import Footer from '@/components/layout/Footer.astro';
 import { Badge } from '@/components/ui/badge';
 import {
   Breadcrumb,
@@ -17,8 +17,8 @@ import { getCollection, render } from 'astro:content';
 import { getTranslations, defaultLang } from '@/i18n';
 import { getTranslatedPath } from '@/i18n/config';
 import { mdxComponents } from '@/components/mdx';
-import Toggle from '@/components/astro/Toggle.astro';
-import { Icon } from '@/components/react/Icon';
+import Toggle from '@/components/mdx/Toggle.astro';
+import { Icon } from '@/components/shared/Icon';
 import {
   ArrowLeft02Icon,
   HomeIcon,
