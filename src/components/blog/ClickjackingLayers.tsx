@@ -331,15 +331,19 @@ export function ClickjackingLayers({ lang = 'en' }: { lang?: Lang }) {
           </div>
         </div>
 
-        {/* Floating layer labels (screen-space, fade in with rotation) */}
+        {/* Floating layer labels (screen-space, fade in with rotation).
+            On narrow screens both labels sit at the top so the bottom strip
+            stays clear for the fire-click button. */}
         <div
-          className="pointer-events-none absolute top-4 left-4 max-w-[180px]"
+          className={`pointer-events-none absolute top-4 left-4 ${narrow ? 'max-w-[145px]' : 'max-w-[180px]'}`}
           style={{ opacity: labelOpacity, transition: 'opacity 0.4s' }}
         >
           <LayerTag color="fuchsia" title={t9n.iframeTag} sub={t9n.iframeSub} />
         </div>
         <div
-          className="pointer-events-none absolute right-4 bottom-4 max-w-[180px] text-right"
+          className={`pointer-events-none absolute text-right ${
+            narrow ? 'top-4 right-4 max-w-[140px]' : 'right-4 bottom-4 max-w-[180px]'
+          }`}
           style={{ opacity: labelOpacity, transition: 'opacity 0.4s' }}
         >
           <LayerTag color="cyan" title={t9n.lureTag} sub={t9n.lureSub} alignRight />
