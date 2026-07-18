@@ -1,0 +1,23 @@
+.claude/skills/blog-writer/SKILL.md
+  s_4c1397bee7d028::t_89a850c895a528 23,26
+  s_4c1397bee7d028::t_418ee80ee55c31 77
+  s_4c1397bee7d028::t_30cc33a98dcb77 105-118
+.claude/skills/blog-writer/references/voice.md
+  s_4c1397bee7d028::t_8a85aa9714bede 1-75
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "b78a204b3ce86621f1399b91014587a44e9d957b",
+  "prompts": {},
+  "sessions": {
+    "s_4c1397bee7d028": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "afba82c0-ae3b-4d94-ba60-07d70c38360b",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
