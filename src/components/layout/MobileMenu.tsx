@@ -10,7 +10,7 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 import { ModeToggle } from './ModeToggle';
-import { Icon } from './Icon';
+import { Icon } from '../shared/Icon';
 import { Separator } from '../ui/separator';
 import { getNavLinks } from '@/lib/navigation';
 import { getTranslatedPath, getTranslations, type Lang } from '@/i18n';

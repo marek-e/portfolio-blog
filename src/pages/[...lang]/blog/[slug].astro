@@ -1,7 +1,7 @@
 ---
 import Layout from '@/layouts/Layout.astro';
-import Navbar from '@/components/astro/Navbar.astro';
-import Footer from '@/components/astro/Footer.astro';
+import Navbar from '@/components/layout/Navbar.astro';
+import Footer from '@/components/layout/Footer.astro';
 import { Badge } from '@/components/ui/badge';
 import {
   Breadcrumb,
@@ -15,11 +15,11 @@ import { getCollection, render } from 'astro:content';
 import { getTranslations, defaultLang } from '@/i18n';
 import { getTranslatedPath } from '@/i18n/config';
 import { mdxComponents } from '@/components/mdx';
-import Toggle from '@/components/astro/Toggle.astro';
-import CodeToggle from '@/components/astro/CodeToggle.astro';
+import Toggle from '@/components/mdx/Toggle.astro';
+import CodeToggle from '@/components/mdx/CodeToggle.astro';
 import { Separator } from '@/components/ui/separator';
 import { formatDate, estimateReadingTime, getTagColor } from '@/lib/blog';
-import { Icon } from '@/components/react/Icon';
+import { Icon } from '@/components/shared/Icon';
 import { ArrowLeft02Icon, HomeIcon, Link02Icon, RssIcon } from '@hugeicons/core-free-icons';
 import { Link } from '@/components/ui/button';
 

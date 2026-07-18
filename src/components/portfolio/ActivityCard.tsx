@@ -1,7 +1,7 @@
 import type { RunningActivity } from '@/types/strava';
 import type { Lang } from '@/i18n/config';
 import { getTranslations } from '@/i18n';
-import { Icon } from './Icon';
+import { Icon } from '../shared/Icon';
 import {
   WorkoutRunIcon,
   DashboardSpeed01Icon,

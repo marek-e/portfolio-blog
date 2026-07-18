@@ -21,7 +21,7 @@ pnpm format       # Prettier
 shadcn components using React Context (Dialog, Sheet, Select, DropdownMenu) **must be wrapped** in a single `.tsx` file. Astro creates separate islands that can't share context.
 
 ```tsx
-// CORRECT: Single wrapper in src/components/react/
+// CORRECT: Single wrapper .tsx in the matching domain folder (src/components/<domain>/)
 export function ProjectModal() {
   return (
     <Dialog>

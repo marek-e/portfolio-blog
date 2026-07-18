@@ -2,11 +2,17 @@
 
 ## Component Placement
 
-| Type              | Location                       | Use Case                                     |
-| ----------------- | ------------------------------ | -------------------------------------------- |
-| Static content    | `src/components/astro/*.astro` | Headers, cards, layout sections (zero JS)    |
-| Interactive       | `src/components/react/*.tsx`   | State, event handlers, context-dependent UI  |
-| shadcn primitives | `src/components/ui/`           | Use CLI: `pnpm dlx shadcn@latest add <name>` |
+Components are organized **by domain**, not by framework. `.astro` (static, zero JS) and `.tsx` (interactive islands) files live side by side in each domain folder.
+
+| Domain            | Location                        | Use Case                                     |
+| ----------------- | ------------------------------- | -------------------------------------------- |
+| Layout            | `src/components/layout/`        | Navbar, Footer, menus, theme/lang toggles    |
+| Portfolio         | `src/components/portfolio/`     | Home sections, projects, timeline, CV        |
+| Blog              | `src/components/blog/`          | Interactive components for blog articles     |
+| MDX               | `src/components/mdx/`           | MDX building blocks (Callout, Figure, ...)   |
+| Design system     | `src/components/design-system/` | Design-system preview page                   |
+| Shared            | `src/components/shared/`        | Cross-domain utilities (Icon)                |
+| shadcn primitives | `src/components/ui/`            | Use CLI: `pnpm dlx shadcn@latest add <name>` |
 
 ## Client Directives
 
@@ -24,7 +30,7 @@
 Astro creates separate islands that **cannot share React Context**. Components using context (Dialog, Sheet, Select, DropdownMenu, Accordion) must be wrapped in a single `.tsx` file.
 
 ```tsx
-// src/components/react/DeleteConfirm.tsx
+// src/components/<domain>/DeleteConfirm.tsx
 export function DeleteConfirm({ onConfirm }: Props) {
   return (
     <AlertDialog>

@@ -1,5 +1,5 @@
 import type { IconSvgElement } from '@hugeicons/react';
-import { Icon } from '../Icon';
+import { Icon } from '../../shared/Icon';
 
 interface CardFieldProps {
   label: string;

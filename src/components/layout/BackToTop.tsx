@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { ArrowUp04Icon } from '@hugeicons/core-free-icons';
-import { Icon } from './Icon';
+import { Icon } from '../shared/Icon';
 import { cn } from '@/lib/utils';
 
 export function BackToTop() {

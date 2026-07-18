@@ -1,7 +1,7 @@
 import type { RunningActivity } from '@/types/strava';
 import type { Lang } from '@/i18n/config';
 import { getTranslations } from '@/i18n';
-import { Icon } from './Icon';
+import { Icon } from '../shared/Icon';
 import {
   Award01Icon,
   MedalFirstPlaceIcon,
@@ -103,20 +103,22 @@ export function RaceActivityCard({ activity, lang = 'fr' }: RaceActivityCardProp
             <span
               key={i}
               className="pointer-events-none absolute rounded-sm"
-              style={{
-                top: piece.top,
-                left: piece.left,
-                width: piece.width,
-                height: piece.height,
-                background: i % 3 === 0 ? '#fbbf24' : i % 3 === 1 ? '#f59e0b' : '#fde68a',
-                '--rotate': `${piece.rotate}deg`,
-                animationName: 'raceConfettiFloat',
-                animationDuration: `${piece.duration}s`,
-                animationDelay: `${piece.delay}s`,
-                animationTimingFunction: 'ease-in-out',
-                animationIterationCount: 'infinite',
-                transform: `rotate(${piece.rotate}deg)`,
-              } as React.CSSProperties}
+              style={
+                {
+                  top: piece.top,
+                  left: piece.left,
+                  width: piece.width,
+                  height: piece.height,
+                  background: i % 3 === 0 ? '#fbbf24' : i % 3 === 1 ? '#f59e0b' : '#fde68a',
+                  '--rotate': `${piece.rotate}deg`,
+                  animationName: 'raceConfettiFloat',
+                  animationDuration: `${piece.duration}s`,
+                  animationDelay: `${piece.delay}s`,
+                  animationTimingFunction: 'ease-in-out',
+                  animationIterationCount: 'infinite',
+                  transform: `rotate(${piece.rotate}deg)`,
+                } as React.CSSProperties
+              }
             />
           ))}
           <div className="relative mb-1 flex items-center justify-between">
@@ -125,16 +127,15 @@ export function RaceActivityCard({ activity, lang = 'fr' }: RaceActivityCardProp
               RACE
             </span>
             <p className="text-xs tracking-wide text-amber-400 uppercase">{formattedDate}</p>
-
           </div>
-          
+
           <h3 className="mt-0.5 line-clamp-1 text-base font-bold text-amber-100">
             {activity.name}
           </h3>
 
           <div className="my-2 flex items-center gap-3 text-[#EFBF04]">
             <div className="shrink-0 transition-transform duration-500 group-hover:rotate-12">
-              <Icon icon={MedalFirstPlaceIcon} size={24} strokeWidth={1.5}/>
+              <Icon icon={MedalFirstPlaceIcon} size={24} strokeWidth={1.5} />
             </div>
             <span
               className="text-2xl font-black tracking-tight"
@@ -145,7 +146,9 @@ export function RaceActivityCard({ activity, lang = 'fr' }: RaceActivityCardProp
           </div>
 
           {/* Stats row */}
-          <div className={`grid gap-2 border-t border-amber-800/50 pt-2 ${activity.averageHeartRate ? 'grid-cols-4' : 'grid-cols-3'}`}>
+          <div
+            className={`grid gap-2 border-t border-amber-800/50 pt-2 ${activity.averageHeartRate ? 'grid-cols-4' : 'grid-cols-3'}`}
+          >
             <div className="text-center">
               <div className="mb-1 flex justify-center text-amber-600">
                 <Icon icon={DashboardSpeed01Icon} size={13} strokeWidth={2} />
@@ -170,7 +173,12 @@ export function RaceActivityCard({ activity, lang = 'fr' }: RaceActivityCardProp
             {activity.averageHeartRate && (
               <div className="text-center">
                 <div className="mb-1 flex justify-center">
-                  <Icon icon={Heart} size={13} strokeWidth={2} className="text-rose-400 fill-rose-400"/>
+                  <Icon
+                    icon={Heart}
+                    size={13}
+                    strokeWidth={2}
+                    className="fill-rose-400 text-rose-400"
+                  />
                 </div>
                 <p className="text-sm font-bold text-amber-200">{activity.averageHeartRate}</p>
                 <p className="text-xs text-amber-600">{t.strava.heartRate}</p>

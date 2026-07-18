@@ -1,13 +1,13 @@
 ---
 import Layout from '@/layouts/Layout.astro';
-import Navbar from '@/components/astro/Navbar.astro';
-import Footer from '@/components/astro/Footer.astro';
+import Navbar from '@/components/layout/Navbar.astro';
+import Footer from '@/components/layout/Footer.astro';
 import { Badge } from '@/components/ui/badge';
 import { getCollection } from 'astro:content';
 import { getTranslations, defaultLang } from '@/i18n';
 import { getTranslatedPath, languages } from '@/i18n/config';
 import { ArrowRight02Icon, RssIcon } from '@hugeicons/core-free-icons';
-import { Icon } from '@/components/react/Icon';
+import { Icon } from '@/components/shared/Icon';
 import { formatDate, getSlug, estimateReadingTime, getTagColor } from '@/lib/blog';
 
 export function getStaticPaths() {

@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project uses shadcn/ui components built on Radix primitives (except Tooltip which uses Base UI). Components are in `src/components/ui/`, with custom Astro and React components in their respective directories.
+This project uses shadcn/ui components built on Radix primitives (except Tooltip which uses Base UI). shadcn components are in `src/components/ui/`; custom components are organized **by domain** — `layout/`, `portfolio/`, `blog/`, `mdx/`, `design-system/`, `shared/` — with `.astro` and `.tsx` files side by side.
 A design system page is present at `/[lang]/design-system`.
 This page is generated automatically by the `DesignSystemPreview` component inside the `src/pages/design-system.astro` file.
 
@@ -61,7 +61,7 @@ import { Badge } from '@/components/ui/badge';
 **Must be wrapped** in a React component file:
 
 ```tsx
-// src/components/react/DeleteConfirm.tsx
+// src/components/<domain>/DeleteConfirm.tsx
 'use client';
 
 import {
@@ -107,7 +107,7 @@ Then use in Astro with client directive:
 
 ```astro
 ---
-import { DeleteConfirm } from '@/components/react/DeleteConfirm';
+import { DeleteConfirm } from '@/components/<domain>/DeleteConfirm';
 ---
 
 <DeleteConfirm client:visible itemName="project" onConfirm={() => {}} />
@@ -176,11 +176,11 @@ import { DeleteConfirm } from '@/components/react/DeleteConfirm';
 </div>
 ```
 
-## Custom React Components
+## Custom Components
 
-Located in `src/components/react/`:
+Organized by domain: `layout/` (site chrome), `portfolio/` (home/projects/CV sections), `blog/` (interactive article components), `design-system/`, and `shared/` (cross-domain utilities):
 
-### ModeToggle
+### ModeToggle (`layout/`)
 
 Theme switcher with circular reveal animation (View Transitions API).
 
@@ -193,7 +193,7 @@ Theme switcher with circular reveal animation (View Transitions API).
 - Fade fallback on Firefox
 - Respects `prefers-reduced-motion`
 
-### MobileMenu
+### MobileMenu (`layout/`)
 
 Hamburger menu for mobile navigation.
 
@@ -206,20 +206,20 @@ Hamburger menu for mobile navigation.
 - Contains all navigation links
 - Close on link click or backdrop tap
 
-### Icon
+### Icon (`shared/`)
 
 Wrapper for Hugeicons that works in both Astro and React.
 
 ```astro
 ---
-import { Icon } from '@/components/react/Icon';
+import { Icon } from '@/components/shared/Icon';
 import { Star } from '@hugeicons/core-free-icons';
 ---
 
 <Icon icon={Star} className="size-5" />
 ```
 
-### LanguageSwitcher
+### LanguageSwitcher (`layout/`)
 
 Pill-shaped language toggle with active state highlighting.
 
@@ -231,7 +231,7 @@ Pill-shaped language toggle with active state highlighting.
 - Active language highlighted with primary color
 - Uses `aria-current="page"` for accessibility
 
-### BookmarkLanguageToggle
+### BookmarkLanguageToggle (`layout/`)
 
 Fixed bookmark-style language toggle with tooltip.
 
@@ -246,7 +246,7 @@ Fixed bookmark-style language toggle with tooltip.
 - Respects `prefers-reduced-motion`
 - Hidden on mobile (`md:flex`)
 
-### TimelineCards
+### TimelineCards (`portfolio/`)
 
 Scroll-driven timeline with 3D card animations.
 
@@ -261,17 +261,13 @@ Scroll-driven timeline with 3D card animations.
 - Respects `prefers-reduced-motion`
 - Supports education and work entry types
 
-## Astro Components
-
-Located in `src/components/astro/`:
-
-### CursorSpotlight
+### CursorSpotlight (`portfolio/`)
 
 Adds a radial gradient spotlight effect that follows the cursor.
 
 ```astro
 ---
-import CursorSpotlight from '@/components/astro/CursorSpotlight.astro';
+import CursorSpotlight from '@/components/portfolio/CursorSpotlight.astro';
 ---
 
 <CursorSpotlight>
