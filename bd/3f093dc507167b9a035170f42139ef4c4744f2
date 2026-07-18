@@ -1,0 +1,47 @@
+src/components/blog/ClickjackingLayers.tsx
+  s_4c1397bee7d028::t_d2fbf43251fbca 396-397,402-403
+  s_4c1397bee7d028::t_eef3df42ecbc7e 187,189-195
+  s_4c1397bee7d028::t_acabc9bbc3f6fc 575,577
+  s_4c1397bee7d028::t_cce6829e4c5e45 593
+  s_4c1397bee7d028::t_b7742dc3b9a9cd 345
+  s_4c1397bee7d028::t_ba2aff26a2b67d 353
+  s_4c1397bee7d028::t_3f6fe3ae9036b2 179
+  s_4c1397bee7d028::t_1bb2063e901ea3 439,443
+  s_4c1397bee7d028::t_3019dd362fe8a6 158
+  s_4c1397bee7d028::t_87e7ff276e2307 229
+  s_4c1397bee7d028::t_782e26ed9368d2 569-570
+  s_4c1397bee7d028::t_985da0be283c24 560
+  s_4c1397bee7d028::t_01b28dc48a74d8 339
+  s_4c1397bee7d028::t_677736c5856d4d 23-94
+  s_4c1397bee7d028::t_e15dcf9a3d633d 361,363-365,367-369,373,375-381
+  s_4c1397bee7d028::t_320bc6b94aadbb 169
+  s_4c1397bee7d028::t_f4fb52d3cc43a3 586
+src/content/blog/fr/clickjacking.mdx
+  s_4c1397bee7d028::t_c6e592bfa0d277 53
+  s_4c1397bee7d028::t_f15f2da8f36029 1-2,4-9,11,13-17,19-23,25-50,52,54-56,59-73,75-113,116-147,150-171,173-176,178-179,181-184,186,188-202,204,206-208,210-221,224-275,277-279,281-282
+  s_4c1397bee7d028::t_b8685647493b91 148-149,283
+  h_34454149dac528 3,10,12,18,24,51,57-58,74,114-115,172,177,180,185,187,203,205,209,222-223,276,280,284-285
+src/content/blog/en/clickjacking.mdx
+  h_34454149dac528 74
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "bd3f093dc507167b9a035170f42139ef4c4744f2",
+  "prompts": {},
+  "humans": {
+    "h_34454149dac528": {
+      "author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_4c1397bee7d028": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "afba82c0-ae3b-4d94-ba60-07d70c38360b",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
