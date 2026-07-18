@@ -1,0 +1,31 @@
+README.md
+  s_6268d38e875f57::t_cd0db30f72da63 22
+  s_6268d38e875f57::t_6cd76ecbd1bf97 1-5,7,9-11,13,17,20,34,36-41
+  s_6268d38e875f57::t_e499c01ae24654 21
+docs/DESIGN-SPEC.md
+  s_6268d38e875f57::t_92e16c7fdb8d91 1-200
+docs/DEVELOPMENT.md
+  s_6268d38e875f57::t_f45f51d6505045 10
+  s_6268d38e875f57::t_c53a295bdce4f1 1-9,11-41
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "e38933d5f604767282196900e49fecedc314a324",
+  "prompts": {},
+  "humans": {
+    "h_34454149dac528": {
+      "author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_6268d38e875f57": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d6479ee0-9d98-4f3c-a14d-f466ede845c3",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
