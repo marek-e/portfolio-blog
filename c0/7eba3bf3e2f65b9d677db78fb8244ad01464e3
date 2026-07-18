@@ -1,0 +1,21 @@
+.node-version
+  s_5b605c7c050b78::t_87e0f0299f8fda 1
+package.json
+  s_5b605c7c050b78::t_0ad65224cf8a72 16-18
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "c07eba3bf3e2f65b9d677db78fb8244ad01464e3",
+  "prompts": {},
+  "sessions": {
+    "s_5b605c7c050b78": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "80eec9c9-78cd-43ea-8994-c3b918e672a7",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
