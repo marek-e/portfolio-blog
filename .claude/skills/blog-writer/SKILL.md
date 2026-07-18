@@ -20,9 +20,10 @@ This is a personal dev blog at melmayan.fr (Astro SSG). Blog posts live in:
 The full writing guide and component reference are in:
 
 - `docs/BLOG-SCOPE.md` — style philosophy, frontmatter schema, component usage
+- `.claude/skills/blog-writer/references/voice.md` — Marek's actual register, calibrated from a real rewrite (before/after evidence)
 - `.claude/skills/blog-writer/_template.mdx` — ready-to-use skeleton (copy into `src/content/blog/<lang>/<slug>.mdx`)
 
-Read these at the start of every session before doing anything else. They are the ground truth.
+Read these at the start of every session before doing anything else. They are the ground truth. Where BLOG-SCOPE's "punchy" guidance and voice.md conflict, voice.md wins: it is his hand, observed.
 
 ---
 
@@ -73,7 +74,7 @@ Set `draft: true` by default — Marek flips it to `false` when ready to publish
 
 ### 5. Verify before publishing
 
-Before Marek flips `draft: false`, run the verification battery in BLOG-SCOPE.md. Run the mechanical checks automatically and report the _specific failing sentences_: the intensifier sweep (superlatives in the body with no referent), byline-swap suspects (sentences a generic dev could have written), sections missing an unfakeable detail, and the deletion pass. Leave the judgment calls (thesis, objection, abandonment, voice) to Marek. The single proxy for the whole thing: would he send this to one smart friend in the domain who'd learn something new?
+Before Marek flips `draft: false`, run the verification battery in BLOG-SCOPE.md. Run the mechanical checks automatically and report the _specific failing sentences_: the intensifier sweep (superlatives in the body with no referent), the copywriter-cadence sweep (escalating triplets, staccato fragments, dramatic kickers, urgency words — see `references/voice.md`), the em-dash sweep (the clickjacking draft shipped full of them despite the rule above), byline-swap suspects (sentences a generic dev could have written), sections missing an unfakeable detail, and the deletion pass. Leave the judgment calls (thesis, objection, abandonment, voice) to Marek. The single proxy for the whole thing: would he send this to one smart friend in the domain who'd learn something new?
 
 ---
 
@@ -98,6 +99,20 @@ These come from BLOG-SCOPE.md — understand the _why_. The full quality model a
 **Show the component, two classes.** Load-bearing visuals (the insight IS the visual: demo video, flow diagram) — maximise. Emphasis components (`<Highlight>`, `<Callout>`: point at insight, add none) — ration; one Callout is often enough, three is too many (advisory).
 
 **Never use em dashes (—).** They are a telltale sign of AI-generated text. Rewrite around them: use a comma, a colon, a period, or restructure the sentence entirely.
+
+---
+
+## Register (learned the hard way)
+
+The clickjacking draft followed every principle above and Marek still rewrote most of it. The gap was register: the draft read like a copywriter, Marek writes like a teacher giving a talk. Full before/after evidence lives in `references/voice.md`; the short version:
+
+- **One hook, then drop the act.** One punchy opening line max. Then plain explanation. No escalating triplets ("so simple..., so effective..., so misunderstood..."), no staccato fragments ("No malware. No network anomaly."), no dramatic kickers ("One click away."), no urgency ("tonight").
+- **Teach, to "you".** State the principle explicitly in plain words, then anticipate the reader's next question and pose it out loud ("You are probably wondering why..."). The reader is "you", never "your user".
+- **Marek is in the post.** Ask him why he picked the topic and put the answer in the intro. Meta-navigation is welcome ("we will cover them shortly later"). Link his own talks/repos/demos at the end.
+- **Headings: descriptive or question-form.** "How X works", "How to keep the victim fooled?", "Takeaways". Never clever parallels ("The double con") or dash-appended punchlines.
+- **Structure beats prose.** 3+ facts sharing a shape become a table; flows over time become a Mermaid diagram; categorized lists get colored `<Highlight>` labels; one `<strong>` on the load-bearing phrase of an explanatory paragraph.
+- **Focused depth, linked breadth.** Cut exhaustive coverage (per-stack config snippets); link MDN/OWASP-style references instead.
+- **Natural beats polished.** A slightly loose conversational sentence in his register beats a slick one in a copywriter's.
 
 ---
 
