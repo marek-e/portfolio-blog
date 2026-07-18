@@ -1,0 +1,49 @@
+src/components/blog/ClickjackingLayers.tsx
+  s_4c1397bee7d028::t_985da0be283c24 560
+  s_4c1397bee7d028::t_cce6829e4c5e45 593
+  s_4c1397bee7d028::t_782e26ed9368d2 569-570
+  s_4c1397bee7d028::t_677736c5856d4d 23-94
+  s_4c1397bee7d028::t_320bc6b94aadbb 169
+  s_4c1397bee7d028::t_d2fbf43251fbca 396-397,402-403
+  s_4c1397bee7d028::t_1bb2063e901ea3 439,443
+  s_4c1397bee7d028::t_acabc9bbc3f6fc 575,577
+  s_4c1397bee7d028::t_87e7ff276e2307 229
+  s_4c1397bee7d028::t_3019dd362fe8a6 158
+  s_4c1397bee7d028::t_ba2aff26a2b67d 353
+  s_4c1397bee7d028::t_e15dcf9a3d633d 361,363-365,367-369,373,375-381
+  s_4c1397bee7d028::t_01b28dc48a74d8 339
+  s_4c1397bee7d028::t_b7742dc3b9a9cd 345
+  s_4c1397bee7d028::t_f4fb52d3cc43a3 586
+  s_4c1397bee7d028::t_eef3df42ecbc7e 187,189-195
+  s_4c1397bee7d028::t_3f6fe3ae9036b2 179
+src/content/blog/fr/clickjacking.mdx
+  s_4c1397bee7d028::t_c6e592bfa0d277 53
+  s_4c1397bee7d028::t_b8685647493b91 282
+  s_4c1397bee7d028::t_8f97e0cacafa63 114
+  s_4c1397bee7d028::t_a461db64c99978 18
+  s_4c1397bee7d028::t_f15f2da8f36029 1-2,4-9,11,13-17,19-23,25-50,52,54-56,59-73,75-113,116-130,132-146,151,154-170,172-175,177-178,180-183,185,187-201,203,205-207,209-220,223-274,276-278,280-281
+  h_34454149dac528 3,10,12,24,51,57-58,74,115,131,147-150,152-153,171,176,179,184,186,202,204,208,221-222,275,279,283-284
+src/content/blog/en/clickjacking.mdx
+  h_34454149dac528 74
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "9b90453662c45b0a8fa17de95a9ec872a7c6531c",
+  "prompts": {},
+  "humans": {
+    "h_34454149dac528": {
+      "author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_4c1397bee7d028": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "afba82c0-ae3b-4d94-ba60-07d70c38360b",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": null
+    }
+  }
+}
