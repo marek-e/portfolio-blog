@@ -1,0 +1,37 @@
+src/content/blog/en/clickjacking.mdx
+  s_4c1397bee7d028::t_5bf35eb2ac629e 112
+  s_4c1397bee7d028::t_875e2dda70f5ab 167
+  s_4c1397bee7d028::t_0facce18a4ec87 69
+  s_4c1397bee7d028::t_1cea4ab47222dd 14
+  s_4c1397bee7d028::t_d6d953fc0e9ca3 18
+  s_4c1397bee7d028::t_08d95a1218ddc8 147
+  s_4c1397bee7d028::t_32e51407695265 80
+  s_4c1397bee7d028::t_26a1fae2c8be29 104
+  s_4c1397bee7d028::t_1a85b4ff8c9f22 197
+  s_4c1397bee7d028::t_2240da364dbdc0 118
+  s_4c1397bee7d028::t_23906a141bca1c 3
+  h_34454149dac528 145
+  s_4c1397bee7d028::t_598497492db988 113
+  s_4c1397bee7d028::t_ff043fed4780e0 148-150
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "d2323d1cb6bb025d12658a2bdd20dff68a18dfd0",
+  "prompts": {},
+  "humans": {
+    "h_34454149dac528": {
+      "author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_4c1397bee7d028": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "afba82c0-ae3b-4d94-ba60-07d70c38360b",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
