@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "3-git-hygiene": {
+      "source": "marek-e/skill-issues-poc",
+      "sourceType": "github",
+      "skillPath": "skills/3-git-hygiene/SKILL.md",
+      "computedHash": "85e25c93c5f3b7803b6fc1d82b6c6cafb925861244de9fa9956fd244f1fc0e51"
+    }
+  }
+}

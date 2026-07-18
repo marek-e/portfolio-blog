@@ -2,7 +2,7 @@
 title: 'Skill issues: a skill is a binary with a README'
 slug: crafting-a-malicious-skill
 languages: [fr, en]
-status: locked
+status: drafting
 related: [agent-skills-the-missing-piece-of-your-ai-workflow]
 updated: 2026-07-16
 ---
@@ -36,7 +36,7 @@ updated: 2026-07-16
 
 1. Actually read `SKILL.md` — look for `allowed-tools`, `` !`...` ``, agent `permissionMode`
 2. Don’t treat the skills.sh audit badge as a security boundary
-3. Floor for untrusted / third-party skills: `deny: ["Bash(*)"]`, then re-allow narrowly — not the only defense, the one that doesn’t rely on attention or the model
+3. Disable dynamic-context shell execution with `"disableSkillShellExecution": true`; use a full Bash deny or a sandbox when the stronger restriction fits
 
 ## Shape
 
@@ -48,7 +48,7 @@ updated: 2026-07-16
   3. Plain instruction fails (model / permission prompt)
   4. What actually wins (frontmatter + dynamic context); agents if needed
   5. Scanner act: evil warns, stealth aims clean on `npx skills add`
-  6. Payoff: read + don’t trust badge + Bash deny floor
+  6. Payoff: read + don’t trust badge + disable skill shell execution
   7. Mention-only: one-line swap to reverse shell
 
 ## Evidence plan
@@ -72,12 +72,12 @@ updated: 2026-07-16
 
 ## Strongest objection
 
-- **Objection:** Denying `Bash(*)` cripples the agent; reading skills is enough if you’re careful; the registry scan is getting better.
-- **Response:** Reading is necessary and fallible; the badge is a signal not a boundary (show control vs stealth). Bash deny is the floor for *untrusted* skills, then re-allow `Bash(git*)` / `Bash(pnpm*)` — not “live in a cave.” Sandbox / managed settings are additional layers, not substitutes for the claim.
+- **Objection:** Blocking Bash cripples the agent; reading skills is enough if you’re careful; the registry scan is getting better.
+- **Response:** Claude Code can disable only dynamic-context shell execution with `"disableSkillShellExecution": true`, so the defense does not need to remove Bash from normal agent work. Reading remains necessary and fallible; the badge is a signal, not a boundary. A full Bash deny and sandboxing are stronger options for untrusted environments.
 
 ## Payoff
 
-Settings snippet with `deny: ["Bash(*)"]` + narrow re-allows; habit: read before `npx skills add`; treat audit badge as non-blocking signal.
+Settings snippet with `"disableSkillShellExecution": true`; habit: read before `npx skills add`; treat the audit badge as a signal. Explain that `deny: ["Bash(*)"]` blocks all Bash and cannot carry narrower allow exceptions because deny rules always win.
 
 ## Open questions
 
@@ -89,3 +89,4 @@ _None — locked 2026-07-16._
 - 2026-07-16: Finale = scanner-clean harmless PoC + obvious-evil control; RS mention-only
 - 2026-07-16: Payload = Calculator + keystroke 1337 + say; cover = git hygiene; public repo
 - 2026-07-16: Earned ladder A; agents in scope; Bash deny = floor not “only fix”
+- 2026-07-16: Corrected the payoff after checking current docs: `disableSkillShellExecution` targets the vulnerable pre-processor; broad Bash deny cannot be narrowly re-allowed
