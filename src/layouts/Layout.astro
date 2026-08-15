@@ -131,10 +131,18 @@ const enURL = new URL(enPath, Astro.site);
     <ClientRouter />
     <script is:inline>
       function applyStoredTheme() {
-        const theme = localStorage.getItem('theme') || 'system';
+        let stored = localStorage.getItem('theme');
+
+        // Only 'light' and 'dark' are overrides. Anything else (including the
+        // legacy 'system' value) means "follow the OS preference".
+        if (stored !== null && stored !== 'light' && stored !== 'dark') {
+          localStorage.removeItem('theme');
+          stored = null;
+        }
+
         const isDark =
-          theme === 'dark' ||
-          (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+          stored === 'dark' ||
+          (stored === null && window.matchMedia('(prefers-color-scheme: dark)').matches);
         document.documentElement.classList[isDark ? 'add' : 'remove']('dark');
       }
 
