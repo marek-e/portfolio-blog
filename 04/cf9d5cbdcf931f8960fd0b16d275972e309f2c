@@ -1,0 +1,21 @@
+src/components/layout/ModeToggle.tsx
+  s_d8f8cbe2e074e6::t_45fe22125394f0 2,10-13,15-21,24,56-75
+src/layouts/Layout.astro
+  s_d8f8cbe2e074e6::t_6bef1dd0363661 134-142,144-145
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "04cf9d5cbdcf931f8960fd0b16d275972e309f2c",
+  "prompts": {},
+  "sessions": {
+    "s_d8f8cbe2e074e6": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "7787a0ef-5961-4a38-88d1-954bf321c661",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
