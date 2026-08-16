@@ -1,0 +1,25 @@
+.claude/skills/3-git-hygiene/SKILL.md
+  s_26ca4d2b626078::t_94d1fb37d492b4 1-16
+docs/blog-prds/crafting-a-malicious-skill.md
+  s_26ca4d2b626078::t_2708bd3247e529 5,39,51,75-76,80,92
+src/content/blog/en/crafting-a-malicious-skill.mdx
+  s_26ca4d2b626078::t_b033b6be42aca0 1-295
+src/content/blog/fr/crafting-a-malicious-skill.mdx
+  s_26ca4d2b626078::t_c93b2fec57d237 1-118
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "7a35b9d97ba9fd00509bb1d4a4ec3c6a92543271",
+  "prompts": {},
+  "sessions": {
+    "s_26ca4d2b626078": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2a1e440a-6217-4e3a-a76e-3e83faf6a0d5",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
