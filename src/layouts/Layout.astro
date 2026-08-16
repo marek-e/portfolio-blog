@@ -130,6 +130,8 @@ const enURL = new URL(enPath, Astro.site);
 
     <ClientRouter />
     <script is:inline>
+      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
+
       function applyStoredTheme() {
         let stored = localStorage.getItem('theme');
 
@@ -138,9 +140,7 @@ const enURL = new URL(enPath, Astro.site);
           stored = null;
         }
 
-        const isDark =
-          stored === 'dark' ||
-          (stored === null && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        const isDark = stored === 'dark' || (stored === null && systemTheme.matches);
         document.documentElement.classList[isDark ? 'add' : 'remove']('dark');
       }
 
@@ -149,6 +149,9 @@ const enURL = new URL(enPath, Astro.site);
 
       // Reapply theme after View Transitions navigation
       document.addEventListener('astro:after-swap', applyStoredTheme);
+
+      // Follow the OS while no override is stored
+      systemTheme.addEventListener('change', applyStoredTheme);
     </script>
   </head>
   <body class="bg-background text-foreground min-h-dvh antialiased">
