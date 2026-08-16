@@ -1,0 +1,19 @@
+src/pages/[...lang]/blog/[slug].astro
+  s_f18f338f2c2696::t_1a05d653a2eb84 145
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "a38b84b06352ab16d4c3fe6b2a6ef8a04ecc5bde",
+  "prompts": {},
+  "sessions": {
+    "s_f18f338f2c2696": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2c8c04dd-1b8e-4a36-b6df-8ce95b3d45a1",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
