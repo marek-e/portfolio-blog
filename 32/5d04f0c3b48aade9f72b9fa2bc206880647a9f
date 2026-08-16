@@ -1,0 +1,26 @@
+.github/workflows/renovate.yml
+  s_45377a6992caf7::t_3bb81da96cd914 1-28
+docs/adr/0001-dependency-update-automation.md
+  s_45377a6992caf7::t_9a0e918933c590 31,33-35
+  s_45377a6992caf7::t_ee6099148630c4 85-86
+  s_45377a6992caf7::t_06d3a453b29b0a 39,81,84
+  s_45377a6992caf7::t_66bee34e12589f 47
+  s_45377a6992caf7::t_281a7073781868 53-54
+  s_45377a6992caf7::t_209eaed2084a22 62-63
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "325d04f0c3b48aade9f72b9fa2bc206880647a9f",
+  "prompts": {},
+  "sessions": {
+    "s_45377a6992caf7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "ba460141-f412-4e8e-9162-0bfc9ed4af55",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
