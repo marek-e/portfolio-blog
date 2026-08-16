@@ -155,6 +155,9 @@ export const fr: UITranslations = {
     duration: 'Durée',
     pace: 'min/km',
     heartRate: 'bpm',
+    tagLongRun: 'Sortie longue',
+    tagIntervals: 'Fractionné',
+    tagCommute: 'Trajet',
   },
   projectsPage: {
     pageTitle: 'Projets | Marek Elmayan',

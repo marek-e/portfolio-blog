@@ -4,6 +4,7 @@ import type {
   StravaTokenResponse,
   RunningActivity,
   RunningStats,
+  RunType,
 } from '@/types/strava';
 
 const STRAVA_API_BASE = 'https://www.strava.com/api/v3';
@@ -80,6 +81,14 @@ function speedToPace(metersPerSecond: number): string {
   return `${minutes}:${seconds.toString().padStart(2, '0')}`;
 }
 
+function resolveRunType(raw: StravaActivityRaw): RunType {
+  if (raw.workout_type === 1) return 'race';
+  if (raw.workout_type === 2) return 'longRun';
+  if (raw.workout_type === 3) return 'intervals';
+  if (raw.commute) return 'commute';
+  return 'default';
+}
+
 /**
  * Transform raw Strava activity to display format
  */
@@ -97,7 +106,7 @@ function transformActivity(raw: StravaActivityRaw): RunningActivity {
     routePolyline: raw.map?.summary_polyline || undefined,
     stravaUrl: `https://www.strava.com/activities/${raw.id}`,
     kudos: raw.kudos_count,
-    isRace: raw.workout_type === 1,
+    runType: resolveRunType(raw),
     isPB: (raw.pr_count ?? 0) > 0,
   };
 }

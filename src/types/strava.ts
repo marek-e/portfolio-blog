@@ -5,6 +5,7 @@ export interface StravaActivityRaw {
   type: string;
   sport_type: string;
   workout_type?: number; // 0=default, 1=race, 2=long run, 3=workout
+  commute?: boolean;
   pr_count?: number; // number of personal records set
   distance: number; // meters
   moving_time: number; // seconds
@@ -51,6 +52,9 @@ export interface StravaTokenResponse {
   };
 }
 
+// Session category, derived from Strava's workout type and commute flag
+export type RunType = 'race' | 'longRun' | 'intervals' | 'commute' | 'default';
+
 // Transformed types for display
 export interface RunningActivity {
   id: number;
@@ -65,7 +69,7 @@ export interface RunningActivity {
   routePolyline?: string;
   stravaUrl: string;
   kudos: number;
-  isRace: boolean;
+  runType: RunType;
   isPB: boolean;
 }
 

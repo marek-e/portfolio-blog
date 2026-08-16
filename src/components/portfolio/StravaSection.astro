@@ -2,6 +2,9 @@
 import { getRunningActivities, getAthleteStats, STRAVA_ATHLETE_ID } from '@/lib/strava';
 import { ActivityCard } from '@/components/portfolio/ActivityCard';
 import { RaceActivityCard } from '@/components/portfolio/RaceActivityCard';
+import { LongRunActivityCard } from '@/components/portfolio/LongRunActivityCard';
+import { IntervalsActivityCard } from '@/components/portfolio/IntervalsActivityCard';
+import { CommuteActivityCard } from '@/components/portfolio/CommuteActivityCard';
 import { RunningStats } from '@/components/portfolio/RunningStats';
 import { getTranslations, getLangFromUrl } from '@/i18n';
 import type { RunningActivity, RunningStats as RunningStatsType } from '@/types/strava';
@@ -71,8 +74,14 @@ const hasData = activities.length > 0;
           {/* Activities Grid */}
           <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {activities.map((activity) =>
-              activity.isRace ? (
+              activity.runType === 'race' ? (
                 <RaceActivityCard client:visible activity={activity} lang={lang} />
+              ) : activity.runType === 'longRun' ? (
+                <LongRunActivityCard client:visible activity={activity} lang={lang} />
+              ) : activity.runType === 'intervals' ? (
+                <IntervalsActivityCard client:visible activity={activity} lang={lang} />
+              ) : activity.runType === 'commute' ? (
+                <CommuteActivityCard client:visible activity={activity} lang={lang} />
               ) : (
                 <ActivityCard client:visible activity={activity} lang={lang} />
               )
