@@ -1,0 +1,19 @@
+.prettierignore
+  s_5a7b32f8e76d4b::t_83a525cd0d0822 5-7
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "c8966f2581486a9826727216fd7a6255230bb821",
+  "prompts": {},
+  "sessions": {
+    "s_5a7b32f8e76d4b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "994845dc-5b65-4088-ba09-0d508bd64322",
+        "model": "unknown"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
