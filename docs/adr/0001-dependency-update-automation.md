@@ -28,12 +28,15 @@ Secondary facts: package manager is pnpm 9.15 with `lockfileVersion: 9.0`, singl
 
 ## Decision
 
-**Adopt Renovate** (the Mend-hosted GitHub App) for version-update PRs, and **keep Dependabot alerts enabled** for vulnerability reporting.
+**Adopt Renovate, self-hosted as a GitHub Action** (`.github/workflows/renovate.yml`), for version-update PRs, and **keep Dependabot alerts enabled** for vulnerability reporting.
 
-Two things are part of this decision rather than preconditions to be satisfied later:
+Self-hosting was chosen over the Mend-hosted app to avoid granting a third party write access to the repository — the one substantive objection to Renovate raised below. The cost is a fine-grained PAT (`RENOVATE_TOKEN`, scoped to this repo only) that must be rotated before it expires. The default `GITHUB_TOKEN` is deliberately **not** used: pull requests it opens produce workflow runs in an approval-required state, so the `lint` check would never report green on its own and automerge would never fire.
+
+Three things are part of this decision rather than preconditions to be satisfied later:
 
 1. **A `lint` workflow** (`.github/workflows/ci.yml`) running `pnpm lint` and `pnpm format:check` on pull requests. The build is deliberately not duplicated — Cloudflare Pages already covers it — so this exists purely to close the lint gap, which is exactly where an ESLint or Prettier bump would break things.
 2. **`platformAutomerge: false`.** Because `main` has no branch protection, GitHub's native auto-merge would merge immediately rather than waiting on a check that is not required. With platform automerge disabled, Renovate itself waits for `Cloudflare Pages` and `lint` to go green and then merges via the API. This is what makes automerge safe here without imposing branch protection on a solo maintainer's own workflow.
+3. **A 6-hourly cron, not a weekly one.** `renovate.json` restricts _branch creation_ to Monday mornings, but Renovate can only merge an already-green PR while it is running. Self-hosted, that means the cron — not the config — sets how long an approved update waits. A weekly cron would leave automerged bumps sitting until the following Monday.
 
 Shape of the configuration (see `renovate.json`):
 
@@ -41,13 +44,14 @@ Shape of the configuration (see `renovate.json`):
 - `minimumReleaseAge: "14 days"` on anything that automerges, so a compromised release has time to be pulled from the registry before it reaches a build. Given that the security exposure here is supply-chain rather than CVE, this matters more than update latency.
 - Group the dev-tooling tail (eslint/prettier/types/rehype/hast/unist) into one PR; automerge patch and minor.
 - Astro, React, Tailwind and any major: separate PRs, no automerge, reviewed by hand.
-- Weekly schedule rather than daily.
+- Weekly branch creation rather than daily — note this is separate from how often the runner fires (see point 3 above).
 
 ## Consequences
 
 **Positive**
 
-- Automerge is native config, not infrastructure — no bespoke merge workflow to maintain, and no branch protection imposed on the maintainer's own pushes.
+- Automerge is native config, not a bespoke merge workflow, and no branch protection is imposed on the maintainer's own pushes.
+- No third party holds write access. Renovate runs under a token scoped to this repository alone, which keeps the supply-chain surface no wider than Dependabot's.
 - The Dependency Dashboard collapses triage to one issue, which suits low-frequency attention better than a PR queue.
 - One config file (`renovate.json`) covers npm, GitHub Actions and `.node-version` (the `nodenv` manager, on by default) under a single set of grouping and scheduling rules. Dependabot also covers npm and GitHub Actions, so this is a convenience rather than a decisive gap.
 - The new `lint` workflow closes a pre-existing gap that has nothing to do with the bot: until now nothing checked lint or formatting on a pull request, only the build.
@@ -55,7 +59,8 @@ Shape of the configuration (see `renovate.json`):
 **Negative**
 
 - Renovate's configuration surface is large and easy to get subtly wrong; a misgrouped rule can automerge more than intended. Mitigated by starting with `config:best-practices` and adding narrow rules only as needed.
-- It requires installing a third-party GitHub App with write access to the repo. That is itself a supply-chain surface, and a real one to weigh against Dependabot being first-party.
+- Self-hosting means a long-lived credential to own and rotate. `RENOVATE_TOKEN` is a fine-grained PAT limited to this repository, but when it expires Renovate simply stops opening PRs — **a silent failure**, and precisely the "appearance of maintenance" this ADR set out to avoid. Its expiry belongs in a calendar. Registering a dedicated GitHub App and minting short-lived tokens via `actions/create-github-app-token` removes the cliff at the cost of more setup, and is the natural upgrade if the rotation becomes annoying.
+- Renovate now runs in this repo's Actions rather than on Mend's infrastructure: a workflow to maintain and a version to keep current. Free on a public repo, but no longer somebody else's problem.
 - Renovate reads GitHub's vulnerability alerts too, so running both PR-openers would duplicate work. This is an either/or for PRs — alerts stay on regardless of which tool is chosen.
 - `minimumReleaseAge: 14 days` deliberately trades update latency for safety. Fine for a static site; it would be the wrong default for a service.
 
@@ -73,10 +78,12 @@ Rejected, but the gap is much narrower than it once was, and several claims comm
 
 What remains genuinely different:
 
-- **No native automerge.** Merging requires a separate GitHub Actions workflow combining `dependabot/fetch-metadata` with `gh pr merge --auto`. That is a second moving part to write and maintain, and the place where the decision actually turns.
+- **No native automerge.** Merging requires a GitHub Actions workflow combining `dependabot/fetch-metadata` with `gh pr merge --auto` — merge _logic_ that has to be written and maintained, where Renovate's equivalent is four lines of config.
 - **No dependency dashboard equivalent.** Triage happens in the PR list.
 
-Its real advantages — first-party, no third-party app to install, zero infrastructure — are the reason it stays the recommended fallback if automerge is ever abandoned.
+**This margin narrowed once self-hosting was chosen.** The original case against Dependabot leaned on it needing an Actions workflow while Renovate needed none; self-hosted Renovate needs one too. The distinction that survives is what the workflow _contains_ — Dependabot's encodes the merge policy, Renovate's only invokes the tool — plus the Dependency Dashboard. That is a thinner margin than the hosted-app comparison suggested, and it is worth being honest that Dependabot with `groups` and `cooldown` would be a defensible choice here. It would also avoid the `RENOVATE_TOKEN` rotation burden entirely, since Dependabot needs no credential at all.
+
+Its real advantages — first-party, no credential to own, no runner to maintain — make it the natural fallback if the token rotation proves more annoying than the Dashboard is useful.
 
 ### Both tools together
 
