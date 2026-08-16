@@ -86,10 +86,7 @@ const {
 } = project.data;
 
 const statusKey = `status${status.charAt(0).toUpperCase()}${status.slice(1).replace('-', '')}` as
-  | 'statusCompleted'
-  | 'statusInprogress'
-  | 'statusArchived'
-  | 'statusConcept';
+  'statusCompleted' | 'statusInprogress' | 'statusArchived' | 'statusConcept';
 
 // Prepare gallery images with optimized sources
 const galleryImages = gallery?.map((item) => ({

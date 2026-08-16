@@ -24,7 +24,7 @@ The Dantotsu will be written in French and saved in `path/to/dantotsus/` to shar
 
 1. **User-facing perspective**: Start with what the user experienced, not technical details
 2. **Causal chain**: Trace events from user impact back to the faulty code line
-3. **Root cause of occurrence**: The misconception that led to writing faulty code ("The developer thought **_, but actually _**")
+3. **Root cause of occurrence**: The misconception that led to writing faulty code ("The developer thought **\_, but actually _**")
 4. **Detection failure causes**: Why existing safeguards (typing, linting, tests, code review) didn't catch it
 5. **Countermeasure**: The minimal fix that restores functionality
 6. **Eradication**: Preventing similar defects (code patterns, linter config, team training, similar bugs in codebase)
@@ -101,7 +101,7 @@ The Dantotsu will be written in French and saved in `path/to/dantotsus/` to shar
 
    **Root cause analysis & contre-mesures:**
    - **Analyse de l'introduction: Pourquoi la ligne a-t-elle été écrite ?**
-     - Dig deep: "The developer thought **_, but actually _**"
+     - Dig deep: "The developer thought **\_, but actually _**"
      - Use nested bullet points to show reasoning chain
      - Avoid "I wasn't paying attention" - find the real misconception
 

@@ -46,12 +46,12 @@ Pull these from him during drafting (why this topic? any talk/repo/demo of yours
 
 ## 4. Headings: descriptive or question-form, never clever
 
-| Draft (rejected)                                       | Marek's rewrite                            |
-| ------------------------------------------------------ | ------------------------------------------ |
-| Five lines of CSS, one stolen click                     | How Clickjacking works: Five lines of CSS  |
-| The double con                                          | How to keep the victim fooled?             |
-| Three prerequisites — fix one, the attack collapses     | The 3 prerequisites for a successful attack |
-| The fix in thirty seconds                               | Takeaways                                  |
+| Draft (rejected)                                    | Marek's rewrite                             |
+| --------------------------------------------------- | ------------------------------------------- |
+| Five lines of CSS, one stolen click                 | How Clickjacking works: Five lines of CSS   |
+| The double con                                      | How to keep the victim fooled?              |
+| Three prerequisites — fix one, the attack collapses | The 3 prerequisites for a successful attack |
+| The fix in thirty seconds                           | Takeaways                                   |
 
 Patterns: "How X works", question-form H2s, plain nouns ("The defenses", "Takeaways"), digits over spelled-out numbers. No parallelism jokes, no dash-appended punchlines.
 

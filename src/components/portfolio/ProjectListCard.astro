@@ -25,10 +25,7 @@ const projectSlug = getProjectSlug(project.id, lang);
 const projectUrl = translatePath(`/projects/${projectSlug}`);
 
 const statusKey = `status${status.charAt(0).toUpperCase()}${status.slice(1).replace('-', '')}` as
-  | 'statusCompleted'
-  | 'statusInprogress'
-  | 'statusArchived'
-  | 'statusConcept';
+  'statusCompleted' | 'statusInprogress' | 'statusArchived' | 'statusConcept';
 ---
 
 <article class="group h-full">
