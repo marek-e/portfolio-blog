@@ -142,7 +142,7 @@ const readingTime = estimateReadingTime(post.body ?? '');
         <div class="text-muted-foreground flex flex-wrap items-center gap-16 text-sm">
           <time datetime={post.data.publishDate.toISOString()}>
             {t.blog.publishedOn}
-            <span class="font-semibold">{formatDate(post.data.publishDate, lang)}</span>
+            <span class="ml-2 font-semibold">{formatDate(post.data.publishDate, lang)}</span>
           </time>
           <span>{readingTime} {t.blog.minRead}</span>
         </div>
