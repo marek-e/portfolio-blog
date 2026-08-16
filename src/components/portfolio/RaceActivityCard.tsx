@@ -93,10 +93,10 @@ export function RaceActivityCard({ activity, lang = 'fr' }: RaceActivityCardProp
         href={activity.stravaUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="block rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2"
+        className="block h-full rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2"
       >
         <div
-          className="race-card-glow group relative overflow-hidden rounded-xl border border-amber-500/60 p-4 transition-all duration-300 hover:border-amber-400"
+          className="race-card-glow group relative flex h-full flex-col overflow-hidden rounded-xl border border-amber-500/60 p-4 transition-all duration-300 hover:border-amber-400"
           style={{ background: '#100c00' }}
         >
           {CONFETTI_PIECES.map((piece, i) => (
@@ -122,11 +122,11 @@ export function RaceActivityCard({ activity, lang = 'fr' }: RaceActivityCardProp
             />
           ))}
           <div className="relative mb-1 flex items-center justify-between">
+            <p className="text-xs tracking-wide text-amber-400 uppercase">{formattedDate}</p>
             <span className="inline-flex items-center gap-1 rounded-full border border-amber-500/50 bg-[#EFBF04] px-2.5 py-0.5 text-xs font-semibold tracking-widest text-amber-950 uppercase">
               <Icon icon={Award01Icon} size={12} strokeWidth={2} />
               RACE
             </span>
-            <p className="text-xs tracking-wide text-amber-400 uppercase">{formattedDate}</p>
           </div>
 
           <h3 className="mt-0.5 line-clamp-1 text-base font-bold text-amber-100">
@@ -147,7 +147,7 @@ export function RaceActivityCard({ activity, lang = 'fr' }: RaceActivityCardProp
 
           {/* Stats row */}
           <div
-            className={`grid gap-2 border-t border-amber-800/50 pt-2 ${activity.averageHeartRate ? 'grid-cols-4' : 'grid-cols-3'}`}
+            className={`mt-auto grid gap-2 border-t border-amber-800/50 pt-2 ${activity.averageHeartRate ? 'grid-cols-4' : 'grid-cols-3'}`}
           >
             <div className="text-center">
               <div className="mb-1 flex justify-center text-amber-600">

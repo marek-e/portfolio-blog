@@ -142,6 +142,9 @@ export interface UITranslations {
     duration: string;
     pace: string;
     heartRate: string;
+    tagLongRun: string;
+    tagIntervals: string;
+    tagCommute: string;
   };
   projectsPage: {
     pageTitle: string;
