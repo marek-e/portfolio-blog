@@ -1,0 +1,43 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:best-practices"],
+  "timezone": "Europe/Paris",
+  "schedule": ["* 0-6 * * 1"],
+  "automergeSchedule": ["at any time"],
+  "platformAutomerge": false,
+  "minimumReleaseAge": "14 days",
+  "prConcurrentLimit": 5,
+  "packageRules": [
+    {
+      "description": "Dev tooling: one grouped PR, automerged on patch+minor",
+      "matchDepTypes": ["devDependencies"],
+      "matchUpdateTypes": ["patch", "minor"],
+      "groupName": "dev tooling",
+      "automerge": true
+    },
+    {
+      "description": "Frameworks always reviewed by hand",
+      "matchPackageNames": [
+        "astro",
+        "react",
+        "react-dom",
+        "tailwindcss",
+        "@astrojs/**",
+        "@tailwindcss/**",
+        "@types/react",
+        "@types/react-dom"
+      ],
+      "automerge": false
+    },
+    {
+      "description": "Never automerge majors",
+      "matchUpdateTypes": ["major"],
+      "automerge": false
+    },
+    {
+      "description": "Node bumps are manual - Cloudflare builds from .node-version",
+      "matchManagers": ["nodenv"],
+      "automerge": false
+    }
+  ]
+}

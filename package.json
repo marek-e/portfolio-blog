@@ -13,6 +13,7 @@
     "format:check": "prettier --check .",
     "optimize-fonts": "npx glyphhanger --formats=woff2 --subset=/public/fonts/*.woff2"
   },
+  "packageManager": "pnpm@9.15.9",
   "engines": {
     "node": ">=22.12.0"
   },
