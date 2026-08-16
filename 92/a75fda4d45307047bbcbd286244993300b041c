@@ -1,0 +1,19 @@
+src/layouts/Layout.astro
+  s_d8f8cbe2e074e6::t_89fcc1292d696a 133-134,143,152-154
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "92a75fda4d45307047bbcbd286244993300b041c",
+  "prompts": {},
+  "sessions": {
+    "s_d8f8cbe2e074e6": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "7787a0ef-5961-4a38-88d1-954bf321c661",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
