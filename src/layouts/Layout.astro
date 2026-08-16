@@ -133,8 +133,6 @@ const enURL = new URL(enPath, Astro.site);
       function applyStoredTheme() {
         let stored = localStorage.getItem('theme');
 
-        // Only 'light' and 'dark' are overrides. Anything else (including the
-        // legacy 'system' value) means "follow the OS preference".
         if (stored !== null && stored !== 'light' && stored !== 'dark') {
           localStorage.removeItem('theme');
           stored = null;

@@ -12,8 +12,6 @@ export function ModeToggle() {
     const next = isDark ? 'light' : 'dark';
     const system = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 
-    // Only persist an override. Landing back on the system preference clears it,
-    // so the second press returns to following the OS instead of pinning a theme.
     if (next === system) {
       localStorage.removeItem('theme');
     } else {
