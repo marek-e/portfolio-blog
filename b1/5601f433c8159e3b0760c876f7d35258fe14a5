@@ -1,0 +1,42 @@
+.coderabbit.yaml
+  s_45377a6992caf7::t_b4a8e50a8dacaf 1-5
+renovate.json
+  s_45377a6992caf7::t_2100ddfc4034db 1-43
+docs/adr/0001-dependency-update-automation.md
+  s_45377a6992caf7::t_23e9f39b13a7b5 62
+  s_45377a6992caf7::t_549919f3528869 33-36
+  s_45377a6992caf7::t_482cb3217a32c8 53
+  s_45377a6992caf7::t_828df591eabc1c 79
+  s_45377a6992caf7::t_0465d670a0ca33 38
+  s_45377a6992caf7::t_c4b2ba779502ca 17
+  s_45377a6992caf7::t_372eccdd3c3b55 50
+  s_45377a6992caf7::t_6bbbf52710c919 14-16
+  s_45377a6992caf7::t_44ec37875ac82d 18-20,30-32
+  s_45377a6992caf7::t_2300f81aeb5adb 37
+  s_45377a6992caf7::t_42f839766656cb 39-41,47-49
+  s_45377a6992caf7::t_528710a1a9a322 51-52
+  s_45377a6992caf7::t_fb8065c8cc2a8d 54-56,59-61
+  s_45377a6992caf7::t_a54c1d813007e2 63-65,76-78
+  s_45377a6992caf7::t_179c8072d26d34 80-82
+  s_45377a6992caf7::t_974cbfdf39c490 1-13,21-29,42-46,57-58,66-75,83-95
+package.json
+  s_45377a6992caf7::t_2fb88844248b0d 16
+.github/workflows/ci.yml
+  s_45377a6992caf7::t_2190e9d3b867b5 1-20
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "b15601f433c8159e3b0760c876f7d35258fe14a5",
+  "prompts": {},
+  "sessions": {
+    "s_45377a6992caf7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "ba460141-f412-4e8e-9162-0bfc9ed4af55",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
