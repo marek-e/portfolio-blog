@@ -100,8 +100,7 @@ const {
 </style>
 
 <script>
-  // Run immediately (not on DOMContentLoaded) to avoid flash
-  (() => {
+  function initBackgroundImage() {
     const placeholder = document.getElementById('bg-placeholder');
     const images = document.querySelectorAll<HTMLImageElement>('picture img');
 
@@ -118,22 +117,37 @@ const {
     };
 
     images.forEach((img) => {
-      // If already loaded (cached), don't animate - just count it
-      if (img.complete && img.naturalHeight > 0) {
+      // If already settled (cached/preloaded), don't animate - just count it.
+      // Only `complete` is checked: the images are preloaded, so the request
+      // is already settled by the time this deferred script runs, while
+      // decoding="async" leaves naturalHeight at 0 until the decode finishes.
+      // Gating on naturalHeight here sent them down the branch below and left
+      // them waiting on a load event that had already fired - stuck at opacity 0.
+      if (img.complete) {
         loadedCount++;
       } else {
         // Not loaded yet - add loading class for fade effect
         img.classList.add('is-loading');
-        img.addEventListener('load', () => {
+        let counted = false;
+        const markLoaded = () => {
+          if (counted) return;
+          counted = true;
           img.classList.add('loaded');
           loadedCount++;
           if (loadedCount === totalImages) {
             hidePlaceholder();
           }
-        });
+        };
+        img.addEventListener('load', markLoaded, { once: true });
         img.addEventListener('error', () => {
           console.warn('Background image failed to load');
+          markLoaded();
         });
+        // Guard the remaining race: the request can settle between the check
+        // above and the listener being attached.
+        if (img.complete) {
+          markLoaded();
+        }
       }
     });
 
@@ -144,5 +158,12 @@ const {
         placeholder.style.display = 'none';
       }
     }
-  })();
+  }
+
+  // Run immediately (not on DOMContentLoaded) to avoid flash
+  initBackgroundImage();
+
+  // Client-side navigation renders a fresh placeholder over the hero, so the
+  // hide has to run again after every swap.
+  document.addEventListener('astro:after-swap', initBackgroundImage);
 </script>
