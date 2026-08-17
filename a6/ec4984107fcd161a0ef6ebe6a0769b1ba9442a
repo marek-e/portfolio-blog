@@ -1,0 +1,24 @@
+src/components/layout/BackgroundImage.astro
+  s_115bd9d4c3e8b9::t_7b633c37098929 141,144,146-148
+  s_115bd9d4c3e8b9::t_0f8f110dc27a4b 161-168
+  s_115bd9d4c3e8b9::t_620a4795d6f8af 120-126
+  s_115bd9d4c3e8b9::t_9491170d59c151 132,140,149-150
+  s_115bd9d4c3e8b9::t_81b176155603bf 131,133-134
+  s_115bd9d4c3e8b9::t_51074d3761f364 103
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "a6ec4984107fcd161a0ef6ebe6a0769b1ba9442a",
+  "prompts": {},
+  "sessions": {
+    "s_115bd9d4c3e8b9": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "df1b0805-43ad-46bb-b5d5-7ccba2db2aa0",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
