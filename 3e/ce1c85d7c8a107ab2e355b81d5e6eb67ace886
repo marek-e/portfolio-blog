@@ -1,0 +1,91 @@
+src/components/react/world/scenes/IslandScene.ts
+  s_a1cb8e7589e874::t_2c4be90803eacc 132-133
+  s_a1cb8e7589e874::t_8c743c2e1073ac 4,8,10,12-14,18-20,23-24,35-36,38-40,46-47,50-52,59,64,68,72-74,76-77,89-93,95,97-105,109-131,140-148
+  s_a1cb8e7589e874::t_851a27e4dc77e3 63
+  s_a1cb8e7589e874::t_f56a93d57d837f 33,42-44
+  s_a1cb8e7589e874::t_b22ab7d97aac22 5
+  s_a1cb8e7589e874::t_5fc48fb7e187e2 78-88
+  s_a1cb8e7589e874::t_e70c0e78571656 134-139
+  s_a1cb8e7589e874::t_491c0aab339657 45
+src/components/react/world/PropCardOverlay.tsx
+  s_a1cb8e7589e874::t_b1ff838f41ab77 1-8,10-72
+scripts/world-isolation-baseline.json
+  s_a1cb8e7589e874::t_a6047f87e8edf8 4,7-11,13-17
+src/pages/[...lang]/projects/index.astro
+  s_a1cb8e7589e874::t_67bc7dff06fe79 21-23
+  s_a1cb8e7589e874::t_0e1176b058e97b 69-81
+src/components/react/world/scenes/interactions.ts
+  s_a1cb8e7589e874::t_eaf0f35ea09622 1-24,26-37,42-48,60-88,90-91,93-129
+  s_a1cb8e7589e874::t_2dc62ad5a868b9 89,92
+  s_a1cb8e7589e874::t_dd4a7b76fcdfbb 38-41
+  s_a1cb8e7589e874::t_aef540a367d8d8 25
+  s_a1cb8e7589e874::t_1c8d09b7dbcb9e 49-59
+src/i18n/ui.ts
+  s_a1cb8e7589e874::t_00a20ef3d4ab07 154
+src/components/react/world/state.ts
+  s_a1cb8e7589e874::t_2d070cff794f13 1-65
+src/components/react/world/scenes/tiled.ts
+  s_a1cb8e7589e874::t_2510a6fbca36b6 106-136
+src/components/react/world/ProjectsWorld.tsx
+  s_a1cb8e7589e874::t_0137498084aa4a 44-45
+  s_a1cb8e7589e874::t_0559be80e6afa4 10-11
+  s_a1cb8e7589e874::t_83afafea3309ef 71-72,75-81,86-88,91,93,95
+  s_a1cb8e7589e874::t_71e2374b57fe9e 129-134,137-143
+src/components/react/world/bridge.ts
+  s_a1cb8e7589e874::t_cbc36f083a833a 14-16,18-21
+src/i18n/translations/world.ts
+  s_a1cb8e7589e874::t_b3fe355531a868 77-99
+  s_a1cb8e7589e874::t_c3edacca53a916 120-123
+  s_a1cb8e7589e874::t_bebe7384df7ca3 61-64
+  s_a1cb8e7589e874::t_e9270a81850c78 24-28,34-39
+  s_a1cb8e7589e874::t_541f1a38fb35e8 134-156
+  s_a1cb8e7589e874::t_05d1ba825c0ae8 40
+src/components/react/world/WorldHud.tsx
+  s_a1cb8e7589e874::t_d2dc3eea2b310c 6-9,16-20,22-42
+src/i18n/translations/en.ts
+  s_a1cb8e7589e874::t_12dd1871d6e720 166
+src/i18n/translations/fr.ts
+  s_a1cb8e7589e874::t_12dd1871d6e720 167
+docs/feature/projetcts-world/projects-world-prd.md
+  s_a1cb8e7589e874::t_c39211172e4303 322
+  s_a1cb8e7589e874::t_8067a0596e1300 190-199
+src/components/react/world/scenes/HouseScene.ts
+  s_a1cb8e7589e874::t_55603954693554 2-4,7-10,13-17,20-23,29,32-54,66-98,103-111
+  s_a1cb8e7589e874::t_aa5282d82e4388 99-102
+  s_a1cb8e7589e874::t_6ec4f60e75e2ef 31
+src/components/react/world/scenes/WorldSceneBase.ts
+  s_a1cb8e7589e874::t_2eba9655a3e3a4 5,8,28-30,35,37,39,63,74-78,83,89-90,99-102,104-105,107-112,119,154
+  s_a1cb8e7589e874::t_4d25137cb6f438 120-121
+  s_a1cb8e7589e874::t_ec84ba4cf9bbce 36
+  s_a1cb8e7589e874::t_fc6d08a08a8142 92-98
+  s_a1cb8e7589e874::t_83da3551446305 113-118
+  s_a1cb8e7589e874::t_f32557b9e0fe43 50-51
+  s_a1cb8e7589e874::t_16516fee83f570 4
+src/components/react/world/scenes/BootScene.ts
+  s_a1cb8e7589e874::t_42463c6cfad4fe 57-58,60
+  s_a1cb8e7589e874::t_ef5804d0155b14 4
+src/components/react/world/scenes/ambience.ts
+  s_a1cb8e7589e874::t_0df0cf720d9b4a 1-193
+  s_a1cb8e7589e874::t_60b272b60dcbe8 194-204
+src/components/react/world/createGame.ts
+  s_a1cb8e7589e874::t_b466367f91ac41 37-40
+  s_a1cb8e7589e874::t_17282b9b8fb569 10
+src/components/react/world/motion.ts
+  s_a1cb8e7589e874::t_8635af1edabf60 1-6
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "3ece1c85d7c8a107ab2e355b81d5e6eb67ace886",
+  "prompts": {},
+  "sessions": {
+    "s_a1cb8e7589e874": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1db9f4e0-681d-468c-a46f-9f8e52046ab7",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}

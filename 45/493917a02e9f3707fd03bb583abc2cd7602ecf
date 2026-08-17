@@ -1,0 +1,55 @@
+src/components/react/world/Confetti.tsx
+  s_a1cb8e7589e874::t_677f2389df7e19 1-49
+src/components/react/world/WorldHud.tsx
+  s_a1cb8e7589e874::t_18de9bf01c8964 43-50
+  s_a1cb8e7589e874::t_113b953fb52f02 12-13
+  s_a1cb8e7589e874::t_15272d6b97128b 28
+src/components/react/world/scenes/BootScene.ts
+  s_a1cb8e7589e874::t_a83feac2948e34 21-23
+src/components/react/world/GameCanvas.tsx
+  s_a1cb8e7589e874::t_482bc3c4fe43ad 11-12
+  s_a1cb8e7589e874::t_bc3aa3f9036bf4 21
+  s_a1cb8e7589e874::t_dbf44d856ec473 29-38
+  s_a1cb8e7589e874::t_a9c362bc2f5936 51-52
+src/pages/[...lang]/projects/world.astro
+  s_a1cb8e7589e874::t_bd565316ae2ae2 49,55-69
+src/components/react/world/ProjectsWorld.tsx
+  s_a1cb8e7589e874::t_c1b3b4a1bf9a4d 159
+  s_a1cb8e7589e874::t_9c25a39fe9ccf2 10
+  s_a1cb8e7589e874::t_6224fc18d74337 216-221,231-232,242,245-254,257-277,304-307
+  s_a1cb8e7589e874::t_b5399eeba8fe26 33-37
+  s_a1cb8e7589e874::t_eacc11e72ade86 80-82,86,90-105
+  s_a1cb8e7589e874::t_eb47f0e4cb7764 122-123,125-127
+  s_a1cb8e7589e874::t_b43234a11fb0fb 139-146
+  s_a1cb8e7589e874::t_7bab06aedcfd92 54-55,60
+  s_a1cb8e7589e874::t_b34cbe570ba56e 178-195
+  s_a1cb8e7589e874::t_2c2eba67b056d8 106
+  s_a1cb8e7589e874::t_5c439bbee9b719 308-309
+scripts/world-art/generate.mjs
+  s_a1cb8e7589e874::t_2b421624d9de44 391-418
+src/components/react/world/bridge.ts
+  s_a1cb8e7589e874::t_d900d20d369b87 12-13
+src/i18n/translations/world.ts
+  s_a1cb8e7589e874::t_af38cba7d63a75 140-149,151-152
+  s_a1cb8e7589e874::t_c829e30a05d786 21-25,27-28
+  s_a1cb8e7589e874::t_76b79a3fc832a7 67-74,76,78-79
+  s_a1cb8e7589e874::t_7ef95b1617761a 75
+scripts/world-isolation-baseline.json
+  s_a1cb8e7589e874::t_a067b8aef43100 17
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "45493917a02e9f3707fd03bb583abc2cd7602ecf",
+  "prompts": {},
+  "sessions": {
+    "s_a1cb8e7589e874": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1db9f4e0-681d-468c-a46f-9f8e52046ab7",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
