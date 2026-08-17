@@ -1,0 +1,21 @@
+scripts/world-isolation-baseline.json
+  s_79ab9c8078de75::t_3a2a9b9e42145e 3-26
+docs/feature/projetcts-world/projects-world-p0-plan.md
+  s_79ab9c8078de75::t_eadb5c9ec15d01 268
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "988dadf1f95838189aa1d558a2da9d745aa951cc",
+  "prompts": {},
+  "sessions": {
+    "s_79ab9c8078de75": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f2cb91a5-99cd-4396-8695-22d591ed8294",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
