@@ -1,0 +1,41 @@
+src/components/react/world/scenes/BootScene.ts
+  s_a1cb8e7589e874::t_3181addee964d4 22,24
+  s_a1cb8e7589e874::t_3695ca18e75208 30,32
+src/components/react/world/scenes/IslandScene.ts
+  s_a1cb8e7589e874::t_f21a621883c66e 1-2,5-6,8,13-14
+src/components/react/world/scenes/HouseScene.ts
+  s_a1cb8e7589e874::t_cb73ddc1cf2ead 1-21,23-31
+  s_a1cb8e7589e874::t_4c1bcdeb2543b2 22
+scripts/world-isolation-baseline.json
+  s_a1cb8e7589e874::t_24ad74a190cbae 9,13
+src/components/react/world/scenes/tiled.ts
+  s_a1cb8e7589e874::t_fc3d4d293117e8 1-50
+public/world/maps/house.tmj
+  s_a1cb8e7589e874::t_52790f2002393b 1-142
+docs/feature/projetcts-world/projects-world-p0-plan.md
+  s_a1cb8e7589e874::t_7aa91435bd7873 40
+public/world/maps/island.tmj
+  s_a1cb8e7589e874::t_aa54cf8d44589f 106,110,115-137
+  s_a1cb8e7589e874::t_d81a958f2fe715 13
+src/components/react/world/createGame.ts
+  s_a1cb8e7589e874::t_e48f827df24777 11
+  s_a1cb8e7589e874::t_30ca803ad904ed 31
+src/components/react/world/scenes/WorldSceneBase.ts
+  s_a1cb8e7589e874::t_32c089cda96dc1 1-101
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "ac2620f7048439e13ae1b83347ac33c2a6ab1a28",
+  "prompts": {},
+  "sessions": {
+    "s_a1cb8e7589e874": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1db9f4e0-681d-468c-a46f-9f8e52046ab7",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}

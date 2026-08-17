@@ -1,0 +1,50 @@
+src/components/ui/dialog.tsx
+  s_a1cb8e7589e874::t_c06881608cf9c2 3,8-9,11-13,15-17,19-21,23-29,31-34,36-43,45-51,53-68,70-71,73,76-82,85-89,91-99,101-106,108-109,111-117,119-122,124-136
+  s_a1cb8e7589e874::t_7b52515f6fb06a 1-2,4-7,10,14,18,22,30,35,44,52,69,72,74-75,83-84,90,100,107,110,118,123,137
+src/components/react/world/ProjectsWorld.tsx
+  s_a1cb8e7589e874::t_f6085042d0d4e1 34
+  s_a1cb8e7589e874::t_28355de4190f18 64-78
+  s_a1cb8e7589e874::t_4f3d7e7bbcd7cc 108-109
+  s_a1cb8e7589e874::t_e21030d3eec152 8
+scripts/world-isolation-baseline.json
+  s_a1cb8e7589e874::t_2ec1a0c99f8abe 4-5,7-11,13-17
+src/i18n/translations/world.ts
+  s_a1cb8e7589e874::t_da0ff5f5159379 50-60
+  s_a1cb8e7589e874::t_4a792b14a8527f 82-90
+  s_a1cb8e7589e874::t_faa595f4ba7c8a 25-28
+src/components/react/world/scenes/IslandScene.ts
+  s_a1cb8e7589e874::t_743cc4a8d7b47d 1-3,6-18,22-24,27-29,35,38-98
+public/world/maps/island.tmj
+  s_a1cb8e7589e874::t_d051524b84335b 13
+  s_a1cb8e7589e874::t_62c5aa843c9f61 138-165
+src/components/react/world/ProjectCardOverlay.tsx
+  s_a1cb8e7589e874::t_2e5e32559f7bc6 1-6,8-81
+  s_a1cb8e7589e874::t_a2990c212cb654 7
+src/components/react/world/scenes/tiled.ts
+  s_a1cb8e7589e874::t_863ff53507f2ac 24-34,41-44
+  s_a1cb8e7589e874::t_7ec4acf170b8ff 45,57-77
+  s_a1cb8e7589e874::t_7ce655bd288043 46
+src/components/react/world/scenes/WorldSceneBase.ts
+  s_a1cb8e7589e874::t_dcae314a0812d5 28,34
+  s_a1cb8e7589e874::t_19747163d5728a 56
+src/components/react/world/scenes/HouseScene.ts
+  s_a1cb8e7589e874::t_f85799231e5379 16
+docs/feature/projetcts-world/projects-world-p0-plan.md
+  s_a1cb8e7589e874::t_dc7ae89e615694 41
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "afacc3025e9ab44bf5397b683c570d28500bfe8b",
+  "prompts": {},
+  "sessions": {
+    "s_a1cb8e7589e874": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1db9f4e0-681d-468c-a46f-9f8e52046ab7",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}

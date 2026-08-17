@@ -1,0 +1,32 @@
+src/components/portfolio/StravaSection.astro
+  s_1005447721ad33::t_16141acd2ae4fb 86
+src/components/portfolio/RaceActivityCard.tsx
+  s_1005447721ad33::t_16141acd2ae4fb 106-121,131,138,149,151,176-181
+.deepsec/deepsec.config.ts
+  s_1005447721ad33::t_16141acd2ae4fb 1,5
+.deepsec/data/astro-perso-website/SETUP.md
+  s_1005447721ad33::t_16141acd2ae4fb 28
+docs/feature/projetcts-world/projects-world-prd.md
+  s_1005447721ad33::t_16141acd2ae4fb 3-8,16,33,39-57,82,91,107,111-112,114-116,130,177-184,205-216,224-225,229,233,236-237,241,250,252,292-298,306,317-321,327-334,347,392,405-412
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.9",
+  "base_commit_sha": "c105ca2cfcce0070209e7181a14d8e69722499db",
+  "prompts": {},
+  "humans": {
+    "h_34454149dac528": {
+      "author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_1005447721ad33": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e38d6c2f-5af7-4701-a9b9-0939fee1a41f",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}

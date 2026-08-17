@@ -1,0 +1,47 @@
+src/components/react/world/scenes/IslandScene.ts
+  s_a1cb8e7589e874::t_83380d64d569f3 2-6,9-10,13-15,21-22,24,26-65
+src/components/react/world/input/types.ts
+  s_a1cb8e7589e874::t_6fc7ff5773f2d8 1-27
+src/components/react/world/input/keyboardSource.ts
+  s_a1cb8e7589e874::t_d2990bd8c26985 1-13,18,25-53,55-101
+  s_a1cb8e7589e874::t_6a8e6fa06ebce0 54
+  s_a1cb8e7589e874::t_d7948649cbab62 14-17,19-24
+src/components/react/world/GameCanvas.tsx
+  s_a1cb8e7589e874::t_c3feef82b1b0d4 19,29,37
+  s_a1cb8e7589e874::t_3365e7a30bc6cd 4,8
+src/components/react/world/scenes/BootScene.ts
+  s_a1cb8e7589e874::t_caf27a3a3de352 22
+src/components/react/world/createGame.ts
+  s_a1cb8e7589e874::t_c88899946dfe8c 38-43
+  s_a1cb8e7589e874::t_171c32dd7affa4 8-9,13-20,28,32-35
+  s_a1cb8e7589e874::t_c08620c4f71429 21
+public/world/maps/island.tmj
+  s_a1cb8e7589e874::t_84eabbad4396c8 1-119
+src/components/react/world/ProjectsWorld.tsx
+  s_a1cb8e7589e874::t_bf56a3edfd0791 90
+  s_a1cb8e7589e874::t_7f7e5a4aa566f2 5-6
+  s_a1cb8e7589e874::t_c522720ab14ea8 57-62
+  s_a1cb8e7589e874::t_af198a44ca3bd9 79-81
+  s_a1cb8e7589e874::t_659e7cb5d2b5a4 37
+src/components/react/world/input/manager.ts
+  s_a1cb8e7589e874::t_7a54d2382a164f 1-4,8-77
+  s_a1cb8e7589e874::t_630107d84c972b 5-7
+docs/feature/projetcts-world/projects-world-p0-plan.md
+  s_a1cb8e7589e874::t_a24a0ade3bed73 39
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "0108a0a43352d8af6f40899b15b00f5a0910495e",
+  "prompts": {},
+  "sessions": {
+    "s_a1cb8e7589e874": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1db9f4e0-681d-468c-a46f-9f8e52046ab7",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
