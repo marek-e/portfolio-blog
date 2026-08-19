@@ -1,0 +1,19 @@
+src/components/layout/BackgroundImage.astro
+  s_bc03f77a3ab411::t_2fb9d349143127 121-125
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "15c6ddda12d8eefcd8af58a12b36111c6df667d5",
+  "prompts": {},
+  "sessions": {
+    "s_bc03f77a3ab411": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "484ec293-fb5b-484f-9f2e-9592541cc290",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
