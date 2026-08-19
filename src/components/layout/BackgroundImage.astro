@@ -118,8 +118,11 @@ const {
     };
 
     images.forEach((img) => {
-      // If already loaded (cached), don't animate - just count it
-      if (img.complete && img.naturalHeight > 0) {
+      // If already loaded (cached or preloaded), don't animate - just count it.
+      // Checking naturalHeight here would be wrong: a preloaded image reports
+      // complete before it has finished decoding, and its load event has
+      // already fired, so a listener attached now would never run.
+      if (img.complete) {
         loadedCount++;
       } else {
         // Not loaded yet - add loading class for fade effect
