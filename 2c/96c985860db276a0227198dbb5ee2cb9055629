@@ -1,0 +1,103 @@
+src/components/layout/Navbar.astro
+  s_a0e46f02350a51::t_00fd442b0c2c73 5,7,12,25,28
+src/components/portfolio/TimelineCards.tsx
+  s_a0e46f02350a51::t_a05183c4ca011e 181-182,191-192
+  s_a0e46f02350a51::t_db781848274ec7 144,154,303
+src/types/timeline.ts
+  s_a0e46f02350a51::t_a05183c4ca011e 12-13
+public/_headers
+  s_a0e46f02350a51::t_44d99a29fb7659 28-32,37-47
+  s_a0e46f02350a51::t_25d1e8bea421b0 48
+.claude/launch.json
+  s_a0e46f02350a51::t_1b06cce2c987ec 7-9,11-20
+astro.config.mjs
+  s_a0e46f02350a51::t_5039f1a9f78fcc 26-27
+  s_a0e46f02350a51::t_db88fae6a8a35b 23-25
+src/styles/global.css
+  s_a0e46f02350a51::t_88bf603f649aa6 537
+  s_a0e46f02350a51::t_1091701e683691 4-7,52-55
+  s_a0e46f02350a51::t_e614c4b824cf39 58-60,108-109,175,430
+src/components/portfolio/CopyEmailButton.tsx
+  s_a0e46f02350a51::t_b373a382396e0a 12,15-18,33
+src/components/portfolio/LongRunActivityCard.tsx
+  s_a0e46f02350a51::t_bbd93561b4ed6c 59
+src/components/mdx/Citation.tsx
+  s_a0e46f02350a51::t_1cfc7852d6ed82 42
+  s_a0e46f02350a51::t_811a0fa6fcf6af 25
+src/data/timeline.ts
+  s_a0e46f02350a51::t_a05183c4ca011e 10,28,52,74,97,142
+src/i18n/translations/en.ts
+  s_a0e46f02350a51::t_1cfc7852d6ed82 26
+  s_a0e46f02350a51::t_6c7371aa198fe1 90-91
+src/i18n/translations/fr.ts
+  s_a0e46f02350a51::t_6c7371aa198fe1 90-91
+  s_a0e46f02350a51::t_1cfc7852d6ed82 26
+src/components/layout/ModeToggle.tsx
+  s_d8f8cbe2e074e6::t_45fe22125394f0 60
+src/components/portfolio/DevIdCard/index.tsx
+  s_a0e46f02350a51::t_b68357569d503e 92-93,95-96,99-100
+src/components/portfolio/StravaSection.astro
+  s_a0e46f02350a51::t_1cfc7852d6ed82 97
+src/components/layout/AnimatedLogo.astro
+  s_a0e46f02350a51::t_61aa2bfc372e3c 1-42,44-47,49-51,54-55,58-59,62-63,66-99
+  s_a0e46f02350a51::t_5039f1a9f78fcc 43,48,52-53,56-57,60-61,64-65
+src/components/layout/Footer.astro
+  s_a0e46f02350a51::t_bbd93561b4ed6c 44
+src/components/portfolio/ContactSection.astro
+  s_a0e46f02350a51::t_b373a382396e0a 33
+src/components/portfolio/DevIdCard/constants.tsx
+  s_a0e46f02350a51::t_b2075bb4f2f381 61-65
+  s_a0e46f02350a51::t_5039f1a9f78fcc 11-19,23-31,35-43,47-55,59-60,66-67
+src/components/mdx/Link.tsx
+  s_a0e46f02350a51::t_575348897bf76c 18
+src/components/portfolio/ActivityCard.tsx
+  s_a0e46f02350a51::t_df7c9140049daa 67,116
+src/components/portfolio/CV.astro
+  s_a0e46f02350a51::t_8796894d8081c0 80
+src/components/portfolio/DevIdCard/CardTitle.tsx
+  s_a0e46f02350a51::t_3e11a99ae6406b 18
+src/components/portfolio/DevIdCard/StatusBadge.tsx
+  s_a0e46f02350a51::t_32850a7d0c55c6 7
+src/components/portfolio/FeaturedProjects.astro
+  s_a0e46f02350a51::t_b2ec5dc0509d75 63,87
+src/components/portfolio/ProjectCardReact.tsx
+  s_a0e46f02350a51::t_12277c45754e0e 105
+src/components/portfolio/RunningStats.tsx
+  s_a0e46f02350a51::t_9318efdf8322f7 162
+src/components/ui/badge.tsx
+  s_a0e46f02350a51::t_03abe85ad88900 18
+src/components/ui/button.tsx
+  s_a0e46f02350a51::t_6aa08c252d1d4a 23
+src/components/ui/field.tsx
+  s_a0e46f02350a51::t_a729afd5eb7c7e 127
+src/pages/[...lang]/blog/[slug].astro
+  s_a0e46f02350a51::t_da17d93f4eaf8e 127,153,158
+src/pages/[...lang]/blog/index.astro
+  s_a0e46f02350a51::t_6697d6f483154a 58,104
+src/pages/[...lang]/projects/index.astro
+  s_a0e46f02350a51::t_2d67021423862d 55
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "2c96c985860db276a0227198dbb5ee2cb9055629",
+  "prompts": {},
+  "sessions": {
+    "s_a0e46f02350a51": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8ad2a42c-cd6a-4be8-ae6a-84319a2fee42",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    },
+    "s_d8f8cbe2e074e6": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "7787a0ef-5961-4a38-88d1-954bf321c661",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
