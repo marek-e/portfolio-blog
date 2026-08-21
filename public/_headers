@@ -32,7 +32,11 @@
   Cache-Control: public, max-age=2592000
 
 # Images with moderate cache
-/bg-*.webp
+/bg-*-v3.webp
+  ! Cache-Control
+  Cache-Control: public, max-age=2592000, immutable
+
+/bg-*-v3.jpg
   ! Cache-Control
   Cache-Control: public, max-age=2592000, immutable
 
@@ -66,7 +70,7 @@
 
 /favicon.svg
   ! Cache-Control
-  Cache-Control: public, max-age=2592000, immutable
+  Cache-Control: public, max-age=2592000
 
 # HTML pages - no cache to ensure fresh content on deploys
 /*.html
