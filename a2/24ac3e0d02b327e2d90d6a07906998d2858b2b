@@ -1,0 +1,19 @@
+public/_headers
+  s_197b3aee1b4034::t_1dc31e07d2d817 17-19
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "a224ac3e0d02b327e2d90d6a07906998d2858b2b",
+  "prompts": {},
+  "sessions": {
+    "s_197b3aee1b4034": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "71586884-1f57-4679-9834-619fdd07bbc7",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
