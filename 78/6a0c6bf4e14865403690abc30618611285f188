@@ -1,0 +1,21 @@
+public/_headers
+  s_a0e46f02350a51::t_953832d5b0b615 22,27,31-32,36,40,44,48,52,56,61,65
+src/i18n/ui.ts
+  s_a0e46f02350a51::t_c32ef97d09b772 79-80
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "786a0c6bf4e14865403690abc30618611285f188",
+  "prompts": {},
+  "sessions": {
+    "s_a0e46f02350a51": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8ad2a42c-cd6a-4be8-ae6a-84319a2fee42",
+        "model": "unknown"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
