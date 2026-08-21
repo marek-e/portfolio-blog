@@ -99,12 +99,13 @@ type CardContent = {
 // That gradient is why every text element lives inside COLUMN_WIDTH - past it
 // the veil thins and the floors below stop holding. Measured across the whole
 // column, so they hold whatever the headline length pushes the layout to, and
-// with the background darkened by the JPEG encoder's worst observed deviation
-// so they hold on every shipped card rather than on a clean render:
-//   #17130f headline/name -> 11.21:1 (needs 4.5)
-//   #4a4038 tagline/meta  ->  6.12:1 (needs 4.5)
-//   #7a3c00 pill labels   ->  5.15:1 (needs 4.5)
-//   #a85200 kicker        ->  3.29:1 (needs 3.0, 28px bold)
+// with the background darkened by the worst deviation measured between a
+// clean render and the bytes actually served (the JPEG encoder, plus the CDN's
+// own re-encode), so they hold on the deployed card and not just locally:
+//   #17130f headline/name -> 11.09:1 (needs 4.5)
+//   #4a4038 tagline/meta  ->  6.06:1 (needs 4.5)
+//   #7a3c00 pill labels   ->  5.10:1 (needs 4.5)
+//   #a85200 kicker        ->  3.26:1 (needs 3.0, 28px bold) <- tightest
 // Re-measure before widening the column, softening the veil, or swapping the
 // artwork for something brighter.
 const COLUMN_WIDTH = 840;

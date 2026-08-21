@@ -15,7 +15,7 @@ const { title, description, image, imageAlt } = Astro.props;
 
 // Social platforms read this out to screen-reader users in place of the card.
 // The title is the card's dominant content, so it is the right fallback.
-const socialImageAlt = imageAlt ?? title;
+const socialImageAlt = imageAlt || title;
 
 const lang = getLangFromUrl(Astro.url);
 
