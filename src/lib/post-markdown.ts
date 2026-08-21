@@ -311,6 +311,12 @@ export function postToMarkdown(post: BlogPost, options: PostToMarkdownOptions): 
   let body = (post.body ?? '').replace(/^---\n[\s\S]*?\n---\n/, '');
 
   body = protectFencedCode(body, store);
+
+  // Ahead of protectInlineCode: a chart written on one line is a backtick span as
+  // far as that pass is concerned, and protecting it first hides the chart from
+  // transformMermaid, leaving handleUnknownComponents to discard the diagram
+  body = transformMermaid(body, store);
+
   body = protectInlineCode(body, store);
 
   // Imports only live at the top level, and code samples containing them are protected by now
@@ -321,7 +327,6 @@ export function postToMarkdown(post: BlogPost, options: PostToMarkdownOptions): 
     .replace(/^[ \t]*\{\/\*[\s\S]*?\*\/\}[ \t]*\n/gm, '')
     .replace(/\{\/\*[\s\S]*?\*\/\}/g, '');
 
-  body = transformMermaid(body, store);
   body = transformFigure(body, options.lang);
   body = transformMediaElements(body, options.lang);
   body = transformCallouts(body);

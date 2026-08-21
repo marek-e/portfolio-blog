@@ -11,6 +11,13 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { cn } from '@/lib/utils';
 
+/**
+ * Whether the clipboard accepts a ClipboardItem, which is what allows the write
+ * to be issued synchronously with data that is still in flight.
+ */
+const supportsPromisedClipboardItem = () =>
+  typeof ClipboardItem !== 'undefined' && typeof navigator.clipboard?.write === 'function';
+
 interface PostActionsMenuProps {
   /** URL of the post's generated markdown file, e.g. /blog/my-post.md */
   copyUrl: string;
@@ -38,29 +45,48 @@ export function PostActionsMenu({
   const markdown = useRef<Promise<string> | null>(null);
 
   /**
-   * Fetching before the click keeps the clipboard write inside the click's
-   * user-activation window, which Safari revokes across a slow await. Doing it
-   * on mount instead would cost every reader a request they never use.
+   * Warms the cache on hover, focus or menu open so the copy is instant. Only an
+   * optimization — the click path below stays correct on a cold cache, which is
+   * what a tap gets, having none of a pointer's lead time.
    */
   const prefetch = () => {
     markdown.current ??= fetch(copyUrl).then((response) => {
       if (!response.ok) throw new Error(`Could not fetch ${copyUrl}: ${response.status}`);
       return response.text();
     });
+    return markdown.current;
   };
 
-  const handleCopy = async () => {
-    prefetch();
+  const handleCopy = () => {
+    const pending = prefetch();
 
-    try {
-      await navigator.clipboard.writeText(await markdown.current!);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch {
-      // A failed fetch or a blocked clipboard leaves the item idle, and drops
-      // the rejected promise so the next click starts over
-      markdown.current = null;
-    }
+    // The clipboard is handed the pending promise rather than an awaited value:
+    // Safari treats an await inside the handler as the end of the click's user
+    // activation and rejects the write that follows.
+    const written = supportsPromisedClipboardItem()
+      ? navigator.clipboard
+          .write([
+            new ClipboardItem({
+              'text/plain': pending.then((text) => new Blob([text], { type: 'text/plain' })),
+            }),
+          ])
+          // Browsers that take a ClipboardItem but not a promised value reject
+          // here. They are also the ones lenient about activation, so awaiting
+          // the text and writing it plainly still works.
+          .catch(() => pending.then((text) => navigator.clipboard.writeText(text)))
+      : pending.then((text) => navigator.clipboard.writeText(text));
+
+    written.then(
+      () => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      },
+      () => {
+        // A failed fetch or a blocked clipboard leaves the item idle, and drops
+        // the rejected promise so the next click starts over
+        markdown.current = null;
+      }
+    );
   };
 
   return (
