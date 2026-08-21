@@ -1,0 +1,19 @@
+public/_headers
+  s_5d215c28e3d1c9::t_2cf8cb28c5402e 51-63
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "7bebcb18c7663e38a0965e62da3e462ba9e9e8b9",
+  "prompts": {},
+  "sessions": {
+    "s_5d215c28e3d1c9": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d9806f21-33b7-47ee-ae1f-7d4d11d6f1aa",
+        "model": "unknown"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
