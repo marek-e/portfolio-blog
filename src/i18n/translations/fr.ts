@@ -87,6 +87,8 @@ export const fr: UITranslations = {
     sendEmail: 'Envoyer un email',
     followOn: 'Suivre sur {platform}',
     subscribeRss: "S'abonner au flux RSS",
+    homeLink: "Marek Elmayan - retour à l'accueil",
+    copyEmail: "Copier l'adresse email",
   },
   designSystem: {
     pageTitle: 'Design System | melmayan.fr',

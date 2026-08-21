@@ -14,27 +14,63 @@
   Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://cloudflareinsights.com; frame-ancestors 'self'; base-uri 'self'; form-action 'self'
 
   # Performance & Caching
+  # HTML routes land here on purpose. Astro emits pretty URLs (/contact/), and
+  # _headers matches the request path, so no *.html pattern can ever target a
+  # page. A deploy is therefore visible after at most an hour.
   Cache-Control: public, max-age=3600, must-revalidate
 
 # Immutable hashed assets in /_astro/ directory
 # Vite content-hashes ensure cache-busting on changes
 /_astro/*
+  ! Cache-Control
   Cache-Control: public, max-age=31536000, immutable
 
 # Web fonts with long cache
 /_astro/*.woff2
+  ! Cache-Control
   Cache-Control: public, max-age=31536000, immutable
 
+/fonts/*
+  ! Cache-Control
+  Cache-Control: public, max-age=2592000
+
 # Images with moderate cache
-/bg-*.webp
+/bg-*-v3.webp
+  ! Cache-Control
   Cache-Control: public, max-age=2592000, immutable
+
+/bg-*-v3.jpg
+  ! Cache-Control
+  Cache-Control: public, max-age=2592000, immutable
+
+/images/*
+  ! Cache-Control
+  Cache-Control: public, max-age=2592000
+
+/icons/*
+  ! Cache-Control
+  Cache-Control: public, max-age=2592000
+
+/flags/*
+  ! Cache-Control
+  Cache-Control: public, max-age=2592000
+
+/projects/*.svg
+  ! Cache-Control
+  Cache-Control: public, max-age=2592000
+
+/projects/*.png
+  ! Cache-Control
+  Cache-Control: public, max-age=2592000
+
+/projects/*.mp4
+  ! Cache-Control
+  Cache-Control: public, max-age=2592000
+
+/projects/*.mov
+  ! Cache-Control
+  Cache-Control: public, max-age=2592000
 
 /favicon.svg
-  Cache-Control: public, max-age=2592000, immutable
-
-# HTML pages - no cache to ensure fresh content on deploys
-/*.html
-  Cache-Control: public, max-age=0, must-revalidate, no-cache
-
-/index.html
-  Cache-Control: public, max-age=0, must-revalidate, no-cache
+  ! Cache-Control
+  Cache-Control: public, max-age=2592000

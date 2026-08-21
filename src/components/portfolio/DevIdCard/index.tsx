@@ -90,9 +90,12 @@ export function DevIdCard({ lang }: DevIdCardProps) {
               {/* Portrait */}
               <div className="border-primary/30 bg-muted hidden w-32 shrink-0 items-center justify-center overflow-hidden rounded-lg border-2 md:flex md:w-40">
                 <img
-                  src="/images/portrait.png"
+                  src="/images/portrait-160.webp"
+                  srcSet="/images/portrait-160.webp 1x, /images/portrait.webp 2x"
                   alt="Portrait"
                   aria-hidden="true"
+                  width={160}
+                  height={240}
                   className="h-full w-full object-contain p-2"
                   loading="lazy"
                 />

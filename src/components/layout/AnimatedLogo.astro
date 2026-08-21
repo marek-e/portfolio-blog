@@ -1,0 +1,83 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+
+const pieces = [
+  { fill: '#F67280', x: -200, y: 150, rotate: -25 },
+  { fill: '#C06C84', x: 200, y: 150, rotate: 25 },
+  { fill: '#355C7D', x: 300, y: 0, rotate: 0 },
+  { fill: '#355C7D', x: 300, y: 0, rotate: 0 },
+  { fill: '#355C7D', x: 250, y: 0, rotate: 0 },
+  { fill: '#6C5B7B', x: 0, y: -200, rotate: 0 },
+];
+
+const from = (i: number) => {
+  const p = pieces[i];
+  return `--from: translate(${p.x}px, ${p.y}px) rotate(${p.rotate}deg); --delay: ${(i * 0.08).toFixed(2)}s;`;
+};
+---
+
+<svg
+  width="1146"
+  height="820"
+  viewBox="-40 -40 1146 820"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  class:list={['logo', className]}
+  aria-hidden="true"
+>
+  <g transform="matrix(0.866025 0.5 -0.530526 0.847668 395.259 1)">
+    <rect width="220" height="743.147" rx="110" fill={pieces[0].fill} style={from(0)}></rect>
+  </g>
+
+  <g transform="matrix(0.866025 0.5 -0.530526 0.847668 654.315 0)">
+    <rect width="220" height="667.582" rx="110" fill={pieces[1].fill} style={from(1)}></rect>
+  </g>
+
+  <rect x="584" y="40" width="440" height="220" rx="110" fill={pieces[2].fill} style={from(2)}
+  ></rect>
+
+  <rect x="584" y="480" width="440" height="220" rx="110" fill={pieces[3].fill} style={from(3)}
+  ></rect>
+
+  <rect x="803.76" y="260" width="220" height="220" rx="110" fill={pieces[4].fill} style={from(4)}
+  ></rect>
+
+  <rect x="583.76" y="40" width="220" height="660" rx="110" fill={pieces[5].fill} style={from(5)}
+  ></rect>
+</svg>
+
+<style>
+  .logo rect {
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .logo {
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    :global(a:hover) > .logo {
+      transform: scale(1.1) rotate(-3deg);
+    }
+
+    .logo rect {
+      animation: logo-piece-in 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) var(--delay) both;
+    }
+
+    @keyframes logo-piece-in {
+      from {
+        opacity: 0;
+        transform: var(--from);
+      }
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  }
+</style>

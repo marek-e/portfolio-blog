@@ -9,6 +9,7 @@ export interface TimelineEntry {
   endDate: string | null;
   description: string;
   logo?: string;
+  logoWidth?: number;
   logoInverted?: boolean;
   tags?: string[];
   link?: string;

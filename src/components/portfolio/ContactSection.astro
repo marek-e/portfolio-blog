@@ -30,7 +30,7 @@ const t = getTranslations(lang);
         {t.contact.cta}
         <HugeiconsIcon icon={Sent02Icon} className="size-5" data-icon="inline-start" />
       </Link>
-      <CopyEmailButton copiedText={t.contact.copied} client:load />
+      <CopyEmailButton copiedText={t.contact.copied} copyLabel={t.aria.copyEmail} client:load />
     </div>
     <p class="text-muted-foreground mx-auto mb-8 max-w-lg text-lg">
       {t.contact.socialIntro}

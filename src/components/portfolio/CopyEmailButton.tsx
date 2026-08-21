@@ -9,9 +9,13 @@ import { EMAIL } from '@/lib/socials';
 
 interface CopyEmailButtonProps {
   copiedText?: string;
+  copyLabel?: string;
 }
 
-export function CopyEmailButton({ copiedText = 'Copied!' }: CopyEmailButtonProps) {
+export function CopyEmailButton({
+  copiedText = 'Copied!',
+  copyLabel = 'Copy email address',
+}: CopyEmailButtonProps) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
@@ -26,7 +30,7 @@ export function CopyEmailButton({ copiedText = 'Copied!' }: CopyEmailButtonProps
       size="lg"
       className="w-3/4 cursor-pointer md:w-auto"
       onClick={handleCopy}
-      aria-label={copied ? 'Email copied' : 'Copy email'}
+      aria-label={`${copied ? copiedText : copyLabel} ${EMAIL}`}
     >
       <span
         className={cn(

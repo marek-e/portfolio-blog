@@ -7,6 +7,7 @@ interface TimelineEntryWithTranslations {
   startDate: string;
   endDate: string | null;
   logo?: string;
+  logoWidth?: number;
   tags?: string[];
   logoInverted?: boolean;
   link?: string;
@@ -24,6 +25,7 @@ const timelineDataWithTranslations: TimelineEntryWithTranslations[] = [
     endDate: null,
     tags: ['React', 'TypeScript', 'Node.js', 'AWS', 'Agile'],
     logo: '/icons/theodo_logo.svg',
+    logoWidth: 149,
     link: 'https://www.theodo.fr',
     translations: {
       fr: {
@@ -47,6 +49,7 @@ const timelineDataWithTranslations: TimelineEntryWithTranslations[] = [
     endDate: '2023-06',
     tags: ['Algorithms', 'Computer Science', 'Applied Mathematics'],
     logo: '/icons/ensimag_logo.png',
+    logoWidth: 93,
     link: 'https://ensimag.grenoble-inp.fr',
     translations: {
       fr: {
@@ -68,6 +71,7 @@ const timelineDataWithTranslations: TimelineEntryWithTranslations[] = [
     endDate: '2022-12',
     tags: ['Exchange', 'International'],
     logo: '/icons/aalto_logo.png',
+    logoWidth: 36,
     logoInverted: true,
     link: 'https://www.aalto.fi',
     translations: {
@@ -90,6 +94,7 @@ const timelineDataWithTranslations: TimelineEntryWithTranslations[] = [
     endDate: '2021-08',
     tags: ['Python', 'Power Apps', 'Automation'],
     logo: '/icons/se_logo.png',
+    logoWidth: 107,
     link: 'https://www.se.com',
     translations: {
       fr: {
@@ -134,6 +139,7 @@ export function getLocalizedTimeline(lang: Lang): TimelineEntry[] {
     startDate: entry.startDate,
     endDate: entry.endDate,
     logo: entry.logo,
+    logoWidth: entry.logoWidth,
     logoInverted: entry.logoInverted,
     tags: entry.tags,
     link: entry.link,

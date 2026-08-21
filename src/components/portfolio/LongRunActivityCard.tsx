@@ -56,7 +56,7 @@ export function LongRunActivityCard({ activity, lang = 'fr' }: LongRunActivityCa
               <Icon icon={Calendar01Icon} size={14} strokeWidth={2} />
               {formattedDate}
             </p>
-            <span className="inline-flex items-center rounded-full bg-emerald-600 px-2.5 py-0.5 text-xs font-semibold tracking-widest text-white uppercase dark:bg-emerald-500 dark:text-emerald-950">
+            <span className="inline-flex items-center rounded-full bg-emerald-700 px-2.5 py-0.5 text-xs font-semibold tracking-widest text-white uppercase dark:bg-emerald-500 dark:text-emerald-950">
               {t.strava.tagLongRun}
             </span>
           </div>
