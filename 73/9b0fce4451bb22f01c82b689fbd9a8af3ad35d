@@ -1,0 +1,35 @@
+src/layouts/Layout.astro
+  s_ae6aafd35278bf::t_f1ebc169d47d46 26
+src/lib/og-image.tsx
+  s_ae6aafd35278bf::t_78c5bc600631d8 101-107,319-323
+src/pages/[...lang]/blog/[slug].astro
+  s_ae6aafd35278bf::t_e41ab7d267bab8 70
+src/pages/[...lang]/blog/[slug]/og.jpg.ts
+  s_ae6aafd35278bf::t_5c25ae56c8a5b6 38,40,42
+src/pages/[...lang]/blog/index.astro
+  s_ae6aafd35278bf::t_6933da2436fe5c 31
+src/pages/en/og-image.jpg.ts
+  s_ae6aafd35278bf::t_7268560f767428 4,6,8
+src/pages/en/og-image_blog.jpg.ts
+  s_ae6aafd35278bf::t_741a005cc11807 4,6,8
+src/pages/og-image.jpg.ts
+  s_ae6aafd35278bf::t_43971ffea587cc 4,6,8
+src/pages/og-image_blog.jpg.ts
+  s_ae6aafd35278bf::t_a1041d151d560b 4,6,8
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "739b0fce4451bb22f01c82b689fbd9a8af3ad35d",
+  "prompts": {},
+  "sessions": {
+    "s_ae6aafd35278bf": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "4772fd40-59e4-4ac5-bbe8-34d4e121e189",
+        "model": "unknown"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
