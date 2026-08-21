@@ -1,0 +1,26 @@
+src/layouts/Layout.astro
+  s_ae6aafd35278bf::t_525a08d3ac7785 11,14-18,70,78
+src/lib/og-image.tsx
+  s_ae6aafd35278bf::t_8035ec11d7d1f2 42-44,46-47,52
+  s_ae6aafd35278bf::t_06647d5235299a 94-97,102-105,107,128,131-135
+  s_ae6aafd35278bf::t_01518e42c002ba 101,106,108
+  s_ae6aafd35278bf::t_41f32cf71f01b5 5-6,14-15,17,19-25,27,30,33,36-41,45,48-51,55
+  s_ae6aafd35278bf::t_e3460248367853 81-85,88,90-92,98-100,110-114,124,141-167,169,171-174,177,183-185,189-198,203-206,209
+  s_ae6aafd35278bf::t_39f493340aad28 93,109
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "e8a9a970dc4f650394bf1570f9423edaa4e70c5c",
+  "prompts": {},
+  "sessions": {
+    "s_ae6aafd35278bf": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "4772fd40-59e4-4ac5-bbe8-34d4e121e189",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
