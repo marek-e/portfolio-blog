@@ -1,0 +1,42 @@
+public/_headers
+  s_5d215c28e3d1c9::t_9f8dac3420e684 41-49
+src/i18n/translations/fr.ts
+  s_5d215c28e3d1c9::t_4a0722ec147b73 122-123
+src/i18n/translations/en.ts
+  s_5d215c28e3d1c9::t_2e17ec5289a583 121-122
+src/pages/[...lang]/blog/[slug].astro
+  s_5d215c28e3d1c9::t_530c7b5eb3e78d 126-131,133-145
+  s_5d215c28e3d1c9::t_ff7e982f50df9d 25,66
+  s_5d215c28e3d1c9::t_9bdc33261744f9 161
+src/pages/[...lang]/blog/[slug].md.ts
+  s_5d215c28e3d1c9::t_205514fef91339 21-40,42
+  s_5d215c28e3d1c9::t_086391fe0d526e 1-20,41,43-63
+src/i18n/ui.ts
+  s_5d215c28e3d1c9::t_4a0722ec147b73 110-111
+src/components/blog/CopyMarkdownButton.tsx
+  s_5d215c28e3d1c9::t_3e639926a335f7 1-75
+src/lib/post-markdown.ts
+  s_5d215c28e3d1c9::t_877263e3982459 164
+  s_5d215c28e3d1c9::t_b1d08675c1aa8e 246-247
+  s_5d215c28e3d1c9::t_87d05ddbd01694 319-323
+  s_5d215c28e3d1c9::t_5d844824ddea63 173-178,181,183-186
+  s_5d215c28e3d1c9::t_c04e7f2d1ff02b 122-123
+  s_5d215c28e3d1c9::t_33884853512124 136-142,144-150,152-156
+  s_5d215c28e3d1c9::t_2d151aac624f79 1-121,124-135,143,151,157-163,165-172,179-180,182,187-245,248-318,324-346
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "567ec64ed500610339c5fe3d3aa44eed5747d942",
+  "prompts": {},
+  "sessions": {
+    "s_5d215c28e3d1c9": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d9806f21-33b7-47ee-ae1f-7d4d11d6f1aa",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
