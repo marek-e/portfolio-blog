@@ -109,11 +109,6 @@ function protectFencedCode(source: string, store: VerbatimStore): string {
   return output.join('\n');
 }
 
-/** Protect inline code spans, kept to a single line so multi-line JSX template literals survive */
-function protectInlineCode(source: string, store: VerbatimStore): string {
-  return source.replace(/(`+)([^\n]*?)\1/g, (match) => store.protect(match));
-}
-
 function getAttribute(attributes: string, name: string): string | undefined {
   return attributes.match(new RegExp(`\\b${name}="([^"]*)"`))?.[1];
 }
@@ -134,16 +129,30 @@ function blockquote(text: string): string {
 }
 
 /**
- * `<Mermaid chart={`...`} title caption />` becomes a mermaid fence.
+ * Turns `<Mermaid chart={`...`} title caption />` into a mermaid fence, and
+ * protects inline code spans, in a single left-to-right scan.
  *
- * The match is anchored on the chart's template literal rather than on the
- * first `/>`: charts contain `<br/>` for line breaks inside diagram labels, so
- * a lazy `[\s\S]*?\/>` would stop there and leak the rest of the element.
+ * The two belong in one pass because either construct can contain the other's
+ * opening delimiter: a chart written on one line is a backtick span as far as
+ * inline code is concerned, while a code span is exactly where a post writes a
+ * literal `<Mermaid />` example it does not want rendered. Running either pass
+ * first corrupts the other's input, so whichever one opens earlier in the source
+ * wins the overlap — which is the reading a human gives it too.
+ *
+ * The Mermaid alternative is anchored on the chart's template literal rather
+ * than on the first `/>`: charts contain `<br/>` for line breaks inside diagram
+ * labels, so a lazy `[\s\S]*?\/>` would stop there and leak the rest of the
+ * element. Inline code stays single-line so multi-line JSX template literals
+ * survive it.
  */
-function transformMermaid(source: string, store: VerbatimStore): string {
+function transformMermaidAndProtectInlineCode(source: string, store: VerbatimStore): string {
   return source.replace(
-    /<Mermaid\b([^`>]*)chart=\{`([\s\S]*?)`\}([^>]*?)\/>/g,
-    (_match, before: string, chart: string, after: string) => {
+    /<Mermaid\b([^`>]*)chart=\{`([\s\S]*?)`\}([^>]*?)\/>|(`+)[^\n]*?\4/g,
+    (match, before: string, chart: string | undefined, after: string) => {
+      // No chart means the inline-code alternative matched, so the span — Mermaid
+      // example and all — is held back verbatim instead of transformed
+      if (chart === undefined) return store.protect(match);
+
       const attributes = `${before} ${after}`;
       const title = getAttribute(attributes, 'title');
       const caption = getAttribute(attributes, 'caption');
@@ -311,13 +320,7 @@ export function postToMarkdown(post: BlogPost, options: PostToMarkdownOptions): 
   let body = (post.body ?? '').replace(/^---\n[\s\S]*?\n---\n/, '');
 
   body = protectFencedCode(body, store);
-
-  // Ahead of protectInlineCode: a chart written on one line is a backtick span as
-  // far as that pass is concerned, and protecting it first hides the chart from
-  // transformMermaid, leaving handleUnknownComponents to discard the diagram
-  body = transformMermaid(body, store);
-
-  body = protectInlineCode(body, store);
+  body = transformMermaidAndProtectInlineCode(body, store);
 
   // Imports only live at the top level, and code samples containing them are protected by now
   body = body.replace(/^(?:import|export)\s[^\n]*\n/gm, '');

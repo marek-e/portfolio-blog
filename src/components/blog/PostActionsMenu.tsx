@@ -18,6 +18,31 @@ import { cn } from '@/lib/utils';
 const supportsPromisedClipboardItem = () =>
   typeof ClipboardItem !== 'undefined' && typeof navigator.clipboard?.write === 'function';
 
+/**
+ * Copies markdown that has not arrived yet. The clipboard is handed the pending
+ * promise rather than an awaited value: Safari treats an await inside the click
+ * handler as the end of the click's user activation and rejects the write that
+ * follows, whereas a ClipboardItem built on a promise is accepted there.
+ */
+function writeWhilePending(pending: Promise<string>): Promise<void> {
+  if (!supportsPromisedClipboardItem()) {
+    return pending.then((text) => navigator.clipboard.writeText(text));
+  }
+
+  return (
+    navigator.clipboard
+      .write([
+        new ClipboardItem({
+          'text/plain': pending.then((text) => new Blob([text], { type: 'text/plain' })),
+        }),
+      ])
+      // Browsers that take a ClipboardItem but not a promised value reject here.
+      // They are also the ones lenient about activation, so awaiting the text and
+      // writing it plainly still works.
+      .catch(() => pending.then((text) => navigator.clipboard.writeText(text)))
+  );
+}
+
 interface PostActionsMenuProps {
   /** URL of the post's generated markdown file, e.g. /blog/my-post.md */
   copyUrl: string;
@@ -42,7 +67,8 @@ export function PostActionsMenu({
   rssLabel,
 }: PostActionsMenuProps) {
   const [copied, setCopied] = useState(false);
-  const markdown = useRef<Promise<string> | null>(null);
+  const pending = useRef<Promise<string> | null>(null);
+  const markdown = useRef<string | null>(null);
 
   /**
    * Warms the cache on hover, focus or menu open so the copy is instant. Only an
@@ -50,51 +76,56 @@ export function PostActionsMenu({
    * what a tap gets, having none of a pointer's lead time.
    */
   const prefetch = () => {
-    markdown.current ??= fetch(copyUrl).then((response) => {
-      if (!response.ok) throw new Error(`Could not fetch ${copyUrl}: ${response.status}`);
-      return response.text();
-    });
-    return markdown.current;
+    pending.current ??= fetch(copyUrl)
+      .then((response) => {
+        if (!response.ok) throw new Error(`Could not fetch ${copyUrl}: ${response.status}`);
+        return response.text();
+      })
+      .then((text) => {
+        // Kept as a resolved string so a click that follows needs no await at all
+        markdown.current = text;
+        return text;
+      })
+      .catch((error: unknown) => {
+        // Dropped rather than cached, so the next click retries instead of
+        // replaying the failure
+        pending.current = null;
+        throw error;
+      });
+    return pending.current;
   };
 
-  const handleCopy = () => {
-    const pending = prefetch();
+  /**
+   * Warming only. The rejection is swallowed here so a hover over a post whose
+   * markdown is missing stays silent; the click path still sees the failure.
+   */
+  const warm = () => void prefetch().catch(() => {});
 
-    // The clipboard is handed the pending promise rather than an awaited value:
-    // Safari treats an await inside the handler as the end of the click's user
-    // activation and rejects the write that follows.
-    const written = supportsPromisedClipboardItem()
-      ? navigator.clipboard
-          .write([
-            new ClipboardItem({
-              'text/plain': pending.then((text) => new Blob([text], { type: 'text/plain' })),
-            }),
-          ])
-          // Browsers that take a ClipboardItem but not a promised value reject
-          // here. They are also the ones lenient about activation, so awaiting
-          // the text and writing it plainly still works.
-          .catch(() => pending.then((text) => navigator.clipboard.writeText(text)))
-      : pending.then((text) => navigator.clipboard.writeText(text));
+  const handleCopy = () => {
+    // Warm is the common case, prefetch having run on hover, focus or open. The
+    // write is then issued straight from the click, with no promise in the way
+    // for a browser to weigh against the gesture that asked for it.
+    const written =
+      markdown.current === null
+        ? writeWhilePending(prefetch())
+        : navigator.clipboard.writeText(markdown.current);
 
     written.then(
       () => {
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
       },
-      () => {
-        // A failed fetch or a blocked clipboard leaves the item idle, and drops
-        // the rejected promise so the next click starts over
-        markdown.current = null;
-      }
+      // A failed fetch or a blocked clipboard leaves the item idle
+      () => setCopied(false)
     );
   };
 
   return (
-    <DropdownMenu onOpenChange={(open) => open && prefetch()}>
+    <DropdownMenu onOpenChange={(open) => open && warm()}>
       <DropdownMenuTrigger
         aria-label={triggerLabel}
-        onPointerEnter={prefetch}
-        onFocus={prefetch}
+        onPointerEnter={warm}
+        onFocus={warm}
         className="group text-muted-foreground hover:text-primary data-popup-open:text-primary flex shrink-0 cursor-pointer items-center rounded-md border border-transparent px-3 py-1.5 text-sm transition-colors hover:border-current data-popup-open:border-current"
       >
         <HugeiconsIcon icon={MoreHorizontalIcon} strokeWidth={2} className="size-4" />
