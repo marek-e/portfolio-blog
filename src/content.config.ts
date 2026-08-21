@@ -46,6 +46,8 @@ const blog = defineCollection({
     updatedDate: z.coerce.date().optional(),
     tags: z.array(z.string()).default([]),
     draft: z.boolean().default(false),
+    // Offer the post as markdown: the header action and the /blog/<slug>.md file
+    copyMarkdown: z.boolean().default(true),
   }),
 });
 

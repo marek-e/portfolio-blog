@@ -78,6 +78,7 @@ export interface UITranslations {
     subscribeRss: string;
     homeLink: string;
     copyEmail: string;
+    postActions: string;
   };
   designSystem: {
     pageTitle: string;

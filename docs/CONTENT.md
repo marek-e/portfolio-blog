@@ -29,8 +29,12 @@ publishDate: 2024-01-15
 updatedDate: 2024-01-20
 tags: ['astro', 'react', 'tutorial']
 draft: false
+copyMarkdown: true
 ---
 ```
+
+`copyMarkdown` defaults to `true`. Set it to `false` to drop the post's
+"copy as markdown" header action and stop generating its `/blog/<slug>.md` file.
 
 ## File Naming
 

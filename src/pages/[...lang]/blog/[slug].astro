@@ -22,7 +22,7 @@ import { formatDate, estimateReadingTime, getTagColor } from '@/lib/blog';
 import { Icon } from '@/components/shared/Icon';
 import { ArrowLeft02Icon, HomeIcon, Link02Icon, RssIcon } from '@hugeicons/core-free-icons';
 import { Link } from '@/components/ui/button';
-import { CopyMarkdownButton } from '@/components/blog/CopyMarkdownButton';
+import { PostActionsMenu } from '@/components/blog/PostActionsMenu';
 
 type BlogPost = Awaited<ReturnType<typeof getCollection<'blog'>>>[number];
 
@@ -64,6 +64,7 @@ const { Content } = await render(post);
 
 const readingTime = estimateReadingTime(post.body ?? '');
 const slug = post.id.split('/').pop();
+const rssUrl = lang === 'fr' ? '/rss.xml' : '/en/rss.xml';
 ---
 
 <Layout
@@ -123,26 +124,34 @@ const slug = post.id.split('/').pop();
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
-      <div class="flex shrink-0 items-center gap-1">
-        <CopyMarkdownButton
-          url={translatePath(`/blog/${slug}.md`)}
-          label={t.blog.copyMarkdown}
-          copiedLabel={t.blog.copied}
-          client:load
-        />
-        <a
-          href={lang === 'fr' ? '/rss.xml' : '/en/rss.xml'}
-          aria-label={t.aria.subscribeRss}
-          class="group text-muted-foreground hover:text-primary flex shrink-0 items-center gap-2 rounded-md border border-transparent px-3 py-1.5 text-sm transition-colors hover:border-current"
-        >
-          <Icon
-            icon={RssIcon}
-            strokeWidth={2}
-            className="group-hover:animate-wiggle size-4 transition-transform duration-300"
+      {
+        /* Both actions share a menu, unless the post opts out of the markdown
+           copy — a single-item dropdown is worse than the plain RSS link */
+        post.data.copyMarkdown ? (
+          <PostActionsMenu
+            copyUrl={translatePath(`/blog/${slug}.md`)}
+            rssUrl={rssUrl}
+            triggerLabel={t.aria.postActions}
+            copyLabel={t.blog.copyMarkdown}
+            copiedLabel={t.blog.copied}
+            rssLabel={t.aria.subscribeRss}
+            client:load
           />
-          <span class="hidden sm:inline">RSS</span>
-        </a>
-      </div>
+        ) : (
+          <a
+            href={rssUrl}
+            aria-label={t.aria.subscribeRss}
+            class="group text-muted-foreground hover:text-primary flex shrink-0 items-center gap-2 rounded-md border border-transparent px-3 py-1.5 text-sm transition-colors hover:border-current"
+          >
+            <Icon
+              icon={RssIcon}
+              strokeWidth={2}
+              className="group-hover:animate-wiggle size-4 transition-transform duration-300"
+            />
+            <span class="hidden sm:inline">RSS</span>
+          </a>
+        )
+      }
     </div>
 
     <div class="bg-primary/80 mb-6 h-0.5 w-8 rounded-full"></div>

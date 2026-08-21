@@ -17,30 +17,35 @@ type StaticPaths = {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const posts = await getCollection('blog');
-  const staticPaths: StaticPaths[] = [];
+  const bySlug = (lang: string) =>
+    new Map(
+      posts
+        .filter((post) => post.id.startsWith(`${lang}/`))
+        .map((post) => [post.id.split('/')[1], post])
+    );
 
-  const postsByLang = (lang: string) => posts.filter((post) => post.id.startsWith(`${lang}/`));
-  const frenchPosts = postsByLang('fr');
+  const englishPosts = bySlug('en');
+  const frenchPosts = bySlug('fr');
+  const routes: StaticPaths[] = [];
 
-  postsByLang('en').forEach((post) => {
-    staticPaths.push({ params: { lang: 'en', slug: post.id.split('/')[1] }, props: { post } });
+  englishPosts.forEach((post, slug) => {
+    routes.push({ params: { lang: 'en', slug }, props: { post } });
   });
 
   // The default locale is unprefixed. Unlike the sibling routes, which push both
-  // translations at the same path and let Astro drop one, the French post is
-  // picked explicitly and English is only a fallback for untranslated posts —
-  // so this file's markdown always matches the HTML served at the same slug.
-  const translatedSlugs = new Set(frenchPosts.map((post) => post.id.split('/')[1]));
-  const defaultLocalePosts = [
-    ...frenchPosts,
-    ...postsByLang('en').filter((post) => !translatedSlugs.has(post.id.split('/')[1])),
-  ];
-
-  defaultLocalePosts.forEach((post) => {
-    staticPaths.push({ params: { lang: undefined, slug: post.id.split('/')[1] }, props: { post } });
+  // translations at the same path and let Astro drop one, the post serving the
+  // route is chosen explicitly — French where it exists, English as a fallback
+  // for untranslated posts — so the markdown always matches the HTML there.
+  new Set([...frenchPosts.keys(), ...englishPosts.keys()]).forEach((slug) => {
+    const post = frenchPosts.get(slug) ?? englishPosts.get(slug)!;
+    routes.push({ params: { lang: undefined, slug }, props: { post } });
   });
 
-  return staticPaths;
+  // Opting out drops the file entirely, so a post's prose is not left sitting at
+  // a public URL once the header action is taken away. This is filtered after the
+  // route's post is resolved: opting out of a translation must not promote the
+  // other language into its slot.
+  return routes.filter((route) => route.props.post.data.copyMarkdown);
 };
 
 type Props = {
