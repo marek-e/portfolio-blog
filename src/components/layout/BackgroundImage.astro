@@ -117,35 +117,39 @@ const {
       }
     };
 
+    const countLoaded = () => {
+      loadedCount++;
+      if (loadedCount === totalImages) {
+        hidePlaceholder();
+      }
+    };
+
     images.forEach((img) => {
       // If already loaded (cached or preloaded), don't animate - just count it.
-      // Checking naturalHeight here would be wrong: a preloaded image reports
-      // complete before it has finished decoding, and its load event has
-      // already fired, so a listener attached now would never run.
+      // We can't listen for load on the element itself: it has already fired,
+      // so a listener attached now would never run. naturalWidth is no help
+      // either - a preloaded image reports complete before it has decoded, so
+      // it reads 0 for a pending image and for a broken one alike. A throwaway
+      // probe on the same URL answers from cache and tells them apart, so the
+      // placeholder stays up when the image really did fail.
       if (img.complete) {
-        loadedCount++;
+        const probe = new Image();
+        probe.addEventListener('load', countLoaded);
+        probe.addEventListener('error', () => {
+          console.warn('Background image failed to load');
+        });
+        probe.src = img.currentSrc || img.src;
       } else {
         // Not loaded yet - add loading class for fade effect
         img.classList.add('is-loading');
         img.addEventListener('load', () => {
           img.classList.add('loaded');
-          loadedCount++;
-          if (loadedCount === totalImages) {
-            hidePlaceholder();
-          }
+          countLoaded();
         });
         img.addEventListener('error', () => {
           console.warn('Background image failed to load');
         });
       }
     });
-
-    // If all images are already loaded (cached), hide placeholder immediately
-    if (loadedCount === totalImages) {
-      if (placeholder) {
-        placeholder.style.opacity = '0';
-        placeholder.style.display = 'none';
-      }
-    }
   })();
 </script>

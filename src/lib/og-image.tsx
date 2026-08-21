@@ -9,25 +9,33 @@ type BlogPost = CollectionEntry<'blog'>;
 let geistRegular: ArrayBuffer | null = null;
 let geistBold: ArrayBuffer | null = null;
 
-// Cache the background in memory to avoid re-encoding it for every post
-let background: string | null = null;
+// Cache the background in memory to avoid re-encoding it for every post.
+// The in-flight promise is cached too, so posts generated concurrently share a
+// single read + resize instead of each starting its own.
+let backgroundPromise: Promise<string> | null = null;
 
 // Read the hero background from disk (not from the deployed site) so builds
 // don't depend on the asset already being live
-async function loadBackground() {
-  if (background) {
-    return background;
+function loadBackground() {
+  if (!backgroundPromise) {
+    backgroundPromise = encodeBackground().catch((error) => {
+      // Drop the rejected promise so a later call can retry
+      backgroundPromise = null;
+      throw error;
+    });
   }
 
+  return backgroundPromise;
+}
+
+async function encodeBackground() {
   const source = await readFile('public/bg-light-v2.jpg');
   const resized = await sharp(source)
     .resize(1200, 630, { fit: 'cover' })
     .jpeg({ quality: 80 })
     .toBuffer();
 
-  background = `data:image/jpeg;base64,${resized.toString('base64')}`;
-
-  return background;
+  return `data:image/jpeg;base64,${resized.toString('base64')}`;
 }
 
 async function loadFonts() {
