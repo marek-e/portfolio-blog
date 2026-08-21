@@ -1,0 +1,19 @@
+src/components/portfolio/StravaSection.astro
+  s_28c1bfaa6e47c5::t_c9fa48f2b97994 97
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "ed0e6ec9a819ba80cb7acb3f6abdd98a41975170",
+  "prompts": {},
+  "sessions": {
+    "s_28c1bfaa6e47c5": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "62edb7ce-e643-42de-86c1-46fc63419fb4",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
