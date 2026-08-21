@@ -29,7 +29,7 @@ function loadBackground() {
 }
 
 async function encodeBackground() {
-  const source = await readFile('public/bg-light-v2.jpg');
+  const source = await readFile('public/bg-light-v3.jpg');
   const resized = await sharp(source)
     .resize(1200, 630, { fit: 'cover' })
     .jpeg({ quality: 80 })

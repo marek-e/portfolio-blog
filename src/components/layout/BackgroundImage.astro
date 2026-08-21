@@ -9,8 +9,8 @@ interface Props {
 }
 
 const {
-  lightSrc = '/bg-light-v2.webp',
-  darkSrc = '/bg-dark-v2.webp',
+  lightSrc = '/bg-light-v3.webp',
+  darkSrc = '/bg-dark-v3.webp',
   lightAlt = 'Wide valley at sunrise with green hills, wildflowers in the foreground, and tall rocky cliffs on both sides, softly lit by warm sunlight and light mist.',
   darkAlt = 'Moonlit valley at night with rolling hills, mist over the grass, wildflowers in the foreground, tall cliffs on both sides, and a bright full moon in a starry sky.',
 } = Astro.props;
@@ -40,7 +40,7 @@ const {
     sizes="100vw"
     alt={lightAlt}
     width={2048}
-    height={1136}
+    height={1143}
     class="h-full w-full object-cover"
     fetchpriority="high"
     decoding="async"
@@ -54,7 +54,7 @@ const {
     sizes="100vw"
     alt={darkAlt}
     width={2048}
-    height={1136}
+    height={1143}
     class="h-full w-full object-cover"
     fetchpriority="high"
     decoding="async"
