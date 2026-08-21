@@ -109,6 +109,8 @@ export interface UITranslations {
     updatedOn: string;
     minRead: string;
     noPosts: string;
+    copyMarkdown: string;
+    copied: string;
   };
   devCard: {
     cardTitle: string;

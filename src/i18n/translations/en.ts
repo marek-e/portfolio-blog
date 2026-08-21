@@ -120,6 +120,8 @@ export const en: UITranslations = {
     updatedOn: 'Updated on',
     minRead: 'min read',
     noPosts: 'No posts yet. Check back soon!',
+    copyMarkdown: 'Copy as Markdown',
+    copied: 'Copied!',
   },
   devCard: {
     cardTitle: 'Developer ID Card',

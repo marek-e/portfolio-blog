@@ -121,6 +121,8 @@ export const fr: UITranslations = {
     updatedOn: 'Mis à jour le',
     minRead: 'min de lecture',
     noPosts: "Pas encore d'articles. Revenez bientôt !",
+    copyMarkdown: 'Copier en Markdown',
+    copied: 'Copié !',
   },
   devCard: {
     cardTitle: 'Carte de développeur',
