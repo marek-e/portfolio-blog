@@ -32,8 +32,11 @@ const {
   fetchpriority="high"
 />
 
-<!-- Background Images with responsive srcset -->
-<picture class="absolute inset-0 -z-10 dark:hidden">
+<!-- Background Images with responsive srcset.
+     z-0, not -z-10: a negative z-index would paint the artwork behind the
+     opaque bg-background on <body>, hiding it completely. z-0 keeps it above
+     that and below both the spotlight glow (z-1) and the page content (z-10). -->
+<picture class="absolute inset-0 z-0 dark:hidden">
   <Image
     src={lightSrc}
     srcset={`${lightSrc} 2048w`}
@@ -47,7 +50,7 @@ const {
     loading="eager"
   />
 </picture>
-<picture class="absolute inset-0 -z-10 hidden dark:block">
+<picture class="absolute inset-0 z-0 hidden dark:block">
   <Image
     src={darkSrc}
     srcset={`${darkSrc} 2048w`}
@@ -64,7 +67,7 @@ const {
 
 <!-- Low-quality placeholder overlay (fades out when image loads) -->
 <div
-  class="from-primary/20 via-secondary/10 to-primary/20 dark:from-primary/30 dark:via-secondary/20 dark:to-primary/30 absolute inset-0 -z-10 bg-linear-to-br opacity-100 transition-opacity duration-1000"
+  class="from-primary/20 via-secondary/10 to-primary/20 dark:from-primary/30 dark:via-secondary/20 dark:to-primary/30 absolute inset-0 z-0 bg-linear-to-br opacity-100 transition-opacity duration-1000"
   id="bg-placeholder"
 >
 </div>
