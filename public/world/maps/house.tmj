@@ -1,0 +1,270 @@
+{
+  "type": "map",
+  "version": "1.10",
+  "tiledversion": "1.10.2",
+  "orientation": "orthogonal",
+  "renderorder": "right-down",
+  "infinite": false,
+  "width": 48,
+  "height": 32,
+  "tilewidth": 32,
+  "tileheight": 32,
+  "nextlayerid": 3,
+  "nextobjectid": 16,
+  "tilesets": [],
+  "layers": [
+    {
+      "type": "objectgroup",
+      "id": 1,
+      "name": "collision",
+      "opacity": 1,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "draworder": "topdown",
+      "objects": [
+        {
+          "id": 1,
+          "name": "wall-north",
+          "type": "",
+          "x": 0,
+          "y": 0,
+          "width": 1536,
+          "height": 96,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 2,
+          "name": "wall-west",
+          "type": "",
+          "x": 0,
+          "y": 96,
+          "width": 32,
+          "height": 928,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 3,
+          "name": "wall-east",
+          "type": "",
+          "x": 1504,
+          "y": 96,
+          "width": 32,
+          "height": 928,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 4,
+          "name": "wall-south-west",
+          "type": "",
+          "x": 32,
+          "y": 992,
+          "width": 672,
+          "height": 32,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 5,
+          "name": "wall-south-east",
+          "type": "",
+          "x": 832,
+          "y": 992,
+          "width": 672,
+          "height": 32,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 6,
+          "name": "bed",
+          "type": "",
+          "x": 128,
+          "y": 128,
+          "width": 224,
+          "height": 320,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 7,
+          "name": "desk",
+          "type": "",
+          "x": 600,
+          "y": 145,
+          "width": 300,
+          "height": 190,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 8,
+          "name": "bookshelf",
+          "type": "",
+          "x": 1365,
+          "y": 270,
+          "width": 110,
+          "height": 300,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 9,
+          "name": "plant-sw",
+          "type": "",
+          "x": 40,
+          "y": 890,
+          "width": 90,
+          "height": 90,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 10,
+          "name": "plant-ne",
+          "type": "",
+          "x": 1256,
+          "y": 60,
+          "width": 90,
+          "height": 100,
+          "rotation": 0,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "type": "objectgroup",
+      "id": 2,
+      "name": "zones",
+      "opacity": 1,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "draworder": "topdown",
+      "objects": [
+        {
+          "id": 11,
+          "name": "bed",
+          "type": "spawn",
+          "point": true,
+          "x": 460,
+          "y": 560,
+          "width": 0,
+          "height": 0,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 12,
+          "name": "front-door",
+          "type": "door",
+          "x": 704,
+          "y": 976,
+          "width": 128,
+          "height": 48,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "target",
+              "type": "string",
+              "value": "island"
+            },
+            {
+              "name": "spawn",
+              "type": "string",
+              "value": "outside-front-door"
+            }
+          ]
+        },
+        {
+          "id": 13,
+          "name": "desk",
+          "type": "prop",
+          "x": 560,
+          "y": 105,
+          "width": 380,
+          "height": 270,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "id",
+              "type": "string",
+              "value": "desk"
+            },
+            {
+              "name": "promptOffsetX",
+              "type": "int",
+              "value": 0
+            },
+            {
+              "name": "promptOffsetY",
+              "type": "int",
+              "value": -140
+            }
+          ]
+        },
+        {
+          "id": 14,
+          "name": "bookshelf",
+          "type": "prop",
+          "x": 1325,
+          "y": 230,
+          "width": 190,
+          "height": 380,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "id",
+              "type": "string",
+              "value": "bookshelf"
+            },
+            {
+              "name": "promptOffsetX",
+              "type": "int",
+              "value": 0
+            },
+            {
+              "name": "promptOffsetY",
+              "type": "int",
+              "value": -200
+            }
+          ]
+        },
+        {
+          "id": 15,
+          "name": "shoes",
+          "type": "prop",
+          "x": 815,
+          "y": 865,
+          "width": 170,
+          "height": 130,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "id",
+              "type": "string",
+              "value": "shoes"
+            },
+            {
+              "name": "promptOffsetX",
+              "type": "int",
+              "value": 0
+            },
+            {
+              "name": "promptOffsetY",
+              "type": "int",
+              "value": -80
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

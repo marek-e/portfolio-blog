@@ -31,6 +31,10 @@ export default defineConfig({
             if (id.includes('node_modules/katex')) {
               return 'katex-vendor';
             }
+            // Phaser only ever loads on the world route, behind a dynamic import
+            if (id.includes('node_modules/phaser')) {
+              return 'phaser-vendor';
+            }
             // Let Rollup handle React, base-ui, and components naturally
             // to avoid circular dependency issues
           },

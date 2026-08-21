@@ -1,0 +1,72 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import { getImage } from 'astro:assets';
+import { defaultLang } from '@/i18n';
+import { getProjectImageSafe } from '@/lib/images';
+import { worldTranslations } from '@/i18n/translations/world';
+import { ProjectsWorld } from '@/components/react/world/ProjectsWorld';
+import type { WorldProjectDTO } from '@/components/react/world/ProjectsWorld';
+
+export function getStaticPaths() {
+  return [{ params: { lang: undefined } }, { params: { lang: 'en' } as const }];
+}
+
+const lang = Astro.params.lang ?? defaultLang;
+const t = worldTranslations[lang];
+
+// Build-time data pipeline: content collection is the single source of truth. Filter by language
+// prefix (the glob loader ids are lang-prefixed), then map every project to the minimal DTO the
+// island consumes. No client-side fetching.
+const allProjects = await getCollection('projects');
+const langProjects = allProjects.filter((project) => project.id.startsWith(`${lang}/`));
+
+const projects: WorldProjectDTO[] = await Promise.all(
+  langProjects.map(async (project) => {
+    const [, ...slugParts] = project.id.split('/');
+    const slug = slugParts.join('/').replace(/\.(md|mdx)$/, '');
+
+    const imageMetadata = getProjectImageSafe(project.data.image);
+    let imageUrl: string | undefined;
+    if (imageMetadata) {
+      const optimized = await getImage({ src: imageMetadata });
+      imageUrl = optimized.src;
+    }
+
+    return {
+      slug,
+      title: project.data.title,
+      description: project.data.description,
+      techStack: project.data.techStack,
+      status: project.data.status,
+      imageUrl,
+      detailUrl: lang === 'en' ? `/en/projects/${slug}` : `/projects/${slug}`,
+    };
+  })
+);
+---
+
+<Layout title={t.pageTitle} description={t.pageDescription} image="/world/og-v1.png">
+  <main class="flex min-h-dvh flex-col items-center justify-center gap-8 px-4 py-16">
+    <header class="max-w-2xl space-y-3 text-center">
+      <h1 class="text-4xl font-bold tracking-tight">{t.heading}</h1>
+      <p class="text-muted-foreground text-lg">{t.intro}</p>
+    </header>
+    {
+      /* Equivalent experience for screen readers + crawlers (PRD §6.9/§9.8): the world is
+        inherently visual, so every project it contains is described and linked here. */
+    }
+    <nav class="sr-only" aria-label={t.pageTitle}>
+      <ul>
+        {
+          projects.map((project) => (
+            <li>
+              <a href={project.detailUrl}>{project.title}</a> — {project.description}
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+    <ProjectsWorld client:only="react" projects={projects} t={t} lang={lang} />
+  </main>
+</Layout>

@@ -1,0 +1,2319 @@
+{
+  "type": "map",
+  "version": "1.10",
+  "tiledversion": "1.10.2",
+  "orientation": "orthogonal",
+  "renderorder": "right-down",
+  "infinite": false,
+  "width": 128,
+  "height": 128,
+  "tilewidth": 32,
+  "tileheight": 32,
+  "nextlayerid": 3,
+  "nextobjectid": 187,
+  "tilesets": [],
+  "layers": [
+    {
+      "type": "objectgroup",
+      "id": 1,
+      "name": "collision",
+      "opacity": 1,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "draworder": "topdown",
+      "objects": [
+        {
+          "id": 1,
+          "name": "water",
+          "type": "",
+          "x": 1728,
+          "y": 640,
+          "width": 384,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 2,
+          "name": "water",
+          "type": "",
+          "x": 1600,
+          "y": 704,
+          "width": 192,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 3,
+          "name": "water",
+          "type": "",
+          "x": 2048,
+          "y": 704,
+          "width": 384,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 4,
+          "name": "water",
+          "type": "",
+          "x": 1472,
+          "y": 768,
+          "width": 192,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 5,
+          "name": "water",
+          "type": "",
+          "x": 2368,
+          "y": 768,
+          "width": 320,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 6,
+          "name": "water",
+          "type": "",
+          "x": 1408,
+          "y": 832,
+          "width": 128,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 7,
+          "name": "water",
+          "type": "",
+          "x": 2624,
+          "y": 832,
+          "width": 256,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 8,
+          "name": "water",
+          "type": "",
+          "x": 1344,
+          "y": 896,
+          "width": 128,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 9,
+          "name": "water",
+          "type": "",
+          "x": 2816,
+          "y": 896,
+          "width": 128,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 10,
+          "name": "water",
+          "type": "",
+          "x": 1280,
+          "y": 960,
+          "width": 128,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 11,
+          "name": "water",
+          "type": "",
+          "x": 2880,
+          "y": 960,
+          "width": 128,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 12,
+          "name": "water",
+          "type": "",
+          "x": 1152,
+          "y": 1024,
+          "width": 192,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 13,
+          "name": "water",
+          "type": "",
+          "x": 2944,
+          "y": 1024,
+          "width": 128,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 14,
+          "name": "water",
+          "type": "",
+          "x": 1088,
+          "y": 1088,
+          "width": 128,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 15,
+          "name": "water",
+          "type": "",
+          "x": 3008,
+          "y": 1088,
+          "width": 128,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 16,
+          "name": "water",
+          "type": "",
+          "x": 1088,
+          "y": 1152,
+          "width": 64,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 17,
+          "name": "water",
+          "type": "",
+          "x": 3072,
+          "y": 1152,
+          "width": 128,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 18,
+          "name": "water",
+          "type": "",
+          "x": 1024,
+          "y": 1216,
+          "width": 128,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 19,
+          "name": "water",
+          "type": "",
+          "x": 3136,
+          "y": 1216,
+          "width": 64,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 20,
+          "name": "water",
+          "type": "",
+          "x": 896,
+          "y": 1280,
+          "width": 192,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 21,
+          "name": "water",
+          "type": "",
+          "x": 3136,
+          "y": 1280,
+          "width": 128,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 22,
+          "name": "water",
+          "type": "",
+          "x": 832,
+          "y": 1344,
+          "width": 128,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 23,
+          "name": "water",
+          "type": "",
+          "x": 3200,
+          "y": 1344,
+          "width": 64,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 24,
+          "name": "water",
+          "type": "",
+          "x": 768,
+          "y": 1408,
+          "width": 128,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 25,
+          "name": "water",
+          "type": "",
+          "x": 3200,
+          "y": 1408,
+          "width": 128,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 26,
+          "name": "water",
+          "type": "",
+          "x": 704,
+          "y": 1472,
+          "width": 128,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 27,
+          "name": "water",
+          "type": "",
+          "x": 3264,
+          "y": 1472,
+          "width": 64,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 28,
+          "name": "water",
+          "type": "",
+          "x": 640,
+          "y": 1536,
+          "width": 128,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 29,
+          "name": "water",
+          "type": "",
+          "x": 3264,
+          "y": 1536,
+          "width": 64,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 30,
+          "name": "water",
+          "type": "",
+          "x": 576,
+          "y": 1600,
+          "width": 128,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 31,
+          "name": "water",
+          "type": "",
+          "x": 3264,
+          "y": 1600,
+          "width": 64,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 32,
+          "name": "water",
+          "type": "",
+          "x": 576,
+          "y": 1664,
+          "width": 64,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 33,
+          "name": "water",
+          "type": "",
+          "x": 3264,
+          "y": 1664,
+          "width": 128,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 34,
+          "name": "water",
+          "type": "",
+          "x": 576,
+          "y": 1728,
+          "width": 64,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 35,
+          "name": "water",
+          "type": "",
+          "x": 3328,
+          "y": 1728,
+          "width": 64,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 36,
+          "name": "water",
+          "type": "",
+          "x": 576,
+          "y": 1792,
+          "width": 64,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 37,
+          "name": "water",
+          "type": "",
+          "x": 3328,
+          "y": 1792,
+          "width": 128,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 38,
+          "name": "water",
+          "type": "",
+          "x": 576,
+          "y": 1856,
+          "width": 64,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 39,
+          "name": "water",
+          "type": "",
+          "x": 3392,
+          "y": 1856,
+          "width": 64,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 40,
+          "name": "water",
+          "type": "",
+          "x": 576,
+          "y": 1920,
+          "width": 64,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 41,
+          "name": "water",
+          "type": "",
+          "x": 3392,
+          "y": 1920,
+          "width": 128,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 42,
+          "name": "water",
+          "type": "",
+          "x": 576,
+          "y": 1984,
+          "width": 64,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 43,
+          "name": "water",
+          "type": "",
+          "x": 3456,
+          "y": 1984,
+          "width": 64,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 44,
+          "name": "water",
+          "type": "",
+          "x": 576,
+          "y": 2048,
+          "width": 64,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 45,
+          "name": "water",
+          "type": "",
+          "x": 3456,
+          "y": 2048,
+          "width": 64,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 46,
+          "name": "water",
+          "type": "",
+          "x": 576,
+          "y": 2112,
+          "width": 64,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 47,
+          "name": "water",
+          "type": "",
+          "x": 3456,
+          "y": 2112,
+          "width": 64,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 48,
+          "name": "water",
+          "type": "",
+          "x": 576,
+          "y": 2176,
+          "width": 64,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 49,
+          "name": "water",
+          "type": "",
+          "x": 3456,
+          "y": 2176,
+          "width": 64,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 50,
+          "name": "water",
+          "type": "",
+          "x": 576,
+          "y": 2240,
+          "width": 64,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 51,
+          "name": "water",
+          "type": "",
+          "x": 3456,
+          "y": 2240,
+          "width": 64,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 52,
+          "name": "water",
+          "type": "",
+          "x": 576,
+          "y": 2304,
+          "width": 64,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 53,
+          "name": "water",
+          "type": "",
+          "x": 3456,
+          "y": 2304,
+          "width": 64,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 54,
+          "name": "water",
+          "type": "",
+          "x": 576,
+          "y": 2368,
+          "width": 64,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 55,
+          "name": "water",
+          "type": "",
+          "x": 3392,
+          "y": 2368,
+          "width": 128,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 56,
+          "name": "water",
+          "type": "",
+          "x": 576,
+          "y": 2432,
+          "width": 64,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 57,
+          "name": "water",
+          "type": "",
+          "x": 3392,
+          "y": 2432,
+          "width": 64,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 58,
+          "name": "water",
+          "type": "",
+          "x": 576,
+          "y": 2496,
+          "width": 64,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 59,
+          "name": "water",
+          "type": "",
+          "x": 3392,
+          "y": 2496,
+          "width": 64,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 60,
+          "name": "water",
+          "type": "",
+          "x": 576,
+          "y": 2560,
+          "width": 128,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 61,
+          "name": "water",
+          "type": "",
+          "x": 3328,
+          "y": 2560,
+          "width": 128,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 62,
+          "name": "water",
+          "type": "",
+          "x": 640,
+          "y": 2624,
+          "width": 64,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 63,
+          "name": "water",
+          "type": "",
+          "x": 3328,
+          "y": 2624,
+          "width": 64,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 64,
+          "name": "water",
+          "type": "",
+          "x": 640,
+          "y": 2688,
+          "width": 64,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 65,
+          "name": "water",
+          "type": "",
+          "x": 3264,
+          "y": 2688,
+          "width": 128,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 66,
+          "name": "water",
+          "type": "",
+          "x": 640,
+          "y": 2752,
+          "width": 128,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 67,
+          "name": "water",
+          "type": "",
+          "x": 3264,
+          "y": 2752,
+          "width": 64,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 68,
+          "name": "water",
+          "type": "",
+          "x": 704,
+          "y": 2816,
+          "width": 64,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 69,
+          "name": "water",
+          "type": "",
+          "x": 3200,
+          "y": 2816,
+          "width": 128,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 70,
+          "name": "water",
+          "type": "",
+          "x": 704,
+          "y": 2880,
+          "width": 128,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 71,
+          "name": "water",
+          "type": "",
+          "x": 3136,
+          "y": 2880,
+          "width": 128,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 72,
+          "name": "water",
+          "type": "",
+          "x": 768,
+          "y": 2944,
+          "width": 128,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 73,
+          "name": "water",
+          "type": "",
+          "x": 3072,
+          "y": 2944,
+          "width": 128,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 74,
+          "name": "water",
+          "type": "",
+          "x": 832,
+          "y": 3008,
+          "width": 64,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 75,
+          "name": "water",
+          "type": "",
+          "x": 3072,
+          "y": 3008,
+          "width": 64,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 76,
+          "name": "water",
+          "type": "",
+          "x": 832,
+          "y": 3072,
+          "width": 128,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 77,
+          "name": "water",
+          "type": "",
+          "x": 3008,
+          "y": 3072,
+          "width": 128,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 78,
+          "name": "water",
+          "type": "",
+          "x": 896,
+          "y": 3136,
+          "width": 128,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 79,
+          "name": "water",
+          "type": "",
+          "x": 2944,
+          "y": 3136,
+          "width": 128,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 80,
+          "name": "water",
+          "type": "",
+          "x": 960,
+          "y": 3200,
+          "width": 128,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 81,
+          "name": "water",
+          "type": "",
+          "x": 2880,
+          "y": 3200,
+          "width": 128,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 82,
+          "name": "water",
+          "type": "",
+          "x": 1024,
+          "y": 3264,
+          "width": 192,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 83,
+          "name": "water",
+          "type": "",
+          "x": 2880,
+          "y": 3264,
+          "width": 64,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 84,
+          "name": "water",
+          "type": "",
+          "x": 1152,
+          "y": 3328,
+          "width": 128,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 85,
+          "name": "water",
+          "type": "",
+          "x": 2816,
+          "y": 3328,
+          "width": 128,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 86,
+          "name": "water",
+          "type": "",
+          "x": 1216,
+          "y": 3392,
+          "width": 192,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 87,
+          "name": "water",
+          "type": "",
+          "x": 2688,
+          "y": 3392,
+          "width": 192,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 88,
+          "name": "water",
+          "type": "",
+          "x": 1344,
+          "y": 3456,
+          "width": 512,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 89,
+          "name": "water",
+          "type": "",
+          "x": 2560,
+          "y": 3456,
+          "width": 192,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 90,
+          "name": "water",
+          "type": "",
+          "x": 1792,
+          "y": 3520,
+          "width": 192,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 91,
+          "name": "water",
+          "type": "",
+          "x": 2432,
+          "y": 3520,
+          "width": 192,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 92,
+          "name": "water",
+          "type": "",
+          "x": 1920,
+          "y": 3584,
+          "width": 192,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 93,
+          "name": "water",
+          "type": "",
+          "x": 2240,
+          "y": 3584,
+          "width": 256,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 94,
+          "name": "water",
+          "type": "",
+          "x": 2048,
+          "y": 3648,
+          "width": 64,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 95,
+          "name": "water",
+          "type": "",
+          "x": 2240,
+          "y": 3648,
+          "width": 64,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 96,
+          "name": "water",
+          "type": "",
+          "x": 2048,
+          "y": 3712,
+          "width": 64,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 97,
+          "name": "water",
+          "type": "",
+          "x": 2240,
+          "y": 3712,
+          "width": 64,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 98,
+          "name": "water",
+          "type": "",
+          "x": 2048,
+          "y": 3776,
+          "width": 256,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 99,
+          "name": "border-n",
+          "type": "",
+          "x": 0,
+          "y": 0,
+          "width": 4096,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 100,
+          "name": "border-s",
+          "type": "",
+          "x": 0,
+          "y": 4032,
+          "width": 4096,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 101,
+          "name": "border-w",
+          "type": "",
+          "x": 0,
+          "y": 64,
+          "width": 64,
+          "height": 3968,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 102,
+          "name": "border-e",
+          "type": "",
+          "x": 4032,
+          "y": 64,
+          "width": 64,
+          "height": 3968,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 103,
+          "name": "house",
+          "type": "",
+          "x": 1856,
+          "y": 896,
+          "width": 384,
+          "height": 288,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 104,
+          "name": "library",
+          "type": "",
+          "x": 1456,
+          "y": 2240,
+          "width": 248,
+          "height": 220,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 105,
+          "name": "fountain",
+          "type": "",
+          "x": 1952,
+          "y": 2200,
+          "width": 192,
+          "height": 192,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 106,
+          "name": "bench",
+          "type": "",
+          "x": 3270,
+          "y": 2446,
+          "width": 140,
+          "height": 76,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 107,
+          "name": "tree",
+          "type": "",
+          "x": 1474,
+          "y": 794,
+          "width": 52,
+          "height": 40,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 108,
+          "name": "tree",
+          "type": "",
+          "x": 1654,
+          "y": 634,
+          "width": 52,
+          "height": 40,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 109,
+          "name": "tree",
+          "type": "",
+          "x": 2324,
+          "y": 634,
+          "width": 52,
+          "height": 40,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 110,
+          "name": "tree",
+          "type": "",
+          "x": 2524,
+          "y": 694,
+          "width": 52,
+          "height": 40,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 111,
+          "name": "tree",
+          "type": "",
+          "x": 1324,
+          "y": 1044,
+          "width": 52,
+          "height": 40,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 112,
+          "name": "tree",
+          "type": "",
+          "x": 2674,
+          "y": 1244,
+          "width": 52,
+          "height": 40,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 113,
+          "name": "tree",
+          "type": "",
+          "x": 1124,
+          "y": 1294,
+          "width": 52,
+          "height": 40,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 114,
+          "name": "tree",
+          "type": "",
+          "x": 874,
+          "y": 2194,
+          "width": 52,
+          "height": 40,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 115,
+          "name": "tree",
+          "type": "",
+          "x": 854,
+          "y": 2594,
+          "width": 52,
+          "height": 40,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 116,
+          "name": "tree",
+          "type": "",
+          "x": 3274,
+          "y": 1694,
+          "width": 52,
+          "height": 40,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 117,
+          "name": "tree",
+          "type": "",
+          "x": 3424,
+          "y": 2044,
+          "width": 52,
+          "height": 40,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 118,
+          "name": "tree",
+          "type": "",
+          "x": 2424,
+          "y": 1494,
+          "width": 52,
+          "height": 40,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 119,
+          "name": "tree",
+          "type": "",
+          "x": 1724,
+          "y": 1444,
+          "width": 52,
+          "height": 40,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 120,
+          "name": "tree",
+          "type": "",
+          "x": 3124,
+          "y": 2744,
+          "width": 52,
+          "height": 40,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 121,
+          "name": "tree",
+          "type": "",
+          "x": 1024,
+          "y": 2244,
+          "width": 52,
+          "height": 40,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 122,
+          "name": "tree",
+          "type": "",
+          "x": 1824,
+          "y": 614,
+          "width": 52,
+          "height": 40,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 123,
+          "name": "tree",
+          "type": "",
+          "x": 2074,
+          "y": 574,
+          "width": 52,
+          "height": 40,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 124,
+          "name": "tree",
+          "type": "",
+          "x": 1224,
+          "y": 844,
+          "width": 52,
+          "height": 40,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 125,
+          "name": "tree",
+          "type": "",
+          "x": 954,
+          "y": 1544,
+          "width": 52,
+          "height": 40,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 126,
+          "name": "tree",
+          "type": "",
+          "x": 834,
+          "y": 1794,
+          "width": 52,
+          "height": 40,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 127,
+          "name": "tree",
+          "type": "",
+          "x": 3224,
+          "y": 1444,
+          "width": 52,
+          "height": 40,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 128,
+          "name": "tree",
+          "type": "",
+          "x": 3454,
+          "y": 2374,
+          "width": 52,
+          "height": 40,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 129,
+          "name": "tree",
+          "type": "",
+          "x": 2874,
+          "y": 694,
+          "width": 52,
+          "height": 40,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 130,
+          "name": "tree",
+          "type": "",
+          "x": 3094,
+          "y": 794,
+          "width": 52,
+          "height": 40,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 131,
+          "name": "tree",
+          "type": "",
+          "x": 714,
+          "y": 2394,
+          "width": 52,
+          "height": 40,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 132,
+          "name": "tree",
+          "type": "",
+          "x": 974,
+          "y": 2844,
+          "width": 52,
+          "height": 40,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 133,
+          "name": "tree",
+          "type": "",
+          "x": 3354,
+          "y": 2894,
+          "width": 52,
+          "height": 40,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 134,
+          "name": "tree",
+          "type": "",
+          "x": 2024,
+          "y": 694,
+          "width": 52,
+          "height": 40,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 135,
+          "name": "tree",
+          "type": "",
+          "x": 2224,
+          "y": 794,
+          "width": 52,
+          "height": 40,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 136,
+          "name": "tree",
+          "type": "",
+          "x": 1524,
+          "y": 944,
+          "width": 52,
+          "height": 40,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 137,
+          "name": "tree",
+          "type": "",
+          "x": 1574,
+          "y": 1844,
+          "width": 52,
+          "height": 40,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 138,
+          "name": "tree",
+          "type": "",
+          "x": 2424,
+          "y": 1944,
+          "width": 52,
+          "height": 40,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 139,
+          "name": "tree",
+          "type": "",
+          "x": 1774,
+          "y": 2694,
+          "width": 52,
+          "height": 40,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 140,
+          "name": "tree",
+          "type": "",
+          "x": 2324,
+          "y": 2444,
+          "width": 52,
+          "height": 40,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 141,
+          "name": "tree",
+          "type": "",
+          "x": 2874,
+          "y": 2244,
+          "width": 52,
+          "height": 40,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 142,
+          "name": "tree",
+          "type": "",
+          "x": 1424,
+          "y": 2444,
+          "width": 52,
+          "height": 40,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 143,
+          "name": "tree",
+          "type": "",
+          "x": 2174,
+          "y": 1494,
+          "width": 52,
+          "height": 40,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 144,
+          "name": "tree",
+          "type": "",
+          "x": 3024,
+          "y": 1494,
+          "width": 52,
+          "height": 40,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 145,
+          "name": "tree",
+          "type": "",
+          "x": 1274,
+          "y": 2094,
+          "width": 52,
+          "height": 40,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 146,
+          "name": "tree",
+          "type": "",
+          "x": 1724,
+          "y": 1974,
+          "width": 52,
+          "height": 40,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 147,
+          "name": "tree",
+          "type": "",
+          "x": 2574,
+          "y": 1614,
+          "width": 52,
+          "height": 40,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 148,
+          "name": "tree",
+          "type": "",
+          "x": 2024,
+          "y": 2674,
+          "width": 52,
+          "height": 40,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 149,
+          "name": "tree",
+          "type": "",
+          "x": 1124,
+          "y": 2544,
+          "width": 52,
+          "height": 40,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 150,
+          "name": "tree",
+          "type": "",
+          "x": 2524,
+          "y": 3174,
+          "width": 52,
+          "height": 40,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 151,
+          "name": "tree",
+          "type": "",
+          "x": 1874,
+          "y": 3074,
+          "width": 52,
+          "height": 40,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 152,
+          "name": "palm",
+          "type": "",
+          "x": 1466,
+          "y": 3248,
+          "width": 52,
+          "height": 36,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 153,
+          "name": "palm",
+          "type": "",
+          "x": 1732,
+          "y": 3448,
+          "width": 52,
+          "height": 36,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 154,
+          "name": "palm",
+          "type": "",
+          "x": 2416,
+          "y": 3298,
+          "width": 52,
+          "height": 36,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 155,
+          "name": "palm",
+          "type": "",
+          "x": 2682,
+          "y": 3378,
+          "width": 52,
+          "height": 36,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 156,
+          "name": "palm",
+          "type": "",
+          "x": 1216,
+          "y": 3148,
+          "width": 52,
+          "height": 36,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 157,
+          "name": "palm",
+          "type": "",
+          "x": 3032,
+          "y": 3148,
+          "width": 52,
+          "height": 36,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 158,
+          "name": "palm",
+          "type": "",
+          "x": 1916,
+          "y": 3298,
+          "width": 52,
+          "height": 36,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 159,
+          "name": "rock",
+          "type": "",
+          "x": 2599,
+          "y": 771,
+          "width": 102,
+          "height": 64,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 160,
+          "name": "rock",
+          "type": "",
+          "x": 2908,
+          "y": 727,
+          "width": 83,
+          "height": 52,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 161,
+          "name": "rock",
+          "type": "",
+          "x": 3042,
+          "y": 1018,
+          "width": 115,
+          "height": 72,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 162,
+          "name": "rock",
+          "type": "",
+          "x": 2512,
+          "y": 1028,
+          "width": 77,
+          "height": 48,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 163,
+          "name": "rock",
+          "type": "",
+          "x": 3305,
+          "y": 2275,
+          "width": 90,
+          "height": 56,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 164,
+          "name": "rock",
+          "type": "",
+          "x": 3366,
+          "y": 2619,
+          "width": 109,
+          "height": 68,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 165,
+          "name": "rock",
+          "type": "",
+          "x": 658,
+          "y": 1877,
+          "width": 83,
+          "height": 52,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 166,
+          "name": "rock",
+          "type": "",
+          "x": 812,
+          "y": 2878,
+          "width": 77,
+          "height": 48,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 167,
+          "name": "landmark-elemix",
+          "type": "",
+          "x": 2895,
+          "y": 1850,
+          "width": 310,
+          "height": 180,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 168,
+          "name": "landmark-minesweeper",
+          "type": "",
+          "x": 2665,
+          "y": 900,
+          "width": 310,
+          "height": 180,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 169,
+          "name": "landmark-next-armored",
+          "type": "",
+          "x": 930,
+          "y": 1620,
+          "width": 240,
+          "height": 200,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 170,
+          "name": "landmark-equinox",
+          "type": "",
+          "x": 1120,
+          "y": 2925,
+          "width": 260,
+          "height": 130,
+          "rotation": 0,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "type": "objectgroup",
+      "id": 2,
+      "name": "zones",
+      "opacity": 1,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "draworder": "topdown",
+      "objects": [
+        {
+          "id": 171,
+          "name": "outside-front-door",
+          "type": "spawn",
+          "point": true,
+          "x": 2048,
+          "y": 1320,
+          "width": 0,
+          "height": 0,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 172,
+          "name": "house-front-door",
+          "type": "door",
+          "x": 2000,
+          "y": 1184,
+          "width": 96,
+          "height": 48,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "target",
+              "type": "string",
+              "value": "house"
+            },
+            {
+              "name": "spawn",
+              "type": "string",
+              "value": "bed"
+            }
+          ]
+        },
+        {
+          "id": 173,
+          "name": "landmark-elemix",
+          "type": "project",
+          "x": 2870,
+          "y": 1750,
+          "width": 360,
+          "height": 300,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "slug",
+              "type": "string",
+              "value": "elemix"
+            },
+            {
+              "name": "promptOffsetX",
+              "type": "int",
+              "value": 0
+            },
+            {
+              "name": "promptOffsetY",
+              "type": "int",
+              "value": -190
+            }
+          ]
+        },
+        {
+          "id": 174,
+          "name": "landmark-minesweeper-llm-arena",
+          "type": "project",
+          "x": 2640,
+          "y": 800,
+          "width": 360,
+          "height": 300,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "slug",
+              "type": "string",
+              "value": "minesweeper-llm-arena"
+            },
+            {
+              "name": "promptOffsetX",
+              "type": "int",
+              "value": 0
+            },
+            {
+              "name": "promptOffsetY",
+              "type": "int",
+              "value": -190
+            }
+          ]
+        },
+        {
+          "id": 175,
+          "name": "landmark-next-armored",
+          "type": "project",
+          "x": 890,
+          "y": 1520,
+          "width": 320,
+          "height": 320,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "slug",
+              "type": "string",
+              "value": "next-armored"
+            },
+            {
+              "name": "promptOffsetX",
+              "type": "int",
+              "value": 0
+            },
+            {
+              "name": "promptOffsetY",
+              "type": "int",
+              "value": -210
+            }
+          ]
+        },
+        {
+          "id": 176,
+          "name": "landmark-equinox-theme",
+          "type": "project",
+          "x": 1080,
+          "y": 2810,
+          "width": 340,
+          "height": 280,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "slug",
+              "type": "string",
+              "value": "equinox-theme"
+            },
+            {
+              "name": "promptOffsetX",
+              "type": "int",
+              "value": 0
+            },
+            {
+              "name": "promptOffsetY",
+              "type": "int",
+              "value": -170
+            }
+          ]
+        },
+        {
+          "id": 177,
+          "name": "landmark-petanque",
+          "type": "project",
+          "x": 2600,
+          "y": 2860,
+          "width": 400,
+          "height": 320,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "slug",
+              "type": "string",
+              "value": "petanque"
+            },
+            {
+              "name": "promptOffsetX",
+              "type": "int",
+              "value": 0
+            },
+            {
+              "name": "promptOffsetY",
+              "type": "int",
+              "value": -180
+            }
+          ]
+        },
+        {
+          "id": 178,
+          "name": "landmark-personal-portfolio",
+          "type": "project",
+          "x": 2050,
+          "y": 1142,
+          "width": 220,
+          "height": 200,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "slug",
+              "type": "string",
+              "value": "personal-portfolio"
+            },
+            {
+              "name": "promptOffsetX",
+              "type": "int",
+              "value": 0
+            },
+            {
+              "name": "promptOffsetY",
+              "type": "int",
+              "value": -110
+            }
+          ]
+        },
+        {
+          "id": 179,
+          "name": "library",
+          "type": "prop",
+          "x": 1456,
+          "y": 2240,
+          "width": 248,
+          "height": 220,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "id",
+              "type": "string",
+              "value": "library"
+            },
+            {
+              "name": "promptOffsetX",
+              "type": "int",
+              "value": 0
+            },
+            {
+              "name": "promptOffsetY",
+              "type": "int",
+              "value": -160
+            }
+          ]
+        },
+        {
+          "id": 180,
+          "name": "bench",
+          "type": "prop",
+          "x": 3260,
+          "y": 2420,
+          "width": 160,
+          "height": 130,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "id",
+              "type": "string",
+              "value": "bench"
+            },
+            {
+              "name": "promptOffsetX",
+              "type": "int",
+              "value": 0
+            },
+            {
+              "name": "promptOffsetY",
+              "type": "int",
+              "value": -80
+            }
+          ]
+        },
+        {
+          "id": 181,
+          "name": "landmark-elemix",
+          "type": "landmark-anchor",
+          "point": true,
+          "x": 3050,
+          "y": 1900,
+          "width": 0,
+          "height": 0,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "sprite",
+              "type": "string",
+              "value": "landmark-elemix"
+            },
+            {
+              "name": "scale",
+              "type": "float",
+              "value": 0.78
+            }
+          ]
+        },
+        {
+          "id": 182,
+          "name": "landmark-minesweeper",
+          "type": "landmark-anchor",
+          "point": true,
+          "x": 2820,
+          "y": 950,
+          "width": 0,
+          "height": 0,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "sprite",
+              "type": "string",
+              "value": "landmark-minesweeper-llm-arena"
+            },
+            {
+              "name": "scale",
+              "type": "float",
+              "value": 0.78
+            }
+          ]
+        },
+        {
+          "id": 183,
+          "name": "landmark-next-armored",
+          "type": "landmark-anchor",
+          "point": true,
+          "x": 1050,
+          "y": 1680,
+          "width": 0,
+          "height": 0,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "sprite",
+              "type": "string",
+              "value": "landmark-next-armored"
+            },
+            {
+              "name": "scale",
+              "type": "float",
+              "value": 0.72
+            }
+          ]
+        },
+        {
+          "id": 184,
+          "name": "landmark-equinox",
+          "type": "landmark-anchor",
+          "point": true,
+          "x": 1250,
+          "y": 2950,
+          "width": 0,
+          "height": 0,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "sprite",
+              "type": "string",
+              "value": "landmark-equinox-theme"
+            },
+            {
+              "name": "scale",
+              "type": "float",
+              "value": 0.72
+            }
+          ]
+        },
+        {
+          "id": 185,
+          "name": "landmark-petanque",
+          "type": "landmark-anchor",
+          "point": true,
+          "x": 2800,
+          "y": 3020,
+          "width": 0,
+          "height": 0,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "sprite",
+              "type": "string",
+              "value": "landmark-petanque"
+            },
+            {
+              "name": "scale",
+              "type": "float",
+              "value": 0.95
+            },
+            {
+              "name": "sortY",
+              "type": "int",
+              "value": 2880
+            }
+          ]
+        },
+        {
+          "id": 186,
+          "name": "landmark-sign",
+          "type": "landmark-anchor",
+          "point": true,
+          "x": 2160,
+          "y": 1252,
+          "width": 0,
+          "height": 0,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "sprite",
+              "type": "string",
+              "value": "landmark-personal-portfolio"
+            },
+            {
+              "name": "scale",
+              "type": "float",
+              "value": 0.85
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

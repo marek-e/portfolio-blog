@@ -56,6 +56,7 @@ export interface UITranslations {
     presentations: string;
     designSystem: string;
     cv: string;
+    projectsWorld: string;
     backToTop: string;
   };
   notFound: {
@@ -151,6 +152,10 @@ export interface UITranslations {
     pageDescription: string;
     title: string;
     subtitle: string;
+    worldBannerTitle: string;
+    worldBannerBody: string;
+    worldBannerCta: string;
+    moreProjects: string;
     noProjects: string;
     role: string;
     duration: string;

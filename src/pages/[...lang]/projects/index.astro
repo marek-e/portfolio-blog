@@ -18,6 +18,9 @@ const allProjects = await getCollection('projects');
 const projects = sortProjects(allProjects.filter((project) => project.id.startsWith(`${lang}/`)));
 
 const featuredProjects = projects.filter((p) => p.data.featured);
+// Variant parity with the world (PRD §6.1): every project the island shows must be
+// reachable from this grid, so non-featured entries get their own section.
+const moreProjects = projects.filter((p) => !p.data.featured);
 ---
 
 <Layout title={t.projectsPage.pageTitle} description={t.projectsPage.pageDescription}>
@@ -45,6 +48,36 @@ const featuredProjects = projects.filter((p) => p.data.featured);
       <p class="text-muted-foreground max-w-2xl text-lg">{t.projectsPage.subtitle}</p>
     </header>
 
+    {/* Entry banner to the interactive island variant (PRD §6.1) */}
+    <a
+      href={lang === 'en' ? '/en/projects/world' : '/projects/world'}
+      class="group border-border hover:ring-primary/30 relative mb-12 block overflow-hidden rounded-2xl border shadow-sm transition-all hover:shadow-md hover:ring-2 motion-reduce:transition-none"
+    >
+      <img
+        src="/world/banner-v1.webp"
+        alt=""
+        width={1600}
+        height={400}
+        loading="lazy"
+        class="h-36 w-full object-cover transition-transform duration-500 motion-safe:group-hover:scale-105 sm:h-44"
+      />
+      <div
+        class="absolute inset-0 flex items-center justify-between bg-gradient-to-r from-black/55 via-black/25 to-transparent px-6 sm:px-10"
+      >
+        <div class="max-w-md space-y-1 text-white">
+          <p class="text-xl font-bold tracking-tight sm:text-2xl">
+            {t.projectsPage.worldBannerTitle}
+          </p>
+          <p class="hidden text-sm text-white/85 sm:block">{t.projectsPage.worldBannerBody}</p>
+        </div>
+        <span
+          class="bg-primary text-primary-foreground group-hover:bg-primary/90 inline-flex shrink-0 items-center gap-1 rounded-lg px-4 py-2 text-sm font-semibold transition-transform motion-safe:group-hover:translate-x-1"
+        >
+          {t.projectsPage.worldBannerCta} →
+        </span>
+      </div>
+    </a>
+
     {
       projects.length === 0 ? (
         <p class="text-muted-foreground py-12 text-center">{t.projectsPage.noProjects}</p>
@@ -59,6 +92,19 @@ const featuredProjects = projects.filter((p) => p.data.featured);
               <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {featuredProjects.map((project) => (
                   <ProjectListCard project={project} featured />
+                ))}
+              </div>
+            </section>
+          )}
+          {moreProjects.length > 0 && (
+            <section>
+              <h2 class="text-muted-foreground mb-6 flex items-center gap-2 text-xl font-semibold">
+                <span class="bg-muted-foreground/60 inline-block size-2 rounded-full" />
+                {t.projectsPage.moreProjects}
+              </h2>
+              <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                {moreProjects.map((project) => (
+                  <ProjectListCard project={project} />
                 ))}
               </div>
             </section>
