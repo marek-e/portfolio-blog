@@ -48,7 +48,19 @@
   ! Cache-Control
   Cache-Control: public, max-age=2592000
 
-/projects/*
+/projects/*.svg
+  ! Cache-Control
+  Cache-Control: public, max-age=2592000
+
+/projects/*.png
+  ! Cache-Control
+  Cache-Control: public, max-age=2592000
+
+/projects/*.mp4
+  ! Cache-Control
+  Cache-Control: public, max-age=2592000
+
+/projects/*.mov
   ! Cache-Control
   Cache-Control: public, max-age=2592000
 
