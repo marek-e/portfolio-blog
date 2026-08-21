@@ -1,0 +1,36 @@
+src/lib/blog-routes.ts
+  s_09edf90f5af858::t_b858d0e08d2495 1-3,5-49
+  s_09edf90f5af858::t_9db9b1e16fa608 4
+src/lib/post-markdown.ts
+  s_09edf90f5af858::t_f17161a79d9967 132-140,142-146,148,150-155,323
+src/pages/[...lang]/blog/[slug].md.ts
+  s_09edf90f5af858::t_9db9b1e16fa608 3
+  s_09edf90f5af858::t_095e114541a795 7
+src/pages/[...lang]/blog/[slug]/og.jpg.ts
+  s_09edf90f5af858::t_9db9b1e16fa608 2
+  s_09edf90f5af858::t_095e114541a795 5
+src/components/blog/PostActionsMenu.tsx
+  s_09edf90f5af858::t_77b6a86ede82f5 98-102,124,127-128
+  s_09edf90f5af858::t_e7fcbaef0e4b8a 21-31,44-45,70-71,79-95,105-111,118-119
+  s_09edf90f5af858::t_b4c09f33622f4b 32-43
+  s_09edf90f5af858::t_5a0d18ddf57fc5 104
+src/pages/[...lang]/blog/[slug].astro
+  s_09edf90f5af858::t_9db9b1e16fa608 14,26
+  s_09edf90f5af858::t_87b591a23de96a 29
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "2d3afa3134ae58abc3115d42724822f076091475",
+  "prompts": {},
+  "sessions": {
+    "s_09edf90f5af858": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8765b81e-cdcc-4907-b2a4-def4fff63f43",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
