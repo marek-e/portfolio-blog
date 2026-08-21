@@ -1,0 +1,62 @@
+src/components/portfolio/CopyEmailButton.tsx
+  s_a0e46f02350a51::t_b373a382396e0a 12,15-18,33
+src/components/portfolio/DevIdCard/index.tsx
+  s_a0e46f02350a51::t_b68357569d503e 92-93,95-96,99-100
+src/styles/global.css
+  s_a0e46f02350a51::t_1091701e683691 4-7,51,73
+  s_a0e46f02350a51::t_88bf603f649aa6 528-530
+src/i18n/translations/fr.ts
+  s_a0e46f02350a51::t_1cfc7852d6ed82 26
+  s_a0e46f02350a51::t_6c7371aa198fe1 90-91
+src/components/layout/AnimatedLogo.astro
+  s_a0e46f02350a51::t_5039f1a9f78fcc 43,48,52-53,56-57,60-61,64-65
+  s_a0e46f02350a51::t_61aa2bfc372e3c 1-42,44-47,49-51,54-55,58-59,62-63,66-99
+src/components/layout/Navbar.astro
+  s_a0e46f02350a51::t_00fd442b0c2c73 5,7,12,25,28
+src/types/timeline.ts
+  s_a0e46f02350a51::t_a05183c4ca011e 12-13
+src/components/portfolio/StravaSection.astro
+  s_a0e46f02350a51::t_1cfc7852d6ed82 97
+src/i18n/translations/en.ts
+  s_a0e46f02350a51::t_6c7371aa198fe1 90-91
+  s_a0e46f02350a51::t_1cfc7852d6ed82 26
+public/_headers
+  s_a0e46f02350a51::t_44d99a29fb7659 28-32,37-47
+  s_a0e46f02350a51::t_25d1e8bea421b0 48
+src/components/mdx/Citation.tsx
+  s_a0e46f02350a51::t_1cfc7852d6ed82 42
+src/components/portfolio/ContactSection.astro
+  s_a0e46f02350a51::t_b373a382396e0a 33
+.claude/launch.json
+  s_a0e46f02350a51::t_1b06cce2c987ec 7-9,11-20
+astro.config.mjs
+  s_a0e46f02350a51::t_db88fae6a8a35b 23-25
+  s_a0e46f02350a51::t_5039f1a9f78fcc 26-27
+src/components/portfolio/LongRunActivityCard.tsx
+  s_a0e46f02350a51::t_bbd93561b4ed6c 59
+src/components/portfolio/TimelineCards.tsx
+  s_a0e46f02350a51::t_a05183c4ca011e 181-182,191-192
+src/components/portfolio/DevIdCard/constants.tsx
+  s_a0e46f02350a51::t_b2075bb4f2f381 61-65
+  s_a0e46f02350a51::t_5039f1a9f78fcc 11-19,23-31,35-43,47-55,59-60,66-67
+src/data/timeline.ts
+  s_a0e46f02350a51::t_a05183c4ca011e 10,28,52,74,97,142
+src/components/layout/Footer.astro
+  s_a0e46f02350a51::t_bbd93561b4ed6c 44
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "2195f12c73c075c920db5a06b3d26b0ebfa382ea",
+  "prompts": {},
+  "sessions": {
+    "s_a0e46f02350a51": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8ad2a42c-cd6a-4be8-ae6a-84319a2fee42",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
