@@ -14,6 +14,9 @@
   Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://cloudflareinsights.com; frame-ancestors 'self'; base-uri 'self'; form-action 'self'
 
   # Performance & Caching
+  # HTML routes land here on purpose. Astro emits pretty URLs (/contact/), and
+  # _headers matches the request path, so no *.html pattern can ever target a
+  # page. A deploy is therefore visible after at most an hour.
   Cache-Control: public, max-age=3600, must-revalidate
 
 # Immutable hashed assets in /_astro/ directory
@@ -71,12 +74,3 @@
 /favicon.svg
   ! Cache-Control
   Cache-Control: public, max-age=2592000
-
-# HTML pages - no cache to ensure fresh content on deploys
-/*.html
-  ! Cache-Control
-  Cache-Control: public, max-age=0, must-revalidate, no-cache
-
-/index.html
-  ! Cache-Control
-  Cache-Control: public, max-age=0, must-revalidate, no-cache
