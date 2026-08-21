@@ -1,5 +1,6 @@
 import satori from 'satori';
 import sharp from 'sharp';
+import { readFile } from 'node:fs/promises';
 import type { CollectionEntry } from 'astro:content';
 
 type BlogPost = CollectionEntry<'blog'>;
@@ -7,6 +8,35 @@ type BlogPost = CollectionEntry<'blog'>;
 // Cache fonts in memory to avoid refetching
 let geistRegular: ArrayBuffer | null = null;
 let geistBold: ArrayBuffer | null = null;
+
+// Cache the background in memory to avoid re-encoding it for every post.
+// The in-flight promise is cached too, so posts generated concurrently share a
+// single read + resize instead of each starting its own.
+let backgroundPromise: Promise<string> | null = null;
+
+// Read the hero background from disk (not from the deployed site) so builds
+// don't depend on the asset already being live
+function loadBackground() {
+  if (!backgroundPromise) {
+    backgroundPromise = encodeBackground().catch((error) => {
+      // Drop the rejected promise so a later call can retry
+      backgroundPromise = null;
+      throw error;
+    });
+  }
+
+  return backgroundPromise;
+}
+
+async function encodeBackground() {
+  const source = await readFile('public/bg-light-v3.jpg');
+  const resized = await sharp(source)
+    .resize(1200, 630, { fit: 'cover' })
+    .jpeg({ quality: 80 })
+    .toBuffer();
+
+  return `data:image/jpeg;base64,${resized.toString('base64')}`;
+}
 
 async function loadFonts() {
   if (geistRegular && geistBold) {
@@ -44,6 +74,7 @@ function truncateText(text: string, maxLength: number): string {
 
 export async function generateOgImage(post: BlogPost): Promise<Buffer> {
   const { geistRegular, geistBold } = await loadFonts();
+  const backgroundUrl = await loadBackground();
 
   const lang = post.id.split('/')[0] === 'en' ? 'en' : 'fr';
   const title = post.data.title;
@@ -64,7 +95,7 @@ export async function generateOgImage(post: BlogPost): Promise<Buffer> {
         flexDirection: 'column',
         alignItems: 'flex-start',
         justifyContent: 'space-between',
-        backgroundImage: `url('https://melmayan.fr/bg-light.jpg')`,
+        backgroundImage: `url('${backgroundUrl}')`,
         padding: '60px 80px',
         position: 'relative',
         overflow: 'hidden',
