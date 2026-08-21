@@ -1,0 +1,19 @@
+src/styles/global.css
+  s_5d215c28e3d1c9::t_6a47d077b98c73 5-7,142-143
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "6e189befc9aa4f9259c8b526230c7bc24e4ce535",
+  "prompts": {},
+  "sessions": {
+    "s_5d215c28e3d1c9": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d9806f21-33b7-47ee-ae1f-7d4d11d6f1aa",
+        "model": "unknown"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
