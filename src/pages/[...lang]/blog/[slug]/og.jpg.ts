@@ -35,11 +35,11 @@ type Props = {
 export async function GET({ props }: { props: Props }) {
   const { post } = props;
 
-  const pngBuffer = await generateOgImage(post);
+  const jpegBuffer = await generateOgImage(post);
 
-  return new Response(new Uint8Array(pngBuffer), {
+  return new Response(new Uint8Array(jpegBuffer), {
     headers: {
-      'Content-Type': 'image/png',
+      'Content-Type': 'image/jpeg',
       'Cache-Control': 'public, max-age=31536000, immutable',
     },
   });

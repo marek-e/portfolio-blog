@@ -23,7 +23,7 @@ const lang = getLangFromUrl(Astro.url);
 // with English copy. Scrapers need an absolute URL, so resolve it against the
 // site: pages that pass an absolute URL of their own are left untouched.
 const socialImage = new URL(
-  image ?? (lang === 'en' ? '/en/og-image.png' : '/og-image.png'),
+  image ?? (lang === 'en' ? '/en/og-image.jpg' : '/og-image.jpg'),
   Astro.site
 ).toString();
 

@@ -98,11 +98,13 @@ type CardContent = {
 // the right so the sunrise still reads as a photograph rather than a wash.
 // That gradient is why every text element lives inside COLUMN_WIDTH - past it
 // the veil thins and the floors below stop holding. Measured across the whole
-// column, so they hold whatever the headline length pushes the layout to:
-//   #17130f headline/name -> 11.77:1 (needs 4.5)
-//   #4a4038 tagline/meta  ->  6.43:1 (needs 4.5)
-//   #7a3c00 pill labels   ->  5.41:1 (needs 4.5)
-//   #a85200 kicker        ->  3.46:1 (needs 3.0, 28px bold)
+// column, so they hold whatever the headline length pushes the layout to, and
+// with the background darkened by the JPEG encoder's worst observed deviation
+// so they hold on every shipped card rather than on a clean render:
+//   #17130f headline/name -> 11.21:1 (needs 4.5)
+//   #4a4038 tagline/meta  ->  6.12:1 (needs 4.5)
+//   #7a3c00 pill labels   ->  5.15:1 (needs 4.5)
+//   #a85200 kicker        ->  3.29:1 (needs 3.0, 28px bold)
 // Re-measure before widening the column, softening the veil, or swapping the
 // artwork for something brighter.
 const COLUMN_WIDTH = 840;
@@ -314,10 +316,11 @@ async function renderCard({
     }
   );
 
-  // Convert SVG to PNG using Sharp. palette must stay off: sharp's higher
-  // effort levels quantise to 256 colours, which bands the sky and shifts the
-  // pixels the contrast floors above were measured against.
-  return sharp(Buffer.from(svg)).png({ compressionLevel: 9, palette: false }).toBuffer();
+  // JPEG, not PNG: these are photographs, and PNG lands them at ~700 KB -
+  // past the ~600 KB WhatsApp will fetch for a link preview. q90 is ~95 KB
+  // with no difference visible at feed size, and the contrast floors above
+  // were measured on its output, artefacts included.
+  return sharp(Buffer.from(svg)).jpeg({ quality: 90, mozjpeg: true }).toBuffer();
 }
 
 export async function generateOgImage(post: BlogPost): Promise<Buffer> {
