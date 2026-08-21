@@ -1,0 +1,31 @@
+src/layouts/Layout.astro
+  s_ae6aafd35278bf::t_be21835ca5ce16 18
+src/lib/og-image.tsx
+  s_ae6aafd35278bf::t_57ce0eb78bdb78 102-108
+src/pages/[...lang]/blog/[slug]/og.jpg.ts
+  s_ae6aafd35278bf::t_70a504fdd84167 41-42
+src/pages/en/og-image.jpg.ts
+  s_ae6aafd35278bf::t_83dbd8a6c351d1 7-8
+src/pages/en/og-image_blog.jpg.ts
+  s_ae6aafd35278bf::t_c61e9469008531 7-8
+src/pages/og-image.jpg.ts
+  s_ae6aafd35278bf::t_8738759325751c 7-8
+src/pages/og-image_blog.jpg.ts
+  s_ae6aafd35278bf::t_6e228839dc1300 7-8
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "3e15f5e1d0a677df9975619a86df94e6a7d52f52",
+  "prompts": {},
+  "sessions": {
+    "s_ae6aafd35278bf": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "4772fd40-59e4-4ac5-bbe8-34d4e121e189",
+        "model": "unknown"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
