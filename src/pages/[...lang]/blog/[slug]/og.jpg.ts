@@ -35,12 +35,13 @@ type Props = {
 export async function GET({ props }: { props: Props }) {
   const { post } = props;
 
-  const pngBuffer = await generateOgImage(post);
+  const jpegBuffer = await generateOgImage(post);
 
-  return new Response(new Uint8Array(pngBuffer), {
+  return new Response(new Uint8Array(jpegBuffer), {
+    // No Cache-Control here: the card is prerendered at build time, so Pages
+    // serves it as a static asset and public/_headers owns its cache policy.
     headers: {
-      'Content-Type': 'image/png',
-      'Cache-Control': 'public, max-age=31536000, immutable',
+      'Content-Type': 'image/jpeg',
     },
   });
 }

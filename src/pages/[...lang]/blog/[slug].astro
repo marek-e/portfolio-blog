@@ -67,7 +67,7 @@ const readingTime = estimateReadingTime(post.body ?? '');
 <Layout
   title={`${post.data.title} | ${t.blog.title}`}
   description={post.data.description}
-  image={new URL(`${Astro.url.pathname.replace(/\/$/, '')}/og.png`, Astro.site).toString()}
+  image={new URL(`${Astro.url.pathname.replace(/\/$/, '')}/og.jpg`, Astro.site).toString()}
 >
   <script
     is:inline
