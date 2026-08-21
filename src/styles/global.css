@@ -194,6 +194,19 @@
       transform: rotate(4deg);
     }
   }
+
+  /* Per-dot lift for the post actions trigger, staggered by an inline delay so
+     the three dots read as one wave rather than a single jumping block */
+  --animate-dot-bounce: dot-bounce 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  @keyframes dot-bounce {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-3px);
+    }
+  }
 }
 
 @utility shadow-code {

@@ -2,7 +2,7 @@
 
 import { useRef, useState } from 'react';
 import { HugeiconsIcon } from '@hugeicons/react';
-import { Check, Copy01Icon, MoreHorizontalIcon, RssIcon } from '@hugeicons/core-free-icons';
+import { Check, Copy01Icon, RssIcon } from '@hugeicons/core-free-icons';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -40,6 +40,28 @@ function writeWhilePending(pending: Promise<string>): Promise<void> {
       // They are also the ones lenient about activation, so awaiting the text and
       // writing it plainly still works.
       .catch(() => pending.then((text) => navigator.clipboard.writeText(text)))
+  );
+}
+
+/**
+ * The trigger's three dots, drawn here rather than taken from the icon set: the
+ * packaged MoreHorizontal icon puts all three in a single path, and each dot has
+ * to be its own element to bounce on its own beat.
+ */
+function MoreHorizontalDots() {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="size-4 shrink-0">
+      {[6, 12, 18].map((cx, index) => (
+        <circle
+          key={cx}
+          cx={cx}
+          cy="12.5"
+          r="2"
+          className="motion-safe:group-hover:animate-dot-bounce"
+          style={{ animationDelay: `${index * 90}ms` }}
+        />
+      ))}
+    </svg>
   );
 }
 
@@ -126,9 +148,9 @@ export function PostActionsMenu({
         aria-label={triggerLabel}
         onPointerEnter={warm}
         onFocus={warm}
-        className="group text-muted-foreground hover:text-primary data-popup-open:text-primary flex shrink-0 cursor-pointer items-center rounded-md border border-transparent px-3 py-1.5 text-sm transition-colors hover:border-current data-popup-open:border-current"
+        className="group border-border text-muted-foreground hover:text-primary data-popup-open:text-primary flex shrink-0 cursor-pointer items-center rounded-md border px-3 py-1.5 text-sm transition-colors hover:border-current data-popup-open:border-current"
       >
-        <HugeiconsIcon icon={MoreHorizontalIcon} strokeWidth={2} className="size-4" />
+        <MoreHorizontalDots />
       </DropdownMenuTrigger>
 
       <DropdownMenuContent align="end" className="w-auto min-w-52">
