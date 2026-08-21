@@ -4,6 +4,7 @@ import { readFile } from 'node:fs/promises';
 import type { CollectionEntry } from 'astro:content';
 import { estimateReadingTime } from '@/lib/blog';
 import { getTranslations } from '@/i18n';
+import type { Lang } from '@/i18n/config';
 
 type BlogPost = CollectionEntry<'blog'>;
 
@@ -18,7 +19,7 @@ const assetPromises = new Map<string, Promise<string>>();
 
 // Every asset is read from disk, not from the deployed site, so builds don't
 // depend on them already being live
-function loadAsset(key: 'background' | 'logo' | 'avatar') {
+function loadAsset(key: 'background' | 'logo' | 'portrait') {
   let promise = assetPromises.get(key);
 
   if (!promise) {
@@ -33,7 +34,7 @@ function loadAsset(key: 'background' | 'logo' | 'avatar') {
   return promise;
 }
 
-async function encodeAsset(key: 'background' | 'logo' | 'avatar') {
+async function encodeAsset(key: 'background' | 'logo' | 'portrait') {
   if (key === 'logo') {
     const source = await readFile('public/favicon.svg');
     return `data:image/svg+xml;base64,${source.toString('base64')}`;
@@ -43,8 +44,8 @@ async function encodeAsset(key: 'background' | 'logo' | 'avatar') {
   // below were measured on its pixels at this exact encoding.
   const { file, resize, quality } =
     key === 'background'
-      ? { file: 'public/bg-dark-v3.jpg', resize: [1200, 630] as const, quality: 80 }
-      : { file: 'public/images/mareke.jpg', resize: [160, 160] as const, quality: 84 };
+      ? { file: 'public/bg-light-v3.jpg', resize: [1200, 630] as const, quality: 80 }
+      : { file: 'public/images/mareke.jpg', resize: [320, 320] as const, quality: 88 };
 
   const source = await readFile(file);
   const encoded = await sharp(source)
@@ -76,52 +77,71 @@ async function loadFonts() {
   return { geistRegular, geistBold };
 }
 
-export async function generateOgImage(post: BlogPost): Promise<Buffer> {
+type CardContent = {
+  /** Short, uppercased framing above the headline */
+  kicker?: string;
+  headline: string;
+  headlineSize?: number;
+  headlineClamp?: number;
+  /** One line of value copy under the headline */
+  tagline?: string;
+  /** Topic chips, for the site-level cards */
+  pills?: string[];
+  /** Avatar + name + meta row, for post cards */
+  byline?: { name: string; meta?: string };
+  /** Large portrait on the right, for the site-level cards */
+  portrait?: boolean;
+};
+
+// The card is text over a photograph, so contrast can't be left to the
+// artwork: a veil carries it. It is strongest on the left and feathers out to
+// the right so the sunrise still reads as a photograph rather than a wash.
+// That gradient is why every text element lives inside COLUMN_WIDTH - past it
+// the veil thins and the floors below stop holding. Measured across the whole
+// column, so they hold whatever the headline length pushes the layout to:
+//   #17130f headline/name -> 11.77:1 (needs 4.5)
+//   #4a4038 tagline/meta  ->  6.43:1 (needs 4.5)
+//   #7a3c00 pill labels   ->  5.41:1 (needs 4.5)
+//   #a85200 kicker        ->  3.46:1 (needs 3.0, 28px bold)
+// Re-measure before widening the column, softening the veil, or swapping the
+// artwork for something brighter.
+const COLUMN_WIDTH = 840;
+const VEIL =
+  'linear-gradient(100deg, rgba(253,250,246,0.97) 0%, rgba(253,250,246,0.94) 58%, rgba(253,250,246,0.62) 74%, rgba(253,250,246,0.08) 100%)';
+const INK = '#17130f';
+const MUTED = '#4a4038';
+const ACCENT = '#a85200';
+const PILL_INK = '#7a3c00';
+
+// Everything is sized for the width feeds actually render the card at. Slack
+// shows the 1200px card at ~360px, so anything under ~28px here lands below
+// 9px on screen and reads as noise - which is why no card repeats its page
+// description: the unfurl already shows it as selectable text next to the
+// image.
+async function renderCard({
+  kicker,
+  headline,
+  headlineSize = 66,
+  headlineClamp = 3,
+  tagline,
+  pills,
+  byline,
+  portrait,
+}: CardContent): Promise<Buffer> {
   const { geistRegular, geistBold } = await loadFonts();
-  const [backgroundUrl, logoUrl, avatarUrl] = await Promise.all([
+  const [backgroundUrl, logoUrl, portraitUrl] = await Promise.all([
     loadAsset('background'),
     loadAsset('logo'),
-    loadAsset('avatar'),
+    loadAsset('portrait'),
   ]);
 
-  const lang = post.id.split('/')[0] === 'en' ? 'en' : 'fr';
-  const t = getTranslations(lang);
-  const title = post.data.title;
-  // One legible topic beats three chips nobody can read at feed size
-  const topic = post.data.tags?.[0];
-  const readingTime = `${estimateReadingTime(post.body ?? '')} ${t.blog.minRead}`;
-
-  // The card is text over a photograph, so contrast can't be left to the
-  // artwork: a scrim carries it. These values are measured against the darkest
-  // and lightest pixels of the scrimmed background anywhere text can land, so
-  // the floors hold whatever the title length pushes the layout to:
-  //   #fafafa title    -> 5.77:1 (needs 3.0, 78px bold)
-  //   #eeecf4 meta     -> 5.14:1 (needs 4.5)
-  //   #cdbcff topic    -> 3.51:1 (needs 3.0, 34px bold)
-  // The floors are set by the moon, the brightest thing under the scrim.
-  // Dropping the scrim opacity, or swapping in lighter artwork, invalidates
-  // them - re-measure before touching either.
-  const scrim =
-    'linear-gradient(180deg, rgba(11,9,16,0.58) 0%, rgba(11,9,16,0.70) 45%, rgba(11,9,16,0.84) 100%)';
-  const brandColor = '#cdbcff';
-  const textColor = '#fafafa';
-  const mutedColor = '#eeecf4';
-
-  // Everything on the card is sized for the width feeds actually render it at.
-  // Slack shows the 1200px card at ~360px, so anything under ~34px here lands
-  // below 10px on screen and reads as noise - which is why the post
-  // description is not repeated on the card: the unfurl already shows it as
-  // selectable text next to the image.
   const svg = await satori(
     <div
       style={{
         height: '100%',
         width: '100%',
         display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between',
         backgroundImage: `url('${backgroundUrl}')`,
-        padding: '56px 80px',
         position: 'relative',
       }}
     >
@@ -132,82 +152,146 @@ export async function generateOgImage(post: BlogPost): Promise<Buffer> {
           left: 0,
           width: '1200px',
           height: '630px',
-          backgroundImage: scrim,
+          backgroundImage: VEIL,
         }}
+      />
+
+      {portrait && (
+        <img
+          style={{
+            position: 'absolute',
+            top: '175px',
+            right: '74px',
+            borderRadius: '150px',
+            border: '6px solid rgba(255,255,255,0.85)',
+          }}
+          src={portraitUrl}
+          alt="Marek Elmayan"
+          width={280}
+          height={280}
+        />
+      )}
+
+      <img
+        style={{ position: 'absolute', top: '44px', right: '60px' }}
+        src={logoUrl}
+        alt="Marek Elmayan's logo"
+        height={76}
       />
 
       <div
         style={{
           display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
-          width: '100%',
+          flexDirection: 'column',
+          width: `${COLUMN_WIDTH}px`,
+          height: '630px',
+          padding: '58px 72px',
+          justifyContent: 'center',
+          gap: '24px',
         }}
       >
-        {topic && (
+        {kicker && (
           <div
             style={{
-              fontSize: '34px',
+              fontSize: '28px',
               fontWeight: 700,
-              color: brandColor,
+              color: ACCENT,
               fontFamily: 'Geist',
               letterSpacing: '4px',
               textTransform: 'uppercase',
             }}
           >
-            {topic}
+            {kicker}
           </div>
         )}
 
-        <img style={{ marginLeft: 'auto' }} src={logoUrl} alt="Marek Elmayan's logo" height={92} />
-      </div>
-
-      <div
-        style={{
-          fontSize: '78px',
-          fontWeight: 700,
-          color: textColor,
-          fontFamily: 'Geist',
-          lineHeight: 1.08,
-          maxWidth: '1040px',
-          display: 'block',
-          lineClamp: 3,
-        }}
-      >
-        {title}
-      </div>
-
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
-          gap: '20px',
-          width: '100%',
-        }}
-      >
-        <img
-          style={{ borderRadius: '40px', border: '3px solid rgba(255,255,255,0.35)' }}
-          src={avatarUrl}
-          alt="Marek Elmayan"
-          width={72}
-          height={72}
-        />
-
-        <div style={{ fontSize: '34px', fontWeight: 700, color: textColor, fontFamily: 'Geist' }}>
-          Marek Elmayan
-        </div>
-
         <div
           style={{
-            fontSize: '34px',
-            color: mutedColor,
+            fontSize: `${headlineSize}px`,
+            fontWeight: 700,
+            color: INK,
             fontFamily: 'Geist',
-            marginLeft: 'auto',
+            lineHeight: 1.05,
+            display: 'block',
+            lineClamp: headlineClamp,
           }}
         >
-          {readingTime}
+          {headline}
         </div>
+
+        {tagline && (
+          <div
+            style={{
+              fontSize: '32px',
+              color: MUTED,
+              fontFamily: 'Geist',
+              lineHeight: 1.3,
+              display: 'block',
+              lineClamp: 2,
+            }}
+          >
+            {tagline}
+          </div>
+        )}
+
+        {pills && pills.length > 0 && (
+          <div style={{ display: 'flex', flexDirection: 'row', gap: '12px', flexWrap: 'wrap' }}>
+            {pills.map((label) => (
+              <div
+                key={label}
+                style={{
+                  padding: '8px 22px',
+                  borderRadius: '24px',
+                  backgroundColor: 'rgba(220,119,2,0.13)',
+                  border: '2px solid rgba(168,82,0,0.45)',
+                  color: PILL_INK,
+                  fontSize: '28px',
+                  fontWeight: 700,
+                  fontFamily: 'Geist',
+                }}
+              >
+                {label}
+              </div>
+            ))}
+          </div>
+        )}
+
+        {byline && (
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center',
+              gap: '18px',
+              width: '100%',
+            }}
+          >
+            <img
+              style={{ borderRadius: '40px', border: '3px solid rgba(168,82,0,0.35)' }}
+              src={portraitUrl}
+              alt="Marek Elmayan"
+              width={72}
+              height={72}
+            />
+
+            <div style={{ fontSize: '30px', fontWeight: 700, color: INK, fontFamily: 'Geist' }}>
+              {byline.name}
+            </div>
+
+            {byline.meta && (
+              <div
+                style={{
+                  fontSize: '30px',
+                  color: MUTED,
+                  fontFamily: 'Geist',
+                  marginLeft: 'auto',
+                }}
+              >
+                {byline.meta}
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </div>,
     {
@@ -230,8 +314,60 @@ export async function generateOgImage(post: BlogPost): Promise<Buffer> {
     }
   );
 
-  // Convert SVG to PNG using Sharp
-  const png = await sharp(Buffer.from(svg)).png().toBuffer();
+  // Convert SVG to PNG using Sharp. palette must stay off: sharp's higher
+  // effort levels quantise to 256 colours, which bands the sky and shifts the
+  // pixels the contrast floors above were measured against.
+  return sharp(Buffer.from(svg)).png({ compressionLevel: 9, palette: false }).toBuffer();
+}
 
-  return png;
+export async function generateOgImage(post: BlogPost): Promise<Buffer> {
+  const lang = post.id.split('/')[0] === 'en' ? 'en' : 'fr';
+  const t = getTranslations(lang);
+
+  return renderCard({
+    // One legible topic beats three chips nobody can read at feed size
+    kicker: post.data.tags?.[0],
+    headline: post.data.title,
+    headlineSize: 62,
+    headlineClamp: 4,
+    byline: {
+      name: 'Marek Elmayan',
+      meta: `${estimateReadingTime(post.body ?? '')} ${t.blog.minRead}`,
+    },
+  });
+}
+
+/**
+ * The site-level cards for the home page and the blog index. Generated from
+ * the same shell as the post cards so they can't drift apart the way the
+ * hand-made PNGs did - those were still sitting on the v2 artwork.
+ */
+export async function generateSiteOgImage({
+  lang,
+  page,
+}: {
+  lang: Lang;
+  page: 'home' | 'blog';
+}): Promise<Buffer> {
+  const t = getTranslations(lang);
+  const topics = t.hero.badges.slice(0, 4).map((badge) => badge.replace('#', ''));
+
+  if (page === 'blog') {
+    return renderCard({
+      kicker: t.blog.title,
+      headline: t.blog.subtitle,
+      headlineSize: 56,
+      pills: topics,
+      portrait: true,
+    });
+  }
+
+  return renderCard({
+    kicker: 'Portfolio · Blog',
+    // Satori has no emoji font loaded, so the waving hand would render blank
+    headline: t.hero.headline.replace(/\p{Extended_Pictographic}/gu, '').trim(),
+    tagline: t.hero.subtitle.split('\n')[0],
+    pills: topics,
+    portrait: true,
+  });
 }
