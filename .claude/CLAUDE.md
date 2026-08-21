@@ -16,6 +16,13 @@ pnpm format       # Prettier
 /validate         # Run format + lint + build checks
 ```
 
+## Code Style
+
+Do not add comments. Write code that explains itself through naming and
+structure instead. Rationale for a change belongs in the commit message or PR
+description, not in the source. Leave existing comments alone unless the code
+they describe is being removed.
+
 ## Critical Gotcha
 
 shadcn components using React Context (Dialog, Sheet, Select, DropdownMenu) **must be wrapped** in a single `.tsx` file. Astro creates separate islands that can't share context.

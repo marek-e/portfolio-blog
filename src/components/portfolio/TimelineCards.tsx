@@ -178,7 +178,8 @@ function CardContent({
               <img
                 src={entry.logo}
                 alt={`${entry.organization} logo`}
-                className={`h-8 object-cover ${entry.logoInverted ? 'dark:invert' : ''}`}
+                className={`h-8 w-auto object-contain ${entry.logoInverted ? 'dark:invert' : ''}`}
+                width={entry.logoWidth}
                 height={32}
                 loading="lazy"
               />
@@ -187,7 +188,8 @@ function CardContent({
             <img
               src={entry.logo}
               alt={`${entry.organization} logo`}
-              className={`h-8 object-cover ${entry.logoInverted ? 'dark:invert' : ''}`}
+              className={`h-8 w-auto object-contain ${entry.logoInverted ? 'dark:invert' : ''}`}
+              width={entry.logoWidth}
               height={32}
               loading="lazy"
             />

@@ -20,6 +20,8 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
     build: {
+      assetsInlineLimit: (filePath) =>
+        /\.(woff2?|ttf|otf|eot)$/i.test(filePath) ? false : undefined,
       rollupOptions: {
         output: {
           manualChunks: (id) => {
