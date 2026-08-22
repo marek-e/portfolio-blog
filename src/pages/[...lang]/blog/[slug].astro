@@ -104,8 +104,6 @@ const rssUrl = lang === 'fr' ? '/rss.xml' : '/en/rss.xml';
         </BreadcrumbList>
       </Breadcrumb>
       {
-        /* Both actions share a menu, unless the post opts out of the markdown
-           copy — a single-item dropdown is worse than the plain RSS link */
         post.data.copyMarkdown ? (
           <PostActionsMenu
             copyUrl={translatePath(`/blog/${slug}.md`)}

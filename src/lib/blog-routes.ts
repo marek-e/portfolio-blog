@@ -13,16 +13,6 @@ export type BlogPostRoute = {
   };
 };
 
-/**
- * One route per blog post path, and the post that serves it.
- *
- * English lives under a prefix, at /en/blog/<slug>/. The default locale is
- * unprefixed, and the post behind it is picked explicitly — French where it
- * exists, English as a fallback for an untranslated post — rather than pushing
- * both translations at the same path and letting Astro drop one by collection
- * order. Every generator hanging off a post path builds on this, so the page,
- * its OG card and its markdown never disagree about which post they describe.
- */
 export async function getBlogPostRoutes(): Promise<BlogPostRoute[]> {
   const posts = await getCollection('blog');
   const bySlug = (lang: string) =>

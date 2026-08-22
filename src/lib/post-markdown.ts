@@ -4,15 +4,10 @@ import type { Lang } from '@/i18n/config';
 type BlogPost = CollectionEntry<'blog'>;
 
 interface PostToMarkdownOptions {
-  /** Absolute URL of the rendered post, used in the header and in media notes */
   url: string;
   lang: Lang;
 }
 
-/**
- * Strings that end up *inside* the generated markdown. They describe content
- * rather than UI chrome, so they live here instead of src/i18n/ui.ts.
- */
 const labels: Record<Lang, Record<string, string>> = {
   fr: {
     source: 'Source',
@@ -34,7 +29,6 @@ const labels: Record<Lang, Record<string, string>> = {
   },
 };
 
-/** Callout variants map onto GitHub's alert syntax, which most readers render */
 const alertByVariant: Record<string, string> = {
   info: 'NOTE',
   tip: 'TIP',
@@ -45,10 +39,6 @@ const alertByVariant: Record<string, string> = {
 
 const placeholder = (index: number) => `%%VERBATIM${index}%%`;
 
-/**
- * Holds verbatim chunks (code blocks, generated fences) out of harm's way while
- * the JSX transforms run, then puts them back untouched.
- */
 class VerbatimStore {
   private readonly chunks: string[] = [];
 
@@ -58,7 +48,6 @@ class VerbatimStore {
   }
 
   restore(text: string): string {
-    // Restore in reverse so a chunk that itself holds a placeholder still resolves
     return this.chunks.reduceRight(
       (acc, chunk, index) => acc.replaceAll(placeholder(index), chunk),
       text
@@ -66,11 +55,6 @@ class VerbatimStore {
   }
 }
 
-/**
- * Replace fenced code blocks with placeholders. Fences are matched line by line
- * rather than with a regex because posts nest a ``` fence inside a ```` one, so
- * the closing fence has to be at least as long as the one that opened the block.
- */
 function protectFencedCode(source: string, store: VerbatimStore): string {
   const output: string[] = [];
   let openingFence: string | null = null;
@@ -103,7 +87,6 @@ function protectFencedCode(source: string, store: VerbatimStore): string {
     }
   }
 
-  // An unterminated fence is left as-is rather than swallowed
   if (openingFence !== null) output.push(...block);
 
   return output.join('\n');
@@ -114,7 +97,6 @@ function getAttribute(attributes: string, name: string): string | undefined {
 }
 
 function dedent(text: string): string {
-  // Trims blank lines, including the whitespace-only ones that JSX indentation leaves behind
   const lines = text.replace(/^(?:[ \t]*\n)+|(?:\n[ \t]*)+$/g, '').split('\n');
   const indents = lines.filter((line) => line.trim()).map((line) => line.match(/^ */)![0].length);
   const shortest = indents.length ? Math.min(...indents) : 0;
@@ -128,29 +110,10 @@ function blockquote(text: string): string {
     .join('\n');
 }
 
-/**
- * Turns `<Mermaid chart={`...`} title caption />` into a mermaid fence, and
- * protects inline code spans, in a single left-to-right scan.
- *
- * The two belong in one pass because either construct can contain the other's
- * opening delimiter: a chart written on one line is a backtick span as far as
- * inline code is concerned, while a code span is exactly where a post writes a
- * literal `<Mermaid />` example it does not want rendered. Running either pass
- * first corrupts the other's input, so whichever one opens earlier in the source
- * wins the overlap — which is the reading a human gives it too.
- *
- * The Mermaid alternative is anchored on the chart's template literal rather
- * than on the first `/>`: charts contain `<br/>` for line breaks inside diagram
- * labels, so a lazy `[\s\S]*?\/>` would stop there and leak the rest of the
- * element. Inline code stays single-line so multi-line JSX template literals
- * survive it.
- */
 function transformMermaidAndProtectInlineCode(source: string, store: VerbatimStore): string {
   return source.replace(
     /<Mermaid\b([^`>]*)chart=\{`([\s\S]*?)`\}([^>]*?)\/>|(`+)[^\n]*?\4/g,
     (match, before: string, chart: string | undefined, after: string) => {
-      // No chart means the inline-code alternative matched, so the span — Mermaid
-      // example and all — is held back verbatim instead of transformed
       if (chart === undefined) return store.protect(match);
 
       const attributes = `${before} ${after}`;
@@ -165,10 +128,6 @@ function transformMermaidAndProtectInlineCode(source: string, store: VerbatimSto
   );
 }
 
-/**
- * `<Figure src={imported} alt caption />` becomes a note. The `src` is an
- * imported asset binding, so no URL is resolvable at this layer.
- */
 function transformFigure(source: string, lang: Lang): string {
   return source.replace(/^[ \t]*<Figure\b([\s\S]*?)\/>[ \t]*$/gm, (_match, attributes: string) => {
     const alt = getAttribute(attributes, 'alt');
@@ -179,12 +138,6 @@ function transformFigure(source: string, lang: Lang): string {
   });
 }
 
-/**
- * Bare `<video>` / `<img>` elements get the same treatment as Figure. Videos
- * carry their description in `aria-label`, so that is the richest source of alt
- * text. The leading indentation is consumed too, since these sit inside layout
- * wrappers that are about to be dropped.
- */
 function transformMediaElements(source: string, lang: Lang): string {
   return source.replace(
     /^[ \t]*<(video|img)\b([\s\S]*?)\/>[ \t]*$/gm,
@@ -229,7 +182,6 @@ function transformCitations(source: string): string {
   );
 }
 
-/** Collapsible sections keep their title as a bold line, then their content */
 function transformToggles(source: string): string {
   return source.replace(
     /<(Toggle|CodeToggle)\b([^>]*)>([\s\S]*?)<\/\1>/g,
@@ -252,13 +204,11 @@ function transformPastelCards(source: string): string {
         const title = getAttribute(attributes, 'title');
         const heading = [emoji, title].filter(Boolean).join(' ');
 
-        // Padded with blank lines so consecutive cards stay separate blocks
         return heading ? `\n**${heading}**\n\n${dedent(body)}\n` : `\n${dedent(body)}\n`;
       }
     );
 }
 
-/** The file tree's children are already a markdown list, so they pass through */
 function transformFileTrees(source: string): string {
   return source.replace(/<FileTree\b[^>]*>([\s\S]*?)<\/FileTree>/g, (_match, body: string) =>
     dedent(body)
@@ -274,17 +224,10 @@ function transformInlineElements(source: string): string {
     .replace(/<br\s*\/?>/g, '\n');
 }
 
-/** Layout-only wrappers are dropped, their children kept */
 function dropWrapperElements(source: string): string {
   return source.replace(/<\/?(?:div|p|span|figure|figcaption)\b[^>]*>/g, '');
 }
 
-/**
- * Anything still left is an MDX component this transform does not know about.
- * Self-closing tags are interactive islands with no textual equivalent; paired
- * tags are dropped so future components degrade to their children rather than
- * leaking JSX.
- */
 function handleUnknownComponents(source: string, options: PostToMarkdownOptions): string {
   return source
     .replace(
@@ -309,23 +252,16 @@ function buildHeader(post: BlogPost, options: PostToMarkdownOptions): string {
   return [`# ${title}`, `> ${description}`, meta.join('\n'), '---'].join('\n\n');
 }
 
-/**
- * Turn a post's MDX body into plain markdown: imports stripped, every site
- * component converted to a markdown equivalent, no JSX left behind.
- */
 export function postToMarkdown(post: BlogPost, options: PostToMarkdownOptions): string {
   const store = new VerbatimStore();
 
-  // The glob loader already drops frontmatter; this only guards against a change there
   let body = (post.body ?? '').replace(/^---\n[\s\S]*?\n---\n/, '');
 
   body = protectFencedCode(body, store);
   body = transformMermaidAndProtectInlineCode(body, store);
 
-  // Imports only live at the top level, and code samples containing them are protected by now
   body = body.replace(/^(?:import|export)\s[^\n]*\n/gm, '');
 
-  // MDX expression comments such as {/* prettier-ignore */} are tooling directives
   body = body
     .replace(/^[ \t]*\{\/\*[\s\S]*?\*\/\}[ \t]*\n/gm, '')
     .replace(/\{\/\*[\s\S]*?\*\/\}/g, '');

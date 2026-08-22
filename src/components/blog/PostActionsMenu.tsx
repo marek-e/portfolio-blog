@@ -11,19 +11,9 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { cn } from '@/lib/utils';
 
-/**
- * Whether the clipboard accepts a ClipboardItem, which is what allows the write
- * to be issued synchronously with data that is still in flight.
- */
 const supportsPromisedClipboardItem = () =>
   typeof ClipboardItem !== 'undefined' && typeof navigator.clipboard?.write === 'function';
 
-/**
- * Writes plain text to the clipboard, rejecting rather than throwing when there
- * is no clipboard to write to: `navigator.clipboard` is undefined outside a
- * secure context, and a synchronous throw would escape the click handler
- * instead of reaching the caller's rejection handler.
- */
 function writeText(text: string): Promise<void> {
   if (typeof navigator.clipboard?.writeText !== 'function') {
     return Promise.reject(new Error('Clipboard unavailable'));
@@ -32,36 +22,20 @@ function writeText(text: string): Promise<void> {
   return navigator.clipboard.writeText(text);
 }
 
-/**
- * Copies markdown that has not arrived yet. The clipboard is handed the pending
- * promise rather than an awaited value: Safari treats an await inside the click
- * handler as the end of the click's user activation and rejects the write that
- * follows, whereas a ClipboardItem built on a promise is accepted there.
- */
 function writeWhilePending(pending: Promise<string>): Promise<void> {
   if (!supportsPromisedClipboardItem()) {
     return pending.then(writeText);
   }
 
-  return (
-    navigator.clipboard
-      .write([
-        new ClipboardItem({
-          'text/plain': pending.then((text) => new Blob([text], { type: 'text/plain' })),
-        }),
-      ])
-      // Browsers that take a ClipboardItem but not a promised value reject here.
-      // They are also the ones lenient about activation, so awaiting the text and
-      // writing it plainly still works.
-      .catch(() => pending.then(writeText))
-  );
+  return navigator.clipboard
+    .write([
+      new ClipboardItem({
+        'text/plain': pending.then((text) => new Blob([text], { type: 'text/plain' })),
+      }),
+    ])
+    .catch(() => pending.then(writeText));
 }
 
-/**
- * The trigger's three dots, drawn here rather than taken from the icon set: the
- * packaged MoreHorizontal icon puts all three in a single path, and each dot has
- * to be its own element to bounce on its own beat.
- */
 function MoreHorizontalDots() {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="size-4 shrink-0">
@@ -80,7 +54,6 @@ function MoreHorizontalDots() {
 }
 
 interface PostActionsMenuProps {
-  /** URL of the post's generated markdown file, e.g. /blog/my-post.md */
   copyUrl: string;
   rssUrl: string;
   triggerLabel: string;
@@ -89,11 +62,6 @@ interface PostActionsMenuProps {
   rssLabel: string;
 }
 
-/**
- * The post header's action menu. Trigger, content and items all live in this one
- * file: Astro would otherwise hydrate each part as its own island, and separate
- * islands cannot share the menu's React context (see .claude/CLAUDE.md).
- */
 export function PostActionsMenu({
   copyUrl,
   rssUrl,
@@ -106,11 +74,6 @@ export function PostActionsMenu({
   const pending = useRef<Promise<string> | null>(null);
   const markdown = useRef<string | null>(null);
 
-  /**
-   * Warms the cache on hover, focus or menu open so the copy is instant. Only an
-   * optimization — the click path below stays correct on a cold cache, which is
-   * what a tap gets, having none of a pointer's lead time.
-   */
   const prefetch = () => {
     pending.current ??= fetch(copyUrl)
       .then((response) => {
@@ -118,29 +81,19 @@ export function PostActionsMenu({
         return response.text();
       })
       .then((text) => {
-        // Kept as a resolved string so a click that follows needs no await at all
         markdown.current = text;
         return text;
       })
       .catch((error: unknown) => {
-        // Dropped rather than cached, so the next click retries instead of
-        // replaying the failure
         pending.current = null;
         throw error;
       });
     return pending.current;
   };
 
-  /**
-   * Warming only. The rejection is swallowed here so a hover over a post whose
-   * markdown is missing stays silent; the click path still sees the failure.
-   */
   const warm = () => void prefetch().catch(() => {});
 
   const handleCopy = () => {
-    // Warm is the common case, prefetch having run on hover, focus or open. The
-    // write is then issued straight from the click, with no promise in the way
-    // for a browser to weigh against the gesture that asked for it.
     const written =
       markdown.current === null ? writeWhilePending(prefetch()) : writeText(markdown.current);
 
@@ -149,7 +102,6 @@ export function PostActionsMenu({
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
       },
-      // A failed fetch or a blocked clipboard leaves the item idle
       () => setCopied(false)
     );
   };
@@ -166,7 +118,6 @@ export function PostActionsMenu({
       </DropdownMenuTrigger>
 
       <DropdownMenuContent align="end" className="w-auto min-w-52">
-        {/* Kept open on click so the copied state is visible where it was triggered */}
         <DropdownMenuItem closeOnClick={false} onClick={handleCopy} className="gap-2 px-2 py-1.5">
           <span className="relative size-4 shrink-0">
             <HugeiconsIcon
