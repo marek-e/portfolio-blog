@@ -1,0 +1,22 @@
+src/lib/post-markdown.ts
+  s_5d215c28e3d1c9::t_839dd8dfc6c417 314-319
+src/components/blog/PostActionsMenu.tsx
+  s_5d215c28e3d1c9::t_e64ddb3882d97e 14-20
+  s_5d215c28e3d1c9::t_cbc537f451224f 48-50,57,60-77,79-89
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "6cc57f78adbd036ddc417d7b1a8be074a7a2ec9f",
+  "prompts": {},
+  "sessions": {
+    "s_5d215c28e3d1c9": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d9806f21-33b7-47ee-ae1f-7d4d11d6f1aa",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
