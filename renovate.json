@@ -30,6 +30,11 @@
       "automerge": false
     },
     {
+      "description": "TS 7 dropped the JS compiler API that Volar and typescript-eslint need",
+      "matchPackageNames": ["typescript"],
+      "allowedVersions": "<7.0.0"
+    },
+    {
       "description": "Never automerge majors",
       "matchUpdateTypes": ["major"],
       "automerge": false
