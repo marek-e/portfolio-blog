@@ -19,6 +19,20 @@ const supportsPromisedClipboardItem = () =>
   typeof ClipboardItem !== 'undefined' && typeof navigator.clipboard?.write === 'function';
 
 /**
+ * Writes plain text to the clipboard, rejecting rather than throwing when there
+ * is no clipboard to write to: `navigator.clipboard` is undefined outside a
+ * secure context, and a synchronous throw would escape the click handler
+ * instead of reaching the caller's rejection handler.
+ */
+function writeText(text: string): Promise<void> {
+  if (typeof navigator.clipboard?.writeText !== 'function') {
+    return Promise.reject(new Error('Clipboard unavailable'));
+  }
+
+  return navigator.clipboard.writeText(text);
+}
+
+/**
  * Copies markdown that has not arrived yet. The clipboard is handed the pending
  * promise rather than an awaited value: Safari treats an await inside the click
  * handler as the end of the click's user activation and rejects the write that
@@ -26,7 +40,7 @@ const supportsPromisedClipboardItem = () =>
  */
 function writeWhilePending(pending: Promise<string>): Promise<void> {
   if (!supportsPromisedClipboardItem()) {
-    return pending.then((text) => navigator.clipboard.writeText(text));
+    return pending.then(writeText);
   }
 
   return (
@@ -39,7 +53,7 @@ function writeWhilePending(pending: Promise<string>): Promise<void> {
       // Browsers that take a ClipboardItem but not a promised value reject here.
       // They are also the ones lenient about activation, so awaiting the text and
       // writing it plainly still works.
-      .catch(() => pending.then((text) => navigator.clipboard.writeText(text)))
+      .catch(() => pending.then(writeText))
   );
 }
 
@@ -128,9 +142,7 @@ export function PostActionsMenu({
     // write is then issued straight from the click, with no promise in the way
     // for a browser to weigh against the gesture that asked for it.
     const written =
-      markdown.current === null
-        ? writeWhilePending(prefetch())
-        : navigator.clipboard.writeText(markdown.current);
+      markdown.current === null ? writeWhilePending(prefetch()) : writeText(markdown.current);
 
     written.then(
       () => {
