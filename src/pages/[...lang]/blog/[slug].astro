@@ -11,7 +11,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
-import { getCollection, render } from 'astro:content';
+import { render } from 'astro:content';
 import { getTranslations, defaultLang } from '@/i18n';
 import { getTranslatedPath } from '@/i18n/config';
 import { mdxComponents } from '@/components/mdx';
@@ -22,31 +22,11 @@ import { formatDate, estimateReadingTime, getTagColor } from '@/lib/blog';
 import { Icon } from '@/components/shared/Icon';
 import { ArrowLeft02Icon, HomeIcon, Link02Icon, RssIcon } from '@hugeicons/core-free-icons';
 import { Link } from '@/components/ui/button';
-
-type BlogPost = Awaited<ReturnType<typeof getCollection<'blog'>>>[number];
-
-type StaticPaths = {
-  params: {
-    lang: 'en' | undefined;
-    slug: string;
-  };
-  props: {
-    post: BlogPost;
-  };
-};
+import { PostActionsMenu } from '@/components/blog/PostActionsMenu';
+import { getBlogPostRoutes, type BlogPost } from '@/lib/blog-routes';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog');
-  const staticPaths: StaticPaths[] = [];
-  posts.forEach((post) => {
-    const [lang, slug] = post.id.split('/');
-
-    if (lang === 'en') {
-      staticPaths.push({ params: { lang: 'en', slug }, props: { post } });
-    }
-    staticPaths.push({ params: { lang: undefined, slug }, props: { post } });
-  });
-  return staticPaths;
+  return getBlogPostRoutes();
 }
 
 type Props = {
@@ -62,6 +42,8 @@ const translatePath = getTranslatedPath(lang);
 const { Content } = await render(post);
 
 const readingTime = estimateReadingTime(post.body ?? '');
+const slug = post.id.split('/').pop();
+const rssUrl = lang === 'fr' ? '/rss.xml' : '/en/rss.xml';
 ---
 
 <Layout
@@ -121,18 +103,32 @@ const readingTime = estimateReadingTime(post.body ?? '');
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
-      <a
-        href={lang === 'fr' ? '/rss.xml' : '/en/rss.xml'}
-        aria-label={t.aria.subscribeRss}
-        class="group text-muted-foreground hover:text-primary flex shrink-0 items-center gap-2 rounded-md border border-transparent px-3 py-1.5 text-sm transition-colors hover:border-current"
-      >
-        <Icon
-          icon={RssIcon}
-          strokeWidth={2}
-          className="group-hover:animate-wiggle size-4 transition-transform duration-300"
-        />
-        <span class="hidden sm:inline">RSS</span>
-      </a>
+      {
+        post.data.copyMarkdown ? (
+          <PostActionsMenu
+            copyUrl={translatePath(`/blog/${slug}.md`)}
+            rssUrl={rssUrl}
+            triggerLabel={t.aria.postActions}
+            copyLabel={t.blog.copyMarkdown}
+            copiedLabel={t.blog.copied}
+            rssLabel={t.aria.subscribeRss}
+            client:load
+          />
+        ) : (
+          <a
+            href={rssUrl}
+            aria-label={t.aria.subscribeRss}
+            class="group text-muted-foreground hover:text-primary flex shrink-0 items-center gap-2 rounded-md border border-transparent px-3 py-1.5 text-sm transition-colors hover:border-current"
+          >
+            <Icon
+              icon={RssIcon}
+              strokeWidth={2}
+              className="group-hover:animate-wiggle size-4 transition-transform duration-300"
+            />
+            <span class="hidden sm:inline">RSS</span>
+          </a>
+        )
+      }
     </div>
 
     <div class="bg-primary/80 mb-6 h-0.5 w-8 rounded-full"></div>
@@ -148,10 +144,7 @@ const readingTime = estimateReadingTime(post.body ?? '');
         </div>
 
         <h1 class="group text-4xl font-bold tracking-tight lg:text-5xl">
-          <a
-            href={translatePath(`/blog/${post.id.split('/').pop()}`)}
-            class="text-primary hover:text-primary/80"
-          >
+          <a href={translatePath(`/blog/${slug}`)} class="text-primary hover:text-primary/80">
             {post.data.title}
           </a>
           <span

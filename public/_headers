@@ -74,3 +74,12 @@
 /favicon.svg
   ! Cache-Control
   Cache-Control: public, max-age=2592000
+
+# Per-post markdown (the "copy as markdown" source) served as plain text.
+# Cloudflare Pages types .md as text/markdown, which the nosniff header above
+# turns into a download instead of a page.
+/blog/*.md
+  Content-Type: text/plain; charset=utf-8
+
+/en/blog/*.md
+  Content-Type: text/plain; charset=utf-8

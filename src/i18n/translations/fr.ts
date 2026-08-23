@@ -89,6 +89,7 @@ export const fr: UITranslations = {
     subscribeRss: "S'abonner au flux RSS",
     homeLink: "Marek Elmayan - retour à l'accueil",
     copyEmail: "Copier l'adresse email",
+    postActions: "Plus d'actions",
   },
   designSystem: {
     pageTitle: 'Design System | melmayan.fr',
@@ -121,6 +122,8 @@ export const fr: UITranslations = {
     updatedOn: 'Mis à jour le',
     minRead: 'min de lecture',
     noPosts: "Pas encore d'articles. Revenez bientôt !",
+    copyMarkdown: 'Copier en Markdown',
+    copied: 'Copié !',
   },
   devCard: {
     cardTitle: 'Carte de développeur',

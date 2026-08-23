@@ -78,6 +78,7 @@ export interface UITranslations {
     subscribeRss: string;
     homeLink: string;
     copyEmail: string;
+    postActions: string;
   };
   designSystem: {
     pageTitle: string;
@@ -109,6 +110,8 @@ export interface UITranslations {
     updatedOn: string;
     minRead: string;
     noPosts: string;
+    copyMarkdown: string;
+    copied: string;
   };
   devCard: {
     cardTitle: string;
