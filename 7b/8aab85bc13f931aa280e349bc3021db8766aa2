@@ -1,0 +1,94 @@
+.claude/settings.local.json
+  s_3d8a2a4bb65f4f::t_f989c00c1c2ea2 6,8,10,12
+.agents/skills/technical-strategy/SKILL.md
+  s_3d8a2a4bb65f4f::t_7ff26d3a8a05a5 1-2,4-153
+  s_3d8a2a4bb65f4f::t_0c8073245d7ea5 3
+.agents/skills/learn/agents/openai.yaml
+  s_3d8a2a4bb65f4f::t_4d56e8272eb4f6 1-2
+.agents/skills/prime-context/SKILL.md
+  s_3d8a2a4bb65f4f::t_0c8073245d7ea5 3
+  s_3d8a2a4bb65f4f::t_7ff26d3a8a05a5 1-2,4-17
+.agents/skills/fix-pr-comments/SKILL.md
+  s_3d8a2a4bb65f4f::t_ef9c062948156d 1-2,4-48
+  s_3d8a2a4bb65f4f::t_0c8073245d7ea5 3
+.agents/skills/commit/agents/openai.yaml
+  s_3d8a2a4bb65f4f::t_4d56e8272eb4f6 1-2
+.agents/skills/web-research-synthesizer/agents/openai.yaml
+  s_3d8a2a4bb65f4f::t_4d56e8272eb4f6 1-2
+.agents/skills/validate/agents/openai.yaml
+  s_3d8a2a4bb65f4f::t_4d56e8272eb4f6 1-2
+.agents/skills/remove-ai-code-slope/agents/openai.yaml
+  s_3d8a2a4bb65f4f::t_4d56e8272eb4f6 1-2
+AGENTS.md
+  s_3d8a2a4bb65f4f::t_02f643f3799c7f 2-15,18-44
+  s_3d8a2a4bb65f4f::t_f989c00c1c2ea2 1,16-17,45-50
+.agents/skills/commit/SKILL.md
+  s_3d8a2a4bb65f4f::t_0c8073245d7ea5 3
+  s_3d8a2a4bb65f4f::t_7ff26d3a8a05a5 1-2,4-153
+.agents/skills/kaizen-conv/SKILL.md
+  s_3d8a2a4bb65f4f::t_0c8073245d7ea5 3
+  s_3d8a2a4bb65f4f::t_ef9c062948156d 57,78
+  s_3d8a2a4bb65f4f::t_7ff26d3a8a05a5 1-2,4-56,58-67,69-77,79-106
+  s_3d8a2a4bb65f4f::t_3b9737af875f73 68
+.agents/skills/kaizen-conv/agents/openai.yaml
+  s_3d8a2a4bb65f4f::t_4d56e8272eb4f6 1-2
+.agents/skills/learn/SKILL.md
+  s_3d8a2a4bb65f4f::t_ef9c062948156d 114
+  s_3d8a2a4bb65f4f::t_0c8073245d7ea5 3
+  s_3d8a2a4bb65f4f::t_7ff26d3a8a05a5 1-2,4-113
+.agents/skills/fix-pr-comments/agents/openai.yaml
+  s_3d8a2a4bb65f4f::t_4d56e8272eb4f6 1-2
+.agents/skills/prime-context/agents/openai.yaml
+  s_3d8a2a4bb65f4f::t_4d56e8272eb4f6 1-2
+.agents/skills/update-docs/agents/openai.yaml
+  s_3d8a2a4bb65f4f::t_4d56e8272eb4f6 1-2
+.agents/skills/validate/SKILL.md
+  s_3d8a2a4bb65f4f::t_7ff26d3a8a05a5 1-2,4-60
+  s_3d8a2a4bb65f4f::t_0c8073245d7ea5 3
+.agents/skills/web-research-synthesizer/SKILL.md
+  s_3d8a2a4bb65f4f::t_50375cdbf2431b 1-2,4-29
+  s_3d8a2a4bb65f4f::t_0c8073245d7ea5 3
+.claude/agents/web-research-synthesizer.md
+  s_3d8a2a4bb65f4f::t_50375cdbf2431b 3,9-11
+.codex/agents/web-research-synthesizer.toml
+  s_3d8a2a4bb65f4f::t_50375cdbf2431b 1-7
+.agents/skills/dantotsu/agents/openai.yaml
+  s_3d8a2a4bb65f4f::t_4d56e8272eb4f6 1-2
+.claude/hooks/capture-error.mjs
+  s_3d8a2a4bb65f4f::t_ef9c062948156d 8
+  s_3d8a2a4bb65f4f::t_f989c00c1c2ea2 18
+.agents/skills/blog-writer/SKILL.md
+  s_3d8a2a4bb65f4f::t_f989c00c1c2ea2 23-24,26,75-78,83-89,91,93,95,97,99,105-115
+  s_3d8a2a4bb65f4f::t_30ff4df68d50e1 116-118
+.agents/skills/remove-ai-code-slope/SKILL.md
+  s_3d8a2a4bb65f4f::t_0c8073245d7ea5 3
+  s_3d8a2a4bb65f4f::t_7ff26d3a8a05a5 1-2,4-17
+.agents/skills/update-docs/SKILL.md
+  s_3d8a2a4bb65f4f::t_7ff26d3a8a05a5 1-2,4-87
+  s_3d8a2a4bb65f4f::t_0c8073245d7ea5 3
+.agents/skills/dantotsu/SKILL.md
+  s_3d8a2a4bb65f4f::t_7ff26d3a8a05a5 1-2,4-175
+  s_3d8a2a4bb65f4f::t_0c8073245d7ea5 3
+.agents/skills/technical-strategy/agents/openai.yaml
+  s_3d8a2a4bb65f4f::t_4d56e8272eb4f6 1-2
+.claude/skills
+  s_3d8a2a4bb65f4f::t_a49297fcad2008 1
+CLAUDE.md
+  s_3d8a2a4bb65f4f::t_1ae16ef14be7a9 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "7b8aab85bc13f931aa280e349bc3021db8766aa2",
+  "prompts": {},
+  "sessions": {
+    "s_3d8a2a4bb65f4f": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0303e-fab5-7732-be27-7bfb7e026f1d",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
