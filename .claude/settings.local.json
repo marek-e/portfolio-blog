@@ -3,9 +3,13 @@
     "allow": [
       "Bash(pnpm:*)",
       "Bash(node .claude/hooks:*)",
+      "Edit(.agents/**)",
       "Edit(.claude/**)",
+      "Edit(AGENTS.md)",
       "Edit(docs/**)",
+      "Write(.agents/**)",
       "Write(.claude/**)",
+      "Write(AGENTS.md)",
       "Write(docs/**)",
       "Skill(validate)"
     ]

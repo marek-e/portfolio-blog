@@ -5,7 +5,7 @@
  * Error Capture Hook
  *
  * This script captures tool errors and appends them to mistakes.jsonl
- * for later analysis by the /learn command.
+ * for later analysis by the learn skill.
  *
  * Usage: node capture-error.mjs <tool_name> <exit_code> <output>
  */
@@ -15,7 +15,7 @@ import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const mistakesFile = join(__dirname, '..', 'mistakes.jsonl');
+const mistakesFile = join(__dirname, '..', '..', '.agents', 'mistakes.jsonl');
 
 // Get arguments
 const toolName = process.argv[2] || 'unknown';
