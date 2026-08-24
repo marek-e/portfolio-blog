@@ -1,0 +1,19 @@
+.github/workflows/semgrep.yml
+  s_7a0fb6fe62d4d9::t_6e0f1c6bb49de7 23,26-27
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "71afb991499848038becff20b87c9d6bca9d99ec",
+  "prompts": {},
+  "sessions": {
+    "s_7a0fb6fe62d4d9": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a032ac-a060-7de1-8b80-1fd0746ff56b",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
