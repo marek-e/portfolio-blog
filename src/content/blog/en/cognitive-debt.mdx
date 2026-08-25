@@ -110,30 +110,41 @@ However, this summary is not a record you can trust blindly. After a long run, w
 
 The goal is to preserve the agent’s speed while keeping the decisions visible.
 
-### Do not stop when the error disappears
+### Use defects to improve your mental model
 
-For defects, I use an exercise called <Highlight>Dantotsu Quality</Highlight>, inspired by Sadao Nomura’s work on radical improvement at Toyota.
+When an error appears, I still give the stack trace to the agent and let it investigate. This is one of the places where an agent can save me a lot of time.
 
-The important question is not only, “Which line fixed the error?” It is:
+What I do not want anymore is to stop as soon as the error disappears. A fix restores the expected behavior, but it does not necessarily improve my understanding or prevent the same type of defect from happening again.
+
+For this, I use an exercise called <Highlight>Dantotsu Quality</Highlight>, inspired by Sadao Nomura’s work on radical improvement at Toyota. It starts from a visible defect and goes further than finding the faulty line of code.
+
+| Step                   | Question                                                                               |
+| ---------------------- | -------------------------------------------------------------------------------------- |
+| Causal chain           | How did the system move from the visible defect to the faulty behavior in the code?    |
+| Assumption in the code | What does the code assume to be true, and what does the system actually require?       |
+| My understanding       | Could I have detected and explained this mismatch before the agent fixed it?           |
+| Detection failure      | Why did typing, tests, validation, review, or monitoring not expose it earlier?        |
+| Eradication            | Where else could the same assumption exist, and how can we prevent or detect it there? |
+
+In its original form, Dantotsu asks the developer to complete:
 
 > **I thought \_\_\_, but actually \_\_\_.**
 
-The first blank captures the mental model that produced the defect. The second replaces it with a more accurate one.
+This assumes that the developer wrote the faulty code. With coding agents, authorship is less clear. If Claude generated the implementation, forcing that sentence may attribute the agent’s misconception to me.
 
-This distinction matters because “I did not know enough about iframe communication” is too broad to be useful. “I thought an origin was a URL, but it is a scheme, hostname, and port” identifies the exact misconception. You can connect that new knowledge to the code you will write next time.
+I therefore start with a neutral version:
 
-When I give an agent a stack trace, I can still let it investigate and apply the fix. But before moving on, I need to reconstruct three things:
+> **The generated code assumes \_\_\_, while the system requires \_\_\_.**
 
-1. What sequence of events produced the visible failure?
-2. What did the code assume at the first incorrect point?
-3. What is true instead?
+This identifies the faulty model encoded in the implementation without pretending that either the agent or I consciously believed it. I then ask a separate question: **Could I have detected and explained this mismatch before the agent fixed it?**
 
-If I cannot answer those questions, the error has been removed but the cognitive debt remains.
+If the answer is no, there is something worth learning. I identify the missing part of my own model and reformulate it in my own words. If the answer is yes, the defect does not necessarily reveal cognitive debt. The agent may have lacked context, my instructions may have been ambiguous, or the system may have failed to detect a mistake I already knew how to explain.
 
-<Callout variant="tip" title="Use the agent without skipping the lesson">
-  Ask the agent to trace the failure from the visible symptom to the incorrect assumption. Then
-  state the misconception yourself in the form: “I thought ___, but actually ___.”
-</Callout>
+The agent can help reconstruct the causal chain, but I still verify its explanation against the code and documentation. A plausible explanation generated after the fix is not enough.
+
+Finally, eradication turns the finding into a system improvement. It can lead to a simpler code pattern, a type constraint, a test, a linting rule, or clearer documentation. The learning no longer exists only in my head.
+
+I do not run this complete exercise for every typo or familiar failure. I use it when an error surprises me, reveals a business misconception, or exposes a part of the system I will need to reason about again.
 
 ## Takeaways
 

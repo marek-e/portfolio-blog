@@ -110,31 +110,41 @@ Il ne faut cependant pas faire aveuglément confiance à ce résumé. Après une
 
 Le but est de préserver la vitesse de l'agent tout en gardant les décisions visibles.
 
-### Ne pas s'arrêter lorsque l'erreur a disparu
+### Utiliser les défauts pour améliorer son modèle mental
 
-Pour les défauts, j'utilise un exercice appelé <Highlight>Dantotsu Quality</Highlight>, inspiré du travail de Sadao Nomura sur l'amélioration radicale chez Toyota.
+Lorsqu'une erreur apparaît, je continue de donner la stack trace à l'agent et je le laisse enquêter. C'est l'un des endroits où un agent peut me faire gagner beaucoup de temps.
 
-La question importante n'est pas seulement « Quelle ligne a corrigé l'erreur ? » C'est :
+Ce que je ne veux plus faire, c'est m'arrêter dès que l'erreur a disparu. Une correction rétablit le comportement attendu, mais elle n'améliore pas forcément ma compréhension et n'empêche pas le même type de défaut de se reproduire.
+
+Pour cela, j'utilise un exercice appelé <Highlight>Dantotsu Quality</Highlight>, inspiré du travail de Sadao Nomura sur l'amélioration radicale chez Toyota. Il part d'un défaut visible et va plus loin que la recherche de la ligne de code fautive.
+
+| Étape              | Question                                                                                                   |
+| ------------------ | ---------------------------------------------------------------------------------------------------------- |
+| Chaîne causale     | Comment le système est-il passé du défaut visible au comportement fautif dans le code ?                    |
+| Hypothèse du code  | Qu'est-ce que le code suppose vrai, et qu'est-ce que le système exige réellement ?                         |
+| Ma compréhension   | Aurais-je pu détecter et expliquer cet écart avant que l'agent le corrige ?                                |
+| Échec de détection | Pourquoi le typage, les tests, la validation, la revue ou le monitoring ne l'ont-ils pas exposé plus tôt ? |
+| Éradication        | Où la même hypothèse pourrait-elle exister, et comment l'empêcher ou la détecter à ces endroits ?          |
+
+Dans sa forme originale, Dantotsu demande au développeur de compléter :
 
 > **Je pensais que \_\_\_, mais en réalité \_\_\_.**
 
-Le premier espace représente le modèle mental qui a produit le défaut. Le second le remplace par un modèle plus précis.
+Cela suppose que le développeur a écrit le code fautif. Avec les agents de code, l'auteur est moins évident. Si Claude a généré l'implémentation, compléter cette phrase peut m'attribuer l'idée fausse de l'agent.
 
-Cette distinction est importante parce que « Je ne connaissais pas assez la communication entre les iframes » est trop vague pour être utile. « Je pensais qu'une origine était une URL, mais il s'agit d'un schéma, d'un nom d'hôte et d'un port » identifie l'idée fausse exacte. Vous pouvez relier cette nouvelle connaissance au code que vous écrirez la prochaine fois.
+Je commence donc par une version neutre :
 
-Lorsque je donne une stack trace à un agent, je peux toujours le laisser enquêter et appliquer la correction. Mais avant de continuer, je dois reconstruire trois éléments :
+> **Le code généré suppose que \_\_\_, alors que le système exige \_\_\_.**
 
-1. Quelle séquence d'événements a produit l'échec visible ?
-2. Quelle était l'hypothèse du code au premier point incorrect ?
-3. Qu'est-ce qui est vrai à la place ?
+Cette formulation identifie le modèle fautif inscrit dans l'implémentation sans prétendre que l'agent ou moi y avons consciemment cru. Je me pose ensuite une question séparée : **Aurais-je pu détecter et expliquer cet écart avant que l'agent le corrige ?**
 
-Si je ne peux pas répondre à ces questions, l'erreur a été supprimée, mais la dette cognitive reste présente.
+Si la réponse est non, il y a quelque chose à apprendre. J'identifie la partie manquante dans mon propre modèle et je la reformule avec mes mots. Si la réponse est oui, le défaut ne révèle pas forcément une dette cognitive. L'agent manquait peut-être de contexte, mes instructions étaient peut-être ambiguës ou le système n'a pas détecté une erreur que je savais déjà expliquer.
 
-<Callout variant="tip" title="Utiliser l'agent sans manquer la leçon">
-  Demandez à l'agent de retracer l'échec depuis le symptôme visible jusqu'à l'hypothèse incorrecte.
-  Formulez ensuite vous-même l'idée fausse sous cette forme : « Je pensais que ___, mais en réalité
-  ___. »
-</Callout>
+L'agent peut m'aider à reconstruire la chaîne causale, mais je vérifie tout de même son explication dans le code et la documentation. Une explication crédible générée après la correction ne suffit pas.
+
+Enfin, l'éradication transforme le constat en une amélioration du système. Cela peut mener à un pattern de code plus simple, une contrainte de typage, un test, une règle de lint ou une documentation plus claire. L'apprentissage n'existe alors plus uniquement dans ma tête.
+
+Je ne déroule pas cet exercice complet pour chaque typo ou erreur familière. Je l'utilise lorsqu'une erreur me surprend, révèle une incompréhension du métier ou touche une partie du système sur laquelle je devrai de nouveau raisonner.
 
 ## À retenir
 
