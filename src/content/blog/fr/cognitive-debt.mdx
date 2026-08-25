@@ -1,153 +1,153 @@
 ---
-title: 'Comment rester intellectuellement impliqué malgré une utilisation intensive de l’IA'
-description: 'L’IA est capable d’écrire pratiquement la totalité de notre code, mais elle peut aussi nous laisser avec une compréhension de plus en plus superficielle de ce que nous construisons.'
+title: "Comment rester intellectuellement impliqué malgré une utilisation intensive de l'IA"
+description: "L'IA est capable d'écrire pratiquement la totalité de notre code, mais elle peut aussi nous laisser avec une compréhension de plus en plus superficielle de ce que nous construisons."
 publishDate: 2026-08-23
 tags: ['ia', 'software-engineering', 'apprentissage']
 draft: true
 ---
 
-Je n’écris quasiment plus de code moi-même.
+Je n'écris quasiment plus de code moi-même.
 
-Les modèles LLMs et les harnais qui les entourent ont progressé au point que mon workflow agentique génère aujourd’hui environ 98 % de mon code. Je décris ce que je veux, les agents explorent la codebase, proposent une implémentation et l’exécutent. Pendant un moment, j’ai vu cela uniquement comme un gain de productivité.
+Les modèles LLMs et les harnais qui les entourent ont progressé au point que mon workflow agentique génère aujourd'hui environ 98 % de mon code. Je décris ce que je veux, les agents explorent la codebase, proposent une implémentation et l'exécutent. Pendant un moment, j'ai vu cela uniquement comme un gain de productivité.
 
-L'échelle a laquelle on délègue la création de code a augmenté de façon significative. Avant, j’avais une conversation avec un seul agent que je pouvais suivre. Maintenant, un agent peut lancer plusieurs sous-agents et travailler sur différentes sujets en parallèle avec des worktree git. Lire chaque échange et chaque ligne générée n’est plus vraiment réaliste.
+L'échelle a laquelle on délègue la création de code a augmenté de façon significative. Avant, j'avais une conversation avec un seul agent que je pouvais suivre. Maintenant, un agent peut lancer plusieurs sous-agents et travailler sur différentes sujets en parallèle avec des worktree git. Lire chaque échange et chaque ligne générée n'est plus vraiment réaliste.
 
-Puis j’ai réalisé que j’avais arrêté d’apprendre. Je produisais plus de code, mais je n'avais plus l'impression de progresser au quotidien.
+Puis j'ai réalisé que j'avais arrêté d'apprendre. Je produisais plus de code, mais je n'avais plus l'impression de progresser au quotidien.
 
-Le signe le plus évident était ma façon de gérer les erreurs. Je copiais toute la stack trace dans une nouvelle session Claude, je le laissais faire l'investigation et les corrections, puis je vérifiais si l’erreur avait bien disparu. Si tout fonctionnait à nouveau comme il fallait, je passais à la suite sans vraiment comprendre ce qui s’était passé.
+Le signe le plus évident était ma façon de gérer les erreurs. Je copiais toute la stack trace dans une nouvelle session Claude, je le laissais faire l'investigation et les corrections, puis je vérifiais si l'erreur avait bien disparu. Si tout fonctionnait à nouveau comme il fallait, je passais à la suite sans vraiment comprendre ce qui s'était passé.
 
-Avant, sans avoir des agents aussi autonomes, une erreur me forçait généralement à investiguer la cause racine. Je devais formuler une hypothèse, suivre le chemin d’exécution, lire de la documentation et comprendre suffisamment le problème pour choisir le meilleur fix. Le processus était plus lent, mais il mettait à jour mon modèle mental du système.
+Avant, sans avoir des agents aussi autonomes, une erreur me forçait généralement à investiguer la cause racine. Je devais formuler une hypothèse, suivre le chemin d'exécution, lire de la documentation et comprendre suffisamment le problème pour choisir le meilleur fix. Le processus était plus lent, mais il mettait à jour mon modèle mental du système.
 
-Avec les agents, je continuais à faire avancer mes projets, mais avec une compréhension de plus en plus superficielle de ce que je construisais. J’en savais assez pour écrire le prochain prompt et orienter l’agent, mais pas toujours pour expliquer les choix d’implémentation qu’il avait faits.
+Avec les agents, je continuais à faire avancer mes projets, mais avec une compréhension de plus en plus superficielle de ce que je construisais. J'en savais assez pour écrire le prochain prompt et orienter l'agent, mais pas toujours pour expliquer les choix d'implémentation qu'il avait faits.
 
-C’est ce qui m’a amené à réfléchir au concept de <Highlight>dette cognitive</Highlight>. Cet article n’est pas un plaidoyer pour revenir à l’écriture manuelle de chaque ligne de code. Il s’agit de comprendre comment profiter des agents sans leur abandonner progressivement notre capacité à raisonner.
+C'est ce qui m'a amené à réfléchir au concept de <Highlight>dette cognitive</Highlight>. Cet article n'est pas un plaidoyer pour revenir à l'écriture manuelle de chaque ligne de code. Il s'agit de comprendre comment profiter des agents sans leur abandonner progressivement notre capacité à raisonner.
 
-## Qu’est-ce que la dette cognitive ?
+## Qu'est-ce que la dette cognitive ?
 
-Utiliser du code que vous ne comprenez pas entièrement n’est pas un problème en soi. On dépend déjà de frameworks, de librairies externes et de systèmes d’exploitation sans connaître chaque détail de leur fonctionnement.
+Utiliser du code que vous ne comprenez pas entièrement n'est pas un problème en soi. On dépend déjà de frameworks, de librairies externes et de systèmes d'exploitation sans connaître chaque détail de leur fonctionnement.
 
-La dette cognitive s’accumule lorsque vous **laissez l’IA prendre des décisions que vous ne comprenez pas, puis continuez à construire dessus**. Comme la dette technique, elle échange de la vitesse à court terme contre un coût futur : vous devenez moins capable d’expliquer, de déboguer ou de faire évoluer votre propre système sans revenir vers l’outil.
+La dette cognitive est un deficit mentale invisble qui s'accumule lorsque vous **laissez l'IA prendre des décisions que vous ne comprenez pas, puis continuez à construire par dessus**. Comme la dette technique, elle échange de la vitesse à court terme contre un coût futur : vous devenez moins capable d'expliquer, de déboguer ou de faire évoluer votre propre système sans revenir vers l'outil.
 
-Contracter cette dette n’est pas toujours une mauvaise décision. Un raccourci peut être raisonnable si vous savez qu’il existe et si vous pouvez y revenir plus tard. Le danger commence lorsque ces raccourcis s’accumulent sans rester visibles.
+Contracter cette dette n'est pas toujours une mauvaise décision. Un raccourci peut être raisonnable si vous savez qu'il existe et si vous pouvez y revenir plus tard. Le danger commence lorsque ces raccourcis s'accumulent sans rester visibles.
 
-Personne ne décide volontairement d’arrêter de comprendre son travail. Cela arrive parce qu’accepter un résultat qui fonctionne est l’étape suivante la plus simple. Éviter la dette cognitive demande donc de choisir consciemment les parties du processus dont vous voulez rester responsable.
+Personne ne décide volontairement d'arrêter de comprendre son travail. Cela arrive parce qu'accepter un résultat qui fonctionne est l'étape suivante la plus simple. Éviter la dette cognitive demande donc de choisir consciemment les parties du processus dont vous voulez rester responsable.
 
-Avec les agents de code, cela peut arriver assez vite. Ils choisissent une architecture, ajoutent une abstraction ou utilisent une API que vous connaissez peu ou pas du tout. Le résultat fonctionne, donc vous continuez. Lors du changement suivant, votre modèle mental du projet est déjà moins précis, ce qui vous rend encore plus dépendant de l’agent.
+Avec les agents de code, cela peut arriver assez vite. Ils choisissent une architecture, ajoutent une abstraction ou utilisent une API que vous connaissez peu ou pas du tout. Le résultat fonctionne, donc vous continuez. Lors du changement suivant, votre modèle mental du projet est déjà moins précis, ce qui vous rend encore plus dépendant de l'agent.
 
 <Callout variant="warning" title="Le point de bascule">
-  Déléguer l’écriture du code ne signifie pas abandonner sa réflexion. Cela le devient lorsque vous
+  Déléguer l'écriture du code ne signifie pas abandonner sa réflexion. Cela le devient lorsque vous
   ne pouvez plus remettre en question les décisions prises à votre place.
 </Callout>
 
-## Comment l’IA peut-elle créer de la dette cognitive ?
+## Comment l'IA peut-elle créer de la dette cognitive ?
 
-Le problème ne vient pas d’une fonction générée ou d’un bug corrigé sans explication. Il vient de la boucle qu’elle crée.
+Le problème ne vient pas d'une fonction générée ou d'un bug corrigé sans explication. Il vient de la boucle qu'elle crée.
 
 <Mermaid
   chart={`
     flowchart LR
       A[Une erreur apparaît] --> B[Envoyer la stack trace à un agent]
-      B --> C[L’agent applique une correction]
-      C --> D[Vérifier que l’erreur a disparu]
+      B --> C[L'agent applique une correction]
+      C --> D[Vérifier que l'erreur a disparu]
       D --> E[Continuer sans comprendre]
       E --> F[Le modèle mental reste incomplet]
       F --> B
   `}
   caption="La boucle de débugging qui crée de la dette cognitive"
-  title="Comment la dette cognitive s’accumule"
+  title="Comment la dette cognitive s'accumule"
 />
 
 Lorsque vous débuguez quelque chose vous-même, vous devez normalement rendre votre compréhension actuelle explicite. Vous prédisez où le problème pourrait se trouver, vous testez cette hypothèse, puis vous corrigez votre modèle mental s'il s'avère faux.
 
-Un agent peut fermer cette boucle avant que l’une de ces étapes ait lieu. L’erreur disparaît, mais l'incompréhension qui l'a permis de vous surprendre reste présente.
+Un agent peut fermer cette boucle avant que l'une de ces étapes ait lieu. L'erreur disparaît, mais l'incompréhension qui l'a permis de vous surprendre reste présente.
 
-Cela ne signifie pas que chaque erreur mérite une heure d’investigation. Comprendre pourquoi le nom d’une variable était mal orthographié n’est probablement pas une bonne utilisation de votre temps. La dette compte lorsque l’agent corrige le comportement d’une partie du système que vous devrez de nouveau modifier, débugguer ou prendre en compte dans vos décisions.
+Cela ne signifie pas que chaque erreur mérite une heure d'investigation. Comprendre pourquoi le nom d'une variable était mal orthographié n'est probablement pas une bonne utilisation de votre temps. La dette compte lorsque l'agent corrige le comportement d'une partie du système que vous devrez de nouveau modifier, débugguer ou prendre en compte dans vos décisions.
 
-La prochaine fois que quelque chose casse à cet endroit, vous repartez avec la même compréhension superficielle. Vous envoyez la nouvelle erreur à l’agent, vous recevez une autre correction et vous ajoutez une décision que vous n’avez pas prise et que vous ne pouvez pas complètement expliquer.
+La prochaine fois que quelque chose casse à cet endroit, vous repartez avec la même compréhension superficielle. Vous envoyez la nouvelle erreur à l'agent, vous recevez une autre correction et vous ajoutez une décision que vous n'avez pas prise et que vous ne pouvez pas complètement expliquer.
 
-À ce stade, l’IA ne vous fait plus seulement gagner du temps. Elle dépense aussi une compréhension dont vous pourriez avoir besoin plus tard. Cette compréhension n'est pas utilisée pour corriger l'erreur, mais pour comprendre pourquoi l'erreur a été corrigée.
+À ce stade, l'IA ne vous fait plus seulement gagner du temps. Elle dépense aussi une compréhension dont vous pourriez avoir besoin plus tard. Cette compréhension n'est pas utilisée pour corriger l'erreur, mais pour comprendre pourquoi l'erreur a été corrigée.
 
-## Toutes les utilisations de l’IA ne créent pas inconditionnellement de la dette cognitive
+## Toutes les utilisations de l'IA ne créent pas inconditionnellement de la dette cognitive
 
 On pourrait répondre que les développeurs ont toujours délégué une partie de leur compréhension. On utilise des frameworks sans lire leur code source, copie des solutions depuis la documentation ou bien Stack Overflow sans toujours toujours comprendre ce qu'on fait.
 
-C’est vrai. <Highlight color="blue">Une compréhension complète n’est ni possible ni souhaitable</Highlight>.
+C'est vrai. <Highlight color="blue">Une compréhension complète n'est ni possible ni souhaitable</Highlight>.
 
-La différence dépend de la partie du système modifiée par le travail délégué. Je n’ai pas besoin d’étudier chaque définition de type ou fichier de configuration généré. Je dois en revanche comprendre les décisions qui structurent le système et les idées fausses à l’origine de ses défauts.
+La différence dépend de la partie du système modifiée par le travail délégué. Je n'ai pas besoin d'étudier chaque définition de type ou fichier de configuration généré. Je dois en revanche comprendre les décisions qui structurent le système et les idées fausses à l'origine de ses défauts.
 
 | Situation                                  | Ce que je dois comprendre                                |
 | ------------------------------------------ | -------------------------------------------------------- |
-| Travail répétitif suivant un pattern connu | Assez pour confirmer que le pattern s’applique toujours  |
-| Une nouvelle décision d’architecture       | Les alternatives et la raison du choix                   |
-| Un défaut dans un comportement métier      | L’hypothèse incorrecte sur le modèle métier              |
-| Une défaillance technique inattendue       | La chaîne causale et l’idée fausse précise à son origine |
+| Travail répétitif suivant un pattern connu | Assez pour confirmer que le pattern s'applique toujours  |
+| Une nouvelle décision d'architecture       | Les alternatives et la raison du choix                   |
+| Un défaut dans un comportement métier      | L'hypothèse incorrecte sur le modèle métier              |
+| Une défaillance technique inattendue       | La chaîne causale et l'idée fausse précise à son origine |
 
-Le but n’est pas de ralentir l’agent jusqu’à ce qu’il travaille à mon rythme, mais de décider où la compréhension a de la valeur et de refuser de la déléguer à ces endroits.
+Le but n'est pas de ralentir l'agent jusqu'à ce qu'il travaille à mon rythme, mais de décider où la compréhension a de la valeur et de refuser de la déléguer à ces endroits.
 
 ## Comment je fais pour rester impliqué intellectuellement
 
-### Réfléchir avant de demander à l’agent
+### Réfléchir avant de demander à l'agent
 
-Avant de demander à un agent d’implémenter une fonctionnalité, je construis mon propre plan d’implémentation.
+Avant de demander à un agent d'implémenter une fonctionnalité, je construis mon propre plan d'implémentation.
 
-Il n’a pas besoin d'être écrit ou contenir chaque fichier/fonction. Je veux décider où le comportement doit se trouver, comment les données doivent circuler et quels compromis sont importants. Je compare ensuite ce plan avec celui produit ou proposé par l’agent.
+Il n'a pas besoin d'être écrit ou contenir chaque fichier/fonction. Je veux décider où le comportement doit se trouver, comment les données doivent circuler et quels compromis sont importants. Je compare ensuite ce plan avec celui produit ou proposé par l'agent.
 
-C’est en comparant les différences entre les deux que l'on peut continuer à apprendre. L’agent a peut-être trouvé une contrainte que je n’avais pas vue. Il a peut-être introduit une abstraction qui ne me paraît pas justifiée. Dans les deux cas, j’ai maintenant une décision concrète à examiner au lieu d’accepter passivement la première implémentation qui m'a été proposée.
+C'est en comparant les différences entre les deux que l'on peut continuer à apprendre. L'agent a peut-être trouvé une contrainte que je n'avais pas vue. Il a peut-être introduit une abstraction qui ne me paraît pas justifiée. Dans les deux cas, j'ai maintenant une décision concrète à examiner au lieu d'accepter passivement la première implémentation qui m'a été proposée.
 
-Cette méthode préserve la majeure partie de l’efficacité de l’agent. Je ne réécris pas sa solution et je ne relis pas chaque ligne générée. Je m’assure que la direction de l’implémentation reste le résultat d’un raisonnement auquel j’ai participé.
+Cette méthode préserve la majeure partie de l'efficacité de l'agent. Je ne réécris pas sa solution et je ne relis pas chaque ligne générée. Je m'assure que la direction de l'implémentation reste le résultat d'un raisonnement auquel j'ai participé.
 
 ### Demander les décisions prises, au lieu de relire toute la conversation
 
-Lorsque plusieurs sous-agents travaillent en parallèle, lire tout ce qu’ils produisent enlève une grande partie de l’intérêt de cette approche. À la place, je lis le résumé final en entier, en particulier les décisions prises pendant le travail.
+Lorsque plusieurs sous-agents travaillent en parallèle, lire tout ce qu'ils produisent enlève une grande partie de l'intérêt de cette approche. À la place, je lis le résumé final en entier, en particulier les décisions prises pendant le travail.
 
 Si le résumé ne les contient pas, je demande un journal de décisions :
 
 > Liste les décisions prises, les difficultés rencontrées et les particularités de ton approche que je devrais garder en tête.
 
-Cela me donne une carte des endroits où l’implémentation s’est éloignée de mon plan initial. J’obtiens également une courte liste d’hypothèses et de compromis qui méritent d’être examinés.
+Cela me donne une carte des endroits où l'implémentation s'est éloignée de mon plan initial. J'obtiens également une courte liste d'hypothèses et de compromis qui méritent d'être examinés.
 
-Il ne faut cependant pas faire aveuglément confiance à ce résumé. Après une longue exécution, qui atteint ou dépasse les limites de contexte de l'agent ou bien qui provoque sa compression à un certain stade, le modèle peut halluciner une explication crédible au lieu de rapporter le raisonnement qui a réellement eu lieu. Je considère le journal comme une liste d’affirmations à vérifier dans l’implémentation, pas comme une preuve.
+Il ne faut cependant pas faire aveuglément confiance à ce résumé. Après une longue exécution, qui atteint ou dépasse les limites de contexte de l'agent ou bien qui provoque sa compression à un certain stade, le modèle peut halluciner une explication crédible au lieu de rapporter le raisonnement qui a réellement eu lieu. Je considère le journal comme une liste d'affirmations à vérifier dans l'implémentation, pas comme une preuve.
 
-Le but est de préserver la vitesse de l’agent tout en gardant les décisions visibles.
+Le but est de préserver la vitesse de l'agent tout en gardant les décisions visibles.
 
-### Ne pas s’arrêter lorsque l’erreur a disparu
+### Ne pas s'arrêter lorsque l'erreur a disparu
 
-Pour les défauts, j’utilise un exercice appelé <Highlight>Dantotsu Quality</Highlight>, inspiré du travail de Sadao Nomura sur l’amélioration radicale chez Toyota.
+Pour les défauts, j'utilise un exercice appelé <Highlight>Dantotsu Quality</Highlight>, inspiré du travail de Sadao Nomura sur l'amélioration radicale chez Toyota.
 
-La question importante n’est pas seulement « Quelle ligne a corrigé l’erreur ? » C’est :
+La question importante n'est pas seulement « Quelle ligne a corrigé l'erreur ? » C'est :
 
 > **Je pensais que \_\_\_, mais en réalité \_\_\_.**
 
 Le premier espace représente le modèle mental qui a produit le défaut. Le second le remplace par un modèle plus précis.
 
-Cette distinction est importante parce que « Je ne connaissais pas assez la communication entre les iframes » est trop vague pour être utile. « Je pensais qu’une origine était une URL, mais il s’agit d’un schéma, d’un nom d’hôte et d’un port » identifie l’idée fausse exacte. Vous pouvez relier cette nouvelle connaissance au code que vous écrirez la prochaine fois.
+Cette distinction est importante parce que « Je ne connaissais pas assez la communication entre les iframes » est trop vague pour être utile. « Je pensais qu'une origine était une URL, mais il s'agit d'un schéma, d'un nom d'hôte et d'un port » identifie l'idée fausse exacte. Vous pouvez relier cette nouvelle connaissance au code que vous écrirez la prochaine fois.
 
 Lorsque je donne une stack trace à un agent, je peux toujours le laisser enquêter et appliquer la correction. Mais avant de continuer, je dois reconstruire trois éléments :
 
-1. Quelle séquence d’événements a produit l’échec visible ?
-2. Quelle était l’hypothèse du code au premier point incorrect ?
-3. Qu’est-ce qui est vrai à la place ?
+1. Quelle séquence d'événements a produit l'échec visible ?
+2. Quelle était l'hypothèse du code au premier point incorrect ?
+3. Qu'est-ce qui est vrai à la place ?
 
-Si je ne peux pas répondre à ces questions, l’erreur a été supprimée, mais la dette cognitive reste présente.
+Si je ne peux pas répondre à ces questions, l'erreur a été supprimée, mais la dette cognitive reste présente.
 
-<Callout variant="tip" title="Utiliser l’agent sans manquer la leçon">
-  Demandez à l’agent de retracer l’échec depuis le symptôme visible jusqu’à l’hypothèse incorrecte.
-  Formulez ensuite vous-même l’idée fausse sous cette forme : « Je pensais que ___, mais en réalité
+<Callout variant="tip" title="Utiliser l'agent sans manquer la leçon">
+  Demandez à l'agent de retracer l'échec depuis le symptôme visible jusqu'à l'hypothèse incorrecte.
+  Formulez ensuite vous-même l'idée fausse sous cette forme : « Je pensais que ___, mais en réalité
   ___. »
 </Callout>
 
 ## À retenir
 
-L’IA ne m’a pas fait arrêter d’apprendre en me donnant de mauvaises réponses. Elle a supprimé beaucoup de situations qui m’obligeaient auparavant à me poser des questions et me stimuler intellectuellement.
+L'IA ne m'a pas fait arrêter d'apprendre en me donnant de mauvaises réponses. Elle a supprimé beaucoup de situations qui m'obligeaient auparavant à me poser des questions et me stimuler intellectuellement.
 
-Imaginer le plan d’implémentation avant de lui demander de le générer me permet de rester impliqué dans les décisions. Le comparer au plan de l’agent me montre où ma compréhension diffère de sa solution et me force à avoir un esprit critique.
+Imaginer le plan d'implémentation avant de lui demander de le générer me permet de rester impliqué dans les décisions. Le comparer au plan de l'agent me montre où ma compréhension diffère de sa solution et me force à avoir un esprit critique.
 
-Lorsqu’un défaut inattendu apparaît, le corriger n’est pas la seule contre-mesure. Retracer sa chaîne causale et trouver la misconception à l'origine transforme ce défaut en une mise à jour de mon modèle mental et un apprentissage concret.
+Lorsqu'un défaut inattendu apparaît, le corriger n'est pas la seule contre-mesure. Retracer sa chaîne causale et trouver la misconception à l'origine transforme ce défaut en une mise à jour de mon modèle mental et un apprentissage concret.
 
-Ces pratiques sont volontairement sélectives. Comprendre chaque ligne générée supprimerait une grande partie de l’intérêt d’utiliser un agent. Les éléments qui méritent d’être protégés sont les décisions qui structurent le système et les idées fausses qui me suivraient sinon dans la prochaine fonctionnalité.
+Ces pratiques sont volontairement sélectives. Comprendre chaque ligne générée supprimerait une grande partie de l'intérêt d'utiliser un agent. Les éléments qui méritent d'être protégés sont les décisions qui structurent le système et les idées fausses qui me suivraient sinon dans la prochaine fonctionnalité.
 
-J’aime voir cela comme une <Highlight>amplification mutuelle</Highlight>. Mon workflow agentique s’améliore lorsque je documente les difficultés, clarifie mes instructions et rends les décisions utiles accessibles aux prochaines exécutions. Je progresse lorsque je compare les plans, questionne ces décisions et recherche les idées fausses derrière les défauts.
+J'aime voir cela comme une <Highlight>amplification mutuelle</Highlight>. Mon workflow agentique s'améliore lorsque je documente les difficultés, clarifie mes instructions et rends les décisions utiles accessibles aux prochaines exécutions. Je progresse lorsque je compare les plans, questionne ces décisions et recherche les idées fausses derrière les défauts.
 
-Je n’ai aucun problème à laisser l’IA écrire 98 % de mon code. Je ne veux pas que cette facilité me laisse seulement une compréhension superficielle de ce que je construis.
+Je n'ai aucun problème à laisser l'IA écrire 98 % de mon code. Je ne veux pas que cette facilité me laisse seulement une compréhension superficielle de ce que je construis.
 
-Le but n’est pas de résister à la délégation. Il est de travailler avec des agents d’une façon qui améliore à la fois le système que j’utilise et ma compréhension du système que je construis.
+Le but n'est pas de résister à la délégation. Il est de travailler avec des agents d'une façon qui améliore à la fois le système que j'utilise et ma compréhension du système que je construis.
