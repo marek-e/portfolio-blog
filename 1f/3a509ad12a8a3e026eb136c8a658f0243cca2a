@@ -1,0 +1,23 @@
+src/content/blog/fr/cognitive-debt.mdx
+  s_467b05ff148584::t_dbadfa448a4301 113,115,117-120,126,128-129,133,135,137,139,141,143-147
+  s_467b05ff148584::t_cbd55021e1b5c4 121-125,127
+src/content/blog/en/cognitive-debt.mdx
+  s_467b05ff148584::t_dbadfa448a4301 113,115,117-120,128-129,133,135,137,139,141,143-147
+  s_467b05ff148584::t_cbd55021e1b5c4 121-127
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "1f3a509ad12a8a3e026eb136c8a658f0243cca2a",
+  "prompts": {},
+  "sessions": {
+    "s_467b05ff148584": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a03052-b20e-70c1-a54c-b556f69d3faa",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
