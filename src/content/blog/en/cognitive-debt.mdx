@@ -1,0 +1,163 @@
+---
+title: 'How Not to Surrender Your Thinking to AI'
+description: 'AI can write almost all our code, but it can also leave us building with an increasingly superficial understanding.'
+publishDate: 2026-08-23
+tags: ['ai', 'software-engineering', 'learning']
+draft: false
+---
+
+I barely write code myself anymore.
+
+Models and their harnesses have progressed to the point where my agentic workflow now generates around 98% of my code. I describe what I want, agents explore the project, propose an implementation, and execute it. For a while, I saw this only as a productivity gain.
+
+This has also changed the scale of delegation. I used to have one conversation with one model. Now an agent can spawn several subagents and work on multiple parts of the problem at the same time using Git worktrees. Reading every exchange and every generated line is no longer realistic.
+
+Then I realized I had stopped learning. I was producing more code, but I no longer felt like I was making progress each day.
+
+The clearest sign was how I handled errors. I would copy and paste an entire stack trace into a new Claude session, let it investigate and apply a fix, and check whether the error was gone. If the application worked again, I moved on without really understanding what had happened.
+
+Before I had such autonomous agents, an error usually forced me to investigate its root cause. I had to form a hypothesis, trace the execution path, read some documentation, and understand enough of the problem to choose the right fix. The process was slower, but it updated my mental model of the system.
+
+With the agent, I was still moving my projects forward, but with an increasingly superficial understanding of what I was building. I knew enough to write the next prompt and steer the agent, but not always enough to explain the implementation decisions it had made.
+
+This is what led me to think about <Highlight>cognitive debt</Highlight>. This article is not an argument for returning to writing every line by hand. It is about how we can benefit from agents without gradually surrendering our ability to reason.
+
+## What is cognitive debt?
+
+Using code you do not completely understand is not a problem by itself. We already rely on frameworks, libraries, and operating systems without knowing every detail of how they work.
+
+Cognitive debt is the invisible mental deficit that accumulates when you **let AI make decisions you do not understand and continue building on top of them**. Like technical debt, it trades short-term speed for a future cost: you become less able to explain, debug, or change your own system without returning to the tool.
+
+Taking on this debt is not always a bad decision. A shortcut can be reasonable when you know it exists and can return to it later. The danger starts when those shortcuts accumulate without remaining visible.
+
+Nobody deliberately decides to stop understanding their work. It happens because accepting a working result is the easiest next step. Avoiding cognitive debt therefore requires some intentionality about which parts of the process you still want to own.
+
+With an agent, this can happen quite quickly. It chooses an architecture, adds an abstraction, or uses an API you barely know. The result works, so you continue. When the next change arrives, your mental model of the project is less precise, which makes you even more dependent on the agent.
+
+<Callout variant="warning" title="The tipping point">
+  Delegating the writing of code is not the same as surrendering your thinking. It becomes surrender
+  when you can no longer challenge the decisions made on your behalf.
+</Callout>
+
+## How does AI compound cognitive debt?
+
+The problem is not one generated function or one unexplained bug fix. It is the feedback loop they create.
+
+<Mermaid
+  chart={`
+    flowchart LR
+      A[An error appears] --> B[Send the stack trace to an agent]
+      B --> C[The agent applies a fix]
+      C --> D[Check that the error is gone]
+      D --> E[Move on without understanding it]
+      E --> F[Your mental model stays incomplete]
+      F --> B
+  `}
+  caption="The debugging loop that creates cognitive debt"
+  title="How cognitive debt compounds"
+/>
+
+When you debug something yourself, you normally have to make your current understanding explicit. You predict where the problem might be, test that prediction, and correct your model when you are wrong.
+
+An agent can close that feedback loop before any of those steps happen. The error disappears, but the misunderstanding that allowed it to surprise you remains.
+
+This does not mean that every error deserves an hour of investigation. Learning why a variable was misspelled is probably not a good use of your time. The debt matters when the agent fixes behavior in a part of the system that you will need to change, debug, or make decisions about again.
+
+The next time something breaks there, you start from the same superficial understanding. You send the new error to the agent, receive another fix, and add another decision that you did not make and cannot fully explain.
+
+At that point, AI is no longer only saving you time. It is also spending understanding that you may need later.
+
+## Not every use of AI creates cognitive debt
+
+You could argue that developers have always delegated part of their understanding. We use frameworks without reading their source code, copy solutions from documentation or Stack Overflow without always understanding what we are doing.
+
+That is true. <Highlight color="blue">Complete understanding is neither possible nor desirable</Highlight>.
+
+The difference is whether the delegated work changes a part of the system you need to reason about. I do not need to study every generated type definition or configuration file. I do need to understand the decisions that shape the system and the misconceptions that caused its defects.
+
+| Situation                             | What I need to understand                          |
+| ------------------------------------- | -------------------------------------------------- |
+| Repetitive work in a familiar pattern | Enough to confirm that the pattern still applies   |
+| A new architectural decision          | The alternatives and why this one was chosen       |
+| A defect in business behavior         | The incorrect assumption about the business model  |
+| An unexpected technical failure       | The causal chain and exact misconception behind it |
+
+The goal is not to slow the agent down until it works at my speed. It is to decide where understanding has value and refuse to delegate it in those places.
+
+## How I try not to surrender my thinking
+
+### Think before asking the agent
+
+Before asking an agent to implement a feature, I form my own implementation plan.
+
+It does not need to be written down or cover every file and function. I want to decide where the behavior belongs, how data should flow, and which tradeoffs matter. Then I compare that plan with the one produced or proposed by the agent.
+
+The differences are where the learning happens. Perhaps the agent found a constraint I missed. Perhaps it introduced an abstraction I do not think is justified. In both cases, I now have a concrete decision to examine instead of passively accepting the first working implementation that was proposed.
+
+This preserves most of the agent’s efficiency. I am not rewriting its output or reviewing every generated line. I am making sure that the direction of the implementation is still the result of reasoning I have participated in.
+
+### Ask for the decisions taken, instead of reading the whole transcript
+
+Once several subagents are working in parallel, reading everything they produce defeats much of the purpose. Instead, I read the final summary from beginning to end, especially the decisions that were made along the way.
+
+If the summary does not contain them, I ask for a decision log:
+
+> Log the decisions you made, the friction you encountered, and anything specific about your approach that I should keep in mind.
+
+This gives me a map of the places where the implementation moved away from my initial plan. It also gives me a short list of assumptions and tradeoffs that are worth investigating.
+
+However, this summary is not a record you can trust blindly. When a long run reaches the agent's context limit and triggers compaction, the model may hallucinate a plausible explanation instead of reporting the decision process that actually happened. I treat the log as a list of claims to check against the implementation, not as proof.
+
+The goal is to preserve the agent’s speed while keeping the decisions visible.
+
+### Use defects to improve your mental model
+
+When an error appears, I still give the stack trace to the agent and let it investigate. This is one of the places where an agent can save me a lot of time.
+
+What I do not want anymore is to stop as soon as the error disappears. A fix restores the expected behavior, but it does not necessarily improve my understanding or prevent the same type of defect from happening again.
+
+For this, I use an exercise inspired by Sadao Nomura's book [_The Toyota Way of Dantotsu Radical Quality Improvement_](https://www.routledge.com/The-Toyota-Way-of-Dantotsu-Radical-Quality-Improvement/Nomura/p/book/9780367672386). I adapted it to software development so that it starts from a visible defect and goes further than finding the faulty line of code.
+
+| Step                   | Question                                                                               |
+| ---------------------- | -------------------------------------------------------------------------------------- |
+| Causal chain           | How did the system move from the visible defect to the faulty behavior in the code?    |
+| Assumption in the code | What does the code assume to be true, and what does the system actually require?       |
+| My understanding       | Could I have detected and explained this mismatch before the agent fixed it?           |
+| Detection failure      | Why did typing, tests, validation, review, or monitoring not expose it earlier?        |
+| Eradication            | Where else could the same assumption exist, and how can we prevent or detect it there? |
+
+To capture the lesson, a developer can complete:
+
+> **I thought \_\_\_, but actually \_\_\_.**
+
+This assumes that the developer wrote the faulty code. With coding agents, authorship is less clear. If Claude generated the implementation, forcing that sentence may attribute the agent’s misconception to me.
+
+I therefore start with a neutral version:
+
+> **The generated code assumes \_\_\_, while the system requires \_\_\_.**
+
+This identifies the faulty model encoded in the implementation without pretending that either the agent or I consciously believed it. I then ask a separate question: **Could I have detected and explained this mismatch before the agent fixed it?**
+
+If the answer is no, there is something worth learning. I identify the missing part of my own model and reformulate it in my own words. If the answer is yes, the defect does not necessarily reveal cognitive debt. The agent may have lacked context, my instructions may have been ambiguous, or the system may have failed to detect a mistake I already knew how to explain.
+
+The agent can help reconstruct the causal chain, but I still verify its explanation against the code and documentation. A plausible explanation generated after the fix is not enough.
+
+Finally, eradication turns the finding into a system improvement. It can lead to a simpler code pattern, a type constraint, a test, a linting rule, or clearer documentation. The learning no longer exists only in my head.
+
+I do not run this complete exercise for every typo or familiar failure. I use it when an error surprises me, reveals a business misconception, or exposes a part of the system I will need to reason about again.
+
+## Takeaways
+
+AI did not make me stop learning by giving me bad answers. It removed many of the situations that previously forced me to ask questions and stimulated my intellectual curiosity.
+
+Writing an implementation plan before prompting keeps me involved in the decisions. Comparing it with the agent's plan shows me where my understanding differs from its solution and forces me to think critically.
+
+When an unexpected defect appears, fixing it is not the only countermeasure. Tracing its causal chain and finding the misconception at the root turns the defect into a concrete update to my mental model.
+
+These practices are deliberately selective. Understanding every generated line would remove much of the benefit of using an agent. The parts worth protecting are the decisions that shape the system and the misconceptions that would otherwise follow me into the next feature.
+
+I like to think about this as <Highlight>mutual amplification</Highlight>. My agentic workflow improves as I record friction, clarify instructions, and make useful decisions available to future runs. I improve when I compare plans, question those decisions, and investigate the misconceptions behind defects.
+
+I am comfortable letting AI write 98% of my code. I do not want that convenience to leave me with only a superficial understanding of what I am building.
+
+The goal is not to resist delegation. It is to work with agents in a way that improves both the system I use and my understanding of the system I build.
