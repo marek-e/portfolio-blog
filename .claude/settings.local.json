@@ -13,5 +13,8 @@
       "Write(docs/**)",
       "Skill(validate)"
     ]
+  },
+  "enabledPlugins": {
+    "semgrep@semgrep-marketplace": true
   }
 }
