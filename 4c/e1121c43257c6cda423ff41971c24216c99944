@@ -1,0 +1,19 @@
+.claude/settings.local.json
+  s_ba114fd725a5cd::t_34d87a40de2831 16-18
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "4ce1121c43257c6cda423ff41971c24216c99944",
+  "prompts": {},
+  "sessions": {
+    "s_ba114fd725a5cd": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "846ee1d9-30ef-43b0-9b04-d82d4f046441",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
