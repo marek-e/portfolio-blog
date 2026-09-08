@@ -47,6 +47,12 @@ Use `/world/music-v1.mp3` for compressed music when ffmpeg is present, or `/worl
 
 Effects are `/world/{step,interact,open,close,discovery,celebrate,door}-v1.wav`. Each is an original short synthesized tone sequence. Audio generation checks include valid PCM headers, non-silent output and no sample clipping. Listen and set final playback gain in the application.
 
+## Browser verification
+
+Verify the production build with the Content-Security-Policy from `public/_headers` applied. Astro's preview server does not apply that file. Enter the house and revisit with `world:intro-done` set to verify the island's paintings, character and landmarks. Phaser must load images directly with `HTMLImageElement`; its default blob image URLs are blocked by the deployed policy.
+
+Also serve invalid image bytes for `/world/house-v1.webp` with an HTTP 200 response. The loading screen must offer retry and the projects list instead of entering a scene with missing textures.
+
 ## Adding a project
 
 The runtime contract is data-driven: add a landmark image, its `landmark-anchor` point, a `project-zones` rectangle with the exact content slug, and any collision rectangles to the map. No engine switch or project enumeration is required. To regenerate the illustrated world, add the site and its drawing to the generator too. Regeneration overwrites generated maps, so keep manual Tiled edits in sync with the source before rerunning it.

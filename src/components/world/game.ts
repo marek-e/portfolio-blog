@@ -141,11 +141,16 @@ export async function createWorld(
       for (const path of images) this.load.image(path, path);
       for (const direction of ['down', 'up', 'left', 'right']) {
         this.load.image(`avatar-${direction}`, `/world/avatar-${direction}-v1.png`);
+        images.add(`avatar-${direction}`);
       }
       this.load.off('progress');
       this.load.on('progress', (progress: number) => options.onProgress(0.15 + progress * 0.85));
       this.load.once('complete', () => {
         if (failed || destroyed) return;
+        if ([...images].some((key) => !this.textures.exists(key))) {
+          fail();
+          return;
+        }
         try {
           this.scene.start(options.introDone ? 'Island' : 'House', {
             spawn: options.introDone ? 'house-exit' : 'default',
@@ -522,6 +527,7 @@ export async function createWorld(
       physics: { default: 'arcade', arcade: { gravity: { x: 0, y: 0 }, debug: false } },
       input: { keyboard: false, mouse: false, touch: false },
       audio: { noAudio: true },
+      loader: { imageLoadType: 'HTMLImageElement' },
       render: { antialias: true, roundPixels: false },
       scene: [Boot, new WorldScene('House', 'house'), new WorldScene('Island', 'island')],
       callbacks: {
