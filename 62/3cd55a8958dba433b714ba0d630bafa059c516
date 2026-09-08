@@ -1,0 +1,149 @@
+src/components/layout/Footer.astro
+  s_cc3779508bda14::t_76cde8a28a2833 12,24
+astro.config.mjs
+  s_cc3779508bda14::t_76cde8a28a2833 28-30
+src/components/world/input.test.ts
+  s_d50c97945311db::t_7d0ec43f45f7a6 68-69
+  s_cc3779508bda14::t_5904a15f6d153f 1-67,70-121
+src/components/world/ProjectsWorld.tsx
+  s_cc3779508bda14::t_371946819759aa 1-280
+public/_headers
+  s_cc3779508bda14::t_76cde8a28a2833 50-51,53
+  s_d50c97945311db::t_26d9fce47ec8a7 52
+scripts/world-art/generate.mjs
+  s_cc3779508bda14::t_dff288255faefb 1-884
+  s_cc3779508bda14::t_90de4836f63237 885-887
+src/pages/[...lang]/projects/world.astro
+  s_cc3779508bda14::t_76cde8a28a2833 1-3,5-6,9-18,25-35,37-50,60-61,69-70,72-82,91-94,96-108
+  s_cc3779508bda14::t_c5dbce455ba63e 36
+  s_cc3779508bda14::t_1fde8389baf023 7-8,19-24,71,83-90,95
+  s_cc3779508bda14::t_13d1b0b7bdecfc 4,51-59,62-68
+  s_cc3779508bda14::t_9413adec1c4611 109-111
+  s_2b997cc2f2873f::t_709867b8204268 112
+src/pages/[...lang]/projects/index.astro
+  s_cc3779508bda14::t_76cde8a28a2833 9-10,18-19,25,53-55,57-60,64-66,69-73,92-95
+  s_cc3779508bda14::t_6beac3f583b1f1 56,61-63,67-68,96-101,108-123
+src/layouts/Layout.astro
+  s_cc3779508bda14::t_6a2ffc399a53be 12,15,174
+  s_cc3779508bda14::t_5cd20d45eee75a 175-177
+  s_1d07e0accc0221::t_c2dfa88018ed19 178
+src/i18n/translations/world.ts
+  s_cc3779508bda14::t_76cde8a28a2833 1-29,37-47,55-60,62-65,70,72,75-82,97-101,103,109-125,128-130,133-135,138-141,146,148-157,172-176,178,182-199,202-204,206-213
+  s_cc3779508bda14::t_1fde8389baf023 30-36,48-54,61,66-69,71,73-74,83-96,102,104-108,126-127,131-132,136-137,142-145,147,158-171,177,179-181,200-201,205
+  s_cc3779508bda14::t_7966cb9cc72ed1 214-216
+  s_e93cd310f19216::t_b4931f587e7309 217
+src/components/world/world.css
+  s_cc3779508bda14::t_371946819759aa 1-338
+src/components/world/input.ts
+  s_d50c97945311db::t_7d0ec43f45f7a6 1-100
+scripts/world-art/check-build.mjs
+  s_d50c97945311db::t_59d1860fa107b0 1-52
+docs/feature/projetcts-world/projects-world-prd.md
+  s_1d07e0accc0221::t_5b9f6bd317a782 1-48
+package.json
+  s_2b997cc2f2873f::t_09d814626e313d 44,59
+pnpm-lock.yaml
+  s_2b997cc2f2873f::t_fcaab915272cd4 77-79,117-119,3901-3903,9472-9475,10379
+public/world/ambient-butterfly-v1.svg
+  s_2b997cc2f2873f::t_989f879a8ad9eb 1
+public/world/ambient-cloud-v1.svg
+  s_2b997cc2f2873f::t_54ed26d4b8d541 1
+public/world/ambient-leaf-v1.svg
+  s_2b997cc2f2873f::t_5590373bec3916 1
+public/world/ambient-shadow-v1.svg
+  s_2b997cc2f2873f::t_5660c45c31eb76 1
+public/world/ambient-sparkle-v1.svg
+  s_2b997cc2f2873f::t_dcb727992eb307 1
+public/world/avatar-down-v1.svg
+  s_2b997cc2f2873f::t_c0bba9b781063e 1
+public/world/avatar-left-v1.svg
+  s_2b997cc2f2873f::t_6d6e2bad00bd24 1
+public/world/avatar-right-v1.svg
+  s_2b997cc2f2873f::t_c3e959232f021f 1
+public/world/avatar-up-v1.svg
+  s_2b997cc2f2873f::t_178f239aea21a6 1
+public/world/elemix-scaffolding-v1.svg
+  s_2b997cc2f2873f::t_b79d16d4323f34 1
+public/world/equinox-sundial-v1.svg
+  s_2b997cc2f2873f::t_a16b726a65cd21 1
+public/world/house-v1.json
+  s_2b997cc2f2873f::t_d51e8b6f41d841 1-506
+public/world/house-v1.svg
+  s_2b997cc2f2873f::t_810a6906f8cfcf 1
+public/world/island-v1.json
+  s_2b997cc2f2873f::t_24004c1346c199 1-5130
+public/world/island-v1.svg
+  s_1d07e0accc0221::t_48714706f84783 1
+public/world/manifest-v1.json
+  s_2b997cc2f2873f::t_f78f53e6ebc8f4 1-320
+public/world/minesweeper-mine-v1.svg
+  s_2b997cc2f2873f::t_f04ca4ef7f3aa0 1
+public/world/next-armored-tower-v1.svg
+  s_2b997cc2f2873f::t_06ac99ce855f2c 1
+public/world/petanque-court-v1.svg
+  s_2b997cc2f2873f::t_b1d3964ab9b5cf 1
+public/world/portfolio-sign-v1.svg
+  s_2b997cc2f2873f::t_41fafe432bdfe5 1
+scripts/world-art/README.md
+  s_1d07e0accc0221::t_2ee4da9e1b8f1b 1-60
+scripts/world-art/validate.mjs
+  s_1d07e0accc0221::t_a6500786937715 1-155
+src/components/world/ProjectCardOverlay.tsx
+  s_1d07e0accc0221::t_ef7e7dfeb41b5e 1-134
+src/components/world/audio.ts
+  s_1d07e0accc0221::t_423ea5096d37fd 1-91
+src/components/world/game.ts
+  s_1d07e0accc0221::t_586adf3569ad80 1-584
+src/components/world/state.test.ts
+  s_1d07e0accc0221::t_8c3cabd0240397 1-72
+src/components/world/state.ts
+  s_1d07e0accc0221::t_05333a6f283ede 1-63
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "623cd55a8958dba433b714ba0d630bafa059c516",
+  "prompts": {},
+  "sessions": {
+    "s_1d07e0accc0221": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a07cad-8c1e-7ca2-a75a-e28739baa103",
+        "model": "unknown"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    },
+    "s_2b997cc2f2873f": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a07cae-9077-7092-ac0e-57d3d5b0c0ea",
+        "model": "unknown"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    },
+    "s_cc3779508bda14": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a07c23-d812-7530-80e9-ab9a096d3910",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    },
+    "s_d50c97945311db": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a080e6-c0f4-74c1-93c6-f8f930594044",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    },
+    "s_e93cd310f19216": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a07cae-2ad4-7913-ad7b-8222f94a19a8",
+        "model": "unknown"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
