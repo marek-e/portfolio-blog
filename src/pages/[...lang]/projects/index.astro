@@ -6,6 +6,8 @@ import ProjectListCard from '@/components/portfolio/ProjectListCard.astro';
 import { getCollection } from 'astro:content';
 import { getTranslations, defaultLang, languages } from '@/i18n';
 import { sortProjects } from '@/lib/projects';
+import { getTranslatedPath } from '@/i18n/config';
+import { worldTranslations } from '@/i18n/translations/world';
 
 export function getStaticPaths() {
   return [{ params: { lang: undefined } }, { params: { lang: 'en' } as const }];
@@ -13,11 +15,14 @@ export function getStaticPaths() {
 
 const lang = Astro.params.lang ?? defaultLang;
 const t = getTranslations(lang);
+const world = worldTranslations[lang];
+const translatePath = getTranslatedPath(lang);
 
 const allProjects = await getCollection('projects');
 const projects = sortProjects(allProjects.filter((project) => project.id.startsWith(`${lang}/`)));
 
 const featuredProjects = projects.filter((p) => p.data.featured);
+const moreProjects = projects.filter((p) => !p.data.featured);
 ---
 
 <Layout title={t.projectsPage.pageTitle} description={t.projectsPage.pageDescription}>
@@ -45,6 +50,27 @@ const featuredProjects = projects.filter((p) => p.data.featured);
       <p class="text-muted-foreground max-w-2xl text-lg">{t.projectsPage.subtitle}</p>
     </header>
 
+    <a
+      href={translatePath('/projects/world')}
+      data-astro-prefetch="false"
+      class="world-banner border-border bg-card focus-visible:outline-primary mb-8 grid overflow-hidden rounded-xl border focus-visible:outline-2 focus-visible:outline-offset-4 md:grid-cols-2"
+    >
+      <img
+        src="/world/banner-v1.webp"
+        alt=""
+        width="1920"
+        height="640"
+        class="w-full object-cover"
+        loading="lazy"
+        decoding="async"
+      />
+      <div class="flex flex-col justify-center gap-2 p-6">
+        <h2 class="text-xl font-semibold tracking-tight">{world.bannerTitle}</h2>
+        <p class="text-muted-foreground">{world.bannerDescription}</p>
+        <span class="text-primary font-medium underline underline-offset-4">{world.bannerCta}</span>
+      </div>
+    </a>
+
     {
       projects.length === 0 ? (
         <p class="text-muted-foreground py-12 text-center">{t.projectsPage.noProjects}</p>
@@ -63,9 +89,35 @@ const featuredProjects = projects.filter((p) => p.data.featured);
               </div>
             </section>
           )}
+          {moreProjects.length > 0 && (
+            <section>
+              <h2 class="mb-6 text-xl font-semibold">{world.moreProjects}</h2>
+              <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                {moreProjects.map((project) => (
+                  <ProjectListCard project={project} />
+                ))}
+              </div>
+            </section>
+          )}
         </div>
       )
     }
   </main>
   <Footer />
 </Layout>
+
+<style>
+  .world-banner img {
+    height: 180px;
+    transition: object-position 600ms ease;
+    object-position: 50% 45%;
+  }
+  .world-banner:hover img {
+    object-position: 50% 60%;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .world-banner img {
+      transition: none;
+    }
+  }
+</style>
