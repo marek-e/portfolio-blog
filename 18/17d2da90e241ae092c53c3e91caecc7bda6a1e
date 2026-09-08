@@ -1,0 +1,21 @@
+scripts/world-art/README.md
+  s_d50c97945311db::t_f4412bcc33a2e6 50-55
+src/components/world/game.ts
+  s_d50c97945311db::t_c6d232d3da2473 144,150-153,530
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "1817d2da90e241ae092c53c3e91caecc7bda6a1e",
+  "prompts": {},
+  "sessions": {
+    "s_d50c97945311db": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a080e6-c0f4-74c1-93c6-f8f930594044",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
