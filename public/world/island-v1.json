@@ -1,0 +1,5130 @@
+{
+  "compressionlevel": -1,
+  "height": 128,
+  "width": 128,
+  "infinite": false,
+  "layers": [
+    {
+      "id": 1,
+      "name": "background",
+      "type": "imagelayer",
+      "image": "island-v1.webp",
+      "imagewidth": 4096,
+      "imageheight": 4096,
+      "opacity": 1,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "offsetx": 0,
+      "offsety": 0
+    },
+    {
+      "id": 2,
+      "name": "collisions",
+      "type": "objectgroup",
+      "draworder": "topdown",
+      "opacity": 1,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "objects": [
+        {
+          "id": 1,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 0,
+          "width": 4096,
+          "height": 32
+        },
+        {
+          "id": 2,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 32,
+          "width": 4096,
+          "height": 32
+        },
+        {
+          "id": 3,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 64,
+          "width": 4096,
+          "height": 32
+        },
+        {
+          "id": 4,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 96,
+          "width": 4096,
+          "height": 32
+        },
+        {
+          "id": 5,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 128,
+          "width": 4096,
+          "height": 32
+        },
+        {
+          "id": 6,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 160,
+          "width": 4096,
+          "height": 32
+        },
+        {
+          "id": 7,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 192,
+          "width": 4096,
+          "height": 32
+        },
+        {
+          "id": 8,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 224,
+          "width": 4096,
+          "height": 32
+        },
+        {
+          "id": 9,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 256,
+          "width": 4096,
+          "height": 32
+        },
+        {
+          "id": 10,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 288,
+          "width": 2048,
+          "height": 32
+        },
+        {
+          "id": 11,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 2272,
+          "y": 288,
+          "width": 1824,
+          "height": 32
+        },
+        {
+          "id": 12,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 320,
+          "width": 1856,
+          "height": 32
+        },
+        {
+          "id": 13,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 2432,
+          "y": 320,
+          "width": 1664,
+          "height": 32
+        },
+        {
+          "id": 14,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 352,
+          "width": 1088,
+          "height": 32
+        },
+        {
+          "id": 15,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 2528,
+          "y": 352,
+          "width": 1568,
+          "height": 32
+        },
+        {
+          "id": 16,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 384,
+          "width": 960,
+          "height": 32
+        },
+        {
+          "id": 17,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 2592,
+          "y": 384,
+          "width": 1504,
+          "height": 32
+        },
+        {
+          "id": 18,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 416,
+          "width": 896,
+          "height": 32
+        },
+        {
+          "id": 19,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 2656,
+          "y": 416,
+          "width": 1440,
+          "height": 32
+        },
+        {
+          "id": 20,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 448,
+          "width": 800,
+          "height": 32
+        },
+        {
+          "id": 21,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 2720,
+          "y": 448,
+          "width": 1376,
+          "height": 32
+        },
+        {
+          "id": 22,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 480,
+          "width": 736,
+          "height": 32
+        },
+        {
+          "id": 23,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 2784,
+          "y": 480,
+          "width": 1312,
+          "height": 32
+        },
+        {
+          "id": 24,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 512,
+          "width": 704,
+          "height": 32
+        },
+        {
+          "id": 25,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 2944,
+          "y": 512,
+          "width": 1152,
+          "height": 32
+        },
+        {
+          "id": 26,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 544,
+          "width": 640,
+          "height": 32
+        },
+        {
+          "id": 27,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3008,
+          "y": 544,
+          "width": 1088,
+          "height": 32
+        },
+        {
+          "id": 28,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 576,
+          "width": 608,
+          "height": 32
+        },
+        {
+          "id": 29,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3072,
+          "y": 576,
+          "width": 1024,
+          "height": 32
+        },
+        {
+          "id": 30,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 608,
+          "width": 576,
+          "height": 32
+        },
+        {
+          "id": 31,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3136,
+          "y": 608,
+          "width": 960,
+          "height": 32
+        },
+        {
+          "id": 32,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 640,
+          "width": 576,
+          "height": 32
+        },
+        {
+          "id": 33,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3200,
+          "y": 640,
+          "width": 896,
+          "height": 32
+        },
+        {
+          "id": 34,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 672,
+          "width": 544,
+          "height": 32
+        },
+        {
+          "id": 35,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3232,
+          "y": 672,
+          "width": 864,
+          "height": 32
+        },
+        {
+          "id": 36,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 704,
+          "width": 512,
+          "height": 32
+        },
+        {
+          "id": 37,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3264,
+          "y": 704,
+          "width": 832,
+          "height": 32
+        },
+        {
+          "id": 38,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 736,
+          "width": 512,
+          "height": 32
+        },
+        {
+          "id": 39,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3296,
+          "y": 736,
+          "width": 800,
+          "height": 32
+        },
+        {
+          "id": 40,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 768,
+          "width": 512,
+          "height": 32
+        },
+        {
+          "id": 41,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3328,
+          "y": 768,
+          "width": 768,
+          "height": 32
+        },
+        {
+          "id": 42,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 800,
+          "width": 480,
+          "height": 32
+        },
+        {
+          "id": 43,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3360,
+          "y": 800,
+          "width": 736,
+          "height": 32
+        },
+        {
+          "id": 44,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 832,
+          "width": 480,
+          "height": 32
+        },
+        {
+          "id": 45,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3392,
+          "y": 832,
+          "width": 704,
+          "height": 32
+        },
+        {
+          "id": 46,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 864,
+          "width": 480,
+          "height": 32
+        },
+        {
+          "id": 47,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3392,
+          "y": 864,
+          "width": 704,
+          "height": 32
+        },
+        {
+          "id": 48,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 896,
+          "width": 480,
+          "height": 32
+        },
+        {
+          "id": 49,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3424,
+          "y": 896,
+          "width": 672,
+          "height": 32
+        },
+        {
+          "id": 50,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 928,
+          "width": 480,
+          "height": 32
+        },
+        {
+          "id": 51,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3424,
+          "y": 928,
+          "width": 672,
+          "height": 32
+        },
+        {
+          "id": 52,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 960,
+          "width": 480,
+          "height": 32
+        },
+        {
+          "id": 53,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3456,
+          "y": 960,
+          "width": 640,
+          "height": 32
+        },
+        {
+          "id": 54,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 992,
+          "width": 480,
+          "height": 32
+        },
+        {
+          "id": 55,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3456,
+          "y": 992,
+          "width": 640,
+          "height": 32
+        },
+        {
+          "id": 56,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 1024,
+          "width": 480,
+          "height": 32
+        },
+        {
+          "id": 57,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3488,
+          "y": 1024,
+          "width": 608,
+          "height": 32
+        },
+        {
+          "id": 58,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 1056,
+          "width": 448,
+          "height": 32
+        },
+        {
+          "id": 59,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3488,
+          "y": 1056,
+          "width": 608,
+          "height": 32
+        },
+        {
+          "id": 60,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 1088,
+          "width": 448,
+          "height": 32
+        },
+        {
+          "id": 61,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3488,
+          "y": 1088,
+          "width": 608,
+          "height": 32
+        },
+        {
+          "id": 62,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 1120,
+          "width": 448,
+          "height": 32
+        },
+        {
+          "id": 63,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3520,
+          "y": 1120,
+          "width": 576,
+          "height": 32
+        },
+        {
+          "id": 64,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 1152,
+          "width": 448,
+          "height": 32
+        },
+        {
+          "id": 65,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3520,
+          "y": 1152,
+          "width": 576,
+          "height": 32
+        },
+        {
+          "id": 66,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 1184,
+          "width": 416,
+          "height": 32
+        },
+        {
+          "id": 67,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3552,
+          "y": 1184,
+          "width": 544,
+          "height": 32
+        },
+        {
+          "id": 68,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 1216,
+          "width": 416,
+          "height": 32
+        },
+        {
+          "id": 69,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3552,
+          "y": 1216,
+          "width": 544,
+          "height": 32
+        },
+        {
+          "id": 70,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 1248,
+          "width": 416,
+          "height": 32
+        },
+        {
+          "id": 71,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3584,
+          "y": 1248,
+          "width": 512,
+          "height": 32
+        },
+        {
+          "id": 72,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 1280,
+          "width": 384,
+          "height": 32
+        },
+        {
+          "id": 73,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3584,
+          "y": 1280,
+          "width": 512,
+          "height": 32
+        },
+        {
+          "id": 74,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 1312,
+          "width": 384,
+          "height": 32
+        },
+        {
+          "id": 75,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3584,
+          "y": 1312,
+          "width": 512,
+          "height": 32
+        },
+        {
+          "id": 76,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 1344,
+          "width": 384,
+          "height": 32
+        },
+        {
+          "id": 77,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3616,
+          "y": 1344,
+          "width": 480,
+          "height": 32
+        },
+        {
+          "id": 78,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 1376,
+          "width": 352,
+          "height": 32
+        },
+        {
+          "id": 79,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3616,
+          "y": 1376,
+          "width": 480,
+          "height": 32
+        },
+        {
+          "id": 80,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 1408,
+          "width": 352,
+          "height": 32
+        },
+        {
+          "id": 81,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3616,
+          "y": 1408,
+          "width": 480,
+          "height": 32
+        },
+        {
+          "id": 82,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 1440,
+          "width": 352,
+          "height": 32
+        },
+        {
+          "id": 83,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3616,
+          "y": 1440,
+          "width": 480,
+          "height": 32
+        },
+        {
+          "id": 84,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 1472,
+          "width": 352,
+          "height": 32
+        },
+        {
+          "id": 85,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3616,
+          "y": 1472,
+          "width": 480,
+          "height": 32
+        },
+        {
+          "id": 86,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 1504,
+          "width": 352,
+          "height": 32
+        },
+        {
+          "id": 87,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3616,
+          "y": 1504,
+          "width": 480,
+          "height": 32
+        },
+        {
+          "id": 88,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 1536,
+          "width": 352,
+          "height": 32
+        },
+        {
+          "id": 89,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3648,
+          "y": 1536,
+          "width": 448,
+          "height": 32
+        },
+        {
+          "id": 90,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 1568,
+          "width": 352,
+          "height": 32
+        },
+        {
+          "id": 91,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3648,
+          "y": 1568,
+          "width": 448,
+          "height": 32
+        },
+        {
+          "id": 92,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 1600,
+          "width": 352,
+          "height": 32
+        },
+        {
+          "id": 93,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3648,
+          "y": 1600,
+          "width": 448,
+          "height": 32
+        },
+        {
+          "id": 94,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 1632,
+          "width": 352,
+          "height": 32
+        },
+        {
+          "id": 95,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3648,
+          "y": 1632,
+          "width": 448,
+          "height": 32
+        },
+        {
+          "id": 96,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 1664,
+          "width": 352,
+          "height": 32
+        },
+        {
+          "id": 97,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3648,
+          "y": 1664,
+          "width": 448,
+          "height": 32
+        },
+        {
+          "id": 98,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 1696,
+          "width": 352,
+          "height": 32
+        },
+        {
+          "id": 99,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3648,
+          "y": 1696,
+          "width": 448,
+          "height": 32
+        },
+        {
+          "id": 100,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 1728,
+          "width": 352,
+          "height": 32
+        },
+        {
+          "id": 101,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3648,
+          "y": 1728,
+          "width": 448,
+          "height": 32
+        },
+        {
+          "id": 102,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 1760,
+          "width": 352,
+          "height": 32
+        },
+        {
+          "id": 103,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3648,
+          "y": 1760,
+          "width": 448,
+          "height": 32
+        },
+        {
+          "id": 104,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 1792,
+          "width": 352,
+          "height": 32
+        },
+        {
+          "id": 105,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3648,
+          "y": 1792,
+          "width": 448,
+          "height": 32
+        },
+        {
+          "id": 106,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 1824,
+          "width": 384,
+          "height": 32
+        },
+        {
+          "id": 107,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3648,
+          "y": 1824,
+          "width": 448,
+          "height": 32
+        },
+        {
+          "id": 108,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 1856,
+          "width": 384,
+          "height": 32
+        },
+        {
+          "id": 109,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3680,
+          "y": 1856,
+          "width": 416,
+          "height": 32
+        },
+        {
+          "id": 110,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 1888,
+          "width": 384,
+          "height": 32
+        },
+        {
+          "id": 111,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3680,
+          "y": 1888,
+          "width": 416,
+          "height": 32
+        },
+        {
+          "id": 112,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 1920,
+          "width": 384,
+          "height": 32
+        },
+        {
+          "id": 113,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3680,
+          "y": 1920,
+          "width": 416,
+          "height": 32
+        },
+        {
+          "id": 114,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 1952,
+          "width": 384,
+          "height": 32
+        },
+        {
+          "id": 115,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3680,
+          "y": 1952,
+          "width": 416,
+          "height": 32
+        },
+        {
+          "id": 116,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 1984,
+          "width": 384,
+          "height": 32
+        },
+        {
+          "id": 117,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3680,
+          "y": 1984,
+          "width": 416,
+          "height": 32
+        },
+        {
+          "id": 118,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 2016,
+          "width": 384,
+          "height": 32
+        },
+        {
+          "id": 119,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3680,
+          "y": 2016,
+          "width": 416,
+          "height": 32
+        },
+        {
+          "id": 120,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 2048,
+          "width": 384,
+          "height": 32
+        },
+        {
+          "id": 121,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3680,
+          "y": 2048,
+          "width": 416,
+          "height": 32
+        },
+        {
+          "id": 122,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 2080,
+          "width": 384,
+          "height": 32
+        },
+        {
+          "id": 123,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3680,
+          "y": 2080,
+          "width": 416,
+          "height": 32
+        },
+        {
+          "id": 124,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 2112,
+          "width": 384,
+          "height": 32
+        },
+        {
+          "id": 125,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3680,
+          "y": 2112,
+          "width": 416,
+          "height": 32
+        },
+        {
+          "id": 126,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 2144,
+          "width": 352,
+          "height": 32
+        },
+        {
+          "id": 127,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3680,
+          "y": 2144,
+          "width": 416,
+          "height": 32
+        },
+        {
+          "id": 128,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 2176,
+          "width": 352,
+          "height": 32
+        },
+        {
+          "id": 129,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3680,
+          "y": 2176,
+          "width": 416,
+          "height": 32
+        },
+        {
+          "id": 130,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 2208,
+          "width": 352,
+          "height": 32
+        },
+        {
+          "id": 131,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3680,
+          "y": 2208,
+          "width": 416,
+          "height": 32
+        },
+        {
+          "id": 132,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 2240,
+          "width": 352,
+          "height": 32
+        },
+        {
+          "id": 133,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3648,
+          "y": 2240,
+          "width": 448,
+          "height": 32
+        },
+        {
+          "id": 134,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 2272,
+          "width": 352,
+          "height": 32
+        },
+        {
+          "id": 135,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3648,
+          "y": 2272,
+          "width": 448,
+          "height": 32
+        },
+        {
+          "id": 136,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 2304,
+          "width": 352,
+          "height": 32
+        },
+        {
+          "id": 137,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3648,
+          "y": 2304,
+          "width": 448,
+          "height": 32
+        },
+        {
+          "id": 138,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 2336,
+          "width": 352,
+          "height": 32
+        },
+        {
+          "id": 139,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3616,
+          "y": 2336,
+          "width": 480,
+          "height": 32
+        },
+        {
+          "id": 140,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 2368,
+          "width": 384,
+          "height": 32
+        },
+        {
+          "id": 141,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3616,
+          "y": 2368,
+          "width": 480,
+          "height": 32
+        },
+        {
+          "id": 142,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 2400,
+          "width": 384,
+          "height": 32
+        },
+        {
+          "id": 143,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3584,
+          "y": 2400,
+          "width": 512,
+          "height": 32
+        },
+        {
+          "id": 144,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 2432,
+          "width": 384,
+          "height": 32
+        },
+        {
+          "id": 145,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3584,
+          "y": 2432,
+          "width": 512,
+          "height": 32
+        },
+        {
+          "id": 146,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 2464,
+          "width": 384,
+          "height": 32
+        },
+        {
+          "id": 147,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3584,
+          "y": 2464,
+          "width": 512,
+          "height": 32
+        },
+        {
+          "id": 148,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 2496,
+          "width": 384,
+          "height": 32
+        },
+        {
+          "id": 149,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3552,
+          "y": 2496,
+          "width": 544,
+          "height": 32
+        },
+        {
+          "id": 150,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 2528,
+          "width": 384,
+          "height": 32
+        },
+        {
+          "id": 151,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3552,
+          "y": 2528,
+          "width": 544,
+          "height": 32
+        },
+        {
+          "id": 152,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 2560,
+          "width": 416,
+          "height": 32
+        },
+        {
+          "id": 153,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3552,
+          "y": 2560,
+          "width": 544,
+          "height": 32
+        },
+        {
+          "id": 154,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 2592,
+          "width": 416,
+          "height": 32
+        },
+        {
+          "id": 155,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3520,
+          "y": 2592,
+          "width": 576,
+          "height": 32
+        },
+        {
+          "id": 156,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 2624,
+          "width": 416,
+          "height": 32
+        },
+        {
+          "id": 157,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3520,
+          "y": 2624,
+          "width": 576,
+          "height": 32
+        },
+        {
+          "id": 158,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 2656,
+          "width": 448,
+          "height": 32
+        },
+        {
+          "id": 159,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3520,
+          "y": 2656,
+          "width": 576,
+          "height": 32
+        },
+        {
+          "id": 160,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 2688,
+          "width": 448,
+          "height": 32
+        },
+        {
+          "id": 161,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3488,
+          "y": 2688,
+          "width": 608,
+          "height": 32
+        },
+        {
+          "id": 162,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 2720,
+          "width": 448,
+          "height": 32
+        },
+        {
+          "id": 163,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3488,
+          "y": 2720,
+          "width": 608,
+          "height": 32
+        },
+        {
+          "id": 164,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 2752,
+          "width": 448,
+          "height": 32
+        },
+        {
+          "id": 165,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3488,
+          "y": 2752,
+          "width": 608,
+          "height": 32
+        },
+        {
+          "id": 166,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 2784,
+          "width": 448,
+          "height": 32
+        },
+        {
+          "id": 167,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3488,
+          "y": 2784,
+          "width": 608,
+          "height": 32
+        },
+        {
+          "id": 168,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 2816,
+          "width": 480,
+          "height": 32
+        },
+        {
+          "id": 169,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3488,
+          "y": 2816,
+          "width": 608,
+          "height": 32
+        },
+        {
+          "id": 170,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 2848,
+          "width": 480,
+          "height": 32
+        },
+        {
+          "id": 171,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3456,
+          "y": 2848,
+          "width": 640,
+          "height": 32
+        },
+        {
+          "id": 172,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 2880,
+          "width": 480,
+          "height": 32
+        },
+        {
+          "id": 173,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3456,
+          "y": 2880,
+          "width": 640,
+          "height": 32
+        },
+        {
+          "id": 174,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 2912,
+          "width": 480,
+          "height": 32
+        },
+        {
+          "id": 175,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3456,
+          "y": 2912,
+          "width": 640,
+          "height": 32
+        },
+        {
+          "id": 176,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 2944,
+          "width": 512,
+          "height": 32
+        },
+        {
+          "id": 177,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3424,
+          "y": 2944,
+          "width": 672,
+          "height": 32
+        },
+        {
+          "id": 178,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 2976,
+          "width": 512,
+          "height": 32
+        },
+        {
+          "id": 179,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3424,
+          "y": 2976,
+          "width": 672,
+          "height": 32
+        },
+        {
+          "id": 180,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 3008,
+          "width": 512,
+          "height": 32
+        },
+        {
+          "id": 181,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3392,
+          "y": 3008,
+          "width": 704,
+          "height": 32
+        },
+        {
+          "id": 182,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 3040,
+          "width": 544,
+          "height": 32
+        },
+        {
+          "id": 183,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3392,
+          "y": 3040,
+          "width": 704,
+          "height": 32
+        },
+        {
+          "id": 184,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 3072,
+          "width": 544,
+          "height": 32
+        },
+        {
+          "id": 185,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3360,
+          "y": 3072,
+          "width": 736,
+          "height": 32
+        },
+        {
+          "id": 186,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 3104,
+          "width": 576,
+          "height": 32
+        },
+        {
+          "id": 187,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3328,
+          "y": 3104,
+          "width": 768,
+          "height": 32
+        },
+        {
+          "id": 188,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 3136,
+          "width": 608,
+          "height": 32
+        },
+        {
+          "id": 189,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3328,
+          "y": 3136,
+          "width": 768,
+          "height": 32
+        },
+        {
+          "id": 190,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 3168,
+          "width": 640,
+          "height": 32
+        },
+        {
+          "id": 191,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3296,
+          "y": 3168,
+          "width": 800,
+          "height": 32
+        },
+        {
+          "id": 192,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 3200,
+          "width": 672,
+          "height": 32
+        },
+        {
+          "id": 193,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3264,
+          "y": 3200,
+          "width": 832,
+          "height": 32
+        },
+        {
+          "id": 194,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 3232,
+          "width": 704,
+          "height": 32
+        },
+        {
+          "id": 195,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3232,
+          "y": 3232,
+          "width": 864,
+          "height": 32
+        },
+        {
+          "id": 196,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 3264,
+          "width": 736,
+          "height": 32
+        },
+        {
+          "id": 197,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3200,
+          "y": 3264,
+          "width": 896,
+          "height": 32
+        },
+        {
+          "id": 198,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 3296,
+          "width": 768,
+          "height": 32
+        },
+        {
+          "id": 199,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3168,
+          "y": 3296,
+          "width": 928,
+          "height": 32
+        },
+        {
+          "id": 200,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 3328,
+          "width": 832,
+          "height": 32
+        },
+        {
+          "id": 201,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3104,
+          "y": 3328,
+          "width": 992,
+          "height": 32
+        },
+        {
+          "id": 202,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 3360,
+          "width": 896,
+          "height": 32
+        },
+        {
+          "id": 203,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3072,
+          "y": 3360,
+          "width": 1024,
+          "height": 32
+        },
+        {
+          "id": 204,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 3392,
+          "width": 992,
+          "height": 32
+        },
+        {
+          "id": 205,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3008,
+          "y": 3392,
+          "width": 1088,
+          "height": 32
+        },
+        {
+          "id": 206,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 3424,
+          "width": 1056,
+          "height": 32
+        },
+        {
+          "id": 207,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 2944,
+          "y": 3424,
+          "width": 1152,
+          "height": 32
+        },
+        {
+          "id": 208,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 3456,
+          "width": 1088,
+          "height": 32
+        },
+        {
+          "id": 209,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 2848,
+          "y": 3456,
+          "width": 1248,
+          "height": 32
+        },
+        {
+          "id": 210,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 3488,
+          "width": 1152,
+          "height": 32
+        },
+        {
+          "id": 211,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 2752,
+          "y": 3488,
+          "width": 1344,
+          "height": 32
+        },
+        {
+          "id": 212,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 3520,
+          "width": 1216,
+          "height": 32
+        },
+        {
+          "id": 213,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 2656,
+          "y": 3520,
+          "width": 1440,
+          "height": 32
+        },
+        {
+          "id": 214,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 3552,
+          "width": 1312,
+          "height": 32
+        },
+        {
+          "id": 215,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 2560,
+          "y": 3552,
+          "width": 1536,
+          "height": 32
+        },
+        {
+          "id": 216,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 3584,
+          "width": 1376,
+          "height": 32
+        },
+        {
+          "id": 217,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 2144,
+          "y": 3584,
+          "width": 1952,
+          "height": 32
+        },
+        {
+          "id": 218,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 3616,
+          "width": 1472,
+          "height": 32
+        },
+        {
+          "id": 219,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 2048,
+          "y": 3616,
+          "width": 2048,
+          "height": 32
+        },
+        {
+          "id": 220,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 3648,
+          "width": 1632,
+          "height": 32
+        },
+        {
+          "id": 221,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 1920,
+          "y": 3648,
+          "width": 32,
+          "height": 32
+        },
+        {
+          "id": 222,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 2048,
+          "y": 3648,
+          "width": 2048,
+          "height": 32
+        },
+        {
+          "id": 223,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 3680,
+          "width": 1952,
+          "height": 32
+        },
+        {
+          "id": 224,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 2048,
+          "y": 3680,
+          "width": 2048,
+          "height": 32
+        },
+        {
+          "id": 225,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 3712,
+          "width": 1952,
+          "height": 32
+        },
+        {
+          "id": 226,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 2048,
+          "y": 3712,
+          "width": 2048,
+          "height": 32
+        },
+        {
+          "id": 227,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 3744,
+          "width": 1952,
+          "height": 32
+        },
+        {
+          "id": 228,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 2048,
+          "y": 3744,
+          "width": 2048,
+          "height": 32
+        },
+        {
+          "id": 229,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 3776,
+          "width": 1952,
+          "height": 32
+        },
+        {
+          "id": 230,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 2048,
+          "y": 3776,
+          "width": 2048,
+          "height": 32
+        },
+        {
+          "id": 231,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 3808,
+          "width": 4096,
+          "height": 32
+        },
+        {
+          "id": 232,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 3840,
+          "width": 4096,
+          "height": 32
+        },
+        {
+          "id": 233,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 3872,
+          "width": 4096,
+          "height": 32
+        },
+        {
+          "id": 234,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 3904,
+          "width": 4096,
+          "height": 32
+        },
+        {
+          "id": 235,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 3936,
+          "width": 4096,
+          "height": 32
+        },
+        {
+          "id": 236,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 3968,
+          "width": 4096,
+          "height": 32
+        },
+        {
+          "id": 237,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 4000,
+          "width": 4096,
+          "height": 32
+        },
+        {
+          "id": 238,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 4032,
+          "width": 4096,
+          "height": 32
+        },
+        {
+          "id": 239,
+          "name": "water",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 4064,
+          "width": 4096,
+          "height": 32
+        },
+        {
+          "id": 240,
+          "name": "library",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 1535,
+          "y": 1800,
+          "width": 240,
+          "height": 110
+        },
+        {
+          "id": 241,
+          "name": "bench",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 700,
+          "y": 3160,
+          "width": 140,
+          "height": 50
+        },
+        {
+          "id": 242,
+          "name": "fountain",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 1895,
+          "y": 1910,
+          "width": 190,
+          "height": 110
+        },
+        {
+          "id": 243,
+          "name": "tree",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 2070,
+          "y": 659,
+          "width": 34,
+          "height": 24
+        },
+        {
+          "id": 244,
+          "name": "tree",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 2156,
+          "y": 832,
+          "width": 34,
+          "height": 24
+        },
+        {
+          "id": 245,
+          "name": "tree",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 1862,
+          "y": 873,
+          "width": 34,
+          "height": 24
+        },
+        {
+          "id": 246,
+          "name": "tree",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 1748,
+          "y": 896,
+          "width": 34,
+          "height": 24
+        },
+        {
+          "id": 247,
+          "name": "tree",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 1873,
+          "y": 917,
+          "width": 34,
+          "height": 24
+        },
+        {
+          "id": 248,
+          "name": "tree",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 1813,
+          "y": 929,
+          "width": 34,
+          "height": 24
+        },
+        {
+          "id": 249,
+          "name": "tree",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 2104,
+          "y": 987,
+          "width": 34,
+          "height": 24
+        },
+        {
+          "id": 250,
+          "name": "tree",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 2206,
+          "y": 1141,
+          "width": 34,
+          "height": 24
+        },
+        {
+          "id": 251,
+          "name": "tree",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 1636,
+          "y": 1165,
+          "width": 34,
+          "height": 24
+        },
+        {
+          "id": 252,
+          "name": "tree",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3078,
+          "y": 1181,
+          "width": 34,
+          "height": 24
+        },
+        {
+          "id": 253,
+          "name": "tree",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3269,
+          "y": 1458,
+          "width": 34,
+          "height": 24
+        },
+        {
+          "id": 254,
+          "name": "tree",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 1902,
+          "y": 1472,
+          "width": 34,
+          "height": 24
+        },
+        {
+          "id": 255,
+          "name": "tree",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 1893,
+          "y": 1536,
+          "width": 34,
+          "height": 24
+        },
+        {
+          "id": 256,
+          "name": "tree",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 2485,
+          "y": 1554,
+          "width": 34,
+          "height": 24
+        },
+        {
+          "id": 257,
+          "name": "tree",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 1319,
+          "y": 1607,
+          "width": 34,
+          "height": 24
+        },
+        {
+          "id": 258,
+          "name": "tree",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 1254,
+          "y": 1615,
+          "width": 34,
+          "height": 24
+        },
+        {
+          "id": 259,
+          "name": "tree",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3302,
+          "y": 1634,
+          "width": 34,
+          "height": 24
+        },
+        {
+          "id": 260,
+          "name": "tree",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 2931,
+          "y": 1650,
+          "width": 34,
+          "height": 24
+        },
+        {
+          "id": 261,
+          "name": "tree",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 679,
+          "y": 1680,
+          "width": 34,
+          "height": 24
+        },
+        {
+          "id": 262,
+          "name": "tree",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 2996,
+          "y": 1698,
+          "width": 34,
+          "height": 24
+        },
+        {
+          "id": 263,
+          "name": "tree",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 1144,
+          "y": 1706,
+          "width": 34,
+          "height": 24
+        },
+        {
+          "id": 264,
+          "name": "tree",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 2570,
+          "y": 1734,
+          "width": 34,
+          "height": 24
+        },
+        {
+          "id": 265,
+          "name": "tree",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 2756,
+          "y": 1752,
+          "width": 34,
+          "height": 24
+        },
+        {
+          "id": 266,
+          "name": "tree",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 2780,
+          "y": 1761,
+          "width": 34,
+          "height": 24
+        },
+        {
+          "id": 267,
+          "name": "tree",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 2831,
+          "y": 1786,
+          "width": 34,
+          "height": 24
+        },
+        {
+          "id": 268,
+          "name": "tree",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 2318,
+          "y": 1821,
+          "width": 34,
+          "height": 24
+        },
+        {
+          "id": 269,
+          "name": "tree",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 1484,
+          "y": 1821,
+          "width": 34,
+          "height": 24
+        },
+        {
+          "id": 270,
+          "name": "tree",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 2511,
+          "y": 1943,
+          "width": 34,
+          "height": 24
+        },
+        {
+          "id": 271,
+          "name": "tree",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 1130,
+          "y": 2051,
+          "width": 34,
+          "height": 24
+        },
+        {
+          "id": 272,
+          "name": "tree",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 2321,
+          "y": 2314,
+          "width": 34,
+          "height": 24
+        },
+        {
+          "id": 273,
+          "name": "tree",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 2656,
+          "y": 2446,
+          "width": 34,
+          "height": 24
+        },
+        {
+          "id": 274,
+          "name": "tree",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 2644,
+          "y": 2595,
+          "width": 34,
+          "height": 24
+        },
+        {
+          "id": 275,
+          "name": "tree",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 1319,
+          "y": 2638,
+          "width": 34,
+          "height": 24
+        },
+        {
+          "id": 276,
+          "name": "tree",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 1557,
+          "y": 2692,
+          "width": 34,
+          "height": 24
+        },
+        {
+          "id": 277,
+          "name": "tree",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 1216,
+          "y": 2692,
+          "width": 34,
+          "height": 24
+        },
+        {
+          "id": 278,
+          "name": "tree",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 899,
+          "y": 2807,
+          "width": 34,
+          "height": 24
+        },
+        {
+          "id": 279,
+          "name": "tree",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 1981,
+          "y": 2989,
+          "width": 34,
+          "height": 24
+        },
+        {
+          "id": 280,
+          "name": "tree",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 1098,
+          "y": 3037,
+          "width": 34,
+          "height": 24
+        },
+        {
+          "id": 281,
+          "name": "tree",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 2017,
+          "y": 3220,
+          "width": 34,
+          "height": 24
+        },
+        {
+          "id": 282,
+          "name": "tree",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 2288,
+          "y": 3253,
+          "width": 34,
+          "height": 24
+        },
+        {
+          "id": 283,
+          "name": "tree",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 2245,
+          "y": 3312,
+          "width": 34,
+          "height": 24
+        },
+        {
+          "id": 284,
+          "name": "tree",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 2189,
+          "y": 3339,
+          "width": 34,
+          "height": 24
+        },
+        {
+          "id": 285,
+          "name": "tree",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 1940,
+          "y": 3352,
+          "width": 34,
+          "height": 24
+        },
+        {
+          "id": 286,
+          "name": "home",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 855,
+          "y": 930,
+          "width": 330,
+          "height": 140
+        },
+        {
+          "id": 287,
+          "name": "portfolio-sign",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 1186,
+          "y": 1070,
+          "width": 128,
+          "height": 64
+        },
+        {
+          "id": 288,
+          "name": "elemix-scaffolding",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 2582.8,
+          "y": 920,
+          "width": 294.40000000000003,
+          "height": 64
+        },
+        {
+          "id": 289,
+          "name": "minesweeper-mine",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 3152.8,
+          "y": 1990,
+          "width": 294.40000000000003,
+          "height": 64
+        },
+        {
+          "id": 290,
+          "name": "next-armored-tower",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 2552.8,
+          "y": 3020,
+          "width": 294.40000000000003,
+          "height": 64
+        },
+        {
+          "id": 291,
+          "name": "equinox-sundial",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 1352.8,
+          "y": 3190,
+          "width": 294.40000000000003,
+          "height": 64
+        },
+        {
+          "id": 292,
+          "name": "petanque-court",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 577.2,
+          "y": 2260,
+          "width": 345.6,
+          "height": 64
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "project-zones",
+      "type": "objectgroup",
+      "draworder": "topdown",
+      "opacity": 1,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "objects": [
+        {
+          "id": 293,
+          "name": "personal-portfolio",
+          "type": "project-zones",
+          "rotation": 0,
+          "visible": true,
+          "x": 1050,
+          "y": 1140,
+          "width": 400,
+          "height": 200,
+          "properties": [
+            {
+              "name": "slug",
+              "type": "string",
+              "value": "personal-portfolio"
+            },
+            {
+              "name": "label",
+              "type": "string",
+              "value": "portfolio-sign"
+            },
+            {
+              "name": "promptOffsetX",
+              "type": "float",
+              "value": 0
+            },
+            {
+              "name": "promptOffsetY",
+              "type": "float",
+              "value": -100
+            }
+          ]
+        },
+        {
+          "id": 294,
+          "name": "elemix",
+          "type": "project-zones",
+          "rotation": 0,
+          "visible": true,
+          "x": 2530,
+          "y": 990,
+          "width": 400,
+          "height": 200,
+          "properties": [
+            {
+              "name": "slug",
+              "type": "string",
+              "value": "elemix"
+            },
+            {
+              "name": "label",
+              "type": "string",
+              "value": "elemix-scaffolding"
+            },
+            {
+              "name": "promptOffsetX",
+              "type": "float",
+              "value": 0
+            },
+            {
+              "name": "promptOffsetY",
+              "type": "float",
+              "value": -100
+            }
+          ]
+        },
+        {
+          "id": 295,
+          "name": "minesweeper-llm-arena",
+          "type": "project-zones",
+          "rotation": 0,
+          "visible": true,
+          "x": 3100,
+          "y": 2060,
+          "width": 400,
+          "height": 200,
+          "properties": [
+            {
+              "name": "slug",
+              "type": "string",
+              "value": "minesweeper-llm-arena"
+            },
+            {
+              "name": "label",
+              "type": "string",
+              "value": "minesweeper-mine"
+            },
+            {
+              "name": "promptOffsetX",
+              "type": "float",
+              "value": 0
+            },
+            {
+              "name": "promptOffsetY",
+              "type": "float",
+              "value": -100
+            }
+          ]
+        },
+        {
+          "id": 296,
+          "name": "next-armored",
+          "type": "project-zones",
+          "rotation": 0,
+          "visible": true,
+          "x": 2500,
+          "y": 3090,
+          "width": 400,
+          "height": 200,
+          "properties": [
+            {
+              "name": "slug",
+              "type": "string",
+              "value": "next-armored"
+            },
+            {
+              "name": "label",
+              "type": "string",
+              "value": "next-armored-tower"
+            },
+            {
+              "name": "promptOffsetX",
+              "type": "float",
+              "value": 0
+            },
+            {
+              "name": "promptOffsetY",
+              "type": "float",
+              "value": -100
+            }
+          ]
+        },
+        {
+          "id": 297,
+          "name": "equinox-theme",
+          "type": "project-zones",
+          "rotation": 0,
+          "visible": true,
+          "x": 1300,
+          "y": 3260,
+          "width": 400,
+          "height": 200,
+          "properties": [
+            {
+              "name": "slug",
+              "type": "string",
+              "value": "equinox-theme"
+            },
+            {
+              "name": "label",
+              "type": "string",
+              "value": "equinox-sundial"
+            },
+            {
+              "name": "promptOffsetX",
+              "type": "float",
+              "value": 0
+            },
+            {
+              "name": "promptOffsetY",
+              "type": "float",
+              "value": -100
+            }
+          ]
+        },
+        {
+          "id": 298,
+          "name": "petanque",
+          "type": "project-zones",
+          "rotation": 0,
+          "visible": true,
+          "x": 550,
+          "y": 2330,
+          "width": 400,
+          "height": 200,
+          "properties": [
+            {
+              "name": "slug",
+              "type": "string",
+              "value": "petanque"
+            },
+            {
+              "name": "label",
+              "type": "string",
+              "value": "petanque-court"
+            },
+            {
+              "name": "promptOffsetX",
+              "type": "float",
+              "value": 0
+            },
+            {
+              "name": "promptOffsetY",
+              "type": "float",
+              "value": -100
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "props",
+      "type": "objectgroup",
+      "draworder": "topdown",
+      "opacity": 1,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "objects": [
+        {
+          "id": 299,
+          "name": "library",
+          "type": "props",
+          "rotation": 0,
+          "visible": true,
+          "x": 1535,
+          "y": 1800,
+          "width": 240,
+          "height": 110,
+          "properties": [
+            {
+              "name": "solid",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "baked",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "interactable",
+              "type": "bool",
+              "value": true
+            }
+          ]
+        },
+        {
+          "id": 300,
+          "name": "bench",
+          "type": "props",
+          "rotation": 0,
+          "visible": true,
+          "x": 700,
+          "y": 3160,
+          "width": 140,
+          "height": 50,
+          "properties": [
+            {
+              "name": "solid",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "baked",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "interactable",
+              "type": "bool",
+              "value": true
+            }
+          ]
+        },
+        {
+          "id": 301,
+          "name": "fountain",
+          "type": "props",
+          "rotation": 0,
+          "visible": true,
+          "x": 1895,
+          "y": 1910,
+          "width": 190,
+          "height": 110,
+          "properties": [
+            {
+              "name": "solid",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "baked",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "interactable",
+              "type": "bool",
+              "value": false
+            }
+          ]
+        },
+        {
+          "id": 302,
+          "name": "tree",
+          "type": "props",
+          "rotation": 0,
+          "visible": true,
+          "x": 2070,
+          "y": 659,
+          "width": 34,
+          "height": 24,
+          "properties": [
+            {
+              "name": "solid",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "baked",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "interactable",
+              "type": "bool",
+              "value": false
+            }
+          ]
+        },
+        {
+          "id": 303,
+          "name": "tree",
+          "type": "props",
+          "rotation": 0,
+          "visible": true,
+          "x": 2156,
+          "y": 832,
+          "width": 34,
+          "height": 24,
+          "properties": [
+            {
+              "name": "solid",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "baked",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "interactable",
+              "type": "bool",
+              "value": false
+            }
+          ]
+        },
+        {
+          "id": 304,
+          "name": "tree",
+          "type": "props",
+          "rotation": 0,
+          "visible": true,
+          "x": 1862,
+          "y": 873,
+          "width": 34,
+          "height": 24,
+          "properties": [
+            {
+              "name": "solid",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "baked",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "interactable",
+              "type": "bool",
+              "value": false
+            }
+          ]
+        },
+        {
+          "id": 305,
+          "name": "tree",
+          "type": "props",
+          "rotation": 0,
+          "visible": true,
+          "x": 1748,
+          "y": 896,
+          "width": 34,
+          "height": 24,
+          "properties": [
+            {
+              "name": "solid",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "baked",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "interactable",
+              "type": "bool",
+              "value": false
+            }
+          ]
+        },
+        {
+          "id": 306,
+          "name": "tree",
+          "type": "props",
+          "rotation": 0,
+          "visible": true,
+          "x": 1873,
+          "y": 917,
+          "width": 34,
+          "height": 24,
+          "properties": [
+            {
+              "name": "solid",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "baked",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "interactable",
+              "type": "bool",
+              "value": false
+            }
+          ]
+        },
+        {
+          "id": 307,
+          "name": "tree",
+          "type": "props",
+          "rotation": 0,
+          "visible": true,
+          "x": 1813,
+          "y": 929,
+          "width": 34,
+          "height": 24,
+          "properties": [
+            {
+              "name": "solid",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "baked",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "interactable",
+              "type": "bool",
+              "value": false
+            }
+          ]
+        },
+        {
+          "id": 308,
+          "name": "tree",
+          "type": "props",
+          "rotation": 0,
+          "visible": true,
+          "x": 2104,
+          "y": 987,
+          "width": 34,
+          "height": 24,
+          "properties": [
+            {
+              "name": "solid",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "baked",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "interactable",
+              "type": "bool",
+              "value": false
+            }
+          ]
+        },
+        {
+          "id": 309,
+          "name": "tree",
+          "type": "props",
+          "rotation": 0,
+          "visible": true,
+          "x": 2206,
+          "y": 1141,
+          "width": 34,
+          "height": 24,
+          "properties": [
+            {
+              "name": "solid",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "baked",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "interactable",
+              "type": "bool",
+              "value": false
+            }
+          ]
+        },
+        {
+          "id": 310,
+          "name": "tree",
+          "type": "props",
+          "rotation": 0,
+          "visible": true,
+          "x": 1636,
+          "y": 1165,
+          "width": 34,
+          "height": 24,
+          "properties": [
+            {
+              "name": "solid",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "baked",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "interactable",
+              "type": "bool",
+              "value": false
+            }
+          ]
+        },
+        {
+          "id": 311,
+          "name": "tree",
+          "type": "props",
+          "rotation": 0,
+          "visible": true,
+          "x": 3078,
+          "y": 1181,
+          "width": 34,
+          "height": 24,
+          "properties": [
+            {
+              "name": "solid",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "baked",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "interactable",
+              "type": "bool",
+              "value": false
+            }
+          ]
+        },
+        {
+          "id": 312,
+          "name": "tree",
+          "type": "props",
+          "rotation": 0,
+          "visible": true,
+          "x": 3269,
+          "y": 1458,
+          "width": 34,
+          "height": 24,
+          "properties": [
+            {
+              "name": "solid",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "baked",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "interactable",
+              "type": "bool",
+              "value": false
+            }
+          ]
+        },
+        {
+          "id": 313,
+          "name": "tree",
+          "type": "props",
+          "rotation": 0,
+          "visible": true,
+          "x": 1902,
+          "y": 1472,
+          "width": 34,
+          "height": 24,
+          "properties": [
+            {
+              "name": "solid",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "baked",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "interactable",
+              "type": "bool",
+              "value": false
+            }
+          ]
+        },
+        {
+          "id": 314,
+          "name": "tree",
+          "type": "props",
+          "rotation": 0,
+          "visible": true,
+          "x": 1893,
+          "y": 1536,
+          "width": 34,
+          "height": 24,
+          "properties": [
+            {
+              "name": "solid",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "baked",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "interactable",
+              "type": "bool",
+              "value": false
+            }
+          ]
+        },
+        {
+          "id": 315,
+          "name": "tree",
+          "type": "props",
+          "rotation": 0,
+          "visible": true,
+          "x": 2485,
+          "y": 1554,
+          "width": 34,
+          "height": 24,
+          "properties": [
+            {
+              "name": "solid",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "baked",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "interactable",
+              "type": "bool",
+              "value": false
+            }
+          ]
+        },
+        {
+          "id": 316,
+          "name": "tree",
+          "type": "props",
+          "rotation": 0,
+          "visible": true,
+          "x": 1319,
+          "y": 1607,
+          "width": 34,
+          "height": 24,
+          "properties": [
+            {
+              "name": "solid",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "baked",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "interactable",
+              "type": "bool",
+              "value": false
+            }
+          ]
+        },
+        {
+          "id": 317,
+          "name": "tree",
+          "type": "props",
+          "rotation": 0,
+          "visible": true,
+          "x": 1254,
+          "y": 1615,
+          "width": 34,
+          "height": 24,
+          "properties": [
+            {
+              "name": "solid",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "baked",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "interactable",
+              "type": "bool",
+              "value": false
+            }
+          ]
+        },
+        {
+          "id": 318,
+          "name": "tree",
+          "type": "props",
+          "rotation": 0,
+          "visible": true,
+          "x": 3302,
+          "y": 1634,
+          "width": 34,
+          "height": 24,
+          "properties": [
+            {
+              "name": "solid",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "baked",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "interactable",
+              "type": "bool",
+              "value": false
+            }
+          ]
+        },
+        {
+          "id": 319,
+          "name": "tree",
+          "type": "props",
+          "rotation": 0,
+          "visible": true,
+          "x": 2931,
+          "y": 1650,
+          "width": 34,
+          "height": 24,
+          "properties": [
+            {
+              "name": "solid",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "baked",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "interactable",
+              "type": "bool",
+              "value": false
+            }
+          ]
+        },
+        {
+          "id": 320,
+          "name": "tree",
+          "type": "props",
+          "rotation": 0,
+          "visible": true,
+          "x": 679,
+          "y": 1680,
+          "width": 34,
+          "height": 24,
+          "properties": [
+            {
+              "name": "solid",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "baked",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "interactable",
+              "type": "bool",
+              "value": false
+            }
+          ]
+        },
+        {
+          "id": 321,
+          "name": "tree",
+          "type": "props",
+          "rotation": 0,
+          "visible": true,
+          "x": 2996,
+          "y": 1698,
+          "width": 34,
+          "height": 24,
+          "properties": [
+            {
+              "name": "solid",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "baked",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "interactable",
+              "type": "bool",
+              "value": false
+            }
+          ]
+        },
+        {
+          "id": 322,
+          "name": "tree",
+          "type": "props",
+          "rotation": 0,
+          "visible": true,
+          "x": 1144,
+          "y": 1706,
+          "width": 34,
+          "height": 24,
+          "properties": [
+            {
+              "name": "solid",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "baked",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "interactable",
+              "type": "bool",
+              "value": false
+            }
+          ]
+        },
+        {
+          "id": 323,
+          "name": "tree",
+          "type": "props",
+          "rotation": 0,
+          "visible": true,
+          "x": 2570,
+          "y": 1734,
+          "width": 34,
+          "height": 24,
+          "properties": [
+            {
+              "name": "solid",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "baked",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "interactable",
+              "type": "bool",
+              "value": false
+            }
+          ]
+        },
+        {
+          "id": 324,
+          "name": "tree",
+          "type": "props",
+          "rotation": 0,
+          "visible": true,
+          "x": 2756,
+          "y": 1752,
+          "width": 34,
+          "height": 24,
+          "properties": [
+            {
+              "name": "solid",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "baked",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "interactable",
+              "type": "bool",
+              "value": false
+            }
+          ]
+        },
+        {
+          "id": 325,
+          "name": "tree",
+          "type": "props",
+          "rotation": 0,
+          "visible": true,
+          "x": 2780,
+          "y": 1761,
+          "width": 34,
+          "height": 24,
+          "properties": [
+            {
+              "name": "solid",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "baked",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "interactable",
+              "type": "bool",
+              "value": false
+            }
+          ]
+        },
+        {
+          "id": 326,
+          "name": "tree",
+          "type": "props",
+          "rotation": 0,
+          "visible": true,
+          "x": 2831,
+          "y": 1786,
+          "width": 34,
+          "height": 24,
+          "properties": [
+            {
+              "name": "solid",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "baked",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "interactable",
+              "type": "bool",
+              "value": false
+            }
+          ]
+        },
+        {
+          "id": 327,
+          "name": "tree",
+          "type": "props",
+          "rotation": 0,
+          "visible": true,
+          "x": 2318,
+          "y": 1821,
+          "width": 34,
+          "height": 24,
+          "properties": [
+            {
+              "name": "solid",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "baked",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "interactable",
+              "type": "bool",
+              "value": false
+            }
+          ]
+        },
+        {
+          "id": 328,
+          "name": "tree",
+          "type": "props",
+          "rotation": 0,
+          "visible": true,
+          "x": 1484,
+          "y": 1821,
+          "width": 34,
+          "height": 24,
+          "properties": [
+            {
+              "name": "solid",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "baked",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "interactable",
+              "type": "bool",
+              "value": false
+            }
+          ]
+        },
+        {
+          "id": 329,
+          "name": "tree",
+          "type": "props",
+          "rotation": 0,
+          "visible": true,
+          "x": 2511,
+          "y": 1943,
+          "width": 34,
+          "height": 24,
+          "properties": [
+            {
+              "name": "solid",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "baked",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "interactable",
+              "type": "bool",
+              "value": false
+            }
+          ]
+        },
+        {
+          "id": 330,
+          "name": "tree",
+          "type": "props",
+          "rotation": 0,
+          "visible": true,
+          "x": 1130,
+          "y": 2051,
+          "width": 34,
+          "height": 24,
+          "properties": [
+            {
+              "name": "solid",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "baked",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "interactable",
+              "type": "bool",
+              "value": false
+            }
+          ]
+        },
+        {
+          "id": 331,
+          "name": "tree",
+          "type": "props",
+          "rotation": 0,
+          "visible": true,
+          "x": 2321,
+          "y": 2314,
+          "width": 34,
+          "height": 24,
+          "properties": [
+            {
+              "name": "solid",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "baked",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "interactable",
+              "type": "bool",
+              "value": false
+            }
+          ]
+        },
+        {
+          "id": 332,
+          "name": "tree",
+          "type": "props",
+          "rotation": 0,
+          "visible": true,
+          "x": 2656,
+          "y": 2446,
+          "width": 34,
+          "height": 24,
+          "properties": [
+            {
+              "name": "solid",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "baked",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "interactable",
+              "type": "bool",
+              "value": false
+            }
+          ]
+        },
+        {
+          "id": 333,
+          "name": "tree",
+          "type": "props",
+          "rotation": 0,
+          "visible": true,
+          "x": 2644,
+          "y": 2595,
+          "width": 34,
+          "height": 24,
+          "properties": [
+            {
+              "name": "solid",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "baked",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "interactable",
+              "type": "bool",
+              "value": false
+            }
+          ]
+        },
+        {
+          "id": 334,
+          "name": "tree",
+          "type": "props",
+          "rotation": 0,
+          "visible": true,
+          "x": 1319,
+          "y": 2638,
+          "width": 34,
+          "height": 24,
+          "properties": [
+            {
+              "name": "solid",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "baked",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "interactable",
+              "type": "bool",
+              "value": false
+            }
+          ]
+        },
+        {
+          "id": 335,
+          "name": "tree",
+          "type": "props",
+          "rotation": 0,
+          "visible": true,
+          "x": 1557,
+          "y": 2692,
+          "width": 34,
+          "height": 24,
+          "properties": [
+            {
+              "name": "solid",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "baked",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "interactable",
+              "type": "bool",
+              "value": false
+            }
+          ]
+        },
+        {
+          "id": 336,
+          "name": "tree",
+          "type": "props",
+          "rotation": 0,
+          "visible": true,
+          "x": 1216,
+          "y": 2692,
+          "width": 34,
+          "height": 24,
+          "properties": [
+            {
+              "name": "solid",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "baked",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "interactable",
+              "type": "bool",
+              "value": false
+            }
+          ]
+        },
+        {
+          "id": 337,
+          "name": "tree",
+          "type": "props",
+          "rotation": 0,
+          "visible": true,
+          "x": 899,
+          "y": 2807,
+          "width": 34,
+          "height": 24,
+          "properties": [
+            {
+              "name": "solid",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "baked",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "interactable",
+              "type": "bool",
+              "value": false
+            }
+          ]
+        },
+        {
+          "id": 338,
+          "name": "tree",
+          "type": "props",
+          "rotation": 0,
+          "visible": true,
+          "x": 1981,
+          "y": 2989,
+          "width": 34,
+          "height": 24,
+          "properties": [
+            {
+              "name": "solid",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "baked",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "interactable",
+              "type": "bool",
+              "value": false
+            }
+          ]
+        },
+        {
+          "id": 339,
+          "name": "tree",
+          "type": "props",
+          "rotation": 0,
+          "visible": true,
+          "x": 1098,
+          "y": 3037,
+          "width": 34,
+          "height": 24,
+          "properties": [
+            {
+              "name": "solid",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "baked",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "interactable",
+              "type": "bool",
+              "value": false
+            }
+          ]
+        },
+        {
+          "id": 340,
+          "name": "tree",
+          "type": "props",
+          "rotation": 0,
+          "visible": true,
+          "x": 2017,
+          "y": 3220,
+          "width": 34,
+          "height": 24,
+          "properties": [
+            {
+              "name": "solid",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "baked",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "interactable",
+              "type": "bool",
+              "value": false
+            }
+          ]
+        },
+        {
+          "id": 341,
+          "name": "tree",
+          "type": "props",
+          "rotation": 0,
+          "visible": true,
+          "x": 2288,
+          "y": 3253,
+          "width": 34,
+          "height": 24,
+          "properties": [
+            {
+              "name": "solid",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "baked",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "interactable",
+              "type": "bool",
+              "value": false
+            }
+          ]
+        },
+        {
+          "id": 342,
+          "name": "tree",
+          "type": "props",
+          "rotation": 0,
+          "visible": true,
+          "x": 2245,
+          "y": 3312,
+          "width": 34,
+          "height": 24,
+          "properties": [
+            {
+              "name": "solid",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "baked",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "interactable",
+              "type": "bool",
+              "value": false
+            }
+          ]
+        },
+        {
+          "id": 343,
+          "name": "tree",
+          "type": "props",
+          "rotation": 0,
+          "visible": true,
+          "x": 2189,
+          "y": 3339,
+          "width": 34,
+          "height": 24,
+          "properties": [
+            {
+              "name": "solid",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "baked",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "interactable",
+              "type": "bool",
+              "value": false
+            }
+          ]
+        },
+        {
+          "id": 344,
+          "name": "tree",
+          "type": "props",
+          "rotation": 0,
+          "visible": true,
+          "x": 1940,
+          "y": 3352,
+          "width": 34,
+          "height": 24,
+          "properties": [
+            {
+              "name": "solid",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "baked",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "interactable",
+              "type": "bool",
+              "value": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "doors",
+      "type": "objectgroup",
+      "draworder": "topdown",
+      "opacity": 1,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "objects": [
+        {
+          "id": 345,
+          "name": "house-entry",
+          "type": "doors",
+          "rotation": 0,
+          "visible": true,
+          "x": 972,
+          "y": 1075,
+          "width": 96,
+          "height": 80,
+          "properties": [
+            {
+              "name": "targetMap",
+              "type": "string",
+              "value": "house-v1"
+            },
+            {
+              "name": "targetSpawn",
+              "type": "string",
+              "value": "entry"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "spawns",
+      "type": "objectgroup",
+      "draworder": "topdown",
+      "opacity": 1,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "objects": [
+        {
+          "id": 346,
+          "name": "default",
+          "type": "spawns",
+          "rotation": 0,
+          "visible": true,
+          "x": 1990,
+          "y": 2150,
+          "width": 0,
+          "height": 0,
+          "point": true
+        },
+        {
+          "id": 347,
+          "name": "house-exit",
+          "type": "spawns",
+          "rotation": 0,
+          "visible": true,
+          "x": 1020,
+          "y": 1205,
+          "width": 0,
+          "height": 0,
+          "point": true
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "landmark-anchor",
+      "type": "objectgroup",
+      "draworder": "topdown",
+      "opacity": 1,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "objects": [
+        {
+          "id": 348,
+          "name": "portfolio-sign",
+          "type": "landmark-anchor",
+          "rotation": 0,
+          "visible": true,
+          "x": 1250,
+          "y": 1150,
+          "width": 0,
+          "height": 0,
+          "point": true,
+          "properties": [
+            {
+              "name": "slug",
+              "type": "string",
+              "value": "personal-portfolio"
+            },
+            {
+              "name": "asset",
+              "type": "string",
+              "value": "/world/portfolio-sign-v1.png"
+            },
+            {
+              "name": "anchorX",
+              "type": "float",
+              "value": 0.5
+            },
+            {
+              "name": "anchorY",
+              "type": "float",
+              "value": 1
+            },
+            {
+              "name": "width",
+              "type": "float",
+              "value": 200
+            },
+            {
+              "name": "height",
+              "type": "float",
+              "value": 174
+            }
+          ]
+        },
+        {
+          "id": 349,
+          "name": "elemix-scaffolding",
+          "type": "landmark-anchor",
+          "rotation": 0,
+          "visible": true,
+          "x": 2730,
+          "y": 1000,
+          "width": 0,
+          "height": 0,
+          "point": true,
+          "properties": [
+            {
+              "name": "slug",
+              "type": "string",
+              "value": "elemix"
+            },
+            {
+              "name": "asset",
+              "type": "string",
+              "value": "/world/elemix-scaffolding-v1.png"
+            },
+            {
+              "name": "anchorX",
+              "type": "float",
+              "value": 0.5
+            },
+            {
+              "name": "anchorY",
+              "type": "float",
+              "value": 1
+            },
+            {
+              "name": "width",
+              "type": "float",
+              "value": 460
+            },
+            {
+              "name": "height",
+              "type": "float",
+              "value": 480
+            }
+          ]
+        },
+        {
+          "id": 350,
+          "name": "minesweeper-mine",
+          "type": "landmark-anchor",
+          "rotation": 0,
+          "visible": true,
+          "x": 3300,
+          "y": 2070,
+          "width": 0,
+          "height": 0,
+          "point": true,
+          "properties": [
+            {
+              "name": "slug",
+              "type": "string",
+              "value": "minesweeper-llm-arena"
+            },
+            {
+              "name": "asset",
+              "type": "string",
+              "value": "/world/minesweeper-mine-v1.png"
+            },
+            {
+              "name": "anchorX",
+              "type": "float",
+              "value": 0.5
+            },
+            {
+              "name": "anchorY",
+              "type": "float",
+              "value": 1
+            },
+            {
+              "name": "width",
+              "type": "float",
+              "value": 460
+            },
+            {
+              "name": "height",
+              "type": "float",
+              "value": 420
+            }
+          ]
+        },
+        {
+          "id": 351,
+          "name": "next-armored-tower",
+          "type": "landmark-anchor",
+          "rotation": 0,
+          "visible": true,
+          "x": 2700,
+          "y": 3100,
+          "width": 0,
+          "height": 0,
+          "point": true,
+          "properties": [
+            {
+              "name": "slug",
+              "type": "string",
+              "value": "next-armored"
+            },
+            {
+              "name": "asset",
+              "type": "string",
+              "value": "/world/next-armored-tower-v1.png"
+            },
+            {
+              "name": "anchorX",
+              "type": "float",
+              "value": 0.5
+            },
+            {
+              "name": "anchorY",
+              "type": "float",
+              "value": 1
+            },
+            {
+              "name": "width",
+              "type": "float",
+              "value": 460
+            },
+            {
+              "name": "height",
+              "type": "float",
+              "value": 540
+            }
+          ]
+        },
+        {
+          "id": 352,
+          "name": "equinox-sundial",
+          "type": "landmark-anchor",
+          "rotation": 0,
+          "visible": true,
+          "x": 1500,
+          "y": 3270,
+          "width": 0,
+          "height": 0,
+          "point": true,
+          "properties": [
+            {
+              "name": "slug",
+              "type": "string",
+              "value": "equinox-theme"
+            },
+            {
+              "name": "asset",
+              "type": "string",
+              "value": "/world/equinox-sundial-v1.png"
+            },
+            {
+              "name": "anchorX",
+              "type": "float",
+              "value": 0.5
+            },
+            {
+              "name": "anchorY",
+              "type": "float",
+              "value": 1
+            },
+            {
+              "name": "width",
+              "type": "float",
+              "value": 460
+            },
+            {
+              "name": "height",
+              "type": "float",
+              "value": 400
+            }
+          ]
+        },
+        {
+          "id": 353,
+          "name": "petanque-court",
+          "type": "landmark-anchor",
+          "rotation": 0,
+          "visible": true,
+          "x": 750,
+          "y": 2340,
+          "width": 0,
+          "height": 0,
+          "point": true,
+          "properties": [
+            {
+              "name": "slug",
+              "type": "string",
+              "value": "petanque"
+            },
+            {
+              "name": "asset",
+              "type": "string",
+              "value": "/world/petanque-court-v1.png"
+            },
+            {
+              "name": "anchorX",
+              "type": "float",
+              "value": 0.5
+            },
+            {
+              "name": "anchorY",
+              "type": "float",
+              "value": 1
+            },
+            {
+              "name": "width",
+              "type": "float",
+              "value": 540
+            },
+            {
+              "name": "height",
+              "type": "float",
+              "value": 420
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "nextlayerid": 8,
+  "nextobjectid": 354,
+  "orientation": "orthogonal",
+  "renderorder": "right-down",
+  "tiledversion": "1.11.2",
+  "tileheight": 32,
+  "tilewidth": 32,
+  "tilesets": [],
+  "type": "map",
+  "version": "1.10",
+  "properties": [
+    {
+      "name": "schemaVersion",
+      "type": "float",
+      "value": 1
+    },
+    {
+      "name": "coordinateUnit",
+      "type": "string",
+      "value": "pixel"
+    },
+    {
+      "name": "avatarRadius",
+      "type": "float",
+      "value": 18
+    }
+  ]
+}

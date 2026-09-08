@@ -1,0 +1,320 @@
+{
+  "version": 1,
+  "seed": 481516,
+  "palette": {
+    "ink": "#334e50",
+    "grass": "#a7c890",
+    "grassLight": "#bfd5a2",
+    "sand": "#eee0b3",
+    "water": "#76b9c1",
+    "wood": "#b77855",
+    "cream": "#fff1d3",
+    "coral": "#db8973",
+    "dark": "#517978"
+  },
+  "maps": {
+    "island": "/world/island-v1.json",
+    "house": "/world/house-v1.json"
+  },
+  "avatar": {
+    "width": 110,
+    "height": 110,
+    "anchorX": 0.5,
+    "anchorY": 1,
+    "collisionRadius": 18,
+    "poses": ["down", "up", "left", "right"]
+  },
+  "sites": [
+    {
+      "slug": "personal-portfolio",
+      "name": "portfolio-sign",
+      "x": 1250,
+      "y": 1150,
+      "w": 200,
+      "h": 174
+    },
+    {
+      "slug": "elemix",
+      "name": "elemix-scaffolding",
+      "x": 2730,
+      "y": 1000,
+      "w": 460,
+      "h": 480
+    },
+    {
+      "slug": "minesweeper-llm-arena",
+      "name": "minesweeper-mine",
+      "x": 3300,
+      "y": 2070,
+      "w": 460,
+      "h": 420
+    },
+    {
+      "slug": "next-armored",
+      "name": "next-armored-tower",
+      "x": 2700,
+      "y": 3100,
+      "w": 460,
+      "h": 540
+    },
+    {
+      "slug": "equinox-theme",
+      "name": "equinox-sundial",
+      "x": 1500,
+      "y": 3270,
+      "w": 460,
+      "h": 400
+    },
+    {
+      "slug": "petanque",
+      "name": "petanque-court",
+      "x": 750,
+      "y": 2340,
+      "w": 540,
+      "h": 420
+    }
+  ],
+  "assets": {
+    "island-v1": {
+      "src": "/world/island-v1.webp",
+      "width": 4096,
+      "height": 4096,
+      "source": "/world/island-v1.svg",
+      "bytes": 309738,
+      "sha256": "54ddf153f4f6a402825d4272a3eedb55defdeb7b1ee7124f9df3ec13f0b7f7a9"
+    },
+    "portfolio-sign-v1": {
+      "src": "/world/portfolio-sign-v1.png",
+      "width": 200,
+      "height": 174,
+      "source": "/world/portfolio-sign-v1.svg",
+      "bytes": 4455,
+      "sha256": "b6aaa5f15268a4dee9e5b958d064bd27498ea2f9a6007593ecc666102e9c9a14"
+    },
+    "elemix-scaffolding-v1": {
+      "src": "/world/elemix-scaffolding-v1.png",
+      "width": 460,
+      "height": 480,
+      "source": "/world/elemix-scaffolding-v1.svg",
+      "bytes": 13713,
+      "sha256": "b549ef75a9223636184e185efea4c7ba73fb75ed101c52678073d46067f0bc6e"
+    },
+    "minesweeper-mine-v1": {
+      "src": "/world/minesweeper-mine-v1.png",
+      "width": 460,
+      "height": 420,
+      "source": "/world/minesweeper-mine-v1.svg",
+      "bytes": 12578,
+      "sha256": "f6a3e9f1ec0a7fc7434fdcb573f02a100424e7aeb3f9663f17c676e9abdc8fb3"
+    },
+    "next-armored-tower-v1": {
+      "src": "/world/next-armored-tower-v1.png",
+      "width": 460,
+      "height": 540,
+      "source": "/world/next-armored-tower-v1.svg",
+      "bytes": 11828,
+      "sha256": "6cd5395b022494fb1b8e765aca21f9300f6a3c4f1515d018174f6851752b52d1"
+    },
+    "equinox-sundial-v1": {
+      "src": "/world/equinox-sundial-v1.png",
+      "width": 460,
+      "height": 400,
+      "source": "/world/equinox-sundial-v1.svg",
+      "bytes": 16814,
+      "sha256": "f2c4ca62fe3e8c8c9bddc5ad92ca5a13e2e122646fb8f5109860359879de2252"
+    },
+    "petanque-court-v1": {
+      "src": "/world/petanque-court-v1.png",
+      "width": 540,
+      "height": 420,
+      "source": "/world/petanque-court-v1.svg",
+      "bytes": 14070,
+      "sha256": "e86581d5295183b7b27b8736663ba4e55760236a00e9055b32f7a94f8529ab93"
+    },
+    "house-v1": {
+      "src": "/world/house-v1.webp",
+      "width": 1536,
+      "height": 1024,
+      "source": "/world/house-v1.svg",
+      "bytes": 32736,
+      "sha256": "6aae3c5830d98f1b542dc5780f4239947283238091cccd2adb0d0afc20e28ba1"
+    },
+    "avatar-down-v1": {
+      "src": "/world/avatar-down-v1.png",
+      "width": 110,
+      "height": 110,
+      "source": "/world/avatar-down-v1.svg",
+      "bytes": 2433,
+      "sha256": "12d5c2fe1c2efb33ce65bc5f92db1ea3fc4a2aeb560f70c22104884165bdb207"
+    },
+    "avatar-up-v1": {
+      "src": "/world/avatar-up-v1.png",
+      "width": 110,
+      "height": 110,
+      "source": "/world/avatar-up-v1.svg",
+      "bytes": 2662,
+      "sha256": "50b5abb9055329ea606b1647529118f430a240b4d72da0f5faa703b178c37540"
+    },
+    "avatar-left-v1": {
+      "src": "/world/avatar-left-v1.png",
+      "width": 110,
+      "height": 110,
+      "source": "/world/avatar-left-v1.svg",
+      "bytes": 2367,
+      "sha256": "ae2fd74f459a3b8cfde2f36f0b27c4ef2d830c15c57b16f928d48909d2bcb7c7"
+    },
+    "avatar-right-v1": {
+      "src": "/world/avatar-right-v1.png",
+      "width": 110,
+      "height": 110,
+      "source": "/world/avatar-right-v1.svg",
+      "bytes": 2334,
+      "sha256": "54738f2c8634898a74327d1f85cb5e920e258a193688423023efd00b8f467ab8"
+    },
+    "ambient-leaf-v1": {
+      "src": "/world/ambient-leaf-v1.png",
+      "width": 48,
+      "height": 48,
+      "source": "/world/ambient-leaf-v1.svg",
+      "bytes": 975,
+      "sha256": "42b745d2048ebf9d2135fdef842b5b6e02751ff67e37c6f1ad03b5beb89a2292"
+    },
+    "ambient-butterfly-v1": {
+      "src": "/world/ambient-butterfly-v1.png",
+      "width": 64,
+      "height": 64,
+      "source": "/world/ambient-butterfly-v1.svg",
+      "bytes": 1370,
+      "sha256": "0aa9917d8315d5164c260ee1680d7a06a51e2684ae5bf698df40edcfd1602bc3"
+    },
+    "ambient-cloud-v1": {
+      "src": "/world/ambient-cloud-v1.png",
+      "width": 320,
+      "height": 160,
+      "source": "/world/ambient-cloud-v1.svg",
+      "bytes": 5629,
+      "sha256": "faac78c8ba4e414ad00b8b2e35f3ef902e5df1711f71dee4fe3f0451b3577f96"
+    },
+    "ambient-sparkle-v1": {
+      "src": "/world/ambient-sparkle-v1.png",
+      "width": 48,
+      "height": 48,
+      "source": "/world/ambient-sparkle-v1.svg",
+      "bytes": 598,
+      "sha256": "e757796cf1ff31dfc56f780d68bb3fa958c207d04f8026dafa5be4f9aac09ccb"
+    },
+    "ambient-shadow-v1": {
+      "src": "/world/ambient-shadow-v1.png",
+      "width": 110,
+      "height": 30,
+      "source": "/world/ambient-shadow-v1.svg",
+      "bytes": 672,
+      "sha256": "55df3ea9bb08ea6fd539fb1cfe576874f9b7d3cd05b94dfd65f61cf28d22e01c"
+    },
+    "island-overview-v1": {
+      "src": "/world/island-overview-v1.webp",
+      "width": 4096,
+      "height": 4096,
+      "bytes": 337286,
+      "sha256": "8acb214dd06e17031e8f6bd902479893938ffa1f6e1928fa831f3f08a03cb77a"
+    },
+    "banner-v1": {
+      "src": "/world/banner-v1.webp",
+      "width": 1920,
+      "height": 640,
+      "crop": {
+        "left": 500,
+        "top": 1000,
+        "width": 3060,
+        "height": 1020
+      },
+      "bytes": 47108,
+      "sha256": "4bcc4c83f23203f1c061ed991b5a86bf03b29d8c066bac509135b8f66e50aad6"
+    },
+    "teaser-v1": {
+      "src": "/world/teaser-v1.webp",
+      "width": 1200,
+      "height": 900,
+      "crop": {
+        "left": 450,
+        "top": 450,
+        "width": 3200,
+        "height": 2400
+      },
+      "bytes": 57174,
+      "sha256": "31c62bc8c3a1f349499f3e98b462ec810cd02ef835ae5a25093c51a457b9f378"
+    },
+    "og-v1": {
+      "src": "/world/og-v1.webp",
+      "width": 1200,
+      "height": 630,
+      "crop": {
+        "left": 430,
+        "top": 650,
+        "width": 3200,
+        "height": 1680
+      },
+      "bytes": 43976,
+      "sha256": "448364c8e7fd18d67deeff096d83182e1234001285477194de0979476775fa19"
+    },
+    "lofi-garden-v1": {
+      "src": "/world/lofi-garden-v1.wav",
+      "duration": 24.615374149659864,
+      "loop": true,
+      "sampleRate": 22050,
+      "compressedSrc": "/world/lofi-garden-v1.ogg",
+      "bytes": 1085582,
+      "sha256": "e3d597b960cec32d14d78fa9d0e00d18d4893520b3717c0846ffe98f3776eb86"
+    },
+    "interact-v1": {
+      "src": "/world/interact-v1.wav",
+      "duration": 0.49002267573696145,
+      "bytes": 21654,
+      "sha256": "a59bac60bb75978bb8c13e6b7c9c0861a4fb5ce82dbb7c32ddaae37d88693a2a"
+    },
+    "door-v1": {
+      "src": "/world/door-v1.wav",
+      "duration": 0.5849886621315192,
+      "bytes": 25842,
+      "sha256": "e345970d34b486cbb3cef87f254a42f0824a9dfe7c92b665eac62b26dae41227"
+    },
+    "step-v1": {
+      "src": "/world/step-v1.wav",
+      "duration": 0.39501133786848075,
+      "bytes": 17464,
+      "sha256": "3c2e3c17397fde3a67283cc66090c9dcf39eac378e725323f7afdf25f536e315"
+    },
+    "discovery-v1": {
+      "src": "/world/discovery-v1.wav",
+      "duration": 0.68,
+      "bytes": 30032,
+      "sha256": "a5bbe95eb2127d05a601f4c40d6226fc828a0a77677bf2833ccb05839f039ce6"
+    },
+    "open-v1": {
+      "src": "/world/open-v1.wav",
+      "duration": 0.49002267573696145,
+      "bytes": 21654,
+      "sha256": "1e12365e6a0b8c6a6845308ec9da98e0c2ab3e16ac56d6af93493788963aa88f"
+    },
+    "close-v1": {
+      "src": "/world/close-v1.wav",
+      "duration": 0.49002267573696145,
+      "bytes": 21654,
+      "sha256": "eb255ab57443ce6a83e7e07665bff75366383d61df9dbf7254c9d85b6b23bcb1"
+    },
+    "celebrate-v1": {
+      "src": "/world/celebrate-v1.wav",
+      "duration": 0.8700226757369615,
+      "bytes": 38412,
+      "sha256": "bf42bc89adee0419245ad4f5ec799f6d8a50761f8305d34569b9ec74e42ef0c4"
+    },
+    "music-v1": {
+      "src": "/world/music-v1.mp3",
+      "duration": 24.615374149659864,
+      "loop": true,
+      "bytes": 296586,
+      "sha256": "abc14e30d6917ef7757ed414110303412c04f9880fc85130d98e0609a3d788df"
+    }
+  },
+  "provenance": "Original procedural SVG illustration and original synthesized composition. No external artwork, recordings, samples, or fonts. Generated by scripts/world-art/generate.mjs."
+}
