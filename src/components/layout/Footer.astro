@@ -9,6 +9,7 @@ import { getTranslations, getLangFromUrl, getTranslatedPath } from '@/i18n';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { Image } from 'astro:assets';
 import logo from '@/assets/logo.svg';
+import { worldTranslations } from '@/i18n/translations/world';
 
 const lang = getLangFromUrl(Astro.url);
 const t = getTranslations(lang);
@@ -20,6 +21,7 @@ const currentYear = new Date().getFullYear();
 const sitemapLinks = [
   { href: '/', label: t.footer.home },
   { href: '/projects', label: t.footer.projects },
+  { href: '/projects/world', label: worldTranslations[lang].footerLink },
   { href: '/blog', label: t.footer.blog },
   { href: '/design-system', label: t.footer.designSystem },
   { href: '/contact', label: t.footer.contact },

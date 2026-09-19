@@ -1,0 +1,506 @@
+{
+  "compressionlevel": -1,
+  "height": 32,
+  "width": 48,
+  "infinite": false,
+  "layers": [
+    {
+      "id": 1,
+      "name": "background",
+      "type": "imagelayer",
+      "image": "house-v1.webp",
+      "imagewidth": 1536,
+      "imageheight": 1024,
+      "opacity": 1,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "offsetx": 0,
+      "offsety": 0
+    },
+    {
+      "id": 2,
+      "name": "collisions",
+      "type": "objectgroup",
+      "draworder": "topdown",
+      "opacity": 1,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "objects": [
+        {
+          "id": 1,
+          "name": "north-wall",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 0,
+          "width": 1536,
+          "height": 275
+        },
+        {
+          "id": 2,
+          "name": "west-wall",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 0,
+          "y": 275,
+          "width": 125,
+          "height": 749
+        },
+        {
+          "id": 3,
+          "name": "east-wall",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 1411,
+          "y": 275,
+          "width": 125,
+          "height": 749
+        },
+        {
+          "id": 4,
+          "name": "south-wall-left",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 125,
+          "y": 904,
+          "width": 585,
+          "height": 120
+        },
+        {
+          "id": 5,
+          "name": "south-wall-right",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 830,
+          "y": 904,
+          "width": 581,
+          "height": 120
+        },
+        {
+          "id": 6,
+          "name": "desk",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 1010,
+          "y": 233,
+          "width": 318,
+          "height": 113
+        },
+        {
+          "id": 7,
+          "name": "sofa",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 203,
+          "y": 310,
+          "width": 310,
+          "height": 145
+        },
+        {
+          "id": 8,
+          "name": "bookshelf",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 620,
+          "y": 185,
+          "width": 270,
+          "height": 84
+        },
+        {
+          "id": 9,
+          "name": "plant",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 1320,
+          "y": 610,
+          "width": 64,
+          "height": 70
+        },
+        {
+          "id": 10,
+          "name": "table",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 618,
+          "y": 510,
+          "width": 285,
+          "height": 142
+        },
+        {
+          "id": 11,
+          "name": "bed",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 1110,
+          "y": 485,
+          "width": 210,
+          "height": 260
+        },
+        {
+          "id": 12,
+          "name": "shoes",
+          "type": "collisions",
+          "rotation": 0,
+          "visible": true,
+          "x": 884,
+          "y": 790,
+          "width": 72,
+          "height": 44
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "project-zones",
+      "type": "objectgroup",
+      "draworder": "topdown",
+      "opacity": 1,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "objects": []
+    },
+    {
+      "id": 4,
+      "name": "props",
+      "type": "objectgroup",
+      "draworder": "topdown",
+      "opacity": 1,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "objects": [
+        {
+          "id": 13,
+          "name": "desk",
+          "type": "props",
+          "rotation": 0,
+          "visible": true,
+          "x": 1010,
+          "y": 233,
+          "width": 318,
+          "height": 113,
+          "properties": [
+            {
+              "name": "baked",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "solid",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "interactable",
+              "type": "bool",
+              "value": true
+            }
+          ]
+        },
+        {
+          "id": 14,
+          "name": "sofa",
+          "type": "props",
+          "rotation": 0,
+          "visible": true,
+          "x": 203,
+          "y": 310,
+          "width": 310,
+          "height": 145,
+          "properties": [
+            {
+              "name": "baked",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "solid",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "interactable",
+              "type": "bool",
+              "value": false
+            }
+          ]
+        },
+        {
+          "id": 15,
+          "name": "bookshelf",
+          "type": "props",
+          "rotation": 0,
+          "visible": true,
+          "x": 620,
+          "y": 185,
+          "width": 270,
+          "height": 84,
+          "properties": [
+            {
+              "name": "baked",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "solid",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "interactable",
+              "type": "bool",
+              "value": true
+            }
+          ]
+        },
+        {
+          "id": 16,
+          "name": "plant",
+          "type": "props",
+          "rotation": 0,
+          "visible": true,
+          "x": 1320,
+          "y": 610,
+          "width": 64,
+          "height": 70,
+          "properties": [
+            {
+              "name": "baked",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "solid",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "interactable",
+              "type": "bool",
+              "value": false
+            }
+          ]
+        },
+        {
+          "id": 17,
+          "name": "table",
+          "type": "props",
+          "rotation": 0,
+          "visible": true,
+          "x": 618,
+          "y": 510,
+          "width": 285,
+          "height": 142,
+          "properties": [
+            {
+              "name": "baked",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "solid",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "interactable",
+              "type": "bool",
+              "value": false
+            }
+          ]
+        },
+        {
+          "id": 18,
+          "name": "bed",
+          "type": "props",
+          "rotation": 0,
+          "visible": true,
+          "x": 1110,
+          "y": 485,
+          "width": 210,
+          "height": 260,
+          "properties": [
+            {
+              "name": "baked",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "solid",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "interactable",
+              "type": "bool",
+              "value": false
+            }
+          ]
+        },
+        {
+          "id": 19,
+          "name": "shoes",
+          "type": "props",
+          "rotation": 0,
+          "visible": true,
+          "x": 884,
+          "y": 790,
+          "width": 72,
+          "height": 44,
+          "properties": [
+            {
+              "name": "baked",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "solid",
+              "type": "bool",
+              "value": true
+            },
+            {
+              "name": "interactable",
+              "type": "bool",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "doors",
+      "type": "objectgroup",
+      "draworder": "topdown",
+      "opacity": 1,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "objects": [
+        {
+          "id": 20,
+          "name": "island-exit",
+          "type": "doors",
+          "rotation": 0,
+          "visible": true,
+          "x": 710,
+          "y": 870,
+          "width": 120,
+          "height": 65,
+          "properties": [
+            {
+              "name": "targetMap",
+              "type": "string",
+              "value": "island-v1"
+            },
+            {
+              "name": "targetSpawn",
+              "type": "string",
+              "value": "house-exit"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "spawns",
+      "type": "objectgroup",
+      "draworder": "topdown",
+      "opacity": 1,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "objects": [
+        {
+          "id": 21,
+          "name": "entry",
+          "type": "spawns",
+          "rotation": 0,
+          "visible": true,
+          "x": 770,
+          "y": 795,
+          "width": 0,
+          "height": 0,
+          "point": true
+        },
+        {
+          "id": 22,
+          "name": "default",
+          "type": "spawns",
+          "rotation": 0,
+          "visible": true,
+          "x": 1020,
+          "y": 735,
+          "width": 0,
+          "height": 0,
+          "point": true
+        },
+        {
+          "id": 23,
+          "name": "initial",
+          "type": "spawns",
+          "rotation": 0,
+          "visible": true,
+          "x": 1020,
+          "y": 735,
+          "width": 0,
+          "height": 0,
+          "point": true
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "landmark-anchor",
+      "type": "objectgroup",
+      "draworder": "topdown",
+      "opacity": 1,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "objects": []
+    }
+  ],
+  "nextlayerid": 8,
+  "nextobjectid": 24,
+  "orientation": "orthogonal",
+  "renderorder": "right-down",
+  "tiledversion": "1.11.2",
+  "tileheight": 32,
+  "tilewidth": 32,
+  "tilesets": [],
+  "type": "map",
+  "version": "1.10",
+  "properties": [
+    {
+      "name": "schemaVersion",
+      "type": "float",
+      "value": 1
+    },
+    {
+      "name": "coordinateUnit",
+      "type": "string",
+      "value": "pixel"
+    },
+    {
+      "name": "avatarRadius",
+      "type": "float",
+      "value": 18
+    }
+  ]
+}

@@ -1,0 +1,112 @@
+---
+import { getImage } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import { readFile } from 'node:fs/promises';
+import Layout from '@/layouts/Layout.astro';
+import ProjectsWorld from '@/components/world/ProjectsWorld';
+import { defaultLang, getTranslatedPath, getTranslations } from '@/i18n';
+import { TECH_STACK } from '@/components/portfolio/DevIdCard/constants';
+import { worldTranslations, type WorldProject } from '@/i18n/translations/world';
+import { getProjectImage } from '@/lib/images';
+import { getProjectSlug, sortProjects } from '@/lib/projects';
+
+export function getStaticPaths() {
+  return [{ params: { lang: undefined } }, { params: { lang: 'en' } as const }];
+}
+
+const lang = Astro.params.lang ?? defaultLang;
+const t = worldTranslations[lang];
+const ui = getTranslations(lang);
+const developer = {
+  name: ui.devCard.values.name,
+  job: ui.devCard.values.job,
+  techStack: TECH_STACK.map((tech) => tech.name),
+};
+const translatePath = getTranslatedPath(lang);
+const entries = sortProjects(
+  await getCollection('projects', (project) => project.id.startsWith(`${lang}/`))
+);
+const projects: WorldProject[] = await Promise.all(
+  entries.map(async (project) => {
+    const slug = getProjectSlug(project.id, lang);
+    const image = getProjectImage(project.data.image);
+    const optimizedImage = await getImage({
+      src: image,
+      width: Math.min(image.width, 960),
+      format: image.format === 'svg' ? 'svg' : 'webp',
+      quality: 80,
+    });
+
+    return {
+      slug,
+      title: project.data.title,
+      description: project.data.description,
+      techStack: project.data.techStack,
+      status: project.data.status,
+      imageUrl: optimizedImage.src,
+      detailUrl: translatePath(`/projects/${slug}`),
+    };
+  })
+);
+const map = JSON.parse(await readFile('public/world/island-v1.json', 'utf8'));
+const mappedSlugs: string[] = map.layers
+  .find((layer: { name: string }) => layer.name === 'project-zones')
+  .objects.map(
+    (zone: { properties: { name: string; value: string }[] }) =>
+      zone.properties.find((property) => property.name === 'slug')?.value
+  );
+if (
+  JSON.stringify([...mappedSlugs].sort()) !==
+  JSON.stringify(projects.map((project) => project.slug).sort())
+) {
+  throw new Error(`World landmarks must match the ${lang} project collection`);
+}
+---
+
+<Layout
+  title={t.pageTitle}
+  description={t.pageDescription}
+  image="/world/og-v1.webp"
+  imageAlt={t.title}
+  immersive
+>
+  <main>
+    <h1 class="sr-only">{t.title}</h1>
+    <ProjectsWorld client:only="react" projects={projects} t={t} lang={lang} developer={developer}>
+      <div slot="fallback" class="grid min-h-dvh place-content-center gap-4 p-6 text-center">
+        <p role="status">{t.loading}</p>
+        <a href={translatePath('/projects')} class="underline underline-offset-4">
+          {t.backToProjects}
+        </a>
+      </div>
+    </ProjectsWorld>
+    <noscript><p class="p-6">{t.javascriptRequired}</p></noscript>
+    <section class="world-project-links sr-only focus-within:not-sr-only focus-within:p-6">
+      <h2>{t.projectList}</h2>
+      <ul>
+        {
+          projects.map((project) => (
+            <li>
+              <a href={project.detailUrl}>{project.title}</a>
+              <p>{project.description}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+  </main>
+  <noscript>
+    <style is:inline>
+      .world-project-links {
+        position: static;
+        width: auto;
+        height: auto;
+        margin: 0;
+        padding: 1.5rem;
+        overflow: visible;
+        clip: auto;
+        white-space: normal;
+      }
+    </style>
+  </noscript>
+</Layout>

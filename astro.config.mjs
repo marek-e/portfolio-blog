@@ -25,6 +25,9 @@ export default defineConfig({
       rollupOptions: {
         output: {
           manualChunks: (id) => {
+            if (id.includes('node_modules/phaser/')) {
+              return 'phaser-vendor';
+            }
             // Bundle mermaid and its heavy deps together (prevents splitting)
             if (id.includes('node_modules/mermaid') || id.includes('node_modules/d3')) {
               return 'mermaid-vendor';
