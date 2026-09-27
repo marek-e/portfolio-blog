@@ -1,0 +1,136 @@
+src/components/portfolio/DevIdCard/StatusBadge.tsx
+  s_a098cb91585c4f::t_75b6e7ed0e152d 3-10
+src/i18n/ui.ts
+  s_a098cb91585c4f::t_b79cb3073cce57 167-168
+  s_a098cb91585c4f::t_bd79a3dca5e6db 164
+  s_a098cb91585c4f::t_661caf78919a9f 10-13
+  s_a098cb91585c4f::t_6f39b47863ef32 24,31
+  s_a098cb91585c4f::t_2617d4df4feada 123-124
+  s_a098cb91585c4f::t_aae864c2679c96 37,47,145
+src/components/portfolio/CopyEmailButton.tsx
+  s_a098cb91585c4f::t_70e758ed5fdd18 29,31
+  s_a098cb91585c4f::t_08d4f0ff97d314 51-56,60,67
+src/components/portfolio/AboutSection.astro
+  s_a098cb91585c4f::t_943eca32d33f04 4-5,9-12,15-50
+src/components/portfolio/ProjectCardReact.tsx
+  s_a098cb91585c4f::t_4e459d0776f7bf 85,97,140,145
+  s_a098cb91585c4f::t_e0a1b83bb33a20 3-4,29-50,53-54,57-63,65-74,76,78-84,86-90,92-96,98,101-136,138-139,141-144,146-149
+src/components/portfolio/LongRunActivityCard.tsx
+  s_a098cb91585c4f::t_9f9ad76f73ab03 10-18,28-35,38-56
+src/components/portfolio/DevIdCard/TechStackBadge.tsx
+  s_a098cb91585c4f::t_75b6e7ed0e152d 10-13
+src/components/layout/Navbar.astro
+  s_a098cb91585c4f::t_2933634c22f76d 16,21,52,74
+  s_a098cb91585c4f::t_4c5f86b796f2ff 34
+src/components/portfolio/DevIdCard/index.tsx
+  s_a098cb91585c4f::t_b8f47b826f028e 1,37,44,51-55,57-58,60-61,63-81,84-97
+src/components/portfolio/DevIdCard/CardField.tsx
+  s_a098cb91585c4f::t_75b6e7ed0e152d 11,13-15,17-26
+src/components/portfolio/CV.astro
+  s_a098cb91585c4f::t_2ae64e09af0658 82-84,130-132,139-141
+  s_a098cb91585c4f::t_4d91556754541c 56,135,138,157,167,170-171,192,195-196,215,219
+  s_a098cb91585c4f::t_8e33ae12bf5317 54,57,60,79-80,87,100,109,118,147,152,177,183,201,204
+src/components/layout/Footer.astro
+  s_a098cb91585c4f::t_414fce96fe9529 29-30
+  s_a098cb91585c4f::t_283e0569264c0b 31-61,63-66,68-86,89-103
+src/components/portfolio/FeaturedProjects.astro
+  s_a098cb91585c4f::t_5ab3e5251729df 58-64
+  s_a098cb91585c4f::t_7b81641334c05a 7-10,65,67-69,86-87,89-90
+  s_a098cb91585c4f::t_aa37122d8071fe 56
+  s_a098cb91585c4f::t_812ad16c4865c1 73
+src/components/portfolio/DevIdCard/HolographicOverlay.tsx
+  s_a098cb91585c4f::t_5b606140c7aa8c 11,14-22,24,29,33-35
+src/components/portfolio/ContactSection.astro
+  s_a098cb91585c4f::t_6b9c06b57ad879 8-9,26-43,47-48,50,52,55-57,59-92
+  s_a098cb91585c4f::t_f7c2de6f5d889a 53,58
+  s_a098cb91585c4f::t_2a014115f89239 11-15,18,45-46,49
+  s_a098cb91585c4f::t_aa37122d8071fe 23
+  s_a098cb91585c4f::t_ec0722f39a0f1c 21-22,24-25
+  s_a098cb91585c4f::t_5ab3e5251729df 44
+src/components/portfolio/ActivityCardParts.tsx
+  s_a098cb91585c4f::t_9f9ad76f73ab03 2,209
+  s_a098cb91585c4f::t_414fce96fe9529 190
+  s_a098cb91585c4f::t_e4a2f7f5abd249 176,213-232
+  s_a098cb91585c4f::t_b62564c4fceaca 178-179,186,188
+  s_a098cb91585c4f::t_2b5746329386b0 1,3-175,177,180-185,187,189,191-208,210-212,233-261
+src/components/portfolio/CommuteActivityCard.tsx
+  s_a098cb91585c4f::t_9f9ad76f73ab03 4-15,24,26-29,32-45,47-50,52-54
+src/components/portfolio/StravaSection.astro
+  s_a098cb91585c4f::t_aa37122d8071fe 40
+  s_a098cb91585c4f::t_3af9ee25c4c422 11-12,35-36,49-50,54,56-57,59-61,63,71,77,94,96-97,102-103,106,114-117,122-123,126
+  s_a098cb91585c4f::t_5ab3e5251729df 42-48
+src/components/portfolio/ProjectListCard.astro
+  s_a098cb91585c4f::t_498d0177b724e8 10,14-15,31-41,44,47,51-52,54-57,61-64,68,80,85-109,112-114,117-118,120
+  s_a098cb91585c4f::t_8066c97d8edac2 9
+  s_a098cb91585c4f::t_2ae64e09af0658 53,69-79
+  s_a098cb91585c4f::t_a5653452ed4485 6
+  s_a098cb91585c4f::t_43d48b6cab9aab 18
+src/components/portfolio/DevIdCard/constants.tsx
+  s_a098cb91585c4f::t_75b6e7ed0e152d 17,29,41,53,65
+src/components/portfolio/RunningStats.tsx
+  s_a098cb91585c4f::t_aa866037bea1f5 6,122-129,131-133,136,143,151,155,157-173
+src/components/layout/ModeToggle.tsx
+  s_a098cb91585c4f::t_4c5f86b796f2ff 60
+src/components/portfolio/RaceActivityCard.tsx
+  s_a098cb91585c4f::t_759e26ea3cbb61 4-5,15-23,30,47,49-56,62-63,65-66,70,72,74-100,102-116,118-127,129-131
+src/components/portfolio/ActivityCard.tsx
+  s_a098cb91585c4f::t_9f9ad76f73ab03 10-18,28-35,38-47,49-51
+src/components/portfolio/FeaturedProjectsCarousel.tsx
+  s_a098cb91585c4f::t_d0b4511ca31b4c 84,100-101,103-106,108-109,113-133
+  s_a098cb91585c4f::t_812ad16c4865c1 102,107
+src/i18n/translations/en.ts
+  s_a098cb91585c4f::t_b09b662e9f97ec 50
+  s_a098cb91585c4f::t_aae864c2679c96 47,57,156
+  s_a098cb91585c4f::t_b79cb3073cce57 179-180
+  s_a098cb91585c4f::t_88369ccd247513 58,61
+  s_a098cb91585c4f::t_bd79a3dca5e6db 176
+  s_a098cb91585c4f::t_6f39b47863ef32 27,41
+  s_a098cb91585c4f::t_2617d4df4feada 134-135
+  s_a098cb91585c4f::t_d4c00def137740 12-15
+src/components/portfolio/TimelineSection.astro
+  s_a098cb91585c4f::t_ee6dcd5e923200 21
+  s_a098cb91585c4f::t_b62564c4fceaca 62
+  s_a098cb91585c4f::t_aa37122d8071fe 14
+  s_a098cb91585c4f::t_b692e55e95c011 3,15-20,23-24,28-61,63-68
+src/components/portfolio/TimelineCards.tsx
+  s_a098cb91585c4f::t_b692e55e95c011 175-183
+  s_a098cb91585c4f::t_63a52f68d61bc9 3,5,13-19,21,23-32,35-38,40-67,69-86,88,91-96,98-99,103,105,110,114-115,117-130,132,134-138,140,142,144-150,152,154,156,162-164,167,170,172,184,186-187,193-197,199
+  s_a098cb91585c4f::t_1626612223b1a0 33,39
+  s_a098cb91585c4f::t_f0a91179e769b5 188
+  s_a098cb91585c4f::t_db64214d04427d 174,189-192,202
+src/components/portfolio/IntervalsActivityCard.tsx
+  s_a098cb91585c4f::t_f747f6ef8edd4c 5,12-21,34,36-43,49-50,58-64,66-69,71-78,80-82
+src/i18n/translations/fr.ts
+  s_a098cb91585c4f::t_aae864c2679c96 47,57,157
+  s_a098cb91585c4f::t_6f39b47863ef32 27,41
+  s_a098cb91585c4f::t_2617d4df4feada 135-136
+  s_a098cb91585c4f::t_d4c00def137740 12-15
+  s_a098cb91585c4f::t_bd79a3dca5e6db 177
+  s_a098cb91585c4f::t_88369ccd247513 58,61
+  s_a098cb91585c4f::t_b79cb3073cce57 180-181
+  s_a098cb91585c4f::t_b09b662e9f97ec 50
+src/components/portfolio/Hero.astro
+  s_a098cb91585c4f::t_44a270ad7c6ac9 16-20
+  s_a098cb91585c4f::t_42912aecb39acc 25-27,41-43,88-90
+  s_a098cb91585c4f::t_25b66284e141b3 2-4,6,9,14-15,21,28-39,44-54,58,60-71,75,80-81,91-99,101,104,110-119,121-130,133-168
+src/components/portfolio/DevIdCard/CardTitle.tsx
+  s_a098cb91585c4f::t_75b6e7ed0e152d 7,18-22
+src/components/portfolio/DevIdCard/useTiltEffect.ts
+  s_a098cb91585c4f::t_0386f09842dc03 129,131-132
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "dd1ffa79d2bb49c59a3f7aa557e559089f19a85d",
+  "prompts": {},
+  "sessions": {
+    "s_a098cb91585c4f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6b64f08b-9f30-480e-8016-4bba017f0d87",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
