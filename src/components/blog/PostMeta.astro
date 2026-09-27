@@ -1,0 +1,28 @@
+---
+import { formatDate } from '@/lib/blog';
+import type { Lang } from '@/i18n/config';
+import { cn } from '@/lib/utils';
+
+interface Props {
+  date: Date;
+  lang: Lang;
+  readingTime: number;
+  minRead: string;
+  stacked?: boolean;
+  class?: string;
+}
+
+const { date, lang, readingTime, minRead, stacked = false, class: className } = Astro.props;
+---
+
+<p
+  class={cn(
+    'text-muted-foreground flex font-mono text-xs tracking-wide',
+    stacked ? 'flex-row gap-3 md:flex-col md:gap-1.5' : 'flex-wrap items-center gap-3',
+    className
+  )}
+>
+  <time datetime={date.toISOString()}>{formatDate(date, lang)}</time>
+  <span aria-hidden="true" class={cn('text-foreground/25', stacked && 'md:hidden')}>/</span>
+  <span>{readingTime} {minRead}</span>
+</p>

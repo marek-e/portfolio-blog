@@ -112,7 +112,7 @@ export function PostActionsMenu({
         aria-label={triggerLabel}
         onPointerEnter={warm}
         onFocus={warm}
-        className="group border-border text-muted-foreground hover:text-primary data-popup-open:text-primary flex shrink-0 cursor-pointer items-center rounded-md border px-3 py-1.5 text-sm transition-colors hover:border-current data-popup-open:border-current"
+        className="group glass text-muted-foreground hover:text-foreground data-popup-open:text-foreground focus-visible:ring-ring/50 flex size-11 shrink-0 cursor-pointer items-center justify-center rounded-full transition-colors outline-none focus-visible:ring-[3px]"
       >
         <MoreHorizontalDots />
       </DropdownMenuTrigger>

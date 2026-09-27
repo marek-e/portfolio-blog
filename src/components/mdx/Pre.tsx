@@ -11,32 +11,31 @@ interface PreProps {
 
 export function Pre({ children, className, 'data-language': language, ...props }: PreProps) {
   return (
-    <div
-      data-pre
-      className="group border-border shadow-code shadow-primary relative my-6 overflow-hidden rounded-lg border"
-    >
+    <div data-pre className="group code-surface relative my-8 overflow-hidden rounded-2xl">
       {language && (
         <div
           data-language-header
-          className="border-border bg-muted dark:bg-muted/40 relative flex h-10 items-center justify-between"
+          className="border-border flex h-10 items-center gap-2 border-b px-4"
         >
-          <div className="border-primary text-foreground absolute ml-8 h-full rounded-t-lg border-t-2 bg-(--shiki-bg) px-4 py-2 font-mono text-sm">
-            {language}
-          </div>
+          <span aria-hidden="true" className="bg-pastel-lilac size-2 rounded-full" />
+          <span className="text-muted-foreground font-mono text-xs tracking-wide">{language}</span>
         </div>
       )}
-      <div className="relative bg-(--shiki-bg)">
-        <pre className={cn('overflow-x-auto p-4 text-sm leading-relaxed', className)} {...props}>
+      <div className="relative">
+        <pre
+          className={cn('overflow-x-auto px-5 py-4 text-[0.85rem] leading-relaxed', className)}
+          {...props}
+        >
           {children}
         </pre>
         <button
           type="button"
           data-copy-button
           className={cn(
-            'border-border bg-background/80 text-muted-foreground absolute top-3 right-3 z-10 cursor-pointer rounded-md border p-2 backdrop-blur-sm',
-            'opacity-0 group-hover:opacity-100 motion-safe:transition-opacity',
-            'hover:bg-muted hover:text-foreground',
-            'focus:ring-ring focus:opacity-100 focus:ring-2 focus:outline-none',
+            'glass text-muted-foreground absolute top-2.5 right-2.5 z-10 cursor-pointer rounded-lg p-2',
+            'opacity-0 group-hover:opacity-100 motion-safe:transition-opacity pointer-coarse:opacity-100',
+            'hover:text-foreground',
+            'focus-visible:ring-ring/50 focus-visible:opacity-100 focus-visible:ring-[3px] focus-visible:outline-none',
             'active:scale-95 motion-safe:transition-transform'
           )}
           aria-label="Copy code"

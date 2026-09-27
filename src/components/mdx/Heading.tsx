@@ -94,7 +94,7 @@ export function H3({ children, id, className, ...props }: HeadingProps) {
     <h3
       id={headingId}
       className={cn(
-        'not-prose group cursor-pointer scroll-mt-24 text-xl font-semibold tracking-tight',
+        'not-prose font-display-soft group cursor-pointer scroll-mt-24 text-xl font-semibold tracking-tight',
         className
       )}
       onClick={handleClick}

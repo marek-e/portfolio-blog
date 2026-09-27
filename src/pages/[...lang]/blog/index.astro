@@ -2,13 +2,16 @@
 import Layout from '@/layouts/Layout.astro';
 import Navbar from '@/components/layout/Navbar.astro';
 import Footer from '@/components/layout/Footer.astro';
-import { Badge } from '@/components/ui/badge';
+import SectionHeading from '@/components/shared/SectionHeading.astro';
+import PostMeta from '@/components/blog/PostMeta.astro';
+import PostTags from '@/components/blog/PostTags.astro';
+import { Doodle } from '@/components/shared/HandDrawn';
 import { getCollection } from 'astro:content';
 import { getTranslations, defaultLang } from '@/i18n';
 import { getTranslatedPath, languages } from '@/i18n/config';
 import { ArrowRight02Icon, RssIcon } from '@hugeicons/core-free-icons';
 import { Icon } from '@/components/shared/Icon';
-import { formatDate, getSlug, estimateReadingTime, getTagColor } from '@/lib/blog';
+import { getSlug, estimateReadingTime } from '@/lib/blog';
 
 export function getStaticPaths() {
   return [{ params: { lang: undefined } }, { params: { lang: 'en' } as const }];
@@ -23,6 +26,7 @@ const posts = allPosts
   .filter((post) => post.id.startsWith(`${lang}/`))
   .filter((post) => import.meta.env.DEV || !post.data.draft)
   .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
+const [featured, ...rest] = posts;
 ---
 
 <Layout
@@ -48,68 +52,118 @@ const posts = allPosts
     })}
   />
   <Navbar />
-  <main class="container mx-auto min-h-dvh w-full max-w-6xl px-4 pt-32 pb-16">
-    <header class="mb-12 space-y-4">
-      <div class="flex items-center justify-between gap-4">
-        <h1 class="text-4xl font-bold tracking-tight">{t.blog.title}</h1>
-        <a
-          href={lang === 'fr' ? '/rss.xml' : '/en/rss.xml'}
-          aria-label={t.aria.subscribeRss}
-          class="group text-muted-foreground hover:text-primary flex items-center gap-2 rounded-md border border-transparent px-3 py-1.5 text-sm transition-colors hover:border-current"
-        >
-          <Icon
-            icon={RssIcon}
-            strokeWidth={2}
-            className="group-hover:animate-wiggle size-4 transition-transform duration-300"
-          />
-          <span class="hidden sm:inline">RSS</span>
-        </a>
-      </div>
-      <p class="text-foreground text-lg">{t.blog.subtitle}</p>
-    </header>
+  <main class="mx-auto min-h-dvh w-full max-w-6xl px-4 pt-36 pb-24 md:pt-44 md:pb-32">
+    <SectionHeading
+      as="h1"
+      eyebrow={t.blog.eyebrow}
+      title={t.blog.title}
+      subtitle={t.blog.subtitle}
+    >
+      <a
+        href={lang === 'fr' ? '/rss.xml' : '/en/rss.xml'}
+        aria-label={t.aria.subscribeRss}
+        class="group glass text-muted-foreground hover:text-foreground inline-flex h-11 shrink-0 items-center gap-2 self-start rounded-full px-4 font-mono text-xs transition-colors md:self-auto"
+      >
+        <Icon
+          icon={RssIcon}
+          strokeWidth={2}
+          className="motion-safe:group-hover:animate-wiggle size-4 transition-transform duration-300"
+        />
+        RSS
+      </a>
+    </SectionHeading>
 
     {
       posts.length === 0 ? (
-        <p class="text-muted-foreground py-12 text-center">{t.blog.noPosts}</p>
+        <p class="glass text-muted-foreground mt-16 rounded-3xl p-12 text-center">
+          {t.blog.noPosts}
+        </p>
       ) : (
-        <ul class="space-y-8">
-          {posts.map((post) => (
-            <li>
-              <a
-                href={translatePath(`/blog/${getSlug(post.id, lang)}`)}
-                class="group border-border bg-card hover:border-primary/50 hover:bg-card/80 block rounded-lg border p-6 transition-colors"
-              >
-                <article class="space-y-3">
-                  <div class="text-muted-foreground flex flex-wrap items-center justify-between gap-2 text-sm">
-                    <div class="flex items-center gap-16">
-                      <time datetime={post.data.publishDate.toISOString()}>
-                        {formatDate(post.data.publishDate, lang)}
-                      </time>
-                      <span>
-                        {post.body && estimateReadingTime(post.body)} {t.blog.minRead}
-                      </span>
-                    </div>
-                    {post.data.tags.length > 0 && (
-                      <div class="flex flex-wrap gap-1.5">
-                        {post.data.tags.map((tag) => (
-                          <Badge variant={getTagColor(tag)} className="text-xs">
-                            {tag}
-                          </Badge>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                  <h2 class="text-xl font-semibold transition-colors">{post.data.title}</h2>
-                  <p class="text-muted-foreground line-clamp-2">{post.data.description}</p>
-                  <span class="text-primary group-hover:bg-primary/10 inline-flex items-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium transition-all group-hover:gap-3">
-                    {t.blog.readMore}
-                    <Icon icon={ArrowRight02Icon} strokeWidth={2} className="size-4" />
+        <div class="mt-14 space-y-4 md:mt-20 md:space-y-5">
+          {featured && (
+            <a
+              href={translatePath(`/blog/${getSlug(featured.id, lang)}`)}
+              class="group glass relative block rounded-3xl p-6 transition duration-300 hover:-translate-y-0.5 hover:bg-(--glass-bg-strong) sm:p-8 md:p-12"
+            >
+              <Doodle
+                name="sparkle"
+                className="text-pastel-lilac absolute top-8 right-8 hidden size-7 rotate-12 md:block"
+              />
+              <Doodle
+                name="sparkle"
+                className="text-pastel-peach absolute top-16 right-16 hidden size-4 -rotate-12 md:block"
+              />
+              <article class="flex flex-col gap-6">
+                <div class="flex flex-wrap items-center gap-x-4 gap-y-2">
+                  <span class="bg-pastel-rose/60 text-foreground/85 dark:bg-pastel-rose/12 dark:text-pastel-rose rounded-full px-3 py-1 font-mono text-xs">
+                    {t.blog.latest}
                   </span>
-                </article>
-              </a>
-            </li>
-          ))}
-        </ul>
+                  <PostMeta
+                    date={featured.data.publishDate}
+                    lang={lang}
+                    readingTime={estimateReadingTime(featured.body ?? '')}
+                    minRead={t.blog.minRead}
+                  />
+                </div>
+                <h2 class="font-display-soft max-w-4xl text-3xl leading-[1.08] font-semibold tracking-tight text-balance md:text-5xl">
+                  {featured.data.title}
+                </h2>
+                <p class="text-muted-foreground max-w-2xl text-lg leading-relaxed text-pretty">
+                  {featured.data.description}
+                </p>
+                <div class="flex flex-wrap items-center justify-between gap-4 pt-2">
+                  <PostTags tags={featured.data.tags} />
+                  <span class="text-foreground inline-flex items-center gap-2 text-sm font-medium">
+                    {t.blog.readMore}
+                    <Icon
+                      icon={ArrowRight02Icon}
+                      strokeWidth={2}
+                      className="size-4 transition-transform duration-300 group-hover:translate-x-1"
+                    />
+                  </span>
+                </div>
+              </article>
+            </a>
+          )}
+
+          {rest.length > 0 && (
+            <ul class="space-y-4 md:space-y-5">
+              {rest.map((post) => (
+                <li>
+                  <a
+                    href={translatePath(`/blog/${getSlug(post.id, lang)}`)}
+                    class="group glass block rounded-3xl p-6 transition duration-300 hover:-translate-y-0.5 hover:bg-(--glass-bg-strong) md:p-8"
+                  >
+                    <article class="grid gap-x-10 gap-y-3 md:grid-cols-[11rem_1fr_auto]">
+                      <PostMeta
+                        date={post.data.publishDate}
+                        lang={lang}
+                        readingTime={estimateReadingTime(post.body ?? '')}
+                        minRead={t.blog.minRead}
+                        stacked
+                      />
+                      <div class="flex min-w-0 flex-col gap-3">
+                        <h2 class="font-display-soft text-xl leading-snug font-semibold tracking-tight text-balance md:text-2xl">
+                          {post.data.title}
+                        </h2>
+                        <p class="text-muted-foreground line-clamp-2 leading-relaxed">
+                          {post.data.description}
+                        </p>
+                        <PostTags tags={post.data.tags} class="pt-1" />
+                      </div>
+                      <span
+                        aria-hidden="true"
+                        class="glass text-muted-foreground group-hover:text-foreground hidden size-11 items-center justify-center self-center rounded-full transition duration-300 group-hover:translate-x-1 md:flex"
+                      >
+                        <Icon icon={ArrowRight02Icon} strokeWidth={2} className="size-4" />
+                      </span>
+                    </article>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
       )
     }
   </main>

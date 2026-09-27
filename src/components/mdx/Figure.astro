@@ -23,12 +23,12 @@ const {
 } = Astro.props;
 ---
 
-<figure class={`not-prose my-8 flex w-full flex-col items-center ${className}`}>
+<figure class={`not-prose my-10 flex w-full flex-col items-center ${className}`}>
   <Image
     src={src}
     alt={alt}
     fetchpriority={fetchpriority}
-    class={`border-border bg-muted/30 overflow-hidden rounded-lg border${srcDark ? ' dark:hidden' : ''}`}
+    class={`border-border bg-muted/30 overflow-hidden rounded-2xl border shadow-[0_18px_40px_-18px_var(--glass-shadow)]${srcDark ? ' dark:hidden' : ''}`}
     style={{ objectFit }}
   />
   {
@@ -44,7 +44,9 @@ const {
   }
   {
     caption && (
-      <figcaption class="text-muted-foreground mt-4 text-center text-sm">{caption}</figcaption>
+      <figcaption class="text-muted-foreground mt-3 text-center font-mono text-xs tracking-wide">
+        {caption}
+      </figcaption>
     )
   }
 </figure>

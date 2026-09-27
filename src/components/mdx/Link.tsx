@@ -13,9 +13,9 @@ function isExternal(href: string): boolean {
 }
 
 const linkStyles = cn(
-  'underline decoration-primary decoration-wavy decoration-[1.3px] underline-offset-[5px]',
-  'transition-all duration-200 ease-out',
-  'hover:text-primary/80 hover:decoration-[1.8px] hover:underline-offset-[5.5px]'
+  'text-foreground font-medium underline decoration-marker/55 decoration-[1.5px] underline-offset-4',
+  'transition-colors duration-200 ease-out',
+  'hover:text-primary hover:decoration-marker'
 );
 
 export function Link({ href, children, newTab, className, ...rest }: LinkProps) {
