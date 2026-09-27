@@ -19,25 +19,28 @@ export function Toggle({
   const [isOpen, setIsOpen] = useState(defaultOpen);
 
   return (
-    <div
-      className={cn('not-prose border-border my-6 overflow-hidden rounded-lg border', className)}
-    >
+    <div className={cn('not-prose glass my-8 overflow-hidden rounded-2xl', className)}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="bg-muted/50 hover:bg-muted flex w-full cursor-pointer items-center justify-between px-4 py-3 text-left transition-colors"
+        className="hover:bg-foreground/4 focus-visible:ring-ring/50 flex min-h-14 w-full cursor-pointer items-center justify-between gap-4 px-5 py-3 text-left transition-colors outline-none focus-visible:ring-[3px] focus-visible:ring-inset"
         aria-expanded={isOpen}
       >
-        <span className="font-medium">{title}</span>
+        <span className="font-display-soft text-foreground text-lg font-semibold tracking-tight">
+          {title}
+        </span>
         <HugeiconsIcon
           icon={ArrowDown01Icon}
           strokeWidth={2}
-          className={cn('size-5 transition-transform', isOpen && 'rotate-180')}
+          className={cn(
+            'text-muted-foreground size-5 shrink-0 motion-safe:transition-transform',
+            isOpen && 'rotate-180'
+          )}
         />
       </button>
       <div
         className={cn(
-          'border-border h-0 overflow-hidden border-t px-4 py-0 transition-all duration-300',
-          isOpen && 'h-auto p-4'
+          'border-border h-0 overflow-hidden border-t px-5 py-0 motion-safe:transition-all motion-safe:duration-300',
+          isOpen && 'h-auto py-5'
         )}
       >
         {children}

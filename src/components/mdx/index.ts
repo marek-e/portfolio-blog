@@ -7,10 +7,12 @@ import { Mermaid } from './Mermaid';
 import { Toggle } from './Toggle';
 import { PastelCard, PastelCards } from './PastelCard';
 import { Link } from './Link';
+import { Table } from './Table';
 
 export const mdxComponents = {
   pre: Pre,
   a: Link,
+  table: Table,
   h1: H1,
   h2: H2,
   h3: H3,
@@ -37,6 +39,7 @@ export {
   Mermaid,
   Toggle,
   Link,
+  Table,
   PastelCard,
   PastelCards,
 };

@@ -20,12 +20,14 @@ export function CodeBlock({ code, language, filename, className }: CodeBlockProp
   };
 
   return (
-    <div className={cn('group border-border bg-card relative my-6 rounded-lg border', className)}>
+    <div className={cn('group code-surface relative my-8 overflow-hidden rounded-2xl', className)}>
       {filename && (
-        <div className="border-border text-muted-foreground flex items-center gap-2 border-b px-4 py-2 text-sm">
-          <span className="font-mono">{filename}</span>
+        <div className="border-border text-muted-foreground flex h-10 items-center gap-2 border-b px-4 font-mono text-xs tracking-wide">
+          <span>{filename}</span>
           {language && (
-            <span className="bg-muted ml-auto rounded px-2 py-0.5 text-xs">{language}</span>
+            <span className="bg-pastel-lilac/50 dark:bg-pastel-lilac/12 dark:text-pastel-lilac ml-auto rounded-full px-2 py-0.5">
+              {language}
+            </span>
           )}
         </div>
       )}
@@ -36,10 +38,10 @@ export function CodeBlock({ code, language, filename, className }: CodeBlockProp
         <button
           onClick={handleCopy}
           className={cn(
-            'border-border bg-background/80 text-muted-foreground absolute top-2 right-2 rounded-md border p-2 backdrop-blur-sm',
-            'opacity-0 group-hover:opacity-100 motion-safe:transition-opacity',
-            'hover:bg-muted hover:text-foreground',
-            'focus:ring-ring focus:opacity-100 focus:ring-2 focus:outline-none'
+            'glass text-muted-foreground absolute top-2.5 right-2.5 rounded-lg p-2',
+            'opacity-0 group-hover:opacity-100 motion-safe:transition-opacity pointer-coarse:opacity-100',
+            'hover:text-foreground',
+            'focus-visible:ring-ring/50 focus-visible:opacity-100 focus-visible:ring-[3px] focus-visible:outline-none'
           )}
           aria-label={copied ? 'Copied!' : 'Copy code'}
         >

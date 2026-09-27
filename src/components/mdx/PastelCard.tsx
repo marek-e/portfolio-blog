@@ -15,56 +15,55 @@ interface PastelCardsProps {
   children: ReactNode;
 }
 
-const colorConfig: Record<PastelColor, { card: string; chip: string }> = {
+const colorConfig: Record<PastelColor, { tint: string; chip: string }> = {
   slate: {
-    card: 'border-slate-200 shadow-[6px_6px_0_var(--color-slate-200)] dark:border-slate-700 dark:shadow-[6px_6px_0_var(--color-slate-700)]',
-    chip: 'bg-slate-50 text-slate-700 border-slate-200 dark:bg-slate-900/60 dark:text-slate-300 dark:border-slate-700',
+    tint: 'from-foreground/4',
+    chip: 'bg-foreground/8 text-foreground/75',
   },
   stone: {
-    card: 'border-stone-200 shadow-[6px_6px_0_var(--color-stone-200)] dark:border-stone-700 dark:shadow-[6px_6px_0_var(--color-stone-700)]',
-    chip: 'bg-stone-50 text-stone-700 border-stone-200 dark:bg-stone-900/60 dark:text-stone-300 dark:border-stone-700',
+    tint: 'from-pastel-butter/25 dark:from-pastel-butter/6',
+    chip: 'bg-pastel-butter/80 text-foreground/80 dark:bg-pastel-butter/12 dark:text-pastel-butter',
   },
   red: {
-    card: 'border-red-200 shadow-[6px_6px_0_var(--color-red-200)] dark:border-rose-700 dark:shadow-[6px_6px_0_var(--color-rose-700)]',
-    chip: 'bg-red-50 text-red-700 border-red-200 dark:bg-rose-950/60 dark:text-rose-300 dark:border-rose-700',
+    tint: 'from-pastel-rose/35 dark:from-marker/10',
+    chip: 'bg-pastel-rose/70 text-foreground/80 dark:bg-marker/15 dark:text-marker',
   },
   orange: {
-    card: 'border-orange-200 shadow-[6px_6px_0_var(--color-orange-200)] dark:border-yellow-700 dark:shadow-[6px_6px_0_var(--color-yellow-700)]',
-    chip: 'bg-orange-50 text-orange-700 border-orange-200 dark:bg-yellow-950/60 dark:text-yellow-300 dark:border-yellow-700',
+    tint: 'from-pastel-peach/40 dark:from-pastel-peach/10',
+    chip: 'bg-pastel-peach/70 text-foreground/80 dark:bg-pastel-peach/12 dark:text-pastel-peach',
   },
   green: {
-    card: 'border-green-200 shadow-[6px_6px_0_var(--color-green-200)] dark:border-green-700 dark:shadow-[6px_6px_0_var(--color-green-700)]',
-    chip: 'bg-green-50 text-green-700 border-green-200 dark:bg-green-950/60 dark:text-green-300 dark:border-green-700',
+    tint: 'from-pastel-mint/40 dark:from-pastel-mint/10',
+    chip: 'bg-pastel-mint/75 text-foreground/80 dark:bg-pastel-mint/12 dark:text-pastel-mint',
   },
   blue: {
-    card: 'border-blue-200 shadow-[6px_6px_0_var(--color-blue-200)] dark:border-sky-700 dark:shadow-[6px_6px_0_var(--color-sky-700)]',
-    chip: 'bg-blue-50 text-blue-700 border-blue-200 dark:bg-sky-950/60 dark:text-sky-300 dark:border-sky-700',
+    tint: 'from-pastel-sky/40 dark:from-pastel-sky/10',
+    chip: 'bg-pastel-sky/70 text-foreground/80 dark:bg-pastel-sky/12 dark:text-pastel-sky',
   },
   purple: {
-    card: 'border-purple-200 shadow-[6px_6px_0_var(--color-purple-200)] dark:border-fuchsia-700 dark:shadow-[6px_6px_0_var(--color-fuchsia-700)]',
-    chip: 'bg-purple-50 text-purple-700 border-purple-200 dark:bg-fuchsia-950/60 dark:text-fuchsia-300 dark:border-fuchsia-700',
+    tint: 'from-pastel-lilac/40 dark:from-pastel-lilac/12',
+    chip: 'bg-pastel-lilac/70 text-foreground/80 dark:bg-pastel-lilac/12 dark:text-pastel-lilac',
   },
   pink: {
-    card: 'border-pink-200 shadow-[6px_6px_0_var(--color-pink-200)] dark:border-pink-700 dark:shadow-[6px_6px_0_var(--color-pink-700)]',
-    chip: 'bg-pink-50 text-pink-700 border-pink-200 dark:bg-pink-950/60 dark:text-pink-300 dark:border-pink-700',
+    tint: 'from-marker/15 dark:from-marker/10',
+    chip: 'bg-marker/20 text-foreground/80 dark:bg-marker/15 dark:text-marker',
   },
 };
 
 export function PastelCard({ label, emoji, title, color = 'slate', children }: PastelCardProps) {
-  const { card, chip } = colorConfig[color];
+  const { tint, chip } = colorConfig[color];
 
   return (
     <div
       className={cn(
-        'not-prose dark:bg-card relative flex h-full flex-col rounded-2xl border bg-white p-4',
-        label ? 'pt-10' : 'pt-4',
-        card
+        'not-prose glass relative flex h-full flex-col gap-2 rounded-3xl bg-linear-to-br to-transparent to-70% p-6 transition duration-300 hover:-translate-y-0.5',
+        tint
       )}
     >
       {label && (
         <span
           className={cn(
-            'absolute top-3 left-3 rounded-lg border px-2 py-0.5 text-[10px] font-semibold tracking-wide uppercase',
+            'mb-2 self-start rounded-full px-2.5 py-0.5 font-mono text-[0.7rem] tracking-wide uppercase',
             chip
           )}
         >
@@ -72,12 +71,16 @@ export function PastelCard({ label, emoji, title, color = 'slate', children }: P
         </span>
       )}
 
-      {emoji && <div className="mb-2 text-3xl">{emoji}</div>}
+      {emoji && <div className="text-3xl">{emoji}</div>}
 
-      {title && <div className="font-bold text-gray-900 dark:text-gray-100">{title}</div>}
+      {title && (
+        <div className="font-display-soft text-foreground text-lg leading-snug font-semibold tracking-tight">
+          {title}
+        </div>
+      )}
 
       {children && (
-        <div className="mt-1 flex-1 text-sm text-gray-600 dark:text-gray-400 [&>p]:m-0">
+        <div className="text-muted-foreground flex-1 text-sm leading-relaxed [&>p]:m-0">
           {children}
         </div>
       )}
@@ -87,7 +90,7 @@ export function PastelCard({ label, emoji, title, color = 'slate', children }: P
 
 export function PastelCards({ children }: PastelCardsProps) {
   return (
-    <div className="not-prose my-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="not-prose my-8 grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-3">
       {children}
     </div>
   );

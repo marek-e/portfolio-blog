@@ -15,8 +15,8 @@ interface MermaidProps {
 export function Mermaid({ chart, caption, title, className }: MermaidProps) {
   if (!chart) {
     return (
-      <div className="not-prose my-6 rounded-lg border border-red-300 bg-red-50 p-4 dark:border-red-700 dark:bg-red-950/30">
-        <p className="text-sm font-medium text-red-800 dark:text-red-200">
+      <div className="not-prose glass from-pastel-rose/40 dark:from-marker/12 my-8 rounded-2xl bg-linear-to-br to-transparent p-5">
+        <p className="text-foreground text-sm font-medium">
           Mermaid diagram error: No chart definition provided
         </p>
       </div>
@@ -24,19 +24,20 @@ export function Mermaid({ chart, caption, title, className }: MermaidProps) {
   }
 
   return (
-    <figure className={cn('not-prose my-6', className)}>
-      <div className="border-border shadow-code shadow-primary overflow-hidden rounded-lg border">
+    <figure className={cn('not-prose my-8', className)}>
+      <div className="code-surface overflow-hidden rounded-2xl">
         {title && (
-          <div className="border-border bg-muted dark:bg-muted/40 relative flex h-10 items-center">
-            <div className="border-primary text-foreground absolute ml-8 h-full rounded-t-lg border-t-2 bg-(--shiki-bg) px-4 py-2 font-mono text-sm">
-              mermaid
-            </div>
+          <div className="border-border flex h-10 items-center gap-2 border-b px-4">
+            <span aria-hidden="true" className="bg-pastel-mint size-2 rounded-full" />
+            <span className="text-muted-foreground truncate font-mono text-xs tracking-wide">
+              {title}
+            </span>
           </div>
         )}
         <div
           data-mermaid-chart
           data-chart={chart.trim()}
-          className="flex min-h-32 justify-center overflow-auto bg-(--shiki-bg) p-4"
+          className="flex min-h-32 justify-center overflow-auto p-4 sm:p-6"
         >
           <div className="flex items-center justify-center">
             <div className="border-muted-foreground size-6 animate-spin rounded-full border-2 border-t-transparent" />
@@ -44,7 +45,7 @@ export function Mermaid({ chart, caption, title, className }: MermaidProps) {
         </div>
       </div>
       {caption && (
-        <figcaption className="text-muted-foreground mt-4 text-center text-sm">
+        <figcaption className="text-muted-foreground mt-3 text-center font-mono text-xs tracking-wide">
           {caption}
         </figcaption>
       )}

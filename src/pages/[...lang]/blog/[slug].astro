@@ -2,7 +2,9 @@
 import Layout from '@/layouts/Layout.astro';
 import Navbar from '@/components/layout/Navbar.astro';
 import Footer from '@/components/layout/Footer.astro';
-import { Badge } from '@/components/ui/badge';
+import PostMeta from '@/components/blog/PostMeta.astro';
+import PostTags from '@/components/blog/PostTags.astro';
+import { Doodle } from '@/components/shared/HandDrawn';
 import {
   Breadcrumb,
   BreadcrumbList,
@@ -17,8 +19,7 @@ import { getTranslatedPath } from '@/i18n/config';
 import { mdxComponents } from '@/components/mdx';
 import Toggle from '@/components/mdx/Toggle.astro';
 import CodeToggle from '@/components/mdx/CodeToggle.astro';
-import { Separator } from '@/components/ui/separator';
-import { formatDate, estimateReadingTime, getTagColor } from '@/lib/blog';
+import { formatDate, estimateReadingTime } from '@/lib/blog';
 import { Icon } from '@/components/shared/Icon';
 import { ArrowLeft02Icon, HomeIcon, Link02Icon, RssIcon } from '@hugeicons/core-free-icons';
 import { Link } from '@/components/ui/button';
@@ -74,123 +75,119 @@ const rssUrl = lang === 'fr' ? '/rss.xml' : '/en/rss.xml';
     })}
   />
   <Navbar />
-  <main class="container mx-auto max-w-6xl px-4 pt-32 pb-8">
-    <div class="mb-6 flex items-center justify-between gap-4">
-      <Breadcrumb>
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbLink href={translatePath('/')} aria-label="Home">
-              <Icon
-                icon={HomeIcon}
-                strokeWidth={2}
-                className="motion-safe:hover:animate-wiggle size-4 transition-transform duration-300 ease-in-out"
-              />
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbLink href={translatePath('/blog')}>{t.blog.title}</BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbPage>
-              <span
-                class="font-medium underline decoration-rose-300 decoration-wavy decoration-2 underline-offset-3 dark:decoration-rose-400"
-              >
-                {post.data.title}
-              </span>
-            </BreadcrumbPage>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
-      {
-        post.data.copyMarkdown ? (
-          <PostActionsMenu
-            copyUrl={translatePath(`/blog/${slug}.md`)}
-            rssUrl={rssUrl}
-            triggerLabel={t.aria.postActions}
-            copyLabel={t.blog.copyMarkdown}
-            copiedLabel={t.blog.copied}
-            rssLabel={t.aria.subscribeRss}
-            client:load
-          />
-        ) : (
-          <a
-            href={rssUrl}
-            aria-label={t.aria.subscribeRss}
-            class="group text-muted-foreground hover:text-primary flex shrink-0 items-center gap-2 rounded-md border border-transparent px-3 py-1.5 text-sm transition-colors hover:border-current"
-          >
-            <Icon
-              icon={RssIcon}
-              strokeWidth={2}
-              className="group-hover:animate-wiggle size-4 transition-transform duration-300"
+  <main class="mx-auto w-full max-w-6xl px-4 pt-32 pb-24 md:pt-40 md:pb-32">
+    <div class="mx-auto max-w-3xl">
+      <div class="flex items-center justify-between gap-4">
+        <Breadcrumb className="min-w-0">
+          <BreadcrumbList className="flex-nowrap">
+            <BreadcrumbItem>
+              <BreadcrumbLink href={translatePath('/')} aria-label="Home">
+                <Icon
+                  icon={HomeIcon}
+                  strokeWidth={2}
+                  className="motion-safe:hover:animate-wiggle size-4 transition-transform duration-300 ease-in-out"
+                />
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbLink href={translatePath('/blog')}>{t.blog.title}</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem className="min-w-0">
+              <BreadcrumbPage className="block truncate">{post.data.title}</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
+        {
+          post.data.copyMarkdown ? (
+            <PostActionsMenu
+              copyUrl={translatePath(`/blog/${slug}.md`)}
+              rssUrl={rssUrl}
+              triggerLabel={t.aria.postActions}
+              copyLabel={t.blog.copyMarkdown}
+              copiedLabel={t.blog.copied}
+              rssLabel={t.aria.subscribeRss}
+              client:load
             />
-            <span class="hidden sm:inline">RSS</span>
-          </a>
-        )
-      }
-    </div>
+          ) : (
+            <a
+              href={rssUrl}
+              aria-label={t.aria.subscribeRss}
+              class="group glass text-muted-foreground hover:text-foreground inline-flex h-11 shrink-0 items-center gap-2 rounded-full px-4 font-mono text-xs transition-colors"
+            >
+              <Icon
+                icon={RssIcon}
+                strokeWidth={2}
+                className="motion-safe:group-hover:animate-wiggle size-4 transition-transform duration-300"
+              />
+              RSS
+            </a>
+          )
+        }
+      </div>
 
-    <div class="bg-primary/80 mb-6 h-0.5 w-8 rounded-full"></div>
-
-    <article>
-      <header class="mb-10 space-y-4">
-        <div class="text-muted-foreground flex flex-wrap items-center gap-16 text-sm">
-          <time datetime={post.data.publishDate.toISOString()}>
-            {t.blog.publishedOn}
-            <span class="ml-2 font-semibold">{formatDate(post.data.publishDate, lang)}</span>
-          </time>
-          <span>{readingTime} {t.blog.minRead}</span>
-        </div>
-
-        <h1 class="group text-4xl font-bold tracking-tight lg:text-5xl">
-          <a href={translatePath(`/blog/${slug}`)} class="text-primary hover:text-primary/80">
-            {post.data.title}
-          </a>
-          <span
-            class="text-primary/80 ml-2 inline-flex items-center opacity-0 transition-opacity group-hover:opacity-100"
-          >
-            <Icon icon={Link02Icon} strokeWidth={2} className="size-6" />
-          </span>
-        </h1>
-      </header>
-
-      <p class="text-muted-foreground mb-8 text-lg">
-        {post.data.description}
-      </p>
-      {
-        post.data.tags.length > 0 && (
-          <div class="flex flex-wrap gap-2">
-            {post.data.tags.map((tag) => (
-              <Badge variant={getTagColor(tag)}>{tag}</Badge>
-            ))}
+      <article class="mt-14 md:mt-20">
+        <header class="flex flex-col gap-6">
+          <div class="flex flex-wrap items-center gap-x-4 gap-y-2">
+            <PostMeta
+              date={post.data.publishDate}
+              lang={lang}
+              readingTime={readingTime}
+              minRead={t.blog.minRead}
+            />
+            {
+              post.data.updatedDate && (
+                <p class="text-muted-foreground font-mono text-xs tracking-wide">
+                  <span aria-hidden="true" class="text-foreground/25 mr-3">
+                    /
+                  </span>
+                  {t.blog.updatedOn}{' '}
+                  <time datetime={post.data.updatedDate.toISOString()}>
+                    {formatDate(post.data.updatedDate, lang)}
+                  </time>
+                </p>
+              )
+            }
           </div>
-        )
-      }
 
-      {
-        post.data.updatedDate && (
-          <p class="text-muted-foreground mt-4 text-sm italic">
-            {t.blog.updatedOn} {formatDate(post.data.updatedDate, lang)}
+          <h1
+            class="group text-foreground text-4xl leading-[1.05] font-semibold tracking-[-0.03em] text-balance md:text-6xl"
+          >
+            <a href={translatePath(`/blog/${slug}`)} class="hover:text-primary transition-colors">
+              {post.data.title}
+            </a>
+            <span
+              class="text-primary/70 ml-2 inline-flex items-center align-middle opacity-0 transition-opacity group-hover:opacity-100"
+            >
+              <Icon icon={Link02Icon} strokeWidth={2} className="size-6" />
+            </span>
+          </h1>
+
+          <p class="text-muted-foreground text-xl leading-relaxed text-pretty">
+            {post.data.description}
           </p>
-        )
-      }
-    </article>
-    <Separator className="my-8" />
 
-    <div class="prose prose-neutral dark:prose-invert max-w-none">
-      <Content components={{ ...mdxComponents, Toggle, CodeToggle }} />
+          <PostTags tags={post.data.tags} />
+        </header>
+
+        <Doodle name="squiggle" strokeWidth={2.5} className="text-marker my-12 h-4 w-20 md:my-16" />
+
+        <div class="prose prose-neutral dark:prose-invert md:prose-lg max-w-none">
+          <Content components={{ ...mdxComponents, Toggle, CodeToggle }} />
+        </div>
+      </article>
+
+      <div class="border-border mt-16 border-t pt-10 md:mt-24">
+        <Link href={translatePath('/blog')} variant="glass" size="lg">
+          <Icon icon={ArrowLeft02Icon} strokeWidth={2} className="size-4" />
+          {t.blog.backToBlog}
+        </Link>
+      </div>
     </div>
-
-    <hr class="border-border my-8" />
-
-    <Link href={translatePath('/blog')} variant="link">
-      <Icon icon={ArrowLeft02Icon} strokeWidth={2} className="size-4" />
-      {t.blog.backToBlog}
-    </Link>
   </main>
+  <Footer />
 </Layout>
-<Footer />
 
 <script>
   import { initCopyButtons } from '@/lib/copy-buttons';
