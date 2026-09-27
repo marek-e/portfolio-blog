@@ -4,6 +4,10 @@ import { getImage } from 'astro:assets';
 import { FeaturedProjectsCarousel } from '@/components/portfolio/FeaturedProjectsCarousel';
 import { getTranslations, getLangFromUrl, getTranslatedPath } from '@/i18n';
 import { getProjectImageSafe } from '@/lib/images';
+import SectionHeading from '@/components/shared/SectionHeading.astro';
+import { Link } from '@/components/ui/button';
+import { HugeiconsIcon } from '@hugeicons/react';
+import { ArrowRight02Icon } from '@hugeicons/core-free-icons';
 
 const lang = getLangFromUrl(Astro.url);
 const t = getTranslations(lang);
@@ -49,26 +53,24 @@ const carouselTranslations = {
 };
 ---
 
-<section id="projects" class="relative py-20 md:py-32">
+<section id="projects" class="relative py-20 md:py-24" aria-labelledby="projects-title">
   <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-    <div class="mb-6 flex items-end justify-between md:mb-12">
-      <div>
-        <h2 class="text-foreground text-3xl font-bold tracking-tight md:text-4xl">
-          {t.projects.title}
-        </h2>
-        <p class="text-muted-foreground mt-2">{t.projects.subtitle}</p>
-      </div>
-      <a
-        href={translatePath('/projects')}
-        class="text-primary hover:text-primary/80 text-md hidden font-semibold transition-colors md:block"
-      >
+    <SectionHeading
+      id="projects-title"
+      eyebrow={t.projects.eyebrow}
+      title={t.projects.title}
+      subtitle={t.projects.subtitle}
+      class="mb-10 md:mb-14"
+    >
+      <Link variant="glass" href={translatePath('/projects')} className="hidden md:inline-flex">
         {t.projects.viewAll}
-      </a>
-    </div>
+        <HugeiconsIcon icon={ArrowRight02Icon} className="size-4" data-icon="inline-end" />
+      </Link>
+    </SectionHeading>
 
     {
       featuredProjects.length > 0 ? (
-        <div class="md:px-12">
+        <div class="md:px-14">
           <FeaturedProjectsCarousel
             client:visible
             projects={serializedProjects}
@@ -81,13 +83,11 @@ const carouselTranslations = {
       )
     }
 
-    <div class="mt-8 text-center md:hidden">
-      <a
-        href={translatePath('/projects')}
-        class="text-primary hover:text-primary/80 text-sm font-medium transition-colors"
-      >
+    <div class="mt-8 flex justify-center md:hidden">
+      <Link variant="glass" size="lg" href={translatePath('/projects')}>
         {t.projects.viewAll}
-      </a>
+        <HugeiconsIcon icon={ArrowRight02Icon} className="size-4" data-icon="inline-end" />
+      </Link>
     </div>
   </div>
 </section>

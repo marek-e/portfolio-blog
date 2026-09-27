@@ -13,12 +13,12 @@ const t = getTranslations(lang);
 const currentPath = Astro.url.pathname;
 
 const linksClasses =
-  'text-foreground/80 hover:text-foreground flex items-center gap-2 relative z-10 rounded-lg px-3 py-1.5 text-sm transition-colors';
+  'text-foreground/75 hover:text-foreground flex items-center gap-2 relative z-10 rounded-full px-3.5 py-2 text-sm font-medium transition-colors';
 ---
 
 <nav class="fixed top-6 left-1/2 z-50 w-fit -translate-x-1/2">
   <div
-    class="relative flex items-center gap-6 rounded-full border border-black/20 bg-white/10 px-6 py-3 shadow-xl shadow-black/5 backdrop-blur-lg before:pointer-events-none before:absolute before:inset-0 before:rounded-full before:bg-linear-to-b before:from-white/30 before:via-transparent before:to-transparent dark:border-white/20 dark:bg-black/10 dark:shadow-black/40 dark:before:from-white/10"
+    class="glass relative flex items-center gap-5 rounded-full py-2 pr-2 pl-4 before:pointer-events-none before:absolute before:inset-0 before:rounded-full before:bg-linear-to-b before:from-white/40 before:via-transparent before:to-transparent dark:before:from-white/8"
   >
     <a
       href={translatePath('/')}
@@ -31,7 +31,7 @@ const linksClasses =
     <div id="nav-links" class="relative hidden items-center gap-1 md:flex">
       <div
         id="nav-pill"
-        class="bg-primary/20 shadow-primary/30 pointer-events-none absolute rounded-lg opacity-0 shadow-sm transition-all duration-200 ease-out"
+        class="bg-pastel pointer-events-none absolute rounded-full opacity-0 shadow-[inset_0_1px_0_oklch(1_0_0/60%)] transition-all duration-200 ease-out"
       >
       </div>
       {
@@ -49,7 +49,7 @@ const linksClasses =
       }
     </div>
 
-    <div class="flex items-center gap-6">
+    <div class="flex items-center gap-2">
       <MobileMenu client:load lang={lang} currentPath={currentPath} />
       <ModeToggle client:load />
     </div>
@@ -71,7 +71,7 @@ const linksClasses =
         pill.style.height = `${linkRect.height}px`;
         pill.style.left = `${linkRect.left - containerRect.left}px`;
         pill.style.top = `${linkRect.top - containerRect.top}px`;
-        pill.style.opacity = '1';
+        pill.style.opacity = document.documentElement.classList.contains('dark') ? '0.55' : '0.9';
       };
 
       const hidePill = () => {

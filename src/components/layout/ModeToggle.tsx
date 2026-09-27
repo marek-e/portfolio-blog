@@ -57,7 +57,7 @@ export function ModeToggle() {
       variant="outline"
       size="icon"
       aria-label="Toggle theme"
-      className="hover:text-primary active:bg-primary/20 rounded-full bg-white"
+      className="bg-card/70 hover:bg-card size-9 rounded-full border-(--glass-border) dark:bg-white/5 dark:hover:bg-white/10"
     >
       <HugeiconsIcon
         icon={SunIcon}

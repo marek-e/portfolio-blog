@@ -1,68 +1,168 @@
 ---
+import { Image } from 'astro:assets';
+import { HugeiconsIcon } from '@hugeicons/react';
+import { ArrowRight02Icon } from '@hugeicons/core-free-icons';
 import { Link } from '@/components/ui/button';
+import { Doodle, MarkedText } from '@/components/shared/HandDrawn';
 import { getTranslations, getLangFromUrl, getTranslatedPath } from '@/i18n';
-import BackgroundImage from '../layout/BackgroundImage.astro';
 import CursorSpotlight from './CursorSpotlight.astro';
-import { Badge } from '../ui/badge';
+import portrait from '@/assets/mareke.avif';
 
 const lang = getLangFromUrl(Astro.url);
 const t = getTranslations(lang);
 const translatePath = getTranslatedPath(lang);
+
+const stickerStyles = [
+  'bg-pastel-peach/70 dark:bg-pastel-peach/12 dark:text-pastel-peach -rotate-6 top-[14%] left-[6%]',
+  'bg-pastel-sky/70 dark:bg-pastel-sky/12 dark:text-pastel-sky rotate-3 top-[22%] right-[7%]',
+  'bg-pastel-mint/70 dark:bg-pastel-mint/12 dark:text-pastel-mint rotate-6 bottom-[30%] left-[9%]',
+  'bg-pastel-lilac/70 dark:bg-pastel-lilac/12 dark:text-pastel-lilac -rotate-3 bottom-[24%] right-[10%]',
+  'bg-pastel-butter/80 dark:bg-pastel-butter/12 dark:text-pastel-butter rotate-2 bottom-[12%] left-[26%]',
+];
 ---
 
 <CursorSpotlight>
-  <section class="relative flex min-h-dvh items-center justify-center overflow-hidden">
-    <BackgroundImage />
+  <section
+    class="relative flex min-h-[94dvh] items-center justify-center overflow-hidden pt-28 pb-20"
+  >
+    <div aria-hidden="true" class="absolute inset-0 hidden lg:block">
+      {
+        t.hero.badges.map((badge, index) => (
+          <span
+            class={`glass text-foreground/85 hero-sticker absolute rounded-full px-4 py-1.5 font-mono text-sm ${stickerStyles[index % stickerStyles.length]}`}
+            style={`animation-delay: ${index * -1.7}s`}
+          >
+            {badge}
+          </span>
+        ))
+      }
+    </div>
 
-    <!-- Content -->
-    <div class="relative z-10 mx-auto max-w-6xl px-4 text-center sm:px-6 lg:px-8">
-      <!-- Announcement Badge -->
-      <div class="mb-6 flex items-center justify-center gap-2">
-        {t.hero.badges.map((badge) => <Badge variant="glass">{badge}</Badge>)}
-      </div>
+    <div
+      class="relative z-10 mx-auto flex max-w-5xl flex-col items-center px-4 text-center sm:px-6"
+    >
+      <p class="glass mb-10 flex items-center gap-3 rounded-full py-1.5 pr-4 pl-1.5 text-sm">
+        <Image
+          src={portrait}
+          alt=""
+          width={56}
+          height={56}
+          class="size-7 rounded-full object-cover"
+          loading="eager"
+        />
+        <span class="text-foreground/80 font-mono text-xs tracking-wide">{t.hero.eyebrow}</span>
+      </p>
 
-      <!-- Headline -->
       <h1
         id="hello"
-        class="text-foreground mb-6 text-4xl font-bold drop-shadow-lg sm:text-5xl lg:text-6xl dark:text-white"
+        class="text-foreground relative text-[clamp(3rem,9vw,7.5rem)] leading-[0.95] font-medium tracking-[-0.035em]"
       >
-        {t.hero.headline}
+        <span class="block">{t.hero.greeting}</span>
+        <span class="relative mt-2 inline-block">
+          <MarkedText>{t.hero.name}</MarkedText>
+          <Doodle
+            name="sparkle"
+            className="text-pastel-lilac absolute -top-[0.2em] -right-[0.55em] size-[0.42em] rotate-12"
+          />
+          <Doodle
+            name="sparkle"
+            className="text-pastel-peach absolute top-[0.05em] -left-[0.5em] size-[0.24em] -rotate-12"
+          />
+        </span>
       </h1>
 
-      <!-- Subtitle -->
       <p
-        class="text-foreground/90 mx-auto mb-8 max-w-2xl text-lg drop-shadow-md sm:text-xl lg:text-2xl dark:text-white/90"
+        class="text-muted-foreground mx-auto mt-10 max-w-2xl text-lg leading-relaxed text-pretty md:text-xl"
       >
         {
           t.hero.subtitle.split('\n').map((line, i) => (
             <>
-              {i > 0 && <br />}
+              {i > 0 && <br class="hidden md:block" />}
+              {i > 0 && ' '}
               {line}
             </>
           ))
         }
       </p>
 
-      <!-- CTAs -->
-      <div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
+      <div
+        class="relative mt-10 flex w-full flex-col items-center justify-center gap-3 sm:w-auto sm:flex-row"
+      >
+        <Doodle
+          name="arrow"
+          strokeWidth={2.5}
+          className="text-foreground/50 absolute top-1/2 -left-32 hidden h-14 w-24 -translate-y-3/4 md:block"
+        />
+        <Link size="lg" href="#projects" className="w-full sm:w-auto" animation="scale">
+          {t.hero.ctaProjects}
+          <HugeiconsIcon icon={ArrowRight02Icon} className="size-4" data-icon="inline-end" />
+        </Link>
         <Link
+          variant="pastel"
           size="lg"
           href={translatePath('/curriculum-vitae')}
-          className="w-1/2 px-8 py-6 font-semibold md:w-auto"
+          className="w-full sm:w-auto"
           animation="scale"
         >
           {t.hero.ctaCv}
         </Link>
-        <Link
-          variant="secondary"
-          size="lg"
-          href="#projects"
-          className="w-1/2 px-8 py-6 font-semibold md:w-auto"
-          animation="scale"
-        >
-          {t.hero.ctaProjects}
-        </Link>
       </div>
+
+      <ul class="mt-12 flex flex-wrap justify-center gap-2 lg:hidden">
+        {
+          t.hero.badges.map((badge) => (
+            <li class="glass text-foreground/80 rounded-full px-3 py-1 font-mono text-xs">
+              {badge}
+            </li>
+          ))
+        }
+      </ul>
     </div>
+
+    <a
+      href="#about"
+      class="text-muted-foreground hover:text-foreground absolute bottom-8 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 font-mono text-[0.7rem] tracking-[0.2em] uppercase transition-colors md:flex"
+    >
+      {t.hero.scrollHint}
+      <span class="bg-foreground/15 relative h-10 w-px overflow-hidden">
+        <span class="scroll-hint-dot bg-foreground absolute inset-x-0 top-0 h-3"></span>
+      </span>
+    </a>
   </section>
 </CursorSpotlight>
+
+<style>
+  .hero-sticker {
+    animation: sticker-float 9s ease-in-out infinite;
+  }
+
+  .scroll-hint-dot {
+    animation: scroll-hint 2.2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+  }
+
+  @keyframes sticker-float {
+    0%,
+    100% {
+      translate: 0 0;
+    }
+    50% {
+      translate: 0 -10px;
+    }
+  }
+
+  @keyframes scroll-hint {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(400%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-sticker,
+    .scroll-hint-dot {
+      animation: none;
+    }
+  }
+</style>

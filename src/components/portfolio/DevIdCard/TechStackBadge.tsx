@@ -7,7 +7,10 @@ interface TechStackBadgeProps {
 
 export function TechStackBadge({ name, icon }: TechStackBadgeProps) {
   return (
-    <div className="size-8 transition-transform duration-300 hover:scale-110" title={name}>
+    <div
+      className="bg-card/60 ring-foreground/5 dark:bg-foreground/5 flex size-11 items-center justify-center rounded-2xl ring-1 transition-transform duration-300 hover:-translate-y-0.5"
+      title={name}
+    >
       {icon}
     </div>
   );
