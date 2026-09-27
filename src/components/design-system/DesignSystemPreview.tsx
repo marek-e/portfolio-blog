@@ -58,17 +58,36 @@ import {
 import { PastelCard, PastelCards } from '@/components/mdx/PastelCard';
 import { ModeToggle } from '../layout/ModeToggle';
 import { Icon } from '../shared/Icon';
+import { Doodle, MarkedText } from '../shared/HandDrawn';
 import { ArrowLeftIcon, Search01Icon, Mail01Icon } from '@hugeicons/core-free-icons';
 import { getTranslatedPath, type Lang } from '@/i18n';
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <section className="space-y-4">
-      <h2 className="text-2xl font-semibold tracking-tight">{title}</h2>
-      <div className="border-border bg-card rounded-xl border p-6">{children}</div>
+      <h2 className="text-foreground text-2xl font-semibold tracking-tight md:text-3xl">{title}</h2>
+      <div className="glass rounded-3xl p-6 md:p-8">{children}</div>
     </section>
   );
 }
+
+function Caption({ children }: { children: React.ReactNode }) {
+  return <p className="eyebrow mb-3">{children}</p>;
+}
+
+const pastelSwatches = [
+  { name: 'Peach', className: 'bg-pastel-peach' },
+  { name: 'Rose', className: 'bg-pastel-rose' },
+  { name: 'Lilac', className: 'bg-pastel-lilac' },
+  { name: 'Sky', className: 'bg-pastel-sky' },
+  { name: 'Mint', className: 'bg-pastel-mint' },
+  { name: 'Butter', className: 'bg-pastel-butter' },
+  { name: 'Marker', className: 'bg-marker' },
+  { name: 'Ink', className: 'bg-ink' },
+  { name: 'Paper', className: 'bg-paper' },
+];
+
+const doodleNames = ['underline', 'squiggle', 'sparkle', 'arrow', 'loop', 'circle'] as const;
 
 export function DesignSystemPreview({ lang }: { lang: Lang }) {
   const [inputValue, setInputValue] = useState('');
@@ -77,11 +96,7 @@ export function DesignSystemPreview({ lang }: { lang: Lang }) {
   return (
     <div className="space-y-12">
       <div className="flex items-center justify-between">
-        <Link
-          href={translatePath('/')}
-          variant="outline"
-          className="flex h-11 items-center gap-2 bg-white"
-        >
+        <Link href={translatePath('/')} variant="glass" className="flex h-11 items-center gap-2">
           <Icon icon={ArrowLeftIcon} strokeWidth={2} />
           <span className="text-sm font-medium">Back to home</span>
         </Link>
@@ -89,6 +104,14 @@ export function DesignSystemPreview({ lang }: { lang: Lang }) {
       </div>
       {/* Colors */}
       <Section title="Colors">
+        <Caption>Pastels & brand</Caption>
+        <div className="grid grid-cols-3 gap-4 sm:grid-cols-5 md:grid-cols-9">
+          {pastelSwatches.map((swatch) => (
+            <ColorSwatch key={swatch.name} name={swatch.name} className={swatch.className} />
+          ))}
+        </div>
+        <div className="bg-pastel mt-6 mb-8 h-12 rounded-2xl" />
+        <Caption>Semantic tokens</Caption>
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 md:grid-cols-6">
           <ColorSwatch name="Background" className="bg-background" />
           <ColorSwatch name="Foreground" className="bg-foreground" />
@@ -107,17 +130,73 @@ export function DesignSystemPreview({ lang }: { lang: Lang }) {
       {/* Typography */}
       <Section title="Typography">
         <div className="space-y-4">
-          <h1 className="text-4xl font-bold tracking-tight">Heading 1</h1>
+          <Caption>Display · Fraunces</Caption>
+          <p className="font-display-soft text-5xl leading-[1.05] font-semibold tracking-tight md:text-6xl">
+            Crafted with <MarkedText>care</MarkedText>
+          </p>
+          <p className="font-display-wonk text-muted-foreground text-2xl">
+            Italic, soft and a little wonky.
+          </p>
+          <Separator className="my-6" />
+          <h1 className="text-4xl font-semibold tracking-tight">Heading 1</h1>
           <h2 className="text-3xl font-semibold tracking-tight">Heading 2</h2>
-          <h3 className="text-2xl font-semibold tracking-tight">Heading 3</h3>
+          <h3 className="font-display-soft text-2xl font-semibold tracking-tight">Heading 3</h3>
           <h4 className="text-xl font-semibold tracking-tight">Heading 4</h4>
-          <p className="text-muted-foreground text-base">
+          <Separator className="my-6" />
+          <Caption>Body · Geist</Caption>
+          <p className="text-muted-foreground text-base leading-relaxed">
             Body text - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
             tempor incididunt ut labore et dolore magna aliqua.
           </p>
           <p className="text-muted-foreground text-sm">
             Small text - Used for captions and helper text.
           </p>
+          <Separator className="my-6" />
+          <Caption>Mono · Maple Mono</Caption>
+          <p className="text-foreground/80 font-mono text-sm">
+            const craft = (idea: string) =&gt; ship(idea);
+          </p>
+          <p className="eyebrow">Eyebrow label · 2026</p>
+        </div>
+      </Section>
+
+      <Section title="Surfaces">
+        <div className="grid gap-4 sm:grid-cols-2">
+          <div className="glass rounded-3xl p-6">
+            <p className="font-display-soft text-xl font-semibold">glass</p>
+            <p className="text-muted-foreground mt-1 text-sm">Signature translucent surface.</p>
+          </div>
+          <div className="glass-strong rounded-3xl p-6">
+            <p className="font-display-soft text-xl font-semibold">glass-strong</p>
+            <p className="text-muted-foreground mt-1 text-sm">Dense content, menus, popovers.</p>
+          </div>
+          <div className="ring-pastel rounded-3xl p-6">
+            <p className="font-display-soft text-xl font-semibold">ring-pastel</p>
+            <p className="text-muted-foreground mt-1 text-sm">One highlighted element per view.</p>
+          </div>
+          <div className="bg-pastel text-ink rounded-3xl p-6">
+            <p className="font-display-soft text-xl font-semibold">bg-pastel</p>
+            <p className="text-ink/70 mt-1 text-sm">Soft gradient fill.</p>
+          </div>
+        </div>
+      </Section>
+
+      <Section title="Doodles">
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
+          {doodleNames.map((name) => (
+            <div
+              key={name}
+              className="bg-foreground/[0.03] flex flex-col items-center gap-3 rounded-2xl p-5"
+            >
+              <Doodle
+                name={name}
+                className={
+                  name === 'sparkle' ? 'text-pastel-lilac size-10' : 'text-marker h-10 w-28'
+                }
+              />
+              <span className="text-muted-foreground font-mono text-xs">{name}</span>
+            </div>
+          ))}
         </div>
       </Section>
 
@@ -128,6 +207,9 @@ export function DesignSystemPreview({ lang }: { lang: Lang }) {
             <p className="text-muted-foreground mb-3 text-sm font-medium">Variants</p>
             <div className="flex flex-wrap gap-3">
               <Button variant="default">Default</Button>
+              <Button variant="pastel">Pastel</Button>
+              <Button variant="primary">Primary</Button>
+              <Button variant="glass">Glass</Button>
               <Button variant="secondary">Secondary</Button>
               <Button variant="outline">Outline</Button>
               <Button variant="ghost">Ghost</Button>
@@ -165,6 +247,7 @@ export function DesignSystemPreview({ lang }: { lang: Lang }) {
               <Badge variant="default">Default</Badge>
               <Badge variant="secondary">Secondary</Badge>
               <Badge variant="outline">Outline</Badge>
+              <Badge variant="glass">Glass</Badge>
               <Badge variant="destructive">Destructive</Badge>
             </div>
           </div>
@@ -525,12 +608,14 @@ function ColorSwatch({ name, className }: { name: string; className: string }) {
       <div
         ref={setSwatchRef}
         onClick={handleCopy}
-        className={`border-border h-12 w-full cursor-pointer rounded-lg border transition-transform hover:scale-103 active:scale-97 ${className}`}
+        className={`border-foreground/10 h-14 w-full cursor-pointer rounded-2xl border transition-transform hover:scale-103 active:scale-97 ${className}`}
         title="Click to copy"
       />
       <div className="flex flex-col justify-between gap-1">
-        <p className="text-foreground text-semibold text-sm">{name}</p>
-        <p className="text-muted-foreground text-xs">{copied ? '✓ Copied' : colorValue}</p>
+        <p className="text-foreground text-sm font-medium">{name}</p>
+        <p className="text-muted-foreground truncate font-mono text-[0.65rem]">
+          {copied ? '✓ Copied' : colorValue}
+        </p>
       </div>
     </div>
   );
