@@ -1,5 +1,6 @@
 ---
 import { TimelineCards } from '@/components/portfolio/TimelineCards';
+import SectionHeading from '@/components/shared/SectionHeading.astro';
 import { getLocalizedTimeline } from '@/data/timeline';
 import { getTranslations, getLangFromUrl } from '@/i18n';
 import CursorSpotlight from './CursorSpotlight.astro';
@@ -10,26 +11,58 @@ const timelineEntries = getLocalizedTimeline(lang);
 ---
 
 <CursorSpotlight>
-  <section id="timeline" class="relative py-20 md:py-32" aria-labelledby="timeline-heading">
-    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-      <div class="mb-16 text-center">
-        <h2
-          id="timeline-heading"
-          class="text-foreground text-3xl font-bold tracking-tight md:text-4xl"
-        >
-          {t.timeline.title}
-        </h2>
-        <p class="text-muted-foreground mx-auto mt-4 max-w-2xl text-lg">
-          {t.timeline.subtitle}
-        </p>
-      </div>
-
-      <TimelineCards
-        client:visible
-        entries={timelineEntries}
-        presentLabel={t.timeline.present}
-        lang={lang}
+  <section id="timeline" class="relative py-20 md:py-24" aria-label={t.timeline.title}>
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <SectionHeading
+        eyebrow={t.timeline.eyebrow}
+        title={t.timeline.title}
+        subtitle={t.timeline.subtitle}
+        align="center"
+        class="mb-16 md:mb-24"
       />
+
+      <TimelineCards entries={timelineEntries} presentLabel={t.timeline.present} lang={lang} />
     </div>
   </section>
 </CursorSpotlight>
+
+<style>
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      :global(.timeline) {
+        view-timeline: --timeline block;
+        view-timeline-inset: 0 45%;
+      }
+
+      :global(.timeline-progress) {
+        animation: timeline-draw linear both;
+        animation-timeline: --timeline;
+        animation-range: entry 0% exit 0%;
+      }
+
+      :global(.timeline-card) {
+        animation: timeline-rise linear both;
+        animation-timeline: view();
+        animation-range: entry 0% cover 14rem;
+      }
+    }
+  }
+
+  @keyframes timeline-draw {
+    from {
+      clip-path: inset(0 0 100% 0);
+    }
+    to {
+      clip-path: inset(0 0 0 0);
+    }
+  }
+
+  @keyframes timeline-rise {
+    from {
+      transform: translateY(2.5rem) scale(0.96);
+    }
+    to {
+      transform: none;
+    }
+  }
+</style>

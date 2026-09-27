@@ -26,9 +26,9 @@ export function CopyEmailButton({
 
   return (
     <Button
-      variant="ghost"
+      variant="glass"
       size="lg"
-      className="w-3/4 cursor-pointer md:w-auto"
+      className="relative cursor-pointer font-mono text-sm"
       onClick={handleCopy}
       aria-label={`${copied ? copiedText : copyLabel} ${EMAIL}`}
     >
@@ -48,18 +48,23 @@ export function CopyEmailButton({
       >
         {copiedText}
       </span>
-      <span className="relative ml-2 size-5">
+      <span
+        className={cn(
+          'relative -mr-2 ml-1 size-8 rounded-full transition-colors duration-300',
+          copied ? 'bg-pastel-mint/70 dark:bg-pastel-mint/20' : 'bg-foreground/6'
+        )}
+      >
         <HugeiconsIcon
           icon={Copy01Icon}
           className={cn(
-            'absolute inset-0 size-5 motion-safe:transition-all motion-safe:duration-300',
+            'absolute inset-2 size-4 motion-safe:transition-all motion-safe:duration-300',
             copied ? 'scale-75 rotate-12 opacity-0' : 'scale-100 rotate-0 opacity-100'
           )}
         />
         <HugeiconsIcon
           icon={Check}
           className={cn(
-            'absolute inset-0 size-5 text-green-500 motion-safe:transition-all motion-safe:duration-300',
+            'text-foreground absolute inset-2 size-4 motion-safe:transition-all motion-safe:duration-300',
             copied ? 'scale-100 rotate-0 opacity-100' : 'scale-75 -rotate-12 opacity-0'
           )}
         />

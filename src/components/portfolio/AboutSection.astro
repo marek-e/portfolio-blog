@@ -1,22 +1,52 @@
 ---
 import { getTranslations, getLangFromUrl } from '@/i18n';
 import { DevIdCard } from '@/components/portfolio/DevIdCard';
-import { Citation } from '../mdx/Citation';
+import { Doodle } from '@/components/shared/HandDrawn';
+import SectionHeading from '@/components/shared/SectionHeading.astro';
 
 const lang = getLangFromUrl(Astro.url);
 const t = getTranslations(lang);
+
+const [lead, ...rest] = t.about.paragraphs;
+const beforeMantra = rest.slice(0, 1);
+const afterMantra = rest.slice(1);
 ---
 
-<section
-  id="about"
-  class="container mx-auto flex max-w-6xl flex-col gap-12 px-4 py-20 sm:px-6 md:py-32 lg:px-8"
->
-  <h2 class="text-foreground text-3xl font-bold tracking-tight md:text-4xl">
-    {t.about.title}
-  </h2>
-  <DevIdCard client:visible lang={lang} />
-  <div class="text-foreground/80 space-y-6 text-lg leading-relaxed">
-    {t.about.paragraphs.map((paragraph) => <p set:html={paragraph} />)}
+<section id="about" class="relative mx-auto max-w-6xl px-4 py-24 sm:px-6 md:py-32 lg:px-8">
+  <SectionHeading eyebrow={t.about.eyebrow} title={t.about.title} />
+
+  <div class="mt-14 grid gap-14 lg:mt-20 lg:grid-cols-12 lg:gap-16">
+    <div class="lg:col-span-5">
+      <div class="lg:sticky lg:top-28">
+        <DevIdCard client:visible lang={lang} />
+      </div>
+    </div>
+
+    <div class="text-foreground/75 space-y-6 text-lg leading-relaxed text-pretty lg:col-span-7">
+      <p
+        class="font-display-soft text-foreground/90 text-xl leading-normal tracking-tight md:text-[1.4rem]"
+        set:html={lead}
+      />
+      {beforeMantra.map((paragraph) => <p set:html={paragraph} />)}
+
+      <figure class="relative !my-14 py-2 md:!my-16 md:pl-10">
+        <span
+          aria-hidden="true"
+          class="font-display-wonk text-marker/70 absolute -top-10 -left-1 text-8xl leading-none select-none md:-top-8 md:left-0"
+          >“</span
+        >
+        <blockquote
+          class="font-display-wonk text-foreground relative text-3xl leading-[1.2] tracking-tight text-balance md:text-[2.5rem]"
+        >
+          <p>{t.about.mantraContent}</p>
+        </blockquote>
+        <figcaption class="eyebrow mt-6 flex items-center gap-3">
+          <Doodle name="loop" strokeWidth={2.5} className="text-pastel-lilac h-5 w-16" />
+          {t.about.mantraTitle}
+        </figcaption>
+      </figure>
+
+      {afterMantra.map((paragraph) => <p set:html={paragraph} />)}
+    </div>
   </div>
-  <Citation source={t.about.mantraTitle}>{t.about.mantraContent}</Citation>
 </section>

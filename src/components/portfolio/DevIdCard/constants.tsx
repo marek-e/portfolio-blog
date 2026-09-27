@@ -14,7 +14,7 @@ export const TECH_STACK: TechItem[] = [
         alt="React"
         width={32}
         height={32}
-        className="size-8 object-contain"
+        className="size-6 object-contain"
       />
     ),
   },
@@ -26,7 +26,7 @@ export const TECH_STACK: TechItem[] = [
         alt="TypeScript"
         width={32}
         height={32}
-        className="size-8 object-contain"
+        className="size-6 object-contain"
       />
     ),
   },
@@ -38,7 +38,7 @@ export const TECH_STACK: TechItem[] = [
         alt="Python"
         width={32}
         height={32}
-        className="size-8 object-contain"
+        className="size-6 object-contain"
       />
     ),
   },
@@ -50,7 +50,7 @@ export const TECH_STACK: TechItem[] = [
         alt="AWS Lambda"
         width={32}
         height={32}
-        className="size-8 object-contain"
+        className="size-6 object-contain"
       />
     ),
   },
@@ -62,7 +62,7 @@ export const TECH_STACK: TechItem[] = [
         alt="Next.js"
         width={32}
         height={32}
-        className="size-8 object-contain dark:invert"
+        className="size-6 object-contain dark:invert"
       />
     ),
   },

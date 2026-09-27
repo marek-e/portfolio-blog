@@ -7,6 +7,10 @@ export interface UITranslations {
     contact: string;
   };
   hero: {
+    eyebrow: string;
+    greeting: string;
+    name: string;
+    scrollHint: string;
     pageTitle: string;
     pageDescription: string;
     badges: string[];
@@ -17,17 +21,20 @@ export interface UITranslations {
     ctaCv: string;
   };
   about: {
+    eyebrow: string;
     title: string;
     paragraphs: string[];
     mantraContent: string;
     mantraTitle: string;
   };
   timeline: {
+    eyebrow: string;
     title: string;
     subtitle: string;
     present: string;
   };
   projects: {
+    eyebrow: string;
     title: string;
     subtitle: string;
     viewAll: string;
@@ -37,6 +44,7 @@ export interface UITranslations {
     viewDetails: string;
   };
   contact: {
+    eyebrow: string;
     title: string;
     subtitle: string;
     cta: string;
@@ -112,6 +120,8 @@ export interface UITranslations {
     noPosts: string;
     copyMarkdown: string;
     copied: string;
+    eyebrow: string;
+    latest: string;
   };
   devCard: {
     cardTitle: string;
@@ -132,6 +142,7 @@ export interface UITranslations {
     };
   };
   strava: {
+    eyebrow: string;
     title: string;
     subtitle: string;
     intro: string;
@@ -150,8 +161,11 @@ export interface UITranslations {
     tagLongRun: string;
     tagIntervals: string;
     tagCommute: string;
+    tagRace: string;
   };
   projectsPage: {
+    eyebrow: string;
+    countLabel: string;
     pageTitle: string;
     pageDescription: string;
     title: string;
