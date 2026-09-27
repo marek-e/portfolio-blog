@@ -128,11 +128,19 @@ function Carousel({
   );
 }
 
-function CarouselContent({ className, ...props }: React.ComponentProps<'div'>) {
+function CarouselContent({
+  className,
+  viewportClassName,
+  ...props
+}: React.ComponentProps<'div'> & { viewportClassName?: string }) {
   const { carouselRef, orientation } = useCarousel();
 
   return (
-    <div ref={carouselRef} className="-mx-1 overflow-hidden px-1" data-slot="carousel-content">
+    <div
+      ref={carouselRef}
+      className={cn('-mx-1 overflow-hidden px-1', viewportClassName)}
+      data-slot="carousel-content"
+    >
       <div
         className={cn('flex', orientation === 'horizontal' ? '-ml-4' : '-mt-4 flex-col', className)}
         {...props}
@@ -173,7 +181,7 @@ function CarouselPrevious({
       variant={variant}
       size={size}
       className={cn(
-        'absolute cursor-pointer touch-manipulation rounded-full bg-white',
+        'absolute cursor-pointer touch-manipulation rounded-full',
         orientation === 'horizontal'
           ? 'top-1/2 -left-12 -translate-y-1/2'
           : '-top-12 left-1/2 -translate-x-1/2 rotate-90',
@@ -203,7 +211,7 @@ function CarouselNext({
       variant={variant}
       size={size}
       className={cn(
-        'absolute cursor-pointer touch-manipulation rounded-full bg-white',
+        'absolute cursor-pointer touch-manipulation rounded-full',
         orientation === 'horizontal'
           ? 'top-1/2 -right-12 -translate-y-1/2'
           : '-bottom-12 left-1/2 -translate-x-1/2 rotate-90',
