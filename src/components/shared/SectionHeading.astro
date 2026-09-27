@@ -1,0 +1,55 @@
+---
+import { MarkedText, splitLastWord } from '@/components/shared/HandDrawn';
+import { cn } from '@/lib/utils';
+
+interface Props {
+  title: string;
+  eyebrow?: string;
+  subtitle?: string;
+  align?: 'start' | 'center';
+  as?: 'h1' | 'h2';
+  id?: string;
+  class?: string;
+}
+
+const {
+  title,
+  eyebrow,
+  subtitle,
+  align = 'start',
+  as: Tag = 'h2',
+  id,
+  class: className,
+} = Astro.props;
+const { lead, last } = splitLastWord(title);
+const hasAction = Astro.slots.has('default');
+---
+
+<header
+  class={cn(
+    'flex flex-col gap-4',
+    align === 'center' && 'items-center text-center',
+    hasAction && align === 'start' && 'md:flex-row md:items-end md:justify-between',
+    className
+  )}
+>
+  <div class={cn('flex flex-col gap-3', align === 'center' && 'items-center')}>
+    {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+    <Tag id={id} class="text-foreground text-4xl leading-[1.05] font-semibold md:text-6xl">
+      {lead}<MarkedText>{last}</MarkedText>
+    </Tag>
+    {
+      subtitle && (
+        <p
+          class={cn(
+            'text-muted-foreground max-w-xl text-lg text-pretty',
+            align === 'center' && 'mx-auto'
+          )}
+        >
+          {subtitle}
+        </p>
+      )
+    }
+  </div>
+  <slot />
+</header>
