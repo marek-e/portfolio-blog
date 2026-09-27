@@ -1,0 +1,62 @@
+src/components/mdx/Figure.astro
+  s_a098cb91585c4f::t_c39cf5fd0d07d3 26,31,47-49
+src/components/mdx/CodeToggle.tsx
+  s_a098cb91585c4f::t_aede592ce32817 20,23,26-28,33
+src/components/mdx/Link.tsx
+  s_a098cb91585c4f::t_c39cf5fd0d07d3 16-18
+src/components/mdx/CodeBlock.tsx
+  s_a098cb91585c4f::t_aede592ce32817 23,25-26,28-30,41-44
+src/components/mdx/Mermaid.tsx
+  s_a098cb91585c4f::t_aede592ce32817 18-19,27-28,30-34,40,48
+src/pages/[...lang]/blog/[slug].astro
+  s_a098cb91585c4f::t_b8f47b826f028e 182
+  s_a098cb91585c4f::t_b8df7a5f7c5851 5-7,22,78-118,120,122,124-137,139-151,154-168,171-172,174,176-181,183-186
+  s_a098cb91585c4f::t_2a014115f89239 189
+  s_a098cb91585c4f::t_489b54723bd9d6 187
+src/components/mdx/Pre.tsx
+  s_a098cb91585c4f::t_2dad3be3f68385 14,18,20-21,24-28,35-38
+src/components/mdx/Citation.tsx
+  s_a098cb91585c4f::t_474983951f7d07 18-26,28-30,35-38,45,51
+src/components/mdx/Highlight.tsx
+  s_a098cb91585c4f::t_474983951f7d07 13-18,26
+  s_a098cb91585c4f::t_bc8045b81ef6ff 31
+src/pages/[...lang]/blog/index.astro
+  s_a098cb91585c4f::t_8c96b6aa7939de 8,88-95
+  s_a098cb91585c4f::t_6da18cfd9dabe6 5-7,14,29,55-74,78-80,82-87,96-116,118-122,124-166
+src/components/blog/PostTags.astro
+  s_a098cb91585c4f::t_6da18cfd9dabe6 1-26
+src/components/mdx/Heading.tsx
+  s_a098cb91585c4f::t_c39cf5fd0d07d3 97
+src/components/blog/PostActionsMenu.tsx
+  s_a098cb91585c4f::t_b8f47b826f028e 115
+src/components/mdx/FileTree.astro
+  s_a098cb91585c4f::t_c39cf5fd0d07d3 60-68,70,72-73,113,172-175
+src/components/mdx/Callout.tsx
+  s_a098cb91585c4f::t_474983951f7d07 23,27-28,32-33,37-38,42-43,47-48,60-61,65-81
+src/components/mdx/Toggle.tsx
+  s_a098cb91585c4f::t_aede592ce32817 22,25,28-30,34-37,42-43
+src/components/blog/PostMeta.astro
+  s_a098cb91585c4f::t_6da18cfd9dabe6 1-28
+src/components/mdx/PastelCard.tsx
+  s_a098cb91585c4f::t_8fc7e540f68a13 18,20-21,24-25,28-29,32-33,36-37,40-41,44-45,48-49,54,59-60,66,74,76-80,83,93
+src/components/mdx/Table.tsx
+  s_a098cb91585c4f::t_cb4b3d00b3be0b 1-9
+src/components/mdx/index.ts
+  s_a098cb91585c4f::t_b7b43221b643e4 10,15,42
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "439f8bba3f03ec9d6dfe8ddae6abf3ba889af333",
+  "prompts": {},
+  "sessions": {
+    "s_a098cb91585c4f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6b64f08b-9f30-480e-8016-4bba017f0d87",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
