@@ -10,6 +10,7 @@ export interface UITranslations {
     eyebrow: string;
     greeting: string;
     name: string;
+    scrollHint: string;
     pageTitle: string;
     pageDescription: string;
     badges: string[];

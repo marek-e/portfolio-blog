@@ -12,6 +12,7 @@ export const fr: UITranslations = {
     eyebrow: 'Ingénieur full-stack · Paris',
     greeting: 'Hey, je suis',
     name: 'Marek Elmayan',
+    scrollHint: 'Défiler',
     pageTitle: 'Marek Elmayan | Portfolio',
     pageDescription: 'Portfolio et blog de Marek Elmayan, ingénieur logiciel full-stack.',
     badges: ['#UX', '#Cybersecurity', '#AI', '#DevX', '#OpenSource'],
