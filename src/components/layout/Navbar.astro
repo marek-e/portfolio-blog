@@ -1,6 +1,7 @@
 ---
 import { ModeToggle } from '@/components/layout/ModeToggle';
-import { MobileMenu } from '@/components/layout/MobileMenu';
+import { LanguageSwitcher } from '@/components/layout/LanguageSwitcher';
+import MobileTabBar from '@/components/layout/MobileTabBar.astro';
 import { Icon } from '@/components/shared/Icon';
 import AnimatedLogo from '@/components/layout/AnimatedLogo.astro';
 import { getNavLinks } from '@/lib/navigation';
@@ -50,11 +51,13 @@ const linksClasses =
     </div>
 
     <div class="flex items-center gap-6">
-      <MobileMenu client:load lang={lang} currentPath={currentPath} />
+      <LanguageSwitcher currentLang={lang} currentPath={currentPath} className="md:hidden" />
       <ModeToggle client:load />
     </div>
   </div>
 </nav>
+
+<MobileTabBar />
 
 <script>
   function initNavPillEffect() {

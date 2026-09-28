@@ -1,5 +1,7 @@
 export interface UITranslations {
   nav: {
+    home: string;
+    presentationsShort: string;
     projects: string;
     blog: string;
     presentations: string;
@@ -79,6 +81,7 @@ export interface UITranslations {
     system: string;
   };
   aria: {
+    mainNavigation: string;
     openMenu: string;
     closeMenu: string;
     sendEmail: string;
