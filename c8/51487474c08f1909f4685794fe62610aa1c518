@@ -1,0 +1,80 @@
+src/components/ui/alert-dialog.tsx
+  s_a098cb91585c4f::t_9768e446c2e094 46
+src/pages/[...lang]/projects/[slug].astro
+  s_a098cb91585c4f::t_32c4865324e71d 193,208,229,255,279,308,329
+src/components/layout/BackgroundImage.astro
+  s_a098cb91585c4f::t_9768e446c2e094 1-158
+src/components/ui/input.tsx
+  s_a098cb91585c4f::t_9768e446c2e094 12
+src/components/layout/BackToTop.tsx
+  s_a098cb91585c4f::t_b386fa19e98c1d 49,51,53
+src/styles/global.css
+  s_a098cb91585c4f::t_6d617bcb7584ee 102-104
+  s_a098cb91585c4f::t_17f99750d30aa5 303,576,578,581,588,597-598,602,607,611,616,628,633-637,646-647,652-653,655-658,678-680,682,686,690,692-694,702-705,707,711,713,720-738
+  s_a098cb91585c4f::t_32c4865324e71d 297-302
+  s_a098cb91585c4f::t_e42cdbf7f9540a 47-81,89,114,118,121,128-161,169,178,180-186
+  s_a098cb91585c4f::t_14c636f1add262 304
+src/components/ui/sheet.tsx
+  s_a098cb91585c4f::t_9768e446c2e094 55
+src/components/layout/LanguageSwitcher.tsx
+  s_a098cb91585c4f::t_9768e446c2e094 12-17,23,25-26
+src/pages/[...lang]/curriculum-vitae.astro
+  s_a098cb91585c4f::t_32c4865324e71d 61
+src/components/layout/Navbar.astro
+  s_a098cb91585c4f::t_9768e446c2e094 16,21,34,52,74
+src/components/layout/MobileMenu.tsx
+  s_a098cb91585c4f::t_9768e446c2e094 1,14,32,40,42,45,47-48,53,65-68,72,75-76,81
+src/components/portfolio/Hero.astro
+  s_a098cb91585c4f::t_82a2caac597ae2 26,59
+  s_a098cb91585c4f::t_23c501f7aecea4 76
+  s_a098cb91585c4f::t_b386fa19e98c1d 141
+  s_a098cb91585c4f::t_1970b4f8c5b655 8,27-29
+src/components/ui/button.tsx
+  s_a098cb91585c4f::t_6d617bcb7584ee 15
+src/pages/404.astro
+  s_a098cb91585c4f::t_32c4865324e71d 42,56
+src/components/portfolio/ProjectListCard.astro
+  s_a098cb91585c4f::t_32c4865324e71d 47,70
+src/components/ui/input-group.tsx
+  s_a098cb91585c4f::t_9768e446c2e094 17
+src/components/ui/combobox.tsx
+  s_a098cb91585c4f::t_9768e446c2e094 112,140
+src/pages/[...lang]/projects/index.astro
+  s_a098cb91585c4f::t_32c4865324e71d 61
+src/components/ui/tooltip.tsx
+  s_a098cb91585c4f::t_9768e446c2e094 43
+src/components/ui/dropdown-menu.tsx
+  s_a098cb91585c4f::t_9768e446c2e094 41,90,115,138,160,188
+src/components/ui/textarea.tsx
+  s_a098cb91585c4f::t_9768e446c2e094 10
+src/components/design-system/DesignSystemPreview.tsx
+  s_a098cb91585c4f::t_32c4865324e71d 69,99
+src/components/ui/select.tsx
+  s_a098cb91585c4f::t_9768e446c2e094 50,96,125,162,180
+src/components/layout/BookmarkLanguageToggle.tsx
+  s_a098cb91585c4f::t_b386fa19e98c1d 23-24,39
+src/components/ui/card.tsx
+  s_a098cb91585c4f::t_9768e446c2e094 15,28,84
+docs/STYLING.md
+  s_a098cb91585c4f::t_fa276dedc13a5b 3,5,8,10-12
+src/components/layout/ModeToggle.tsx
+  s_a098cb91585c4f::t_9768e446c2e094 60
+src/components/layout/Footer.astro
+  s_a098cb91585c4f::t_9768e446c2e094 4-5,31-45,47-50,52-82,85-100
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "c851487474c08f1909f4685794fe62610aa1c518",
+  "prompts": {},
+  "sessions": {
+    "s_a098cb91585c4f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6b64f08b-9f30-480e-8016-4bba017f0d87",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
