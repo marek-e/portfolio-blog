@@ -137,7 +137,7 @@ export function ProjectCardReact({ project, projectUrl, translations }: ProjectC
           </div>
           <span
             aria-hidden="true"
-            className="glass-strong text-foreground group-hover:bg-foreground group-hover:text-background flex size-10 shrink-0 items-center justify-center rounded-full transition-colors duration-300"
+            className="glass-strong text-foreground group-hover:bg-primary group-hover:text-primary-foreground flex size-10 shrink-0 items-center justify-center rounded-full transition-colors duration-300 group-hover:border-transparent"
           >
             <HugeiconsIcon
               icon={ArrowUpRight01Icon}

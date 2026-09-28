@@ -74,10 +74,8 @@ function OrganizationLogo({ entry }: { entry: TimelineEntry }) {
       src={entry.logo}
       alt={`${entry.organization} logo`}
       className={cn(
-        'h-6 w-auto max-w-28 object-contain opacity-85',
-        entry.logoInverted
-          ? 'dark:invert'
-          : 'dark:bg-foreground/90 dark:box-content dark:rounded-md dark:px-1.5 dark:py-1 dark:opacity-100'
+        'h-6 w-auto max-w-24 object-contain md:max-w-28',
+        entry.logoInverted && 'dark:invert'
       )}
       width={entry.logoWidth}
       height={32}
@@ -114,12 +112,12 @@ function TimelineCard({
   const icon = entry.type === 'education' ? Mortarboard01Icon : Briefcase01Icon;
 
   return (
-    <article className="glass rounded-3xl p-6 transition duration-300 hover:-translate-y-0.5 hover:shadow-lg md:p-7">
+    <article className="glass rounded-3xl p-5 transition duration-300 hover:-translate-y-0.5 hover:shadow-lg sm:p-6 md:p-7">
       <div className="mb-5 flex items-center justify-between gap-4">
         <div className="flex items-center gap-3">
           <span
             className={cn(
-              'text-foreground/75 flex size-10 shrink-0 items-center justify-center rounded-2xl',
+              'text-foreground/75 hidden size-10 shrink-0 items-center justify-center rounded-2xl sm:flex',
               accent
             )}
           >
@@ -169,7 +167,7 @@ export function TimelineCards({ entries, presentLabel, lang }: TimelineCardsProp
           return (
             <li
               key={entry.id}
-              className="timeline-item relative grid grid-cols-[3.5rem_1fr] gap-x-3 pb-8 last:pb-0 md:grid-cols-[1fr_6rem_1fr] md:gap-x-0 md:pb-0 md:not-first:-mt-24"
+              className="timeline-item relative grid grid-cols-[3rem_minmax(0,1fr)] gap-x-2 pb-8 last:pb-0 md:grid-cols-[1fr_6rem_1fr] md:gap-x-0 md:pb-0 md:not-first:-mt-24"
             >
               <div className="col-start-1 row-start-1 flex items-start justify-center pt-7 md:col-start-2">
                 <span className="bg-card ring-foreground/5 relative z-10 rounded-full shadow-sm ring-1">

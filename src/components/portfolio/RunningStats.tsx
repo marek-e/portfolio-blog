@@ -148,11 +148,11 @@ export function RunningStats({ stats, lang = 'fr' }: RunningStatsProps) {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-3 md:gap-5">
+      <div className="grid grid-cols-[repeat(2,minmax(0,1fr))] gap-3 md:gap-5">
         {statItems.map((item, index) => (
           <div
             key={`${mode}-${item.label}`}
-            className="glass relative overflow-hidden rounded-3xl p-5 md:p-8"
+            className="glass relative overflow-hidden rounded-3xl p-4 sm:p-5 md:p-8"
           >
             <span
               aria-hidden="true"
@@ -164,10 +164,10 @@ export function RunningStats({ stats, lang = 'fr' }: RunningStatsProps) {
               )}
             />
             <p className="eyebrow relative">{item.label}</p>
-            <p className="text-foreground relative mt-3 font-mono text-4xl font-medium tracking-tight tabular-nums md:mt-4 md:text-6xl">
+            <p className="text-foreground relative mt-3 font-mono text-[clamp(1.6rem,7.5vw,2.25rem)] font-medium tracking-tight tabular-nums md:mt-4 md:text-6xl">
               <AnimatedCounter value={item.value} duration={1000 + index * 200} />
               {item.suffix && (
-                <span className="text-muted-foreground ml-1.5 text-base font-normal tracking-normal md:text-2xl">
+                <span className="text-muted-foreground ml-1 text-sm font-normal tracking-normal md:ml-1.5 md:text-2xl">
                   {item.suffix.trim()}
                 </span>
               )}
