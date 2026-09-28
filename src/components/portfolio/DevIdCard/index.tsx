@@ -9,7 +9,7 @@ import { CardField } from './CardField';
 import { CardTitle } from './CardTitle';
 import { StatusBadge } from './StatusBadge';
 import { TechStackBadge } from './TechStackBadge';
-import { TECH_STACK } from './constants';
+import { BIRTH_DATE, TECH_STACK, getAge } from './constants';
 
 interface DevIdCardProps {
   lang: Lang;
@@ -22,7 +22,11 @@ export function DevIdCard({ lang }: DevIdCardProps) {
 
   const fields = [
     { label: t.devCard.fields.nature, value: t.devCard.values.nature, icon: Brain },
-    { label: t.devCard.fields.gameTime, value: t.devCard.values.gameTime, icon: Joystick04Icon },
+    {
+      label: t.devCard.fields.gameTime,
+      value: t.devCard.values.gameTime.replace('{age}', String(getAge(BIRTH_DATE))),
+      icon: Joystick04Icon,
+    },
     {
       label: t.devCard.fields.location,
       value: t.devCard.values.location,
