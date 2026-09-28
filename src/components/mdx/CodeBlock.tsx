@@ -25,7 +25,7 @@ export function CodeBlock({ code, language, filename, className }: CodeBlockProp
         <div className="border-border text-muted-foreground flex items-center gap-2 border-b px-4 py-2 text-sm">
           <span className="font-mono">{filename}</span>
           {language && (
-            <span className="bg-pastel-lilac/30 dark:bg-pastel-lilac/12 dark:text-pastel-lilac ml-auto rounded px-2 py-0.5 text-xs">
+            <span className="bg-pastel-lilac/50 text-pastel-lilac-ink dark:bg-pastel-lilac/18 ml-auto rounded px-2 py-0.5 text-xs">
               {language}
             </span>
           )}

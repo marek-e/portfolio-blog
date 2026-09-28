@@ -19,36 +19,37 @@ const badgeVariants = cva(
         link: 'text-primary underline-offset-4 hover:underline',
         glass: 'glass text-foreground/85 [a]:hover:bg-card',
         'pastel-blue':
-          'bg-pastel-sky/45 text-foreground/80 dark:bg-pastel-sky/12 dark:text-pastel-sky',
+          'bg-pastel-sky/55 text-pastel-sky-ink dark:bg-pastel-sky/15 dark:text-pastel-sky-ink',
         'pastel-green':
-          'bg-pastel-mint/50 text-foreground/80 dark:bg-pastel-mint/12 dark:text-pastel-mint',
+          'bg-pastel-mint/55 text-pastel-mint-ink dark:bg-pastel-mint/15 dark:text-pastel-mint-ink',
         'pastel-yellow':
-          'bg-pastel-butter/70 text-foreground/80 dark:bg-pastel-butter/12 dark:text-pastel-butter',
-        'pastel-pink': 'bg-marker/15 text-foreground/80 dark:bg-marker/15 dark:text-marker',
+          'bg-pastel-butter/70 text-pastel-butter-ink dark:bg-pastel-butter/15 dark:text-pastel-butter-ink',
+        'pastel-pink':
+          'bg-pastel-rose/55 text-pastel-rose-ink dark:bg-pastel-rose/15 dark:text-pastel-rose-ink',
         'pastel-purple':
-          'bg-pastel-lilac/45 text-foreground/80 dark:bg-pastel-lilac/12 dark:text-pastel-lilac',
+          'bg-pastel-lilac/55 text-pastel-lilac-ink dark:bg-pastel-lilac/15 dark:text-pastel-lilac-ink',
         'pastel-orange':
-          'bg-pastel-peach/50 text-foreground/80 dark:bg-pastel-peach/12 dark:text-pastel-peach',
+          'bg-pastel-peach/55 text-pastel-peach-ink dark:bg-pastel-peach/15 dark:text-pastel-peach-ink',
         'pastel-teal':
-          'bg-pastel-mint/35 text-foreground/80 dark:bg-pastel-mint/10 dark:text-pastel-mint',
+          'bg-pastel-mint/35 text-pastel-mint-ink dark:bg-pastel-mint/15 dark:text-pastel-mint-ink',
         'pastel-rose':
-          'bg-pastel-rose/45 text-foreground/80 dark:bg-pastel-rose/12 dark:text-pastel-rose',
+          'bg-pastel-rose/55 text-pastel-rose-ink dark:bg-pastel-rose/15 dark:text-pastel-rose-ink',
         'pastel-blue-outline':
-          'bg-pastel-sky/35 border-pastel-sky text-foreground/80 dark:bg-pastel-sky/10 dark:border-pastel-sky/30 dark:text-pastel-sky',
+          'bg-pastel-sky/55 border-pastel-sky text-pastel-sky-ink dark:bg-pastel-sky/15 dark:border-pastel-sky/40 dark:text-pastel-sky-ink',
         'pastel-green-outline':
-          'bg-pastel-mint/40 border-pastel-mint text-foreground/80 dark:bg-pastel-mint/10 dark:border-pastel-mint/30 dark:text-pastel-mint',
+          'bg-pastel-mint/55 border-pastel-mint text-pastel-mint-ink dark:bg-pastel-mint/15 dark:border-pastel-mint/40 dark:text-pastel-mint-ink',
         'pastel-yellow-outline':
-          'bg-pastel-butter/55 border-pastel-butter text-foreground/80 dark:bg-pastel-butter/10 dark:border-pastel-butter/30 dark:text-pastel-butter',
+          'bg-pastel-butter/70 border-pastel-butter text-pastel-butter-ink dark:bg-pastel-butter/15 dark:border-pastel-butter/40 dark:text-pastel-butter-ink',
         'pastel-pink-outline':
-          'bg-marker/10 border-marker/35 text-foreground/80 dark:bg-marker/10 dark:border-marker/30 dark:text-marker',
+          'bg-pastel-rose/55 border-pastel-rose text-pastel-rose-ink dark:bg-pastel-rose/15 dark:border-pastel-rose/40 dark:text-pastel-rose-ink',
         'pastel-purple-outline':
-          'bg-pastel-lilac/35 border-pastel-lilac text-foreground/80 dark:bg-pastel-lilac/10 dark:border-pastel-lilac/30 dark:text-pastel-lilac',
+          'bg-pastel-lilac/55 border-pastel-lilac text-pastel-lilac-ink dark:bg-pastel-lilac/15 dark:border-pastel-lilac/40 dark:text-pastel-lilac-ink',
         'pastel-orange-outline':
-          'bg-pastel-peach/40 border-pastel-peach text-foreground/80 dark:bg-pastel-peach/10 dark:border-pastel-peach/30 dark:text-pastel-peach',
+          'bg-pastel-peach/55 border-pastel-peach text-pastel-peach-ink dark:bg-pastel-peach/15 dark:border-pastel-peach/40 dark:text-pastel-peach-ink',
         'pastel-teal-outline':
-          'bg-pastel-sky/20 border-pastel-mint text-foreground/80 dark:bg-pastel-mint/8 dark:border-pastel-mint/30 dark:text-pastel-mint',
+          'bg-pastel-mint/35 border-pastel-mint text-pastel-mint-ink dark:bg-pastel-mint/15 dark:border-pastel-mint/40 dark:text-pastel-mint-ink',
         'pastel-rose-outline':
-          'bg-pastel-rose/35 border-pastel-rose text-foreground/80 dark:bg-pastel-rose/10 dark:border-pastel-rose/30 dark:text-pastel-rose',
+          'bg-pastel-rose/55 border-pastel-rose text-pastel-rose-ink dark:bg-pastel-rose/15 dark:border-pastel-rose/40 dark:text-pastel-rose-ink',
       },
     },
     defaultVariants: {

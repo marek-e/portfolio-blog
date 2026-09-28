@@ -13,14 +13,14 @@ export function Pre({ children, className, 'data-language': language, ...props }
   return (
     <div
       data-pre
-      className="group border-pastel-lilac/70 dark:border-pastel-lilac/20 relative my-6 overflow-hidden rounded-lg border shadow-[6px_6px_0_var(--color-pastel-lilac)] dark:shadow-[6px_6px_0_color-mix(in_oklab,var(--color-pastel-lilac)_18%,transparent)]"
+      className="group border-pastel-lilac dark:border-pastel-lilac/40 relative my-6 overflow-hidden rounded-lg border shadow-[6px_6px_0_var(--color-pastel-lilac)] dark:shadow-[6px_6px_0_color-mix(in_oklab,var(--color-pastel-lilac)_40%,transparent)]"
     >
       {language && (
         <div
           data-language-header
-          className="bg-pastel-lilac/25 dark:bg-pastel-lilac/8 relative flex h-10 items-center justify-between"
+          className="bg-pastel-lilac/45 dark:bg-pastel-lilac/15 relative flex h-10 items-center justify-between"
         >
-          <div className="border-pastel-lilac dark:text-pastel-lilac text-foreground absolute ml-8 h-full rounded-t-lg border-t-2 bg-(--shiki-bg) px-4 py-2 font-mono text-sm">
+          <div className="border-pastel-lilac-ink dark:border-pastel-lilac text-pastel-lilac-ink absolute ml-8 h-full rounded-t-lg border-t-2 bg-(--shiki-bg) px-4 py-2 font-mono text-sm">
             {language}
           </div>
         </div>

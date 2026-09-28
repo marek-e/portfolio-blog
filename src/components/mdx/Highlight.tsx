@@ -10,12 +10,12 @@ interface HighlightProps {
 }
 
 const colorClasses: Record<HighlightColor, string> = {
-  red: 'before:bg-pastel-rose/80 dark:before:bg-pastel-rose/35',
-  blue: 'before:bg-pastel-sky/80 dark:before:bg-pastel-sky/35',
-  green: 'before:bg-pastel-mint/85 dark:before:bg-pastel-mint/35',
-  yellow: 'before:bg-pastel-butter dark:before:bg-pastel-butter/35',
-  purple: 'before:bg-pastel-lilac/80 dark:before:bg-pastel-lilac/35',
-  orange: 'before:bg-pastel-peach/85 dark:before:bg-pastel-peach/35',
+  red: 'before:bg-pastel-rose dark:before:bg-pastel-rose/45',
+  blue: 'before:bg-pastel-sky dark:before:bg-pastel-sky/45',
+  green: 'before:bg-pastel-mint dark:before:bg-pastel-mint/45',
+  yellow: 'before:bg-pastel-butter dark:before:bg-pastel-butter/45',
+  purple: 'before:bg-pastel-lilac dark:before:bg-pastel-lilac/45',
+  orange: 'before:bg-pastel-peach dark:before:bg-pastel-peach/45',
 };
 
 export function Highlight({ children, color = 'yellow', className }: HighlightProps) {
