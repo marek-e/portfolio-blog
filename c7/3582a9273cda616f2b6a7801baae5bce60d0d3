@@ -1,0 +1,44 @@
+src/components/mdx/Pre.tsx
+  s_a098cb91585c4f::t_db5683c06f0f16 16,21,23
+src/components/mdx/FileTree.astro
+  s_a098cb91585c4f::t_1906ca0159d91d 60,62-63,108,114,169-170,174-176,180-181,186
+src/components/mdx/Link.tsx
+  s_a098cb91585c4f::t_1906ca0159d91d 15
+src/components/mdx/PastelCard.tsx
+  s_a098cb91585c4f::t_b5be2f4efdb614 85
+  s_a098cb91585c4f::t_d63a47b6813c9e 18,22,27,30-32,35-37,40-42,45-47,50-52,55-57,62,88
+src/components/mdx/Citation.tsx
+  s_a098cb91585c4f::t_7304c0346ffc28 22
+  s_a098cb91585c4f::t_1906ca0159d91d 25
+src/components/mdx/Highlight.tsx
+  s_a098cb91585c4f::t_db5683c06f0f16 13-18
+src/components/mdx/Toggle.tsx
+  s_a098cb91585c4f::t_db5683c06f0f16 24,30,42
+src/pages/[...lang]/blog/index.astro
+  s_a098cb91585c4f::t_3fd2068993fed6 33-37,95,103,107
+src/components/mdx/Callout.tsx
+  s_a098cb91585c4f::t_b5be2f4efdb614 34,41,48,55,82
+  s_a098cb91585c4f::t_db5683c06f0f16 27-29,35-36,42-43,49-50,56-57,77
+src/components/mdx/Mermaid.tsx
+  s_a098cb91585c4f::t_db5683c06f0f16 18-19,28,30-31
+src/components/mdx/CodeBlock.tsx
+  s_a098cb91585c4f::t_db5683c06f0f16 28
+src/components/ui/badge.tsx
+  s_a098cb91585c4f::t_bbb0335fd249f1 22,24,26-28,30,32,34,36,38,40,42,44,46,48,50,52
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "c73582a9273cda616f2b6a7801baae5bce60d0d3",
+  "prompts": {},
+  "sessions": {
+    "s_a098cb91585c4f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6b64f08b-9f30-480e-8016-4bba017f0d87",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
