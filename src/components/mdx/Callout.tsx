@@ -24,37 +24,37 @@ const variantConfig: Record<
 > = {
   info: {
     icon: InformationCircleIcon,
-    classes: 'bg-pastel-sky/25 border-pastel-sky dark:bg-pastel-sky/10 dark:border-pastel-sky/35',
-    iconBadge: 'bg-pastel-sky dark:bg-pastel-sky/15 dark:text-pastel-sky',
-    titleColor: 'dark:text-pastel-sky',
+    classes: 'bg-pastel-sky/40 border-pastel-sky dark:bg-pastel-sky/15 dark:border-pastel-sky/40',
+    iconBadge: 'bg-pastel-sky text-pastel-sky-ink dark:bg-pastel-sky/20',
+    titleColor: 'text-pastel-sky-ink',
   },
   warning: {
     icon: Alert02Icon,
     classes:
-      'bg-pastel-butter/35 border-pastel-butter dark:bg-pastel-butter/10 dark:border-pastel-butter/35',
-    iconBadge: 'bg-pastel-butter dark:bg-pastel-butter/15 dark:text-pastel-butter',
-    titleColor: 'dark:text-pastel-butter',
+      'bg-pastel-butter/40 border-pastel-butter dark:bg-pastel-butter/15 dark:border-pastel-butter/40',
+    iconBadge: 'bg-pastel-butter text-pastel-butter-ink dark:bg-pastel-butter/20',
+    titleColor: 'text-pastel-butter-ink',
   },
   success: {
     icon: CheckmarkCircle03Icon,
     classes:
-      'bg-pastel-mint/30 border-pastel-mint dark:bg-pastel-mint/10 dark:border-pastel-mint/35',
-    iconBadge: 'bg-pastel-mint dark:bg-pastel-mint/15 dark:text-pastel-mint',
-    titleColor: 'dark:text-pastel-mint',
+      'bg-pastel-mint/40 border-pastel-mint dark:bg-pastel-mint/15 dark:border-pastel-mint/40',
+    iconBadge: 'bg-pastel-mint text-pastel-mint-ink dark:bg-pastel-mint/20',
+    titleColor: 'text-pastel-mint-ink',
   },
   tip: {
     icon: Bulb,
     classes:
-      'bg-pastel-lilac/25 border-pastel-lilac dark:bg-pastel-lilac/10 dark:border-pastel-lilac/35',
-    iconBadge: 'bg-pastel-lilac dark:bg-pastel-lilac/15 dark:text-pastel-lilac',
-    titleColor: 'dark:text-pastel-lilac',
+      'bg-pastel-lilac/40 border-pastel-lilac dark:bg-pastel-lilac/15 dark:border-pastel-lilac/40',
+    iconBadge: 'bg-pastel-lilac text-pastel-lilac-ink dark:bg-pastel-lilac/20',
+    titleColor: 'text-pastel-lilac-ink',
   },
   danger: {
     icon: CancelCircleIcon,
     classes:
-      'bg-pastel-rose/25 border-pastel-rose dark:bg-pastel-rose/10 dark:border-pastel-rose/35',
-    iconBadge: 'bg-pastel-rose dark:bg-pastel-rose/15 dark:text-pastel-rose',
-    titleColor: 'dark:text-pastel-rose',
+      'bg-pastel-rose/40 border-pastel-rose dark:bg-pastel-rose/15 dark:border-pastel-rose/40',
+    iconBadge: 'bg-pastel-rose text-pastel-rose-ink dark:bg-pastel-rose/20',
+    titleColor: 'text-pastel-rose-ink',
   },
 };
 
@@ -74,14 +74,12 @@ export function Callout({ children, variant = 'info', title, className }: Callou
       )}
     >
       <div className="bg-background absolute -top-4 -left-4 rounded-full p-1">
-        <span className={cn('text-foreground/75 flex rounded-full p-1', config.iconBadge)}>
+        <span className={cn('flex rounded-full p-1', config.iconBadge)}>
           <HugeiconsIcon icon={config.icon} strokeWidth={2} className="size-5 shrink-0" />
         </span>
       </div>
       <div className="min-w-0 flex-1">
-        {title && (
-          <p className={cn('text-foreground mb-1 font-semibold', config.titleColor)}>{title}</p>
-        )}
+        {title && <p className={cn('mb-1 font-semibold', config.titleColor)}>{title}</p>}
         <div className="text-sm [&>p]:m-0">{children}</div>
       </div>
     </aside>

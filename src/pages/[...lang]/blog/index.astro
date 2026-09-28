@@ -30,11 +30,11 @@ const posts = allPosts
 const [featured, ...rest] = posts;
 
 const cardTones = [
-  'border-pastel-sky/70 bg-pastel-sky/15 hover:bg-pastel-sky/30 dark:border-pastel-sky/25 dark:bg-pastel-sky/8 dark:hover:bg-pastel-sky/14',
-  'border-pastel-mint/80 bg-pastel-mint/15 hover:bg-pastel-mint/30 dark:border-pastel-mint/25 dark:bg-pastel-mint/8 dark:hover:bg-pastel-mint/14',
-  'border-pastel-peach/70 bg-pastel-peach/15 hover:bg-pastel-peach/30 dark:border-pastel-peach/25 dark:bg-pastel-peach/8 dark:hover:bg-pastel-peach/14',
-  'border-pastel-rose/70 bg-pastel-rose/15 hover:bg-pastel-rose/30 dark:border-pastel-rose/25 dark:bg-pastel-rose/8 dark:hover:bg-pastel-rose/14',
-  'border-pastel-butter/90 bg-pastel-butter/20 hover:bg-pastel-butter/35 dark:border-pastel-butter/25 dark:bg-pastel-butter/8 dark:hover:bg-pastel-butter/14',
+  'border-pastel-sky bg-pastel-sky/35 hover:bg-pastel-sky/55 dark:border-pastel-sky/40 dark:bg-pastel-sky/12 dark:hover:bg-pastel-sky/18',
+  'border-pastel-mint bg-pastel-mint/35 hover:bg-pastel-mint/55 dark:border-pastel-mint/40 dark:bg-pastel-mint/12 dark:hover:bg-pastel-mint/18',
+  'border-pastel-peach bg-pastel-peach/35 hover:bg-pastel-peach/55 dark:border-pastel-peach/40 dark:bg-pastel-peach/12 dark:hover:bg-pastel-peach/18',
+  'border-pastel-rose bg-pastel-rose/35 hover:bg-pastel-rose/55 dark:border-pastel-rose/40 dark:bg-pastel-rose/12 dark:hover:bg-pastel-rose/18',
+  'border-pastel-butter bg-pastel-butter/35 hover:bg-pastel-butter/55 dark:border-pastel-butter/40 dark:bg-pastel-butter/12 dark:hover:bg-pastel-butter/18',
 ];
 ---
 
@@ -92,7 +92,7 @@ const cardTones = [
           {featured && (
             <a
               href={translatePath(`/blog/${getSlug(featured.id, lang)}`)}
-              class="group bg-card border-pastel-lilac dark:border-pastel-lilac/30 relative block rounded-3xl border p-6 shadow-[6px_6px_0_var(--color-pastel-lilac)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[8px_8px_0_var(--color-pastel-lilac)] sm:p-8 md:p-12 dark:shadow-[6px_6px_0_color-mix(in_oklab,var(--color-pastel-lilac)_25%,transparent)] dark:hover:shadow-[8px_8px_0_color-mix(in_oklab,var(--color-pastel-lilac)_30%,transparent)]"
+              class="group bg-card border-pastel-lilac dark:border-pastel-lilac/40 relative block rounded-3xl border p-6 shadow-[6px_6px_0_var(--color-pastel-lilac)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[8px_8px_0_var(--color-pastel-lilac)] sm:p-8 md:p-12 dark:shadow-[6px_6px_0_color-mix(in_oklab,var(--color-pastel-lilac)_40%,transparent)] dark:hover:shadow-[8px_8px_0_color-mix(in_oklab,var(--color-pastel-lilac)_50%,transparent)]"
             >
               <Doodle
                 name="sparkle"
@@ -100,11 +100,11 @@ const cardTones = [
               />
               <Doodle
                 name="sparkle"
-                className="text-pastel-peach absolute top-16 right-16 hidden size-4 -rotate-12 md:block"
+                className="text-pastel-peach-ink/70 dark:text-pastel-peach absolute top-16 right-16 hidden size-4 -rotate-12 md:block"
               />
               <article class="flex flex-col gap-6">
                 <div class="flex flex-wrap items-center gap-x-4 gap-y-2">
-                  <span class="bg-pastel-rose/60 text-foreground/85 dark:bg-pastel-rose/12 dark:text-pastel-rose rounded-full px-3 py-1 font-mono text-xs">
+                  <span class="bg-pastel-rose text-pastel-rose-ink dark:bg-pastel-rose/20 rounded-full px-3 py-1 font-mono text-xs">
                     {t.blog.latest}
                   </span>
                   <PostMeta
