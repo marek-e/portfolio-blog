@@ -1,0 +1,65 @@
+src/components/mdx/Link.tsx
+  s_a098cb91585c4f::t_1b5fe18ccc5ce8 16-18
+src/components/mdx/CodeToggle.tsx
+  s_a098cb91585c4f::t_3787f7972066f5 20,23
+  s_a098cb91585c4f::t_1b5fe18ccc5ce8 26,31
+src/components/mdx/Pre.tsx
+  s_a098cb91585c4f::t_3787f7972066f5 16,21,23,36
+  s_a098cb91585c4f::t_1b5fe18ccc5ce8 14-15,17,24-25,28-29,37-39
+src/components/mdx/Callout.tsx
+  s_a098cb91585c4f::t_1b5fe18ccc5ce8 69,71-72,80-81,85
+  s_a098cb91585c4f::t_5dbbcc0b6ea407 23,27-29,33-36,40-43,47-50,54-57,70,76,78-79
+  s_a098cb91585c4f::t_3836d2bddb843d 77,83
+src/components/mdx/PastelCard.tsx
+  s_a098cb91585c4f::t_1b5fe18ccc5ce8 18,20-21,24-25,54,60-61,67,75,88
+  s_a098cb91585c4f::t_d9aa1258e01b7b 28-29,32-33,36-37,40-41,44-45,48-49,59,77
+  s_a098cb91585c4f::t_3836d2bddb843d 80
+src/components/mdx/Highlight.tsx
+  s_a098cb91585c4f::t_3787f7972066f5 13-18
+  s_a098cb91585c4f::t_1b5fe18ccc5ce8 26,31
+src/components/blog/PostActionsMenu.tsx
+  s_a098cb91585c4f::t_886496293dd9be 115
+src/components/mdx/CodeBlock.tsx
+  s_a098cb91585c4f::t_3836d2bddb843d 28
+  s_a098cb91585c4f::t_3787f7972066f5 41
+  s_a098cb91585c4f::t_1b5fe18ccc5ce8 23,25-26,42-44
+src/components/mdx/Citation.tsx
+  s_a098cb91585c4f::t_1b5fe18ccc5ce8 18-21,24,26,32-35,42,48
+  s_a098cb91585c4f::t_3787f7972066f5 22-23,25
+src/components/mdx/Mermaid.tsx
+  s_a098cb91585c4f::t_1b5fe18ccc5ce8 27,32-33,39,47
+  s_a098cb91585c4f::t_3787f7972066f5 18-19,28,30-31
+src/pages/[...lang]/blog/[slug].astro
+  s_a098cb91585c4f::t_886496293dd9be 117,155,182
+src/components/mdx/Heading.tsx
+  s_a098cb91585c4f::t_3836d2bddb843d 128-131
+  s_a098cb91585c4f::t_3787f7972066f5 39,65,97
+src/components/mdx/FileTree.astro
+  s_a098cb91585c4f::t_a3f2cc5491b461 60,62,169-179
+  s_a098cb91585c4f::t_1b5fe18ccc5ce8 61,64,66-67,166-167
+src/components/mdx/Figure.astro
+  s_a098cb91585c4f::t_1b5fe18ccc5ce8 26,31,47
+src/components/mdx/Toggle.tsx
+  s_a098cb91585c4f::t_3836d2bddb843d 23-26
+  s_a098cb91585c4f::t_3787f7972066f5 30,42
+  s_a098cb91585c4f::t_1b5fe18ccc5ce8 22,27,33,37,43
+src/pages/[...lang]/blog/index.astro
+  s_a098cb91585c4f::t_886496293dd9be 15,31-32,38,74,87,95,140,144-147,168
+  s_a098cb91585c4f::t_d37beacc0303a3 33-37,91
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "abd94799169a8e2d819ec3232d72eb2eefbcd9df",
+  "prompts": {},
+  "sessions": {
+    "s_a098cb91585c4f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6b64f08b-9f30-480e-8016-4bba017f0d87",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
