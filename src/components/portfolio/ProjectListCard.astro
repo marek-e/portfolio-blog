@@ -44,7 +44,7 @@ const isCover = objectFit === 'cover';
 <article class={cn('group h-full', className)}>
   <a
     href={projectUrl}
-    class="glass text-card-foreground focus-visible:ring-ring/50 flex h-full flex-col rounded-3xl p-2 transition duration-300 ease-out outline-none hover:-translate-y-0.5 hover:bg-(--glass-bg-strong) focus-visible:ring-[3px] motion-reduce:hover:translate-y-0"
+    class="surface text-card-foreground focus-visible:ring-ring/50 flex h-full flex-col rounded-3xl p-2 transition duration-300 ease-out outline-none hover:-translate-y-0.5 hover:shadow-lg focus-visible:ring-[3px] motion-reduce:hover:translate-y-0"
   >
     {
       projectImage && (
@@ -67,7 +67,7 @@ const isCover = objectFit === 'cover';
           />
           <div class="absolute inset-x-3 top-3 flex items-start justify-between gap-2">
             {status && status !== 'completed' ? (
-              <Badge variant="glass">
+              <Badge variant="outline">
                 <span
                   class={cn(
                     'size-1.5 rounded-full',

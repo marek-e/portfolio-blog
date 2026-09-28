@@ -1,0 +1,158 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+  lightSrc?: string;
+  darkSrc?: string;
+  lightAlt?: string;
+  darkAlt?: string;
+}
+
+const {
+  lightSrc = '/bg-light-v3.webp',
+  darkSrc = '/bg-dark-v3.webp',
+  lightAlt = 'Wide valley at sunrise with green hills, wildflowers in the foreground, and tall rocky cliffs on both sides, softly lit by warm sunlight and light mist.',
+  darkAlt = 'Moonlit valley at night with rolling hills, mist over the grass, wildflowers in the foreground, tall cliffs on both sides, and a bright full moon in a starry sky.',
+} = Astro.props;
+---
+
+<!-- Preload appropriate image based on theme -->
+<link
+  rel="preload"
+  as="image"
+  href={lightSrc}
+  media="(prefers-color-scheme: light)"
+  fetchpriority="high"
+/>
+<link
+  rel="preload"
+  as="image"
+  href={darkSrc}
+  media="(prefers-color-scheme: dark)"
+  fetchpriority="high"
+/>
+
+<!-- Background Images with responsive srcset.
+     z-0, not -z-10: a negative z-index would paint the artwork behind the
+     opaque bg-background on <body>, hiding it completely. z-0 keeps it above
+     that and below both the spotlight glow (z-1) and the page content (z-10). -->
+<picture class="absolute inset-0 z-0 dark:hidden">
+  <Image
+    src={lightSrc}
+    srcset={`${lightSrc} 2048w`}
+    sizes="100vw"
+    alt={lightAlt}
+    width={2048}
+    height={1143}
+    class="h-full w-full object-cover"
+    fetchpriority="high"
+    decoding="async"
+    loading="eager"
+  />
+</picture>
+<picture class="absolute inset-0 z-0 hidden dark:block">
+  <Image
+    src={darkSrc}
+    srcset={`${darkSrc} 2048w`}
+    sizes="100vw"
+    alt={darkAlt}
+    width={2048}
+    height={1143}
+    class="h-full w-full object-cover"
+    fetchpriority="high"
+    decoding="async"
+    loading="eager"
+  />
+</picture>
+
+<!-- Low-quality placeholder overlay (fades out when image loads) -->
+<div
+  class="from-primary/20 via-secondary/10 to-primary/20 dark:from-primary/30 dark:via-secondary/20 dark:to-primary/30 absolute inset-0 z-0 bg-linear-to-br opacity-100 transition-opacity duration-1000"
+  id="bg-placeholder"
+>
+</div>
+
+<style>
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      transition: none !important;
+      animation: none !important;
+    }
+  }
+
+  /* Optimize image rendering */
+  picture img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+
+  /* Images start visible by default (for cached/fast loads) */
+  picture img {
+    opacity: 1;
+  }
+
+  /* Only apply fade-in when explicitly marked as loading */
+  picture img.is-loading {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+  }
+
+  picture img.is-loading.loaded {
+    opacity: 1;
+  }
+</style>
+
+<script>
+  // Run immediately (not on DOMContentLoaded) to avoid flash
+  (() => {
+    const placeholder = document.getElementById('bg-placeholder');
+    const images = document.querySelectorAll<HTMLImageElement>('picture img');
+
+    let loadedCount = 0;
+    const totalImages = images.length;
+
+    const hidePlaceholder = () => {
+      if (placeholder) {
+        placeholder.style.opacity = '0';
+        setTimeout(() => {
+          placeholder.style.display = 'none';
+        }, 1000);
+      }
+    };
+
+    const countLoaded = () => {
+      loadedCount++;
+      if (loadedCount === totalImages) {
+        hidePlaceholder();
+      }
+    };
+
+    images.forEach((img) => {
+      // If already loaded (cached or preloaded), don't animate - just count it.
+      // We can't listen for load on the element itself: it has already fired,
+      // so a listener attached now would never run. naturalWidth is no help
+      // either - a preloaded image reports complete before it has decoded, so
+      // it reads 0 for a pending image and for a broken one alike. A throwaway
+      // probe on the same URL answers from cache and tells them apart, so the
+      // placeholder stays up when the image really did fail.
+      if (img.complete) {
+        const probe = new Image();
+        probe.addEventListener('load', countLoaded);
+        probe.addEventListener('error', () => {
+          console.warn('Background image failed to load');
+        });
+        probe.src = img.currentSrc || img.src;
+      } else {
+        // Not loaded yet - add loading class for fade effect
+        img.classList.add('is-loading');
+        img.addEventListener('load', () => {
+          img.classList.add('loaded');
+          countLoaded();
+        });
+        img.addEventListener('error', () => {
+          console.warn('Background image failed to load');
+        });
+      }
+    });
+  })();
+</script>

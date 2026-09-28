@@ -190,7 +190,7 @@ const isCover = objectFit === 'cover';
                   href={links.repo}
                   target="_blank"
                   rel="noopener noreferrer"
-                  variant="glass"
+                  variant="outline"
                   size="lg"
                   animation="scale"
                 >
@@ -205,7 +205,7 @@ const isCover = objectFit === 'cover';
 
       {
         image && (
-          <div class="glass mb-8 rounded-3xl p-2">
+          <div class="surface mb-8 rounded-3xl p-2">
             <div
               class={cn(
                 'bg-pastel-lilac/40 dark:bg-pastel-lilac/10 h-64 overflow-hidden rounded-[1.25rem] md:h-96',
@@ -226,7 +226,7 @@ const isCover = objectFit === 'cover';
       }
 
       <section
-        class="glass mb-16 grid gap-6 rounded-3xl p-6 md:grid-cols-[repeat(var(--cols),minmax(0,1fr))] md:p-8"
+        class="surface mb-16 grid gap-6 rounded-3xl p-6 md:grid-cols-[repeat(var(--cols),minmax(0,1fr))] md:p-8"
         style={`--cols: ${facts.length + 1}`}
       >
         {
@@ -252,7 +252,7 @@ const isCover = objectFit === 'cover';
 
       {
         highlights && highlights.length > 0 && (
-          <section class="glass mx-auto mb-16 max-w-3xl rounded-3xl p-6 md:p-8">
+          <section class="surface mx-auto mb-16 max-w-3xl rounded-3xl p-6 md:p-8">
             <h2 class="text-foreground mb-6 text-2xl font-semibold tracking-tight">
               {t.projectsPage.highlights}
             </h2>
@@ -276,7 +276,7 @@ const isCover = objectFit === 'cover';
 
       {
         lessons && lessons.length > 0 && (
-          <section class="glass relative mx-auto mt-16 max-w-3xl overflow-hidden rounded-3xl p-6 md:p-8">
+          <section class="surface relative mx-auto mt-16 max-w-3xl overflow-hidden rounded-3xl p-6 md:p-8">
             <div class="bg-pastel-butter/40 dark:bg-pastel-butter/8 pointer-events-none absolute inset-0" />
             <h2 class="text-foreground relative mb-6 flex items-center gap-3 text-2xl font-semibold tracking-tight">
               <span class="bg-pastel-butter text-ink dark:bg-pastel-butter/15 dark:text-pastel-butter grid size-9 place-items-center rounded-full">
@@ -305,7 +305,7 @@ const isCover = objectFit === 'cover';
             <div class="grid gap-5 sm:grid-cols-2">
               {galleryImages.map((item) =>
                 item.image ? (
-                  <figure class="glass overflow-hidden rounded-3xl p-2">
+                  <figure class="surface overflow-hidden rounded-3xl p-2">
                     <Image
                       src={item.image}
                       alt={item.alt}
@@ -326,7 +326,7 @@ const isCover = objectFit === 'cover';
       }
 
       <div class="border-foreground/10 mt-20 border-t pt-8">
-        <Link href={translatePath('/projects')} variant="glass" size="lg" animation="scale">
+        <Link href={translatePath('/projects')} variant="outline" size="lg" animation="scale">
           <Icon icon={ArrowLeft02Icon} strokeWidth={2} className="size-4" />
           {t.projectsPage.backToProjects}
         </Link>

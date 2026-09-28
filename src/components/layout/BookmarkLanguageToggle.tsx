@@ -20,8 +20,8 @@ export function BookmarkLanguageToggle({ currentLang, currentPath }: BookmarkLan
       className={cn(
         'fixed top-0 right-6 z-40 hidden md:flex',
         'w-11 flex-col items-center justify-end rounded-b-2xl pb-2',
-        'group glass cursor-pointer overflow-hidden border-t-0',
-        'before:bg-pastel before:pointer-events-none before:absolute before:inset-0 before:opacity-80 dark:before:opacity-35',
+        'group from-primary/80 to-primary/50 cursor-pointer bg-linear-to-b shadow-lg',
+        'border-primary border',
         'h-6 transition-all duration-500',
         'ease-[linear(0,0.1144,0.3475,0.5885,0.7844,0.9194,0.9987,1.0359,1.046,1.0413,1.0308,1.0196,1.0104,1.004,1.0002,0.9984,1)]',
         'motion-safe:hover:h-12',
@@ -36,7 +36,7 @@ export function BookmarkLanguageToggle({ currentLang, currentPath }: BookmarkLan
           render={
             <div
               className={cn(
-                'relative size-6 overflow-hidden rounded-full ring-2 ring-white/80 dark:ring-white/20',
+                'relative size-6 overflow-hidden rounded-full',
                 // 3D effect - shadow for depth
                 'shadow-[0_2px_4px_rgba(0,0,0,0.3),inset_0_-2px_4px_rgba(0,0,0,0.15)]',
                 // Animation with spring

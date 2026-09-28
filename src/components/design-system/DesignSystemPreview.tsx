@@ -66,7 +66,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
   return (
     <section className="space-y-4">
       <h2 className="text-foreground text-2xl font-semibold tracking-tight md:text-3xl">{title}</h2>
-      <div className="glass rounded-3xl p-6 md:p-8">{children}</div>
+      <div className="surface rounded-3xl p-6 md:p-8">{children}</div>
     </section>
   );
 }
@@ -96,7 +96,7 @@ export function DesignSystemPreview({ lang }: { lang: Lang }) {
   return (
     <div className="space-y-12">
       <div className="flex items-center justify-between">
-        <Link href={translatePath('/')} variant="glass" className="flex h-11 items-center gap-2">
+        <Link href={translatePath('/')} variant="outline" className="flex h-11 items-center gap-2">
           <Icon icon={ArrowLeftIcon} strokeWidth={2} />
           <span className="text-sm font-medium">Back to home</span>
         </Link>
@@ -208,7 +208,6 @@ export function DesignSystemPreview({ lang }: { lang: Lang }) {
             <div className="flex flex-wrap gap-3">
               <Button variant="default">Default</Button>
               <Button variant="pastel">Pastel</Button>
-              <Button variant="primary">Primary</Button>
               <Button variant="glass">Glass</Button>
               <Button variant="secondary">Secondary</Button>
               <Button variant="outline">Outline</Button>

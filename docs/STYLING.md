@@ -1,16 +1,15 @@
 # Styling Guide
 
-## Design Language: Paper & Glass
+## Design Language
 
-Warm paper background, ink text, pastel light. Premium comes from restraint (one ink CTA, generous space, editorial serif); the artistic touch comes from hand-drawn marks and pastel glows.
+Brand colours stay orange (light) and purple (dark), with the day/night valley photos behind the hero. On top of that: an editorial serif, hand-drawn marks and pastel accents.
 
-- **Ambient**: `Ambient.astro` (mounted in `Layout.astro`) paints a fixed pastel aurora + grain behind every page. Sections must not paint an opaque `bg-background`; put content on glass instead.
-- **Surfaces**: `glass` (default card), `glass-strong` (dense content, popovers), `ring-pastel` (gradient ring for the one highlighted element of a view).
 - **Typography**: Geist for body (`font-sans`), Fraunces for display (`font-display`, applied to `h1`/`h2` automatically; `font-display-soft` / `font-display-wonk` utilities), MapleMono for code, tags, dates and numbers (`font-mono`, `eyebrow`).
-- **Section titles**: always `SectionHeading.astro`; it italicises and marker-underlines the last word.
+- **Section titles**: always `SectionHeading.astro`; it italicises and marker-underlines the last word. The marker follows the primary colour.
 - **Hand-drawn marks**: `Doodle` and `MarkedText` from `src/components/shared/HandDrawn.tsx`. One flourish per section at most.
-- **Pastels**: `pastel-peach`, `pastel-rose`, `pastel-lilac`, `pastel-sky`, `pastel-mint`, `pastel-butter`, plus `marker`. Fills and accents only; text stays `foreground` / `muted-foreground`. In dark mode use low alpha fills (`dark:bg-pastel-sky/12 dark:text-pastel-sky`).
-- **Buttons**: pill-shaped. `default` is ink (inverts in dark), `pastel` is the gradient-ring secondary CTA.
+- **Pastels**: `pastel-peach`, `pastel-rose`, `pastel-lilac`, `pastel-sky`, `pastel-mint`, `pastel-butter`. Fills and accents only; text stays `foreground` / `muted-foreground`. In dark mode use low alpha fills (`dark:bg-pastel-sky/12 dark:text-pastel-sky`).
+- **Surfaces**: `glass` / `glass-strong` are reserved for the home page and a few CTAs. Elsewhere (blog, projects, CV) use `surface` (solid card, border, soft shadow) or pastel-tinted fills. `ring-pastel` is the gradient ring for the one highlighted element of a view.
+- **Buttons**: pill-shaped. `default` is the primary colour, `pastel` is the gradient-ring secondary CTA.
 
 ## Semantic Colors
 
