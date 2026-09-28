@@ -2,6 +2,8 @@ import type { UITranslations } from '../ui';
 
 export const fr: UITranslations = {
   nav: {
+    home: 'Accueil',
+    presentationsShort: 'Slides',
     projects: 'Projets',
     blog: 'Blog',
     presentations: 'Présentations',
@@ -90,6 +92,7 @@ export const fr: UITranslations = {
     system: 'Système',
   },
   aria: {
+    mainNavigation: 'Navigation principale',
     openMenu: 'Ouvrir le menu',
     closeMenu: 'Fermer le menu',
     sendEmail: 'Envoyer un email',

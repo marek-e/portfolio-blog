@@ -41,7 +41,7 @@ const enURL = new URL(enPath, Astro.site);
 <html lang={lang} class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
     <link rel="shortcut icon" href="/favicon.ico" />
@@ -162,7 +162,7 @@ const enURL = new URL(enPath, Astro.site);
       systemTheme.addEventListener('change', applyStoredTheme);
     </script>
   </head>
-  <body class="bg-background text-foreground min-h-dvh antialiased">
+  <body class="bg-background text-foreground min-h-dvh antialiased max-md:pb-28">
     <BookmarkLanguageToggle client:load currentLang={lang} currentPath={currentPath} />
     <slot />
   </body>
