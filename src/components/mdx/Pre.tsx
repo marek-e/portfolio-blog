@@ -11,31 +11,32 @@ interface PreProps {
 
 export function Pre({ children, className, 'data-language': language, ...props }: PreProps) {
   return (
-    <div data-pre className="group code-surface relative my-8 overflow-hidden rounded-2xl">
+    <div
+      data-pre
+      className="group border-pastel-lilac/70 dark:border-pastel-lilac/20 relative my-6 overflow-hidden rounded-lg border shadow-[6px_6px_0_var(--color-pastel-lilac)] dark:shadow-[6px_6px_0_color-mix(in_oklab,var(--color-pastel-lilac)_18%,transparent)]"
+    >
       {language && (
         <div
           data-language-header
-          className="border-border flex h-10 items-center gap-2 border-b px-4"
+          className="bg-pastel-lilac/25 dark:bg-pastel-lilac/8 relative flex h-10 items-center justify-between"
         >
-          <span aria-hidden="true" className="bg-pastel-lilac size-2 rounded-full" />
-          <span className="text-muted-foreground font-mono text-xs tracking-wide">{language}</span>
+          <div className="border-pastel-lilac dark:text-pastel-lilac text-foreground absolute ml-8 h-full rounded-t-lg border-t-2 bg-(--shiki-bg) px-4 py-2 font-mono text-sm">
+            {language}
+          </div>
         </div>
       )}
-      <div className="relative">
-        <pre
-          className={cn('overflow-x-auto px-5 py-4 text-[0.85rem] leading-relaxed', className)}
-          {...props}
-        >
+      <div className="relative bg-(--shiki-bg)">
+        <pre className={cn('overflow-x-auto p-4 text-sm leading-relaxed', className)} {...props}>
           {children}
         </pre>
         <button
           type="button"
           data-copy-button
           className={cn(
-            'glass text-muted-foreground absolute top-2.5 right-2.5 z-10 cursor-pointer rounded-lg p-2',
-            'opacity-0 group-hover:opacity-100 motion-safe:transition-opacity pointer-coarse:opacity-100',
-            'hover:text-foreground',
-            'focus-visible:ring-ring/50 focus-visible:opacity-100 focus-visible:ring-[3px] focus-visible:outline-none',
+            'border-border bg-background text-muted-foreground absolute top-3 right-3 z-10 cursor-pointer rounded-md border p-2',
+            'opacity-0 group-hover:opacity-100 motion-safe:transition-opacity',
+            'hover:bg-muted hover:text-foreground',
+            'focus:ring-ring focus:opacity-100 focus:ring-2 focus:outline-none',
             'active:scale-95 motion-safe:transition-transform'
           )}
           aria-label="Copy code"

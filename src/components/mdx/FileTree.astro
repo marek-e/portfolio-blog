@@ -57,20 +57,14 @@ const html = processFileTree(fileTreeHtml, 'Directory');
     --y-pad: 0;
 
     display: block;
-    border: 1px solid var(--glass-border);
-    padding: 1.25rem 1.5rem;
-    background-color: var(--glass-bg);
-    box-shadow:
-      inset 0 1px 0 var(--glass-highlight),
-      0 0 0 1px var(--glass-edge),
-      0 18px 40px -18px var(--glass-shadow);
-    backdrop-filter: blur(18px) saturate(160%);
-    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    border: 1px solid oklch(from var(--pastel-mint) l c h / 0.8);
+    padding: 1rem;
+    background-color: oklch(from var(--pastel-mint) l c h / 0.12);
     font-size: 0.875rem;
-    font-family: var(--font-mono);
+    font-family: var(--font-sans);
     overflow-x: auto;
-    border-radius: var(--radius-2xl);
-    margin: 2rem 0;
+    border-radius: var(--radius-lg);
+    margin: 1.5rem 0;
   }
 
   file-tree :global(.directory > details) {
@@ -169,10 +163,20 @@ const html = processFileTree(fileTreeHtml, 'Directory');
 
   file-tree :global(.highlight) {
     display: inline-block;
-    border-radius: 9999px;
-    padding-inline-end: 0.625rem;
+    border-radius: 0.25rem;
+    padding-inline-end: 0.5rem;
     color: var(--color-foreground);
-    background-color: oklch(from var(--pastel-lilac) l c h / 0.55);
+    background-color: oklch(from var(--pastel-butter) l c h / 0.9);
+  }
+
+  :global(.dark) file-tree {
+    border-color: oklch(from var(--pastel-mint) l c h / 0.25);
+    background-color: oklch(from var(--pastel-mint) l c h / 0.05);
+  }
+
+  :global(.dark) file-tree :global(.highlight) {
+    color: var(--pastel-butter);
+    background-color: oklch(from var(--pastel-butter) l c h / 0.14);
   }
 
   file-tree :global(svg) {
