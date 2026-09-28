@@ -9,16 +9,21 @@ interface LanguageSwitcherProps {
 
 export function LanguageSwitcher({ currentLang, currentPath, className }: LanguageSwitcherProps) {
   return (
-    <div className={cn('glass flex items-center gap-0.5 rounded-full p-1', className)}>
+    <div
+      className={cn(
+        'flex items-center gap-0.5 rounded-full border border-black/20 bg-white/10 p-0.5 backdrop-blur-sm dark:border-white/10 dark:bg-black/30',
+        className
+      )}
+    >
       {(Object.keys(languages) as Lang[]).map((lang) => (
         <a
           key={lang}
           href={getAlternatePath(currentPath, currentLang, lang)}
           className={cn(
-            'flex h-9 min-w-11 items-center justify-center rounded-full px-3 font-mono text-xs font-medium tracking-wide transition-colors',
+            'rounded-full px-2 py-1 text-xs font-bold transition-colors',
             lang === currentLang
-              ? 'bg-foreground text-background'
-              : 'text-foreground/70 hover:text-foreground hover:bg-foreground/5'
+              ? 'bg-primary text-primary-foreground'
+              : 'text-foreground/70 hover:text-foreground hover:bg-primary/20'
           )}
           aria-current={lang === currentLang ? 'page' : undefined}
         >

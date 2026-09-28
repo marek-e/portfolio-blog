@@ -46,11 +46,11 @@ export function BackToTop() {
       aria-label="Back to top"
       className={cn(
         'fixed right-6 bottom-6 z-40 flex size-11 items-center justify-center rounded-full',
-        'glass-strong text-foreground',
+        'bg-primary text-primary-foreground shadow-primary/25 shadow-lg',
         'transition-all duration-300 ease-out',
-        'hover:bg-foreground hover:text-background hover:-translate-y-0.5',
+        'hover:shadow-primary/30 hover:scale-105 hover:shadow-xl',
         'focus-visible:ring-ring/50 focus-visible:ring-[3px] focus-visible:outline-none',
-        'motion-reduce:transition-none motion-reduce:hover:translate-y-0',
+        'motion-reduce:transition-none motion-reduce:hover:scale-100',
         visible ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-4 opacity-0'
       )}
     >

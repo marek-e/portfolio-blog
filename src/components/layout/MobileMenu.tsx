@@ -1,4 +1,4 @@
-import { ArrowUpRight01Icon, Cancel01Icon, Menu01Icon } from '@hugeicons/core-free-icons';
+import { Cancel01Icon, Menu01Icon, Star } from '@hugeicons/core-free-icons';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -11,10 +11,9 @@ import {
 } from '@/components/ui/sheet';
 import { ModeToggle } from './ModeToggle';
 import { Icon } from '../shared/Icon';
-import { Doodle } from '../shared/HandDrawn';
+import { Separator } from '../ui/separator';
 import { getNavLinks } from '@/lib/navigation';
 import { getTranslatedPath, getTranslations, type Lang } from '@/i18n';
-import { cn } from '@/lib/utils';
 import { LanguageSwitcher } from './LanguageSwitcher';
 
 interface MobileMenuProps {
@@ -26,18 +25,11 @@ export function MobileMenu({ lang, currentPath }: MobileMenuProps) {
   const t = getTranslations(lang);
   const translatePath = getTranslatedPath(lang);
   const navLinks = getNavLinks(lang);
-  const isActive = (href: string) => href !== '/' && currentPath.startsWith(href);
-
   return (
     <Sheet>
       <SheetTrigger
         render={
-          <Button
-            variant="ghost"
-            size="icon"
-            aria-label={t.aria.openMenu}
-            className="size-11 rounded-full md:hidden"
-          />
+          <Button variant="ghost" size="icon" aria-label={t.aria.openMenu} className="md:hidden" />
         }
       >
         <Icon icon={Menu01Icon} strokeWidth={2} className="size-5" />
@@ -45,24 +37,20 @@ export function MobileMenu({ lang, currentPath }: MobileMenuProps) {
       <SheetContent
         showCloseButton={false}
         side="right"
-        className="bg-background/90 inset-y-3! right-3! h-auto! w-[min(340px,calc(100vw-1.5rem))]! gap-0 overflow-hidden rounded-3xl"
+        className="w-[300px] rounded-l-xl border-l-white/20 bg-white/70 backdrop-blur-lg dark:border-l-white/10 dark:bg-black/70"
       >
-        <Doodle
-          name="loop"
-          strokeWidth={2}
-          className="text-pastel-lilac/70 absolute right-6 bottom-36 h-10 w-32 -rotate-6"
-        />
-        <SheetHeader className="flex-row items-center justify-between px-6 pt-5 pb-4">
+        <SheetHeader className="flex-row items-center justify-between pb-2">
           <a
             href={translatePath('/')}
-            className="font-display-wonk text-foreground text-2xl tracking-tight"
+            className="text-foreground flex items-center gap-2 font-semibold"
           >
-            melmayan
+            <Icon icon={Star} strokeWidth={2} fill="currentColor" className="text-primary size-5" />
+            <span className="text-lg">melmayan</span>
           </a>
           <SheetClose
             render={
               <Button
-                variant="glass"
+                variant="ghost"
                 size="icon"
                 aria-label={t.aria.closeMenu}
                 className="size-11 rounded-full"
@@ -74,37 +62,23 @@ export function MobileMenu({ lang, currentPath }: MobileMenuProps) {
           </SheetClose>
         </SheetHeader>
 
-        <p className="eyebrow px-6 pt-4 pb-2">Menu</p>
-        <nav className="flex flex-col px-3">
-          {navLinks.map((link, index) => (
+        <Separator />
+
+        <nav className="flex flex-col gap-1 px-2 py-4">
+          {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              aria-current={isActive(link.href) ? 'page' : undefined}
-              className={cn(
-                'group hover:bg-foreground/5 flex min-h-14 items-baseline gap-4 rounded-2xl px-3 py-3 transition-colors',
-                isActive(link.href) && 'bg-pastel-lilac/35 dark:bg-pastel-lilac/12'
-              )}
+              className="text-foreground/80 hover:text-foreground hover:bg-primary/20 active:bg-primary/30 flex items-center gap-2 rounded-lg px-4 py-3 text-lg font-medium transition-colors"
               {...(link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
             >
-              <span className="text-muted-foreground font-mono text-xs tabular-nums">
-                {String(index + 1).padStart(2, '0')}
-              </span>
-              <span className="font-display-soft text-foreground text-3xl leading-none font-medium tracking-tight">
-                {link.label}
-              </span>
-              {link.external && (
-                <Icon
-                  icon={ArrowUpRight01Icon}
-                  strokeWidth={2}
-                  className="text-muted-foreground size-4 self-center transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                />
-              )}
+              <Icon icon={link.icon} strokeWidth={2} className="size-4" />
+              {link.label}
             </a>
           ))}
         </nav>
 
-        <SheetFooter className="border-foreground/10 mt-auto border-t px-6 py-5">
+        <SheetFooter className="border-border border-t pt-4">
           <div className="flex items-center justify-between">
             <LanguageSwitcher currentLang={lang} currentPath={currentPath} />
             <ModeToggle />

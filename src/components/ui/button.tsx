@@ -12,8 +12,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          'bg-foreground text-background shadow-[0_1px_0_oklch(1_0_0/18%)_inset,0_10px_24px_-12px_oklch(0.25_0.05_292/55%)] hover:bg-foreground/88',
-        primary: 'bg-primary text-primary-foreground hover:bg-primary/90',
+          'bg-primary text-primary-foreground shadow-[0_10px_24px_-12px_var(--primary)] hover:bg-primary/90',
         pastel:
           'ring-pastel text-foreground shadow-[0_10px_30px_-14px_oklch(0.6_0.15_330/45%)] hover:shadow-[0_14px_34px_-12px_oklch(0.6_0.15_330/55%)]',
         outline:
