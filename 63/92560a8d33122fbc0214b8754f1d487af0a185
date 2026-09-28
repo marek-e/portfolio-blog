@@ -1,0 +1,26 @@
+src/i18n/translations/fr.ts
+  s_a098cb91585c4f::t_c239a92f995a82 15
+src/i18n/translations/en.ts
+  s_a098cb91585c4f::t_c239a92f995a82 15
+src/components/portfolio/Hero.astro
+  s_a098cb91585c4f::t_c239a92f995a82 16-21,23-25,32,34-49,125-129,136-138,140-141,144-145,154-224,227-232,243-251,253-254,257-261,264-293
+  s_a098cb91585c4f::t_21c73438bc744f 139,142-143,225-226
+src/i18n/ui.ts
+  s_a098cb91585c4f::t_c239a92f995a82 13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "6392560a8d33122fbc0214b8754f1d487af0a185",
+  "prompts": {},
+  "sessions": {
+    "s_a098cb91585c4f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6b64f08b-9f30-480e-8016-4bba017f0d87",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
