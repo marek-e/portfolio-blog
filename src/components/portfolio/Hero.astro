@@ -155,59 +155,58 @@ const toneStyle = (tone: string) =>
     position: relative;
     color: var(--tone-ink);
     background:
-      radial-gradient(120% 90% at 30% 0%, oklch(1 0 0 / 70%), transparent 55%),
+      radial-gradient(120% 90% at 30% 0%, oklch(1 0 0 / 55%), transparent 60%),
       linear-gradient(
         180deg,
-        color-mix(in oklab, var(--tone), white 25%),
-        var(--tone) 60%,
-        color-mix(in oklab, var(--tone), black 10%)
+        color-mix(in oklab, var(--tone) 60%, transparent),
+        color-mix(in oklab, var(--tone) 42%, transparent)
       );
+    border: 1px solid oklch(1 0 0 / 55%);
     box-shadow:
-      inset 0 1px 0 oklch(1 0 0 / 85%),
-      inset 0 -2px 4px color-mix(in oklab, var(--tone), black 18%),
-      0 1px 0 color-mix(in oklab, var(--tone), black 14%),
-      0 2px 0 color-mix(in oklab, var(--tone), black 20%),
-      0 3px 0 color-mix(in oklab, var(--tone), black 26%),
-      0 12px 20px -8px oklch(0.2 0.04 60 / 40%);
-    text-shadow: 0 1px 0 oklch(1 0 0 / 55%);
+      inset 0 1px 0 oklch(1 0 0 / 80%),
+      inset 0 -2px 3px color-mix(in oklab, var(--tone), black 12%),
+      0 1px 0 color-mix(in oklab, var(--tone) 70%, transparent),
+      0 2px 0 color-mix(in oklab, var(--tone) 55%, transparent),
+      0 3px 0 color-mix(in oklab, color-mix(in oklab, var(--tone), black 20%) 50%, transparent),
+      0 12px 22px -8px oklch(0.2 0.04 60 / 35%);
+    backdrop-filter: blur(10px) saturate(180%);
+    -webkit-backdrop-filter: blur(10px) saturate(180%);
   }
 
   .sticker-3d::after {
     content: '';
     position: absolute;
-    top: 3px;
-    left: 18%;
-    width: 38%;
-    height: 32%;
+    top: 2px;
+    left: 16%;
+    width: 40%;
+    height: 34%;
     border-radius: 9999px;
-    background: linear-gradient(to bottom, oklch(1 0 0 / 70%), transparent);
-    filter: blur(1px);
+    background: radial-gradient(ellipse at 50% 0%, oklch(1 0 0 / 70%), transparent 70%);
     pointer-events: none;
   }
 
   :global(.dark) .sticker-3d {
+    color: var(--tone-ink);
     background:
-      radial-gradient(120% 90% at 30% 0%, oklch(1 0 0 / 35%), transparent 55%),
+      radial-gradient(120% 90% at 30% 0%, oklch(1 0 0 / 22%), transparent 60%),
       linear-gradient(
         180deg,
-        color-mix(in oklab, var(--tone), white 5%),
-        color-mix(in oklab, var(--tone), black 12%) 60%,
-        color-mix(in oklab, var(--tone), black 28%)
+        color-mix(in oklab, var(--tone) 34%, transparent),
+        color-mix(in oklab, var(--tone) 18%, transparent)
       );
-    color: oklch(0.2 0.03 290);
-    text-shadow: 0 1px 0 oklch(1 0 0 / 30%);
+    border-color: color-mix(in oklab, var(--tone) 45%, transparent);
     box-shadow:
-      inset 0 1px 0 oklch(1 0 0 / 45%),
-      inset 0 -2px 4px color-mix(in oklab, var(--tone), black 35%),
-      0 1px 0 color-mix(in oklab, var(--tone), black 35%),
-      0 2px 0 color-mix(in oklab, var(--tone), black 42%),
-      0 3px 0 color-mix(in oklab, var(--tone), black 50%),
-      0 0 24px -4px color-mix(in oklab, var(--tone), transparent 45%),
-      0 12px 20px -8px oklch(0 0 0 / 60%);
+      inset 0 1px 0 oklch(1 0 0 / 30%),
+      inset 0 -2px 3px oklch(0 0 0 / 25%),
+      0 1px 0 color-mix(in oklab, var(--tone) 40%, transparent),
+      0 2px 0 color-mix(in oklab, var(--tone) 28%, transparent),
+      0 3px 0 color-mix(in oklab, var(--tone) 18%, transparent),
+      0 0 22px -6px color-mix(in oklab, var(--tone) 60%, transparent),
+      0 12px 22px -8px oklch(0 0 0 / 55%);
   }
 
   :global(.dark) .sticker-3d::after {
-    background: linear-gradient(to bottom, oklch(1 0 0 / 40%), transparent);
+    background: radial-gradient(ellipse at 50% 0%, oklch(1 0 0 / 32%), transparent 70%);
   }
 
   .sticker-parallax {
