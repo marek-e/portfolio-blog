@@ -9,7 +9,7 @@ export const en: UITranslations = {
     contact: 'Contact',
   },
   hero: {
-    eyebrow: 'Full-stack engineer · Nantes',
+    eyebrow: 'Full-stack engineer · Paris',
     greeting: "Hey, I'm",
     name: 'Marek Elmayan',
     pageTitle: 'Marek Elmayan | Portfolio',
@@ -147,8 +147,8 @@ export const en: UITranslations = {
       name: 'Marek Elmayan',
       job: 'Full-Stack Software Engineer',
       nature: 'Curious',
-      gameTime: '25 years',
-      location: 'Nantes, France',
+      gameTime: '{age} years',
+      location: 'Paris, France',
     },
   },
   strava: {

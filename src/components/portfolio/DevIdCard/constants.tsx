@@ -1,5 +1,14 @@
 import type { ReactNode } from 'react';
 
+export const BIRTH_DATE = new Date(2000, 4, 29);
+
+export function getAge(birthDate: Date, today = new Date()) {
+  const hasHadBirthdayThisYear =
+    today.getMonth() > birthDate.getMonth() ||
+    (today.getMonth() === birthDate.getMonth() && today.getDate() >= birthDate.getDate());
+  return today.getFullYear() - birthDate.getFullYear() - (hasHadBirthdayThisYear ? 0 : 1);
+}
+
 interface TechItem {
   name: string;
   icon: ReactNode;
