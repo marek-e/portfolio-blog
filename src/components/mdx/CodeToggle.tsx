@@ -17,20 +17,18 @@ export function CodeToggle({
   const [isOpen, setIsOpen] = useState(defaultOpen);
 
   return (
-    <div className="not-prose glass my-8 overflow-hidden rounded-2xl">
+    <div className="not-prose border-pastel-lilac/60 dark:border-pastel-lilac/20 my-6 overflow-hidden rounded-lg border">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="hover:bg-foreground/4 focus-visible:ring-ring/50 flex min-h-14 w-full cursor-pointer items-center justify-between gap-4 px-5 py-3 text-left transition-colors outline-none focus-visible:ring-[3px] focus-visible:ring-inset"
+        className="bg-pastel-lilac/20 hover:bg-pastel-lilac/35 dark:bg-pastel-lilac/8 dark:hover:bg-pastel-lilac/14 flex w-full cursor-pointer items-center justify-between px-4 py-3 text-left transition-colors"
         aria-expanded={isOpen}
       >
-        <span className="font-display-soft text-foreground text-lg font-semibold tracking-tight">
-          {title}
-        </span>
+        <span className="font-medium">{title}</span>
         <HugeiconsIcon
           icon={ArrowDown01Icon}
           strokeWidth={2}
           className={cn(
-            'text-muted-foreground size-5 shrink-0 motion-safe:transition-transform motion-safe:duration-300',
+            'size-5 motion-safe:transition-transform motion-safe:duration-300',
             isOpen && 'rotate-180'
           )}
         />

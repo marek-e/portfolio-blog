@@ -12,6 +12,7 @@ import { getTranslatedPath, languages } from '@/i18n/config';
 import { ArrowRight02Icon, RssIcon } from '@hugeicons/core-free-icons';
 import { Icon } from '@/components/shared/Icon';
 import { getSlug, estimateReadingTime } from '@/lib/blog';
+import { cn } from '@/lib/utils';
 
 export function getStaticPaths() {
   return [{ params: { lang: undefined } }, { params: { lang: 'en' } as const }];
@@ -27,6 +28,14 @@ const posts = allPosts
   .filter((post) => import.meta.env.DEV || !post.data.draft)
   .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
 const [featured, ...rest] = posts;
+
+const cardTones = [
+  'border-pastel-sky/70 bg-pastel-sky/15 hover:bg-pastel-sky/30 dark:border-pastel-sky/25 dark:bg-pastel-sky/8 dark:hover:bg-pastel-sky/14',
+  'border-pastel-mint/80 bg-pastel-mint/15 hover:bg-pastel-mint/30 dark:border-pastel-mint/25 dark:bg-pastel-mint/8 dark:hover:bg-pastel-mint/14',
+  'border-pastel-peach/70 bg-pastel-peach/15 hover:bg-pastel-peach/30 dark:border-pastel-peach/25 dark:bg-pastel-peach/8 dark:hover:bg-pastel-peach/14',
+  'border-pastel-rose/70 bg-pastel-rose/15 hover:bg-pastel-rose/30 dark:border-pastel-rose/25 dark:bg-pastel-rose/8 dark:hover:bg-pastel-rose/14',
+  'border-pastel-butter/90 bg-pastel-butter/20 hover:bg-pastel-butter/35 dark:border-pastel-butter/25 dark:bg-pastel-butter/8 dark:hover:bg-pastel-butter/14',
+];
 ---
 
 <Layout
@@ -62,7 +71,7 @@ const [featured, ...rest] = posts;
       <a
         href={lang === 'fr' ? '/rss.xml' : '/en/rss.xml'}
         aria-label={t.aria.subscribeRss}
-        class="group glass text-muted-foreground hover:text-foreground inline-flex h-11 shrink-0 items-center gap-2 self-start rounded-full px-4 font-mono text-xs transition-colors md:self-auto"
+        class="group border-border text-muted-foreground hover:text-primary inline-flex shrink-0 items-center gap-2 self-start rounded-md border px-3 py-1.5 font-mono text-xs transition-colors hover:border-current md:self-auto"
       >
         <Icon
           icon={RssIcon}
@@ -75,15 +84,15 @@ const [featured, ...rest] = posts;
 
     {
       posts.length === 0 ? (
-        <p class="glass text-muted-foreground mt-16 rounded-3xl p-12 text-center">
+        <p class="bg-card text-muted-foreground mt-16 rounded-3xl border p-12 text-center shadow-sm">
           {t.blog.noPosts}
         </p>
       ) : (
-        <div class="mt-14 space-y-4 md:mt-20 md:space-y-5">
+        <div class="mt-14 space-y-6 md:mt-20 md:space-y-7">
           {featured && (
             <a
               href={translatePath(`/blog/${getSlug(featured.id, lang)}`)}
-              class="group glass relative block rounded-3xl p-6 transition duration-300 hover:-translate-y-0.5 hover:bg-(--glass-bg-strong) sm:p-8 md:p-12"
+              class="group bg-card border-pastel-lilac dark:border-pastel-lilac/30 relative block rounded-3xl border p-6 shadow-[6px_6px_0_var(--color-pastel-lilac)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[8px_8px_0_var(--color-pastel-lilac)] sm:p-8 md:p-12 dark:shadow-[6px_6px_0_color-mix(in_oklab,var(--color-pastel-lilac)_25%,transparent)] dark:hover:shadow-[8px_8px_0_color-mix(in_oklab,var(--color-pastel-lilac)_30%,transparent)]"
             >
               <Doodle
                 name="sparkle"
@@ -128,11 +137,14 @@ const [featured, ...rest] = posts;
 
           {rest.length > 0 && (
             <ul class="space-y-4 md:space-y-5">
-              {rest.map((post) => (
+              {rest.map((post, index) => (
                 <li>
                   <a
                     href={translatePath(`/blog/${getSlug(post.id, lang)}`)}
-                    class="group glass block rounded-3xl p-6 transition duration-300 hover:-translate-y-0.5 hover:bg-(--glass-bg-strong) md:p-8"
+                    class={cn(
+                      'group block rounded-3xl border p-6 transition duration-300 hover:-translate-y-0.5 md:p-8',
+                      cardTones[index % cardTones.length]
+                    )}
                   >
                     <article class="grid gap-x-10 gap-y-3 md:grid-cols-[11rem_1fr_auto]">
                       <PostMeta
@@ -153,7 +165,7 @@ const [featured, ...rest] = posts;
                       </div>
                       <span
                         aria-hidden="true"
-                        class="glass text-muted-foreground group-hover:text-foreground hidden size-11 items-center justify-center self-center rounded-full transition duration-300 group-hover:translate-x-1 md:flex"
+                        class="bg-card text-muted-foreground group-hover:text-foreground hidden size-11 items-center justify-center self-center rounded-full border transition duration-300 group-hover:translate-x-1 md:flex"
                       >
                         <Icon icon={ArrowRight02Icon} strokeWidth={2} className="size-4" />
                       </span>

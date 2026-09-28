@@ -15,40 +15,37 @@ export function Citation({ children, author, source, url, className }: CitationP
   const hasAttribution = author || source;
 
   return (
-    <figure
-      className={cn(
-        'not-prose glass from-pastel-rose/25 dark:from-pastel-lilac/10 relative my-10 overflow-hidden rounded-3xl bg-linear-to-br to-transparent to-60% px-6 pt-12 pb-7 sm:px-10 sm:pt-14 sm:pb-8',
-        className
-      )}
-    >
-      <span
-        aria-hidden="true"
-        className="font-display-wonk text-marker/70 absolute top-2 left-5 text-7xl leading-none select-none sm:left-8"
+    <figure className={cn('my-6', className)}>
+      <blockquote
+        className={cn(
+          'not-prose',
+          'border-pastel-rose dark:border-pastel-rose/50 relative border-l-4 py-2 pl-6',
+          'text-muted-foreground font-display-soft text-lg italic',
+          'before:absolute before:-top-2 before:left-1 before:font-serif before:leading-none',
+          'before:text-pastel-rose dark:before:text-pastel-rose/40 before:text-5xl before:content-["""]'
+        )}
       >
-        &ldquo;
-      </span>
-      <blockquote className="font-display-soft text-foreground text-xl leading-snug text-pretty italic sm:text-2xl">
         <p className="m-0">{children}</p>
       </blockquote>
 
       {hasAttribution && (
-        <figcaption className="text-muted-foreground mt-6 flex flex-wrap items-center gap-x-1.5 font-mono text-xs tracking-wide">
-          <span aria-hidden="true" className="bg-foreground/25 mr-1.5 h-px w-6" />
-          {author && <span className="text-foreground/85">{author}</span>}
-          {author && source && <span>,</span>}
+        <figcaption className="text-foreground mt-3 pl-6 text-sm not-italic">
+          <span className="text-muted-foreground">— </span>
+          {author && <span className="font-medium">{author}</span>}
+          {author && source && <span className="text-muted-foreground">, </span>}
           {source &&
             (url ? (
               <a
                 href={url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-foreground decoration-marker/60 inline-flex items-center gap-1 underline underline-offset-4 transition-colors"
+                className="text-primary inline-flex items-center gap-1 hover:underline"
               >
                 <cite className="not-italic">{source}</cite>
                 <HugeiconsIcon icon={Link02Icon} className="size-3" />
               </a>
             ) : (
-              <cite className="not-italic">{source}</cite>
+              <cite className="text-muted-foreground not-italic">{source}</cite>
             ))}
         </figcaption>
       )}
