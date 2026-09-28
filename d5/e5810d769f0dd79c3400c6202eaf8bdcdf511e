@@ -1,0 +1,39 @@
+src/components/portfolio/TimelineCards.tsx
+  s_a098cb91585c4f::t_17061d7347729d 77-78,120,170
+  s_a098cb91585c4f::t_bbb0335fd249f1 115
+src/components/portfolio/ProjectListCard.astro
+  s_a098cb91585c4f::t_bbb0335fd249f1 102
+src/components/portfolio/RunningStats.tsx
+  s_a098cb91585c4f::t_bbb0335fd249f1 170
+  s_a098cb91585c4f::t_17061d7347729d 151,155,167
+src/components/portfolio/ProjectCardReact.tsx
+  s_a098cb91585c4f::t_bbb0335fd249f1 140
+src/styles/global.css
+  s_a098cb91585c4f::t_4c8a817476888c 177
+  s_a098cb91585c4f::t_1c95d22a7bb252 371,683,817-843
+  s_a098cb91585c4f::t_17061d7347729d 106-108,110
+  s_a098cb91585c4f::t_710869e96d1d63 605,659-677,679-682,686-689,691-693,704-706,737,745,752-753,762,766,780,784,788-789,793,797
+  s_a098cb91585c4f::t_7304c0346ffc28 678,685
+  s_a098cb91585c4f::t_71fd96011af0c9 83-94,185-196,229-234
+  s_a098cb91585c4f::t_7be650da402089 109,111-113,178-184,339-370
+  s_a098cb91585c4f::t_a2640706510c66 372,684
+src/components/ui/button.tsx
+  s_a098cb91585c4f::t_7be650da402089 10,31-32,36
+  s_a098cb91585c4f::t_bbb0335fd249f1 14,37
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "d5e5810d769f0dd79c3400c6202eaf8bdcdf511e",
+  "prompts": {},
+  "sessions": {
+    "s_a098cb91585c4f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6b64f08b-9f30-480e-8016-4bba017f0d87",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
