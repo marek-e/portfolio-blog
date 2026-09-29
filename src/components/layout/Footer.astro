@@ -1,8 +1,7 @@
 ---
 import { ArrowUp04Icon, RssIcon } from '@hugeicons/core-free-icons';
 import { Icon } from '../shared/Icon';
-import { Link } from '../ui/button';
-import { Separator } from '../ui/separator';
+import { Doodle } from '../shared/HandDrawn';
 import { SOCIALS } from '@/lib/socials';
 import { PRESENTATIONS_URL } from '@/lib/sites';
 import { getTranslations, getLangFromUrl, getTranslatedPath } from '@/i18n';
@@ -32,25 +31,24 @@ const sitemapLinks = [
   id="footer"
   class="bg-footer border-border text-foreground rounded-t-4xl border-t px-4 py-8 sm:px-6 lg:px-8"
 >
-  <div class="flex flex-col items-center justify-between gap-4 sm:flex-row">
+  <div class="flex flex-col items-center justify-between gap-6 sm:flex-row">
     <div>
-      <h3 class="text-sm font-bold">{t.footer.sitemap}</h3>
-      <div class="mt-2 grid grid-cols-3 gap-0 sm:grid-cols-4">
+      <h3 class="eyebrow">{t.footer.sitemap}</h3>
+      <div class="mt-3 grid grid-cols-3 gap-x-6 gap-y-1 sm:grid-cols-4">
         {
           sitemapLinks.map((link) => (
-            <Link
+            <a
               href={link.external ? link.href : translatePath(link.href)}
-              variant="link"
-              className="text-muted-foreground hover:text-foreground h-auto min-h-6 w-fit justify-start py-1 pr-3 pl-0 text-sm transition-colors"
+              class="hand-underline-hover text-muted-foreground hover:text-foreground w-fit py-1 text-sm"
               {...(link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
             >
               {link.label}
-            </Link>
+            </a>
           ))
         }
       </div>
     </div>
-    <div class="flex items-center justify-center gap-1">
+    <div class="flex items-center justify-center gap-2">
       {
         SOCIALS.map((social) => (
           <a
@@ -58,46 +56,42 @@ const sitemapLinks = [
             target="_blank"
             rel="noopener noreferrer"
             aria-label={t.aria.followOn.replace('{platform}', social.name)}
-            class="text-muted-foreground hover:text-foreground motion-safe:hover:animate-wiggle p-2 transition-colors"
+            class="text-muted-foreground hover:text-primary flex size-10 items-center justify-center rounded-full border border-black/10 bg-white/60 shadow-[inset_0_1px_0_oklch(1_0_0/80%),0_1px_2px_oklch(0_0_0/6%)] backdrop-blur-sm transition-[color,box-shadow] hover:shadow-[inset_0_1px_0_oklch(1_0_0/80%),0_6px_16px_-6px_var(--primary)] dark:border-white/10 dark:bg-white/5 dark:shadow-[inset_0_1px_0_oklch(1_0_0/8%)]"
           >
-            <Icon icon={social.icon} strokeWidth={2} className="size-5" />
+            <Icon icon={social.icon} strokeWidth={2} className="size-4.5" />
           </a>
         ))
       }
       <a
         href={lang === 'fr' ? '/rss.xml' : '/en/rss.xml'}
         aria-label={t.aria.subscribeRss}
-        class="text-muted-foreground hover:text-foreground motion-safe:hover:animate-wiggle p-2 transition-colors"
+        class="text-muted-foreground hover:text-primary flex size-10 items-center justify-center rounded-full border border-black/10 bg-white/60 shadow-[inset_0_1px_0_oklch(1_0_0/80%),0_1px_2px_oklch(0_0_0/6%)] backdrop-blur-sm transition-[color,box-shadow] hover:shadow-[inset_0_1px_0_oklch(1_0_0/80%),0_6px_16px_-6px_var(--primary)] dark:border-white/10 dark:bg-white/5 dark:shadow-[inset_0_1px_0_oklch(1_0_0/8%)]"
       >
-        <Icon icon={RssIcon} strokeWidth={2} className="size-5" />
+        <Icon icon={RssIcon} strokeWidth={2} className="size-4.5" />
       </a>
     </div>
   </div>
-  <Separator className="bg-primary/50 my-8" />
+
+  <Doodle name="underline" strokeWidth={2} className="text-primary/45 my-8 h-3 w-full" />
+
   <div class="flex flex-col items-center justify-between gap-4 sm:flex-row">
-    <div class="flex items-center gap-5">
-      <Image src={logo} alt="logo - ME" fetchpriority="low" class="size-12" />
-      <p class="text-sm">
-        © {currentYear} Marek Elmayan
+    <div class="flex items-center gap-4">
+      <Image src={logo} alt="logo - ME" fetchpriority="low" class="size-11" />
+      <p class="flex items-baseline gap-2">
+        <span class="text-muted-foreground font-mono text-xs">© {currentYear}</span>
+        <span class="font-display-soft text-lg font-semibold tracking-tight">Marek Elmayan</span>
       </p>
     </div>
 
-    <div class="flex items-center gap-4">
-      <LanguageSwitcher
-        client:load
-        currentLang={lang}
-        currentPath={currentPath}
-        className="bg-background"
-      />
-      <Link
+    <div class="flex items-center gap-5">
+      <LanguageSwitcher client:load currentLang={lang} currentPath={currentPath} />
+      <a
         href="#"
-        size="sm"
-        variant="link"
-        className="text-muted-foreground hover:text-foreground text-sm transition-colors"
+        class="hand-underline-hover text-muted-foreground hover:text-foreground inline-flex items-center gap-1.5 text-sm"
       >
         {t.footer.backToTop}
-        <Icon icon={ArrowUp04Icon} strokeWidth={2} className="size-4" data-icon="inline-end" />
-      </Link>
+        <Icon icon={ArrowUp04Icon} strokeWidth={2} className="size-4" />
+      </a>
     </div>
   </div>
 </footer>
