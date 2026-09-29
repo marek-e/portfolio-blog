@@ -103,9 +103,9 @@
     var(--pastel-lilac) 62%,
     var(--pastel-sky)
   );
-  --radiant-1: oklch(0.79 0.15 70);
-  --radiant-2: oklch(0.72 0.17 58);
-  --radiant-3: oklch(0.66 0.18 48);
+  --radiant-1: oklch(0.72 0.16 60);
+  --radiant-2: oklch(0.68 0.17 54);
+  --radiant-3: oklch(0.64 0.17 48);
   --radiant-glow: oklch(0.72 0.17 58 / 45%);
   --radiant-text: oklch(0.995 0.01 85);
   --gradient-ring: linear-gradient(
@@ -171,9 +171,9 @@
   --sidebar-ring: oklch(0.556 0 0);
   --footer-background: oklch(0.1905 0.0303 295.64);
 
-  --radiant-1: oklch(0.72 0.16 298);
-  --radiant-2: oklch(0.64 0.19 294);
-  --radiant-3: oklch(0.57 0.21 290);
+  --radiant-1: oklch(0.66 0.18 296);
+  --radiant-2: oklch(0.62 0.19 294);
+  --radiant-3: oklch(0.57 0.2 291);
   --radiant-glow: oklch(0.64 0.2 293 / 50%);
   --radiant-text: oklch(0.995 0 0);
   --pastel-peach: oklch(0.8 0.1 55);
@@ -332,14 +332,15 @@
 
 @utility btn-radiant {
   color: var(--radiant-text);
+  font-weight: 600;
   background-color: var(--radiant-2);
   background-image:
-    radial-gradient(120% 100% at 50% 0%, oklch(1 0 0 / 30%), transparent 60%),
+    radial-gradient(110% 120% at 50% -20%, oklch(1 0 0 / 22%), transparent 60%),
     linear-gradient(to bottom, var(--radiant-1), var(--radiant-3));
+  background-origin: border-box;
+  background-repeat: no-repeat;
   border-color: transparent;
-  box-shadow:
-    inset 0 1px 0 oklch(1 0 0 / 35%),
-    0 4px 14px -4px var(--radiant-glow);
+  box-shadow: 0 4px 14px -4px var(--radiant-glow);
   transition:
     box-shadow 0.3s ease-out,
     filter 0.3s ease-out,
@@ -347,9 +348,7 @@
 
   &:hover {
     filter: brightness(1.05);
-    box-shadow:
-      inset 0 1px 0 oklch(1 0 0 / 40%),
-      0 8px 24px -6px var(--radiant-glow);
+    box-shadow: 0 8px 24px -6px var(--radiant-glow);
   }
 
   &:disabled {
