@@ -103,7 +103,7 @@ One flourish per section at most. Don't sprinkle doodles.
 - Day/night valley photo, serif headline with `MarkedText` on the name, and sparkles.
 - Primary CTA is radiant; the CV CTA is `pastel`.
 - Floating hashtag stickers (desktop): translucent 3D glass pills.
-  - One 1px light edge, one 2px darker lip for thickness, and one soft oval shine. Stacking more rims makes them look like outlines, not objects.
+  - No borders and no solid offset lip: both show up as hard lines. The volume comes from shading only: a soft top shine and a darker underside glow in a `::after` layer, a blurred contact shadow (`0 2px 4px -1px`) and a soft drop shadow.
   - Translucent fill with `backdrop-filter: blur(10px)` so the photo shows through.
   - Pointer parallax with a per-sticker depth; off for touch and reduced motion.
 - On mobile the tags become a row of the same pills, without parallax.
