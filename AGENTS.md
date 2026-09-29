@@ -43,6 +43,8 @@ export function ProjectModal() {
 ## Documentation
 
 - [docs/ASTRO-REACT.md](docs/ASTRO-REACT.md) - Island architecture, hydration, MDX patterns
+- [docs/DESIGN-SYSTEM.md](docs/DESIGN-SYSTEM.md) - Visual rules and rebrand directives (read before any visual change)
+- [docs/DESIGN-SYSTEM.md](docs/DESIGN-SYSTEM.md) - Visual rules and rebrand directives (read before any visual change)
 - [docs/STYLING.md](docs/STYLING.md) - Tailwind, theme colors, responsive design
 - [docs/COMPONENTS.md](docs/COMPONENTS.md) - shadcn/ui usage, custom components
 - [docs/CONTENT.md](docs/CONTENT.md) - Content collections, frontmatter schemas

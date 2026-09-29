@@ -166,6 +166,8 @@ Each project MUST include:
 
 ## Design Guidelines
 
+Visual rules and the rebrand directives live in [DESIGN-SYSTEM.md](DESIGN-SYSTEM.md).
+
 - Clean, modern, trustworthy
 - Consistent spacing
 - Borrow inspiration from multiple sources, never copy one

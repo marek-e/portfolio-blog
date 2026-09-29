@@ -2,14 +2,7 @@
 
 ## Design Language
 
-Brand colours stay orange (light) and purple (dark), with the day/night valley photos behind the hero. On top of that: an editorial serif, hand-drawn marks and pastel accents.
-
-- **Typography**: Geist for body (`font-sans`), Fraunces for display (`font-display`, applied to `h1`/`h2` automatically; `font-display-soft` / `font-display-wonk` utilities), MapleMono for code, tags, dates and numbers (`font-mono`, `eyebrow`).
-- **Section titles**: always `SectionHeading.astro`; it italicises and marker-underlines the last word. The marker follows the primary colour.
-- **Hand-drawn marks**: `Doodle` and `MarkedText` from `src/components/shared/HandDrawn.tsx`. One flourish per section at most.
-- **Pastels**: `pastel-peach`, `pastel-rose`, `pastel-lilac`, `pastel-sky`, `pastel-mint`, `pastel-butter`. Fills and accents only; text stays `foreground` / `muted-foreground`. In dark mode use low alpha fills (`dark:bg-pastel-sky/12 dark:text-pastel-sky`).
-- **Surfaces**: `glass` / `glass-strong` are reserved for the home page and a few CTAs. Elsewhere (blog, projects, CV) use `surface` (solid card, border, soft shadow) or pastel-tinted fills. `ring-pastel` is the gradient ring for the one highlighted element of a view.
-- **Buttons**: pill-shaped. `default` is the primary colour, `pastel` is the gradient-ring secondary CTA.
+The visual rules (brand colours, pastels, surfaces, buttons, hand-drawn marks, mobile) live in [DESIGN-SYSTEM.md](DESIGN-SYSTEM.md). Read it before any visual change. This file covers how to apply them with Tailwind.
 
 ## Semantic Colors
 
@@ -18,7 +11,7 @@ Use theme variables, not raw colors:
 ```tsx
 // Correct
 <div className="bg-background text-foreground">
-<button className="bg-primary text-primary-foreground">
+<Button>{/* default variant = radiant primary */}</Button>
 <p className="text-muted-foreground">
 
 // Wrong
