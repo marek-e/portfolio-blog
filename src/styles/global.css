@@ -871,3 +871,27 @@ html.dark .prose pre[style*='--shiki-dark-bg'] span {
   color: var(--primary);
   background-size: 100% 0.55em;
 }
+
+.hand-underline-hover {
+  background-image: var(--hand-underline);
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 0.4em;
+  padding-bottom: 0.1em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  transition:
+    background-size 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    color 0.2s ease-out;
+}
+
+.hand-underline-hover:hover,
+.hand-underline-hover:focus-visible {
+  background-size: 100% 0.4em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hand-underline-hover {
+    transition: color 0.2s ease-out;
+  }
+}
