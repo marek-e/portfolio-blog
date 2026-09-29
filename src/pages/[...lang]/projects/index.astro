@@ -3,6 +3,7 @@ import Layout from '@/layouts/Layout.astro';
 import Navbar from '@/components/layout/Navbar.astro';
 import Footer from '@/components/layout/Footer.astro';
 import ProjectListCard from '@/components/portfolio/ProjectListCard.astro';
+import SectionHeading from '@/components/shared/SectionHeading.astro';
 import { getCollection } from 'astro:content';
 import { getTranslations, defaultLang, languages } from '@/i18n';
 import { sortProjects } from '@/lib/projects';
@@ -18,6 +19,8 @@ const allProjects = await getCollection('projects');
 const projects = sortProjects(allProjects.filter((project) => project.id.startsWith(`${lang}/`)));
 
 const featuredProjects = projects.filter((p) => p.data.featured);
+const editorialSpan = (index: number) =>
+  index % 5 < 2 ? 'md:col-span-1 lg:col-span-3' : 'md:col-span-1 lg:col-span-2';
 ---
 
 <Layout title={t.projectsPage.pageTitle} description={t.projectsPage.pageDescription}>
@@ -39,31 +42,38 @@ const featuredProjects = projects.filter((p) => p.data.featured);
     })}
   />
   <Navbar />
-  <main class="container mx-auto min-h-dvh w-full max-w-6xl px-4 pt-32 pb-16">
-    <header class="mb-12 space-y-4">
-      <h1 class="text-4xl font-bold tracking-tight">{t.projectsPage.title}</h1>
-      <p class="text-muted-foreground max-w-2xl text-lg">{t.projectsPage.subtitle}</p>
-    </header>
+  <main class="container mx-auto min-h-dvh w-full max-w-6xl px-4 pt-36 pb-24 md:pt-44 md:pb-32">
+    <SectionHeading
+      as="h1"
+      eyebrow={t.projectsPage.eyebrow}
+      title={t.projectsPage.title}
+      subtitle={t.projectsPage.subtitle}
+      class="mb-14 md:mb-20"
+    >
+      <p class="text-muted-foreground font-mono text-xs tracking-wide">
+        <span class="text-foreground">{String(featuredProjects.length).padStart(2, '0')}</span>
+        {' '}{t.projectsPage.countLabel}
+      </p>
+    </SectionHeading>
 
     {
       projects.length === 0 ? (
-        <p class="text-muted-foreground py-12 text-center">{t.projectsPage.noProjects}</p>
+        <p class="surface text-muted-foreground rounded-3xl py-12 text-center">
+          {t.projectsPage.noProjects}
+        </p>
       ) : (
-        <div class="space-y-12">
-          {featuredProjects.length > 0 && (
-            <section>
-              <h2 class="text-primary mb-6 flex items-center gap-2 text-xl font-semibold">
-                <span class="bg-primary inline-block size-2 rounded-full" />
-                {t.projects.title}
-              </h2>
-              <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                {featuredProjects.map((project) => (
-                  <ProjectListCard project={project} featured />
-                ))}
-              </div>
-            </section>
-          )}
-        </div>
+        featuredProjects.length > 0 && (
+          <section aria-labelledby="featured-projects">
+            <h2 id="featured-projects" class="sr-only">
+              {t.projects.title}
+            </h2>
+            <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-6 lg:gap-6">
+              {featuredProjects.map((project, index) => (
+                <ProjectListCard project={project} index={index} class={editorialSpan(index)} />
+              ))}
+            </div>
+          </section>
+        )
       )
     }
   </main>

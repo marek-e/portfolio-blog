@@ -8,6 +8,8 @@ import { CommuteActivityCard } from '@/components/portfolio/CommuteActivityCard'
 import { RunningStats } from '@/components/portfolio/RunningStats';
 import { getTranslations, getLangFromUrl } from '@/i18n';
 import type { RunningActivity, RunningStats as RunningStatsType } from '@/types/strava';
+import SectionHeading from '@/components/shared/SectionHeading.astro';
+import { Link } from '@/components/ui/button';
 
 const lang = getLangFromUrl(Astro.url);
 const t = getTranslations(lang);
@@ -30,34 +32,35 @@ try {
 }
 
 const stravaOrange = '#FC4C02';
+const stravaLogoPath =
+  'M15.387 17.944l-2.089-4.116h-3.065L15.387 24l5.15-10.172h-3.066m-7.008-5.599l2.836 5.598h4.172L10.463 0l-7 13.828h4.169';
 const hasData = activities.length > 0;
 ---
 
-<section id="running" class="relative py-20 md:py-32">
+<section id="running" class="relative py-20 md:py-24" aria-labelledby="running-title">
   <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-    <div class="mb-8 flex items-end justify-between">
-      <div>
-        <h2 class="text-foreground text-3xl font-bold tracking-tight md:text-4xl">
-          {t.strava.title}
-        </h2>
-        <p class="text-muted-foreground mt-2">{t.strava.subtitle}</p>
-      </div>
-      <a
+    <SectionHeading
+      id="running-title"
+      eyebrow={t.strava.eyebrow}
+      title={t.strava.title}
+      subtitle={t.strava.subtitle}
+      class="mb-8"
+    >
+      <Link
+        variant="glass"
         href={`https://www.strava.com/athletes/${STRAVA_ATHLETE_ID}`}
         target="_blank"
         rel="noopener noreferrer"
-        class="border-border bg-card hover:bg-muted hover:text-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50 aria-expanded:bg-muted aria-expanded:text-foreground hidden h-10 items-center gap-2 rounded-lg border px-4 py-2 md:flex"
+        className="hidden md:inline-flex"
       >
-        <svg viewBox="0 0 24 24" class="h-5 w-5" fill={stravaOrange} aria-hidden="true">
-          <path
-            d="M15.387 17.944l-2.089-4.116h-3.065L15.387 24l5.15-10.172h-3.066m-7.008-5.599l2.836 5.598h4.172L10.463 0l-7 13.828h4.169"
-          ></path>
+        <svg viewBox="0 0 24 24" class="size-4" fill={stravaOrange} aria-hidden="true">
+          <path d={stravaLogoPath}></path>
         </svg>
-        <span class="text-sm font-medium">{t.strava.viewOnStrava}</span>
-      </a>
-    </div>
+        {t.strava.viewOnStrava}
+      </Link>
+    </SectionHeading>
 
-    <p class="text-foreground/80 mb-10 max-w-3xl text-lg leading-relaxed">
+    <p class="text-muted-foreground mb-12 max-w-3xl text-lg leading-relaxed text-pretty">
       {t.strava.intro}
     </p>
 
@@ -65,13 +68,13 @@ const hasData = activities.length > 0;
       hasData ? (
         <>
           {stats && (
-            <div class="mb-10">
+            <div class="mb-6 md:mb-8">
               <RunningStats client:visible stats={stats} lang={lang} />
             </div>
           )}
 
           {/* Activities Grid */}
-          <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div class="grid gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-3">
             {activities.map((activity) =>
               activity.runType === 'race' ? (
                 <RaceActivityCard client:visible activity={activity} lang={lang} />
@@ -88,19 +91,19 @@ const hasData = activities.length > 0;
           </div>
         </>
       ) : (
-        <div class="flex flex-col items-center justify-center gap-8 py-8">
+        <div class="glass flex flex-col items-center justify-center gap-6 rounded-3xl p-10">
           <p class="text-muted-foreground text-center">{t.strava.noActivities}</p>
-          <a
+          <Link
+            size="lg"
             href={`https://www.strava.com/athletes/${STRAVA_ATHLETE_ID}`}
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 rounded-lg bg-[#FC4C02] px-6 py-3 font-medium text-white transition-colors hover:bg-[#e04502]"
           >
-            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor" aria-hidden="true">
-              <path d="M15.387 17.944l-2.089-4.116h-3.065L15.387 24l5.15-10.172h-3.066m-7.008-5.599l2.836 5.598h4.172L10.463 0l-7 13.828h4.169" />
+            <svg viewBox="0 0 24 24" class="size-4" fill={stravaOrange} aria-hidden="true">
+              <path d={stravaLogoPath} />
             </svg>
             {t.strava.viewOnStrava}
-          </a>
+          </Link>
         </div>
       )
     }
@@ -108,18 +111,19 @@ const hasData = activities.length > 0;
     <!-- Mobile Strava Link (only show if we have data) -->
     {
       hasData && (
-        <div class="mt-8 text-center md:hidden">
-          <a
+        <div class="mt-8 flex justify-center md:hidden">
+          <Link
+            variant="glass"
+            size="lg"
             href={`https://www.strava.com/athletes/${STRAVA_ATHLETE_ID}`}
             target="_blank"
             rel="noopener noreferrer"
-            class="text-muted-foreground hover:text-foreground inline-flex items-center gap-2 text-sm font-medium transition-colors"
           >
-            <svg viewBox="0 0 24 24" class="h-4 w-4" fill={stravaOrange} aria-hidden="true">
-              <path d="M15.387 17.944l-2.089-4.116h-3.065L15.387 24l5.15-10.172h-3.066m-7.008-5.599l2.836 5.598h4.172L10.463 0l-7 13.828h4.169" />
+            <svg viewBox="0 0 24 24" class="size-4" fill={stravaOrange} aria-hidden="true">
+              <path d={stravaLogoPath} />
             </svg>
             {t.strava.viewOnStrava}
-          </a>
+          </Link>
         </div>
       )
     }

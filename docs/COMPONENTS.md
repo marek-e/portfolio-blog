@@ -193,18 +193,34 @@ Theme switcher with circular reveal animation (View Transitions API).
 - Fade fallback on Firefox
 - Respects `prefers-reduced-motion`
 
-### MobileMenu (`layout/`)
+### MobileTabBar (`layout/`)
 
-Hamburger menu for mobile navigation.
+Bottom tab bar for mobile navigation, rendered by `Navbar.astro`. Static, no hydration.
 
 ```astro
-<MobileMenu client:load />
+<MobileTabBar />
 ```
 
-- Opens a Sheet (slide-out drawer) from right
-- Automatically hidden on `md:` breakpoint and above
-- Contains all navigation links
-- Close on link click or backdrop tap
+- Five tabs: home, projects, blog, slides (external), contact
+- Current page gets `aria-current="page"`, a raised bubble and a primary icon
+- Hidden from `md:` up; sits above the iOS safe area
+- `Layout.astro` adds `max-md:pb-28` to `body` so content clears it
+
+### SectionHeading (`shared/`)
+
+Title block for every section and page title.
+
+```astro
+<SectionHeading eyebrow="01 — Qui je suis" title={t.about.title} id="about-title" as="h2" />
+```
+
+- Italicises the last word and draws the marker underline under it
+- Optional `eyebrow`, `subtitle`, `align="start|center"`, `as="h1|h2"`, `id`
+- Default slot renders a right-side action (e.g. "View all")
+
+### HandDrawn (`shared/`)
+
+`Doodle` (underline, squiggle, sparkle, arrow, loop, circle) and `MarkedText`. See [DESIGN-SYSTEM.md](DESIGN-SYSTEM.md#hand-drawn-marks).
 
 ### Icon (`shared/`)
 
@@ -224,12 +240,13 @@ import { Star } from '@hugeicons/core-free-icons';
 Pill-shaped language toggle with active state highlighting.
 
 ```astro
-<LanguageSwitcher client:load currentLang="fr" currentPath={Astro.url.pathname} />
+<LanguageSwitcher currentLang="fr" currentPath={Astro.url.pathname} />
 ```
 
-- Glass-morphism styling with backdrop blur
-- Active language highlighted with primary color
+- Frosted-glass track
+- Active language uses the radiant primary style
 - Uses `aria-current="page"` for accessibility
+- Shown in the footer and in the mobile top bar
 
 ### BookmarkLanguageToggle (`layout/`)
 
