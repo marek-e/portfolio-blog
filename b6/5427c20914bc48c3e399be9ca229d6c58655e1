@@ -1,0 +1,19 @@
+src/styles/global.css
+  s_a098cb91585c4f::t_46171518e43d58 106-108,174-176,335,338,340-341,343,351
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "b65427c20914bc48c3e399be9ca229d6c58655e1",
+  "prompts": {},
+  "sessions": {
+    "s_a098cb91585c4f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6b64f08b-9f30-480e-8016-4bba017f0d87",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
