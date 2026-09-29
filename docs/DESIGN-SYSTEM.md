@@ -10,7 +10,7 @@ Decisions taken during the 2026 rebrand review. Treat them as constraints, not s
 
 1. **Brand colours are orange (light) and purple (dark).** `--primary` carries them. Pastels decorate; they never replace the brand colour.
 2. **The hero keeps the day/night valley photos** (`BackgroundImage.astro`). No full-page gradient or aurora backgrounds: the page background stays the plain `--background`.
-3. **The desktop navbar and the footer keep their original layout.** The footer's details follow the design language: an eyebrow label, a hand-drawn underline on link hover (`.hand-underline-hover`, which draws in), a hand-drawn divider, round frosted social buttons, and the name in the display serif. Don't restructure either of them as part of other work.
+3. **The desktop navbar and the footer keep their original layout.** The footer's details follow the design language: an eyebrow label, a hand-drawn underline on link hover (`.hand-underline-hover`, which draws in), a single-stroke hand-drawn divider (`Doodle name="line"`; the two-stroke `underline` looks glitchy when stretched wide), and the name in the display serif. Footer social icons stay plain with the wiggle on hover (`motion-safe:hover:animate-wiggle`), so they don't duplicate the round buttons in the contact panel just above. Don't restructure either of them as part of other work.
 4. **Mobile navigation is a bottom tab bar** (`MobileTabBar.astro`), never a hamburger sheet. Every destination is one tap away.
 5. **Glass is for the home page and a few CTAs.** Blog, projects, CV and other pages use solid `surface` cards or pastel-tinted fills. If glass shows up on a reading page, it's a mistake.
 6. **Pastels must stay vivid.** Low-alpha pastel fills (`/12`) read as washed out and were rejected. See [Pastels](#pastels) for the minimums.
@@ -88,7 +88,7 @@ Every variant has a visible hover cue, without moving: radiant gets a stronger g
 
 The radiant glow is always on at full strength. Hover only intensifies it; it must never appear only on hover.
 
-The same style applies to back-to-top, the active language in `LanguageSwitcher`, and the "Live" button on project cards.
+The same style applies to back-to-top, the active language in `LanguageSwitcher` (with the inner core turned off, `[--radiant-core:transparent]`, because it looks busy at that size; inactive options hover to a quiet `bg-primary/10` tint, never a raised white pill), and the "Live" button on project cards.
 
 ## Hand-drawn marks
 

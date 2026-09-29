@@ -48,7 +48,7 @@ const sitemapLinks = [
         }
       </div>
     </div>
-    <div class="flex items-center justify-center gap-2">
+    <div class="flex items-center justify-center gap-1">
       {
         SOCIALS.map((social) => (
           <a
@@ -56,23 +56,23 @@ const sitemapLinks = [
             target="_blank"
             rel="noopener noreferrer"
             aria-label={t.aria.followOn.replace('{platform}', social.name)}
-            class="text-muted-foreground hover:text-primary flex size-10 items-center justify-center rounded-full border border-black/10 bg-white/60 shadow-[inset_0_1px_0_oklch(1_0_0/80%),0_1px_2px_oklch(0_0_0/6%)] backdrop-blur-sm transition-[color,box-shadow] hover:shadow-[inset_0_1px_0_oklch(1_0_0/80%),0_6px_16px_-6px_var(--primary)] dark:border-white/10 dark:bg-white/5 dark:shadow-[inset_0_1px_0_oklch(1_0_0/8%)]"
+            class="text-muted-foreground hover:text-primary motion-safe:hover:animate-wiggle p-2 transition-colors"
           >
-            <Icon icon={social.icon} strokeWidth={2} className="size-4.5" />
+            <Icon icon={social.icon} strokeWidth={2} className="size-5" />
           </a>
         ))
       }
       <a
         href={lang === 'fr' ? '/rss.xml' : '/en/rss.xml'}
         aria-label={t.aria.subscribeRss}
-        class="text-muted-foreground hover:text-primary flex size-10 items-center justify-center rounded-full border border-black/10 bg-white/60 shadow-[inset_0_1px_0_oklch(1_0_0/80%),0_1px_2px_oklch(0_0_0/6%)] backdrop-blur-sm transition-[color,box-shadow] hover:shadow-[inset_0_1px_0_oklch(1_0_0/80%),0_6px_16px_-6px_var(--primary)] dark:border-white/10 dark:bg-white/5 dark:shadow-[inset_0_1px_0_oklch(1_0_0/8%)]"
+        class="text-muted-foreground hover:text-primary motion-safe:hover:animate-wiggle p-2 transition-colors"
       >
-        <Icon icon={RssIcon} strokeWidth={2} className="size-4.5" />
+        <Icon icon={RssIcon} strokeWidth={2} className="size-5" />
       </a>
     </div>
   </div>
 
-  <Doodle name="underline" strokeWidth={2} className="text-primary/45 my-8 h-3 w-full" />
+  <Doodle name="line" strokeWidth={1.5} className="text-primary/40 my-8 h-3 w-full" />
 
   <div class="flex flex-col items-center justify-between gap-4 sm:flex-row">
     <div class="flex items-center gap-4">

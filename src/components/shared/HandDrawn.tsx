@@ -7,6 +7,10 @@ const DOODLES = {
     viewBox: '0 0 300 24',
     paths: ['M4 15C58 8 150 5 296 9', 'M40 20C100 16 170 15 238 17'],
   },
+  line: {
+    viewBox: '0 0 300 12',
+    paths: ['M3 7C70 4 160 8 297 5'],
+  },
   squiggle: {
     viewBox: '0 0 120 24',
     paths: ['M3 13C13 3 23 3 31 13S49 23 59 13 77 3 87 13s18 10 30 0'],

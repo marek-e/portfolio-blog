@@ -81,9 +81,12 @@ const isPage = as === 'h1';
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={t.aria.followOn.replace('{platform}', social.name)}
-                  class="glass text-foreground/75 hover:text-foreground focus-visible:ring-ring flex size-12 items-center justify-center rounded-full transition duration-300 outline-none hover:-translate-y-0.5 focus-visible:ring-2"
+                  class="glass group text-foreground/75 hover:text-primary focus-visible:ring-ring flex size-12 items-center justify-center rounded-full transition duration-300 outline-none focus-visible:ring-2"
                 >
-                  <HugeiconsIcon icon={social.icon} className="size-5" />
+                  <HugeiconsIcon
+                    icon={social.icon}
+                    className="motion-safe:group-hover:animate-wiggle size-5"
+                  />
                 </a>
               </li>
             ))
