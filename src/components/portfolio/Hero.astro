@@ -51,9 +51,11 @@ const toneStyle = (tone: string) =>
     </div>
 
     <div
-      class="relative z-10 mx-auto flex max-w-5xl flex-col items-center px-4 text-center sm:px-6"
+      class="relative z-10 mx-auto flex w-full max-w-5xl min-w-0 flex-col items-center px-4 text-center sm:px-6"
     >
-      <p class="glass mb-10 flex items-center gap-3 rounded-full py-1.5 pr-4 pl-1.5 text-sm">
+      <p
+        class="glass mb-10 flex max-w-full items-center gap-3 rounded-full py-1.5 pr-4 pl-1.5 text-sm"
+      >
         <Image
           src={portrait}
           alt=""
@@ -67,7 +69,7 @@ const toneStyle = (tone: string) =>
 
       <h1
         id="hello"
-        class="text-foreground relative text-[clamp(3rem,9vw,7.5rem)] leading-[0.95] font-medium tracking-[-0.035em] drop-shadow-[0_2px_24px_oklch(1_0_0/45%)] dark:text-white dark:drop-shadow-[0_2px_24px_oklch(0_0_0/55%)]"
+        class="text-foreground relative text-[clamp(2.25rem,11.5vw,7.5rem)] leading-[0.95] font-medium tracking-[-0.035em] drop-shadow-[0_2px_24px_oklch(1_0_0/45%)] dark:text-white dark:drop-shadow-[0_2px_24px_oklch(0_0_0/55%)]"
       >
         <span class="block">{t.hero.greeting}</span>
         <span class="relative mt-2 inline-block">
