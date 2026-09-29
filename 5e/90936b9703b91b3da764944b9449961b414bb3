@@ -1,0 +1,20 @@
+src/components/portfolio/Hero.astro
+  s_a098cb91585c4f::t_de39af8e08c596 159-166,168-169,177,179,184-189,191-193
+  s_a098cb91585c4f::t_644738815517fd 197
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "5e90936b9703b91b3da764944b9449961b414bb3",
+  "prompts": {},
+  "sessions": {
+    "s_a098cb91585c4f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6b64f08b-9f30-480e-8016-4bba017f0d87",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
