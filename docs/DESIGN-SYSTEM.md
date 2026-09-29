@@ -76,11 +76,15 @@ All sizes are pills. Variants:
 
 Radiant rules, learned from review:
 
+- The glow lives in layers, not borders: the outer halo is a coloured `box-shadow`. The top shine and a warm "sun core" rising from the bottom are a `::before` layer that sits above the fill and below the label (`isolation: isolate`). Removing them makes the button look flat, and that was rejected.
+- Hover spreads the halo, brightens the fill and sweeps a soft light band across it (`::after`). The sweep is off under reduced motion and on disabled buttons.
 - No `backdrop-filter` on buttons. Chrome leaves a fringe along rounded edges.
 - No inner 1px ring, no halo ring (`0 0 0 4px`), no tight dark outer shadow. Each one reads as an extra border.
 - `background-origin: border-box` with `no-repeat`. Otherwise the gradient tiles under the transparent border and leaves a dark hairline on top and a light one at the bottom.
-- The glow scales with the button (`0 4px 14px -4px`) and is removed when disabled.
+- The element needs a positioning context for the layers: `Button` has `relative` in its base class, and fixed elements like back-to-top already have one. Don't put `position` in the utility, because it would override `fixed`.
 - White on orange is about 3:1. Keep the label semibold, and don't use radiant for small body-size text links.
+
+Every variant has a visible hover: all buttons lift by 1px, and each variant adds its own cue. Radiant gets glow and sweep, pastel a stronger glow, outline and secondary a border or fill change plus a shadow, ghost a fill, glass a stronger fill and shadow, and link an underline.
 
 The same style applies to back-to-top, the active language in `LanguageSwitcher`, and the "Live" button on project cards.
 
