@@ -1,0 +1,26 @@
+src/components/ui/button.tsx
+  s_a098cb91585c4f::t_93aaa8025b2400 10
+  s_a098cb91585c4f::t_1e25d46e3b8490 16,18,20,22,24-26
+src/components/layout/LanguageSwitcher.tsx
+  s_a098cb91585c4f::t_93aaa8025b2400 23
+src/styles/global.css
+  s_a098cb91585c4f::t_1e25d46e3b8490 109-110,178-179,336-337,341,345-371,374-381,387-396
+docs/DESIGN-SYSTEM.md
+  s_a098cb91585c4f::t_8edef6183cd314 79-80,84,87-88
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "fca2b5abf2ed3346cec2927d8cfdd1bb502ea9d6",
+  "prompts": {},
+  "sessions": {
+    "s_a098cb91585c4f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6b64f08b-9f30-480e-8016-4bba017f0d87",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
