@@ -20,7 +20,7 @@ export function LanguageSwitcher({ currentLang, currentPath, className }: Langua
           key={lang}
           href={getAlternatePath(currentPath, currentLang, lang)}
           className={cn(
-            'rounded-full border border-transparent px-2.5 py-1 text-xs font-semibold transition-colors',
+            'relative rounded-full border border-transparent px-2.5 py-1 text-xs font-semibold transition-colors',
             lang === currentLang
               ? 'btn-radiant'
               : 'text-foreground/65 hover:text-foreground hover:bg-white/70 dark:hover:bg-white/10'
