@@ -84,7 +84,9 @@ Radiant rules, learned from review:
 - The element needs a positioning context for the layers: `Button` has `relative` in its base class, and fixed elements like back-to-top already have one. Don't put `position` in the utility, because it would override `fixed`.
 - White on orange is about 3:1. Keep the label semibold, and don't use radiant for small body-size text links.
 
-Every variant has a visible hover: all buttons lift by 1px, and each variant adds its own cue. Radiant gets glow and sweep, pastel a stronger glow, outline and secondary a border or fill change plus a shadow, ghost a fill, glass a stronger fill and shadow, and link an underline.
+Every variant has a visible hover cue, without moving: radiant gets a stronger glow and the light sweep, pastel a stronger glow, outline and secondary a border or fill change plus a shadow, ghost a fill, glass a stronger fill and shadow, and link an underline. Buttons don't lift on hover.
+
+The radiant glow is always on at full strength. Hover only intensifies it; it must never appear only on hover.
 
 The same style applies to back-to-top, the active language in `LanguageSwitcher`, and the "Live" button on project cards.
 
