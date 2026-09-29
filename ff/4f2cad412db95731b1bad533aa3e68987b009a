@@ -1,0 +1,29 @@
+src/components/portfolio/Hero.astro
+  s_a098cb91585c4f::t_6a06226620086d 54,56
+  s_a098cb91585c4f::t_0b9d689ea5a50e 57-58,72
+src/pages/[...lang]/curriculum-vitae.astro
+  s_a098cb91585c4f::t_7d92b23ca0fbce 46
+src/styles/global.css
+  s_a098cb91585c4f::t_1d18a16a828fc3 106-109,174-177,335-338,341-342,349,351-356
+  s_a098cb91585c4f::t_26cff0a69fb086 416-419
+src/components/portfolio/AboutSection.astro
+  s_a098cb91585c4f::t_6a06226620086d 19
+  s_a098cb91585c4f::t_26cff0a69fb086 25
+  s_a098cb91585c4f::t_b1e80e6f8e8548 26-27
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "ff4f2cad412db95731b1bad533aa3e68987b009a",
+  "prompts": {},
+  "sessions": {
+    "s_a098cb91585c4f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6b64f08b-9f30-480e-8016-4bba017f0d87",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
