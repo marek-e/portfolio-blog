@@ -1,10 +1,10 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 import Navbar from '@/components/layout/Navbar.astro';
-import BackgroundImage from '@/components/layout/BackgroundImage.astro';
 import { Link } from '@/components/ui/button';
 import { Icon } from '@/components/shared/Icon';
-import { Home } from '@hugeicons/core-free-icons';
+import { Doodle } from '@/components/shared/HandDrawn';
+import { ArrowRight02Icon, Home } from '@hugeicons/core-free-icons';
 import { getLangFromUrl, getTranslatedPath, getTranslations } from '@/i18n';
 
 const lang = getLangFromUrl(Astro.url);
@@ -14,23 +14,55 @@ const translatePath = getTranslatedPath(lang);
 
 <Layout title={t.notFound.pageTitle} description={t.notFound.pageDescription}>
   <Navbar />
-  <section class="relative flex min-h-dvh items-center justify-center overflow-hidden">
-    <BackgroundImage />
+  <main class="relative flex min-h-dvh items-center justify-center px-4 pt-28 pb-16">
+    <div class="relative z-10 mx-auto flex w-full max-w-xl flex-col items-center text-center">
+      <div class="relative mt-4 mb-12 px-6">
+        <span
+          aria-hidden="true"
+          class="font-display-wonk text-foreground block text-[clamp(7rem,30vw,13rem)] leading-[0.85] tracking-[-0.05em]"
+        >
+          404
+        </span>
+        <Doodle
+          name="circle"
+          draw
+          strokeWidth={3}
+          className="text-marker absolute -inset-x-6 -inset-y-4 h-[calc(100%+2rem)] w-[calc(100%+3rem)] -rotate-3"
+        />
+        <Doodle
+          name="sparkle"
+          className="text-pastel-lilac absolute -top-4 -right-6 size-10 rotate-12"
+        />
+        <Doodle
+          name="sparkle"
+          className="text-pastel-peach absolute bottom-2 -left-8 size-6 -rotate-12"
+        />
+      </div>
 
-    <div class="relative z-10 mx-auto max-w-6xl px-4 text-center sm:px-6 lg:px-8">
-      <span class="text-primary/70 mb-4 block text-[12rem] leading-none font-black sm:text-[16rem]">
-        404
-      </span>
-      <h1 class="text-foreground -mt-16 mb-4 text-3xl font-bold sm:-mt-20 sm:text-4xl lg:text-5xl">
-        {t.notFound.heading}
-      </h1>
-      <p class="text-foreground/80 mx-auto mb-8 max-w-md text-lg">
-        {t.notFound.message}
-      </p>
-      <Link href={translatePath('/')} size="lg" className="px-8 py-6 text-base font-medium">
-        <Icon icon={Home} strokeWidth={3} className="size-4" />
-        {t.notFound.backHome}
-      </Link>
+      <div class="surface w-full rounded-3xl p-8 md:p-10">
+        <h1 class="text-foreground text-3xl font-semibold tracking-tight md:text-4xl">
+          {t.notFound.heading}
+        </h1>
+        <p class="text-muted-foreground mx-auto mt-3 max-w-sm leading-relaxed text-pretty">
+          {t.notFound.message}
+        </p>
+        <div class="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+          <Link href={translatePath('/')} size="lg" className="w-full sm:w-auto" animation="scale">
+            <Icon icon={Home} strokeWidth={2} className="size-4" />
+            {t.notFound.backHome}
+          </Link>
+          <Link
+            href={translatePath('/projects')}
+            variant="outline"
+            size="lg"
+            className="w-full sm:w-auto"
+            animation="scale"
+          >
+            {t.nav.projects}
+            <Icon icon={ArrowRight02Icon} strokeWidth={2} className="size-4" />
+          </Link>
+        </div>
+      </div>
     </div>
-  </section>
+  </main>
 </Layout>

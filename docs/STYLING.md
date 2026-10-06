@@ -1,5 +1,9 @@
 # Styling Guide
 
+## Design Language
+
+The visual rules (brand colours, pastels, surfaces, buttons, hand-drawn marks, mobile) live in [DESIGN-SYSTEM.md](DESIGN-SYSTEM.md). Read it before any visual change. This file covers how to apply them with Tailwind.
+
 ## Semantic Colors
 
 Use theme variables, not raw colors:
@@ -7,7 +11,7 @@ Use theme variables, not raw colors:
 ```tsx
 // Correct
 <div className="bg-background text-foreground">
-<button className="bg-primary text-primary-foreground">
+<Button>{/* default variant = radiant primary */}</Button>
 <p className="text-muted-foreground">
 
 // Wrong

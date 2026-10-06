@@ -19,10 +19,10 @@ export function Citation({ children, author, source, url, className }: CitationP
       <blockquote
         className={cn(
           'not-prose',
-          'border-primary/50 relative border-l-4 py-2 pl-6',
-          'text-muted-foreground text-lg italic',
+          'border-pastel-rose bg-pastel-rose/20 dark:border-pastel-rose/60 dark:bg-pastel-rose/8 relative rounded-r-lg border-l-4 py-2 pr-4 pl-6',
+          'text-muted-foreground font-display-soft text-lg italic',
           'before:absolute before:-top-2 before:left-1 before:font-serif before:leading-none',
-          'before:text-primary/20 before:text-5xl before:content-["""]'
+          'before:text-pastel-rose dark:before:text-pastel-rose/60 before:text-5xl before:content-["""]'
         )}
       >
         <p className="m-0">{children}</p>

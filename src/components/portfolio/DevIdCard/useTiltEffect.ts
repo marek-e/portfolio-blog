@@ -126,9 +126,10 @@ export function useTiltEffect(options: UseTiltEffectOptions = {}) {
 
   const shadowX = currentTilt.rotateY * 1.5;
   const shadowY = -currentTilt.rotateX * 1.5;
+  const surfaceShadow = 'inset 0 1px 0 var(--glass-highlight), 0 0 0 1px var(--glass-edge)';
   const boxShadow = isReducedMotion
-    ? '0 25px 50px -12px rgba(0, 0, 0, 0.15)'
-    : `${shadowX}px ${shadowY + 20}px 40px rgba(0, 0, 0, 0.2)`;
+    ? `${surfaceShadow}, 0 30px 60px -24px var(--glass-shadow)`
+    : `${surfaceShadow}, ${shadowX}px ${shadowY + 28}px 60px -20px var(--glass-shadow)`;
 
   return {
     cardRef,

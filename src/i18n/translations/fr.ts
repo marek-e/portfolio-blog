@@ -2,6 +2,8 @@ import type { UITranslations } from '../ui';
 
 export const fr: UITranslations = {
   nav: {
+    home: 'Accueil',
+    presentationsShort: 'Slides',
     projects: 'Projets',
     blog: 'Blog',
     presentations: 'Présentations',
@@ -9,6 +11,10 @@ export const fr: UITranslations = {
     contact: 'Contact',
   },
   hero: {
+    eyebrow: 'Ingénieur full-stack · Paris',
+    greeting: 'Hey, je suis',
+    name: 'Marek Elmayan',
+    scrollHint: 'Défiler',
     pageTitle: 'Marek Elmayan | Portfolio',
     pageDescription: 'Portfolio et blog de Marek Elmayan, ingénieur logiciel full-stack.',
     badges: ['#UX', '#Cybersecurity', '#AI', '#DevX', '#OpenSource'],
@@ -20,6 +26,7 @@ export const fr: UITranslations = {
     ctaCv: 'Voir mon CV',
   },
   about: {
+    eyebrow: '01 — Qui je suis',
     title: 'À propos',
     paragraphs: [
       "Tout a commencé en classe de maths au lycée. Je finissais toujours mes exercices en avance, alors je passais mon temps sur ma calculatrice TI. D'abord un programme pour résoudre les équations du second degré, puis un Snake, et finalement un jeu de bataille navale complet. Des milliers de lignes de code pour une interface basique, mais un jeu qui fonctionnait et surtout une nouvelle passion.",
@@ -33,24 +40,27 @@ export const fr: UITranslations = {
     mantraTitle: 'Mon mantra',
   },
   timeline: {
+    eyebrow: '02 — Études & expériences',
     title: 'Mon parcours',
     subtitle: "Les expériences qui ont façonné qui je suis aujourd'hui.",
     present: "Aujourd'hui",
   },
   projects: {
+    eyebrow: '03 — Réalisations',
     title: 'Mes projets',
     subtitle: "Une sélection de ce que j'ai construit",
-    viewAll: 'Voir tous les projets →',
+    viewAll: 'Voir tous les projets',
     noProjects: 'Pas encore de projets mis en avant.',
     liveDemo: 'Live',
     code: 'Code',
     viewDetails: 'Voir les détails',
   },
   contact: {
-    title: 'Me contacter',
+    eyebrow: '05 — Écrivez-moi',
+    title: 'Travaillons ensemble',
     subtitle: 'Un projet en tête ou juste envie de dire bonjour ?',
     cta: 'Envoyer un email',
-    socialIntro: 'Vous pouvez aussi me retrouver sur ces plateformes :',
+    socialIntro: 'Ou retrouvez-moi ici',
     copied: 'Copié !',
   },
   contactPage: {
@@ -82,6 +92,7 @@ export const fr: UITranslations = {
     system: 'Système',
   },
   aria: {
+    mainNavigation: 'Navigation principale',
     openMenu: 'Ouvrir le menu',
     closeMenu: 'Fermer le menu',
     sendEmail: 'Envoyer un email',
@@ -124,6 +135,8 @@ export const fr: UITranslations = {
     noPosts: "Pas encore d'articles. Revenez bientôt !",
     copyMarkdown: 'Copier en Markdown',
     copied: 'Copié !',
+    eyebrow: 'Notes & essais',
+    latest: 'Dernier article',
   },
   devCard: {
     cardTitle: 'Carte de développeur',
@@ -139,11 +152,12 @@ export const fr: UITranslations = {
       name: 'Marek Elmayan',
       job: 'Ingénieur Logiciel Full-Stack',
       nature: 'Curieux',
-      gameTime: '25 ans',
-      location: 'Nantes, France',
+      gameTime: '{age} ans',
+      location: 'Paris, France',
     },
   },
   strava: {
+    eyebrow: '04 — Loin du clavier',
     title: 'Mes courses',
     subtitle: 'Je trace ma route, un kilomètre à la fois',
     intro:
@@ -163,8 +177,11 @@ export const fr: UITranslations = {
     tagLongRun: 'Sortie longue',
     tagIntervals: 'Fractionné',
     tagCommute: 'Trajet',
+    tagRace: 'Compétition',
   },
   projectsPage: {
+    eyebrow: 'Travaux choisis',
+    countLabel: 'projets',
     pageTitle: 'Projets | Marek Elmayan',
     pageDescription: 'Découvrez mes projets de développement web, applications et expérimentations',
     title: 'Tous mes projets',

@@ -65,8 +65,8 @@ const cvData: CVData = {
   email: 'elmayan.marek@gmail.com',
   phone: '+33 6 XX XX XX XX',
   location: {
-    fr: 'Nantes, France',
-    en: 'Nantes, France',
+    fr: 'Paris, France',
+    en: 'Paris, France',
   },
   linkedin: 'linkedin.com/in/marek-elmayan',
   github: 'github.com/marek-e',
@@ -89,7 +89,7 @@ const cvData: CVData = {
         fr: {
           title: 'Ingénieur Logiciel Full-Stack',
           company: 'Theodo',
-          location: 'Nantes, France',
+          location: 'Paris, France',
           description: [
             "Développement d'applications web à fort impact pour des clients variés",
             "Prise de décisions techniques et conception d'architecture logicielle",
@@ -101,7 +101,7 @@ const cvData: CVData = {
         en: {
           title: 'Full-Stack Software Engineer',
           company: 'Theodo',
-          location: 'Nantes, France',
+          location: 'Paris, France',
           description: [
             'Building high-impact web applications for various clients',
             'Leading technical decisions and software architecture design',

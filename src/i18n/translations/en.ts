@@ -2,6 +2,8 @@ import type { UITranslations } from '../ui';
 
 export const en: UITranslations = {
   nav: {
+    home: 'Home',
+    presentationsShort: 'Slides',
     projects: 'Projects',
     blog: 'Blog',
     presentations: 'Talks',
@@ -9,6 +11,10 @@ export const en: UITranslations = {
     contact: 'Contact',
   },
   hero: {
+    eyebrow: 'Full-stack engineer · Paris',
+    greeting: "Hey, I'm",
+    name: 'Marek Elmayan',
+    scrollHint: 'Scroll',
     pageTitle: 'Marek Elmayan | Portfolio',
     pageDescription: 'Portfolio and blog of Marek Elmayan, full-stack software engineer.',
     badges: ['#UX', '#Cybersecurity', '#AI', '#DevX', '#OpenSource'],
@@ -20,6 +26,7 @@ export const en: UITranslations = {
     ctaCv: 'View my CV',
   },
   about: {
+    eyebrow: '01 — Who I am',
     title: 'About Me',
     paragraphs: [
       'Everything started in high school during my math classes. I was pretty good and always finished exercises early, so I spent time on my calculator. First, a program to solve second-degree equations, then a Snake game, and finally a full battleship game. Thousands of lines of code for a basic interface, but a working game, and above all a new passion ignited.',
@@ -33,24 +40,27 @@ export const en: UITranslations = {
     mantraTitle: 'My mantra',
   },
   timeline: {
+    eyebrow: '02 — Work & education',
     title: 'My Journey',
     subtitle: 'The experiences that shaped who I am today.',
     present: 'Present',
   },
   projects: {
+    eyebrow: "03 — Things I've built",
     title: 'My Projects',
     subtitle: "A selection of things I've built",
-    viewAll: 'View all projects →',
+    viewAll: 'View all projects',
     noProjects: 'No featured projects yet.',
     liveDemo: 'Live',
     code: 'Code',
     viewDetails: 'View Details',
   },
   contact: {
-    title: 'Get in Touch',
+    eyebrow: '05 — Say hello',
+    title: "Let's work together",
     subtitle: 'Have a project in mind or just want to say hi?',
     cta: 'Send me an email',
-    socialIntro: 'You can find me or see my work on the following platforms:',
+    socialIntro: 'Or find me here',
     copied: 'Copied!',
   },
   contactPage: {
@@ -82,6 +92,7 @@ export const en: UITranslations = {
     system: 'System',
   },
   aria: {
+    mainNavigation: 'Main navigation',
     openMenu: 'Open menu',
     closeMenu: 'Close menu',
     sendEmail: 'Send me an email',
@@ -123,6 +134,8 @@ export const en: UITranslations = {
     noPosts: 'No posts yet. Check back soon!',
     copyMarkdown: 'Copy as Markdown',
     copied: 'Copied!',
+    eyebrow: 'Notes & essays',
+    latest: 'Latest',
   },
   devCard: {
     cardTitle: 'Developer ID Card',
@@ -138,11 +151,12 @@ export const en: UITranslations = {
       name: 'Marek Elmayan',
       job: 'Full-Stack Software Engineer',
       nature: 'Curious',
-      gameTime: '25 years',
-      location: 'Nantes, France',
+      gameTime: '{age} years',
+      location: 'Paris, France',
     },
   },
   strava: {
+    eyebrow: '04 — Off the keyboard',
     title: 'My Runs',
     subtitle: 'Tracing my route, one kilometer at a time',
     intro:
@@ -162,8 +176,11 @@ export const en: UITranslations = {
     tagLongRun: 'Long run',
     tagIntervals: 'Intervals',
     tagCommute: 'Commute',
+    tagRace: 'Race',
   },
   projectsPage: {
+    eyebrow: 'Selected work',
+    countLabel: 'projects',
     pageTitle: 'Projects | Marek Elmayan',
     pageDescription: 'Explore my web development projects, applications, and experiments',
     title: 'All Projects',

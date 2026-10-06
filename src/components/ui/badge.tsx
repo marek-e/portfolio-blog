@@ -5,7 +5,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
 const badgeVariants = cva(
-  'h-5 gap-1 rounded-4xl border border-transparent px-2 py-0.5 text-xs font-medium transition-all has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&>svg]:size-3! inline-flex items-center justify-center w-fit whitespace-nowrap shrink-0 [&>svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive transition-colors overflow-hidden group/badge',
+  'h-6 gap-1 rounded-full border border-transparent px-2.5 py-0.5 font-mono text-xs font-medium tracking-tight transition-all has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&>svg]:size-3! inline-flex items-center justify-center w-fit whitespace-nowrap shrink-0 [&>svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive transition-colors overflow-hidden group/badge',
   {
     variants: {
       variant: {
@@ -13,38 +13,43 @@ const badgeVariants = cva(
         secondary: 'bg-secondary text-secondary-foreground [a]:hover:bg-secondary/80',
         destructive:
           'bg-destructive/10 [a]:hover:bg-destructive/20 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 text-destructive dark:bg-destructive/20',
-        outline: 'border-border text-foreground [a]:hover:bg-muted [a]:hover:text-muted-foreground',
+        outline:
+          'border-foreground/15 text-foreground/80 [a]:hover:bg-muted [a]:hover:text-muted-foreground',
         ghost: 'hover:bg-muted hover:text-muted-foreground dark:hover:bg-muted/50',
         link: 'text-primary underline-offset-4 hover:underline',
-        glass:
-          'backdrop-blur-xl bg-white/20 dark:bg-white/5 border-white/30 dark:border-white/10 text-foreground shadow-lg [a]:hover:bg-white/20 dark:[a]:hover:bg-white/10',
-        // Pastel variants (filled)
-        'pastel-blue': 'bg-sky-100 text-sky-700 dark:bg-sky-900/40 dark:text-sky-300',
+        glass: 'glass text-foreground/85 [a]:hover:bg-card',
+        'pastel-blue':
+          'bg-pastel-sky/55 text-pastel-sky-ink dark:bg-pastel-sky/15 dark:text-pastel-sky-ink',
         'pastel-green':
-          'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300',
-        'pastel-yellow': 'bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300',
-        'pastel-pink': 'bg-pink-100 text-pink-700 dark:bg-pink-900/40 dark:text-pink-300',
-        'pastel-purple': 'bg-violet-100 text-violet-700 dark:bg-violet-900/40 dark:text-violet-300',
-        'pastel-orange': 'bg-orange-100 text-orange-700 dark:bg-orange-900/40 dark:text-orange-300',
-        'pastel-teal': 'bg-teal-100 text-teal-700 dark:bg-teal-900/40 dark:text-teal-300',
-        'pastel-rose': 'bg-rose-100 text-rose-700 dark:bg-rose-900/40 dark:text-rose-300',
-        // Pastel variants (outlined)
+          'bg-pastel-mint/55 text-pastel-mint-ink dark:bg-pastel-mint/15 dark:text-pastel-mint-ink',
+        'pastel-yellow':
+          'bg-pastel-butter/70 text-pastel-butter-ink dark:bg-pastel-butter/15 dark:text-pastel-butter-ink',
+        'pastel-pink':
+          'bg-pastel-rose/55 text-pastel-rose-ink dark:bg-pastel-rose/15 dark:text-pastel-rose-ink',
+        'pastel-purple':
+          'bg-pastel-lilac/55 text-pastel-lilac-ink dark:bg-pastel-lilac/15 dark:text-pastel-lilac-ink',
+        'pastel-orange':
+          'bg-pastel-peach/55 text-pastel-peach-ink dark:bg-pastel-peach/15 dark:text-pastel-peach-ink',
+        'pastel-teal':
+          'bg-pastel-mint/35 text-pastel-mint-ink dark:bg-pastel-mint/15 dark:text-pastel-mint-ink',
+        'pastel-rose':
+          'bg-pastel-rose/55 text-pastel-rose-ink dark:bg-pastel-rose/15 dark:text-pastel-rose-ink',
         'pastel-blue-outline':
-          'bg-sky-100 dark:bg-sky-900/40 border-sky-300 text-sky-700 dark:border-sky-700 dark:text-sky-300',
+          'bg-pastel-sky/55 border-pastel-sky text-pastel-sky-ink dark:bg-pastel-sky/15 dark:border-pastel-sky/40 dark:text-pastel-sky-ink',
         'pastel-green-outline':
-          'bg-emerald-100 dark:bg-emerald-900/40 border-emerald-300 text-emerald-700 dark:border-emerald-700 dark:text-emerald-300',
+          'bg-pastel-mint/55 border-pastel-mint text-pastel-mint-ink dark:bg-pastel-mint/15 dark:border-pastel-mint/40 dark:text-pastel-mint-ink',
         'pastel-yellow-outline':
-          'bg-amber-100 dark:bg-amber-900/40 border-amber-300 text-amber-700 dark:border-amber-700 dark:text-amber-300',
+          'bg-pastel-butter/70 border-pastel-butter text-pastel-butter-ink dark:bg-pastel-butter/15 dark:border-pastel-butter/40 dark:text-pastel-butter-ink',
         'pastel-pink-outline':
-          'bg-pink-100 dark:bg-pink-900/40 border-pink-300 text-pink-700 dark:border-pink-700 dark:text-pink-300',
+          'bg-pastel-rose/55 border-pastel-rose text-pastel-rose-ink dark:bg-pastel-rose/15 dark:border-pastel-rose/40 dark:text-pastel-rose-ink',
         'pastel-purple-outline':
-          'bg-violet-100 dark:bg-violet-900/40 border-violet-300 text-violet-700 dark:border-violet-700 dark:text-violet-300',
+          'bg-pastel-lilac/55 border-pastel-lilac text-pastel-lilac-ink dark:bg-pastel-lilac/15 dark:border-pastel-lilac/40 dark:text-pastel-lilac-ink',
         'pastel-orange-outline':
-          'bg-orange-100 dark:bg-orange-900/40 border-orange-300 text-orange-700 dark:border-orange-700 dark:text-orange-300',
+          'bg-pastel-peach/55 border-pastel-peach text-pastel-peach-ink dark:bg-pastel-peach/15 dark:border-pastel-peach/40 dark:text-pastel-peach-ink',
         'pastel-teal-outline':
-          'bg-teal-100 dark:bg-teal-900/40 border-teal-300 text-teal-700 dark:border-teal-700 dark:text-teal-300',
+          'bg-pastel-mint/35 border-pastel-mint text-pastel-mint-ink dark:bg-pastel-mint/15 dark:border-pastel-mint/40 dark:text-pastel-mint-ink',
         'pastel-rose-outline':
-          'bg-rose-100 dark:bg-rose-900/40 border-rose-300 text-rose-700 dark:border-rose-700 dark:text-rose-300',
+          'bg-pastel-rose/55 border-pastel-rose text-pastel-rose-ink dark:bg-pastel-rose/15 dark:border-pastel-rose/40 dark:text-pastel-rose-ink',
       },
     },
     defaultVariants: {

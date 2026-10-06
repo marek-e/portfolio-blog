@@ -3,6 +3,7 @@ import type { RunningStats as RunningStatsType } from '@/types/strava';
 import type { Lang } from '@/i18n/config';
 import { getTranslations } from '@/i18n';
 import { useReducedMotion } from '@/lib/useReducedMotion';
+import { cn } from '@/lib/utils';
 
 interface RunningStatsProps {
   stats: RunningStatsType;
@@ -118,28 +119,28 @@ export function RunningStats({ stats, lang = 'fr' }: RunningStatsProps) {
           },
         ];
 
+  const toggleClass = (isActive: boolean) =>
+    cn(
+      'min-h-10 rounded-full px-4 text-sm font-medium transition-all',
+      isActive
+        ? 'bg-foreground text-background shadow-sm'
+        : 'text-muted-foreground hover:text-foreground cursor-pointer'
+    );
+
   return (
-    <div className="space-y-4">
-      <div className="flex justify-center">
-        <div className="bg-muted inline-flex gap-1 rounded-lg p-1">
+    <div className="space-y-5">
+      <div className="flex justify-start">
+        <div className="glass inline-flex gap-1 rounded-full p-1">
           <button
             onClick={() => setMode('allTime')}
-            className={`rounded-md px-4 py-2 text-sm font-medium transition-all ${
-              mode === 'allTime'
-                ? 'text-foreground dark:bg-background bg-white shadow-sm'
-                : 'text-muted-foreground hover:text-foreground hover:bg-background/50 cursor-pointer'
-            }`}
+            className={toggleClass(mode === 'allTime')}
             aria-pressed={mode === 'allTime'}
           >
             {t.strava.allTime}
           </button>
           <button
             onClick={() => setMode('thisYear')}
-            className={`rounded-md px-4 py-2 text-sm font-medium transition-all ${
-              mode === 'thisYear'
-                ? 'text-foreground dark:bg-background bg-white shadow-sm'
-                : 'text-muted-foreground hover:text-foreground hover:bg-background/50 cursor-pointer'
-            }`}
+            className={toggleClass(mode === 'thisYear')}
             aria-pressed={mode === 'thisYear'}
           >
             {t.strava.thisYear}
@@ -147,28 +148,30 @@ export function RunningStats({ stats, lang = 'fr' }: RunningStatsProps) {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-4 md:gap-6">
+      <div className="grid grid-cols-[repeat(2,minmax(0,1fr))] gap-3 md:gap-5">
         {statItems.map((item, index) => (
           <div
             key={`${mode}-${item.label}`}
-            className={`rounded-xl p-4 text-center transition-colors ${
-              item.highlight
-                ? 'border-primary/20 bg-primary/10 border'
-                : 'bg-muted/50 border-border border'
-            }`}
+            className="glass relative overflow-hidden rounded-3xl p-4 sm:p-5 md:p-8"
           >
-            <p
-              className={`text-2xl font-bold md:text-3xl ${
-                item.highlight ? 'text-primary' : 'text-foreground'
-              }`}
-            >
-              <AnimatedCounter
-                value={item.value}
-                duration={1000 + index * 200}
-                suffix={item.suffix}
-              />
+            <span
+              aria-hidden="true"
+              className={cn(
+                'pointer-events-none absolute -right-10 -bottom-12 size-40 rounded-full blur-2xl md:size-56',
+                item.highlight
+                  ? 'bg-pastel-lilac/50 dark:bg-pastel-lilac/15'
+                  : 'bg-pastel-mint/55 dark:bg-pastel-mint/12'
+              )}
+            />
+            <p className="eyebrow relative">{item.label}</p>
+            <p className="text-foreground relative mt-3 font-mono text-[clamp(1.6rem,7.5vw,2.25rem)] font-medium tracking-tight tabular-nums md:mt-4 md:text-6xl">
+              <AnimatedCounter value={item.value} duration={1000 + index * 200} />
+              {item.suffix && (
+                <span className="text-muted-foreground ml-1 text-sm font-normal tracking-normal md:ml-1.5 md:text-2xl">
+                  {item.suffix.trim()}
+                </span>
+              )}
             </p>
-            <p className="text-muted-foreground mt-1 text-xs md:text-sm">{item.label}</p>
           </div>
         ))}
       </div>
