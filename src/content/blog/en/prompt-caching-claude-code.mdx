@@ -58,15 +58,18 @@ The rule everything follows from is that the cache is a <Highlight>prefix match<
 
 This is why order matters so much. The request is always rendered in the same order, <strong>tools, then system prompt, then messages</strong>. A change in your latest message costs nothing extra. A change in the tool list or the system prompt throws away the whole conversation behind it.
 
-One more detail: the server doesn't save an entry after every token. It only saves one at the positions the request marks, called <Highlight color="purple">breakpoints</Highlight> (`cache_control` in the API). Think of them as save points in a video game: <strong>the next request can only resume from a spot where a previous one saved</strong>. Claude Code places them for you, so each turn saves at the end of what it sent and the next turn resumes from there. You will rarely touch them yourself, but two limits are worth knowing because they explain some surprising misses.
+You will also meet one more word in the docs: <Highlight color="purple">breakpoints</Highlight> (`cache_control` in the API). The server doesn't save the cache after every token. It only saves it at a few positions that the request marks, like the save points of a video game. <strong>The next request can only resume from a spot where a previous request saved.</strong>
 
-<Toggle title="The limits of breakpoints (for the curious)">
-  A request can carry at most 4 breakpoints. Each one looks back at most 20 content blocks to find
-  an earlier entry, so a single turn that appends a very long run of blocks can miss the previous
-  entry. And a prefix shorter than the model's minimum (512 tokens on the newest models, up to 4,096
-  on some older ones) is silently not cached: no error, the cache fields just stay at 0. The [prompt
-  caching docs](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) have the full
-  details.
+In practice, Claude Code puts a breakpoint at the end of what each turn sends. When you send your next message, the request starts with exactly the same content, the server finds that save point, reads everything before it from the cache, and only processes what comes after it. You never have to place them yourself.
+
+<Toggle title="Two limits that explain some strange misses">
+  A request can carry at most 4 breakpoints. And to find the previous save point, the server only
+  looks back over the last 20 blocks of content, where a block is a message, a tool call or a tool
+  result. If a single turn adds more than that, for example a long chain of tool calls run one after
+  the other, the previous save point is too far back to be found and the whole conversation is
+  processed again. Separately, a prompt shorter than the model's minimum (512 tokens on the newest
+  models, up to 4,096 on some older ones) is never cached, without any error. The [prompt caching
+  docs](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) have the details.
 </Toggle>
 
 ## Why does the cache work like this?
@@ -128,7 +131,13 @@ So which TTL does Claude Code use? It depends on how you pay, and it splits requ
 
 The split makes sense once you think about who is waiting. A human pauses to read a diff, take a call or grab a coffee, and the 1 hour TTL covers those gaps. A subagent usually sends its next request a few seconds later, so 5 minutes is enough and cheaper. The last row is the one to remember: <strong>once you go into overage, your coffee breaks start costing full rewrites</strong>.
 
-The subagent default has one blind spot. The timer counts from the start of one request to the start of the next, so the time a tool takes to run counts too. A subagent running a 7 minute test suite, a subagent stuck on a permission prompt while you are away, or a teammate of an [agent team](https://code.claude.com/docs/en/agent-teams) (several Claude Code sessions working together) sitting idle until another one sends it a message all let their entry expire, and their next request rewrites their whole history.
+The subagent default has one blind spot. The timer counts from the start of one request to the start of the next, so the time a tool takes to run counts too. Three common cases go past 5 minutes without anyone noticing:
+
+- a subagent running a test suite that takes 7 minutes,
+- a subagent waiting for you to approve a permission prompt while you are away from your desk,
+- a teammate in an [agent team](https://code.claude.com/docs/en/agent-teams). Agent teams are several Claude Code sessions working on the same task and sending each other messages, so a teammate often waits a long time for its next message.
+
+In all three cases the entry expires during the wait, and the next request processes and writes the whole history again.
 
 You can override both groups (Claude Code v2.1.242 and later) with the `promptCacheTtl` and `subagentPromptCacheTtl` settings, or the `CLAUDE_CODE_PROMPT_CACHE_TTL` and `CLAUDE_CODE_SUBAGENT_PROMPT_CACHE_TTL` environment variables. Each one takes `5m` or `1h`. For subagents though, I would not switch the whole group to 1 hour: every quick exploration subagent would pay the 2x write for nothing. Set `cacheTtl: 1h` in the `experimental` frontmatter of the few agents that wait (v2.1.248 and later) and keep 5 minutes for the rest.
 
