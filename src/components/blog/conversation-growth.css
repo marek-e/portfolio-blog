@@ -1,0 +1,209 @@
+@keyframes cg-row-0 {
+  0%,
+  3.33% {
+    opacity: 0;
+  }
+  6.25%,
+  88% {
+    opacity: 1;
+  }
+  95%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes cg-row-1 {
+  0%,
+  21.67% {
+    opacity: 0;
+  }
+  24.58%,
+  88% {
+    opacity: 1;
+  }
+  95%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes cg-row-2 {
+  0%,
+  40% {
+    opacity: 0;
+  }
+  42.92%,
+  88% {
+    opacity: 1;
+  }
+  95%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes cg-row-3 {
+  0%,
+  58.33% {
+    opacity: 0;
+  }
+  61.25%,
+  88% {
+    opacity: 1;
+  }
+  95%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes cg-drop-1 {
+  0%,
+  21.67% {
+    transform: translateY(-0.9rem);
+  }
+  25.83%,
+  100% {
+    transform: none;
+  }
+}
+
+@keyframes cg-drop-2 {
+  0%,
+  40% {
+    transform: translateY(-0.9rem);
+  }
+  44.17%,
+  100% {
+    transform: none;
+  }
+}
+
+@keyframes cg-drop-3 {
+  0%,
+  58.33% {
+    transform: translateY(-0.9rem);
+  }
+  62.5%,
+  100% {
+    transform: none;
+  }
+}
+
+@keyframes cg-grow-1 {
+  0%,
+  25% {
+    transform: scaleX(0);
+  }
+  31.67%,
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes cg-grow-2 {
+  0%,
+  43.33% {
+    transform: scaleX(0);
+  }
+  50%,
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes cg-grow-3 {
+  0%,
+  61.67% {
+    transform: scaleX(0);
+  }
+  68.33%,
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes cg-total {
+  0%,
+  71.67% {
+    opacity: 0;
+  }
+  75%,
+  88% {
+    opacity: 1;
+  }
+  95%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.cg-row-0 {
+  animation: cg-row-0 12s linear infinite;
+}
+.cg-row-1 {
+  animation: cg-row-1 12s linear infinite;
+}
+.cg-row-2 {
+  animation: cg-row-2 12s linear infinite;
+}
+.cg-row-3 {
+  animation: cg-row-3 12s linear infinite;
+}
+
+.cg-drop-1,
+.cg-drop-2,
+.cg-drop-3,
+.cg-grow-1,
+.cg-grow-2,
+.cg-grow-3 {
+  animation-duration: 12s;
+  animation-iteration-count: infinite;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+.cg-drop-1 {
+  animation-name: cg-drop-1;
+}
+.cg-drop-2 {
+  animation-name: cg-drop-2;
+}
+.cg-drop-3 {
+  animation-name: cg-drop-3;
+}
+.cg-grow-1,
+.cg-grow-2,
+.cg-grow-3 {
+  transform-origin: left;
+}
+.cg-grow-1 {
+  animation-name: cg-grow-1;
+}
+.cg-grow-2 {
+  animation-name: cg-grow-2;
+}
+.cg-grow-3 {
+  animation-name: cg-grow-3;
+}
+
+.cg-total {
+  animation: cg-total 12s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cg-row-0,
+  .cg-row-1,
+  .cg-row-2,
+  .cg-row-3,
+  .cg-drop-1,
+  .cg-drop-2,
+  .cg-drop-3,
+  .cg-grow-1,
+  .cg-grow-2,
+  .cg-grow-3,
+  .cg-total {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}

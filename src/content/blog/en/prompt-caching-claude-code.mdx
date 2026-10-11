@@ -6,6 +6,7 @@ tags: ['AI', 'agents', 'claude-code', 'DX']
 draft: false
 ---
 
+import { ConversationGrowth } from '@/components/blog/ConversationGrowth';
 import { PromptCacheLock } from '@/components/blog/PromptCacheLock';
 
 Every time you press Enter in Claude Code, the model rereads your whole conversation from the first line.
@@ -18,28 +19,9 @@ Pricing and token consumption are among the new things developers using AI agent
 
 The Claude API is <strong>stateless</strong>. Anthropic's servers keep no memory of your conversation between two messages. So each time you send something, Claude Code sends everything again: the tool definitions, the system prompt, your `CLAUDE.md`, every message, every file it read, every command output.
 
-```
-[ tools + system prompt ][ CLAUDE.md, memory ][ msg 1 ][ reply 1 ][ tool results ] ... [ your new message ]
-```
-
 Before writing a single word of its answer, the model has to process all of those tokens. This step is called the <Highlight color="blue">prefill</Highlight>. On a 150k token session, that is 150k tokens of work on every turn, even though 99% of them are exactly the same as a minute ago.
 
-<Mermaid
-  chart={`
-    sequenceDiagram
-      participant C as Claude Code
-      participant A as Claude API
-
-      C->>A: tools + system + CLAUDE.md + turn 1
-      A-->>C: reply 1
-      C->>A: tools + system + CLAUDE.md + turn 1 + reply 1 + turn 2
-      A-->>C: reply 2
-      C->>A: the same again, plus turn 3
-      Note over C,A: The request only grows. Everything before your new message was already sent last time.
-
-`}
-caption="Each request carries the full history, not just the new message"
-/>
+<ConversationGrowth />
 
 You are probably wondering why nobody just keeps the conversation on the server. That is what prompt caching does, but only under one condition.
 

@@ -6,6 +6,7 @@ tags: ['AI', 'agents', 'claude-code', 'DX']
 draft: false
 ---
 
+import { ConversationGrowth } from '@/components/blog/ConversationGrowth';
 import { PromptCacheLock } from '@/components/blog/PromptCacheLock';
 
 À chaque fois que vous appuyez sur Entrée dans Claude Code, le modèle relit toute votre conversation depuis la première ligne.
@@ -18,28 +19,9 @@ Le prix et la consommation de tokens font partie des nouvelles choses que les d�
 
 L'API de Claude est <strong>stateless</strong>. Les serveurs d'Anthropic ne gardent aucune mémoire de votre conversation entre deux messages. Donc à chaque fois que vous envoyez quelque chose, Claude Code renvoie tout : la définition des outils, le prompt système, votre `CLAUDE.md`, chaque message, chaque fichier lu, chaque sortie de commande.
 
-```
-[ outils + prompt système ][ CLAUDE.md, mémoire ][ msg 1 ][ réponse 1 ][ résultats d'outils ] ... [ votre nouveau message ]
-```
-
 Avant d'écrire le premier mot de sa réponse, le modèle doit traiter tous ces tokens. Cette étape s'appelle le <Highlight color="blue">prefill</Highlight>. Sur une session de 150k tokens, ça fait 150k tokens de travail à chaque tour, alors que 99 % d'entre eux sont exactement les mêmes qu'il y a une minute.
 
-<Mermaid
-  chart={`
-    sequenceDiagram
-      participant C as Claude Code
-      participant A as API Claude
-
-      C->>A: outils + système + CLAUDE.md + tour 1
-      A-->>C: réponse 1
-      C->>A: outils + système + CLAUDE.md + tour 1 + réponse 1 + tour 2
-      A-->>C: réponse 2
-      C->>A: la même chose, plus le tour 3
-      Note over C,A: La requête ne fait que grandir. Tout ce qui précède votre nouveau message a déjà été envoyé la fois d'avant.
-
-`}
-caption="Chaque requête transporte tout l'historique, pas seulement le nouveau message"
-/>
+<ConversationGrowth lang="fr" />
 
 Vous vous demandez sûrement pourquoi personne ne garde simplement la conversation côté serveur. C'est justement ce que fait le prompt caching, mais à une seule condition.
 
