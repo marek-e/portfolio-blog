@@ -41,9 +41,9 @@ const STRINGS = {
     lit: 'Lit: the print head, then each line printed again',
     cache: 'Shaded: lines read from the cache',
     caption:
-      'Each line carries its token and a running hash of every line above it, the way a running total does. Change token 5 and lines 1 to 4 keep their hashes, so they are read from the cache. Lines 5 to 8 depended on the old token: they drop into the bin and print again.',
+      'Each line carries its token and a running hash of itself and every line above it. Change token 5 and lines 1 to 4 keep their hashes, so the server finds them in the cache. Lines 5 to 8 depended on the old token: they drop into the bin and print again.',
     label:
-      'A printing adding machine on a bench. Each token of the prompt is keyed in, the crank turns and the print head prints one line on the paper tape: the token and a running hash of every line before it. When token 5 changes, the tape is cut after line 4, lines 5 to 8 fall into a bin, and they are printed again with new hashes while lines 1 to 4 stay on the tape.',
+      'A printing adding machine on a bench. Each token of the prompt is keyed in, the crank turns and the print head prints one line on the paper tape: the token and a running hash of that line and every line before it. When token 5 changes, the tape is cut after line 4, lines 5 to 8 fall into a bin, and they are printed again with new hashes while lines 1 to 4 stay on the tape.',
     changed: 'Token 5 changed. Lines 1 to 4 are read from the cache, lines 5 to 8 print again.',
     replaying: 'Replaying the prefill from the first token.',
   },
@@ -60,9 +60,9 @@ const STRINGS = {
     lit: 'En couleur : la tête d’impression, puis chaque ligne réimprimée',
     cache: 'Grisées : les lignes lues depuis le cache',
     caption:
-      'Chaque ligne porte son token et un hash cumulé de toutes les lignes au-dessus, comme un total qui court. Changez le token 5 : les lignes 1 à 4 gardent leur hash, elles sont lues depuis le cache. Les lignes 5 à 8 dépendaient de l’ancien token : elles tombent dans le bac et sont réimprimées.',
+      'Chaque ligne porte son token et un hash cumulé d’elle-même et de toutes les lignes au-dessus. Changez le token 5 : les lignes 1 à 4 gardent leur hash, le serveur les retrouve dans le cache. Les lignes 5 à 8 dépendaient de l’ancien token : elles tombent dans le bac et sont réimprimées.',
     label:
-      'Une calculatrice imprimante sur un établi. Chaque token du prompt est tapé, la manivelle tourne et la tête imprime une ligne sur la bande de papier : le token et un hash cumulé de toutes les lignes précédentes. Quand le token 5 change, la bande est coupée après la ligne 4, les lignes 5 à 8 tombent dans un bac, puis sont réimprimées avec de nouveaux hash, tandis que les lignes 1 à 4 restent sur la bande.',
+      'Une calculatrice imprimante sur un établi. Chaque token du prompt est tapé, la manivelle tourne et la tête imprime une ligne sur la bande de papier : le token et un hash cumulé de cette ligne et de toutes les précédentes. Quand le token 5 change, la bande est coupée après la ligne 4, les lignes 5 à 8 tombent dans un bac, puis sont réimprimées avec de nouveaux hash, tandis que les lignes 1 à 4 restent sur la bande.',
     changed:
       'Token 5 changé. Les lignes 1 à 4 sont lues depuis le cache, les lignes 5 à 8 sont réimprimées.',
     replaying: 'Le prefill rejoue depuis le premier token.',
