@@ -7,6 +7,7 @@ draft: false
 ---
 
 import { ConversationGrowth } from '@/components/blog/ConversationGrowth';
+import { TtlTimeline } from '@/components/blog/TtlTimeline';
 import { CausalCache } from '@/components/blog/CausalCache';
 
 À chaque fois que vous appuyez sur Entrée dans Claude Code, le modèle relit toute votre conversation depuis la première ligne.
@@ -92,25 +93,7 @@ Une entrée de cache ne vit pas éternellement. Chacune a un <Highlight color="b
 
 Voici à quoi ressemble une pause déjeuner avec chaque TTL :
 
-<Mermaid
-  chart={`
-    sequenceDiagram
-      actor Y as Vous
-      participant C as Entrée de cache
-
-      Y->>C: 10:00 envoi d'un message
-      Note right of C: écriture, valable jusqu'à 10:05 (5m) ou 11:00 (1h)
-      Y->>C: 10:03 nouveau message
-      Note right of C: lecture, compteur remis à 10:08 ou 11:03
-      Note over Y: 10:04 pause déjeuner
-      Note right of C: 10:08 l'entrée de 5m expire
-      Y->>C: 10:50 retour au bureau
-      Note right of C: 5m : réécriture complète de la conversation
-      Note right of C: 1h : lecture, valable jusqu'à 11:50
-
-`}
-caption="La même pause déjeuner avec un TTL de 5 minutes et d'1 heure"
-/>
+<TtlTimeline lang="fr" />
 
 Alors quel TTL utilise Claude Code ? Ça dépend de la façon dont vous payez, et il répartit les requêtes en deux groupes : la conversation principale (vos tours interactifs, `claude -p`, l'Agent SDK) et tout le reste (subagents, compaction, titres de session).
 

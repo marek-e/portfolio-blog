@@ -7,6 +7,7 @@ draft: false
 ---
 
 import { ConversationGrowth } from '@/components/blog/ConversationGrowth';
+import { TtlTimeline } from '@/components/blog/TtlTimeline';
 import { CausalCache } from '@/components/blog/CausalCache';
 
 Every time you press Enter in Claude Code, the model rereads your whole conversation from the first line.
@@ -91,25 +92,7 @@ A cache entry doesn't live forever. Each one has a <Highlight color="blue">TTL</
 
 Here is what a lunch break looks like with each TTL:
 
-<Mermaid
-  chart={`
-    sequenceDiagram
-      actor Y as You
-      participant C as Cache entry
-
-      Y->>C: 10:00 send a message
-      Note right of C: write, valid until 10:05 (5m) or 11:00 (1h)
-      Y->>C: 10:03 send another
-      Note right of C: read, timer reset to 10:08 or 11:03
-      Note over Y: 10:04 lunch break
-      Note right of C: 10:08 the 5m entry expires
-      Y->>C: 10:50 back at the desk
-      Note right of C: 5m: full rewrite of the conversation
-      Note right of C: 1h: read, valid until 11:50
-
-`}
-caption="The same lunch break with a 5 minute and a 1 hour TTL"
-/>
+<TtlTimeline />
 
 So which TTL does Claude Code use? It depends on how you pay, and it splits requests in two groups: the main conversation (your interactive turns, `claude -p`, the Agent SDK) and everything else (subagents, compaction, session titles).
 
