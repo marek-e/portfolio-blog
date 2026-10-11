@@ -7,7 +7,7 @@ draft: false
 ---
 
 import { ConversationGrowth } from '@/components/blog/ConversationGrowth';
-import { PromptCacheLock } from '@/components/blog/PromptCacheLock';
+import { CausalCache } from '@/components/blog/CausalCache';
 
 Every time you press Enter in Claude Code, the model rereads your whole conversation from the first line.
 
@@ -35,10 +35,6 @@ The rule everything follows from is that the cache is a <Highlight>prefix match<
 
 This is why order matters so much. The request is always rendered in the same order, <strong>tools, then system prompt, then messages</strong>. A change in your latest message costs nothing extra. A change in the tool list or the system prompt throws away the whole conversation behind it.
 
-A pin tumbler lock works the same way. The key is the request you send, each cut on the key is one block of the prompt, and the pins are what the cache remembers from the last request. Every pin that matches lines up with the plug, and that part of the prompt is a cache read. From the first pin that doesn't match, the pins drop and have to be set again, and that part is a cache write. Try it below, and watch what happens to the readout when you change the system prompt or wait 10 minutes.
-
-<PromptCacheLock client:visible />
-
 The places where an entry ends are called <Highlight color="purple">breakpoints</Highlight> (`cache_control` in the API). Claude Code places them for you, so you will rarely touch them yourself, but two limits are worth knowing because they explain some surprising misses.
 
 <Toggle title="The limits of breakpoints (for the curious)">
@@ -49,6 +45,26 @@ The places where an entry ends are called <Highlight color="purple">breakpoints<
   caching docs](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) have the full
   details.
 </Toggle>
+
+## Why does the cache work like this?
+
+You are probably wondering why the cache only works on the beginning of the prompt. It's not an arbitrary API choice, it comes straight from the way a model like Claude reads text. Anthropic doesn't publish how its own servers work, so what follows is how open inference engines like [vLLM](https://docs.vllm.ai/en/latest/design/prefix_caching/) do it, but it explains every rule we have seen so far.
+
+First, the model cuts your prompt into <Highlight color="blue">tokens</Highlight> and turns each one into a vector of numbers. Then, layer after layer, it computes two more vectors for each token, a <strong>key</strong> and a <strong>value</strong>. They are what the following tokens use to "look back" at this one, through the mechanism called attention. All the keys and values of a prompt form the <Highlight color="purple">KV cache</Highlight>, and prompt caching simply keeps it after the request instead of throwing it away. So the cache doesn't store your text, and it's not a vector database either: it stores the model's intermediate math.
+
+The important part is that attention only looks backward. <strong>The keys and values of token 500 are computed from tokens 1 to 500</strong>, never from what comes after. So if token 200 changes, every token from 200 on was computed with a different context and is now wrong, while tokens 1 to 199 never saw the change and stay valid. That's the prefix match rule, coming directly from the math.
+
+<CausalCache />
+
+The same mechanics explain the other rules of the cache:
+
+| Rule                                                        | Why                                                                                                                                                                                                                                                            |
+| ----------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Each model has its own cache                                | Keys and values come from the model's weights. Another model produces completely different vectors, so there is nothing to reuse                                                                                                                               |
+| Entries expire                                              | A KV cache is huge. On Llama 3 70B, whose architecture is public, it's 80 layers x 8 heads x 128 dimensions x 2 vectors x 2 bytes, so about 320 KB per token and 32 GB for a 100k token conversation. That memory is scarce and shared, so entries get evicted |
+| A write costs more than input, and the 1 hour TTL even more | Storing gigabytes has a cost, and holding them 12 times longer costs more. This one is my reading, Anthropic doesn't publish its cost model                                                                                                                    |
+| A read is not free                                          | The stored keys and values have to be loaded back, and your new tokens still look back at the whole history                                                                                                                                                    |
+| Caches are isolated per organization                        | Whether a prefix is cached shows in the response time. [Researchers at Stanford](https://arxiv.org/abs/2502.07776) used it to detect cache sharing between users at 7 API providers                                                                            |
 
 ## Cache read, cache write and the 3 token buckets
 
@@ -218,4 +234,4 @@ In practice, that gives a few habits:
 - Keep `/advisor` off. Every call rereads the whole conversation without any cache, and you don't control when it happens.
 - Put the cache status in your status line, so you know when your next message will be a cold one.
 
-If you want to go deeper, the [Claude Code prompt caching docs](https://code.claude.com/docs/en/prompt-caching) and the [API prompt caching docs](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) cover every edge case. And the lock figure above was drawn with the [anatomy](https://github.com/wheresryan22/anatomy) skill for Claude Code, which turns an idea into an isometric machine that explains it.
+If you want to go deeper, the [Claude Code prompt caching docs](https://code.claude.com/docs/en/prompt-caching) and the [API prompt caching docs](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) cover every edge case.
