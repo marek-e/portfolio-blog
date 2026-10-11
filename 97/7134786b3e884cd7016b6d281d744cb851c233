@@ -1,0 +1,45 @@
+src/components/blog/prompt-cache-lock/iso.ts
+  s_368d18095fddc2::t_fd09af93144345 123-126,133-136,148-150,226,289-296,340-347,367-368,400-407,431-433,437-444,456-465,474-483,556-561
+  s_368d18095fddc2::t_3df8719fb223a3 1-122,127-132,137-147,151-225,227-288,297-339,348-366,369-399,408-430,434-436,445-455,466-473,484-555,562-608
+src/components/blog/PromptCacheLock.tsx
+  s_368d18095fddc2::t_fd09af93144345 121,429
+  s_368d18095fddc2::t_d1e9b129d95be4 78-79
+  s_368d18095fddc2::t_334754c46cac4f 46
+  s_368d18095fddc2::t_5943b08ad2026a 1-45,47-77,80-120,122-428,430-472
+src/components/blog/prompt-cache-lock/motion.ts
+  s_368d18095fddc2::t_fd09af93144345 79-80
+  s_368d18095fddc2::t_0c9119ec33d733 77,105
+  s_368d18095fddc2::t_e2b5534b7532e5 1-76,78,81-104,106-119
+src/components/blog/prompt-cache-lock/model.ts
+  s_368d18095fddc2::t_4aefdd7f7d27c8 1-123
+src/components/blog/prompt-cache-lock/geometry.ts
+  s_368d18095fddc2::t_0f3608dbbd5043 37,269
+  s_368d18095fddc2::t_035f062aeb99e3 380
+  s_368d18095fddc2::t_9771c54cbcee82 454-457,460
+  s_368d18095fddc2::t_334754c46cac4f 504-509
+  s_368d18095fddc2::t_c6c2713c31b462 1-36,38,40-71,73,75-91,93-161,163-168,170-178,180-189,195-196,206-219,226-229,231-240,252-268,270-289,318-322,330,333-370,374-379,381-385,387-453,458-459,461-503
+  s_368d18095fddc2::t_50b43cabaf6326 39,72,74,92,169,179
+  s_368d18095fddc2::t_a30520445e86db 230,241-251,296-317,323,331-332
+  s_368d18095fddc2::t_fd09af93144345 162,190-194,197-205,220-225,290-295,324-329,371-373,386
+src/components/blog/prompt-cache-lock/lock.css
+  s_368d18095fddc2::t_180ea384cf4ff6 1-23,27-56,58-374,377-392
+  s_368d18095fddc2::t_50b43cabaf6326 24,26
+  s_368d18095fddc2::t_be0cd84634b37a 375-376
+  s_368d18095fddc2::t_0c9119ec33d733 25,57
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "977134786b3e884cd7016b6d281d744cb851c233",
+  "prompts": {},
+  "sessions": {
+    "s_368d18095fddc2": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "704be8ce-af5e-411c-a5c7-3689073142a9",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
