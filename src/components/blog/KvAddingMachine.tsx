@@ -254,6 +254,19 @@ export function KvAddingMachine({ lang = 'en' }: { lang?: Lang }) {
     frame();
     narrow.addEventListener('change', frame);
     if (still.matches) s.mode = 'still';
+    const settle = () => {
+      if (still.matches) {
+        s.mode = 'still';
+        cancelAnimationFrame(s.frame);
+        s.frame = 0;
+        s.clock = TIMES.reprintTo;
+        render();
+      } else if (s.mode === 'still') {
+        s.mode = 'tour';
+        run();
+      }
+    };
+    still.addEventListener('change', settle);
     render();
     const observer = new IntersectionObserver(
       (entries) => {
@@ -266,6 +279,7 @@ export function KvAddingMachine({ lang = 'en' }: { lang?: Lang }) {
     return () => {
       observer.disconnect();
       narrow.removeEventListener('change', frame);
+      still.removeEventListener('change', settle);
       cancelAnimationFrame(s.frame);
       s.frame = 0;
     };
