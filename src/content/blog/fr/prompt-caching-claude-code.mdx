@@ -9,6 +9,8 @@ draft: false
 import { ConversationGrowth } from '@/components/blog/ConversationGrowth';
 import { TtlTimeline } from '@/components/blog/TtlTimeline';
 import { KvAddingMachine } from '@/components/blog/KvAddingMachine';
+import Figure from '@/components/mdx/Figure.astro';
+import usageSession from '@/assets/blog/prompt-caching-claude-code/usage-session.png';
 
 À chaque fois que vous appuyez sur Entrée dans Claude Code, le modèle relit toute votre conversation depuis la première ligne.
 
@@ -168,18 +170,19 @@ Pour un humain, le calcul s'inverse. Dans la session de 100k tokens ci-dessus, l
 
 Maintenant que vous savez que le cache est une correspondance de préfixe, la plupart de cette liste va vous paraître logique. Tout ce qui change le début du prompt le casse, tout ce qui ajoute seulement à la fin le garde.
 
-| Action                                                                       | Cache                                      | Pourquoi                                                                                                                                   |
-| ---------------------------------------------------------------------------- | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| Changer de modèle avec `/model`                                              | <Highlight color="red">casse</Highlight>   | Chaque modèle a son propre cache. Ça inclut le changement de `opusplan` en plan mode et les skills qui utilisent un autre modèle           |
-| Changer l'effort                                                             | <Highlight color="red">casse</Highlight>   | Sur la plupart des modèles. Opus 5.5, Sonnet 5.5, Haiku 5.5 et Fable 5.1 gardent le cache                                                  |
-| Ajouter ou retirer des outils MCP                                            | <Highlight color="red">casse</Highlight>   | Seulement quand les outils sont chargés d'emblée. Avec le tool search (par défaut), la liste d'outils de la première requête est conservée |
-| `/compact`                                                                   | <Highlight color="red">casse</Highlight>   | La conversation est reconstruite. La couche du prompt système est réutilisée                                                               |
-| Mettre à jour Claude Code                                                    | <Highlight color="red">casse</Highlight>   | Le prompt système change avec la version                                                                                                   |
-| Rester inactif plus longtemps que le TTL                                     | <Highlight color="red">casse</Highlight>   | L'entrée a expiré                                                                                                                          |
-| Permission mode, output style, skills, commandes slash, plan mode, `/rewind` | <Highlight color="green">garde</Highlight> | Rien ne change avant votre nouveau message                                                                                                 |
-| Lancer un subagent                                                           | <Highlight color="green">garde</Highlight> | Le subagent construit son propre cache et laisse le vôtre tranquille. Un fork réutilise votre préfixe et lit votre cache                   |
-| Activer ou désactiver `/advisor`                                             | <Highlight color="green">garde</Highlight> | Sa définition d'outil se trouve après le breakpoint du cache                                                                               |
-| Modifier `CLAUDE.md` en cours de session                                     | <Highlight color="green">garde</Highlight> | Parce que la modification n'est pas encore appliquée                                                                                       |
+| Action                                                               | Cache                                      | Pourquoi                                                                                                                                                                                                                                                   |
+| -------------------------------------------------------------------- | ------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Changer de modèle avec `/model`                                      | <Highlight color="red">casse</Highlight>   | Chaque modèle a son propre cache. Ça inclut le changement de `opusplan` en plan mode et les skills qui utilisent un autre modèle                                                                                                                           |
+| Changer l'effort                                                     | <Highlight color="red">casse</Highlight>   | Sur la plupart des modèles. Opus 5.5, Sonnet 5.5, Haiku 5.5 et Fable 5.1 gardent le cache                                                                                                                                                                  |
+| Ajouter ou retirer des outils MCP                                    | <Highlight color="red">casse</Highlight>   | Seulement quand les outils sont chargés d'emblée. Avec le tool search (par défaut), la liste d'outils de la première requête est conservée                                                                                                                 |
+| `/compact`                                                           | <Highlight color="red">casse</Highlight>   | La conversation est reconstruite. La couche du prompt système est réutilisée                                                                                                                                                                               |
+| Mettre à jour Claude Code                                            | <Highlight color="red">casse</Highlight>   | Le prompt système change avec la version                                                                                                                                                                                                                   |
+| Rester inactif plus longtemps que le TTL                             | <Highlight color="red">casse</Highlight>   | L'entrée a expiré                                                                                                                                                                                                                                          |
+| Permission mode, output style, commandes slash, plan mode, `/rewind` | <Highlight color="green">garde</Highlight> | Rien ne change avant votre nouveau message                                                                                                                                                                                                                 |
+| Ajouter ou invoquer un skill en cours de session                     | <Highlight color="green">garde</Highlight> | Sa description ou son contenu est ajouté après la conversation. Un skill invocable par le modèle coûte quand même quelques tokens à chaque tour, donc `disable-model-invocation: true` garde hors du contexte un skill que vous lancez seulement à la main |
+| Lancer un subagent                                                   | <Highlight color="green">garde</Highlight> | Le subagent construit son propre cache et laisse le vôtre tranquille. Un fork réutilise votre préfixe et lit votre cache                                                                                                                                   |
+| Activer ou désactiver `/advisor`                                     | <Highlight color="green">garde</Highlight> | Sa définition d'outil se trouve après le breakpoint du cache                                                                                                                                                                                               |
+| Modifier `CLAUDE.md` en cours de session                             | <Highlight color="green">garde</Highlight> | Parce que la modification n'est pas encore appliquée                                                                                                                                                                                                       |
 
 Cette dernière ligne mérite sa propre boîte, parce que c'est la moins intuitive.
 
@@ -207,7 +210,20 @@ En plus de ça, je n'ai vu aucune amélioration de qualité pendant que je l'ava
 
 Pas besoin de me croire sur parole. Claude Code vous montre tout ça.
 
-`/usage` affiche une ligne `Prompt cache (main)` dans son bloc Session (v2.1.251 et plus) avec le taux de succès, les ratés, l'état chaud ou froid du cache et le TTL utilisé.
+`/usage` affiche une ligne `Prompt cache (main)` dans son bloc Session (v2.1.251 et plus) avec le taux de succès, les ratés, l'état chaud ou froid du cache et le TTL utilisé. Voici celui de la session où j'ai écrit cet article avec Claude Code, tel que l'application desktop l'affiche :
+
+<Figure
+  src={usageSession}
+  alt="Le panneau d'usage de Claude Code : cache hit 99 %, input 362 tokens, output 7k, cache read 57M, cache write 818k sur Opus 5.5"
+  caption="/usage à la fin de la session qui a produit cet article"
+  className="mx-auto max-w-sm"
+/>
+
+<strong>
+  57M de tokens lus depuis le cache, 818k écrits, et seulement 362 tokens d'entrée hors cache
+</strong>
+, soit un taux de succès de 99 %. Sans le cache, chacun de ces 57M de tokens aurait été facturé au
+prix d'entrée plein, 20 fois le tarif du cache sur Opus 5.5.
 
 Encore mieux, votre status line peut l'afficher en permanence, pour savoir si le cache est froid avant d'envoyer un message. Vous n'avez même pas besoin d'écrire le script : tapez `/statusline` suivi de ce que vous voulez, et Claude Code le génère pour vous.
 

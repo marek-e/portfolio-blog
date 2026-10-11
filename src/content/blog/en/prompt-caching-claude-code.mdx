@@ -9,6 +9,8 @@ draft: false
 import { ConversationGrowth } from '@/components/blog/ConversationGrowth';
 import { TtlTimeline } from '@/components/blog/TtlTimeline';
 import { KvAddingMachine } from '@/components/blog/KvAddingMachine';
+import Figure from '@/components/mdx/Figure.astro';
+import usageSession from '@/assets/blog/prompt-caching-claude-code/usage-session.png';
 
 Every time you press Enter in Claude Code, the model rereads your whole conversation from the first line.
 
@@ -167,18 +169,19 @@ For a human, the math goes the other way. In the 100k token session above, the 1
 
 Now that you know the cache is a prefix match, most of this list will feel logical. Anything that changes the beginning of the prompt breaks it, anything that only adds to the end keeps it.
 
-| Action                                                                      | Cache                                      | Why                                                                                                             |
-| --------------------------------------------------------------------------- | ------------------------------------------ | --------------------------------------------------------------------------------------------------------------- |
-| Switching model with `/model`                                               | <Highlight color="red">breaks</Highlight>  | Each model has its own cache. This includes `opusplan` switching in plan mode and skills that use another model |
-| Changing effort                                                             | <Highlight color="red">breaks</Highlight>  | On most models. Opus 5.5, Sonnet 5.5, Haiku 5.5 and Fable 5.1 keep the cache                                    |
-| Adding or removing MCP tools                                                | <Highlight color="red">breaks</Highlight>  | Only when tools load upfront. With tool search (the default), the tool list from the first request is kept      |
-| `/compact`                                                                  | <Highlight color="red">breaks</Highlight>  | The conversation is rebuilt. The system prompt layer is reused                                                  |
-| Upgrading Claude Code                                                       | <Highlight color="red">breaks</Highlight>  | The system prompt changes with the version                                                                      |
-| Being idle longer than the TTL                                              | <Highlight color="red">breaks</Highlight>  | The entry expired                                                                                               |
-| Permission mode, output style, skills, slash commands, plan mode, `/rewind` | <Highlight color="green">keeps</Highlight> | Nothing before your new message changes                                                                         |
-| Spawning a subagent                                                         | <Highlight color="green">keeps</Highlight> | The subagent builds its own cache and leaves yours alone. A fork reuses your prefix and reads your cache        |
-| Turning `/advisor` on or off                                                | <Highlight color="green">keeps</Highlight> | Its tool definition sits after the cache breakpoint                                                             |
-| Editing `CLAUDE.md` mid-session                                             | <Highlight color="green">keeps</Highlight> | Because the edit is not applied yet                                                                             |
+| Action                                                              | Cache                                      | Why                                                                                                                                                                                                                  |
+| ------------------------------------------------------------------- | ------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Switching model with `/model`                                       | <Highlight color="red">breaks</Highlight>  | Each model has its own cache. This includes `opusplan` switching in plan mode and skills that use another model                                                                                                      |
+| Changing effort                                                     | <Highlight color="red">breaks</Highlight>  | On most models. Opus 5.5, Sonnet 5.5, Haiku 5.5 and Fable 5.1 keep the cache                                                                                                                                         |
+| Adding or removing MCP tools                                        | <Highlight color="red">breaks</Highlight>  | Only when tools load upfront. With tool search (the default), the tool list from the first request is kept                                                                                                           |
+| `/compact`                                                          | <Highlight color="red">breaks</Highlight>  | The conversation is rebuilt. The system prompt layer is reused                                                                                                                                                       |
+| Upgrading Claude Code                                               | <Highlight color="red">breaks</Highlight>  | The system prompt changes with the version                                                                                                                                                                           |
+| Being idle longer than the TTL                                      | <Highlight color="red">breaks</Highlight>  | The entry expired                                                                                                                                                                                                    |
+| Permission mode, output style, slash commands, plan mode, `/rewind` | <Highlight color="green">keeps</Highlight> | Nothing before your new message changes                                                                                                                                                                              |
+| Adding or invoking a skill mid-session                              | <Highlight color="green">keeps</Highlight> | Its description or content is appended after the conversation. A model-invocable skill still costs a few tokens on every turn, so `disable-model-invocation: true` keeps a skill you only run by hand out of context |
+| Spawning a subagent                                                 | <Highlight color="green">keeps</Highlight> | The subagent builds its own cache and leaves yours alone. A fork reuses your prefix and reads your cache                                                                                                             |
+| Turning `/advisor` on or off                                        | <Highlight color="green">keeps</Highlight> | Its tool definition sits after the cache breakpoint                                                                                                                                                                  |
+| Editing `CLAUDE.md` mid-session                                     | <Highlight color="green">keeps</Highlight> | Because the edit is not applied yet                                                                                                                                                                                  |
 
 That last line gets its own box, because it is the least intuitive one.
 
@@ -206,7 +209,18 @@ On top of that, I haven't seen any increase in quality while having it enabled. 
 
 You don't have to take my word for any of this. Claude Code shows it to you.
 
-`/usage` has a `Prompt cache (main)` line in its Session block (v2.1.251 and later) with the hit rate, the misses, whether the cache is warm or cold, and the TTL in use.
+`/usage` has a `Prompt cache (main)` line in its Session block (v2.1.251 and later) with the hit rate, the misses, whether the cache is warm or cold, and the TTL in use. Here is the one from the session where I wrote this post with Claude Code, as the desktop app shows it:
+
+<Figure
+  src={usageSession}
+  alt="The Claude Code usage panel: cache hit 99%, input 362 tokens, output 7k, cache read 57M, cache write 818k on Opus 5.5"
+  caption="/usage at the end of the session that produced this post"
+  className="mx-auto max-w-sm"
+/>
+
+<strong>57M tokens read from the cache, 818k written, and only 362 tokens of uncached input</strong>
+, so a 99% cache hit rate. Without the cache, every one of those 57M tokens would have been billed
+at the full input price, 20 times the cached rate on Opus 5.5.
 
 Even better, your status line can show it permanently, so you know if the cache is cold before you send a message. You don't even have to write the script: type `/statusline` followed by what you want, and Claude Code generates it for you.
 
