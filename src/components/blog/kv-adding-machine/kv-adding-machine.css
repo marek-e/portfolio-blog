@@ -75,13 +75,6 @@
   letter-spacing: 0.1em;
 }
 
-.kvam-corner[data-corner='hint'] {
-  bottom: 16px;
-  left: 18px;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-}
-
 .kvam-corner[data-corner='readout'] {
   right: 18px;
   bottom: 16px;
@@ -95,6 +88,7 @@
   max-width: 820px;
   margin: 0 auto;
   height: auto;
+  overflow: visible;
 }
 
 .kvam-svg path,
@@ -335,15 +329,14 @@
 
 @media (max-width: 560px) {
   .kvam-card {
-    padding: 40px 6px 52px;
+    padding: 40px 6px;
   }
 
-  .kvam-corner[data-corner='hint'] {
-    bottom: 32px;
+  .kvam-svg {
+    overflow: hidden;
   }
 
-  .kvam-corner[data-corner='fig'],
-  .kvam-corner[data-corner='hint'] {
+  .kvam-corner[data-corner='fig'] {
     left: 12px;
   }
 

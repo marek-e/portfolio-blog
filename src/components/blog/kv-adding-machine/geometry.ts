@@ -86,7 +86,15 @@ const boxOf = (points: Point3[], pad: number) => {
     .join(' ');
 };
 
-export const VIEW_WIDE = `0 0 ${WIDTH} ${HEIGHT}`;
+export const VIEW_WIDE = boxOf(
+  [
+    [BIN.x, BIN.y + BIN.d, 0],
+    [TAPE.x0, TAPE.y, TAPE.top + CURL_R * 2],
+    [CRANK.x + 16, CRANK.y - CRANK.reach - 4, CRANK.z],
+    [X1, FRONT, 0],
+  ],
+  10
+);
 export const VIEW_NARROW = boxOf(
   [
     [BIN.x, BIN.y + BIN.d, 0],
