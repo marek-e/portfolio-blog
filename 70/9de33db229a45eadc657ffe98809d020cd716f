@@ -1,0 +1,21 @@
+src/content/blog/fr/prompt-caching-claude-code.mdx
+  s_62b08560215b70::t_936628c1589447 64-71,184,189
+src/content/blog/en/prompt-caching-claude-code.mdx
+  s_62b08560215b70::t_936628c1589447 64-69,182,187
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "709de33db229a45eadc657ffe98809d020cd716f",
+  "prompts": {},
+  "sessions": {
+    "s_62b08560215b70": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a808b7ec-72c5-4a15-944a-2324204d3385",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
