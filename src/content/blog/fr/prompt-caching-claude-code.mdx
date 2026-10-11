@@ -56,7 +56,7 @@ La règle dont tout découle, c'est que le cache fonctionne par <Highlight>corre
 
 C'est pour ça que l'ordre compte autant. La requête est toujours construite dans le même ordre : <strong>les outils, puis le prompt système, puis les messages</strong>. Un changement dans votre dernier message ne coûte rien de plus. Un changement dans la liste des outils ou dans le prompt système jette toute la conversation qui se trouve derrière.
 
-Les endroits où une entrée de cache s'arrête s'appellent des <Highlight color="purple">breakpoints</Highlight> (`cache_control` dans l'API). Claude Code les place pour vous, vous n'y toucherez donc presque jamais, mais deux limites valent le coup d'être connues parce qu'elles expliquent certains ratés surprenants.
+Un dernier détail : le serveur n'enregistre pas une entrée après chaque token. Il n'en enregistre qu'aux positions que la requête marque, appelées <Highlight color="purple">breakpoints</Highlight> (`cache_control` dans l'API). Voyez-les comme des points de sauvegarde dans un jeu vidéo : <strong>la requête suivante ne peut reprendre qu'à un endroit où une précédente a sauvegardé</strong>. Claude Code les place pour vous, donc chaque tour sauvegarde à la fin de ce qu'il a envoyé et le tour suivant reprend à partir de là. Vous n'y toucherez presque jamais, mais deux limites valent le coup d'être connues parce qu'elles expliquent certains ratés surprenants.
 
 <Toggle title="Les limites des breakpoints (pour les curieux)">
   Une requête peut porter au maximum 4 breakpoints. Chacun remonte au plus 20 blocs de contenu pour
@@ -127,7 +127,7 @@ Alors quel TTL utilise Claude Code ? Ça dépend de la façon dont vous payez, e
 
 Ce découpage a du sens quand on pense à qui attend. Un humain fait des pauses pour lire un diff, prendre un appel ou aller chercher un café, et le TTL d'1 heure couvre ces moments. Un subagent envoie en général sa requête suivante quelques secondes plus tard, donc 5 minutes suffisent et coûtent moins cher. La dernière ligne est celle à retenir : <strong>dès que vous passez en dépassement, vos pauses café se mettent à coûter des réécritures complètes</strong>.
 
-Le défaut des subagents a quand même un angle mort. Le compteur va du début d'une requête au début de la suivante, donc le temps d'exécution d'un outil compte aussi. Un subagent qui lance une suite de tests de 7 minutes, un subagent bloqué sur une demande de permission pendant que vous êtes absent, ou un coéquipier d'une agent team qui attend un message laissent tous expirer leur entrée, et leur requête suivante réécrit tout leur historique.
+Le défaut des subagents a quand même un angle mort. Le compteur va du début d'une requête au début de la suivante, donc le temps d'exécution d'un outil compte aussi. Un subagent qui lance une suite de tests de 7 minutes, un subagent bloqué sur une demande de permission pendant que vous êtes absent, ou un coéquipier d'une [agent team](https://code.claude.com/docs/en/agent-teams) (plusieurs sessions Claude Code qui travaillent ensemble) qui reste inactif en attendant qu'une autre lui envoie un message laissent tous expirer leur entrée, et leur requête suivante réécrit tout leur historique.
 
 Vous pouvez changer le TTL des deux groupes (Claude Code v2.1.242 et plus) avec les réglages `promptCacheTtl` et `subagentPromptCacheTtl`, ou les variables d'environnement `CLAUDE_CODE_PROMPT_CACHE_TTL` et `CLAUDE_CODE_SUBAGENT_PROMPT_CACHE_TTL`. Chacun accepte `5m` ou `1h`. Pour les subagents par contre, je ne passerais pas tout le groupe à 1 heure : chaque petit subagent d'exploration paierait l'écriture à 2x pour rien. Mettez plutôt `cacheTtl: 1h` dans le frontmatter `experimental` des quelques agents qui attendent (v2.1.248 et plus) et gardez 5 minutes pour les autres.
 
@@ -144,7 +144,15 @@ Mettons des chiffres dessus. Vous êtes sur Opus 5.5, votre session fait 100k to
 
 Un tour avec le cache chaud coûte environ 11 fois moins cher que sans cache, et c'est ce qui rend les longues sessions abordables. Mais regardez les deux dernières lignes : <strong>un cache froid coûte plus cher que pas de cache du tout</strong>, parce que vous payez le supplément d'écriture sur toute la conversation. Plus la session est grosse, plus la facture est lourde quand elle refroidit. C'est la pause café du titre.
 
-Le même calcul donne le seuil de rentabilité de chaque TTL. Une écriture à 5 minutes est rentable dès la deuxième requête (1,25 + 0,05 est inférieur à 2). Une écriture à 1 heure en demande une troisième (2 + 0,05 + 0,05 est inférieur à 3).
+Alors combien de requêtes faut-il pour qu'une écriture soit rentable ? Voici le coût d'entrée quand on envoie plusieurs fois le même préfixe, compté en prix plein de ce préfixe (1x pour le traiter, 1,25x ou 2x pour l'écrire, 0,05x pour le lire sur Opus 5.5) :
+
+| Requêtes sur le même préfixe | Sans cache | TTL de 5 minutes                          | TTL d'1 heure                             |
+| ---------------------------- | ---------- | ----------------------------------------- | ----------------------------------------- |
+| 1                            | 1          | <Highlight color="red">1,25</Highlight>   | <Highlight color="red">2</Highlight>      |
+| 2                            | 2          | <Highlight color="green">1,30</Highlight> | <Highlight color="red">2,05</Highlight>   |
+| 3                            | 3          | <Highlight color="green">1,35</Highlight> | <Highlight color="green">2,10</Highlight> |
+
+En vert, c'est moins cher que sans cache, en rouge plus cher. <strong>Une écriture à 5 minutes est rentable dès la deuxième requête, une écriture à 1 heure dès la troisième.</strong> Avec la lecture à 0,1x de la plupart des autres modèles, les seuils restent les mêmes.
 
 Avec un abonnement, vous ne voyez pas de dollars, mais la logique est la même : un long contexte consomme toujours votre quota, même au tarif du cache, donc un cache froid sur une grosse session entame vos limites plus vite.
 
