@@ -1,0 +1,28 @@
+src/content/blog/en/prompt-caching-claude-code.mdx
+  s_368d18095fddc2::t_568fec1942f739 9,24
+src/components/blog/ConversationGrowth.tsx
+  s_368d18095fddc2::t_0c47f42d156315 2-3,55,68,129-131
+  s_368d18095fddc2::t_d55de002cfc992 4-41,43-46,48-49,51-53,56,58,60-67,69-77,79-86,89,93,100,109-128,132-134
+  s_368d18095fddc2::t_568fec1942f739 1,50
+  s_368d18095fddc2::t_c88476a35153e8 42,47,54,57,59,78,87-88,90-92,94-99,101-108
+src/components/blog/conversation-growth.css
+  s_368d18095fddc2::t_bb1995fc2d0b9f 1-209
+src/content/blog/fr/prompt-caching-claude-code.mdx
+  s_368d18095fddc2::t_568fec1942f739 9,24
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "1c30ca9659ff5c5e2d600ea2f103a79abe228bfd",
+  "prompts": {},
+  "sessions": {
+    "s_368d18095fddc2": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "704be8ce-af5e-411c-a5c7-3689073142a9",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
