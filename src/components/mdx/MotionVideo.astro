@@ -1,0 +1,27 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+type Props = Omit<HTMLAttributes<'video'>, 'autoplay'> & { className?: string };
+
+const { className, class: classAttr, ...rest } = Astro.props;
+---
+
+<video class={className ?? classAttr} muted loop playsinline data-motion-autoplay {...rest}></video>
+
+<script>
+  const stillness = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  const motionVideos = () =>
+    document.querySelectorAll<HTMLVideoElement>('video[data-motion-autoplay]');
+
+  const sync = () => {
+    for (const video of motionVideos()) {
+      if (stillness.matches) video.pause();
+      else video.play().catch(() => {});
+    }
+  };
+
+  stillness.addEventListener('change', sync);
+  document.addEventListener('astro:page-load', sync);
+  sync();
+</script>

@@ -10,6 +10,7 @@ import { ConversationGrowth } from '@/components/blog/ConversationGrowth';
 import { TtlTimeline } from '@/components/blog/TtlTimeline';
 import { KvAddingMachine } from '@/components/blog/KvAddingMachine';
 import Figure from '@/components/mdx/Figure.astro';
+import MotionVideo from '@/components/mdx/MotionVideo.astro';
 import usageTerminal from '@/assets/blog/prompt-caching-claude-code/usage-terminal.png';
 
 Every time you press Enter in Claude Code, the model rereads your whole conversation from the first line.
@@ -21,17 +22,13 @@ Pricing and token consumption are among the new things developers using AI agent
 ## Why does Claude reread the whole conversation every turn?
 
 <figure className="not-prose my-8">
-  <video
+  <MotionVideo
     className="w-full rounded-xl border"
     src="/videos/prompt-caching-claude-code/prompt-cache-flow-en.mp4"
     poster="/videos/prompt-caching-claude-code/prompt-cache-flow-en.jpg"
     aria-label="What happens when you send a message: tokenization, a cache write, a cache read, then a cache miss"
     width="1280"
     height="720"
-    autoPlay
-    muted
-    loop
-    playsInline
     controls
     preload="metadata"
   />
