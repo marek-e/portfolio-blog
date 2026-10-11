@@ -1,0 +1,25 @@
+src/content/blog/en/prompt-caching-claude-code.mdx
+  s_368d18095fddc2::t_82851d9b78b115 10,95
+src/components/blog/TtlTimeline.tsx
+  s_368d18095fddc2::t_286f0fa0cc7935 8-17,19,24-33,35,45-47,50-51,53,55-58,71,73-80,84-87,89-95,98-105,110,112-113,115,118-119,121
+  s_368d18095fddc2::t_82851d9b78b115 125-127
+  s_368d18095fddc2::t_7bd41f535a64cd 1-7,18,20-23,34,36-44,48-49,52,54,59-70,72,81-83,88,96-97,106-109,111,114,116-117,120,122-124,128-130
+src/content/blog/fr/prompt-caching-claude-code.mdx
+  s_368d18095fddc2::t_82851d9b78b115 10,96
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "b9fe8cfc3a07618b5fcad839004fc3fcaad83078",
+  "prompts": {},
+  "sessions": {
+    "s_368d18095fddc2": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "704be8ce-af5e-411c-a5c7-3689073142a9",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
