@@ -31,39 +31,39 @@ import { poseOf } from './kv-adding-machine/pose';
 const STRINGS = {
   en: {
     fig: 'Fig 1',
-    title: 'Adding machine',
+    title: 'Printing calculator',
     change: 'Change token 5',
     replay: 'Replay',
-    prefill: (n: number) => `prefill · ${n} of 8 lines printed`,
-    cut: (from: string, to: string) => `token 5: ${from} → ${to} · cut after line 4`,
-    reprint: (n: number) => `4 lines read from the cache · ${n} printed again`,
-    lit: 'Lit: the print head, then each line printed again',
-    cache: 'Shaded: lines read from the cache',
+    prefill: (n: number) => `request 1 · prefill · ${n} of 8 tokens`,
+    cut: (from: string, to: string) => `request 2 · token 5: ${from} → ${to}`,
+    reprint: (n: number) => `request 2 · 4 tokens from the cache · ${n} recomputed`,
+    lit: 'Lit: tokens computed again in request 2',
+    cache: 'Shaded: tokens reused from the cache',
     caption:
-      'Change token 5: lines 1 to 4 keep their hashes, so the server finds them in the cache. Lines 5 to 8 depended on the old token, so they drop into the bin and print again.',
+      'Request 1 computes all 8 tokens. Request 2 changes token 5. Tokens 1 to 4 come from the cache. Tokens 5 to 8 were computed with the old word, so they drop into the bin and are computed again.',
     label:
-      'A printing adding machine on a bench. Each token of the prompt is keyed in, the crank turns and the print head prints one line on the paper tape: the token and a running hash of that line and every line before it. When token 5 changes, the tape is cut after line 4, lines 5 to 8 fall into a bin, and they are printed again with new hashes while lines 1 to 4 stay on the tape.',
-    changed: 'Token 5 changed. Lines 1 to 4 are read from the cache, lines 5 to 8 print again.',
-    replaying: 'Replaying the prefill from the first token.',
+      'A printing calculator on a bench. In request 1, each token of the prompt is keyed in and the print head prints one line on the paper roll, the token and a short code that stands for its keys and values and depends on that token and every token above it. In request 2, token 5 changes, the roll is cut after line 4, and lines 5 to 8 fall into a bin and are printed again with new codes, while lines 1 to 4 stay on the roll as the cached part.',
+    changed:
+      'Request 2, token 5 changed. Tokens 1 to 4 come from the cache, tokens 5 to 8 are computed again.',
+    replaying: 'Replaying request 1 from the first token.',
   },
   fr: {
     fig: 'Fig 1',
     title: 'Calculatrice imprimante',
     change: 'Changer le token 5',
     replay: 'Rejouer',
-    prefill: (n: number) => `prefill · ${n} ${n > 1 ? 'lignes imprimées' : 'ligne imprimée'} sur 8`,
-    cut: (from: string, to: string) => `token 5 : ${from} → ${to} · coupe après la ligne 4`,
-    reprint: (n: number) =>
-      `4 lignes lues depuis le cache · ${n} ${n > 1 ? 'réimprimées' : 'réimprimée'}`,
-    lit: 'En couleur : la tête d’impression, puis chaque ligne réimprimée',
-    cache: 'Grisées : les lignes lues depuis le cache',
+    prefill: (n: number) => `requête 1 · prefill · ${n} token${n > 1 ? 's' : ''} sur 8`,
+    cut: (from: string, to: string) => `requête 2 · token 5 : ${from} → ${to}`,
+    reprint: (n: number) => `requête 2 · 4 tokens du cache · ${n} recalculé${n > 1 ? 's' : ''}`,
+    lit: 'En couleur : les tokens recalculés dans la requête 2',
+    cache: 'Grisés : les tokens réutilisés depuis le cache',
     caption:
-      'Changez le token 5 : les lignes 1 à 4 gardent leur hash, le serveur les retrouve dans le cache. Les lignes 5 à 8 dépendaient de l’ancien token, elles tombent donc dans le bac et sont réimprimées.',
+      'La requête 1 calcule les 8 tokens. La requête 2 change le token 5. Les tokens 1 à 4 viennent du cache. Les tokens 5 à 8 ont été calculés avec l’ancien mot, ils tombent donc dans le bac et sont recalculés.',
     label:
-      'Une calculatrice imprimante sur un établi. Chaque token du prompt est tapé, la manivelle tourne et la tête imprime une ligne sur la bande de papier : le token et un hash cumulé de cette ligne et de toutes les précédentes. Quand le token 5 change, la bande est coupée après la ligne 4, les lignes 5 à 8 tombent dans un bac, puis sont réimprimées avec de nouveaux hash, tandis que les lignes 1 à 4 restent sur la bande.',
+      'Une calculatrice imprimante sur un établi. Dans la requête 1, chaque token du prompt est tapé et la tête imprime une ligne sur le rouleau de papier, le token et un code court qui représente ses clés et valeurs et qui dépend de ce token et de tous ceux au-dessus. Dans la requête 2, le token 5 change, le rouleau est coupé après la ligne 4, et les lignes 5 à 8 tombent dans un bac puis sont réimprimées avec de nouveaux codes, tandis que les lignes 1 à 4 restent sur le rouleau, c’est la partie en cache.',
     changed:
-      'Token 5 changé. Les lignes 1 à 4 sont lues depuis le cache, les lignes 5 à 8 sont réimprimées.',
-    replaying: 'Le prefill rejoue depuis le premier token.',
+      'Requête 2, token 5 changé. Les tokens 1 à 4 viennent du cache, les tokens 5 à 8 sont recalculés.',
+    replaying: 'La requête 1 rejoue depuis le premier token.',
   },
 } satisfies Record<Lang, unknown>;
 
