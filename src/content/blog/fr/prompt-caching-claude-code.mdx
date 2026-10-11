@@ -61,12 +61,14 @@ En pratique, Claude Code place un breakpoint à la fin de ce que chaque tour env
 
 <Toggle title="Deux limites qui expliquent certains ratés étranges">
   Une requête peut porter au maximum 4 breakpoints. Et pour retrouver le point de sauvegarde
-  précédent, le serveur ne remonte que sur les 20 derniers blocs de contenu, un bloc étant un
-  message, un appel d'outil ou un résultat d'outil. Si un seul tour en ajoute plus, par exemple une
-  longue chaîne d'appels d'outils lancés l'un après l'autre, le point de sauvegarde précédent est
-  trop loin pour être retrouvé et toute la conversation est retraitée. À part ça, un prompt plus
-  court que le minimum du modèle (512 tokens sur les modèles les plus récents, jusqu'à 4 096 sur
-  certains plus anciens) n'est jamais mis en cache, sans aucune erreur. La [documentation du prompt
+  précédent, le serveur ne vérifie que les 20 dernières positions, une position étant un message, un
+  appel d'outil ou un résultat d'outil. Une série d'appels d'outils en parallèle compte pour une
+  seule position, tout comme la série de leurs résultats. Si un seul tour ajoute plus de 20
+  positions, par exemple une longue chaîne d'appels d'outils lancés l'un après l'autre, le point de
+  sauvegarde précédent est trop loin pour être retrouvé et toute la conversation est retraitée. À
+  part ça, un prompt plus court que le minimum du modèle (512 tokens sur les modèles les plus
+  récents, jusqu'à 4 096 sur certains plus anciens) n'est jamais mis en cache, sans aucune erreur.
+  La [documentation du prompt
   caching](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) donne les détails.
 </Toggle>
 
@@ -179,12 +181,12 @@ Maintenant que vous savez que le cache est une correspondance de préfixe, la pl
 | Action                                                               | Cache                                      | Pourquoi                                                                                                                                                                                                                                                   |
 | -------------------------------------------------------------------- | ------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Changer de modèle avec `/model`                                      | <Highlight color="red">casse</Highlight>   | Chaque modèle a son propre cache. Ça inclut le changement de `opusplan` en plan mode et les skills qui utilisent un autre modèle                                                                                                                           |
-| Changer l'effort                                                     | <Highlight color="red">casse</Highlight>   | Sur la plupart des modèles. Opus 5.5, Sonnet 5.5, Haiku 5.5 et Fable 5.1 gardent le cache                                                                                                                                                                  |
+| Changer l'effort                                                     | <Highlight color="red">casse</Highlight>   | Sur la plupart des modèles. Opus 5.5, Sonnet 5.5, Haiku 5.5 et Fable 5.1 gardent le cache avec une clé API ou un abonnement, mais pas sur Bedrock, Google Cloud ou la passerelle Claude apps                                                               |
 | Ajouter ou retirer des outils MCP                                    | <Highlight color="red">casse</Highlight>   | Seulement quand les outils sont chargés d'emblée. Avec le tool search (par défaut), la liste d'outils de la première requête est conservée                                                                                                                 |
 | `/compact`                                                           | <Highlight color="red">casse</Highlight>   | La conversation est reconstruite. La couche du prompt système est réutilisée                                                                                                                                                                               |
 | Mettre à jour Claude Code                                            | <Highlight color="red">casse</Highlight>   | Le prompt système change avec la version                                                                                                                                                                                                                   |
 | Rester inactif plus longtemps que le TTL                             | <Highlight color="red">casse</Highlight>   | L'entrée a expiré                                                                                                                                                                                                                                          |
-| Permission mode, output style, commandes slash, plan mode, `/rewind` | <Highlight color="green">garde</Highlight> | Rien ne change avant votre nouveau message                                                                                                                                                                                                                 |
+| Permission mode, output style, commandes slash, plan mode, `/rewind` | <Highlight color="green">garde</Highlight> | Rien ne change avant votre nouveau message. Sauf le plan mode avec `opusplan`, qui change de modèle                                                                                                                                                        |
 | Ajouter ou invoquer un skill en cours de session                     | <Highlight color="green">garde</Highlight> | Sa description ou son contenu est ajouté après la conversation. Un skill invocable par le modèle coûte quand même quelques tokens à chaque tour, donc `disable-model-invocation: true` garde hors du contexte un skill que vous lancez seulement à la main |
 | Lancer un subagent                                                   | <Highlight color="green">garde</Highlight> | Le subagent construit son propre cache et laisse le vôtre tranquille. Un fork réutilise votre préfixe et lit votre cache                                                                                                                                   |
 | Activer ou désactiver `/advisor`                                     | <Highlight color="green">garde</Highlight> | Sa définition d'outil se trouve après le breakpoint du cache                                                                                                                                                                                               |
