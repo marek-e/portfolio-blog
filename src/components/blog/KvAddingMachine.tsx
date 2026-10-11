@@ -153,6 +153,7 @@ export function KvAddingMachine({ lang = 'en' }: { lang?: Lang }) {
   const oldLines = useRef<(SVGGElement | null)[]>([]);
   const newLines = useRef<(SVGGElement | null)[]>([]);
   const upperText = useRef<SVGGElement>(null);
+  const header = useRef<SVGTextElement>(null);
   const stripText = useRef<SVGGElement>(null);
   const freshText = useRef<SVGGElement>(null);
   const strip = useRef<SVGGElement>(null);
@@ -188,6 +189,7 @@ export function KvAddingMachine({ lang = 'en' }: { lang?: Lang }) {
       knifeSolid.current?.toggleAttribute('data-lit', p.knifeLit);
       set(cutLine.current, 'd', p.cut);
       set(upperText.current, 'transform', p.oldFeed);
+      set(header.current, 'opacity', p.fade);
       set(stripText.current, 'transform', p.oldFeed);
       set(freshText.current, 'transform', p.newFeed);
       oldLines.current.forEach((node, index) => set(node, 'opacity', p.oldOpacity[index]));
@@ -402,6 +404,18 @@ export function KvAddingMachine({ lang = 'en' }: { lang?: Lang }) {
               />
             </g>
             <g ref={upperText} transform={pose.oldFeed}>
+              <text
+                ref={header}
+                className="kvam-text"
+                data-row="header"
+                fontSize={TAPE.font}
+                y={-(TAPE.print + TAPE.pitch) + BASELINE}
+                opacity={pose.fade}
+                aria-hidden="true"
+              >
+                <tspan x={TAPE.x0 + 9.5}>token</tspan>
+                <tspan x={TAPE.x0 + 37.5}>K/V</tspan>
+              </text>
               {tape.before.slice(0, CHANGED).map((line) => (
                 <TapeLine
                   key={`old-${line.index}`}

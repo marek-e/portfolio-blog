@@ -230,6 +230,11 @@
   fill: var(--kvam-lo);
 }
 
+.kvam-text[data-row='header'] {
+  fill: var(--kvam-mid);
+  font-weight: 500;
+}
+
 .kvam-line[data-lit] .kvam-text,
 .kvam-line[data-lit] .kvam-text [data-col='index'] {
   fill: var(--kvam-accent);
