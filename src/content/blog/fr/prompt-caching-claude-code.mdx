@@ -33,12 +33,6 @@ La réponse, elle, n'est jamais mise en cache. Le modèle génère la même sort
 
 La règle dont tout découle, c'est que le cache fonctionne par <Highlight>correspondance de préfixe</Highlight>. Le serveur cherche le plus long début de votre prompt déjà stocké par une requête précédente. Changez un seul octet à la position N, et N plus tout ce qui suit est raté. Tout ce qui est avant N reste un succès.
 
-```
-Requête 1 :  [ A B C D E ]                 → écriture de A à E
-Requête 2 :  [ A B C D E | F G ]           → lecture de A à E, écriture de F G     un tour normal
-Requête 3 :  [ A B X D E | F G | H ]       → lecture de A B, réécriture de X à H  quelque chose a changé tôt
-```
-
 C'est pour ça que l'ordre compte autant. La requête est toujours construite dans le même ordre : <strong>les outils, puis le prompt système, puis les messages</strong>. Un changement dans votre dernier message ne coûte rien de plus. Un changement dans la liste des outils ou dans le prompt système jette toute la conversation qui se trouve derrière.
 
 Une serrure à goupilles fonctionne exactement de la même façon. La clé, c'est la requête que vous envoyez, chaque dent de la clé est un bloc du prompt, et les goupilles sont ce que le cache a retenu de la dernière requête. Chaque goupille qui correspond s'aligne avec le rotor, et cette partie du prompt est une lecture de cache. À partir de la première goupille qui ne correspond pas, les goupilles tombent et doivent être replacées, et cette partie est une écriture de cache. Essayez ci-dessous, et regardez ce que devient l'affichage quand vous changez le prompt système ou attendez 10 minutes.

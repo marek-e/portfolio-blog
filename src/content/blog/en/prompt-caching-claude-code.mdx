@@ -33,12 +33,6 @@ The answer itself is never cached. The model generates the same output with or w
 
 The rule everything follows from is that the cache is a <Highlight>prefix match</Highlight>. The server looks for the longest start of your prompt that a previous request already stored. Change one byte at position N, and N plus everything after it misses. Everything before N still hits.
 
-```
-Request 1:  [ A B C D E ]                 → write A to E
-Request 2:  [ A B C D E | F G ]           → read A to E, write F G       a normal turn
-Request 3:  [ A B X D E | F G | H ]       → read A B, rewrite X to H     something changed early
-```
-
 This is why order matters so much. The request is always rendered in the same order, <strong>tools, then system prompt, then messages</strong>. A change in your latest message costs nothing extra. A change in the tool list or the system prompt throws away the whole conversation behind it.
 
 A pin tumbler lock works the same way. The key is the request you send, each cut on the key is one block of the prompt, and the pins are what the cache remembers from the last request. Every pin that matches lines up with the plug, and that part of the prompt is a cache read. From the first pin that doesn't match, the pins drop and have to be set again, and that part is a cache write. Try it below, and watch what happens to the readout when you change the system prompt or wait 10 minutes.
