@@ -1,0 +1,25 @@
+src/components/mdx/MotionVideo.astro
+  s_62b08560215b70::t_545b6486c03f5a 26
+  s_62b08560215b70::t_4378d1eb4ea74b 1-8,10-25,27
+  s_62b08560215b70::t_ce737c41ccca7e 9
+src/content/blog/fr/prompt-caching-claude-code.mdx
+  s_62b08560215b70::t_1aca78b6d7fa6b 13,25
+src/content/blog/en/prompt-caching-claude-code.mdx
+  s_62b08560215b70::t_1aca78b6d7fa6b 13,25
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "ff3d0fbc638e2afd131f60a3f84fce38c13c4484",
+  "prompts": {},
+  "sessions": {
+    "s_62b08560215b70": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a808b7ec-72c5-4a15-944a-2324204d3385",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
