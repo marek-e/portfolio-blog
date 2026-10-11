@@ -94,6 +94,39 @@ The same mechanics explain the other rules of the cache:
 | A read is not free                                          | The stored keys and values have to be loaded back, and your new tokens still look back at the whole history                                                                                                                                                    |
 | Caches are isolated per organization                        | Whether a prefix is cached shows in the response time. [Researchers at Stanford](https://arxiv.org/abs/2502.07776) used it to detect cache sharing between users at 7 API providers                                                                            |
 
+### What the cache looks like in a real engine
+
+The calculator prints one line per token so you can read it. A real engine stores the same thing in bigger pieces. Here is how vLLM does it, with the request from the video above.
+
+```text
+prefix  tools, system, CLAUDE.md, messages  24,007 tokens
+blocks  1,500 blocks of 16 tokens, 7 left over
+entry   block name → K and V of 16 tokens, every layer
+```
+
+The prefix is your request turned into tokens, always in the same order: tool definitions and system prompt, `CLAUDE.md`, then the messages. Claude Code keeps that order every turn, so each request starts with the previous one.
+
+vLLM cuts the tokens into blocks of 16 and only caches full blocks. Each block holds the keys and values of its 16 tokens at every layer. On Llama 3 70B, one token at one layer is 8 heads × 128 numbers for the key, and the same for the value. Multiply by 80 layers and 16 tokens, and a single block weighs about 5 MB of GPU memory.
+
+Each block also gets a name, a hash of its 16 tokens and of the previous block's name. So the name of block 3 changes as soon as anything in blocks 1 to 3 changes, the same dependency as the keys and values. That's why a name is enough to know whether a stored block is still valid. The cache is a table from names to blocks, and when memory runs out, the least recently used blocks go first.
+
+Finding the longest cached prefix is then a short loop. The engine names the blocks of the new request in order and stops at the first name it doesn't know:
+
+```python
+def cached_tokens(tokens, cache):
+    name, hits = None, 0
+    for start in range(0, len(tokens) - 15, 16):
+        name = hash((name, tuple(tokens[start : start + 16])))
+        if name not in cache:
+            break
+        hits += 1
+    return hits * 16
+```
+
+Stopping at the first miss isn't a shortcut. Block 5's name contains block 4's name, so if block 4 isn't in the cache, no later block can be. Everything before the miss is read from the cache, everything after is computed and written as new blocks.
+
+The Claude API puts its own rule on top, the breakpoints and the 20 positions we saw earlier. Those positions count messages and tool calls, not 16-token blocks. Anthropic doesn't say how its engine stores the keys and values underneath.
+
 ## Cache read, cache write and the 3 token buckets
 
 Every API response contains a `usage` block that splits the input of the request into three buckets. Once you know them, you can read any Claude bill.
