@@ -18,6 +18,26 @@ Pricing and token consumption are among the new things developers using AI agent
 
 ## Why does Claude reread the whole conversation every turn?
 
+<figure className="not-prose my-8">
+  <video
+    className="w-full rounded-xl border"
+    src="/videos/prompt-caching-claude-code/prompt-cache-flow-en.mp4"
+    poster="/videos/prompt-caching-claude-code/prompt-cache-flow-en.jpg"
+    aria-label="What happens when you send a message: tokenization, a cache write, a cache read, then a cache miss"
+    width="1280"
+    height="720"
+    autoPlay
+    muted
+    loop
+    playsInline
+    controls
+    preload="metadata"
+  />
+  <figcaption className="text-muted-foreground mt-2 text-center text-sm">
+    What happens to your message, from tokens to the prompt cache, over three requests
+  </figcaption>
+</figure>
+
 The Claude API is <strong>stateless</strong>. Anthropic's servers keep no memory of your conversation between two messages. So each time you send something, Claude Code sends everything again: the tool definitions, the system prompt, your `CLAUDE.md`, every message, every file it read, every command output.
 
 Before writing a single word of its answer, the model has to process all of those tokens. This step is called the <Highlight color="blue">prefill</Highlight>. On a 150k token session, that is 150k tokens of work on every turn, even though 99% of them are exactly the same as a minute ago.

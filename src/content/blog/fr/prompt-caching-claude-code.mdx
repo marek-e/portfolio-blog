@@ -18,6 +18,26 @@ Le prix et la consommation de tokens font partie des nouvelles choses que les d�
 
 ## Pourquoi Claude relit-il toute la conversation à chaque tour ?
 
+<figure className="not-prose my-8">
+  <video
+    className="w-full rounded-xl border"
+    src="/videos/prompt-caching-claude-code/prompt-cache-flow-fr.mp4"
+    poster="/videos/prompt-caching-claude-code/prompt-cache-flow-fr.jpg"
+    aria-label="Ce qui se passe quand vous envoyez un message : tokenisation, écriture de cache, lecture de cache, puis un raté"
+    width="1280"
+    height="720"
+    autoPlay
+    muted
+    loop
+    playsInline
+    controls
+    preload="metadata"
+  />
+  <figcaption className="text-muted-foreground mt-2 text-center text-sm">
+    Ce qui arrive à votre message, des tokens au cache de prompt, sur trois requêtes
+  </figcaption>
+</figure>
+
 L'API de Claude est <strong>stateless</strong>. Les serveurs d'Anthropic ne gardent aucune mémoire de votre conversation entre deux messages. Donc à chaque fois que vous envoyez quelque chose, Claude Code renvoie tout : la définition des outils, le prompt système, votre `CLAUDE.md`, chaque message, chaque fichier lu, chaque sortie de commande.
 
 Avant d'écrire le premier mot de sa réponse, le modèle doit traiter tous ces tokens. Cette étape s'appelle le <Highlight color="blue">prefill</Highlight>. Sur une session de 150k tokens, ça fait 150k tokens de travail à chaque tour, alors que 99 % d'entre eux sont exactement les mêmes qu'il y a une minute.
