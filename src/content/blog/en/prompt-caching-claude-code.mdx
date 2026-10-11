@@ -1,0 +1,248 @@
+---
+title: 'Prompt caching in Claude Code: why your coffee break costs more than your prompt'
+description: 'Cache reads, cache writes, the 5 minute and 1 hour TTL: the token math behind every Claude Code turn, and why a cold cache costs more than no cache at all.'
+publishDate: 2026-10-11
+tags: ['AI', 'agents', 'claude-code', 'DX']
+draft: true
+---
+
+{/* Thesis: In Claude Code, what a turn costs depends less on what you type than on whether the cache in front of it is still warm, and a cold miss costs more than having no cache at all. */}
+{/* Title option 2: 'Cache read, cache write: the token math behind every Claude Code turn' */}
+
+import { PromptCacheLock } from '@/components/blog/PromptCacheLock';
+
+Every time you press Enter in Claude Code, the model rereads your whole conversation from the first line.
+
+That sounds expensive, and it would be without <Highlight>prompt caching</Highlight>. Caching is the reason a two hour session with Claude Code stays affordable, and also the reason the first message after your lunch break can cost more than the ten before it.
+
+Pricing and token consumption are among the new things developers using AI agents have to learn. To really understand them, you first need to understand how the caching system works. So in this post we will go through it from the ground up: what gets cached, what a cache read and a cache write cost, how the 5 minute and 1 hour TTL work, and what breaks the cache in Claude Code.
+
+## Why does Claude reread the whole conversation every turn?
+
+The Claude API is <strong>stateless</strong>. Anthropic's servers keep no memory of your conversation between two messages. So each time you send something, Claude Code sends everything again: the tool definitions, the system prompt, your `CLAUDE.md`, every message, every file it read, every command output.
+
+```
+[ tools + system prompt ][ CLAUDE.md, memory ][ msg 1 ][ reply 1 ][ tool results ] ... [ your new message ]
+```
+
+Before writing a single word of its answer, the model has to process all of those tokens. This step is called the <Highlight color="blue">prefill</Highlight>. On a 150k token session, that is 150k tokens of work on every turn, even though 99% of them are exactly the same as a minute ago.
+
+<Mermaid
+  chart={`
+    sequenceDiagram
+      participant C as Claude Code
+      participant A as Claude API
+
+      C->>A: tools + system + CLAUDE.md + turn 1
+      A-->>C: reply 1
+      C->>A: tools + system + CLAUDE.md + turn 1 + reply 1 + turn 2
+      A-->>C: reply 2
+      C->>A: the same again, plus turn 3
+      Note over C,A: The request only grows. Everything before your new message was already sent last time.
+
+`}
+caption="Each request carries the full history, not just the new message"
+/>
+
+You are probably wondering why nobody just keeps the conversation on the server. That is what prompt caching does, but only under one condition.
+
+## How prompt caching works
+
+After processing a prompt, the server can keep the result of that work for a while. That result is the model's internal state for those tokens (the KV cache), not the answer. On the next request, <strong>if the beginning of the prompt is byte for byte identical</strong>, the server reuses the stored work instead of redoing it.
+
+The answer itself is never cached. The model generates the same output with or without the cache. Caching only changes how much you pay for the input and how fast the first token arrives.
+
+The rule everything follows from is that the cache is a <Highlight>prefix match</Highlight>. The server looks for the longest start of your prompt that a previous request already stored. Change one byte at position N, and N plus everything after it misses. Everything before N still hits.
+
+```
+Request 1:  [ A B C D E ]                 → write A to E
+Request 2:  [ A B C D E | F G ]           → read A to E, write F G       a normal turn
+Request 3:  [ A B X D E | F G | H ]       → read A B, rewrite X to H     something changed early
+```
+
+This is why order matters so much. The request is always rendered in the same order, <strong>tools, then system prompt, then messages</strong>. A change in your latest message costs nothing extra. A change in the tool list or the system prompt throws away the whole conversation behind it.
+
+A pin tumbler lock works the same way. The key is the request you send, each cut on the key is one block of the prompt, and the pins are what the cache remembers from the last request. Every pin that matches lines up with the plug, and that part of the prompt is a cache read. From the first pin that doesn't match, the pins drop and have to be set again, and that part is a cache write. Try it below, and watch what happens to the readout when you change the system prompt or wait 10 minutes.
+
+<PromptCacheLock client:visible />
+
+The places where an entry ends are called <Highlight color="purple">breakpoints</Highlight> (`cache_control` in the API). Claude Code places them for you, so you will rarely touch them yourself, but two limits are worth knowing because they explain some surprising misses.
+
+<Toggle title="The limits of breakpoints (for the curious)">
+  A request can carry at most 4 breakpoints. Each one looks back at most 20 content blocks to find
+  an earlier entry, so a single turn that appends a very long run of blocks can miss the previous
+  entry. And a prefix shorter than the model's minimum (512 tokens on the newest models, up to 4,096
+  on some older ones) is silently not cached: no error, the cache fields just stay at 0. The [prompt
+  caching docs](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) have the full
+  details.
+</Toggle>
+
+## Cache read, cache write and the 3 token buckets
+
+Every API response contains a `usage` block that splits the input of the request into three buckets. Once you know them, you can read any Claude bill.
+
+| Field                         | What happened                    | Price on Claude Opus 5.5 (base input $4 per million tokens) |
+| ----------------------------- | -------------------------------- | ----------------------------------------------------------- |
+| `cache_read_input_tokens`     | Found in the cache and reused    | 0.05x, so $0.20                                             |
+| `cache_creation_input_tokens` | Processed and saved to the cache | 1.25x with a 5 minute TTL ($5), 2x with a 1 hour TTL ($8)   |
+| `input_tokens`                | Processed and not saved          | 1x, so $4                                                   |
+
+The read multiplier depends on the model: 0.1x on most of them, 0.05x on Opus 5.5 and 0.025x on Fable 5.1. Output tokens ($20 per million on Opus 5.5) are never cached.
+
+Two things surprise people here. First, <strong>a cache write costs more than normal input</strong>. You pay a premium to store the work, and it only pays off if a later request reads it back. Second, `input_tokens` is only the uncached remainder. The real size of the prompt is the sum of the three fields, so a turn that shows 300 `input_tokens` may still have processed 100k tokens through the cache.
+
+## 5 minutes or 1 hour: how the TTL works
+
+A cache entry doesn't live forever. Each one has a <Highlight color="blue">TTL</Highlight> (time to live), either 5 minutes (the default, writes at 1.25x) or 1 hour (writes at 2x). Three details matter more than the TTL itself:
+
+- <strong>A cache read resets the timer for free.</strong> If you send a message every 3 minutes,
+  even a 5 minute entry stays warm all day.
+- The timer starts when the request starts, not when it ends. If Claude spends 4 minutes on a long answer, a 5 minute entry has about 1 minute left when it finishes.
+- When the entry expires, the next turn is a full miss. The whole conversation is processed again and written again, with the write premium.
+
+Here is what a lunch break looks like with each TTL:
+
+<Mermaid
+  chart={`
+    sequenceDiagram
+      actor Y as You
+      participant C as Cache entry
+
+      Y->>C: 10:00 send a message
+      Note right of C: write, valid until 10:05 (5m) or 11:00 (1h)
+      Y->>C: 10:03 send another
+      Note right of C: read, timer reset to 10:08 or 11:03
+      Note over Y: 10:04 lunch break
+      Note right of C: 10:08 the 5m entry expires
+      Y->>C: 10:50 back at the desk
+      Note right of C: 5m: full rewrite of the conversation
+      Note right of C: 1h: read, valid until 11:50
+
+`}
+caption="The same lunch break with a 5 minute and a 1 hour TTL"
+/>
+
+So which TTL does Claude Code use? It depends on how you pay, and it splits requests in two groups: the main conversation (your interactive turns, `claude -p`, the Agent SDK) and everything else (subagents, compaction, session titles).
+
+|                                               | Main conversation | Everything else |
+| --------------------------------------------- | ----------------- | --------------- |
+| Subscription (Pro, Max, Team, Enterprise)     | 1 hour            | 5 minutes       |
+| API key, Bedrock, Vertex, Foundry             | 5 minutes         | 5 minutes       |
+| Subscription in overage (using usage credits) | 5 minutes         | 5 minutes       |
+
+The split makes sense once you think about who is waiting. A human pauses to read a diff, take a call or grab a coffee, and the 1 hour TTL covers those gaps. A subagent usually sends its next request a few seconds later, so 5 minutes is enough and cheaper. The last row is the one to remember: <strong>once you go into overage, your coffee breaks start costing full rewrites</strong>.
+
+The subagent default has one blind spot. The timer counts from the start of one request to the start of the next, so the time a tool takes to run counts too. A subagent running a 7 minute test suite, a subagent stuck on a permission prompt while you are away, or an agent team teammate waiting for a message all let their entry expire, and their next request rewrites their whole history.
+
+You can override both groups (Claude Code v2.1.242 and later) with the `promptCacheTtl` and `subagentPromptCacheTtl` settings, or the `CLAUDE_CODE_PROMPT_CACHE_TTL` and `CLAUDE_CODE_SUBAGENT_PROMPT_CACHE_TTL` environment variables. Each one takes `5m` or `1h`. For subagents though, I would not switch the whole group to 1 hour: every quick exploration subagent would pay the 2x write for nothing. Set `cacheTtl: 1h` in the `experimental` frontmatter of the few agents that wait (v2.1.248 and later) and keep 5 minutes for the rest.
+
+## How much does a turn really cost?
+
+Let's put numbers on it. You are on Opus 5.5, your session is at 100k tokens, and the next turn adds 2k new tokens (your message, the last reply and some tool output).
+
+| Situation               | Calculation                         | Input cost of the turn |
+| ----------------------- | ----------------------------------- | ---------------------- |
+| Warm cache, 1 hour TTL  | 100k read at $0.20 + 2k write at $8 | about $0.036           |
+| No caching at all       | 102k at $4                          | about $0.41            |
+| Cold miss, 5 minute TTL | 102k write at $5                    | about $0.51            |
+| Cold miss, 1 hour TTL   | 102k write at $8                    | about $0.82            |
+
+A warm turn is about 11 times cheaper than no caching, and that is what makes long sessions affordable. But look at the last two rows: <strong>a cold miss costs more than having no cache at all</strong>, because you pay the write premium on the whole conversation. The bigger the session, the bigger the bill when it goes cold. That's the coffee break from the title.
+
+The same math gives the break-even of each TTL. A 5 minute write pays for itself from the second request (1.25 + 0.05 is less than 2). A 1 hour write needs a third one (2 + 0.05 + 0.05 is less than 3).
+
+On a subscription you don't see dollars, but the same logic applies: a long context still draws on your plan usage, even at the cached rate, so a cold miss on a big session eats into your limits faster.
+
+## Isn't the 1 hour TTL a rip-off?
+
+That's the fair objection. With the 1 hour TTL, every new token you write costs 2x instead of 1.25x, on every single turn. If you work in a tight loop and send your next message within a few minutes, a 5 minute entry would have stayed warm anyway, and you paid the extra 0.75x for nothing.
+
+For continuous traffic, that's true. An agent loop or a script calling the API every few seconds never lets a 5 minute entry expire, so the 5 minute TTL is strictly cheaper there. It matches what Claude Code does by default: 5 minutes for subagents and for API key users.
+
+For a human, the math goes the other way. In the 100k token session above, the 1 hour premium on a 2k token write is 2k x ($8 - $5) per million, so <strong>about $0.006 per turn</strong>. One cold miss with the 5 minute TTL costs about $0.51 instead of $0.036. You would need around 80 turns of premium to pay for a single avoided miss, and most people take more than one break in 80 turns.
+
+## What breaks the cache in Claude Code?
+
+Now that you know the cache is a prefix match, most of this list will feel logical. Anything that changes the beginning of the prompt breaks it, anything that only adds to the end keeps it.
+
+| Action                                                                      | Cache                                      | Why                                                                                                             |
+| --------------------------------------------------------------------------- | ------------------------------------------ | --------------------------------------------------------------------------------------------------------------- |
+| Switching model with `/model`                                               | <Highlight color="red">breaks</Highlight>  | Each model has its own cache. This includes `opusplan` switching in plan mode and skills that use another model |
+| Changing effort                                                             | <Highlight color="red">breaks</Highlight>  | On most models. Opus 5.5, Sonnet 5.5, Haiku 5.5 and Fable 5.1 keep the cache                                    |
+| Adding or removing MCP tools                                                | <Highlight color="red">breaks</Highlight>  | Only when tools load upfront. With tool search (the default), the tool list from the first request is kept      |
+| `/compact`                                                                  | <Highlight color="red">breaks</Highlight>  | The conversation is rebuilt. The system prompt layer is reused                                                  |
+| Upgrading Claude Code                                                       | <Highlight color="red">breaks</Highlight>  | The system prompt changes with the version                                                                      |
+| Being idle longer than the TTL                                              | <Highlight color="red">breaks</Highlight>  | The entry expired                                                                                               |
+| Permission mode, output style, skills, slash commands, plan mode, `/rewind` | <Highlight color="green">keeps</Highlight> | Nothing before your new message changes                                                                         |
+| Spawning a subagent                                                         | <Highlight color="green">keeps</Highlight> | The subagent builds its own cache and leaves yours alone. A fork reuses your prefix and reads your cache        |
+| Turning `/advisor` on or off                                                | <Highlight color="green">keeps</Highlight> | Its tool definition sits after the cache breakpoint                                                             |
+| Editing `CLAUDE.md` mid-session                                             | <Highlight color="green">keeps</Highlight> | Because the edit is not applied yet                                                                             |
+
+That last line gets its own box, because it is the least intuitive one.
+
+<Callout variant="warning" title="Your CLAUDE.md edit did nothing?">
+  `CLAUDE.md` sits near the start of the prompt, so applying an edit right away would break the
+  cache for the whole conversation. Claude Code avoids that by keeping the old version until you run
+  `/clear`, `/compact` or restart the session.
+</Callout>
+
+`/compact` is worth a second look too. While the cache is warm it is cheap, because the summary is built from cached tokens. After a long break it is the expensive path: it has to read the whole cold conversation just to summarize it. If you come back after an hour and don't need the old context anymore, <strong>`/clear` is much cheaper than continuing or compacting</strong>.
+
+The flip side is that compacting early, at a natural break between two tasks, is a good habit. Every turn rereads the whole history. At 0.05x it is cheap per turn, but on a 200k token session it is still about $0.04 per turn on Opus 5.5, and everything that goes wrong (a cold miss, a model switch) costs in proportion to that size. Compacting while the cache is warm keeps all of it small. Just don't do it in the middle of a task: the summary is lossy, and Claude may have to read again the files it just forgot.
+
+## Why I turned off the advisor tool
+
+The <Highlight color="orange">advisor tool</Highlight> lets Claude consult a second, usually stronger model at key moments. I would not recommend it, and caching is the main reason.
+
+Turning `/advisor` on keeps your cache, but the advisor itself never gets one. Each time Claude consults it, the advisor model receives the full transcript, every tool call and result included, and <strong>processes it uncached, with no reuse between calls</strong>. Even when the advisor is the same model as your main one, it doesn't read your cache.
+
+And you don't choose when it happens. Claude decides, and it tends to call the advisor before declaring a task done, so at the end of a long session, when the transcript is the biggest. That's how a single advisor call cost me <strong>a flat 700k tokens</strong>: one call at the end of a large session, with the whole context sent at full price. On Opus 5.5 prices, that is $2.80 of input for one call, where reading the same 700k from a warm cache costs $0.14.
+
+On top of that, I haven't seen any increase in quality while having it enabled. So I turned it off with `/advisor off`. If you want it gone for good, `CLAUDE_CODE_DISABLE_ADVISOR_TOOL=1` disables it entirely.
+
+## How to check your own cache
+
+You don't have to take my word for any of this. Claude Code shows it to you.
+
+`/usage` has a `Prompt cache (main)` line in its Session block (v2.1.251 and later) with the hit rate, the misses, whether the cache is warm or cold, and the TTL in use.
+
+Even better, your status line can show it permanently, so you know if the cache is cold before you send a message. You don't even have to write the script: type `/statusline` followed by what you want, and Claude Code generates it for you.
+
+```
+/statusline show the prompt cache status: warm or cold, the TTL and the minutes left before it expires
+```
+
+The script reads the `prompt_cache` object Claude Code passes to your status line (v2.1.251 and later): `warm`, `ttl`, `expires_at`, `hit_ratio`, and the most useful one here, `recache_tokens_if_cold`, the number of tokens your next request will rewrite if the cache has gone cold. The status line also refreshes by itself when the cache reaches `expires_at`, so it flips to cold without you doing anything.
+
+To see which TTL you get, run a one-shot request and look at the `usage` block:
+
+```bash
+claude -p "hello" --output-format json
+```
+
+`usage.cache_creation.ephemeral_1h_input_tokens` versus `ephemeral_5m_input_tokens` tells you which TTL was written.
+
+What you want to see in a healthy session: `cache_read` grows turn after turn, because it covers everything before, and `cache_creation` stays small, because it is only what the last turn added. If `cache_creation` is close to the full conversation on every turn, something keeps changing the beginning of the prompt.
+
+<Toggle title="Tracking it in OpenTelemetry">
+  If you export Claude Code metrics, the `claude_code.token.usage` metric has a `type` attribute
+  with the values `input`, `output`, `cacheRead` and `cacheCreation`, and the
+  `claude_code.api_request` event carries `cache_read_tokens` and `cache_creation_tokens`. See the
+  [monitoring docs](https://code.claude.com/docs/en/monitoring-usage).
+</Toggle>
+
+## Takeaways
+
+Prompt caching comes down to one rule: <strong>the server reuses the longest unchanged beginning of your prompt</strong>, for as long as the entry lives. Reads are almost free, writes cost more than normal input, and a cold miss on a big session costs more than having no cache at all.
+
+In practice, that gives a few habits:
+
+- Pick your model at the start of a session, and use subagents for cheaper models instead of switching with `/model`.
+- After a long break, ask yourself if you still need the old context. If not, `/clear` instead of continuing or compacting.
+- Keep big command outputs out of the conversation. They are reread on every turn, cheap per turn but it adds up, and they fill your context window.
+- Watch out for overage. Once you use usage credits, the main conversation drops to the 5 minute TTL. Set `promptCacheTtl` to `1h` if you take long breaks.
+- Compact early, between two tasks and while the cache is warm, to keep the context small.
+- Keep `/advisor` off. Every call rereads the whole conversation without any cache, and you don't control when it happens.
+- Put the cache status in your status line, so you know when your next message will be a cold one.
+
+If you want to go deeper, the [Claude Code prompt caching docs](https://code.claude.com/docs/en/prompt-caching) and the [API prompt caching docs](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) cover every edge case. And the lock figure above was drawn with the [anatomy](https://github.com/wheresryan22/anatomy) skill for Claude Code, which turns an idea into an isometric machine that explains it.
