@@ -8,7 +8,7 @@ draft: false
 
 import { ConversationGrowth } from '@/components/blog/ConversationGrowth';
 import { TtlTimeline } from '@/components/blog/TtlTimeline';
-import { CausalCache } from '@/components/blog/CausalCache';
+import { KvAddingMachine } from '@/components/blog/KvAddingMachine';
 
 À chaque fois que vous appuyez sur Entrée dans Claude Code, le modèle relit toute votre conversation depuis la première ligne.
 
@@ -56,7 +56,9 @@ D'abord, le modèle découpe votre prompt en <Highlight color="blue">tokens</Hig
 
 Le point important, c'est que l'attention ne regarde qu'en arrière. <strong>Les clés et valeurs du token 500 sont calculées à partir des tokens 1 à 500</strong>, jamais à partir de ce qui vient après. Donc si le token 200 change, tous les tokens à partir du 200 ont été calculés avec un contexte différent et sont faux, alors que les tokens 1 à 199 n'ont jamais vu le changement et restent valides. C'est la règle de correspondance de préfixe, qui découle directement des maths.
 
-<CausalCache lang="fr" />
+Une calculatrice imprimante fonctionne de la même façon. Chaque ligne qu'elle imprime est un total cumulé de toutes les touches tapées avant, donc si vous corrigez une erreur à la saisie 5, les totaux des lignes 1 à 4 restent justes, mais tout à partir de la ligne 5 doit être réimprimé. Dans la figure ci-dessous, chaque ligne imprimée porte un token et un hash cumulé de toutes les lignes au-dessus, la même idée que celle qu'utilise vLLM pour retrouver les blocs en cache.
+
+<KvAddingMachine client:visible lang="fr" />
 
 Les mêmes mécanismes expliquent les autres règles du cache :
 

@@ -8,7 +8,7 @@ draft: false
 
 import { ConversationGrowth } from '@/components/blog/ConversationGrowth';
 import { TtlTimeline } from '@/components/blog/TtlTimeline';
-import { CausalCache } from '@/components/blog/CausalCache';
+import { KvAddingMachine } from '@/components/blog/KvAddingMachine';
 
 Every time you press Enter in Claude Code, the model rereads your whole conversation from the first line.
 
@@ -55,7 +55,9 @@ First, the model cuts your prompt into <Highlight color="blue">tokens</Highlight
 
 The important part is that attention only looks backward. <strong>The keys and values of token 500 are computed from tokens 1 to 500</strong>, never from what comes after. So if token 200 changes, every token from 200 on was computed with a different context and is now wrong, while tokens 1 to 199 never saw the change and stay valid. That's the prefix match rule, coming directly from the math.
 
-<CausalCache />
+A printing adding machine works the same way. Each line it prints is a running total of every key pressed before it, so if you fix a mistake in entry 5, the totals of lines 1 to 4 are still right but everything from line 5 has to be printed again. In the figure below, each printed line carries a token and a running hash of every line above it, the same idea vLLM uses to find cached blocks.
+
+<KvAddingMachine client:visible />
 
 The same mechanics explain the other rules of the cache:
 
