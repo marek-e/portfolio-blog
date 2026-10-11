@@ -1,0 +1,25 @@
+src/components/blog/KvAddingMachine.tsx
+  s_62b08560215b70::t_73b908125c1e9b 43,61
+src/components/blog/kv-adding-machine/geometry.ts
+  s_62b08560215b70::t_73b908125c1e9b 89-97
+src/components/blog/kv-adding-machine/kv-adding-machine.css
+  s_62b08560215b70::t_c5b1095f3103e0 91
+  s_62b08560215b70::t_73b908125c1e9b 332,339
+  s_62b08560215b70::t_b444f56af92fe3 335-336
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "cc680819957a6fd9e500f6940fce4acc98153c72",
+  "prompts": {},
+  "sessions": {
+    "s_62b08560215b70": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a808b7ec-72c5-4a15-944a-2324204d3385",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
