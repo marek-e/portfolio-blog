@@ -10,7 +10,7 @@ import { ConversationGrowth } from '@/components/blog/ConversationGrowth';
 import { TtlTimeline } from '@/components/blog/TtlTimeline';
 import { KvAddingMachine } from '@/components/blog/KvAddingMachine';
 import Figure from '@/components/mdx/Figure.astro';
-import usageSession from '@/assets/blog/prompt-caching-claude-code/usage-session.png';
+import usageTerminal from '@/assets/blog/prompt-caching-claude-code/usage-terminal.png';
 
 Every time you press Enter in Claude Code, the model rereads your whole conversation from the first line.
 
@@ -218,18 +218,15 @@ On top of that, I haven't seen any increase in quality while having it enabled. 
 
 You don't have to take my word for any of this. Claude Code shows it to you.
 
-`/usage` has a `Prompt cache (main)` line in its Session block (v2.1.251 and later) with the hit rate, the misses, whether the cache is warm or cold, and the TTL in use. Here is the one from the session where I wrote this post with Claude Code, as the desktop app shows it:
+`/usage` has a `Prompt cache (main)` line in its Session block (v2.1.251 and later) with the hit rate, the misses, whether the cache is warm or cold, and the TTL in use. Here is what it looks like in the terminal at the end of a short session:
 
 <Figure
-  src={usageSession}
-  alt="The Claude Code usage panel: cache hit 99%, input 362 tokens, output 7k, cache read 57M, cache write 818k on Opus 5.5"
-  caption="/usage at the end of the session that produced this post"
-  className="mx-auto max-w-sm"
+  src={usageTerminal}
+  alt="Output of /usage in the terminal: claude-opus-5-5 with 526 input, 2.1k output, 396.7k cache read, 20.7k cache write ($0.2893), and Prompt cache (main): 9 requests, 94% of input tokens from cache, no misses, warm (1h TTL)"
+  caption="/usage in the terminal: the Prompt cache (main) line sums up the cache of the session"
 />
 
-<strong>57M tokens read from the cache, 818k written, and only 362 tokens of uncached input</strong>
-, so a 99% cache hit rate. Without the cache, every one of those 57M tokens would have been billed
-at the full input price, 20 times the cached rate on Opus 5.5.
+The `Prompt cache (main)` line says it all: 9 requests, <strong>94% of the input tokens read from the cache, no misses</strong>, and the cache is still warm with the 1 hour TTL of a subscription. The Opus line also lets you check the math of this post: 396.7k tokens read at $0.20 per million, 20.7k written at $8 (1 hour TTL), 526 uncached at $4 and 2.1k of output at $20 add up to the $0.2893 shown. Without the cache, the same 418k input tokens would have cost about $1.67 instead of $0.25.
 
 Even better, your status line can show it permanently, so you know if the cache is cold before you send a message. You don't even have to write the script: type `/statusline` followed by what you want, and Claude Code generates it for you.
 

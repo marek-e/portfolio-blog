@@ -10,7 +10,7 @@ import { ConversationGrowth } from '@/components/blog/ConversationGrowth';
 import { TtlTimeline } from '@/components/blog/TtlTimeline';
 import { KvAddingMachine } from '@/components/blog/KvAddingMachine';
 import Figure from '@/components/mdx/Figure.astro';
-import usageSession from '@/assets/blog/prompt-caching-claude-code/usage-session.png';
+import usageTerminal from '@/assets/blog/prompt-caching-claude-code/usage-terminal.png';
 
 À chaque fois que vous appuyez sur Entrée dans Claude Code, le modèle relit toute votre conversation depuis la première ligne.
 
@@ -219,20 +219,15 @@ En plus de ça, je n'ai vu aucune amélioration de qualité pendant que je l'ava
 
 Pas besoin de me croire sur parole. Claude Code vous montre tout ça.
 
-`/usage` affiche une ligne `Prompt cache (main)` dans son bloc Session (v2.1.251 et plus) avec le taux de succès, les ratés, l'état chaud ou froid du cache et le TTL utilisé. Voici celui de la session où j'ai écrit cet article avec Claude Code, tel que l'application desktop l'affiche :
+`/usage` affiche une ligne `Prompt cache (main)` dans son bloc Session (v2.1.251 et plus) avec le taux de succès, les ratés, l'état chaud ou froid du cache et le TTL utilisé. Voici à quoi ça ressemble dans le terminal à la fin d'une courte session :
 
 <Figure
-  src={usageSession}
-  alt="Le panneau d'usage de Claude Code : cache hit 99 %, input 362 tokens, output 7k, cache read 57M, cache write 818k sur Opus 5.5"
-  caption="/usage à la fin de la session qui a produit cet article"
-  className="mx-auto max-w-sm"
+  src={usageTerminal}
+  alt="Sortie de /usage dans le terminal : claude-opus-5-5 avec 526 input, 2.1k output, 396.7k cache read, 20.7k cache write (0,2893 $), et Prompt cache (main) : 9 requêtes, 94 % des tokens d'entrée depuis le cache, aucun raté, chaud (TTL 1h)"
+  caption="/usage dans le terminal : la ligne Prompt cache (main) résume le cache de la session"
 />
 
-<strong>
-  57M de tokens lus depuis le cache, 818k écrits, et seulement 362 tokens d'entrée hors cache
-</strong>
-, soit un taux de succès de 99 %. Sans le cache, chacun de ces 57M de tokens aurait été facturé au
-prix d'entrée plein, 20 fois le tarif du cache sur Opus 5.5.
+La ligne `Prompt cache (main)` dit tout : 9 requêtes, <strong>94 % des tokens d'entrée lus depuis le cache, aucun raté</strong>, et le cache est encore chaud avec le TTL d'1 heure d'un abonnement. La ligne Opus permet aussi de vérifier les calculs de cet article : 396,7k tokens lus à 0,20 $ le million, 20,7k écrits à 8 $ (TTL d'1 heure), 526 hors cache à 4 $ et 2,1k de sortie à 20 $ donnent bien les 0,2893 $ affichés. Sans le cache, ces mêmes 418k tokens d'entrée auraient coûté environ 1,67 $ au lieu de 0,25 $.
 
 Encore mieux, votre status line peut l'afficher en permanence, pour savoir si le cache est froid avant d'envoyer un message. Vous n'avez même pas besoin d'écrire le script : tapez `/statusline` suivi de ce que vous voulez, et Claude Code le génère pour vous.
 
