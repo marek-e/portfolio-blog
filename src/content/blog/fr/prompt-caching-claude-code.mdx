@@ -1,6 +1,6 @@
 ---
 title: 'Le prompt caching dans Claude Code : pourquoi votre pause café coûte plus cher que votre prompt'
-description: "Lecture de cache, écriture de cache, TTL de 5 minutes et d'1 heure : le calcul de tokens derrière chaque tour de Claude Code, et pourquoi un cache froid coûte plus cher que pas de cache du tout."
+description: "Lecture de cache, écriture de cache, TTL de 5 minutes et d'1 heure : le calcul de tokens derrière chaque tour de Claude Code, et pourquoi un cache qui a expiré coûte plus cher que pas avoir de cache du tout."
 publishDate: 2026-10-11
 tags: ['AI', 'agents', 'claude-code', 'cache']
 draft: false
@@ -54,7 +54,7 @@ La réponse, elle, n'est jamais mise en cache. Le modèle génère la même sort
 
 La règle dont tout découle, c'est que le cache fonctionne par <Highlight>correspondance de préfixe</Highlight>. Le serveur cherche le plus long début de votre prompt déjà stocké par une requête précédente. Changez un seul octet à la position N, et N plus tout ce qui suit est raté. Tout ce qui est avant N reste un succès.
 
-C'est pour ça que l'ordre compte autant. La requête est toujours construite dans le même ordre : <strong>les outils, puis le prompt système, puis les messages</strong>. Un changement dans votre dernier message ne coûte rien de plus. Un changement dans la liste des outils ou dans le prompt système jette toute la conversation qui se trouve derrière.
+C'est pour ça que l'ordre compte autant. La requête est toujours construite dans le même ordre : <strong>les tools, puis le prompt système, puis les messages</strong>. Un changement dans votre dernier message ne coûte rien de plus. Un changement dans la liste des tools ou dans le prompt système invalide toute la conversation qui se trouve derrière.
 
 Vous croiserez aussi un dernier mot dans la documentation : les <Highlight color="purple">breakpoints</Highlight> (`cache_control` dans l'API). Le serveur n'enregistre pas le cache après chaque token. Il ne l'enregistre qu'à quelques positions que la requête marque, comme les points de sauvegarde d'un jeu vidéo. <strong>La requête suivante ne peut reprendre qu'à un endroit où une requête précédente a sauvegardé.</strong>
 
@@ -75,11 +75,11 @@ En pratique, Claude Code place un breakpoint à la fin de ce que chaque tour env
 
 ## Pourquoi le cache fonctionne-t-il comme ça ?
 
-Ne réutiliser que le début du prompt n'est pas un choix arbitraire de l'API, ça vient directement de la façon dont un modèle comme Claude lit du texte. Anthropic ne publie pas le fonctionnement de ses propres serveurs, donc ce qui suit décrit ce que font les moteurs d'inférence open source comme [vLLM](https://docs.vllm.ai/en/latest/design/prefix_caching/), mais ça explique toutes les règles vues jusqu'ici.
+Ne réutiliser que le début du prompt n'est pas un choix arbitraire de l'API, ça vient directement de la façon dont un modèle comme Claude lit du texte. Anthropic n'a pas publié le fonctionnement de ses propres serveurs, donc ce qui suit décrit ce que font les moteurs d'inférence open source comme [vLLM](https://docs.vllm.ai/en/latest/design/prefix_caching/), mais ça explique toutes les règles vues jusqu'ici.
 
-D'abord, le modèle découpe votre prompt en <Highlight color="blue">tokens</Highlight>, des morceaux d'environ un mot. Ensuite il les lit dans l'ordre, et pour chaque token il calcule des listes de nombres qui décrivent ce que ce token veut dire dans ce contexte. Le contexte change le sens. « Souris » n'est pas le même mot dans « le chat attrape la souris » et dans « je clique avec la souris », donc les nombres de « souris » dépendent des mots qui la précèdent. Le modèle refait ce calcul dans chaque couche, les rangées L1 à L6 de la vidéo <ScrollTo to="cache-flow-video" label="Remonter à la vidéo">plus haut</ScrollTo>. Les vrais modèles ont des dizaines de couches.
+Pour commencer, le modèle découpe votre prompt en <Highlight color="blue">tokens</Highlight>, des fragments qui font à peu près la taille d'un mot. Il les parcourt ensuite dans l'ordre et calcule pour chacun des <Highlight color="blue">vecteurs</Highlight>, de longues listes de nombres qui représentent ce qu'il veut dire à cet endroit du texte. Le sens d'un mot dépend de ce qui l'entoure. La « souris » de « le chat attrape la souris » n'a rien à voir avec celle de « je clique avec la souris ». Ses vecteurs dépendent donc des mots qui la précèdent. Le modèle refait ce calcul à chaque couche, ce sont les rangées L1 à L6 de la vidéo <ScrollTo to="cache-flow-video" label="Remonter à la vidéo">plus haut</ScrollTo>. Les vrais modèles en empilent des dizaines.
 
-Pour le cache, deux de ces listes comptent pour chaque token, la <strong>clé</strong> et la <strong>valeur</strong>, key et value en anglais, d'où le K et le V de KV cache. Chaque token suivant s'en sert pour « regarder en arrière » vers les tokens précédents et récupérer leur sens. Ce mécanisme s'appelle l'attention. L'ensemble des clés et valeurs d'un prompt forme le <Highlight color="purple">KV cache</Highlight>. Les calculer demande un passage complet du modèle sur chaque token, c'est le prefill lent et coûteux, et le prompt caching les garde après la requête au lieu de les jeter. Le cache ne stocke donc pas votre texte, et ce n'est pas non plus une base de données vectorielle. Il stocke les calculs intermédiaires du modèle sur votre texte.
+Pour le cache, deux de ces vecteurs comptent pour chaque token, la <strong>clé</strong> et la <strong>valeur</strong>, key et value en anglais, d'où le K et le V de KV cache. Chaque token suivant s'en sert pour « regarder en arrière » vers les tokens précédents et récupérer leur sens. Ce mécanisme s'appelle l'attention. L'ensemble des clés et valeurs d'un prompt forme le <Highlight color="purple">KV cache</Highlight>. Les calculer demande un passage complet du modèle sur chaque token, c'est le prefill lent et coûteux, et le prompt caching les garde après la requête au lieu de les jeter. Le cache ne stocke donc pas votre texte, et ce n'est pas non plus une base de données vectorielle. Il stocke les calculs intermédiaires du modèle sur votre texte.
 
 Le point important, c'est qu'un token ne regarde qu'en arrière. <strong>Les clés et valeurs du token 500 dépendent des tokens 1 à 500</strong>, jamais de ce qui vient après. Donc si le token 200 change, les tokens 1 à 199 ne l'ont jamais vu, et leurs clés et valeurs restent parfaitement justes. Tous les tokens à partir du 200 ont été calculés avec l'ancien token 200, ils sont donc faux et doivent être recalculés. Le cache ne peut réutiliser que ce qui précède le premier changement. C'est la règle de correspondance de préfixe, et elle découle directement des maths.
 
@@ -118,31 +118,31 @@ Une entrée de cache ne vit pas éternellement. Chacune a un <Highlight color="b
 - <strong>Une lecture de cache remet le compteur à zéro gratuitement.</strong> Si vous envoyez un
   message toutes les 3 minutes, même une entrée de 5 minutes reste chaude toute la journée.
 - Le compteur démarre au début de la requête, pas à la fin. Si Claude passe 4 minutes sur une longue réponse, une entrée de 5 minutes n'a plus qu'environ 1 minute devant elle quand il termine.
-- Quand l'entrée expire, le tour suivant est un raté complet. Toute la conversation est retraitée et réécrite, avec le supplément d'écriture.
+- Quand l'entrée expire, le tour suivant est un raté complet. Toute la conversation est retraitée et réécrite, avec le supplément de coût à l'écriture.
 
 Voici à quoi ressemble une pause déjeuner avec chaque TTL :
 
 <TtlTimeline lang="fr" />
 
-Alors quel TTL utilise Claude Code ? Ça dépend de la façon dont vous payez, et il répartit les requêtes en deux groupes : la conversation principale (vos tours interactifs, `claude -p`, l'Agent SDK) et tout le reste (subagents, compaction, titres de session).
+Alors quel TTL utilise Claude Code ? Ça dépend de la façon dont vous payez, et il répartit les requêtes en deux groupes : la conversation principale (vos tours interactifs, `claude -p`, l'Agent SDK) et tout le reste (sous-agents, compaction, titres de session).
 
-|                                                    | Conversation principale | Tout le reste |
-| -------------------------------------------------- | ----------------------- | ------------- |
-| Abonnement (Pro, Max, Team, Enterprise)            | 1 heure                 | 5 minutes     |
-| Clé API, Bedrock, Vertex, Foundry                  | 5 minutes               | 5 minutes     |
-| Abonnement en dépassement (avec des usage credits) | 5 minutes               | 5 minutes     |
+|                                                  | Conversation principale | Tout le reste |
+| ------------------------------------------------ | ----------------------- | ------------- |
+| Abonnement (Pro, Max, Team, Enterprise)          | 1 heure                 | 5 minutes     |
+| Clé API, Bedrock, Vertex, Foundry                | 5 minutes               | 5 minutes     |
+| Abonnement hors forfait (avec des usage credits) | 5 minutes               | 5 minutes     |
 
-Ce découpage a du sens quand on pense à qui attend. Un humain fait des pauses pour lire un diff, prendre un appel ou aller chercher un café, et le TTL d'1 heure couvre ces moments. Un subagent envoie en général sa requête suivante quelques secondes plus tard, donc 5 minutes suffisent et coûtent moins cher. La dernière ligne est celle à retenir : <strong>dès que vous passez en dépassement, vos pauses café se mettent à coûter des réécritures complètes</strong>.
+Ce découpage a du sens quand on pense à qui attend. Un humain fait des pauses pour lire une diff, prendre un appel ou aller chercher un café, et le TTL d'1 heure couvre ces moments. Un sous-agent envoie en général sa requête suivante quelques secondes plus tard, donc 5 minutes suffisent et coûtent moins cher. La dernière ligne est celle à retenir : <strong>dès que vous passez hors forfait, vos pauses café se mettent à coûter des réécritures complètes</strong>.
 
-Le défaut des subagents a quand même un angle mort. Le compteur va du début d'une requête au début de la suivante, donc le temps d'exécution d'un outil compte aussi. Trois cas courants dépassent les 5 minutes sans que personne ne s'en rende compte :
+Ces 5 minutes ne suffisent pas toujours aux sous-agents. Le compteur va du début d'une requête au début de la suivante, donc le temps d'exécution d'un outil compte aussi. Trois cas courants dépassent les 5 minutes sans que personne ne s'en rende compte :
 
-- un subagent qui lance une suite de tests de 7 minutes,
-- un subagent qui attend que vous validiez une demande de permission pendant que vous êtes loin de votre bureau,
+- un sous-agent qui lance une suite de tests de 7 minutes,
+- un sous-agent qui attend que vous validiez une demande de permission pendant que vous êtes loin de votre bureau,
 - un coéquipier d'une [agent team](https://code.claude.com/docs/en/agent-teams). Les agent teams, ce sont plusieurs sessions Claude Code qui travaillent sur la même tâche et s'envoient des messages, donc un coéquipier attend souvent longtemps son prochain message.
 
 Dans les trois cas, l'entrée expire pendant l'attente, et la requête suivante retraite et réécrit tout l'historique.
 
-Vous pouvez changer le TTL des deux groupes (Claude Code v2.1.242 et plus) avec les réglages `promptCacheTtl` et `subagentPromptCacheTtl`, ou les variables d'environnement `CLAUDE_CODE_PROMPT_CACHE_TTL` et `CLAUDE_CODE_SUBAGENT_PROMPT_CACHE_TTL`. Chacun accepte `5m` ou `1h`. Pour les subagents par contre, je ne passerais pas tout le groupe à 1 heure : chaque petit subagent d'exploration paierait l'écriture à 2x pour rien. Mettez plutôt `cacheTtl: 1h` dans le frontmatter `experimental` des quelques agents qui attendent (v2.1.248 et plus) et gardez 5 minutes pour les autres.
+Vous pouvez changer le TTL des deux groupes (Claude Code v2.1.242 et plus) avec les réglages `promptCacheTtl` et `subagentPromptCacheTtl`, ou les variables d'environnement `CLAUDE_CODE_PROMPT_CACHE_TTL` et `CLAUDE_CODE_SUBAGENT_PROMPT_CACHE_TTL`. Chacun accepte `5m` ou `1h`. Pour les sous-agents par contre, je ne les passerais pas tous à 1 heure : chaque petit sous-agent d'exploration paierait l'écriture à 2x pour rien. Mettez plutôt `cacheTtl: 1h` dans le frontmatter `experimental` des quelques agents qui attendent (v2.1.248 et plus) et gardez 5 minutes pour les autres.
 
 ## Combien coûte vraiment un tour ?
 
@@ -173,7 +173,7 @@ Avec un abonnement, vous ne voyez pas de dollars, mais la logique est la même :
 
 C'est l'objection légitime. Avec le TTL d'1 heure, chaque nouveau token écrit coûte 2x au lieu de 1,25x, à chaque tour. Si vous enchaînez les messages et envoyez le suivant dans les quelques minutes, une entrée de 5 minutes serait restée chaude de toute façon, et vous avez payé les 0,75x de plus pour rien.
 
-Pour un trafic continu, c'est vrai. Une boucle d'agent ou un script qui appelle l'API toutes les quelques secondes ne laisse jamais une entrée de 5 minutes expirer, donc le TTL de 5 minutes est strictement moins cher dans ce cas. Ça correspond à ce que fait Claude Code par défaut : 5 minutes pour les subagents et pour les utilisateurs avec une clé API.
+Pour un trafic continu, c'est vrai. Une boucle d'agent ou un script qui appelle l'API toutes les quelques secondes ne laisse jamais une entrée de 5 minutes expirer, donc le TTL de 5 minutes est strictement moins cher dans ce cas. Ça correspond à ce que fait Claude Code par défaut : 5 minutes pour les sous-agents et pour les utilisateurs avec une clé API.
 
 Pour un humain, le calcul s'inverse. Dans la session de 100k tokens ci-dessus, le supplément du TTL d'1 heure sur une écriture de 2k tokens vaut 2k x (8 $ - 5 $) par million, soit <strong>environ 0,006 $ par tour</strong>. Un seul cache froid avec le TTL de 5 minutes coûte environ 0,51 $ au lieu de 0,036 $. Il faudrait autour de 80 tours de supplément pour payer un seul raté évité, et la plupart des gens font plus d'une pause en 80 tours.
 
@@ -183,7 +183,7 @@ Maintenant que vous savez que le cache est une correspondance de préfixe, la pl
 
 | Action                                                               | Cache                                      | Pourquoi                                                                                                                                                                                                                                                   |
 | -------------------------------------------------------------------- | ------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Changer de modèle avec `/model`                                      | <Highlight color="red">casse</Highlight>   | Chaque modèle a son propre cache. Ça inclut le changement de `opusplan` en plan mode et les skills qui utilisent un autre modèle                                                                                                                           |
+| Changer de modèle avec `/model`                                      | <Highlight color="red">casse</Highlight>   | Chaque modèle a son propre cache. Ça inclut le changement de `opusplan` en mode plan et les skills qui utilisent un autre modèle                                                                                                                           |
 | Changer l'effort                                                     | <Highlight color="red">casse</Highlight>   | Sur la plupart des modèles. Opus 5.5, Sonnet 5.5, Haiku 5.5 et Fable 5.1 gardent le cache avec une clé API ou un abonnement, mais pas sur Bedrock, Google Cloud ou la passerelle Claude apps                                                               |
 | Ajouter ou retirer des outils MCP                                    | <Highlight color="red">casse</Highlight>   | Seulement quand les outils sont chargés d'emblée. Avec le tool search (par défaut), la liste d'outils de la première requête est conservée                                                                                                                 |
 | `/compact`                                                           | <Highlight color="red">casse</Highlight>   | La conversation est reconstruite. La couche du prompt système est réutilisée                                                                                                                                                                               |
@@ -191,11 +191,11 @@ Maintenant que vous savez que le cache est une correspondance de préfixe, la pl
 | Rester inactif plus longtemps que le TTL                             | <Highlight color="red">casse</Highlight>   | L'entrée a expiré                                                                                                                                                                                                                                          |
 | Permission mode, output style, commandes slash, plan mode, `/rewind` | <Highlight color="green">garde</Highlight> | Rien ne change avant votre nouveau message. Sauf le plan mode avec `opusplan`, qui change de modèle                                                                                                                                                        |
 | Ajouter ou invoquer un skill en cours de session                     | <Highlight color="green">garde</Highlight> | Sa description ou son contenu est ajouté après la conversation. Un skill invocable par le modèle coûte quand même quelques tokens à chaque tour, donc `disable-model-invocation: true` garde hors du contexte un skill que vous lancez seulement à la main |
-| Lancer un subagent                                                   | <Highlight color="green">garde</Highlight> | Le subagent construit son propre cache et laisse le vôtre tranquille. Un fork réutilise votre préfixe et lit votre cache                                                                                                                                   |
+| Lancer un sous-agent                                                 | <Highlight color="green">garde</Highlight> | Le sous-agent construit son propre cache et laisse le vôtre tranquille. Un fork réutilise votre préfixe et lit votre cache                                                                                                                                 |
 | Activer ou désactiver `/advisor`                                     | <Highlight color="green">garde</Highlight> | Sa définition d'outil se trouve après le breakpoint du cache                                                                                                                                                                                               |
 | Modifier `CLAUDE.md` en cours de session                             | <Highlight color="green">garde</Highlight> | Parce que la modification n'est pas encore appliquée                                                                                                                                                                                                       |
 
-Cette dernière ligne mérite sa propre boîte, parce que c'est la moins intuitive.
+Cette dernière ligne mérite sa propre explication, parce qu'elle n'est pas intuitive.
 
 <Callout variant="warning" title="Votre modification de CLAUDE.md n'a rien fait ?">
   `CLAUDE.md` se trouve près du début du prompt, donc appliquer une modification tout de suite
@@ -262,10 +262,10 @@ Le prompt caching se résume à une règle : <strong>le serveur réutilise le pl
 
 En pratique, ça donne quelques habitudes :
 
-- Choisissez votre modèle au début de la session, et utilisez des subagents pour les modèles moins chers au lieu de changer avec `/model`.
+- Choisissez votre modèle au début de la session, et utilisez des sous-agents pour les modèles moins chers au lieu de changer avec `/model`.
 - Après une longue pause, demandez-vous si vous avez encore besoin de l'ancien contexte. Sinon, `/clear` plutôt que de continuer ou de compacter.
 - Gardez les grosses sorties de commandes hors de la conversation. Elles sont relues à chaque tour, peu cher par tour mais ça s'accumule, et elles remplissent votre fenêtre de contexte.
-- Méfiez-vous du dépassement. Dès que vous utilisez des usage credits, la conversation principale repasse au TTL de 5 minutes. Mettez `promptCacheTtl` à `1h` si vous faites de longues pauses.
+- Attention au hors forfait. Dès que vous utilisez des usage credits, la conversation principale repasse au TTL de 5 minutes. Mettez `promptCacheTtl` à `1h` si vous faites de longues pauses.
 - Compactez tôt, entre deux tâches et pendant que le cache est chaud, pour garder un contexte petit.
 - Laissez `/advisor` désactivé. Chaque appel relit toute la conversation sans aucun cache, et vous ne contrôlez pas quand il arrive.
 - Mettez l'état du cache dans votre status line, pour savoir quand votre prochain message tombera sur un cache froid.
