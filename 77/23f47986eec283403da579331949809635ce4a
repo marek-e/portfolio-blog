@@ -1,0 +1,26 @@
+docs/BLOG-SCOPE.md
+  s_62b08560215b70::t_c1ca47723bbfdc 194,203
+src/content/blog/en/prompt-caching-claude-code.mdx
+  s_62b08560215b70::t_84d779087e528b 79
+src/components/mdx/ScrollTo.astro
+  s_62b08560215b70::t_d53c9ec321c3bd 107,111
+  s_62b08560215b70::t_84d779087e528b 2-3,72,87-91,100-106,108-110,112-113
+src/content/blog/fr/prompt-caching-claude-code.mdx
+  s_62b08560215b70::t_03944e4ea08193 81
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "7723f47986eec283403da579331949809635ce4a",
+  "prompts": {},
+  "sessions": {
+    "s_62b08560215b70": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a808b7ec-72c5-4a15-944a-2324204d3385",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
