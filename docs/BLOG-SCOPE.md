@@ -65,7 +65,7 @@ updatedDate: 2026-01-15 # optional, only if meaningfully revised
 
 ## MDX Components Reference
 
-All components below are **globally available** — no import needed except `Figure` and `FileTree`.
+All components below are **globally available** — no import needed except `Figure`, `FileTree` and `ScrollTo`.
 
 ### `<Highlight>` — inline text emphasis
 
@@ -186,6 +186,24 @@ import myImage from '@/assets/blog/your-post/screenshot.png';
   caption="What the reader should notice in this image"
 />
 ```
+
+---
+
+### `<ScrollTo>` — jump back to an earlier element
+
+Use when a sentence refers to a visual far above or below it ("the rows in the video above"). Renders a small ↑ or ↓ link that scrolls the target to the middle of the screen, smooth unless the reader prefers reduced motion, and updates the URL hash. Give the target an `id` and `scroll-mt-24`, and glue the arrow to the previous word with `&nbsp;` so it never wraps alone.
+
+```mdx
+import ScrollTo from '@/components/mdx/ScrollTo.astro';
+
+<figure id="cache-flow-video" className="not-prose my-8 scroll-mt-24">
+  ...
+</figure>
+
+The L1 to L6 rows in the video above&nbsp;<ScrollTo to="cache-flow-video" label="Scroll to the video" />.
+```
+
+Props: `to` (target id), `label` (accessible name and tooltip), `direction` (`'up'` default, or `'down'`).
 
 ---
 
