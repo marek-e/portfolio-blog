@@ -1,4 +1,6 @@
 ---
+import { ArrowDown02Icon, ArrowUp02Icon } from '@hugeicons/core-free-icons';
+import { Icon } from '@/components/shared/Icon';
 import { getLangFromUrl, getTranslations } from '@/i18n';
 
 interface Props {
@@ -67,6 +69,7 @@ const t = getTranslations(getLangFromUrl(Astro.url));
       );
     }
     button.focus({ preventScroll: true });
+    return button;
   };
 
   document.addEventListener(
@@ -81,9 +84,12 @@ const t = getTranslations(getLangFromUrl(Astro.url));
       if (!target) return;
       event.preventDefault();
       const linkOffset = link.getBoundingClientRect().top;
-      target.scrollIntoView({ behavior: behavior(), block: 'center' });
+      const pill = open(link, target, linkOffset);
+      const clearance = parseFloat(getComputedStyle(target).scrollMarginTop) || 0;
+      const safe = clearance + pill.offsetHeight + GAP * 2;
+      const centered = (window.innerHeight - target.getBoundingClientRect().height) / 2;
+      window.scrollTo({ top: pageTop(target) - Math.max(safe, centered), behavior: behavior() });
       history.pushState(null, '', `#${target.id}`);
-      open(link, target, linkOffset);
     },
     { capture: true }
   );
@@ -91,12 +97,18 @@ const t = getTranslations(getLangFromUrl(Astro.url));
   document.addEventListener('astro:before-swap', close);
 </script>
 
-<a
-  href={`#${to}`}
-  data-scroll-to={to}
-  data-scroll-back={t.blog.scrollBack}
-  aria-label={label}
-  title={label}
-  class="not-prose text-primary hover:bg-primary/10 focus-visible:ring-ring/50 rounded-sm px-0.5 font-bold no-underline transition-colors outline-none focus-visible:ring-[3px]"
-  ><span aria-hidden="true">{direction === 'up' ? '↑' : '↓'}</span></a
+<span class="whitespace-nowrap"
+  ><slot /><a
+    href={`#${to}`}
+    data-scroll-to={to}
+    data-scroll-back={t.blog.scrollBack}
+    aria-label={label}
+    title={label}
+    class="not-prose text-primary hover:bg-primary/10 focus-visible:ring-ring/50 relative -top-[0.5em] ml-0.5 inline-flex size-3.5 items-center justify-center rounded-sm align-baseline transition-colors outline-none focus-visible:ring-[3px]"
+    ><Icon
+      icon={direction === 'up' ? ArrowUp02Icon : ArrowDown02Icon}
+      strokeWidth={2.5}
+      className="size-3.5"
+    /></a
+  ></span
 >
