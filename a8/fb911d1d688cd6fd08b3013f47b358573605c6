@@ -1,0 +1,19 @@
+src/components/blog/kv-adding-machine/art.tsx
+  s_ce7a0020f5e31f::t_5cadd920a44793 46-48
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "a8fb911d1d688cd6fd08b3013f47b358573605c6",
+  "prompts": {},
+  "sessions": {
+    "s_ce7a0020f5e31f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a021ce5b-4422-46d2-b8ab-aae1b708c77a",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
