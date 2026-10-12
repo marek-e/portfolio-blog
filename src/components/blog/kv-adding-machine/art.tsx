@@ -43,8 +43,9 @@ export function writeSolid(group: SVGGElement | null, paths: SolidPaths) {
   const nodes = group.children;
   nodes[0].setAttribute('d', paths.fill);
   paths.shades.forEach((d, shade) => nodes[1 + shade].setAttribute('d', d));
-  nodes[5].setAttribute('d', paths.top);
-  nodes[6].setAttribute('d', paths.crease);
+  const top = 1 + paths.shades.length;
+  nodes[top].setAttribute('d', paths.top);
+  nodes[top + 1].setAttribute('d', paths.crease);
   nodes[nodes.length - 1].setAttribute('d', paths.outline);
 }
 
