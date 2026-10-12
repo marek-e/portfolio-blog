@@ -9,7 +9,6 @@ draft: false
 import { ConversationGrowth } from '@/components/blog/ConversationGrowth';
 import { TtlTimeline } from '@/components/blog/TtlTimeline';
 import { KvAddingMachine } from '@/components/blog/KvAddingMachine';
-import { PrefixLookup } from '@/components/blog/PrefixLookup';
 import Figure from '@/components/mdx/Figure.astro';
 import MotionVideo from '@/components/mdx/MotionVideo.astro';
 import ScrollTo from '@/components/mdx/ScrollTo.astro';
@@ -39,7 +38,7 @@ Le prix et la consommation de tokens font partie des nouvelles choses que les d�
   </figcaption>
 </figure>
 
-L'API de Claude est <strong>stateless</strong>. Les serveurs d'Anthropic ne gardent aucune mémoire de votre conversation entre deux messages. Donc à chaque fois que vous envoyez quelque chose, Claude Code renvoie tout : la définition des outils, le prompt système, votre `CLAUDE.md`, chaque message, chaque fichier lu, chaque sortie de commande.
+L'API de Claude est <strong>stateless</strong>. Les serveurs d'Anthropic ne gardent aucune mémoire de votre conversation entre deux messages. Donc à chaque fois que vous envoyez quelque chose, Claude Code renvoie tout : la définition des tools, le prompt système, votre `CLAUDE.md`, chaque message, chaque fichier lu, chaque sortie de commande.
 
 Avant d'écrire le premier mot de sa réponse, le modèle doit traiter tous ces tokens. Cette étape s'appelle le <Highlight color="blue">prefill</Highlight>. Sur une session de 150k tokens, ça fait 150k tokens de travail à chaque tour, alors que 99 % d'entre eux sont exactement les mêmes qu'il y a une minute.
 
@@ -97,41 +96,6 @@ Les mêmes mécanismes expliquent les autres règles du cache :
 | Une écriture coûte plus cher qu'une entrée, et le TTL d'1 heure encore plus | Stocker des gigaoctets a un coût, et les garder 12 fois plus longtemps coûte plus cher. Ça, c'est mon interprétation, Anthropic ne publie pas son modèle de coûts                                                                                                                               |
 | Une lecture n'est pas gratuite                                              | Les clés et valeurs stockées doivent être rechargées, et vos nouveaux tokens regardent quand même tout l'historique                                                                                                                                                                             |
 | Les caches sont isolés par organisation                                     | Le fait qu'un préfixe soit en cache se voit dans le temps de réponse. [Des chercheurs de Stanford](https://arxiv.org/abs/2502.07776) s'en sont servis pour détecter un partage de cache entre utilisateurs chez 7 fournisseurs d'API                                                            |
-
-### À quoi ressemble le cache dans un vrai moteur
-
-La calculatrice imprime une ligne par token pour rester lisible. Un vrai moteur stocke la même chose en plus gros morceaux. Voici comment fait vLLM, avec la requête de la vidéo plus haut.
-
-```text
-préfixe  outils, système, CLAUDE.md, messages  24 007 tokens
-blocs    1 500 blocs de 16 tokens, 7 restants
-entrée   nom du bloc → K et V de 16 tokens, à chaque couche
-```
-
-Le préfixe, c'est votre requête transformée en tokens, toujours dans le même ordre : les définitions d'outils et le prompt système, le `CLAUDE.md`, puis les messages. Claude Code garde cet ordre à chaque tour, donc chaque requête commence par la précédente.
-
-vLLM découpe les tokens en blocs de 16 et ne met en cache que les blocs complets. Chaque bloc contient les clés et valeurs de ses 16 tokens à chaque couche. Sur Llama 3 70B, un token dans une couche, c'est 8 têtes × 128 nombres pour la clé, et pareil pour la valeur. Multiplié par 80 couches et 16 tokens, un seul bloc pèse environ 5 Mo de mémoire GPU.
-
-Chaque bloc reçoit aussi un nom, un hash de ses 16 tokens et du nom du bloc précédent. Le nom du bloc 3 change donc dès que quelque chose change dans les blocs 1 à 3, la même dépendance que les clés et valeurs. C'est pour ça qu'un nom suffit pour savoir si un bloc stocké est encore valable. Le cache est une table qui associe ces noms aux blocs, et quand la mémoire manque, les blocs utilisés le moins récemment partent en premier.
-
-Trouver le plus long préfixe en cache tient alors en une petite boucle. Le moteur nomme les blocs de la nouvelle requête dans l'ordre et s'arrête au premier nom qu'il ne connaît pas :
-
-```python
-def cached_tokens(tokens, cache):
-    name, hits = None, 0
-    for start in range(0, len(tokens) - 15, 16):
-        name = hash((name, tuple(tokens[start : start + 16])))
-        if name not in cache:
-            break
-        hits += 1
-    return hits * 16
-```
-
-<PrefixLookup client:visible lang="fr" />
-
-S'arrêter au premier raté n'est pas un raccourci. Le nom du bloc 5 contient le nom du bloc 4, donc si le bloc 4 n'est pas en cache, aucun bloc suivant ne peut l'être. Tout ce qui précède le raté est lu depuis le cache, tout ce qui suit est calculé puis écrit sous forme de nouveaux blocs.
-
-L'API Claude ajoute sa propre règle par-dessus, les breakpoints et les 20 positions vues plus haut. Ces positions comptent des messages et des appels d'outils, pas des blocs de 16 tokens. Anthropic ne dit pas comment son moteur stocke les clés et valeurs en dessous.
 
 ## Lecture, écriture de cache et les 3 catégories de tokens
 
