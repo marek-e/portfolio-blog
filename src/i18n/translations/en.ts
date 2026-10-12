@@ -117,6 +117,7 @@ export const en: UITranslations = {
     subtitle: 'Thoughts on code, design, UX, cybersecurity and AI.',
     readMore: 'Read more',
     backToBlog: 'Back to all posts',
+    scrollBack: 'Back to where you were',
     publishedOn: 'Published on',
     updatedOn: 'Updated on',
     minRead: 'min read',

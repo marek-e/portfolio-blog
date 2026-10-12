@@ -191,7 +191,7 @@ import myImage from '@/assets/blog/your-post/screenshot.png';
 
 ### `<ScrollTo>` — jump back to an earlier element
 
-Use when a sentence refers to a visual far above or below it ("the rows in the video above"). Renders a small ↑ or ↓ link that scrolls the target to the middle of the screen, smooth unless the reader prefers reduced motion, and updates the URL hash. Give the target an `id` and `scroll-mt-24`, and glue the arrow to the previous word with `&nbsp;` so it never wraps alone.
+Use when a sentence refers to a visual far above or below it ("the rows in the video above"). Renders a small ↑ or ↓ link that scrolls the target to the middle of the screen, smooth unless the reader prefers reduced motion, and updates the URL hash. A small "Back to where you were" pill then appears above the target's top-right corner and takes keyboard focus. Clicking it scrolls the reader back so the arrow sits where it was, clears the hash and refocuses the arrow. Give the target an `id` and `scroll-mt-24`, and glue the arrow to the previous word with `&nbsp;` so it never wraps alone.
 
 ```mdx
 import ScrollTo from '@/components/mdx/ScrollTo.astro';

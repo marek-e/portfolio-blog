@@ -118,6 +118,7 @@ export const fr: UITranslations = {
     subtitle: "Réflexions sur le code, le design, l'UX, la cybersécurité et l'IA.",
     readMore: 'Lire la suite',
     backToBlog: 'Retour à tous les articles',
+    scrollBack: 'Retour où vous en étiez',
     publishedOn: 'Publié le',
     updatedOn: 'Mis à jour le',
     minRead: 'min de lecture',
