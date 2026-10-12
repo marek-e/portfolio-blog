@@ -9,6 +9,7 @@ draft: false
 import { ConversationGrowth } from '@/components/blog/ConversationGrowth';
 import { TtlTimeline } from '@/components/blog/TtlTimeline';
 import { KvAddingMachine } from '@/components/blog/KvAddingMachine';
+import { PrefixLookup } from '@/components/blog/PrefixLookup';
 import Figure from '@/components/mdx/Figure.astro';
 import MotionVideo from '@/components/mdx/MotionVideo.astro';
 import usageTerminal from '@/assets/blog/prompt-caching-claude-code/usage-terminal.png';
@@ -122,6 +123,8 @@ def cached_tokens(tokens, cache):
         hits += 1
     return hits * 16
 ```
+
+<PrefixLookup client:visible />
 
 Stopping at the first miss isn't a shortcut. Block 5's name contains block 4's name, so if block 4 isn't in the cache, no later block can be. Everything before the miss is read from the cache, everything after is computed and written as new blocks.
 
