@@ -1,0 +1,20 @@
+functions/videos/[[path]].js
+  s_6323398ded1938::t_c8ddfe830e5d41 4,16-23,26,30-31
+  s_6323398ded1938::t_abc35ab892dc32 1-3,5-15,24-25,27-29,32
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "84fd4838d95bd5e9976590292e0fbdacc89fcb1d",
+  "prompts": {},
+  "sessions": {
+    "s_6323398ded1938": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9d30b6d9-a710-448d-8a03-a51795c21efd",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
