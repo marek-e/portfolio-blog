@@ -67,7 +67,7 @@ In practice, Claude Code puts a breakpoint at the end of what each turn sends. W
   A request can carry at most 4 breakpoints. And to find the previous save point, the server only
   checks the last 20 positions, where a position is a message, a tool call or a tool result. A run
   of parallel tool calls counts as one position, and so does the run of their results. If a single
-  turn adds more than 20 positions, for example a long chain of tool calls run one after the other,
+  turn adds 20 positions or more, for example a long chain of tool calls run one after the other,
   the previous save point is too far back to be found and the whole conversation is processed again.
   Separately, a prompt shorter than the model's minimum (512 tokens on the newest models, up to
   4,096 on some older ones) is never cached, without any error. The [prompt caching

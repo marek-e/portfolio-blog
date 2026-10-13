@@ -67,8 +67,8 @@ En pratique, Claude Code place un breakpoint à la fin de ce que chaque tour env
   Une requête peut porter au maximum 4 breakpoints. Et pour retrouver le point de sauvegarde
   précédent, le serveur ne vérifie que les 20 dernières positions, une position étant un message, un
   appel d'outil ou un résultat d'outil. Une série d'appels d'outils en parallèle compte pour une
-  seule position, tout comme la série de leurs résultats. Si un seul tour ajoute plus de 20
-  positions, par exemple une longue chaîne d'appels d'outils lancés l'un après l'autre, le point de
+  seule position, tout comme la série de leurs résultats. Si un seul tour ajoute 20 positions ou
+  plus, par exemple une longue chaîne d'appels d'outils lancés l'un après l'autre, le point de
   sauvegarde précédent est trop loin pour être retrouvé et toute la conversation est retraitée. À
   part ça, un prompt plus court que le minimum du modèle (512 tokens sur les modèles les plus
   récents, jusqu'à 4 096 sur certains plus anciens) n'est jamais mis en cache, sans aucune erreur.
