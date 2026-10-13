@@ -225,7 +225,7 @@ import ChapterVideo from '@/components/mdx/ChapterVideo.astro';
 />
 ```
 
-Props: `src`, `poster`, `label` (accessible name), `chapters` (`start` in seconds, `title`), `width` and `height` (default 1920 x 1080).
+Props: `src`, `poster`, `label` (accessible name), `chapters` (`start` in seconds, `title`), `id` (optional, makes it a `ScrollTo` target) and `width` and `height` (default 1920 x 1080).
 
 The prompt caching summary video is generated from code in `motion/prompt-caching-summary/`. Its README explains how to render it in each language.
 

@@ -1,7 +1,7 @@
 ---
 title: 'Prompt caching in Claude Code: why your coffee break costs more than your prompt'
 description: 'Cache reads, cache writes, the 5 minute and 1 hour TTL: the token math behind every Claude Code turn, and why a cold cache costs more than no cache at all.'
-publishDate: 2026-10-11
+publishDate: 2026-10-13
 tags: ['AI', 'agents', 'claude-code', 'cache']
 draft: false
 ---
@@ -21,25 +21,7 @@ That sounds expensive, and it would be without <Highlight>prompt caching</Highli
 
 Pricing and token consumption are among the new things developers using AI agents have to learn. To really understand them, you first need to understand how the caching system works. So in this post we will go through it from the ground up: what gets cached, what a cache read and a cache write cost, how the 5 minute and 1 hour TTL work, and what breaks the cache in Claude Code.
 
-Short on time? This video covers the whole post in a little over two minutes. Each chapter button jumps to its part.
-
-<ChapterVideo
-  src="/videos/prompt-caching-claude-code/prompt-caching-summary-en.mp4"
-  poster="/videos/prompt-caching-claude-code/prompt-caching-summary-en.jpg"
-  label="Summary of the post: why every turn rereads the conversation, the prefix match rule, cache read and write prices, the 5 minute and 1 hour TTL, what breaks the cache, the advisor tool and the habits that keep the cache warm"
-  chapters={[
-    { start: 0, title: 'Intro' },
-    { start: 7.7, title: 'Stateless API' },
-    { start: 20.3, title: 'Prefix match' },
-    { start: 35.5, title: 'Why a prefix' },
-    { start: 53.2, title: 'The bill' },
-    { start: 65.8, title: 'TTL' },
-    { start: 81, title: 'Cost of a turn' },
-    { start: 93.6, title: 'What breaks it' },
-    { start: 108.8, title: 'Advisor' },
-    { start: 123.9, title: 'Habits' },
-  ]}
-/>
+Short on time? The whole post is also a two minute video <ScrollTo to="summary-video" label="Scroll to the summary video" direction="down">at the end</ScrollTo>.
 
 ## Why does Claude reread the whole conversation every turn?
 
@@ -288,5 +270,26 @@ In practice, that gives a few habits:
 - Compact early, between two tasks and while the cache is warm, to keep the context small.
 - Keep `/advisor` off. Every call rereads the whole conversation without any cache, and you don't control when it happens.
 - Put the cache status in your status line, so you know when your next message will be a cold one.
+
+Here is the whole post in two minutes, to rewatch or to share. Each chapter button jumps to its part.
+
+<ChapterVideo
+  id="summary-video"
+  src="/videos/prompt-caching-claude-code/prompt-caching-summary-en.mp4"
+  poster="/videos/prompt-caching-claude-code/prompt-caching-summary-en.jpg"
+  label="Summary of the post: why every turn rereads the conversation, the prefix match rule, cache read and write prices, the 5 minute and 1 hour TTL, what breaks the cache, the advisor tool and the habits that keep the cache warm"
+  chapters={[
+    { start: 0, title: 'Intro' },
+    { start: 7.7, title: 'Stateless API' },
+    { start: 20.3, title: 'Prefix match' },
+    { start: 35.5, title: 'Why a prefix' },
+    { start: 53.2, title: 'The bill' },
+    { start: 65.8, title: 'TTL' },
+    { start: 81, title: 'Cost of a turn' },
+    { start: 93.6, title: 'What breaks it' },
+    { start: 108.8, title: 'Advisor' },
+    { start: 123.9, title: 'Habits' },
+  ]}
+/>
 
 If you want to go deeper, the [Claude Code prompt caching docs](https://code.claude.com/docs/en/prompt-caching) and the [API prompt caching docs](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) cover every edge case.

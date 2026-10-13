@@ -9,17 +9,18 @@ interface Props {
   poster: string;
   label: string;
   chapters: Chapter[];
+  id?: string;
   width?: number;
   height?: number;
 }
 
-const { src, poster, label, chapters, width = 1920, height = 1080 } = Astro.props;
+const { src, poster, label, chapters, id, width = 1920, height = 1080 } = Astro.props;
 
 const timestamp = (seconds: number) =>
   `${Math.floor(seconds / 60)}:${String(Math.floor(seconds % 60)).padStart(2, '0')}`;
 ---
 
-<div class="not-prose my-8" data-chapter-video>
+<div id={id} class="not-prose my-8 scroll-mt-24" data-chapter-video>
   <video
     class="w-full rounded-xl border"
     src={src}
