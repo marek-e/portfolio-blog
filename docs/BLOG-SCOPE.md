@@ -65,7 +65,7 @@ updatedDate: 2026-01-15 # optional, only if meaningfully revised
 
 ## MDX Components Reference
 
-All components below are **globally available** — no import needed except `Figure`, `FileTree` and `ScrollTo`.
+All components below are **globally available** — no import needed except `Figure`, `FileTree`, `ScrollTo` and `ChapterVideo`.
 
 ### `<Highlight>` — inline text emphasis
 
@@ -207,6 +207,30 @@ Props: `to` (target id), `label` (accessible name and tooltip), `direction` (`'u
 
 ---
 
+### `<ChapterVideo>` — summary video with chapter buttons
+
+Use for a narrated or scored video that summarises the post, where the reader chooses to play it. Unlike `MotionVideo`, it does not autoplay, loop or force mute. Under the video, a row of buttons shows each chapter with its timestamp. Clicking one seeks the video there and plays it, and the chapter being played gets `aria-current` and the primary colour. Keep chapter titles short and in the post's language.
+
+```mdx
+import ChapterVideo from '@/components/mdx/ChapterVideo.astro';
+
+<ChapterVideo
+  src="/videos/your-post/summary-en.mp4"
+  poster="/videos/your-post/summary-en.jpg"
+  label="Summary of the post: what it covers"
+  chapters={[
+    { start: 0, title: 'Intro' },
+    { start: 12.5, title: 'First idea' },
+  ]}
+/>
+```
+
+Props: `src`, `poster`, `label` (accessible name), `chapters` (`start` in seconds, `title`), `width` and `height` (default 1920 x 1080).
+
+The prompt caching summary video is generated from code in `motion/prompt-caching-summary/`. Its README explains how to render it in each language.
+
+---
+
 ### Code blocks — syntax highlighted
 
 Use liberally. Always specify the language. Use `// [!code highlight]` for line emphasis.
@@ -232,6 +256,7 @@ function theInterestingPart(input: string) {
 | Explain a flow/architecture | `<Mermaid>`                   |
 | Show file structure         | `<FileTree>`                  |
 | Display a screenshot        | `<Figure>`                    |
+| Summarise the post in video | `<ChapterVideo>`              |
 | Show code                   | fenced code block             |
 
 ---

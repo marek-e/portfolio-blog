@@ -10,6 +10,7 @@ import { ConversationGrowth } from '@/components/blog/ConversationGrowth';
 import { TtlTimeline } from '@/components/blog/TtlTimeline';
 import { KvAddingMachine } from '@/components/blog/KvAddingMachine';
 import Figure from '@/components/mdx/Figure.astro';
+import ChapterVideo from '@/components/mdx/ChapterVideo.astro';
 import MotionVideo from '@/components/mdx/MotionVideo.astro';
 import ScrollTo from '@/components/mdx/ScrollTo.astro';
 import usageTerminal from '@/assets/blog/prompt-caching-claude-code/usage-terminal.png';
@@ -19,6 +20,26 @@ import usageTerminal from '@/assets/blog/prompt-caching-claude-code/usage-termin
 Ça a l'air cher, et ça le serait sans le <Highlight>prompt caching</Highlight>. C'est grâce au cache qu'une session de deux heures avec Claude Code reste abordable, et c'est aussi à cause de lui que le premier message après votre pause déjeuner peut coûter plus cher que les dix précédents.
 
 Le prix et la consommation de tokens font partie des nouvelles choses que les développeurs qui utilisent des agents IA doivent apprendre. Et pour vraiment les comprendre, il faut d'abord comprendre comment fonctionne le système de cache. Dans cet article, on va donc le reprendre depuis le début : ce qui est mis en cache, ce que coûtent une lecture et une écriture de cache, comment fonctionnent les TTL de 5 minutes et d'1 heure, et ce qui casse le cache dans Claude Code.
+
+Pas le temps ? Cette vidéo résume tout l'article en un peu plus de deux minutes. Chaque bouton de chapitre vous emmène directement à la partie correspondante.
+
+<ChapterVideo
+  src="/videos/prompt-caching-claude-code/prompt-caching-summary-fr.mp4"
+  poster="/videos/prompt-caching-claude-code/prompt-caching-summary-fr.jpg"
+  label="Résumé de l'article : pourquoi chaque tour relit la conversation, la règle du préfixe, le prix des lectures et écritures de cache, les TTL de 5 minutes et d'1 heure, ce qui casse le cache, l'advisor et les habitudes qui gardent le cache chaud"
+  chapters={[
+    { start: 0, title: 'Intro' },
+    { start: 7.7, title: 'API stateless' },
+    { start: 20.3, title: 'Préfixe' },
+    { start: 35.5, title: 'Pourquoi un préfixe' },
+    { start: 53.2, title: 'La facture' },
+    { start: 65.8, title: 'TTL' },
+    { start: 81, title: "Coût d'un tour" },
+    { start: 93.6, title: 'Ce qui casse' },
+    { start: 108.8, title: 'Advisor' },
+    { start: 123.9, title: 'Habitudes' },
+  ]}
+/>
 
 ## Pourquoi Claude relit-il toute la conversation à chaque tour ?
 
