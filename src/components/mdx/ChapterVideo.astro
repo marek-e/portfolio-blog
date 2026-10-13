@@ -1,0 +1,82 @@
+---
+interface Chapter {
+  start: number;
+  title: string;
+}
+
+interface Props {
+  src: string;
+  poster: string;
+  label: string;
+  chapters: Chapter[];
+  id?: string;
+  width?: number;
+  height?: number;
+}
+
+const { src, poster, label, chapters, id, width = 1920, height = 1080 } = Astro.props;
+
+const timestamp = (seconds: number) =>
+  `${Math.floor(seconds / 60)}:${String(Math.floor(seconds % 60)).padStart(2, '0')}`;
+---
+
+<div id={id} class="not-prose my-8 scroll-mt-24" data-chapter-video>
+  <video
+    class="w-full rounded-xl border"
+    src={src}
+    poster={poster}
+    width={width}
+    height={height}
+    aria-label={label}
+    controls
+    playsinline
+    preload="metadata"></video>
+  <ol class="mt-3 flex flex-wrap gap-2">
+    {
+      chapters.map(({ start, title }) => (
+        <li>
+          <button
+            type="button"
+            data-start={start}
+            class="bg-card hover:bg-muted focus-visible:ring-ring/50 aria-[current=true]:border-primary aria-[current=true]:text-primary inline-flex items-center gap-2 rounded-full border px-3 py-1 text-sm transition-colors outline-none focus-visible:ring-[3px]"
+          >
+            <span class="text-muted-foreground font-mono text-xs">{timestamp(start)}</span> {title}
+          </button>
+        </li>
+      ))
+    }
+  </ol>
+  <slot />
+</div>
+
+<script>
+  const bind = () => {
+    for (const root of document.querySelectorAll<HTMLElement>('[data-chapter-video]')) {
+      if (root.dataset.bound) continue;
+      root.dataset.bound = 'true';
+      const video = root.querySelector('video');
+      if (!video) continue;
+      const buttons = [...root.querySelectorAll<HTMLButtonElement>('button[data-start]')];
+      const startOf = (button: HTMLButtonElement) => Number(button.dataset.start);
+
+      const markCurrent = () => {
+        const current = buttons.findLast((button) => startOf(button) <= video.currentTime + 0.25);
+        for (const button of buttons) {
+          if (button === current) button.setAttribute('aria-current', 'true');
+          else button.removeAttribute('aria-current');
+        }
+      };
+
+      for (const button of buttons) {
+        button.addEventListener('click', () => {
+          video.currentTime = startOf(button);
+          video.play().catch(() => {});
+        });
+      }
+      video.addEventListener('timeupdate', markCurrent);
+      video.addEventListener('seeked', markCurrent);
+    }
+  };
+
+  document.addEventListener('astro:page-load', bind);
+</script>

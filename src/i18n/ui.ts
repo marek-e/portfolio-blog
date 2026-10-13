@@ -106,6 +106,7 @@ export interface UITranslations {
     subtitle: string;
     readMore: string;
     backToBlog: string;
+    scrollBack: string;
     publishedOn: string;
     updatedOn: string;
     minRead: string;

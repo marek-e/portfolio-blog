@@ -65,7 +65,7 @@ updatedDate: 2026-01-15 # optional, only if meaningfully revised
 
 ## MDX Components Reference
 
-All components below are **globally available** — no import needed except `Figure` and `FileTree`.
+All components below are **globally available** — no import needed except `Figure`, `FileTree`, `ScrollTo` and `ChapterVideo`.
 
 ### `<Highlight>` — inline text emphasis
 
@@ -189,6 +189,48 @@ import myImage from '@/assets/blog/your-post/screenshot.png';
 
 ---
 
+### `<ScrollTo>` — jump back to an earlier element
+
+Use when a sentence refers to a visual far above or below it ("the rows in the video above"). Wrap the word that points at the visual: it keeps its normal text style and gets a small arrow icon at its top right, and the two never wrap apart. Clicking the icon scrolls to the target, smooth unless the reader prefers reduced motion, and updates the URL hash. A small "Back to where you were" pill then appears above the target's top-right corner and takes keyboard focus. Clicking it scrolls the reader back so the arrow sits where it was, clears the hash and refocuses the arrow. Give the target an `id` and `scroll-mt-24`.
+
+```mdx
+import ScrollTo from '@/components/mdx/ScrollTo.astro';
+
+<figure id="cache-flow-video" className="not-prose my-8 scroll-mt-24">
+  ...
+</figure>
+
+The L1 to L6 rows in the video <ScrollTo to="cache-flow-video" label="Scroll to the video">above</ScrollTo>.
+```
+
+Props: `to` (target id), `label` (accessible name and tooltip), `direction` (`'up'` default, or `'down'`).
+
+---
+
+### `<ChapterVideo>` — summary video with chapter buttons
+
+Use for a narrated or scored video that summarises the post, where the reader chooses to play it. Unlike `MotionVideo`, it does not autoplay, loop or force mute. Under the video, a row of buttons shows each chapter with its timestamp. Clicking one seeks the video there and plays it, and the chapter being played gets `aria-current` and the primary colour. Keep chapter titles short and in the post's language.
+
+```mdx
+import ChapterVideo from '@/components/mdx/ChapterVideo.astro';
+
+<ChapterVideo
+  src="/videos/your-post/summary-en.mp4"
+  poster="/videos/your-post/summary-en.jpg"
+  label="Summary of the post: what it covers"
+  chapters={[
+    { start: 0, title: 'Intro' },
+    { start: 12.5, title: 'First idea' },
+  ]}
+/>
+```
+
+Props: `src`, `poster`, `label` (accessible name), `chapters` (`start` in seconds, `title`), `id` (optional, makes it a `ScrollTo` target) and `width` and `height` (default 1920 x 1080).
+
+The prompt caching summary video is generated from code in `motion/prompt-caching-summary/`. Its README explains how to render it in each language.
+
+---
+
 ### Code blocks — syntax highlighted
 
 Use liberally. Always specify the language. Use `// [!code highlight]` for line emphasis.
@@ -214,6 +256,7 @@ function theInterestingPart(input: string) {
 | Explain a flow/architecture | `<Mermaid>`                   |
 | Show file structure         | `<FileTree>`                  |
 | Display a screenshot        | `<Figure>`                    |
+| Summarise the post in video | `<ChapterVideo>`              |
 | Show code                   | fenced code block             |
 
 ---

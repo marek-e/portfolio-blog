@@ -12,6 +12,7 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
+    "motion:prompt-caching": "node motion/prompt-caching-summary/render.js",
     "optimize-fonts": "npx glyphhanger --formats=woff2 --subset=/public/fonts/*.woff2"
   },
   "packageManager": "pnpm@9.15.9",
@@ -60,6 +61,7 @@
     "eslint-plugin-react": "7.37.5",
     "eslint-plugin-react-hooks": "7.1.1",
     "globals": "17.11.0",
+    "playwright-core": "1.56.0",
     "prettier": "3.9.6",
     "prettier-plugin-astro": "0.14.1",
     "prettier-plugin-tailwindcss": "0.8.1",

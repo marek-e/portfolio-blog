@@ -488,6 +488,7 @@ html:active-view-transition-type(theme-transition)::view-transition-new(root) {
   padding: 0.2em 0.4em;
   border-radius: 0.25rem;
   font-size: 0.875em;
+  overflow-wrap: anywhere;
   &::before,
   &::after {
     content: '';
@@ -527,6 +528,18 @@ html.dark .prose pre[style*='--shiki-dark-bg'] span {
   overflow: hidden;
   font-size: 0.875em;
   margin: 1.5em 0;
+}
+
+@media (max-width: 767px) {
+  .prose table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+}
+
+.prose table code:not(pre code) {
+  overflow-wrap: normal;
 }
 
 .prose thead {

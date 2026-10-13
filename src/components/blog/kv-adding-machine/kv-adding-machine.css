@@ -1,0 +1,352 @@
+.kvam {
+  --kvam-paper: var(--card);
+  --kvam-top: color-mix(in oklab, var(--card), white 70%);
+  --kvam-shade-0: color-mix(in oklab, var(--card), var(--foreground) 15%);
+  --kvam-shade-1: color-mix(in oklab, var(--card), var(--foreground) 11%);
+  --kvam-shade-2: color-mix(in oklab, var(--card), var(--foreground) 7.5%);
+  --kvam-shade-3: color-mix(in oklab, var(--card), var(--foreground) 4%);
+  --kvam-hi: color-mix(in oklab, var(--card), var(--foreground) 84%);
+  --kvam-mid: color-mix(in oklab, var(--card), var(--foreground) 48%);
+  --kvam-lo: color-mix(in oklab, var(--card), var(--foreground) 30%);
+  --kvam-faint: color-mix(in oklab, var(--card), var(--foreground) 16%);
+  --kvam-dot: var(--foreground);
+  --kvam-halo: color-mix(in oklab, var(--foreground), transparent 80%);
+  --kvam-tape: color-mix(in oklab, var(--background), #fff6e0 35%);
+  --kvam-tape-shade: color-mix(in oklab, var(--kvam-tape), var(--foreground) 8%);
+  --kvam-ink: color-mix(in oklab, var(--card), var(--foreground) 82%);
+  --kvam-cache: color-mix(in oklab, var(--kvam-tape), var(--foreground) 7%);
+  --kvam-well: color-mix(in oklab, var(--card), var(--foreground) 9%);
+  --kvam-dark: color-mix(in oklab, var(--card), var(--foreground) 22%);
+  --kvam-window: color-mix(in oklab, var(--card), var(--foreground) 6%);
+  --kvam-accent: var(--primary);
+  --kvam-accent-top: color-mix(in oklab, var(--card), var(--primary) 16%);
+  --kvam-accent-shade: color-mix(in oklab, var(--card), var(--primary) 26%);
+  --kvam-weight: 0.6px;
+}
+
+.dark .kvam {
+  --kvam-top: color-mix(in oklab, var(--card), var(--foreground) 7%);
+  --kvam-shade-0: color-mix(in oklab, var(--card), black 34%);
+  --kvam-shade-1: color-mix(in oklab, var(--card), black 25%);
+  --kvam-shade-2: color-mix(in oklab, var(--card), black 16%);
+  --kvam-shade-3: color-mix(in oklab, var(--card), black 7%);
+  --kvam-hi: color-mix(in oklab, var(--card), var(--foreground) 80%);
+  --kvam-mid: color-mix(in oklab, var(--card), var(--foreground) 40%);
+  --kvam-lo: color-mix(in oklab, var(--card), var(--foreground) 25%);
+  --kvam-faint: color-mix(in oklab, var(--card), var(--foreground) 14%);
+  --kvam-halo: color-mix(in oklab, black, transparent 30%);
+  --kvam-tape: color-mix(in oklab, var(--card), var(--foreground) 13%);
+  --kvam-tape-shade: color-mix(in oklab, var(--card), var(--foreground) 8%);
+  --kvam-ink: color-mix(in oklab, var(--card), var(--foreground) 88%);
+  --kvam-cache: color-mix(in oklab, var(--kvam-tape), var(--foreground) 9%);
+  --kvam-well: color-mix(in oklab, var(--card), black 30%);
+  --kvam-dark: color-mix(in oklab, var(--card), black 45%);
+  --kvam-window: color-mix(in oklab, var(--card), black 25%);
+  --kvam-accent-top: color-mix(in oklab, var(--card), var(--primary) 22%);
+  --kvam-accent-shade: color-mix(in oklab, var(--card), var(--primary) 14%);
+}
+
+.kvam-card {
+  position: relative;
+  overflow: hidden;
+  padding: 44px 16px 44px;
+}
+
+.kvam-corner {
+  position: absolute;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 10.5px;
+  line-height: 1.2;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  color: var(--muted-foreground);
+}
+
+.kvam-corner[data-corner='fig'] {
+  top: 16px;
+  left: 18px;
+  color: var(--foreground);
+}
+
+.kvam-corner[data-corner='title'] {
+  top: 16px;
+  right: 18px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.kvam-corner[data-corner='readout'] {
+  right: 18px;
+  bottom: 16px;
+  color: var(--foreground);
+  font-variant-numeric: tabular-nums;
+}
+
+.kvam-svg {
+  display: block;
+  width: 100%;
+  max-width: 820px;
+  margin: 0 auto;
+  height: auto;
+  overflow: visible;
+}
+
+.kvam-svg path,
+.kvam-svg circle {
+  vector-effect: non-scaling-stroke;
+}
+
+.kvam .iso-fill {
+  fill: var(--kvam-paper);
+  stroke: none;
+}
+
+.kvam .iso-shade,
+.kvam .iso-top {
+  stroke: none;
+}
+
+.kvam .iso-shade[data-shade='0'] {
+  fill: var(--kvam-shade-0);
+}
+
+.kvam .iso-shade[data-shade='1'] {
+  fill: var(--kvam-shade-1);
+}
+
+.kvam .iso-shade[data-shade='2'] {
+  fill: var(--kvam-shade-2);
+}
+
+.kvam .iso-shade[data-shade='3'] {
+  fill: var(--kvam-shade-3);
+}
+
+.kvam .iso-top {
+  fill: var(--kvam-top);
+}
+
+.kvam .iso-line {
+  fill: none;
+  stroke: var(--kvam-lo);
+  stroke-width: var(--kvam-weight);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.kvam .iso-line[data-tone='hi'] {
+  stroke: var(--kvam-hi);
+}
+
+.kvam .iso-line[data-tone='mid'] {
+  stroke: var(--kvam-mid);
+}
+
+.kvam .iso-line[data-tone='faint'] {
+  stroke: var(--kvam-faint);
+}
+
+.kvam .iso-line[data-tone='lit'] {
+  stroke: var(--kvam-accent);
+  stroke-width: 1.2px;
+}
+
+.kvam .iso-dots circle {
+  fill: var(--kvam-dot);
+  opacity: 0.32;
+}
+
+.kvam .iso-dots[data-tone='hi'] circle {
+  opacity: 0.7;
+}
+
+.kvam .iso-dots[data-tone='lo'] circle {
+  opacity: 0.22;
+}
+
+.kvam .iso-halo {
+  fill: var(--kvam-halo);
+  filter: blur(8px);
+  transform: translateY(3px);
+}
+
+.kvam .iso-solid[data-lit] > .iso-top {
+  fill: var(--kvam-accent-top);
+}
+
+.kvam .iso-solid[data-lit] > .iso-shade {
+  fill: var(--kvam-accent-shade);
+}
+
+.kvam .iso-solid[data-lit] > .iso-edge {
+  stroke: var(--kvam-accent);
+  stroke-width: 1.1px;
+}
+
+.kvam-well {
+  fill: var(--kvam-well);
+}
+
+.kvam-dark {
+  fill: var(--kvam-dark);
+}
+
+.kvam-window {
+  fill: var(--kvam-window);
+}
+
+.kvam-paper,
+.kvam-tape {
+  fill: var(--kvam-tape);
+}
+
+.kvam-tape-shade {
+  fill: var(--kvam-tape-shade);
+}
+
+.kvam-cache {
+  fill: var(--kvam-cache);
+}
+
+.kvam-edge {
+  fill: none;
+  stroke: var(--kvam-mid);
+  stroke-width: var(--kvam-weight);
+  stroke-linecap: round;
+}
+
+.kvam-text {
+  fill: var(--kvam-ink);
+  font-family: MapleMono, ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.kvam-text [data-col='index'] {
+  fill: var(--kvam-mid);
+}
+
+.kvam-text [data-col='lead'] {
+  fill: var(--kvam-lo);
+}
+
+.kvam-text[data-row='header'] {
+  fill: var(--kvam-mid);
+  font-weight: 500;
+}
+
+.kvam-line[data-lit] .kvam-text,
+.kvam-line[data-lit] .kvam-text [data-col='index'] {
+  fill: var(--kvam-accent);
+}
+
+.kvam-digits {
+  fill: var(--kvam-hi);
+  font-family: MapleMono, ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  font-weight: 600;
+}
+
+.kvam-cut {
+  fill: none;
+  stroke: var(--kvam-accent);
+  stroke-width: 1.2px;
+  stroke-linecap: round;
+}
+
+.kvam-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.kvam-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 34px;
+  padding: 0 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--card);
+  color: var(--foreground);
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 120ms ease;
+}
+
+.kvam-button:hover {
+  background: var(--muted);
+}
+
+.kvam-button:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.kvam-legend {
+  display: grid;
+  gap: 6px;
+  margin-top: 10px;
+  color: var(--muted-foreground);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.kvam-keys {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 18px;
+}
+
+.kvam-key {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.kvam-swatch {
+  width: 16px;
+  height: 10px;
+  flex: none;
+  border-radius: 2px;
+}
+
+.kvam-swatch[data-mark='lit'] {
+  background: var(--kvam-accent);
+  height: 3px;
+}
+
+.kvam-swatch[data-mark='cache'] {
+  background: var(--kvam-cache);
+  box-shadow: inset 2px 0 0 var(--kvam-mid);
+}
+
+.kvam-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (max-width: 560px) {
+  .kvam-card {
+    padding: 40px 6px;
+  }
+
+  .kvam-svg {
+    overflow: hidden;
+  }
+
+  .kvam-corner[data-corner='fig'] {
+    left: 12px;
+  }
+
+  .kvam-corner[data-corner='title'],
+  .kvam-corner[data-corner='readout'] {
+    right: 12px;
+  }
+}
