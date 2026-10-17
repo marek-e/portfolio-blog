@@ -3,17 +3,19 @@ import type { CollectionEntry } from 'astro:content';
 import { Image } from 'astro:assets';
 import { Badge } from '@/components/ui/badge';
 import { getTranslations, getTranslatedPath, getLangFromUrl } from '@/i18n';
-import { getProjectSlug, getTechColor, getStatusVariant, formatProjectDate } from '@/lib/projects';
+import { getProjectSlug, getTechColor, formatProjectDate } from '@/lib/projects';
 import { getProjectImageSafe } from '@/lib/images';
 import { Icon } from '@/components/shared/Icon';
-import { ArrowRight02Icon, StarIcon } from '@hugeicons/core-free-icons';
+import { ArrowUpRight01Icon } from '@hugeicons/core-free-icons';
+import { cn } from '@/lib/utils';
 
 interface Props {
   project: CollectionEntry<'projects'>;
-  featured?: boolean;
+  index?: number;
+  class?: string;
 }
 
-const { project, featured = false } = Astro.props;
+const { project, index = 0, class: className } = Astro.props;
 const { title, description, techStack, image, imageAlt, objectFit, publishDate, status } =
   project.data;
 const projectImage = getProjectImageSafe(image);
@@ -26,82 +28,96 @@ const projectUrl = translatePath(`/projects/${projectSlug}`);
 
 const statusKey = `status${status.charAt(0).toUpperCase()}${status.slice(1).replace('-', '')}` as
   'statusCompleted' | 'statusInprogress' | 'statusArchived' | 'statusConcept';
+
+const panelTones = [
+  'bg-pastel-sky/50 dark:bg-pastel-sky/12',
+  'bg-pastel-peach/55 dark:bg-pastel-peach/12',
+  'bg-pastel-lilac/50 dark:bg-pastel-lilac/12',
+  'bg-pastel-mint/55 dark:bg-pastel-mint/12',
+  'bg-pastel-butter/70 dark:bg-pastel-butter/12',
+  'bg-pastel-rose/50 dark:bg-pastel-rose/12',
+];
+const panelTone = panelTones[index % panelTones.length];
+const isCover = objectFit === 'cover';
 ---
 
-<article class="group h-full">
+<article class={cn('group h-full', className)}>
   <a
     href={projectUrl}
-    class="ring-foreground/10 bg-card text-card-foreground hover:ring-primary/30 hover:shadow-primary/5 relative flex h-full flex-col overflow-hidden rounded-xl ring-1 transition-all duration-200 hover:shadow-lg hover:ring-2"
+    class="surface text-card-foreground focus-visible:ring-ring/50 flex h-full flex-col rounded-3xl p-2 transition duration-300 ease-out outline-none hover:-translate-y-0.5 hover:shadow-lg focus-visible:ring-[3px] motion-reduce:hover:translate-y-0"
   >
     {
       projectImage && (
-        <div class="bg-muted/70 relative aspect-video overflow-hidden">
+        <div
+          class={cn(
+            'relative aspect-16/10 overflow-hidden rounded-[1.25rem] lg:aspect-auto lg:h-64',
+            panelTone,
+            !isCover && 'p-8 md:p-10'
+          )}
+        >
           <Image
             src={projectImage}
             alt={imageAlt || `Screenshot of ${title}`}
-            class="h-full w-full transition-transform duration-300 group-hover:scale-105"
+            class={cn(
+              'h-full w-full transition-transform duration-500 ease-out group-hover:scale-[1.03] motion-reduce:group-hover:scale-100',
+              !isCover && 'drop-shadow-[0_12px_24px_oklch(0.3_0.04_300/0.18)]'
+            )}
             style={{ objectFit }}
             loading="lazy"
           />
-          {featured && (
-            <div class="bg-primary text-primary-foreground absolute top-3 right-3 rounded-full p-1.5 shadow-md">
-              <Icon icon={StarIcon} strokeWidth={2} className="size-4" />
-            </div>
-          )}
+          <div class="absolute inset-x-3 top-3 flex items-start justify-between gap-2">
+            {status && status !== 'completed' ? (
+              <Badge variant="outline">
+                <span
+                  class={cn(
+                    'size-1.5 rounded-full',
+                    status === 'in-progress' ? 'bg-marker' : 'bg-muted-foreground'
+                  )}
+                />
+                {t.projectsPage[statusKey]}
+              </Badge>
+            ) : null}
+          </div>
         </div>
       )
     }
 
-    <div class="flex flex-1 flex-col gap-3 p-4">
-      <div class="text-muted-foreground flex items-center justify-between text-xs">
-        <time datetime={publishDate.toISOString()}>
-          {formatProjectDate(publishDate, lang)}
-        </time>
-        {
-          status && status !== 'completed' && (
-            <Badge variant={getStatusVariant(status)} className="text-[10px]">
-              {t.projectsPage[statusKey]}
-            </Badge>
-          )
-        }
+    <div class="flex flex-1 flex-col gap-4 px-4 pt-5 pb-4 md:px-5">
+      <div class="flex items-start justify-between gap-4">
+        <div class="min-w-0">
+          <time
+            datetime={publishDate.toISOString()}
+            class="text-muted-foreground font-mono text-xs"
+          >
+            {formatProjectDate(publishDate, lang)}
+          </time>
+          <h3
+            class="font-display-soft text-foreground mt-1 text-2xl leading-tight font-semibold tracking-tight"
+          >
+            {title}
+          </h3>
+        </div>
+        <span
+          aria-hidden="true"
+          class="border-foreground/10 text-foreground group-hover:bg-primary group-hover:text-primary-foreground mt-1 grid size-10 shrink-0 place-items-center rounded-full border transition-colors group-hover:border-transparent"
+        >
+          <Icon
+            icon={ArrowUpRight01Icon}
+            strokeWidth={2}
+            className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+          />
+        </span>
       </div>
 
-      <div class="flex-1">
-        <h3 class="group-hover:text-primary line-clamp-1 text-lg font-semibold transition-colors">
-          {title}
-        </h3>
-        <p class="text-muted-foreground mt-1 line-clamp-2 text-sm">
-          {description}
-        </p>
-      </div>
+      <p class="text-muted-foreground line-clamp-2 flex-1 leading-relaxed">
+        {description}
+      </p>
 
       <div class="flex flex-wrap gap-1.5">
-        {
-          techStack.slice(0, 3).map((tech) => (
-            <Badge variant={getTechColor(tech)} className="text-xs">
-              {tech}
-            </Badge>
-          ))
-        }
-        {
-          techStack.length > 3 && (
-            <Badge variant="outline" className="text-xs">
-              +{techStack.length - 3}
-            </Badge>
-          )
-        }
+        {techStack.slice(0, 3).map((tech) => <Badge variant={getTechColor(tech)}>{tech}</Badge>)}
+        {techStack.length > 3 && <Badge variant="outline">+{techStack.length - 3}</Badge>}
       </div>
-
-      <div
-        class="border-border/50 text-primary flex items-center justify-end gap-2 border-t pt-2 text-sm font-medium"
-      >
-        <span class="group-hover:underline">{t.projects.viewDetails}</span>
-        <Icon
-          icon={ArrowRight02Icon}
-          strokeWidth={2}
-          className="size-4 transition-transform group-hover:translate-x-1"
-        />
-      </div>
+      <span class="sr-only">{t.projects.viewDetails}</span>
     </div>
   </a>
 </article>

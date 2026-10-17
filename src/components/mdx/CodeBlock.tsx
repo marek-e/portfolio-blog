@@ -25,7 +25,9 @@ export function CodeBlock({ code, language, filename, className }: CodeBlockProp
         <div className="border-border text-muted-foreground flex items-center gap-2 border-b px-4 py-2 text-sm">
           <span className="font-mono">{filename}</span>
           {language && (
-            <span className="bg-muted ml-auto rounded px-2 py-0.5 text-xs">{language}</span>
+            <span className="bg-pastel-lilac/50 text-pastel-lilac-ink dark:bg-pastel-lilac/18 ml-auto rounded px-2 py-0.5 text-xs">
+              {language}
+            </span>
           )}
         </div>
       )}
@@ -36,7 +38,7 @@ export function CodeBlock({ code, language, filename, className }: CodeBlockProp
         <button
           onClick={handleCopy}
           className={cn(
-            'border-border bg-background/80 text-muted-foreground absolute top-2 right-2 rounded-md border p-2 backdrop-blur-sm',
+            'border-border bg-background text-muted-foreground absolute top-2 right-2 rounded-md border p-2',
             'opacity-0 group-hover:opacity-100 motion-safe:transition-opacity',
             'hover:bg-muted hover:text-foreground',
             'focus:ring-ring focus:opacity-100 focus:ring-2 focus:outline-none'

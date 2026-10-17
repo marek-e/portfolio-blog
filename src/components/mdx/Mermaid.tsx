@@ -15,8 +15,8 @@ interface MermaidProps {
 export function Mermaid({ chart, caption, title, className }: MermaidProps) {
   if (!chart) {
     return (
-      <div className="not-prose my-6 rounded-lg border border-red-300 bg-red-50 p-4 dark:border-red-700 dark:bg-red-950/30">
-        <p className="text-sm font-medium text-red-800 dark:text-red-200">
+      <div className="not-prose border-pastel-rose bg-pastel-rose/40 dark:border-pastel-rose/40 dark:bg-pastel-rose/15 my-6 rounded-lg border p-4">
+        <p className="text-pastel-rose-ink text-sm font-medium">
           Mermaid diagram error: No chart definition provided
         </p>
       </div>
@@ -25,10 +25,10 @@ export function Mermaid({ chart, caption, title, className }: MermaidProps) {
 
   return (
     <figure className={cn('not-prose my-6', className)}>
-      <div className="border-border shadow-code shadow-primary overflow-hidden rounded-lg border">
+      <div className="border-pastel-lilac dark:border-pastel-lilac/40 overflow-hidden rounded-lg border shadow-[6px_6px_0_var(--color-pastel-lilac)] dark:shadow-[6px_6px_0_color-mix(in_oklab,var(--color-pastel-lilac)_40%,transparent)]">
         {title && (
-          <div className="border-border bg-muted dark:bg-muted/40 relative flex h-10 items-center">
-            <div className="border-primary text-foreground absolute ml-8 h-full rounded-t-lg border-t-2 bg-(--shiki-bg) px-4 py-2 font-mono text-sm">
+          <div className="bg-pastel-lilac/45 dark:bg-pastel-lilac/15 relative flex h-10 items-center">
+            <div className="border-pastel-lilac-ink dark:border-pastel-lilac text-pastel-lilac-ink absolute ml-8 h-full rounded-t-lg border-t-2 bg-(--shiki-bg) px-4 py-2 font-mono text-sm">
               mermaid
             </div>
           </div>

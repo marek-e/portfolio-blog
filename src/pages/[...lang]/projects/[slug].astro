@@ -12,7 +12,7 @@ import {
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
 import { Link } from '@/components/ui/button';
-import { Separator } from '@/components/ui/separator';
+import SectionHeading from '@/components/shared/SectionHeading.astro';
 import { getCollection, render } from 'astro:content';
 import { getTranslations, defaultLang } from '@/i18n';
 import { getTranslatedPath } from '@/i18n/config';
@@ -32,6 +32,7 @@ import {
 } from '@hugeicons/core-free-icons';
 import { Image } from 'astro:assets';
 import { getTechColor, getStatusVariant, formatProjectDate } from '@/lib/projects';
+import { cn } from '@/lib/utils';
 import { getProjectImage, getProjectImageSafe } from '@/lib/images';
 
 type Project = Awaited<ReturnType<typeof getCollection<'projects'>>>[number];
@@ -93,6 +94,13 @@ const galleryImages = gallery?.map((item) => ({
   ...item,
   image: getProjectImageSafe(item.src),
 }));
+
+const facts = [
+  { label: t.projectsPage.role, value: role, icon: UserIcon },
+  { label: t.projectsPage.duration, value: duration, icon: TimeQuarterIcon },
+  { label: t.projectsPage.team, value: team, icon: UserMultiple02Icon },
+].filter((fact) => fact.value);
+const isCover = objectFit === 'cover';
 ---
 
 <Layout title={`${title} | ${t.projectsPage.title}`} description={description}>
@@ -120,8 +128,8 @@ const galleryImages = gallery?.map((item) => ({
     })}
   />
   <Navbar />
-  <main class="container mx-auto max-w-5xl px-4 pt-32 pb-8">
-    <Breadcrumb className="mb-10">
+  <main class="container mx-auto max-w-5xl px-4 pt-36 pb-24 md:pt-44">
+    <Breadcrumb className="mb-10 font-mono text-xs">
       <BreadcrumbList>
         <BreadcrumbItem>
           <BreadcrumbLink href={translatePath('/')}>
@@ -146,33 +154,46 @@ const galleryImages = gallery?.map((item) => ({
     </Breadcrumb>
 
     <article>
-      <header class="mb-6 space-y-6">
-        <div class="text-muted-foreground flex flex-wrap items-center gap-4 text-sm">
+      <header class="mb-12 space-y-8">
+        <div class="flex flex-wrap items-center gap-3">
           <Badge variant={getStatusVariant(status)}>
             {t.projectsPage[statusKey]}
           </Badge>
-          <time datetime={publishDate.toISOString()}>
+          <time
+            datetime={publishDate.toISOString()}
+            class="text-muted-foreground font-mono text-xs"
+          >
             {formatProjectDate(publishDate, lang)}
           </time>
         </div>
 
-        <h1 class="text-4xl font-bold tracking-tight lg:text-5xl">
-          <span class="text-primary">{title}</span>
-        </h1>
-
-        <p class="text-muted-foreground max-w-3xl text-lg">{description}</p>
+        <SectionHeading as="h1" title={title} subtitle={description} />
 
         {
           (links?.demo || links?.repo) && (
-            <div class="flex flex-wrap gap-3">
+            <div class="flex flex-col gap-3 sm:flex-row">
               {links.demo && (
-                <Link href={links.demo} target="_blank" rel="noopener noreferrer" variant="default">
+                <Link
+                  href={links.demo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  variant="default"
+                  size="lg"
+                  animation="scale"
+                >
                   <Icon icon={Globe02Icon} strokeWidth={2} className="size-4" />
                   {t.projectsPage.viewLive}
                 </Link>
               )}
               {links.repo && (
-                <Link href={links.repo} target="_blank" rel="noopener noreferrer" variant="outline">
+                <Link
+                  href={links.repo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  variant="outline"
+                  size="lg"
+                  animation="scale"
+                >
                   <Icon icon={SourceCodeIcon} strokeWidth={2} className="size-4" />
                   {t.projectsPage.viewCode}
                 </Link>
@@ -181,12 +202,16 @@ const galleryImages = gallery?.map((item) => ({
           )
         }
       </header>
-      <div class="bg-primary mb-6 h-0.5 w-10 rounded-full"></div>
 
       {
         image && (
-          <div class="mb-10 flex items-center">
-            <div class="bg-muted border-border h-60 overflow-hidden rounded-xl border">
+          <div class="surface mb-8 rounded-3xl p-2">
+            <div
+              class={cn(
+                'bg-pastel-lilac/40 dark:bg-pastel-lilac/10 h-64 overflow-hidden rounded-[1.25rem] md:h-96',
+                !isCover && 'p-10 md:p-16'
+              )}
+            >
               <Image
                 src={projectImage}
                 fetchpriority="low"
@@ -200,63 +225,44 @@ const galleryImages = gallery?.map((item) => ({
         )
       }
 
-      <div class="ring-foreground/10 mb-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <section
+        class="surface mb-16 grid gap-6 rounded-3xl p-6 md:grid-cols-[repeat(var(--cols),minmax(0,1fr))] md:p-8"
+        style={`--cols: ${facts.length + 1}`}
+      >
         {
-          role && (
-            <div class="bg-card rounded-lg p-4 ring-1 ring-inherit">
-              <div class="text-muted-foreground mb-1 flex items-center gap-2 text-sm">
-                <Icon icon={UserIcon} strokeWidth={2} className="size-4" />
-                {t.projectsPage.role}
-              </div>
-              <p class="font-medium">{role}</p>
+          facts.map((fact) => (
+            <div>
+              <p class="eyebrow mb-2 flex items-center gap-2">
+                <Icon icon={fact.icon} strokeWidth={2} className="size-3.5" />
+                {fact.label}
+              </p>
+              <p class="text-foreground font-medium">{fact.value}</p>
             </div>
-          )
+          ))
         }
-
-        {
-          duration && (
-            <div class="bg-card rounded-lg p-4 ring-1 ring-inherit">
-              <div class="text-muted-foreground mb-1 flex items-center gap-2 text-sm">
-                <Icon icon={TimeQuarterIcon} strokeWidth={2} className="size-4" />
-                {t.projectsPage.duration}
-              </div>
-              <p class="font-medium">{duration}</p>
-            </div>
-          )
-        }
-
-        {
-          team && (
-            <div class="bg-card rounded-lg p-4 ring-1 ring-inherit">
-              <div class="text-muted-foreground mb-1 flex items-center gap-2 text-sm">
-                <Icon icon={UserMultiple02Icon} strokeWidth={2} className="size-4" />
-                {t.projectsPage.team}
-              </div>
-              <p class="font-medium">{team}</p>
-            </div>
-          )
-        }
-      </div>
-
-      <section class="mb-10">
-        <h2 class="mb-4 text-lg font-semibold">{t.projectsPage.techStack}</h2>
-        <div class="flex flex-wrap gap-2">
-          {techStack.map((tech) => <Badge variant={getTechColor(tech)}>{tech}</Badge>)}
+        <div class={cn(facts.length > 0 && 'md:border-foreground/10 md:border-l md:pl-6')}>
+          <h2 class="eyebrow mb-3 font-mono font-normal tracking-[0.08em]">
+            {t.projectsPage.techStack}
+          </h2>
+          <div class="flex flex-wrap gap-1.5">
+            {techStack.map((tech) => <Badge variant={getTechColor(tech)}>{tech}</Badge>)}
+          </div>
         </div>
       </section>
 
       {
         highlights && highlights.length > 0 && (
-          <section class="bg-primary/5 mb-10 rounded-xl p-6">
-            <h2 class="mb-4 flex items-center gap-2 text-lg font-semibold">
-              <Icon icon={CheckmarkCircle02Icon} strokeWidth={2} className="text-primary size-5" />
+          <section class="surface mx-auto mb-16 max-w-3xl rounded-3xl p-6 md:p-8">
+            <h2 class="text-foreground mb-6 text-2xl font-semibold tracking-tight">
               {t.projectsPage.highlights}
             </h2>
-            <ul class="space-y-2">
+            <ul class="space-y-4">
               {highlights.map((highlight) => (
-                <li class="flex items-start gap-3">
-                  <span class="text-primary mt-1.5">•</span>
-                  <span>{highlight}</span>
+                <li class="flex items-start gap-4">
+                  <span class="bg-pastel-mint/60 text-foreground dark:bg-pastel-mint/15 dark:text-pastel-mint grid size-7 shrink-0 place-items-center rounded-full">
+                    <Icon icon={CheckmarkCircle02Icon} strokeWidth={2} className="size-4" />
+                  </span>
+                  <span class="text-foreground/85 leading-relaxed">{highlight}</span>
                 </li>
               ))}
             </ul>
@@ -264,74 +270,67 @@ const galleryImages = gallery?.map((item) => ({
         )
       }
 
-      <Separator className="my-8" />
-
-      <div class="prose prose-neutral dark:prose-invert max-w-none">
+      <div class="prose prose-neutral dark:prose-invert mx-auto max-w-3xl">
         <Content components={{ ...mdxComponents, Toggle }} />
       </div>
 
       {
         lessons && lessons.length > 0 && (
-          <>
-            <Separator className="my-8" />
-            <section class="rounded-xl bg-amber-50 p-6 dark:bg-amber-950/20">
-              <h2 class="mb-4 flex items-center gap-2 text-lg font-semibold">
-                <Icon
-                  icon={Bulb}
-                  strokeWidth={2}
-                  className="size-5 text-amber-600 dark:text-amber-400"
-                />
-                {t.projectsPage.lessons}
-              </h2>
-              <ul class="space-y-2">
-                {lessons.map((lesson) => (
-                  <li class="flex items-start gap-3">
-                    <span class="mt-1.5 text-amber-600 dark:text-amber-400">•</span>
-                    <span>{lesson}</span>
-                  </li>
-                ))}
-              </ul>
-            </section>
-          </>
+          <section class="surface relative mx-auto mt-16 max-w-3xl overflow-hidden rounded-3xl p-6 md:p-8">
+            <div class="bg-pastel-butter/40 dark:bg-pastel-butter/8 pointer-events-none absolute inset-0" />
+            <h2 class="text-foreground relative mb-6 flex items-center gap-3 text-2xl font-semibold tracking-tight">
+              <span class="bg-pastel-butter text-ink dark:bg-pastel-butter/15 dark:text-pastel-butter grid size-9 place-items-center rounded-full">
+                <Icon icon={Bulb} strokeWidth={2} className="size-4.5" />
+              </span>
+              {t.projectsPage.lessons}
+            </h2>
+            <ul class="relative space-y-3">
+              {lessons.map((lesson) => (
+                <li class="flex items-start gap-3">
+                  <span class="text-muted-foreground mt-0.5 font-mono text-xs">&rarr;</span>
+                  <span class="text-foreground/85 leading-relaxed">{lesson}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
         )
       }
 
       {
         galleryImages && galleryImages.length > 0 && (
-          <>
-            <Separator className="my-8" />
-            <section>
-              <h2 class="mb-6 text-lg font-semibold">{t.projectsPage.gallery}</h2>
-              <div class="grid gap-4 sm:grid-cols-2">
-                {galleryImages.map((item) =>
-                  item.image ? (
-                    <figure class="bg-muted overflow-hidden rounded-lg">
-                      <Image
-                        src={item.image}
-                        alt={item.alt}
-                        class="aspect-video w-full object-cover"
-                        loading="lazy"
-                      />
-                      {item.caption && (
-                        <figcaption class="text-muted-foreground p-3 text-center text-sm">
-                          {item.caption}
-                        </figcaption>
-                      )}
-                    </figure>
-                  ) : null
-                )}
-              </div>
-            </section>
-          </>
+          <section class="mt-20">
+            <h2 class="text-foreground mb-8 text-3xl font-semibold tracking-tight md:text-4xl">
+              {t.projectsPage.gallery}
+            </h2>
+            <div class="grid gap-5 sm:grid-cols-2">
+              {galleryImages.map((item) =>
+                item.image ? (
+                  <figure class="surface overflow-hidden rounded-3xl p-2">
+                    <Image
+                      src={item.image}
+                      alt={item.alt}
+                      class="aspect-video w-full rounded-[1.25rem] object-cover"
+                      loading="lazy"
+                    />
+                    {item.caption && (
+                      <figcaption class="text-muted-foreground px-3 pt-3 pb-2 text-center font-mono text-xs">
+                        {item.caption}
+                      </figcaption>
+                    )}
+                  </figure>
+                ) : null
+              )}
+            </div>
+          </section>
         )
       }
 
-      <hr class="border-border my-8" />
-
-      <Link href={translatePath('/projects')} variant="link">
-        <Icon icon={ArrowLeft02Icon} strokeWidth={2} className="size-4" />
-        {t.projectsPage.backToProjects}
-      </Link>
+      <div class="border-foreground/10 mt-20 border-t pt-8">
+        <Link href={translatePath('/projects')} variant="outline" size="lg" animation="scale">
+          <Icon icon={ArrowLeft02Icon} strokeWidth={2} className="size-4" />
+          {t.projectsPage.backToProjects}
+        </Link>
+      </div>
     </article>
   </main>
 </Layout>

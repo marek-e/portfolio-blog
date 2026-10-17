@@ -1,6 +1,8 @@
 import type { RunningActivity } from '@/types/strava';
 import type { Lang } from '@/i18n/config';
 import { getTranslations } from '@/i18n';
+import { useReducedMotion } from '@/lib/useReducedMotion';
+import { cn } from '@/lib/utils';
 import { Icon } from '../shared/Icon';
 import {
   Award01Icon,
@@ -10,19 +12,22 @@ import {
   MountainIcon,
   Heart,
 } from '@hugeicons/core-free-icons';
+import {
+  ActivityCardLink,
+  ActivityHeader,
+  ActivityStats,
+  HeroMetric,
+  formatActivityDate,
+  formatFinishTime,
+  type ActivityStat,
+} from './ActivityCardParts';
 
 interface RaceActivityCardProps {
   activity: RunningActivity;
   lang?: Lang;
 }
 
-function formatFinishTime(seconds: number): string {
-  const h = Math.floor(seconds / 3600);
-  const m = Math.floor((seconds % 3600) / 60);
-  const s = seconds % 60;
-  if (h > 0) return `${h}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
-  return `${m}:${String(s).padStart(2, '0')}`;
-}
+const CONFETTI_COLORS = ['bg-pastel-butter', 'bg-pastel-peach', 'bg-pastel-rose'] as const;
 
 const CONFETTI_PIECES = [
   { top: '8%', left: '15%', width: 8, height: 4, rotate: 20, delay: 0, duration: 3.2 },
@@ -39,155 +44,91 @@ const CONFETTI_PIECES = [
 
 export function RaceActivityCard({ activity, lang = 'fr' }: RaceActivityCardProps) {
   const t = getTranslations(lang);
+  const reducedMotion = useReducedMotion();
 
-  const formattedDate = activity.date
-    .toLocaleDateString(lang === 'fr' ? 'fr-FR' : 'en-US', {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric',
-    })
-    .toUpperCase();
-
-  const finishTime = formatFinishTime(activity.durationSeconds);
+  const stats: ActivityStat[] = [
+    { icon: DashboardSpeed01Icon, value: activity.paceMinPerKm, unit: t.strava.pace },
+    { icon: WorkoutRunIcon, value: activity.distanceKm.toFixed(1), unit: 'km' },
+    { icon: MountainIcon, value: activity.elevationGain, unit: 'm' },
+    ...(activity.averageHeartRate
+      ? [{ icon: Heart, value: activity.averageHeartRate, unit: t.strava.heartRate }]
+      : []),
+  ];
 
   return (
     <>
       <style>{`
         @keyframes raceConfettiFloat {
-          0%, 100% { transform: translateY(0px) rotate(var(--rotate)); opacity: 0.6; }
-          50% { transform: translateY(-6px) rotate(calc(var(--rotate) + 15deg)); opacity: 0.9; }
+          0%, 100% { transform: translateY(0px) rotate(var(--rotate)); opacity: 0.7; }
+          50% { transform: translateY(-6px) rotate(calc(var(--rotate) + 15deg)); opacity: 1; }
         }
-        @keyframes raceShimmer {
-          0% { background-position: -200% center; }
-          100% { background-position: 200% center; }
-        }
-        @keyframes raceBorderGlow {
-          0%, 100% { box-shadow: 0 0 8px 1px rgba(251,191,36,0.2); }
-          50% { box-shadow: 0 0 18px 4px rgba(251,191,36,0.45); }
-        }
-        .race-card-glow {
-          animation: raceBorderGlow 2.5s ease-in-out infinite;
-        }
-        .race-card-glow:hover {
-          animation: none;
-          box-shadow: 0 0 28px 6px rgba(251,191,36,0.55), 0 0 0 1px rgba(251,191,36,0.8);
-        }
-        .race-shimmer-bar {
-          background: linear-gradient(
-            90deg,
-            transparent 0%,
-            rgba(251,191,36,0.0) 30%,
-            rgba(251,191,36,0.5) 50%,
-            rgba(251,191,36,0.0) 70%,
-            transparent 100%
-          );
-          background-size: 200% auto;
-          animation: raceShimmer 3s linear infinite;
-        }
-        .race-card-glow:hover .race-shimmer-bar {
-          animation: raceShimmer 1.2s linear infinite;
+        .race-confetti {
+          animation: raceConfettiFloat ease-in-out infinite;
         }
       `}</style>
 
-      <a
+      <ActivityCardLink
         href={activity.stravaUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="block h-full rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2"
+        className="ring-pastel shadow-[0_24px_60px_-24px_oklch(from_var(--pastel-butter)_l_c_h/70%)] hover:shadow-[0_30px_70px_-24px_oklch(from_var(--pastel-peach)_l_c_h/80%)]"
       >
-        <div
-          className="race-card-glow group relative flex h-full flex-col overflow-hidden rounded-xl border border-amber-500/60 p-4 transition-all duration-300 hover:border-amber-400"
-          style={{ background: '#100c00' }}
-        >
-          {CONFETTI_PIECES.map((piece, i) => (
-            <span
-              key={i}
-              className="pointer-events-none absolute rounded-sm"
-              style={
-                {
-                  top: piece.top,
-                  left: piece.left,
-                  width: piece.width,
-                  height: piece.height,
-                  background: i % 3 === 0 ? '#fbbf24' : i % 3 === 1 ? '#f59e0b' : '#fde68a',
-                  '--rotate': `${piece.rotate}deg`,
-                  animationName: 'raceConfettiFloat',
-                  animationDuration: `${piece.duration}s`,
-                  animationDelay: `${piece.delay}s`,
-                  animationTimingFunction: 'ease-in-out',
-                  animationIterationCount: 'infinite',
-                  transform: `rotate(${piece.rotate}deg)`,
-                } as React.CSSProperties
-              }
-            />
-          ))}
-          <div className="relative mb-1 flex items-center justify-between">
-            <p className="text-xs tracking-wide text-amber-400 uppercase">{formattedDate}</p>
-            <span className="inline-flex items-center gap-1 rounded-full border border-amber-500/50 bg-[#EFBF04] px-2.5 py-0.5 text-xs font-semibold tracking-widest text-amber-950 uppercase">
-              <Icon icon={Award01Icon} size={12} strokeWidth={2} />
-              RACE
-            </span>
-          </div>
-
-          <h3 className="mt-0.5 line-clamp-1 text-base font-bold text-amber-100">
-            {activity.name}
-          </h3>
-
-          <div className="my-2 flex items-center gap-3 text-[#EFBF04]">
-            <div className="shrink-0 transition-transform duration-500 group-hover:rotate-12">
-              <Icon icon={MedalFirstPlaceIcon} size={24} strokeWidth={1.5} />
-            </div>
-            <span
-              className="text-2xl font-black tracking-tight"
-              style={{ fontVariantNumeric: 'tabular-nums' }}
-            >
-              {finishTime}
-            </span>
-          </div>
-
-          {/* Stats row */}
-          <div
-            className={`mt-auto grid gap-2 border-t border-amber-800/50 pt-2 ${activity.averageHeartRate ? 'grid-cols-4' : 'grid-cols-3'}`}
-          >
-            <div className="text-center">
-              <div className="mb-1 flex justify-center text-amber-600">
-                <Icon icon={DashboardSpeed01Icon} size={13} strokeWidth={2} />
-              </div>
-              <p className="text-sm font-bold text-amber-200">{activity.paceMinPerKm}</p>
-              <p className="text-xs text-amber-600">{t.strava.pace}</p>
-            </div>
-            <div className="text-center">
-              <div className="mb-1 flex justify-center text-amber-600">
-                <Icon icon={WorkoutRunIcon} size={13} strokeWidth={2} />
-              </div>
-              <p className="text-sm font-bold text-amber-200">{activity.distanceKm.toFixed(1)}</p>
-              <p className="text-xs text-amber-600">km</p>
-            </div>
-            <div className="text-center">
-              <div className="mb-1 flex justify-center text-amber-600">
-                <Icon icon={MountainIcon} size={13} strokeWidth={2} />
-              </div>
-              <p className="text-sm font-bold text-amber-200">{activity.elevationGain}</p>
-              <p className="text-xs text-amber-600">m</p>
-            </div>
-            {activity.averageHeartRate && (
-              <div className="text-center">
-                <div className="mb-1 flex justify-center">
-                  <Icon
-                    icon={Heart}
-                    size={13}
-                    strokeWidth={2}
-                    className="fill-rose-400 text-rose-400"
-                  />
-                </div>
-                <p className="text-sm font-bold text-amber-200">{activity.averageHeartRate}</p>
-                <p className="text-xs text-amber-600">{t.strava.heartRate}</p>
-              </div>
+        <span
+          aria-hidden="true"
+          className="bg-pastel-butter/45 dark:bg-pastel-butter/10 pointer-events-none absolute -top-20 -left-12 size-48 rounded-full blur-3xl"
+        />
+        {CONFETTI_PIECES.map((piece, i) => (
+          <span
+            key={i}
+            aria-hidden="true"
+            className={cn(
+              'pointer-events-none absolute rounded-sm',
+              CONFETTI_COLORS[i % CONFETTI_COLORS.length],
+              !reducedMotion && 'race-confetti'
             )}
-          </div>
-          <div className="race-shimmer-bar pointer-events-none absolute bottom-0 left-0 h-[2px] w-full" />
+            style={
+              {
+                top: piece.top,
+                left: piece.left,
+                width: piece.width,
+                height: piece.height,
+                '--rotate': `${piece.rotate}deg`,
+                animationDuration: `${piece.duration}s`,
+                animationDelay: `${piece.delay}s`,
+                transform: `rotate(${piece.rotate}deg)`,
+              } as React.CSSProperties
+            }
+          />
+        ))}
+
+        <ActivityHeader
+          date={formatActivityDate(activity.date, lang, {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric',
+          })}
+          name={activity.name}
+          tag={
+            <>
+              <Icon icon={Award01Icon} size={12} strokeWidth={2} />
+              {t.strava.tagRace}
+            </>
+          }
+          tone="butter"
+        />
+
+        <div className="relative my-5">
+          <HeroMetric
+            value={formatFinishTime(activity.durationSeconds)}
+            unit={t.strava.duration.toLowerCase()}
+            leading={
+              <span className="bg-pastel-butter/70 dark:bg-pastel-butter/15 dark:text-pastel-butter flex size-11 shrink-0 items-center justify-center rounded-2xl transition-transform duration-500 motion-safe:group-hover:rotate-12">
+                <Icon icon={MedalFirstPlaceIcon} size={22} strokeWidth={1.6} />
+              </span>
+            }
+          />
         </div>
-      </a>
+
+        <ActivityStats stats={stats} />
+      </ActivityCardLink>
     </>
   );
 }

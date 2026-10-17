@@ -51,13 +51,13 @@ function formatDate(date: string | null, presentLabel: string, lang: Lang): stri
 ---
 
 <div
-  class="cv-container bg-card border-border mx-auto border p-8 font-[Geist] shadow-lg md:p-12 dark:text-white"
+  class="cv-container bg-card text-card-foreground mx-auto rounded-[1.25rem] p-6 font-[Geist] shadow-[0_1px_2px_oklch(0_0_0/5%),0_12px_32px_-16px_oklch(0.35_0.04_300/25%)] sm:p-10 md:p-14"
 >
-  <header class="cv-section mb-6">
-    <div class="flex items-start gap-6">
+  <header class="cv-section mb-6 print:mb-4">
+    <div class="flex flex-col items-start gap-6 sm:flex-row">
       <!-- Profile Picture -->
       <div
-        class="profile-picture bg-secondary flex aspect-auto h-30 w-25 shrink-0 items-center justify-center overflow-hidden rounded-md"
+        class="profile-picture bg-secondary flex aspect-auto h-30 w-25 shrink-0 items-center justify-center overflow-hidden rounded-2xl"
       >
         <Image
           src={profilePicture}
@@ -76,13 +76,15 @@ function formatDate(date: string | null, presentLabel: string, lang: Lang): stri
       </div>
 
       <div class="flex-1">
-        <h1 class="text-3xl font-bold">{cv.name}</h1>
-        <p class="text-primary mt-1 text-xl font-medium">{cv.title}</p>
+        <h1 class="text-4xl leading-tight font-semibold tracking-tight">{cv.name}</h1>
+        <p class="font-display-wonk text-primary mt-1 text-xl">{cv.title}</p>
 
-        <div class="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-sm">
+        <div
+          class="text-muted-foreground mt-5 flex flex-wrap gap-x-5 gap-y-2 font-mono text-xs print:mt-3"
+        >
           <a
             href={`mailto:${cv.email}`}
-            class="flex items-center gap-1.5 transition-colors hover:underline"
+            class="hover:text-foreground flex items-center gap-1.5 transition-colors hover:underline"
           >
             <HugeiconsIcon icon={Mail01Icon} className="size-4" />
             {cv.email}
@@ -95,7 +97,7 @@ function formatDate(date: string | null, presentLabel: string, lang: Lang): stri
             href={`https://${cv.linkedin}`}
             target="_blank"
             rel="noopener noreferrer"
-            class="flex items-center gap-1.5 transition-colors hover:underline"
+            class="hover:text-foreground flex items-center gap-1.5 transition-colors hover:underline"
           >
             <HugeiconsIcon icon={Linkedin01Icon} className="size-4" />
             LinkedIn
@@ -104,7 +106,7 @@ function formatDate(date: string | null, presentLabel: string, lang: Lang): stri
             href={`https://${cv.github}`}
             target="_blank"
             rel="noopener noreferrer"
-            class="flex items-center gap-1.5 transition-colors hover:underline"
+            class="hover:text-foreground flex items-center gap-1.5 transition-colors hover:underline"
           >
             <HugeiconsIcon icon={Github01Icon} className="size-4" />
             GitHub
@@ -113,7 +115,7 @@ function formatDate(date: string | null, presentLabel: string, lang: Lang): stri
             href={`https://${cv.website}`}
             target="_blank"
             rel="noopener noreferrer"
-            class="flex items-center gap-1.5 transition-colors hover:underline"
+            class="hover:text-foreground flex items-center gap-1.5 transition-colors hover:underline"
           >
             <HugeiconsIcon icon={Globe02Icon} className="size-4" />
             {cv.website}
@@ -125,30 +127,34 @@ function formatDate(date: string | null, presentLabel: string, lang: Lang): stri
 
   <!-- Summary -->
   <section class="cv-section">
-    <p class="text-justify text-sm leading-relaxed">{cv.summary}</p>
+    <p class="text-foreground/85 text-sm leading-relaxed text-pretty sm:text-justify">
+      {cv.summary}
+    </p>
   </section>
 
-  <hr class="border-border my-3" />
+  <hr class="border-foreground/10 my-6 print:my-3" />
 
   <!-- Experience -->
-  <section class="cv-section mb-6">
-    <h2 class="mb-4 text-lg font-semibold">{t.cv.sections.experience}</h2>
+  <section class="cv-section mb-6 print:mb-3">
+    <h2 class="mb-5 text-2xl font-semibold tracking-tight print:mb-3">
+      {t.cv.sections.experience}
+    </h2>
     {
       cv.experience.map((exp) => (
         <div class="mb-5 last:mb-0">
           <div class="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between">
             <div>
-              <h3 class="font-medium">{exp.title}</h3>
+              <h3 class="font-display-soft text-lg font-semibold">{exp.title}</h3>
               <p class="text-sm">
                 <span class="font-bold">{exp.company}</span> - {exp.location}
               </p>
             </div>
-            <span class="text-sm whitespace-nowrap">
+            <span class="text-muted-foreground font-mono text-xs whitespace-nowrap sm:pt-1">
               {formatDate(exp.startDate, t.cv.present, lang)} →
               {formatDate(exp.endDate, t.cv.present, lang)}
             </span>
           </div>
-          <ul class="mt-2 list-inside list-disc space-y-1 text-sm">
+          <ul class="marker:text-muted-foreground text-foreground/85 mt-2 list-outside list-disc space-y-1 pl-4 text-sm leading-relaxed print:space-y-0 print:leading-snug">
             {exp.description.map((item) => (
               <li>{item}</li>
             ))}
@@ -158,23 +164,23 @@ function formatDate(date: string | null, presentLabel: string, lang: Lang): stri
     }
   </section>
 
-  <hr class="border-border my-3" />
+  <hr class="border-foreground/10 my-6 print:my-3" />
 
   <!-- Education -->
-  <section class="cv-section mb-6">
-    <h2 class="mb-4 text-lg font-semibold">{t.cv.sections.education}</h2>
+  <section class="cv-section mb-6 print:mb-3">
+    <h2 class="mb-5 text-2xl font-semibold tracking-tight print:mb-3">{t.cv.sections.education}</h2>
     {
       cv.education.map((edu) => (
         <div class="mb-4 last:mb-0">
           <div class="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between">
             <div>
-              <h3 class="font-medium">{edu.degree}</h3>
+              <h3 class="font-display-soft text-lg font-semibold">{edu.degree}</h3>
               <p class="text-sm">
                 <span class="font-bold">{edu.institution}</span> - {edu.location}
               </p>
               {edu.note && <p class="text-muted-foreground mt-0.5 text-xs italic">{edu.note}</p>}
             </div>
-            <span class="text-sm whitespace-nowrap">
+            <span class="text-muted-foreground font-mono text-xs whitespace-nowrap sm:pt-1">
               {formatDate(edu.startDate, '', lang)} → {formatDate(edu.endDate, '', lang)}
             </span>
           </div>
@@ -183,19 +189,19 @@ function formatDate(date: string | null, presentLabel: string, lang: Lang): stri
     }
   </section>
 
-  <hr class="border-border my-3" />
+  <hr class="border-foreground/10 my-6 print:my-3" />
 
   <!-- Skills -->
-  <section class="cv-section mb-6">
-    <h2 class="mb-4 text-lg font-semibold">{t.cv.sections.skills}</h2>
+  <section class="cv-section mb-6 print:mb-3">
+    <h2 class="mb-5 text-2xl font-semibold tracking-tight print:mb-3">{t.cv.sections.skills}</h2>
     <div class="space-y-3">
       {
         cv.skills.map((category) => (
           <div class="flex flex-wrap items-start gap-2">
-            <span class="min-w-[100px] text-sm font-medium">{category.category}:</span>
+            <span class="min-w-[120px] pt-0.5 text-sm font-medium">{category.category}</span>
             <div class="flex flex-wrap gap-1.5">
               {category.skills.map((skill) => (
-                <span class="bg-secondary inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium">
+                <span class="bg-secondary text-foreground/80 inline-flex items-center rounded-full px-2.5 py-0.5 font-mono text-xs">
                   {skill}
                 </span>
               ))}
@@ -206,11 +212,11 @@ function formatDate(date: string | null, presentLabel: string, lang: Lang): stri
     </div>
   </section>
 
-  <hr class="border-border my-3" />
+  <hr class="border-foreground/10 my-6 print:my-3" />
 
   <!-- Languages -->
   <section class="cv-section">
-    <h2 class="mb-3 text-lg font-semibold">{t.cv.sections.languages}</h2>
+    <h2 class="mb-4 text-2xl font-semibold tracking-tight print:mb-2">{t.cv.sections.languages}</h2>
     <div class="flex flex-wrap gap-x-6 gap-y-1">
       {
         cv.languages.map((lang) => (

@@ -4,7 +4,7 @@ interface CardTitleProps {
 
 const LogoHalf = ({ flip }: { flip?: boolean }) => (
   <svg
-    className={`fill-primary size-6 ${flip ? 'rotate-180' : ''}`}
+    className={`fill-primary size-4 ${flip ? 'rotate-180' : ''}`}
     viewBox="0 0 500 500"
     aria-hidden="true"
   >
@@ -15,10 +15,12 @@ const LogoHalf = ({ flip }: { flip?: boolean }) => (
 
 export function CardTitle({ title }: CardTitleProps) {
   return (
-    <h3 className="text-primary relative z-10 mb-3 flex items-center justify-center gap-2 text-center text-xl font-bold md:text-2xl">
-      <LogoHalf />
+    <h3 className="text-foreground/80 flex items-center gap-1.5 font-mono text-[0.7rem] font-medium tracking-[0.14em] uppercase">
+      <span className="flex items-center">
+        <LogoHalf />
+        <LogoHalf flip />
+      </span>
       {title}
-      <LogoHalf flip />
     </h3>
   );
 }

@@ -1,68 +1,300 @@
 ---
+import { Image } from 'astro:assets';
+import { HugeiconsIcon } from '@hugeicons/react';
+import { ArrowRight02Icon } from '@hugeicons/core-free-icons';
 import { Link } from '@/components/ui/button';
+import { Doodle, MarkedText } from '@/components/shared/HandDrawn';
 import { getTranslations, getLangFromUrl, getTranslatedPath } from '@/i18n';
-import BackgroundImage from '../layout/BackgroundImage.astro';
+import BackgroundImage from '@/components/layout/BackgroundImage.astro';
 import CursorSpotlight from './CursorSpotlight.astro';
-import { Badge } from '../ui/badge';
+import portrait from '@/assets/mareke.avif';
 
 const lang = getLangFromUrl(Astro.url);
 const t = getTranslations(lang);
 const translatePath = getTranslatedPath(lang);
+
+const stickers = [
+  { tone: 'peach', position: '-rotate-6 top-[14%] left-[6%]', depth: 1.2 },
+  { tone: 'sky', position: 'rotate-3 top-[22%] right-[7%]', depth: 0.8 },
+  { tone: 'mint', position: 'rotate-6 bottom-[30%] left-[9%]', depth: 1.4 },
+  { tone: 'lilac', position: '-rotate-3 bottom-[24%] right-[10%]', depth: 1 },
+  { tone: 'butter', position: 'rotate-2 bottom-[12%] left-[26%]', depth: 0.6 },
+];
+
+const toneStyle = (tone: string) =>
+  `--tone: var(--pastel-${tone}); --tone-ink: var(--pastel-${tone}-ink);`;
 ---
 
 <CursorSpotlight>
-  <section class="relative flex min-h-dvh items-center justify-center overflow-hidden">
+  <section class="relative flex min-h-dvh items-center justify-center overflow-hidden pt-28 pb-20">
     <BackgroundImage />
 
-    <!-- Content -->
-    <div class="relative z-10 mx-auto max-w-6xl px-4 text-center sm:px-6 lg:px-8">
-      <!-- Announcement Badge -->
-      <div class="mb-6 flex items-center justify-center gap-2">
-        {t.hero.badges.map((badge) => <Badge variant="glass">{badge}</Badge>)}
-      </div>
+    <div aria-hidden="true" class="absolute inset-0 z-10 hidden lg:block" data-sticker-layer>
+      {
+        t.hero.badges.map((badge, index) => {
+          const sticker = stickers[index % stickers.length];
+          return (
+            <span
+              class={`hero-sticker absolute ${sticker.position}`}
+              style={`animation-delay: ${index * -1.7}s; --depth: ${sticker.depth};`}
+            >
+              <span
+                class="sticker-3d sticker-parallax block rounded-full px-4 py-1.5 font-mono text-sm font-medium"
+                style={toneStyle(sticker.tone)}
+              >
+                {badge}
+              </span>
+            </span>
+          );
+        })
+      }
+    </div>
 
-      <!-- Headline -->
+    <div
+      class="relative z-10 mx-auto flex w-full max-w-5xl min-w-0 flex-col items-center px-4 text-center sm:px-6"
+    >
+      <p
+        class="glass mb-10 flex max-w-full items-center gap-3 rounded-full py-1.5 pr-4 pl-1.5 text-sm"
+      >
+        <Image
+          src={portrait}
+          alt=""
+          width={56}
+          height={56}
+          class="size-7 rounded-full object-cover"
+          loading="eager"
+        />
+        <span class="text-foreground/80 font-mono text-xs tracking-wide">{t.hero.eyebrow}</span>
+      </p>
+
       <h1
         id="hello"
-        class="text-foreground mb-6 text-4xl font-bold drop-shadow-lg sm:text-5xl lg:text-6xl dark:text-white"
+        class="text-foreground relative text-[clamp(2.25rem,11.5vw,7.5rem)] leading-[0.95] font-medium tracking-[-0.035em] drop-shadow-[0_2px_24px_oklch(1_0_0/45%)] dark:text-white dark:drop-shadow-[0_2px_24px_oklch(0_0_0/55%)]"
       >
-        {t.hero.headline}
+        <span class="block">{t.hero.greeting}</span>
+        <span class="relative mt-2 inline-block">
+          <MarkedText>{t.hero.name}</MarkedText>
+          <Doodle
+            name="sparkle"
+            className="text-pastel-lilac absolute -top-[0.2em] -right-[0.55em] size-[0.42em] rotate-12"
+          />
+          <Doodle
+            name="sparkle"
+            className="text-pastel-peach absolute top-[0.05em] -left-[0.5em] size-[0.24em] -rotate-12"
+          />
+        </span>
       </h1>
 
-      <!-- Subtitle -->
       <p
-        class="text-foreground/90 mx-auto mb-8 max-w-2xl text-lg drop-shadow-md sm:text-xl lg:text-2xl dark:text-white/90"
+        class="text-foreground/85 mx-auto mt-10 max-w-2xl text-lg leading-relaxed text-pretty drop-shadow-md md:text-xl dark:text-white/90"
       >
         {
           t.hero.subtitle.split('\n').map((line, i) => (
             <>
-              {i > 0 && <br />}
+              {i > 0 && <br class="hidden md:block" />}
+              {i > 0 && ' '}
               {line}
             </>
           ))
         }
       </p>
 
-      <!-- CTAs -->
-      <div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
+      <div
+        class="relative mt-10 flex w-full flex-col items-center justify-center gap-3 sm:w-auto sm:flex-row"
+      >
+        <Doodle
+          name="arrow"
+          strokeWidth={2.5}
+          className="text-foreground/50 absolute top-1/2 -left-32 hidden h-14 w-24 -translate-y-3/4 md:block"
+        />
+        <Link size="lg" href="#projects" className="w-full sm:w-auto" animation="scale">
+          {t.hero.ctaProjects}
+          <HugeiconsIcon icon={ArrowRight02Icon} className="size-4" data-icon="inline-end" />
+        </Link>
         <Link
+          variant="pastel"
           size="lg"
           href={translatePath('/curriculum-vitae')}
-          className="w-1/2 px-8 py-6 font-semibold md:w-auto"
+          className="w-full sm:w-auto"
           animation="scale"
         >
           {t.hero.ctaCv}
         </Link>
-        <Link
-          variant="secondary"
-          size="lg"
-          href="#projects"
-          className="w-1/2 px-8 py-6 font-semibold md:w-auto"
-          animation="scale"
-        >
-          {t.hero.ctaProjects}
-        </Link>
       </div>
+
+      <ul class="mt-12 flex flex-wrap justify-center gap-2 lg:hidden">
+        {
+          t.hero.badges.map((badge, index) => (
+            <li
+              class="sticker-3d rounded-full px-3 py-1 font-mono text-xs font-medium"
+              style={toneStyle(stickers[index % stickers.length].tone)}
+            >
+              {badge}
+            </li>
+          ))
+        }
+      </ul>
     </div>
+
+    <a
+      href="#about"
+      class="scroll-hint absolute bottom-8 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-3 font-mono text-[0.7rem] tracking-[0.3em] text-white/85 uppercase transition-colors hover:text-white md:flex"
+    >
+      {t.hero.scrollHint}
+      <span class="relative h-12 w-px overflow-hidden bg-white/30">
+        <span class="scroll-hint-dot absolute inset-x-0 top-0 h-4 bg-white"></span>
+      </span>
+    </a>
   </section>
 </CursorSpotlight>
+
+<style>
+  .hero-sticker {
+    animation: sticker-float 9s ease-in-out infinite;
+  }
+
+  .sticker-3d {
+    --tone-deep: color-mix(in oklab, var(--tone), black 28%);
+    position: relative;
+    isolation: isolate;
+    color: var(--tone-ink);
+    background-image: linear-gradient(
+      180deg,
+      color-mix(in oklab, color-mix(in oklab, var(--tone), white 30%) 72%, transparent),
+      color-mix(in oklab, var(--tone) 62%, transparent) 55%,
+      color-mix(in oklab, color-mix(in oklab, var(--tone), black 10%) 66%, transparent)
+    );
+    box-shadow:
+      inset 0 2px 3px -1px oklch(1 0 0 / 80%),
+      inset 0 -3px 5px -2px color-mix(in oklab, var(--tone-deep) 60%, transparent),
+      0 1px 1px color-mix(in oklab, var(--tone-deep) 55%, transparent),
+      0 2px 1.5px color-mix(in oklab, var(--tone-deep) 45%, transparent),
+      0 3px 2px color-mix(in oklab, var(--tone-deep) 35%, transparent),
+      0 4px 3px color-mix(in oklab, var(--tone-deep) 22%, transparent),
+      0 14px 24px -10px oklch(0.2 0.04 60 / 38%);
+    backdrop-filter: blur(10px) saturate(180%);
+    -webkit-backdrop-filter: blur(10px) saturate(180%);
+  }
+
+  .sticker-3d::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background:
+      radial-gradient(ellipse 65% 50% at 45% 8%, oklch(1 0 0 / 75%), transparent 72%),
+      radial-gradient(
+        ellipse 95% 55% at 50% 110%,
+        color-mix(in oklab, var(--tone-deep) 45%, transparent),
+        transparent 70%
+      );
+    pointer-events: none;
+  }
+
+  :global(.dark) .sticker-3d {
+    --tone-deep: color-mix(in oklab, var(--tone), black 55%);
+    background-image: linear-gradient(
+      180deg,
+      color-mix(in oklab, var(--tone) 46%, transparent),
+      color-mix(in oklab, var(--tone) 28%, transparent) 55%,
+      color-mix(in oklab, var(--tone-deep) 40%, transparent)
+    );
+    box-shadow:
+      inset 0 2px 3px -1px oklch(1 0 0 / 35%),
+      inset 0 -3px 5px -2px oklch(0 0 0 / 45%),
+      0 1px 1px color-mix(in oklab, var(--tone-deep) 70%, transparent),
+      0 2px 1.5px color-mix(in oklab, var(--tone-deep) 55%, transparent),
+      0 3px 2px color-mix(in oklab, var(--tone-deep) 40%, transparent),
+      0 4px 3px oklch(0 0 0 / 25%),
+      0 0 22px -6px color-mix(in oklab, var(--tone) 55%, transparent),
+      0 14px 24px -10px oklch(0 0 0 / 60%);
+  }
+
+  :global(.dark) .sticker-3d::after {
+    background:
+      radial-gradient(ellipse 65% 50% at 45% 8%, oklch(1 0 0 / 32%), transparent 72%),
+      radial-gradient(ellipse 95% 55% at 50% 110%, oklch(0 0 0 / 40%), transparent 70%);
+  }
+
+  .sticker-parallax {
+    transform: perspective(500px)
+      translate3d(
+        calc(var(--px, 0) * var(--depth, 1) * 18px),
+        calc(var(--py, 0) * var(--depth, 1) * 12px),
+        0
+      )
+      rotateX(calc(var(--py, 0) * -18deg)) rotateY(calc(var(--px, 0) * 22deg));
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .scroll-hint {
+    text-shadow: 0 1px 10px oklch(0 0 0 / 65%);
+    filter: drop-shadow(0 1px 6px oklch(0 0 0 / 45%));
+  }
+
+  .scroll-hint-dot {
+    animation: scroll-hint 2.2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+  }
+
+  @keyframes sticker-float {
+    0%,
+    100% {
+      translate: 0 0;
+    }
+    50% {
+      translate: 0 -10px;
+    }
+  }
+
+  @keyframes scroll-hint {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(300%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-sticker,
+    .scroll-hint-dot {
+      animation: none;
+    }
+
+    .sticker-parallax {
+      transform: none;
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  function initStickerParallax() {
+    const layer = document.querySelector<HTMLElement>('[data-sticker-layer]');
+    const section = layer?.parentElement;
+    if (!layer || !section) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (window.matchMedia('(pointer: coarse)').matches) return;
+
+    let frame = 0;
+    section.addEventListener('pointermove', (event) => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        const rect = section.getBoundingClientRect();
+        const x = (event.clientX - rect.left) / rect.width - 0.5;
+        const y = (event.clientY - rect.top) / rect.height - 0.5;
+        layer.style.setProperty('--px', x.toFixed(3));
+        layer.style.setProperty('--py', y.toFixed(3));
+      });
+    });
+
+    section.addEventListener('pointerleave', () => {
+      layer.style.setProperty('--px', '0');
+      layer.style.setProperty('--py', '0');
+    });
+  }
+
+  initStickerParallax();
+  document.addEventListener('astro:after-swap', initStickerParallax);
+</script>
