@@ -1,0 +1,21 @@
+src/content/projects/en/blink.mdx
+  s_5fb0c5f42835b3::t_89326a813c68f4 12
+src/content/projects/fr/blink.mdx
+  s_5fb0c5f42835b3::t_494f931ed5f84c 12
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "693504d4c37eaed7a35098820c5c6336375b8ebd",
+  "prompts": {},
+  "sessions": {
+    "s_5fb0c5f42835b3": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f6d7194c-3057-4aa4-9e04-eaed449ee17b",
+        "model": "unknown"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
