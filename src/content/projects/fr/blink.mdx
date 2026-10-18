@@ -1,0 +1,47 @@
+---
+title: 'Blink'
+description: 'Un sélecteur de navigateur natif pour macOS qui route vos liens. Du lien au navigateur, instantanément.'
+featured: true
+techStack: ['Swift', 'SwiftUI', 'AppKit', 'macOS']
+links:
+  demo: 'https://github.com/marek-e/blink/releases'
+  repo: 'https://github.com/marek-e/blink'
+publishDate: 2026-10-18
+image: '/projects/blink.png'
+imageAlt: "Icône de l'application Blink"
+status: 'in-progress'
+---
+
+Blink est une petite application macOS native qui se place entre vos applications et vos navigateurs. Quand vous ouvrez un lien depuis Mail, Slack, Notes ou ailleurs, Blink vous demande quel navigateur utiliser, ou envoie directement le lien au navigateur choisi par vos règles.
+
+<video
+  controls
+  width="100%"
+  class="rounded-lg"
+  autoplay
+  loop
+  muted
+  poster="/projects/blink-poster.jpg"
+>
+  <source src="/projects/blink.mp4" type="video/mp4" />
+  Votre navigateur ne supporte pas la lecture de vidéos.
+</video>
+
+## Ce que fait Blink
+
+- Un sélecteur compact s'ouvre à côté du curseur avec vos navigateurs et le domaine du lien. Appuyez sur 1 à 9, utilisez les flèches ou cliquez.
+- Des règles routent les liens par domaine et par chemin, par exemple `example.com/team` vers un navigateur pro. La première règle qui correspond l'emporte.
+- Blink gère les profils : les espaces Arc, Dia, Chrome, Brave, Edge, Vivaldi, Zen et Firefox. Une règle peut envoyer un domaine vers un profil précis.
+- Quand un navigateur a disparu ou refuse un lien, Blink garde le lien et vous propose de réessayer, de choisir un autre navigateur ou de le copier. Il ne bascule jamais en silence.
+- Tout reste sur votre Mac. Les réglages tiennent dans un seul fichier JSON, sans historique ni requête réseau, et les URL ne sont jamais journalisées.
+
+## Installation
+
+Téléchargez le DMG depuis les [releases GitHub](https://github.com/marek-e/blink/releases), ou installez-le avec Homebrew :
+
+```sh
+brew tap marek-e/blink https://github.com/marek-e/blink
+brew install --cask marek-e/blink/blink
+```
+
+Nécessite macOS 14 Sonoma ou plus récent.

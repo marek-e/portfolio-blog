@@ -1,0 +1,47 @@
+---
+title: 'Blink'
+description: 'A native macOS browser picker and link router. From link to browser, instantly.'
+featured: true
+techStack: ['Swift', 'SwiftUI', 'AppKit', 'macOS']
+links:
+  demo: 'https://github.com/marek-e/blink/releases'
+  repo: 'https://github.com/marek-e/blink'
+publishDate: 2026-10-18
+image: '/projects/blink.png'
+imageAlt: 'Blink app icon'
+status: 'in-progress'
+---
+
+Blink is a small native macOS app that sits between your apps and your browsers. When you open a link from Mail, Slack, Notes or anywhere else, Blink either asks which browser to use or sends the link straight to the browser your rules pick.
+
+<video
+  controls
+  width="100%"
+  class="rounded-lg"
+  autoplay
+  loop
+  muted
+  poster="/projects/blink-poster.jpg"
+>
+  <source src="/projects/blink.mp4" type="video/mp4" />
+  Your browser doesn't support video playback.
+</video>
+
+## What it does
+
+- A compact picker opens next to the pointer with your browsers and the link's host. Press 1 to 9, use the arrow keys, or click.
+- Rules route links by domain and path, for example `example.com/team` to a work browser. The first matching rule wins.
+- It knows browser profiles: Arc spaces, Dia, Chrome, Brave, Edge, Vivaldi, Zen and Firefox. A rule can send a domain to one profile.
+- When a browser is missing or refuses a link, Blink keeps the link and lets you retry, pick another browser or copy it. It never falls back silently.
+- Everything stays on your Mac. Settings live in one JSON file, there's no history, no network request, and URLs are never logged.
+
+## Install
+
+Download the DMG from the [GitHub releases](https://github.com/marek-e/blink/releases), or install it with Homebrew:
+
+```sh
+brew tap marek-e/blink https://github.com/marek-e/blink
+brew install --cask marek-e/blink/blink
+```
+
+Requires macOS 14 Sonoma or later.
