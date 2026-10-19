@@ -1,0 +1,26 @@
+---
+import { Badge } from '@/components/ui/badge';
+import { getTagColor } from '@/lib/blog';
+import { cn } from '@/lib/utils';
+
+interface Props {
+  tags: string[];
+  class?: string;
+}
+
+const { tags, class: className } = Astro.props;
+---
+
+{
+  tags.length > 0 && (
+    <ul class={cn('flex flex-wrap gap-1.5', className)}>
+      {tags.map((tag) => (
+        <li>
+          <Badge variant={getTagColor(tag)} className="font-mono text-xs">
+            {tag}
+          </Badge>
+        </li>
+      ))}
+    </ul>
+  )
+}

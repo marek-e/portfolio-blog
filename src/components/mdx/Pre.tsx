@@ -13,14 +13,14 @@ export function Pre({ children, className, 'data-language': language, ...props }
   return (
     <div
       data-pre
-      className="group border-border shadow-code shadow-primary relative my-6 overflow-hidden rounded-lg border"
+      className="group border-pastel-lilac dark:border-pastel-lilac/40 relative my-6 overflow-hidden rounded-lg border shadow-[6px_6px_0_var(--color-pastel-lilac)] dark:shadow-[6px_6px_0_color-mix(in_oklab,var(--color-pastel-lilac)_40%,transparent)]"
     >
       {language && (
         <div
           data-language-header
-          className="border-border bg-muted dark:bg-muted/40 relative flex h-10 items-center justify-between"
+          className="bg-pastel-lilac/45 dark:bg-pastel-lilac/15 relative flex h-10 items-center justify-between"
         >
-          <div className="border-primary text-foreground absolute ml-8 h-full rounded-t-lg border-t-2 bg-(--shiki-bg) px-4 py-2 font-mono text-sm">
+          <div className="border-pastel-lilac-ink dark:border-pastel-lilac text-pastel-lilac-ink absolute ml-8 h-full rounded-t-lg border-t-2 bg-(--shiki-bg) px-4 py-2 font-mono text-sm">
             {language}
           </div>
         </div>
@@ -33,7 +33,7 @@ export function Pre({ children, className, 'data-language': language, ...props }
           type="button"
           data-copy-button
           className={cn(
-            'border-border bg-background/80 text-muted-foreground absolute top-3 right-3 z-10 cursor-pointer rounded-md border p-2 backdrop-blur-sm',
+            'border-border bg-background text-muted-foreground absolute top-3 right-3 z-10 cursor-pointer rounded-md border p-2',
             'opacity-0 group-hover:opacity-100 motion-safe:transition-opacity',
             'hover:bg-muted hover:text-foreground',
             'focus:ring-ring focus:opacity-100 focus:ring-2 focus:outline-none',

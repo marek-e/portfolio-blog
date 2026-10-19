@@ -81,7 +81,7 @@ export function FeaturedProjectsCarousel({
         plugins={autoplayPlugin() ? [autoplayPlugin()!] : undefined}
         className="w-full"
       >
-        <CarouselContent className="-ml-4 py-1">
+        <CarouselContent className="-ml-4 py-2" viewportClassName="-mx-3 -my-6 px-3 py-6">
           {projects.map((project) => (
             <CarouselItem
               key={project.slug}
@@ -97,26 +97,40 @@ export function FeaturedProjectsCarousel({
         </CarouselContent>
 
         {/* Navigation arrows */}
-        <CarouselPrevious className="-left-12 hidden md:flex" aria-label="Previous projects" />
-        <CarouselNext className="-right-12 hidden md:flex" aria-label="Next projects" />
+        <CarouselPrevious
+          variant="glass"
+          className="-left-14 hidden size-11 md:flex [&_svg]:size-4.5"
+          aria-label="Previous projects"
+        />
+        <CarouselNext
+          variant="glass"
+          className="-right-14 hidden size-11 md:flex [&_svg]:size-4.5"
+          aria-label="Next projects"
+        />
       </Carousel>
 
       {/* Navigation dots */}
-      <div className="mt-6 flex justify-center gap-2">
-        {Array.from({ length: count }).map((_, index) => (
-          <button
-            key={index}
-            onClick={() => api?.scrollTo(index)}
-            className={cn(
-              'size-2 rounded-full transition-all',
-              current === index
-                ? 'bg-primary w-6'
-                : 'bg-muted-foreground/30 hover:bg-muted-foreground/50'
-            )}
-            aria-label={`Go to slide ${index + 1}`}
-            aria-current={current === index ? 'true' : undefined}
-          />
-        ))}
+      <div className="mt-8 flex justify-center">
+        <div className="glass flex items-center rounded-full px-2">
+          {Array.from({ length: count }).map((_, index) => (
+            <button
+              key={index}
+              onClick={() => api?.scrollTo(index)}
+              className="group/dot flex h-8 cursor-pointer items-center px-1.5"
+              aria-label={`Go to slide ${index + 1}`}
+              aria-current={current === index ? 'true' : undefined}
+            >
+              <span
+                className={cn(
+                  'block h-1.5 rounded-full transition-all duration-300',
+                  current === index
+                    ? 'bg-foreground w-6'
+                    : 'bg-foreground/20 group-hover/dot:bg-foreground/40 w-1.5'
+                )}
+              />
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );

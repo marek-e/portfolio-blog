@@ -6,6 +6,8 @@ import { HugeiconsIcon } from '@hugeicons/react';
 import { PrinterIcon } from '@hugeicons/core-free-icons';
 import Navbar from '@/components/layout/Navbar.astro';
 import Footer from '@/components/layout/Footer.astro';
+import { buttonVariants } from '@/components/ui/button';
+import { Doodle } from '@/components/shared/HandDrawn';
 
 export function getStaticPaths() {
   return [
@@ -39,19 +41,27 @@ const t = getTranslations(lang);
     })}
   />
   <Navbar />
-  <main class="bg-background mt-24 min-h-dvh py-8">
-    <div class="container mx-auto px-4">
-      <div class="no-print mb-4 flex justify-end">
+  <main class="min-h-dvh pt-32 pb-24 md:pt-40">
+    <div class="container mx-auto max-w-4xl px-4">
+      <div class="no-print mb-6 flex flex-wrap items-center justify-between gap-3">
+        <p class="eyebrow flex items-center gap-2">
+          <Doodle name="sparkle" className="text-pastel-lilac size-3.5" />
+          Curriculum vitae
+        </p>
         <button
           onclick="window.print()"
-          class="bg-primary text-primary-foreground hover:bg-primary/90 inline-flex cursor-pointer items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-colors"
+          class={buttonVariants({ variant: 'pastel', size: 'lg', animation: 'scale' })}
           aria-label={t.cv.downloadPdf}
         >
           <HugeiconsIcon icon={PrinterIcon} className="size-4" />
           {t.cv.downloadPdf}
         </button>
       </div>
-      <CV lang={lang} />
+      <div
+        class="bg-muted/60 rounded-3xl p-2 md:p-3 print:rounded-none print:bg-transparent print:p-0"
+      >
+        <CV lang={lang} />
+      </div>
     </div>
   </main>
   <Footer />

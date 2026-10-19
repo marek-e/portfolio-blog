@@ -1,10 +1,13 @@
 export function StatusBadge() {
   return (
-    <div className="border-primary/30 bg-card absolute top-4 right-4 z-20 flex items-center gap-2 rounded-full border-2 px-3 py-1.5 shadow-sm">
-      <div className="relative">
-        <div className="size-2 animate-pulse rounded-full bg-green-500" />
-      </div>
-      <span className="text-primary text-xs font-bold tracking-wider uppercase">ACTIVE</span>
+    <div className="glass flex items-center gap-2 rounded-full px-2.5 py-1">
+      <span className="relative flex size-2">
+        <span className="bg-pastel-mint absolute inset-0 rounded-full motion-safe:animate-ping" />
+        <span className="relative size-2 rounded-full bg-emerald-500 dark:bg-emerald-400" />
+      </span>
+      <span className="text-foreground/80 font-mono text-[0.65rem] font-medium tracking-[0.14em] uppercase">
+        Active
+      </span>
     </div>
   );
 }
