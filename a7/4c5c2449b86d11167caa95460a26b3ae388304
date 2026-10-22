@@ -1,0 +1,67 @@
+.agents/skills/review-animations/agents/openai.yaml
+  s_005948c2f3d068::t_2659d5412c7af8 1-2
+.agents/skills/animate/RECIPES.md
+  h_34454149dac528 1-324
+.agents/skills/break-ui/SKILL.md
+  h_34454149dac528 1-175
+.agents/skills/break-ui/CATALOG.md
+  h_34454149dac528 1-135
+.agents/skills/prototype/SKILL.md
+  h_34454149dac528 1-98
+.agents/skills/prototype/PICKER.md
+  h_34454149dac528 1-197
+.agents/skills/pick-ui-library/agents/openai.yaml
+  s_005948c2f3d068::t_2659d5412c7af8 1-2
+.agents/skills/pr/SKILL.md
+  h_34454149dac528 1-164
+.agents/skills/prototype/agents/openai.yaml
+  s_005948c2f3d068::t_2659d5412c7af8 1-2
+.agents/skills/improve-animations/PLAN-TEMPLATE.md
+  h_34454149dac528 1-73
+.agents/skills/pick-ui-library/SKILL.md
+  h_34454149dac528 1-85
+.agents/skills/animation-vocabulary/SKILL.md
+  h_34454149dac528 1-181
+.agents/skills/pr/agents/openai.yaml
+  h_34454149dac528 1-3
+.agents/skills/review-animations/STANDARDS.md
+  h_34454149dac528 1-187
+.agents/skills/animate/SKILL.md
+  h_34454149dac528 1-207
+.agents/skills/emil-design-eng/SKILL.md
+  h_34454149dac528 1-2,4-674
+  s_005948c2f3d068::t_e1f7be373ecb4d 3
+.agents/skills/improve-animations/AUDIT.md
+  h_34454149dac528 1-115
+.agents/skills/improve-animations/SKILL.md
+  h_34454149dac528 1-109
+.agents/skills/find-animation-opportunities/SKILL.md
+  h_34454149dac528 1-140
+.agents/skills/apple-design/SKILL.md
+  h_34454149dac528 1-290
+.agents/skills/review-animations/SKILL.md
+  h_34454149dac528 1-120
+.agents/skills/animation-performance/SKILL.md
+  h_34454149dac528 1-222
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "a74c5c2449b86d11167caa95460a26b3ae388304",
+  "prompts": {},
+  "humans": {
+    "h_34454149dac528": {
+      "author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_005948c2f3d068": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b89a30d9-cb81-4e00-9d1b-5c104370038d",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": null
+    }
+  }
+}
