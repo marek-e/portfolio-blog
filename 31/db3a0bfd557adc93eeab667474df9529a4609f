@@ -1,0 +1,20 @@
+public/robots.txt
+  s_06690adb6fa967::t_4809204321fb40 1
+  s_06690adb6fa967::t_9e2334acb8c170 3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "31db3a0bfd557adc93eeab667474df9529a4609f",
+  "prompts": {},
+  "sessions": {
+    "s_06690adb6fa967": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "86d6d5d3-c4a5-4f94-805b-71abb2ac58a8",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
