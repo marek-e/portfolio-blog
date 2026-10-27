@@ -1,0 +1,25 @@
+artifacts/logo-3d/README.md
+  s_9320934f2e76b1::t_e97016479195bc 6,19
+artifacts/logo-3d/create_logo.py
+  s_9320934f2e76b1::t_6b4c0d977e8ee7 3,175-177,252-254
+artifacts/logo-3d/create_app_icon.py
+  s_9320934f2e76b1::t_c4920e2f263ea0 48-51,70-71
+  s_9320934f2e76b1::t_442b416824b1fa 54-56
+  s_9320934f2e76b1::t_6b4c0d977e8ee7 3,13-14,29,52-53,57,67-69,76-77
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "f10fe1cddddcdc0c08a8e4dfb70e80773f566ff3",
+  "prompts": {},
+  "sessions": {
+    "s_9320934f2e76b1": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a17ecf-4865-7c50-bfc4-5dc1a40e7b53",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
