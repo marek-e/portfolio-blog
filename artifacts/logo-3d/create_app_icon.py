@@ -22,12 +22,12 @@ for stop, color in zip(ramp.color_ramp.elements, ("FF365A", "D633A0", "8F37FF", 
     stop.color = tuple(value / 12.92 if value < 0.04045 else ((value + 0.055) / 1.055) ** 2.4 for value in channels) + (1,)
 for node in glass.node_tree.nodes:
     if node.bl_idname == "ShaderNodeMath":
-        node.inputs[1].default_value = 0.2 if node.operation == "ADD" else 0.75
+        node.inputs[1].default_value = 0.12 if node.operation == "ADD" else 0.45
     if node.bl_idname == "ShaderNodeMixRGB":
         node.inputs[0].default_value = 0.65
 scene.world.node_tree.nodes.get("Background").inputs["Strength"].default_value = 0.85
 shader = glass.node_tree.nodes.get("Principled BSDF")
-shader.inputs["Roughness"].default_value = 0.12
+shader.inputs["Roughness"].default_value = 0.1
 shader.inputs["Coat Weight"].default_value = 0.05
 scene.render.resolution_x = 512 if preview else 1024
 scene.render.resolution_y = scene.render.resolution_x

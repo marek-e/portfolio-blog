@@ -102,8 +102,8 @@ def fuse(objects, name, mat):
     remesh.use_smooth_shade = True
     bpy.ops.object.modifier_apply(modifier=remesh.name)
     smooth = obj.modifiers.new("Polished surface", "SMOOTH")
-    smooth.factor = 1.2
-    smooth.iterations = 5
+    smooth.factor = 0.8 if "--app-icon" in sys.argv else 1.2
+    smooth.iterations = 80 if "--app-icon" in sys.argv else 5
     bpy.ops.object.modifier_apply(modifier=smooth.name)
     obj.data.materials.clear()
     obj.data.materials.append(mat)
@@ -173,7 +173,7 @@ strokes = [
 ]
 
 if "--app-icon" in sys.argv:
-    strokes[0] = ("M left", 220, 743.147, (0.866025, 0.5, -0.530526, 0.847668, 360.259, 1))
+    strokes[0] = ("M left", 220, 743.147, (0.866025, 0.5, -0.530526, 0.847668, 440.259, 1))
     strokes[4] = ("E middle", 200, 200, (1, 0, 0, 1, 813.76, 270))
 
 shells = []
