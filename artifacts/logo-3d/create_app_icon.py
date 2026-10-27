@@ -22,13 +22,15 @@ for stop, color in zip(ramp.color_ramp.elements, ("FF365A", "D633A0", "8F37FF", 
     stop.color = tuple(value / 12.92 if value < 0.04045 else ((value + 0.055) / 1.055) ** 2.4 for value in channels) + (1,)
 for node in glass.node_tree.nodes:
     if node.bl_idname == "ShaderNodeMath":
-        node.inputs[1].default_value = 0.12 if node.operation == "ADD" else 0.45
+        node.inputs[1].default_value = 0.0
     if node.bl_idname == "ShaderNodeMixRGB":
-        node.inputs[0].default_value = 0.65
+        node.inputs[0].default_value = 0.95
 scene.world.node_tree.nodes.get("Background").inputs["Strength"].default_value = 0.85
 shader = glass.node_tree.nodes.get("Principled BSDF")
-shader.inputs["Roughness"].default_value = 0.1
-shader.inputs["Coat Weight"].default_value = 0.05
+shader.inputs["Roughness"].default_value = 0.12
+shader.inputs["Transmission Weight"].default_value = 0.65
+shader.inputs["IOR"].default_value = 1.46
+shader.inputs["Coat Weight"].default_value = 0.15
 scene.render.resolution_x = 512 if preview else 1024
 scene.render.resolution_y = scene.render.resolution_x
 scene.render.resolution_percentage = 100
@@ -52,18 +54,30 @@ backdrop.visible_glossy = False
 backdrop_material = backdrop.data.materials[0]
 backdrop_nodes = backdrop_material.node_tree.nodes
 backdrop_emission = backdrop_nodes.new("ShaderNodeEmission")
-backdrop_emission.inputs["Color"].default_value = (0.035, 0.05, 0.09, 1)
+backdrop_emission.inputs["Color"].default_value = (0.22, 0.24, 0.28, 1)
 backdrop_material.node_tree.links.new(backdrop_emission.outputs["Emission"], backdrop_nodes.get("Material Output").inputs["Surface"])
 for obj in list(bpy.data.objects):
     if obj.type == "LIGHT" and obj.name != "Large softbox":
         bpy.data.objects.remove(obj, do_unlink=True)
 key = bpy.data.objects["Large softbox"]
+key.visible_transmission = False
 key.data.specular_factor = 1
-key.location = (-3, -6, 8)
-key.data.size = 8
+key.data.shape = "DISK"
+key.location = (-5, -7, 5)
+key.data.size = 6
 key.data.size_y = 6
-key.data.energy = 500
+key.data.energy = 650
 key.rotation_euler = (Vector((0, 0, 0)) - key.location).to_track_quat("-Z", "Y").to_euler()
+rim_data = bpy.data.lights.new("Soft rim", "AREA")
+rim_data.shape = "DISK"
+rim_data.size = 5
+rim_data.energy = 1200
+rim_data.color = (0.65, 0.8, 1)
+rim = bpy.data.objects.new("Soft rim", rim_data)
+bpy.context.collection.objects.link(rim)
+rim.location = (6, 2, 4)
+rim.visible_transmission = False
+rim.rotation_euler = (Vector((0, 0, 0)) - rim.location).to_track_quat("-Z", "Y").to_euler()
 compositor = scene.compositing_node_group
 composite = next(node for node in compositor.nodes if node.bl_idname == "NodeGroupOutput")
 render = next(node for node in compositor.nodes if node.bl_idname == "CompositorNodeRLayers")

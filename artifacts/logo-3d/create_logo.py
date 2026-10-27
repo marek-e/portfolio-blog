@@ -96,15 +96,36 @@ def fuse(objects, name, mat):
     bpy.ops.object.join()
     obj = bpy.context.object
     obj.name = name
-    remesh = obj.modifiers.new("Continuous pill surface", "REMESH")
-    remesh.mode = "VOXEL"
-    remesh.voxel_size = 0.035
-    remesh.use_smooth_shade = True
-    bpy.ops.object.modifier_apply(modifier=remesh.name)
-    smooth = obj.modifiers.new("Polished surface", "SMOOTH")
-    smooth.factor = 0.8 if "--app-icon" in sys.argv else 1.2
-    smooth.iterations = 80 if "--app-icon" in sys.argv else 5
-    bpy.ops.object.modifier_apply(modifier=smooth.name)
+    if "--app-icon" in sys.argv:
+        tree = bpy.data.node_groups.new("Rounded glass junctions", "GeometryNodeTree")
+        tree.interface.new_socket(name="Geometry", in_out="INPUT", socket_type="NodeSocketGeometry")
+        tree.interface.new_socket(name="Geometry", in_out="OUTPUT", socket_type="NodeSocketGeometry")
+        source = tree.nodes.new("NodeGroupInput")
+        grid = tree.nodes.new("GeometryNodeMeshToSDFGrid")
+        grid.inputs["Voxel Size"].default_value = 0.035
+        grid.inputs["Band Width"].default_value = 16
+        fillet = tree.nodes.new("GeometryNodeSDFGridFillet")
+        fillet.inputs["Iterations"].default_value = 60
+        surface = tree.nodes.new("GeometryNodeGridToMesh")
+        surface.inputs["Threshold"].default_value = 0
+        result = tree.nodes.new("NodeGroupOutput")
+        tree.links.new(source.outputs["Geometry"], grid.inputs["Mesh"])
+        tree.links.new(grid.outputs["SDF Grid"], fillet.inputs["Grid"])
+        tree.links.new(fillet.outputs["Grid"], surface.inputs["Grid"])
+        tree.links.new(surface.outputs["Mesh"], result.inputs["Geometry"])
+        rounded = obj.modifiers.new("Rounded glass junctions", "NODES")
+        rounded.node_group = tree
+        bpy.ops.object.modifier_apply(modifier=rounded.name)
+    else:
+        remesh = obj.modifiers.new("Continuous pill surface", "REMESH")
+        remesh.mode = "VOXEL"
+        remesh.voxel_size = 0.035
+        remesh.use_smooth_shade = True
+        bpy.ops.object.modifier_apply(modifier=remesh.name)
+        smooth = obj.modifiers.new("Polished surface", "SMOOTH")
+        smooth.factor = 1.2
+        smooth.iterations = 5
+        bpy.ops.object.modifier_apply(modifier=smooth.name)
     obj.data.materials.clear()
     obj.data.materials.append(mat)
     for polygon in obj.data.polygons:
@@ -179,8 +200,20 @@ if "--app-icon" in sys.argv:
 shells = []
 glass = gradient_material("Tinted glass with luminous edges")
 for name, width, height, transform in strokes:
-    shells.append(solid(name + " | Glass", width, height, transform, 1.5, 0, glass))
-fuse(shells, "ME | Continuous glass", glass)
+    shells.append(solid(name + " | Glass", width, height, transform, 1.5, -0.18 if "--app-icon" in sys.argv and name == "M left" else 0, glass))
+if "--app-icon" in sys.argv:
+    dot = shells.pop(4)
+    body = fuse(shells, "ME | Continuous glass", glass)
+    bpy.context.view_layer.objects.active = dot
+    for modifier in list(dot.modifiers):
+        bpy.ops.object.modifier_apply(modifier=modifier.name)
+    bpy.ops.object.select_all(action="DESELECT")
+    body.select_set(True)
+    dot.select_set(True)
+    bpy.context.view_layer.objects.active = body
+    bpy.ops.object.join()
+else:
+    fuse(shells, "ME | Continuous glass", glass)
 
 floor = material("Slate satin", "344052")
 profile = [(-100, -3.95)]

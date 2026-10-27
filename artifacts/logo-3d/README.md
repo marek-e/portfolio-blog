@@ -3,7 +3,7 @@
 Rounded 3D versions of the M/E mark from `src/assets/logo.svg`, including the circular middle of the E. The glass uses a coral, purple, and blue tint with soft reflections and subtle emission on the surface. There are no opaque inner cores.
 
 - `me-glass-neon.png` and `.blend` contain the approved studio presentation.
-- `app-icon/me-icon-{transparent,background}-{size}.png` contains square app assets at 1024, 512, 256, 128, 64, and 32 px. The app version uses saturated glass, softer reflections from a broad overhead light, restrained surface emission, and tighter, more frontal framing. The diagonals overlap by moving the left stroke 45 source units toward the right, then voxel unification and moderate smoothing form a continuous body with a shallow rounded groove. The pill bevels are preserved before unification to retain each stroke's volume. The circular E middle is slightly smaller to leave a visible gap. The background variant uses a solid slate color without a floor reflection.
+- `app-icon/me-icon-{transparent,background}-{size}.png` contains square app assets at 1024, 512, 256, 128, 64, and 32 px. The connected diagonals retain their pill bevels and have a slight depth offset. Native SDF fillets soften their junctions while the circular E middle is processed separately to preserve its gap. The app material uses 65% transmission, an IOR of 1.46, a clear coat, and no surface emission or bloom. Round key and rim lights remain visible in reflections but are hidden from transmission rays to avoid internal softbox patches. The background variant uses solid slate without a floor reflection.
 - `app-icon/me-app-icon.blend` is the editable app scene.
 - `app-icon/me-app-icon-pngs.zip` contains all 12 PNG exports.
 
