@@ -178,7 +178,7 @@ if "--app-icon" in sys.argv:
 shells = []
 glass = gradient_material("Tinted glass with luminous edges")
 for name, width, height, transform in strokes:
-    shells.append(solid(name + " | Glass", width, height, transform, 1.5, 0, glass))
+    shells.append(solid(name + " | Glass", width, height, transform, 1.5, 0, glass, bevel=0.65 if "--app-icon" in sys.argv else 0.74))
 fuse(shells, "ME | Continuous glass", glass)
 
 floor = material("Slate satin", "344052")
