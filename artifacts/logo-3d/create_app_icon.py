@@ -17,23 +17,29 @@ scene.view_settings.exposure = 0.3
 scene.view_settings.look = "AgX - Medium High Contrast"
 glass = bpy.data.materials["Tinted glass with luminous edges"]
 ramp = next(node for node in glass.node_tree.nodes if node.bl_idname == "ShaderNodeValToRGB")
-for stop, color in zip(ramp.color_ramp.elements, ("FF365A", "D633A0", "8F37FF", "039BE5", "039BE5")):
+for stop, color in zip(ramp.color_ramp.elements, ("FF8068", "EC6093", "A06AF0", "35ADE8", "35ADE8")):
     channels = [int(color[index:index + 2], 16) / 255 for index in (0, 2, 4)]
     stop.color = tuple(value / 12.92 if value < 0.04045 else ((value + 0.055) / 1.055) ** 2.4 for value in channels) + (1,)
 for node in glass.node_tree.nodes:
     if node.bl_idname == "ShaderNodeMath":
-        node.inputs[1].default_value = 0.025 if node.operation == "ADD" else 0.12
+        node.inputs[1].default_value = 0.0
     if node.bl_idname == "ShaderNodeMixRGB":
-        node.inputs[0].default_value = 0.85
+        node.inputs[0].default_value = 0.45
 scene.world.node_tree.nodes.get("Background").inputs["Strength"].default_value = 0.35
 shader = glass.node_tree.nodes.get("Principled BSDF")
-shader.inputs["Roughness"].default_value = 0.085
+shader.inputs["Roughness"].default_value = 0.025
 shader.inputs["IOR"].default_value = 1.46
-shader.inputs["Coat Weight"].default_value = 0.05
+shader.inputs["Coat Weight"].default_value = 0
+absorption = glass.node_tree.nodes.new("ShaderNodeVolumeAbsorption")
+absorption.inputs["Density"].default_value = 1.2
+glass.node_tree.links.new(ramp.outputs["Color"], absorption.inputs["Color"])
+glass.node_tree.links.new(absorption.outputs["Volume"], glass.node_tree.nodes.get("Material Output").inputs["Volume"])
 scene.render.resolution_x = 512 if preview else 1024
 scene.render.resolution_y = scene.render.resolution_x
 scene.render.resolution_percentage = 100
-scene.cycles.samples = 32 if preview else 128
+scene.cycles.samples = 96 if preview else 384
+scene.cycles.use_adaptive_sampling = True
+scene.cycles.adaptive_threshold = 0.025 if preview else 0.01
 scene.render.image_settings.file_format = "PNG"
 scene.render.image_settings.color_mode = "RGBA"
 scene.render.image_settings.color_depth = "8"
@@ -53,7 +59,17 @@ backdrop.visible_glossy = False
 backdrop_material = backdrop.data.materials[0]
 backdrop_nodes = backdrop_material.node_tree.nodes
 backdrop_emission = backdrop_nodes.new("ShaderNodeEmission")
-backdrop_emission.inputs["Color"].default_value = (0.13, 0.16, 0.23, 1)
+backdrop_emission.inputs["Color"].default_value = (0.42, 0.42, 0.42, 1)
+position = backdrop_nodes.new("ShaderNodeNewGeometry")
+height = backdrop_nodes.new("ShaderNodeSeparateXYZ")
+illumination = backdrop_nodes.new("ShaderNodeMapRange")
+illumination.inputs["From Min"].default_value = -4
+illumination.inputs["From Max"].default_value = 4
+illumination.inputs["To Min"].default_value = 0.65
+illumination.inputs["To Max"].default_value = 1.5
+backdrop_material.node_tree.links.new(position.outputs["Position"], height.inputs["Vector"])
+backdrop_material.node_tree.links.new(height.outputs["Z"], illumination.inputs["Value"])
+backdrop_material.node_tree.links.new(illumination.outputs["Result"], backdrop_emission.inputs["Strength"])
 backdrop_material.node_tree.links.new(backdrop_emission.outputs["Emission"], backdrop_nodes.get("Material Output").inputs["Surface"])
 for obj in list(bpy.data.objects):
     if obj.type == "LIGHT" and obj.name != "Large softbox":
@@ -86,13 +102,9 @@ compositor = scene.compositing_node_group
 composite = next(node for node in compositor.nodes if node.bl_idname == "NodeGroupOutput")
 render = next(node for node in compositor.nodes if node.bl_idname == "CompositorNodeRLayers")
 glare = next(node for node in compositor.nodes if node.bl_idname == "CompositorNodeGlare")
-denoise = compositor.nodes.new("CompositorNodeDenoise")
-denoise.inputs["Quality"].default_value = "High"
-compositor.links.new(render.outputs["Image"], denoise.inputs["Image"])
-compositor.links.new(denoise.outputs["Image"], glare.inputs["Image"])
 glare.inputs["Strength"].default_value = 0.0
 alpha = compositor.nodes.new("CompositorNodeSetAlpha")
-compositor.links.new(glare.outputs["Image"], alpha.inputs["Image"])
+compositor.links.new(render.outputs["Image"], alpha.inputs["Image"])
 compositor.links.new(render.outputs["Alpha"], alpha.inputs["Alpha"])
 compositor.links.new(alpha.outputs["Image"], composite.inputs["Image"])
 background = compositor.nodes.new("CompositorNodeRGB")
