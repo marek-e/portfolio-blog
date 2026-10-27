@@ -1,0 +1,31 @@
+artifacts/logo-3d/create_app_icon.py
+  s_d2db0e3417df6a::t_b0f813c5a83726 25,57
+  s_d2db0e3417df6a::t_6e9d5fd4845f2d 65
+  s_d2db0e3417df6a::t_86c6b291362c0b 66-67
+  s_d2db0e3417df6a::t_acf51180541a22 27
+  s_d2db0e3417df6a::t_0da5a0088deeaa 63
+  s_d2db0e3417df6a::t_13d66b21c6c6f9 30-33,69,71-80
+artifacts/logo-3d/create_logo.py
+  s_d2db0e3417df6a::t_017facafc59c30 204-216
+  s_d2db0e3417df6a::t_6e9d5fd4845f2d 99-107,109-125,128
+  s_d2db0e3417df6a::t_60ae941ce756f1 126-127
+  s_d2db0e3417df6a::t_86c6b291362c0b 108,203
+artifacts/logo-3d/README.md
+  s_d2db0e3417df6a::t_60ae941ce756f1 6
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "2ccf9949ae17fb1b24e1eca2017181281d603815",
+  "prompts": {},
+  "sessions": {
+    "s_d2db0e3417df6a": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a17f6b-c491-7071-bc68-af63922303fc",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
