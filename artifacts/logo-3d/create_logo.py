@@ -1,5 +1,6 @@
 import bpy
 import math
+import sys
 from pathlib import Path
 from mathutils import Vector
 
@@ -171,6 +172,9 @@ strokes = [
     ("Shared spine", 220, 660, (1, 0, 0, 1, 583.76, 40)),
 ]
 
+if "--app-icon" in sys.argv:
+    strokes[4] = ("E middle", 200, 200, (1, 0, 0, 1, 813.76, 270))
+
 shells = []
 glass = gradient_material("Tinted glass with luminous edges")
 for name, width, height, transform in strokes:
@@ -245,5 +249,6 @@ for screen in bpy.data.screens:
 
 scene.render.image_settings.file_format = "PNG"
 scene.render.filepath = str(output / "me-glass-neon.png")
-bpy.ops.wm.save_as_mainfile(filepath=str(output / "me-glass-neon.blend"))
-bpy.ops.render.render(write_still=True)
+if __name__ == "__main__":
+    bpy.ops.wm.save_as_mainfile(filepath=str(output / "me-glass-neon.blend"))
+    bpy.ops.render.render(write_still=True)

@@ -1,5 +1,6 @@
 import bpy
 import sys
+import runpy
 from pathlib import Path
 from mathutils import Vector
 from zipfile import ZipFile, ZIP_DEFLATED
@@ -9,7 +10,8 @@ root = Path(__file__).resolve().parent
 preview = "--preview" in sys.argv
 output = root / "app-icon" / "preview" if preview else root / "app-icon"
 output.mkdir(parents=True, exist_ok=True)
-bpy.ops.wm.open_mainfile(filepath=str(root / "me-glass-neon.blend"))
+sys.argv.append("--app-icon")
+runpy.run_path(str(root / "create_logo.py"), run_name="logo_scene")
 scene = bpy.context.scene
 scene.view_settings.exposure = 0.15
 scene.view_settings.look = "AgX - Medium High Contrast"
@@ -24,6 +26,7 @@ for node in glass.node_tree.nodes:
     if node.bl_idname == "ShaderNodeMixRGB":
         node.inputs[0].default_value = 0.65
 scene.world.node_tree.nodes.get("Background").inputs["Strength"].default_value = 0.85
+glass.node_tree.nodes.get("Principled BSDF").inputs["Roughness"].default_value = 0.065
 scene.render.resolution_x = 512 if preview else 1024
 scene.render.resolution_y = scene.render.resolution_x
 scene.render.resolution_percentage = 100
@@ -42,6 +45,16 @@ backdrop = bpy.data.objects["Seamless studio"]
 scene.render.film_transparent = True
 scene.cycles.film_transparent_glass = False
 backdrop.visible_camera = False
+backdrop.visible_glossy = False
+for obj in list(bpy.data.objects):
+    if obj.type == "LIGHT" and obj.name != "Large softbox":
+        bpy.data.objects.remove(obj, do_unlink=True)
+key = bpy.data.objects["Large softbox"]
+key.data.specular_factor = 1
+key.location = (-5, -8, 4)
+key.data.size = 1.3
+key.data.size_y = 8
+key.rotation_euler = (Vector((0, 0, 0)) - key.location).to_track_quat("-Z", "Y").to_euler()
 compositor = scene.compositing_node_group
 composite = next(node for node in compositor.nodes if node.bl_idname == "NodeGroupOutput")
 render = next(node for node in compositor.nodes if node.bl_idname == "CompositorNodeRLayers")
@@ -51,12 +64,17 @@ alpha = compositor.nodes.new("CompositorNodeSetAlpha")
 compositor.links.new(glare.outputs["Image"], alpha.inputs["Image"])
 compositor.links.new(render.outputs["Alpha"], alpha.inputs["Alpha"])
 compositor.links.new(alpha.outputs["Image"], composite.inputs["Image"])
+background = compositor.nodes.new("CompositorNodeRGB")
+background.outputs[0].default_value = (0.018, 0.025, 0.05, 1)
+over = compositor.nodes.new("CompositorNodeAlphaOver")
+compositor.links.new(background.outputs[0], over.inputs["Background"])
+compositor.links.new(alpha.outputs["Image"], over.inputs["Foreground"])
 sizes = [512] if preview else [1024, 512, 256, 128, 64, 32]
 
 for variant in ("transparent", "background"):
     transparent = variant == "transparent"
-    scene.render.film_transparent = transparent
-    backdrop.visible_camera = not transparent
+    scene.render.film_transparent = True
+    compositor.links.new(alpha.outputs["Image"] if transparent else over.outputs["Image"], composite.inputs["Image"])
     master = output / f"me-icon-{variant}-{sizes[0]}.png"
     scene.render.filepath = str(master)
     bpy.ops.render.render(write_still=True)
