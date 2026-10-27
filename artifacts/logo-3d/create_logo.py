@@ -102,8 +102,8 @@ def fuse(objects, name, mat):
     remesh.use_smooth_shade = True
     bpy.ops.object.modifier_apply(modifier=remesh.name)
     smooth = obj.modifiers.new("Polished surface", "SMOOTH")
-    smooth.factor = 0.8 if "--app-icon" in sys.argv else 1.2
-    smooth.iterations = 240 if "--app-icon" in sys.argv else 5
+    smooth.factor = 1.2
+    smooth.iterations = 5
     bpy.ops.object.modifier_apply(modifier=smooth.name)
     obj.data.materials.clear()
     obj.data.materials.append(mat)
@@ -152,15 +152,14 @@ def solid(name, width, height, transform, depth, center, mat, inset=0, bevel=0.7
     bpy.ops.mesh.normals_make_consistent(inside=False)
     bpy.ops.object.mode_set(mode="OBJECT")
     obj.select_set(False)
-    if bevel:
-        modifier = obj.modifiers.new("Soft glass edges", "BEVEL")
-        modifier.width = bevel
-        modifier.segments = 12
-        modifier.limit_method = "ANGLE"
-        modifier.angle_limit = 0.4
-        modifier.use_clamp_overlap = False
-        modifier.harden_normals = True
-        obj.modifiers.new("Weighted normals", "WEIGHTED_NORMAL")
+    modifier = obj.modifiers.new("Soft glass edges", "BEVEL")
+    modifier.width = bevel
+    modifier.segments = 12
+    modifier.limit_method = "ANGLE"
+    modifier.angle_limit = 0.4
+    modifier.use_clamp_overlap = False
+    modifier.harden_normals = True
+    obj.modifiers.new("Weighted normals", "WEIGHTED_NORMAL")
     return obj
 
 
@@ -174,13 +173,13 @@ strokes = [
 ]
 
 if "--app-icon" in sys.argv:
-    strokes[0] = ("M left", 220, 743.147, (0.866025, 0.5, -0.530526, 0.847668, 430.259, 1))
+    strokes[0] = ("M left", 220, 743.147, (0.866025, 0.5, -0.530526, 0.847668, 360.259, 1))
     strokes[4] = ("E middle", 200, 200, (1, 0, 0, 1, 813.76, 270))
 
 shells = []
 glass = gradient_material("Tinted glass with luminous edges")
 for name, width, height, transform in strokes:
-    shells.append(solid(name + " | Glass", width, height, transform, 1.5, 0, glass, bevel=0 if "--app-icon" in sys.argv else 0.74))
+    shells.append(solid(name + " | Glass", width, height, transform, 1.5, 0, glass))
 fuse(shells, "ME | Continuous glass", glass)
 
 floor = material("Slate satin", "344052")
