@@ -22,19 +22,22 @@ for stop, color in zip(ramp.color_ramp.elements, ("FF365A", "D633A0", "8F37FF", 
     stop.color = tuple(value / 12.92 if value < 0.04045 else ((value + 0.055) / 1.055) ** 2.4 for value in channels) + (1,)
 for node in glass.node_tree.nodes:
     if node.bl_idname == "ShaderNodeMath":
-        node.inputs[1].default_value = 0.28 if node.operation == "ADD" else 0.95
+        node.inputs[1].default_value = 0.2 if node.operation == "ADD" else 0.75
     if node.bl_idname == "ShaderNodeMixRGB":
         node.inputs[0].default_value = 0.65
 scene.world.node_tree.nodes.get("Background").inputs["Strength"].default_value = 0.85
-glass.node_tree.nodes.get("Principled BSDF").inputs["Roughness"].default_value = 0.065
+shader = glass.node_tree.nodes.get("Principled BSDF")
+shader.inputs["Roughness"].default_value = 0.12
+shader.inputs["Coat Weight"].default_value = 0.05
 scene.render.resolution_x = 512 if preview else 1024
 scene.render.resolution_y = scene.render.resolution_x
 scene.render.resolution_percentage = 100
-scene.cycles.samples = 32 if preview else 96
+scene.cycles.samples = 32 if preview else 128
 scene.render.image_settings.file_format = "PNG"
 scene.render.image_settings.color_mode = "RGBA"
 scene.render.image_settings.color_depth = "8"
 scene.render.image_settings.compression = 80
+scene.render.dither_intensity = 0
 camera = scene.camera
 camera.location = (1.7, -28, 3.2)
 target = Vector((0.44, 0, -0.1))
@@ -46,19 +49,29 @@ scene.render.film_transparent = True
 scene.cycles.film_transparent_glass = False
 backdrop.visible_camera = False
 backdrop.visible_glossy = False
+backdrop_material = backdrop.data.materials[0]
+backdrop_nodes = backdrop_material.node_tree.nodes
+backdrop_emission = backdrop_nodes.new("ShaderNodeEmission")
+backdrop_emission.inputs["Color"].default_value = (0.035, 0.05, 0.09, 1)
+backdrop_material.node_tree.links.new(backdrop_emission.outputs["Emission"], backdrop_nodes.get("Material Output").inputs["Surface"])
 for obj in list(bpy.data.objects):
     if obj.type == "LIGHT" and obj.name != "Large softbox":
         bpy.data.objects.remove(obj, do_unlink=True)
 key = bpy.data.objects["Large softbox"]
 key.data.specular_factor = 1
-key.location = (-5, -8, 4)
-key.data.size = 1.3
-key.data.size_y = 8
+key.location = (-3, -6, 8)
+key.data.size = 8
+key.data.size_y = 6
+key.data.energy = 500
 key.rotation_euler = (Vector((0, 0, 0)) - key.location).to_track_quat("-Z", "Y").to_euler()
 compositor = scene.compositing_node_group
 composite = next(node for node in compositor.nodes if node.bl_idname == "NodeGroupOutput")
 render = next(node for node in compositor.nodes if node.bl_idname == "CompositorNodeRLayers")
 glare = next(node for node in compositor.nodes if node.bl_idname == "CompositorNodeGlare")
+denoise = compositor.nodes.new("CompositorNodeDenoise")
+denoise.inputs["Quality"].default_value = "High"
+compositor.links.new(render.outputs["Image"], denoise.inputs["Image"])
+compositor.links.new(denoise.outputs["Image"], glare.inputs["Image"])
 glare.inputs["Strength"].default_value = 0.15
 alpha = compositor.nodes.new("CompositorNodeSetAlpha")
 compositor.links.new(glare.outputs["Image"], alpha.inputs["Image"])
