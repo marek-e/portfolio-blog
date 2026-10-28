@@ -13,19 +13,19 @@ output.mkdir(parents=True, exist_ok=True)
 sys.argv.append("--app-icon")
 runpy.run_path(str(root / "create_logo.py"), run_name="logo_scene")
 scene = bpy.context.scene
-scene.view_settings.exposure = 0.15
+scene.view_settings.exposure = 0.6
 scene.view_settings.look = "AgX - Medium High Contrast"
 glass = bpy.data.materials["Tinted glass with luminous edges"]
 ramp = next(node for node in glass.node_tree.nodes if node.bl_idname == "ShaderNodeValToRGB")
-for stop, color in zip(ramp.color_ramp.elements, ("FF365A", "D633A0", "8F37FF", "039BE5", "039BE5")):
+for stop, color in zip(ramp.color_ramp.elements, ("FF5072", "F348B1", "9B6AFF", "00CFFF", "00CFFF")):
     channels = [int(color[index:index + 2], 16) / 255 for index in (0, 2, 4)]
     stop.color = tuple(value / 12.92 if value < 0.04045 else ((value + 0.055) / 1.055) ** 2.4 for value in channels) + (1,)
 for node in glass.node_tree.nodes:
     if node.bl_idname == "ShaderNodeMath":
         node.inputs[1].default_value = 0.0
     if node.bl_idname == "ShaderNodeMixRGB":
-        node.inputs[0].default_value = 0.95
-scene.world.node_tree.nodes.get("Background").inputs["Strength"].default_value = 0.85
+        node.inputs[0].default_value = 1.0
+scene.world.node_tree.nodes.get("Background").inputs["Strength"].default_value = 1.0
 shader = glass.node_tree.nodes.get("Principled BSDF")
 shader.inputs["Roughness"].default_value = 0.12
 shader.inputs["Transmission Weight"].default_value = 0.65
