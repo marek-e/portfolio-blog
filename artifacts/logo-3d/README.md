@@ -26,8 +26,8 @@ These scripts use the Blender 5.2 Python API. From the repository root on macOS:
 /Applications/Blender.app/Contents/MacOS/Blender --background --python artifacts/logo-3d/create_app_icon_v2.py
 ```
 
-The scripts can run independently. The second builds the icon geometry from `create_logo.py`, renders both icon variants, exports the smaller sizes, saves the editable icon scene, and rebuilds the ZIP.
+When regenerating the app versions, run the V1 app-icon command without `-- --preview` before the V2 command. This creates or refreshes `app-icon/me-app-icon.blend`, which V2 loads. A V1 preview does not save this scene. The studio command can run independently.
 
-For a faster 512 px preview, append `-- --preview` to either app-icon command. V2 requires the saved V1 scene; its previews go into `app-icon-v2/preview/`. Previews, iteration renders, and Blender backup files stay local.
+For a faster 512 px preview, append `-- --preview` to either app-icon command. V1 previews go into `app-icon/preview/`; V2 previews go into `app-icon-v2/preview/`. Preview runs do not save Blender scenes or ZIP bundles. Previews, iteration renders, and Blender backup files stay local.
 
 These are standalone assets. The website logo and favicon remain unchanged.
