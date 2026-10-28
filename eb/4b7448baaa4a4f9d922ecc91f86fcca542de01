@@ -1,0 +1,38 @@
+src/i18n/translations/en.ts
+  s_d2db0e3417df6a::t_8e84ac1090ed5f 14-15
+src/i18n/translations/fr.ts
+  s_d2db0e3417df6a::t_8e84ac1090ed5f 14-15
+src/components/portfolio/GlassLogo.astro
+  s_d2db0e3417df6a::t_a8f9c0f1d305d5 28-29,163,175-186
+  s_d2db0e3417df6a::t_8e84ac1090ed5f 1-27,30-134,137-146,150-152,157-162,164-174,187-216
+  s_d2db0e3417df6a::t_2ed3c02c109ae2 135-136,147-149,153-156
+src/components/portfolio/Hero.astro
+  s_d2db0e3417df6a::t_8e84ac1090ed5f 6,19-23,25-29,31-34,36-41,43-72
+src/i18n/ui.ts
+  s_d2db0e3417df6a::t_8e84ac1090ed5f 12-13
+artifacts/logo-3d/README.md
+  s_d2db0e3417df6a::t_45dcaae55e7ece 19-24,33,40
+  s_d2db0e3417df6a::t_ba92f6f3e64d02 3
+artifacts/logo-3d/export_web_model.py
+  s_d2db0e3417df6a::t_508d8ee3b1a007 1-65
+package.json
+  s_d2db0e3417df6a::t_d21a667a91ab84 29
+pnpm-lock.yaml
+  s_d2db0e3417df6a::t_c05a7b050df69e 29-31,927-932,1283-1288,1305-1309,3179-3181,3337-3339,3507-3509,3653-3661,4317-4319,4802-4804,6201-6206,6477-6482,6539-6543,6996,8846-8847,8976-8977,9120-9123,9227-9242,10132-10136,10897-10898
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "eb4b7448baaa4a4f9d922ecc91f86fcca542de01",
+  "prompts": {},
+  "sessions": {
+    "s_d2db0e3417df6a": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a17f6b-c491-7071-bc68-af63922303fc",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
