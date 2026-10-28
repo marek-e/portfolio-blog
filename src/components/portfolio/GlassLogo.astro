@@ -1,0 +1,216 @@
+---
+interface Props {
+  label: string;
+  hint: string;
+}
+
+const { label, hint } = Astro.props;
+---
+
+<figure class="glass-logo" data-glass-logo>
+  <img
+    class="glass-logo-poster"
+    src="/models/me-glass-poster.png"
+    alt={label}
+    width="512"
+    height="512"
+    decoding="async"
+  />
+  <model-viewer
+    inert
+    src="/models/me-glass.glb"
+    alt={label}
+    camera-controls
+    disable-zoom
+    disable-pan
+    touch-action="pan-y"
+    camera-orbit="0deg 82deg 115%"
+    min-camera-orbit="auto 65deg 115%"
+    max-camera-orbit="auto 100deg 115%"
+    field-of-view="30deg"
+    interpolation-decay="200"
+    interaction-prompt="none"
+    exposure="1.2"
+    tone-mapping="neutral"
+    shadow-intensity="0"
+  >
+    <span slot="progress-bar"></span>
+  </model-viewer>
+  <figcaption>{hint}</figcaption>
+</figure>
+
+<style>
+  .glass-logo {
+    position: relative;
+    width: min(70vw, 24rem);
+    aspect-ratio: 1;
+    margin: 0 auto;
+    --logo-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .glass-logo-poster,
+  model-viewer {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: opacity 200ms var(--logo-ease-out);
+  }
+
+  model-viewer {
+    display: block;
+    opacity: 0;
+    --poster-color: transparent;
+  }
+
+  .glass-logo[data-loaded] model-viewer {
+    opacity: 1;
+  }
+
+  .glass-logo[data-loaded] .glass-logo-poster {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  figcaption {
+    position: absolute;
+    inset: auto 0 0;
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--muted-foreground);
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 200ms var(--logo-ease-out);
+  }
+
+  .glass-logo[data-loaded] figcaption {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  @media (min-width: 768px) {
+    .glass-logo {
+      width: 100%;
+      max-width: 28rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .glass-logo-poster,
+    model-viewer,
+    figcaption {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  import type { ModelViewerElement } from '@google/model-viewer';
+
+  const controllers = new Map<HTMLElement, () => void>();
+  const rest = '0deg 82deg 115%';
+
+  function initGlassLogos() {
+    document.querySelectorAll<HTMLElement>('[data-glass-logo]').forEach((wrapper) => {
+      if (controllers.has(wrapper)) return;
+      const model = wrapper.querySelector<ModelViewerElement>('model-viewer');
+      if (!model) return;
+
+      const controller = new AbortController();
+      const { signal } = controller;
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+      const fine = window.matchMedia('(hover: hover) and (pointer: fine)');
+      let frame = 0;
+      let pointerX = 0;
+      let pointerY = 0;
+
+      const reset = () => {
+        if (!model.loaded) return;
+        model.cameraOrbit = rest;
+        model.interpolationDecay = reduced.matches ? 1 : 200;
+        if (reduced.matches) model.jumpCameraToGoal();
+      };
+
+      const reveal = () => {
+        model.inert = false;
+        wrapper.dataset.loaded = '';
+        model.interpolationDecay = reduced.matches ? 1 : 200;
+        if (!reduced.matches && document.visibilityState === 'visible') {
+          model.cameraOrbit = '-24deg 78deg 115%';
+          model.jumpCameraToGoal();
+          frame = requestAnimationFrame(() => {
+            frame = 0;
+            model.cameraOrbit = rest;
+          });
+        }
+      };
+      if (model.loaded) reveal();
+      else model.addEventListener('load', reveal, { once: true, signal });
+
+      model.addEventListener(
+        'error',
+        () => {
+          model.inert = true;
+          delete wrapper.dataset.loaded;
+        },
+        { signal }
+      );
+      wrapper.addEventListener(
+        'pointermove',
+        (event) => {
+          if (!model.loaded || reduced.matches || !fine.matches || event.buttons) return;
+          model.interpolationDecay = 200;
+          const bounds = wrapper.getBoundingClientRect();
+          pointerX = (event.clientX - bounds.left) / bounds.width - 0.5;
+          pointerY = (event.clientY - bounds.top) / bounds.height - 0.5;
+          if (frame) return;
+          frame = requestAnimationFrame(() => {
+            frame = 0;
+            model.cameraOrbit = `${pointerX * 36}deg ${82 + pointerY * 16}deg 115%`;
+          });
+        },
+        { signal }
+      );
+      wrapper.addEventListener(
+        'pointerleave',
+        (event) => {
+          if (!event.buttons) reset();
+        },
+        { signal }
+      );
+      wrapper.addEventListener(
+        'pointerdown',
+        () => (model.interpolationDecay = reduced.matches ? 1 : 200),
+        { signal }
+      );
+      wrapper.addEventListener('keydown', () => (model.interpolationDecay = 1), {
+        capture: true,
+        signal,
+      });
+      reduced.addEventListener('change', reset, { signal });
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          if (!entries.some((entry) => entry.isIntersecting)) return;
+          observer.disconnect();
+          void import('@google/model-viewer').catch(() => delete wrapper.dataset.loaded);
+        },
+        { rootMargin: '100px' }
+      );
+      observer.observe(wrapper);
+      controllers.set(wrapper, () => {
+        observer.disconnect();
+        controller.abort();
+        cancelAnimationFrame(frame);
+      });
+    });
+  }
+
+  initGlassLogos();
+  document.addEventListener('astro:page-load', initGlassLogos);
+  document.addEventListener('astro:before-swap', () => {
+    controllers.forEach((dispose) => dispose());
+    controllers.clear();
+  });
+</script>

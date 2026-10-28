@@ -11,6 +11,8 @@ export const fr: UITranslations = {
   hero: {
     pageTitle: 'Marek Elmayan | Portfolio',
     pageDescription: 'Portfolio et blog de Marek Elmayan, ingénieur logiciel full-stack.',
+    logoLabel: 'Logo ME en verre, modèle interactif',
+    logoHint: 'Faites tourner le logo',
     badges: ['#UX', '#Cybersecurity', '#AI', '#DevX', '#OpenSource'],
     headline: 'Hey, je suis Marek Elmayan 👋',
     subtitle:

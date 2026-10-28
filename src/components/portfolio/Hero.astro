@@ -3,6 +3,7 @@ import { Link } from '@/components/ui/button';
 import { getTranslations, getLangFromUrl, getTranslatedPath } from '@/i18n';
 import BackgroundImage from '../layout/BackgroundImage.astro';
 import CursorSpotlight from './CursorSpotlight.astro';
+import GlassLogo from './GlassLogo.astro';
 import { Badge } from '../ui/badge';
 
 const lang = getLangFromUrl(Astro.url);
@@ -15,53 +16,60 @@ const translatePath = getTranslatedPath(lang);
     <BackgroundImage />
 
     <!-- Content -->
-    <div class="relative z-10 mx-auto max-w-6xl px-4 text-center sm:px-6 lg:px-8">
-      <!-- Announcement Badge -->
-      <div class="mb-6 flex items-center justify-center gap-2">
-        {t.hero.badges.map((badge) => <Badge variant="glass">{badge}</Badge>)}
+    <div
+      class="relative z-10 mx-auto grid w-full max-w-6xl items-center gap-6 px-4 py-24 sm:px-6 md:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] md:gap-12 lg:px-8"
+    >
+      <div class="md:order-2">
+        <GlassLogo label={t.hero.logoLabel} hint={t.hero.logoHint} />
       </div>
+      <div class="text-center md:order-1 md:text-left">
+        <!-- Announcement Badge -->
+        <div class="mb-6 flex flex-wrap items-center justify-center gap-2 md:justify-start">
+          {t.hero.badges.map((badge) => <Badge variant="glass">{badge}</Badge>)}
+        </div>
 
-      <!-- Headline -->
-      <h1
-        id="hello"
-        class="text-foreground mb-6 text-4xl font-bold drop-shadow-lg sm:text-5xl lg:text-6xl dark:text-white"
-      >
-        {t.hero.headline}
-      </h1>
-
-      <!-- Subtitle -->
-      <p
-        class="text-foreground/90 mx-auto mb-8 max-w-2xl text-lg drop-shadow-md sm:text-xl lg:text-2xl dark:text-white/90"
-      >
-        {
-          t.hero.subtitle.split('\n').map((line, i) => (
-            <>
-              {i > 0 && <br />}
-              {line}
-            </>
-          ))
-        }
-      </p>
-
-      <!-- CTAs -->
-      <div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
-        <Link
-          size="lg"
-          href={translatePath('/curriculum-vitae')}
-          className="w-1/2 px-8 py-6 font-semibold md:w-auto"
-          animation="scale"
+        <!-- Headline -->
+        <h1
+          id="hello"
+          class="text-foreground mb-6 text-4xl font-bold drop-shadow-lg sm:text-5xl lg:text-6xl dark:text-white"
         >
-          {t.hero.ctaCv}
-        </Link>
-        <Link
-          variant="secondary"
-          size="lg"
-          href="#projects"
-          className="w-1/2 px-8 py-6 font-semibold md:w-auto"
-          animation="scale"
+          {t.hero.headline}
+        </h1>
+
+        <!-- Subtitle -->
+        <p
+          class="text-foreground/90 mx-auto mb-8 max-w-2xl text-lg drop-shadow-md sm:text-xl md:mx-0 lg:text-2xl dark:text-white/90"
         >
-          {t.hero.ctaProjects}
-        </Link>
+          {
+            t.hero.subtitle.split('\n').map((line, i) => (
+              <>
+                {i > 0 && <br />}
+                {line}
+              </>
+            ))
+          }
+        </p>
+
+        <!-- CTAs -->
+        <div class="flex flex-col items-center justify-center gap-4 sm:flex-row md:justify-start">
+          <Link
+            size="lg"
+            href={translatePath('/curriculum-vitae')}
+            className="w-1/2 px-8 py-6 font-semibold md:w-auto"
+            animation="scale"
+          >
+            {t.hero.ctaCv}
+          </Link>
+          <Link
+            variant="secondary"
+            size="lg"
+            href="#projects"
+            className="w-1/2 px-8 py-6 font-semibold md:w-auto"
+            animation="scale"
+          >
+            {t.hero.ctaProjects}
+          </Link>
+        </div>
       </div>
     </div>
   </section>

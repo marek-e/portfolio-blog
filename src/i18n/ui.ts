@@ -9,6 +9,8 @@ export interface UITranslations {
   hero: {
     pageTitle: string;
     pageDescription: string;
+    logoLabel: string;
+    logoHint: string;
     badges: string[];
     headline: string;
     subtitle: string;
