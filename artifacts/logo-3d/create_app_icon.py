@@ -86,8 +86,9 @@ denoise = compositor.nodes.new("CompositorNodeDenoise")
 denoise.inputs["Quality"].default_value = "High"
 compositor.links.new(render.outputs["Image"], denoise.inputs["Image"])
 compositor.links.new(denoise.outputs["Image"], glare.inputs["Image"])
-glare.inputs["Strength"].default_value = 0.15
+glare.inputs["Strength"].default_value = 0.0
 alpha = compositor.nodes.new("CompositorNodeSetAlpha")
+alpha.inputs["Type"].default_value = "Replace Alpha"
 compositor.links.new(glare.outputs["Image"], alpha.inputs["Image"])
 compositor.links.new(render.outputs["Alpha"], alpha.inputs["Alpha"])
 compositor.links.new(alpha.outputs["Image"], composite.inputs["Image"])
