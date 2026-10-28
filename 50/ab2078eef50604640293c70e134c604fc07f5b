@@ -1,0 +1,19 @@
+artifacts/logo-3d/README.md
+  s_d2db0e3417df6a::t_448bdcd90d1ff4 29,31
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "50ab2078eef50604640293c70e134c604fc07f5b",
+  "prompts": {},
+  "sessions": {
+    "s_d2db0e3417df6a": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a17f6b-c491-7071-bc68-af63922303fc",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
