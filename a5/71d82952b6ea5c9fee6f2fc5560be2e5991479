@@ -1,0 +1,19 @@
+pnpm-lock.yaml
+  s_accc2125a5ae8c::t_cbb587975591d1 7310
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "a571d82952b6ea5c9fee6f2fc5560be2e5991479",
+  "prompts": {},
+  "sessions": {
+    "s_accc2125a5ae8c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "872fefa3-a7df-4317-ba86-b342bfda89a3",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
