@@ -1,0 +1,47 @@
+src/components/portfolio/FeaturedProjectsCarousel.tsx
+  s_a53ec57c33191e::t_17216ec483e4fb 101,106
+src/components/ui/carousel.tsx
+  s_a53ec57c33191e::t_17216ec483e4fb 172,202
+src/components/component-example.tsx
+  s_a53ec57c33191e::t_17216ec483e4fb 461
+src/components/design-system/DesignSystemPreview.tsx
+  s_a53ec57c33191e::t_17216ec483e4fb 107,424,473,477,481,485
+src/pages/[...lang]/projects/[slug].astro
+  s_a53ec57c33191e::t_17216ec483e4fb 193,329
+src/pages/404.astro
+  s_a53ec57c33191e::t_17216ec483e4fb 56
+src/pages/[...lang]/blog/[slug].astro
+  s_a53ec57c33191e::t_17216ec483e4fb 182
+src/components/portfolio/FeaturedProjects.astro
+  s_a53ec57c33191e::t_17216ec483e4fb 65,87
+src/components/ui/alert-dialog.tsx
+  s_a53ec57c33191e::t_17216ec483e4fb 132
+docs/COMPONENTS.md
+  s_a53ec57c33191e::t_17216ec483e4fb 57,122
+src/components/portfolio/StravaSection.astro
+  s_a53ec57c33191e::t_17216ec483e4fb 50,116
+src/components/portfolio/ProjectCardReact.tsx
+  s_a53ec57c33191e::t_17216ec483e4fb 127
+src/components/layout/ModeToggle.tsx
+  s_a53ec57c33191e::t_17216ec483e4fb 57,60
+src/components/portfolio/CopyEmailButton.tsx
+  s_a53ec57c33191e::t_17216ec483e4fb 29
+docs/DESIGN-SYSTEM.md
+  s_a53ec57c33191e::t_17216ec483e4fb 80,84,96
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "c3ac60f4ba12f1a505b1b5fd0b155da19da44c93",
+  "prompts": {},
+  "sessions": {
+    "s_a53ec57c33191e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1bd0b-f2ab-71c1-9495-70e197bc4edb",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
