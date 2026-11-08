@@ -65,7 +65,17 @@ Text stays `foreground`, `muted-foreground` or a pastel `-ink`. Never set body t
 
 Radius: `rounded-3xl` for cards, `rounded-2xl` for small tiles, `rounded-full` for every button, chip and pill.
 
+`Card3D` and `Button3D` add the clear glass treatment shown on `/design-system`: rounded bevels, curved reflections and diffused shadows. Brand accents follow `primary`, orange in light mode and purple in dark. Keep these components to home page highlights and occasional CTAs, following the same placement rules as glass surfaces.
+
+`Card3D` has a 2.75rem radius, a translucent primary-tinted face with 14px backdrop blur, and one thin exterior contour. The face, rim, icon tile and shadow use the same primary hue so warm and cool tints do not clash. One continuous rounded surface uses soft inset shading and asymmetric corner highlights; separate filled inner rectangles create visible seams and must not be added. The optional `.card-3d-icon` tile is 64px square and uses the same continuous shading. Reduced transparency, increased contrast and browsers without backdrop filtering use an opaque face.
+
+`Button3D` is a pill with primary and secondary variants. Its translucent SVG lens has coloured edge refraction, curved reflections and a concentrated band of light along the bottom. The lens adapts to the button's dimensions to keep the ends rounded, including the icon size. Buttons use neither bitmap assets nor backdrop blur, and support focus, disabled states and reduced motion.
+
 ## Buttons
+
+The `Button3D` secondary variant uses cool neutral glass, slate text and softer reflections. Its faint blue-grey edge and shadow distinguish it from the primary variant's brand-coloured lens.
+
+On a fine pointer, 3D buttons fade in a brighter copy of their glass lens over 200ms with the strong `--ease-out` curve. The glass brightens evenly, preserving its hue; the label, reflections and outer shape stay still. The brighter lens uses a static brightness and saturation filter, and only its opacity animates. Transitions reverse smoothly when interrupted. Disabled buttons and touch do not trigger hover; reduced motion uses a 160ms opacity fade. Press feedback lasts 160ms and does not animate keyboard presses.
 
 All sizes are pills. Variants:
 

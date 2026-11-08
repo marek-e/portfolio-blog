@@ -8,23 +8,25 @@ This page is generated automatically by the `DesignSystemPreview` component insi
 
 ## Available Components
 
-| Component     | Type              | Context Required | Notes                        |
-| ------------- | ----------------- | ---------------- | ---------------------------- |
-| Button        | Static-safe       | No               | Can use directly in Astro    |
-| Badge         | Static-safe       | No               | Can use directly in Astro    |
-| Card          | Static-safe       | No               | Can use directly in Astro    |
-| Input         | Static-safe       | No               | Can use directly in Astro    |
-| Textarea      | Static-safe       | No               | Can use directly in Astro    |
-| Label         | Static-safe       | No               | Can use directly in Astro    |
-| Separator     | Static-safe       | No               | Can use directly in Astro    |
-| Field         | Static-safe       | No               | Form field layout primitives |
-| InputGroup    | Static-safe       | No               | Input with addons/buttons    |
-| Alert Dialog  | **Needs wrapper** | Yes              | Wrap in React component      |
-| Dropdown Menu | **Needs wrapper** | Yes              | Wrap in React component      |
-| Select        | **Needs wrapper** | Yes              | Wrap in React component      |
-| Combobox      | **Needs wrapper** | Yes              | Wrap in React component      |
-| Sheet         | **Needs wrapper** | Yes              | Wrap in React component      |
-| Tooltip       | **Needs wrapper** | Yes              | Uses Base UI, wrap in React  |
+| Component     | Type              | Context Required | Notes                                 |
+| ------------- | ----------------- | ---------------- | ------------------------------------- |
+| Button        | Static-safe       | No               | Can use directly in Astro             |
+| Button3D      | Static-safe       | No               | Clear glass primary/secondary buttons |
+| Card3D        | Static-safe       | No               | Clear glass content container         |
+| Badge         | Static-safe       | No               | Can use directly in Astro             |
+| Card          | Static-safe       | No               | Can use directly in Astro             |
+| Input         | Static-safe       | No               | Can use directly in Astro             |
+| Textarea      | Static-safe       | No               | Can use directly in Astro             |
+| Label         | Static-safe       | No               | Can use directly in Astro             |
+| Separator     | Static-safe       | No               | Can use directly in Astro             |
+| Field         | Static-safe       | No               | Form field layout primitives          |
+| InputGroup    | Static-safe       | No               | Input with addons/buttons             |
+| Alert Dialog  | **Needs wrapper** | Yes              | Wrap in React component               |
+| Dropdown Menu | **Needs wrapper** | Yes              | Wrap in React component               |
+| Select        | **Needs wrapper** | Yes              | Wrap in React component               |
+| Combobox      | **Needs wrapper** | Yes              | Wrap in React component               |
+| Sheet         | **Needs wrapper** | Yes              | Wrap in React component               |
+| Tooltip       | **Needs wrapper** | Yes              | Uses Base UI, wrap in React           |
 
 ## Adding New Components
 
@@ -144,6 +146,25 @@ import { DeleteConfirm } from '@/components/<domain>/DeleteConfirm';
 ```
 
 ## Card Structure
+
+### 3D glass components
+
+`Button3D` and `Card3D` are separate components, previewed on `/design-system`. Use them for home page highlights and occasional CTAs.
+
+```tsx
+import { Button3D } from '@/components/ui/button-3d';
+import { Card3D } from '@/components/ui/card-3d';
+
+<Card3D>
+  <h3>Glass card</h3>
+  <p>Content goes here.</p>
+  <Button3D variant="primary">Explore</Button3D>
+</Card3D>;
+```
+
+`Button3D` supports `primary` and `secondary` variants, `sm`, `default`, `lg` and `icon` sizes, native button props, and Base UI's `render` prop. For links, pass `render={<a href="/projects" />}` and `nativeButton={false}`. `Card3D` accepts div props and arbitrary children. Both accept `className` and adapt to the current theme. All button sizes meet the 44px touch target. On fine pointers, enabled buttons brighten their glass evenly on hover and fade back on leave, without moving the label or reflections. Hover and press feedback respect reduced motion.
+
+`Card3D` uses an independent CSS lens with a 2.75rem radius. Place an optional `.card-3d-icon` wrapper inside the card to give an icon the matching 64px glass tile shown in the preview. It inherits the card's material tokens.
 
 ```tsx
 <Card>

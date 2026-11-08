@@ -1,5 +1,7 @@
 import { useRef, useState } from 'react';
 import { Button, Link } from '@/components/ui/button';
+import { Button3D } from '@/components/ui/button-3d';
+import { Card3D } from '@/components/ui/card-3d';
 import { Badge } from '@/components/ui/badge';
 import {
   Card,
@@ -59,7 +61,13 @@ import { PastelCard, PastelCards } from '@/components/mdx/PastelCard';
 import { ModeToggle } from '../layout/ModeToggle';
 import { Icon } from '../shared/Icon';
 import { Doodle, MarkedText } from '../shared/HandDrawn';
-import { ArrowLeftIcon, Search01Icon, Mail01Icon } from '@hugeicons/core-free-icons';
+import {
+  ArrowLeftIcon,
+  ArrowRight01Icon,
+  Search01Icon,
+  Mail01Icon,
+  SparklesIcon,
+} from '@hugeicons/core-free-icons';
 import { getTranslatedPath, type Lang } from '@/i18n';
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
@@ -233,6 +241,70 @@ export function DesignSystemPreview({ lang }: { lang: Lang }) {
               <Button>Normal</Button>
               <Button disabled>Disabled</Button>
             </div>
+          </div>
+        </div>
+      </Section>
+
+      <Section title="3D button">
+        <div className="space-y-8">
+          <div>
+            <Caption>Clear glass</Caption>
+            <div className="flex flex-wrap items-center gap-7 py-6 sm:gap-8">
+              <Button3D size="lg" className="w-full sm:w-auto sm:min-w-52">
+                Primary
+              </Button3D>
+              <Button3D variant="secondary" size="lg" className="w-full sm:w-auto sm:min-w-52">
+                Secondary
+              </Button3D>
+            </div>
+          </div>
+          <Separator />
+          <div>
+            <Caption>Sizes & states</Caption>
+            <div className="flex flex-wrap items-center gap-4">
+              <Button3D size="sm">Small</Button3D>
+              <Button3D>Default</Button3D>
+              <Button3D size="icon" aria-label="Search">
+                <Icon icon={Search01Icon} />
+              </Button3D>
+              <Button3D disabled>Disabled</Button3D>
+            </div>
+          </div>
+        </div>
+      </Section>
+
+      <Section title="3D card">
+        <div className="grid items-center gap-8 md:grid-cols-[1.1fr_1fr]">
+          <Card3D className="min-h-88 w-full max-w-sm justify-between">
+            <div className="card-3d-icon text-primary">
+              <Icon icon={SparklesIcon} className="size-7" aria-hidden="true" />
+            </div>
+            <div className="space-y-3">
+              <h3 className="font-display-soft text-3xl font-semibold tracking-tight">
+                Glass card
+              </h3>
+              <p className="text-muted-foreground max-w-60 text-base leading-relaxed">
+                A clear glass container for content and actions.
+              </p>
+            </div>
+            <Button3D
+              className="self-start"
+              render={<a href={translatePath('/projects')} />}
+              nativeButton={false}
+            >
+              Explore
+              <Icon icon={ArrowRight01Icon} aria-hidden="true" />
+            </Button3D>
+          </Card3D>
+          <div className="space-y-3">
+            <Caption>Clear glass</Caption>
+            <p className="text-muted-foreground text-sm leading-relaxed">
+              Rounded glass edges, curved highlights and a soft primary-colour shadow give the
+              surface its depth. Add your own heading, content and actions.
+            </p>
+            <p className="text-muted-foreground text-sm leading-relaxed">
+              For home page highlights and occasional calls to action.
+            </p>
           </div>
         </div>
       </Section>
