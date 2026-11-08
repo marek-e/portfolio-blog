@@ -1,0 +1,57 @@
+.agents/skills/animate/RECIPES.md
+  s_a53ec57c33191e::t_2bc653d356ded3 1-324
+.agents/skills/animate/SKILL.md
+  s_a53ec57c33191e::t_aa47440a687698 1-207
+.agents/skills/animation-performance/SKILL.md
+  s_a53ec57c33191e::t_2f023675f1e52f 1-222
+.agents/skills/animation-vocabulary/SKILL.md
+  s_a53ec57c33191e::t_ca2001a9c07aca 1-181
+.agents/skills/apple-design/SKILL.md
+  s_a53ec57c33191e::t_5bace7506c8871 1-290
+.agents/skills/break-ui/CATALOG.md
+  s_a53ec57c33191e::t_7be88ac9cb69f9 1-135
+.agents/skills/break-ui/SKILL.md
+  s_a53ec57c33191e::t_fb7b147cbadc0c 1-175
+.agents/skills/choreograph/RECIPES.md
+  s_a53ec57c33191e::t_86252ab78a2978 1-292
+.agents/skills/choreograph/SKILL.md
+  s_a53ec57c33191e::t_1e8e5abef4877e 1-171
+.agents/skills/emil-design-eng/SKILL.md
+  s_a53ec57c33191e::t_0b85ac982bddac 1-676
+.agents/skills/find-animation-opportunities/SKILL.md
+  s_a53ec57c33191e::t_72ec4e58d6333a 1-140
+.agents/skills/gestures/SKILL.md
+  s_a53ec57c33191e::t_6ce42c1a5e31e4 1-106
+.agents/skills/improve-animations/AUDIT.md
+  s_a53ec57c33191e::t_f8b4f541beb12b 1-115
+.agents/skills/improve-animations/PLAN-TEMPLATE.md
+  s_a53ec57c33191e::t_ff6b53b5c9a236 1-73
+.agents/skills/improve-animations/SKILL.md
+  s_a53ec57c33191e::t_666173b9eae4b1 1-109
+.agents/skills/prototype/PICKER.md
+  s_a53ec57c33191e::t_f096946461709b 1-197
+.agents/skills/prototype/SKILL.md
+  s_a53ec57c33191e::t_2d82858b88f673 1-98
+.agents/skills/remove-animations/SKILL.md
+  s_a53ec57c33191e::t_c3555bec2d319e 1-166
+.agents/skills/review-animations/SKILL.md
+  s_a53ec57c33191e::t_6c80e6fe244144 1-120
+.agents/skills/review-animations/STANDARDS.md
+  s_a53ec57c33191e::t_bfb04d0da71feb 1-187
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "91b6611398ffd19544085c3df2a310cc2bd937d7",
+  "prompts": {},
+  "sessions": {
+    "s_a53ec57c33191e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1bd0b-f2ab-71c1-9495-70e197bc4edb",
+        "model": "unknown"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
