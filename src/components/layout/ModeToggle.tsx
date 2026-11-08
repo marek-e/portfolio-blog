@@ -54,10 +54,10 @@ export function ModeToggle() {
     <Button
       ref={buttonRef}
       onClick={toggleTheme}
-      variant="outline"
+      variant="ghost"
       size="icon"
       aria-label="Toggle theme"
-      className="hover:text-primary active:bg-primary/20 rounded-full bg-white"
+      className="hover:text-primary active:bg-primary/20 rounded-full"
     >
       <HugeiconsIcon
         icon={SunIcon}

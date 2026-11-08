@@ -98,12 +98,12 @@ export function FeaturedProjectsCarousel({
 
         {/* Navigation arrows */}
         <CarouselPrevious
-          variant="glass"
+          variant="pastel"
           className="-left-14 hidden size-11 md:flex [&_svg]:size-4.5"
           aria-label="Previous projects"
         />
         <CarouselNext
-          variant="glass"
+          variant="pastel"
           className="-right-14 hidden size-11 md:flex [&_svg]:size-4.5"
           aria-label="Next projects"
         />

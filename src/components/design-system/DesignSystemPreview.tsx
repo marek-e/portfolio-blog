@@ -104,7 +104,7 @@ export function DesignSystemPreview({ lang }: { lang: Lang }) {
   return (
     <div className="space-y-12">
       <div className="flex items-center justify-between">
-        <Link href={translatePath('/')} variant="outline" className="flex h-11 items-center gap-2">
+        <Link href={translatePath('/')} variant="ghost" className="flex h-11 items-center gap-2">
           <Icon icon={ArrowLeftIcon} strokeWidth={2} />
           <span className="text-sm font-medium">Back to home</span>
         </Link>
@@ -216,9 +216,6 @@ export function DesignSystemPreview({ lang }: { lang: Lang }) {
             <div className="flex flex-wrap gap-3">
               <Button variant="default">Default</Button>
               <Button variant="pastel">Pastel</Button>
-              <Button variant="glass">Glass</Button>
-              <Button variant="secondary">Secondary</Button>
-              <Button variant="outline">Outline</Button>
               <Button variant="ghost">Ghost</Button>
               <Button variant="destructive">Destructive</Button>
               <Button variant="link">Link</Button>
@@ -424,7 +421,7 @@ export function DesignSystemPreview({ lang }: { lang: Lang }) {
       {/* Dropdown Menu */}
       <Section title="Dropdown Menu">
         <DropdownMenu>
-          <DropdownMenuTrigger render={<Button variant="outline">Open Menu</Button>} />
+          <DropdownMenuTrigger render={<Button variant="ghost">Open Menu</Button>} />
           <DropdownMenuContent>
             <DropdownMenuItem>Profile</DropdownMenuItem>
             <DropdownMenuItem>Settings</DropdownMenuItem>
@@ -473,19 +470,19 @@ export function DesignSystemPreview({ lang }: { lang: Lang }) {
       <Section title="Tooltip">
         <div className="flex flex-wrap gap-6">
           <Tooltip>
-            <TooltipTrigger render={<Button variant="outline">Hover me (top)</Button>} />
+            <TooltipTrigger render={<Button variant="ghost">Hover me (top)</Button>} />
             <TooltipContent side="top">Tooltip on top</TooltipContent>
           </Tooltip>
           <Tooltip>
-            <TooltipTrigger render={<Button variant="outline">Hover me (bottom)</Button>} />
+            <TooltipTrigger render={<Button variant="ghost">Hover me (bottom)</Button>} />
             <TooltipContent side="bottom">Tooltip on bottom</TooltipContent>
           </Tooltip>
           <Tooltip>
-            <TooltipTrigger render={<Button variant="outline">Hover me (left)</Button>} />
+            <TooltipTrigger render={<Button variant="ghost">Hover me (left)</Button>} />
             <TooltipContent side="left">Tooltip on left</TooltipContent>
           </Tooltip>
           <Tooltip>
-            <TooltipTrigger render={<Button variant="outline">Hover me (right)</Button>} />
+            <TooltipTrigger render={<Button variant="ghost">Hover me (right)</Button>} />
             <TooltipContent side="right">Tooltip on right</TooltipContent>
           </Tooltip>
         </div>

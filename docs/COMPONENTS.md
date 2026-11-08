@@ -54,7 +54,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 ---
 
-<Button variant="outline">Click me</Button>
+<Button variant="pastel">Click me</Button>
 <Badge variant="secondary">New</Badge>
 ```
 
@@ -119,8 +119,7 @@ import { DeleteConfirm } from '@/components/<domain>/DeleteConfirm';
 
 ```tsx
 <Button variant="default">Primary action</Button>
-<Button variant="secondary">Secondary action</Button>
-<Button variant="outline">Outlined</Button>
+<Button variant="pastel">Secondary action</Button>
 <Button variant="ghost">Subtle</Button>
 <Button variant="destructive">Dangerous action</Button>
 <Button variant="link">Link style</Button>

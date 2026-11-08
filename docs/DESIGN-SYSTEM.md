@@ -77,12 +77,11 @@ The `Button3D` secondary variant uses cool neutral glass, slate text and softer 
 
 On a fine pointer, 3D buttons fade in a brighter copy of their glass lens over 200ms with the strong `--ease-out` curve. The glass brightens evenly, preserving its hue; the label, reflections and outer shape stay still. The brighter lens uses a static brightness and saturation filter, and only its opacity animates. Transitions reverse smoothly when interrupted. Disabled buttons and touch do not trigger hover; reduced motion uses a 160ms opacity fade. Press feedback lasts 160ms and does not animate keyboard presses.
 
-All sizes are pills. Variants:
+All classic button sizes are pills. Variants:
 
 - `default`: the **radiant** primary (`btn-radiant`). A subtle orange gradient in light mode, purple in dark, with one soft top shine, a glow underneath and a semibold white label. Use it for the main action of a view.
 - `pastel`: white/card fill with the orange→rose→purple gradient ring. Use it for the secondary CTA next to a radiant one.
-- `glass`: home page only.
-- `outline`, `secondary`, `ghost`, `link`, `destructive`: standard.
+- `ghost`, `link`, `destructive`: standard.
 
 Radiant rules, learned from review:
 
@@ -94,7 +93,7 @@ Radiant rules, learned from review:
 - The element needs a positioning context for the layers: `Button` has `relative` in its base class, and fixed elements like back-to-top already have one. Don't put `position` in the utility, because it would override `fixed`.
 - White on orange is about 3:1. Keep the label semibold, and don't use radiant for small body-size text links.
 
-Every variant has a visible hover cue, without moving: radiant gets a stronger glow and the light sweep, pastel a stronger glow, outline and secondary a border or fill change plus a shadow, ghost a fill, glass a stronger fill and shadow, and link an underline. Buttons don't lift on hover.
+Every variant has a visible hover cue, without moving: radiant gets a stronger glow and the light sweep, pastel a stronger glow, ghost a fill, destructive a stronger fill and shadow, and link an underline. Buttons don't lift on hover.
 
 The radiant glow is always on at full strength. Hover only intensifies it; it must never appear only on hover.
 

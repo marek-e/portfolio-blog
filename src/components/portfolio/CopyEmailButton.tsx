@@ -26,7 +26,7 @@ export function CopyEmailButton({
 
   return (
     <Button
-      variant="glass"
+      variant="pastel"
       size="lg"
       className="relative cursor-pointer font-mono text-sm"
       onClick={handleCopy}

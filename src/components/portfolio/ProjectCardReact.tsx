@@ -124,7 +124,7 @@ export function ProjectCardReact({ project, projectUrl, translations }: ProjectC
             )}
             {links?.repo && (
               <Link
-                variant="glass"
+                variant="pastel"
                 size="sm"
                 href={links.repo}
                 target="_blank"
