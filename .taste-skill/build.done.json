@@ -1,0 +1,11 @@
+{
+ "page": "dist/index.html",
+ "url": null,
+ "root": "dist",
+ "kind": "software",
+ "category": "développeur logiciel",
+ "primary": "Voir mes projets",
+ "rounds": 3,
+ "start": "2026-11-08T16:50:30.847Z",
+ "by": "gate.mjs --start"
+}

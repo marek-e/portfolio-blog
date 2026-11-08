@@ -1,0 +1,1961 @@
+{
+  "start": "2026-11-08T16:50:30.847Z",
+  "round": 3,
+  "idle": 0,
+  "errors": 0,
+  "status": "open",
+  "history": [
+    {
+      "at": "2026-11-08T17:13:57.706Z",
+      "mode": "manual",
+      "status": "fail",
+      "fails": 44,
+      "round": 1,
+      "reused": false,
+      "stopHookActive": false
+    },
+    {
+      "at": "2026-11-08T17:18:46.538Z",
+      "mode": "manual",
+      "status": "fail",
+      "fails": 78,
+      "round": 2,
+      "reused": false,
+      "stopHookActive": false
+    },
+    {
+      "at": "2026-11-08T17:23:39.760Z",
+      "mode": "manual",
+      "status": "open",
+      "fails": 77,
+      "round": 3,
+      "reused": false,
+      "stopHookActive": false
+    }
+  ],
+  "max": 3,
+  "marker": {
+    "page": "dist/index.html",
+    "url": null,
+    "root": "dist",
+    "kind": "software",
+    "category": "développeur logiciel",
+    "primary": "Voir mes projets",
+    "rounds": 3,
+    "start": "2026-11-08T16:50:30.847Z",
+    "by": "gate.mjs --start"
+  },
+  "manual": true,
+  "roundKey": "68f8ef44fa9f8a6c:b62033ba",
+  "roundFree": false,
+  "idleFree": false,
+  "blockKey": null,
+  "fp": "68f8ef44fa9f8a6c",
+  "page": "dist/index.html",
+  "found": {
+    "fails": [
+      {
+        "check": "nav-covers",
+        "where": "header.site-header \"✧ marek. Projets Blog Présentations↗︎ Co\"",
+        "msg": "sits on top of the text \"En prépa, j'ai continué à coder : un jeu\" while the page scrolls: part of the line shows beside it",
+        "fix": "make the fixed nav one opaque band across the whole screen, or let it scroll away with the page",
+        "widths": [1440],
+        "from": "consistency",
+        "ids": ["nav-covers"],
+        "wheres": ["header.site-header \"✧ marek. Projets Blog Présentations↗︎ Co\""]
+      },
+      {
+        "check": "no-visual",
+        "where": "section#timeline \"Mon parcours.\"",
+        "msg": "pictures, effects and mocks cover 4% of this section; a feature section needs a visual (about 25% or more)",
+        "fix": "give the section a visual: a UI fragment on a ground, real icons, or a photograph that fits",
+        "widths": [1440, 390],
+        "from": "consistency",
+        "ids": ["no-visual"],
+        "wheres": ["section#timeline \"Mon parcours.\""]
+      },
+      {
+        "check": "no-visual",
+        "where": "section#running \"Mes courses\"",
+        "msg": "pictures, effects and mocks cover 7% of this section; a feature section needs a visual (about 25% or more)",
+        "fix": "give the section a visual: a UI fragment on a ground, real icons, or a photograph that fits",
+        "widths": [1440, 390],
+        "from": "consistency",
+        "ids": ["no-visual"],
+        "wheres": ["section#running \"Mes courses\""]
+      },
+      {
+        "check": "copy-fact",
+        "where": "h1#hello \"Curieux par nature. Développeur par pass\"",
+        "msg": "the first screen holds no number, price, date, place, platform or genre",
+        "fix": "put one hard fact from the brief on the first screen: a number, a price, a date, the place, the platforms it runs on or a game's genre; take it from the brief or remove the claim",
+        "widths": [1440],
+        "from": "consistency",
+        "ids": ["copy-fact"],
+        "wheres": ["h1#hello \"Curieux par nature. Développeur par pass\""]
+      },
+      {
+        "check": "copy-headings",
+        "where": "h2#projects-heading \"Des idées qui prennent vie.\"",
+        "msg": "\"Des idées qui prennent vie.\" names no product, part, place or section (9 headings like it; at most one brand line per page) (and 8 more like it: \"Tout commence par « et s\", \"Mon parcours.\", \"Semestre d'échange\", \"CPGE PCSI/PSI*\", ...)",
+        "fix": "name the thing in every heading: the product, a part, the place or a section noun",
+        "widths": [1440],
+        "from": "consistency",
+        "ids": ["copy-headings"],
+        "wheres": ["h2#projects-heading \"Des idées qui prennent vie.\""]
+      },
+      {
+        "check": "off-grid",
+        "where": "section.hero.world-hero > div.hero-inner.wrap > div.hero-copy > p.eyebrow \"✧ MAREK ELMAYAN / INGÉNIEUR LOGICIEL\"",
+        "msg": "left edge at 183.5px, 23.5px off the page margin at 160px (36 elements, like span.tiny-star)",
+        "fix": "move it onto the page margin, or the column edge its section uses",
+        "widths": [1440, 390],
+        "from": "consistency",
+        "ids": ["off-grid"],
+        "wheres": [
+          "section.hero.world-hero > div.hero-inner.wrap > div.hero-copy > p.eyebrow \"✧ MAREK ELMAYAN / INGÉNIEUR LOGICIEL\""
+        ]
+      },
+      {
+        "check": "tilt",
+        "where": "section.hero.world-hero > div.hero-inner.wrap > div.hero-workshop > span.handwritten.hero-note \"Les bonnes idées commencent ici.\"",
+        "msg": "rotated 5.0°",
+        "fix": "set it straight",
+        "widths": [1440],
+        "from": "consistency",
+        "ids": ["tilt"],
+        "wheres": [
+          "section.hero.world-hero > div.hero-inner.wrap > div.hero-workshop > span.handwritten.hero-note \"Les bonnes idées commencent ici.\""
+        ]
+      },
+      {
+        "check": "focus-ring",
+        "where": ".focus\\:outline-none:focus",
+        "msg": "\".focus\\:outline-none:focus\" in Footer.rd-bUygk.css removes the focus outline and sets nothing in its place",
+        "fix": "keep the kit's :focus-visible ring, or put a change of the same strength (a 2px line in --action) in the rule that removes it",
+        "widths": [1440],
+        "from": "consistency",
+        "ids": ["focus-ring"],
+        "wheres": [".focus\\:outline-none:focus"]
+      },
+      {
+        "check": "focus-ring",
+        "where": ".focus-visible\\:outline-none:focus-visible",
+        "msg": "\".focus-visible\\:outline-none:focus-visible\" in Footer.rd-bUygk.css removes the focus outline and sets nothing in its place",
+        "fix": "keep the kit's :focus-visible ring, or put a change of the same strength (a 2px line in --action) in the rule that removes it",
+        "widths": [1440],
+        "from": "consistency",
+        "ids": ["focus-ring"],
+        "wheres": [".focus-visible\\:outline-none:focus-visible"]
+      },
+      {
+        "check": "section-height",
+        "where": "footer#footer \"✧marek.ProjetsBlogContactCVDesign System\"",
+        "msg": "the section is 218px tall (0.2 screens), 682px short of one screen (900px): every section after the hero is one screen or two, 2px either way (SR-2)",
+        "fix": "set the section to one screen or two (height: calc(var(--h,1) * 100vh), --h 1 or 2) and cut or split its content to fit",
+        "widths": [1440],
+        "from": "consistency",
+        "ids": ["section-height"],
+        "wheres": ["footer#footer \"✧marek.ProjetsBlogContactCVDesign System\""]
+      },
+      {
+        "check": "section-height",
+        "where": "section#timeline \"03 / Au fil du cheminMon parcours.Les ex\"",
+        "msg": "the section is 1395px tall (1.5 screens), 405px short of two screens (1800px): every section after the hero is one screen or two, 2px either way (SR-2)",
+        "fix": "set the section to one screen or two (height: calc(var(--h,1) * 100vh), --h 1 or 2) and cut or split its content to fit",
+        "widths": [1440, 390],
+        "from": "consistency",
+        "ids": ["section-height", "screen-height"],
+        "wheres": [
+          "section#timeline \"03 / Au fil du cheminMon parcours.Les ex\"",
+          "#timeline section.chapter.section-shell \"03 / Au fil du cheminMon parcour\""
+        ]
+      },
+      {
+        "check": "section-height",
+        "where": "section#about \"Marek, enchanté !Nantes, FranceUXCybersé\"",
+        "msg": "the section is 1241px tall (1.4 screens), 341px over one screen (900px): every section after the hero is one screen or two, 2px either way (and 4 more like it: \"05 / Hors écranMes cours\", \"La suite s’écrit ensembl\", \"01 / De l’idée au produi\") (SR-2)",
+        "fix": "set the section to one screen or two (height: calc(var(--h,1) * 100vh), --h 1 or 2) and cut or split its content to fit",
+        "widths": [1440, 390],
+        "from": "consistency",
+        "ids": ["section-height", "screen-height"],
+        "wheres": [
+          "section#about \"Marek, enchanté !Nantes, FranceUXCybersé\"",
+          "#about section.chapter.about-chapter \"Marek, enchanté !Nantes, FranceU\""
+        ]
+      },
+      {
+        "check": "section-height",
+        "where": "main#main-content > section.chapter.journal-chapter \"04 / Notes de terrainLe journal d’un cur\"",
+        "msg": "the section starts at 5202px, 198px above the screen grid (6 x 900px): sections start on whole screens (SR-2)",
+        "fix": "make every section above it exactly one or two screens tall, so this one starts on a whole screen",
+        "widths": [1440],
+        "from": "consistency",
+        "ids": ["section-height"],
+        "wheres": [
+          "main#main-content > section.chapter.journal-chapter \"04 / Notes de terrainLe journal d’un cur\""
+        ]
+      },
+      {
+        "check": "section-height",
+        "where": "section#running \"05 / Hors écranMes coursesJe trace ma ro\"",
+        "msg": "the section starts at 6134px, 166px above the screen grid (7 x 900px): sections start on whole screens (and 3 more like it: \"✧marek.ProjetsBlogContac\", \"Marek, enchanté !Nantes,\", \"La suite s’écrit ensembl\") (SR-2)",
+        "fix": "make every section above it exactly one or two screens tall, so this one starts on a whole screen",
+        "widths": [1440, 390],
+        "from": "consistency",
+        "ids": ["section-height", "screen-height"],
+        "wheres": [
+          "section#running \"05 / Hors écranMes coursesJe trace ma ro\"",
+          "#running section.chapter.relative \"05 / Hors écranMes coursesJe tra\""
+        ]
+      },
+      {
+        "check": "one-section",
+        "where": "section#about \"Marek, enchanté !Nantes, FranceUXCybersé\"",
+        "msg": "the screen at scroll 3600px (stride 4) shows 207px of section 3 and the content of 2 sections, over 24px each beside section 4: a screen shows one section (another may peek 8px, 24px WARN) (SR-4)",
+        "fix": "make each section exactly one screen or two, so a screen shows one section and no neighbour peeks",
+        "widths": [1440],
+        "from": "consistency",
+        "ids": ["one-section"],
+        "wheres": ["section#about \"Marek, enchanté !Nantes, FranceUXCybersé\""]
+      },
+      {
+        "check": "one-section",
+        "where": "div.section-shell > div.footer-top > a.wordmark > span.brand-spark \"✧\"",
+        "msg": "the screen at scroll 7254px (the top of section 7) shows 206px of section 8 and the heading of section 8 whole and the content of 2 sections, over 24px each beside section 7: a screen shows one section (another may peek 8px, 24px WARN) (SR-4)",
+        "fix": "make each section exactly one screen or two, so a screen shows one section and no neighbour peeks",
+        "widths": [1440],
+        "from": "consistency",
+        "ids": ["one-section"],
+        "wheres": ["div.section-shell > div.footer-top > a.wordmark > span.brand-spark \"✧\""]
+      },
+      {
+        "check": "one-section",
+        "where": "main#main-content > section.chapter.journal-chapter \"04 / Notes de terrainLe journal d’un cur\"",
+        "msg": "the screen at scroll 4500px (stride 5) shows 198px of section 5 and the content of 2 sections, over 24px each beside section 4: a screen shows one section (another may peek 8px, 24px WARN) (and 3 more like it: scroll 5400px, scroll 7200px, scroll 1800px) (SR-4)",
+        "fix": "make each section exactly one screen or two, so a screen shows one section and no neighbour peeks",
+        "widths": [1440],
+        "from": "consistency",
+        "ids": ["one-section"],
+        "wheres": [
+          "main#main-content > section.chapter.journal-chapter \"04 / Notes de terrainLe journal d’un cur\""
+        ]
+      },
+      {
+        "check": "container-edges",
+        "where": "header.site-header \"✧marek.ProjetsBlogPrésentations↗︎Contact\"",
+        "msg": "the nav's content runs 180px from the left and 174px from the right (read from its outermost blocks: no .wrap): the page's container starts at 160px; 180 and 174px are not one margin; the margin is 64-120px at 1440px (one container, equal margins, 2px either way) (SR-6)",
+        "fix": "use one container on every section and the nav (.wrap): one margin left and right, 64-120px on a desktop, 16-24px on a phone",
+        "widths": [1440],
+        "from": "consistency",
+        "ids": ["container-edges"],
+        "wheres": ["header.site-header \"✧marek.ProjetsBlogPrésentations↗︎Contact\""]
+      },
+      {
+        "check": "container-edges",
+        "where": "main#main-content > section.hero.world-hero \"✧ Marek Elmayan /Ingénieur logicielCurie\"",
+        "msg": "the content of section 1 runs 160px from the left and 160px from the right: the margin is 64-120px at 1440px (one container, equal margins, 2px either way) (and 7 more like it: \"01 / De l’idée au produi\", \"Marek, enchanté !Nantes,\", \"03 / Au fil du cheminMon\") (SR-6)",
+        "fix": "use one container on every section and the nav (.wrap): one margin left and right, 64-120px on a desktop, 16-24px on a phone",
+        "widths": [1440],
+        "from": "consistency",
+        "ids": ["container-edges"],
+        "wheres": [
+          "main#main-content > section.hero.world-hero \"✧ Marek Elmayan /Ingénieur logicielCurie\""
+        ]
+      },
+      {
+        "check": "container-edges",
+        "where": "a.skip-link \"Aller au contenu\"",
+        "msg": "a <a> at the top of the page, outside header.nav, main, footer.closing and nav.actionbar (SR-6)",
+        "fix": "build the page as header.nav, a main of sections (each one in-flow .wrap plus background layers) and footer.closing",
+        "widths": [1440],
+        "from": "consistency",
+        "ids": ["container-edges"],
+        "wheres": ["a.skip-link \"Aller au contenu\""]
+      },
+      {
+        "check": "container-edges",
+        "where": "section.hero.world-hero > div.hero-inner.wrap > div.hero-workshop > div.hero-guardian.liquid-glass \"La sécurité, dès la première ligne.\"",
+        "msg": "a box runs 1122-1312px, outside the container lines of section 1 at 160-1280px: full width is for background layers and grounds only (SR-6)",
+        "fix": "keep it inside the container lines (.wrap): full width is for background layers and grounds only",
+        "widths": [1440],
+        "from": "consistency",
+        "ids": ["container-edges"],
+        "wheres": [
+          "section.hero.world-hero > div.hero-inner.wrap > div.hero-workshop > div.hero-guardian.liquid-glass \"La sécurité, dès la première ligne.\""
+        ]
+      },
+      {
+        "check": "container-edges",
+        "where": "div.hero-inner.wrap > div.hero-workshop > div.hero-guardian.liquid-glass > span:nth-of-type(2) \"La sécurité, dès la première ligne.\"",
+        "msg": "\"La sécurité, dès la première lig\" runs 1188-1290px, outside the container lines of section 1 at 160-1280px: full width is for background layers and grounds only (SR-6)",
+        "fix": "keep it inside the container lines (.wrap): full width is for background layers and grounds only",
+        "widths": [1440],
+        "from": "consistency",
+        "ids": ["container-edges"],
+        "wheres": [
+          "div.hero-inner.wrap > div.hero-workshop > div.hero-guardian.liquid-glass > span:nth-of-type(2) \"La sécurité, dès la première ligne.\""
+        ]
+      },
+      {
+        "check": "container-edges",
+        "where": "section.hero.world-hero > div.hero-inner.wrap > div.hero-workshop > span.handwritten.hero-note \"Les bonnes idées commencent ici.\"",
+        "msg": "1 text block starts on a left line at x 1114, 954px from the container's left: text starts on the container's left, or on one split line (x 637, 732, 827) (and 8 more like it: x 716, x 705, x 622) (SR-6)",
+        "fix": "start the text on the container's left, or on the one split line every split shares",
+        "widths": [1440],
+        "from": "consistency",
+        "ids": ["container-edges"],
+        "wheres": [
+          "section.hero.world-hero > div.hero-inner.wrap > div.hero-workshop > span.handwritten.hero-note \"Les bonnes idées commencent ici.\""
+        ]
+      },
+      {
+        "check": "container-edges",
+        "where": "section#timeline > ol.journey-list \"janv. 2023 → Aujourd'huiIngénieur Logici\"",
+        "msg": "a box over half the container wide runs 664-1280px, not on the container's lines at 160-1280px (SR-6)",
+        "fix": "run the picture or box from the container's left line to its right line, or put it in a row or a split",
+        "widths": [1440],
+        "from": "consistency",
+        "ids": ["container-edges"],
+        "wheres": [
+          "section#timeline > ol.journey-list \"janv. 2023 → Aujourd'huiIngénieur Logici\""
+        ]
+      },
+      {
+        "check": "row-lines",
+        "where": "astro-island:nth-of-type(1) > a.block.h-full > div.bg-card.border-border > div.my-auto.grid \"9.9km5:16min/km109m152bpm\"",
+        "msg": "a row of 4 items: its first item starts at 177px, the container's left line at 160px; its last item ends at 506px, the container's right line at 1280px (2px either way) (SR-7)",
+        "fix": "start the row's first item on the container's left line and end its last on the right line, every item one height",
+        "widths": [1440],
+        "from": "consistency",
+        "ids": ["row-lines"],
+        "wheres": [
+          "astro-island:nth-of-type(1) > a.block.h-full > div.bg-card.border-border > div.my-auto.grid \"9.9km5:16min/km109m152bpm\""
+        ]
+      },
+      {
+        "check": "row-lines",
+        "where": "astro-island:nth-of-type(4) > a.block.h-full > div.bg-card.border-border > div.my-auto.grid \"9.1km6:08min/km85m133bpm\"",
+        "msg": "a row of 4 items: its first item starts at 177px, the container's left line at 160px; its last item ends at 506px, the container's right line at 1280px (2px either way) (SR-7)",
+        "fix": "start the row's first item on the container's left line and end its last on the right line, every item one height",
+        "widths": [1440],
+        "from": "consistency",
+        "ids": ["row-lines"],
+        "wheres": [
+          "astro-island:nth-of-type(4) > a.block.h-full > div.bg-card.border-border > div.my-auto.grid \"9.1km6:08min/km85m133bpm\""
+        ]
+      },
+      {
+        "check": "row-lines",
+        "where": "astro-island:nth-of-type(3) > a.block.h-full > div.bg-card.border-border > div.my-auto.grid \"4.1km5:25min/km38m149bpm\"",
+        "msg": "a row of 4 items: its first item starts at 934px, the container's left line at 160px; its last item ends at 1263px, the container's right line at 1280px (2px either way) (and 6 more like it: \"10.1km4:25min/km137m170b\", \"4:06min/km21.2km62m184bp\", \"4:56min/km89m83min157bpm\") (SR-7)",
+        "fix": "start the row's first item on the container's left line and end its last on the right line, every item one height",
+        "widths": [1440],
+        "from": "consistency",
+        "ids": ["row-lines"],
+        "wheres": [
+          "astro-island:nth-of-type(3) > a.block.h-full > div.bg-card.border-border > div.my-auto.grid \"4.1km5:25min/km38m149bpm\""
+        ]
+      },
+      {
+        "check": "row-lines",
+        "where": "div.hero-inner.wrap > div.hero-workshop > div.hero-guardian.liquid-glass > span:nth-of-type(2) \"La sécurité, dès la première ligne.\"",
+        "msg": "\"La sécurité, dès la première lig\" ends at 1290px, past the container's right line at 1280px (SR-7)",
+        "fix": "end it at the container's right line",
+        "widths": [1440],
+        "from": "consistency",
+        "ids": ["row-lines"],
+        "wheres": [
+          "div.hero-inner.wrap > div.hero-workshop > div.hero-guardian.liquid-glass > span:nth-of-type(2) \"La sécurité, dès la première ligne.\""
+        ]
+      },
+      {
+        "check": "split-pair",
+        "where": "main#main-content > section.hero.world-hero > div.hero-inner.wrap \"✧ Marek Elmayan /Ingénieur logicielCurie\"",
+        "msg": "the two columns of the split start 54px apart at the top: a split's columns are top-aligned, 8px either way (SR-8)",
+        "fix": "top-align both columns of the split (align-items: start)",
+        "widths": [1440],
+        "from": "consistency",
+        "ids": ["split-pair"],
+        "wheres": [
+          "main#main-content > section.hero.world-hero > div.hero-inner.wrap \"✧ Marek Elmayan /Ingénieur logicielCurie\""
+        ]
+      },
+      {
+        "check": "split-pair",
+        "where": "section#contact > div.section-shell.contact-layout \"La suite s’écrit ensembleEt si on constr\"",
+        "msg": "the two columns of the split start 52px apart at the top (centred on each other): a split's columns are top-aligned, 8px either way (SR-8)",
+        "fix": "top-align both columns of the split (align-items: start)",
+        "widths": [1440],
+        "from": "consistency",
+        "ids": ["split-pair"],
+        "wheres": [
+          "section#contact > div.section-shell.contact-layout \"La suite s’écrit ensembleEt si on constr\""
+        ]
+      },
+      {
+        "check": "split-pair",
+        "where": "section#about > div.section-shell.about-layout \"Marek, enchanté !Nantes, FranceUXCybersé\"",
+        "msg": "the two columns of the split start 29px apart at the top: a split's columns are top-aligned, 8px either way (SR-8)",
+        "fix": "top-align both columns of the split (align-items: start)",
+        "widths": [1440],
+        "from": "consistency",
+        "ids": ["split-pair"],
+        "wheres": [
+          "section#about > div.section-shell.about-layout \"Marek, enchanté !Nantes, FranceUXCybersé\""
+        ]
+      },
+      {
+        "check": "nav-covers",
+        "where": "header.site-header \"✧ marek. EN Toggle theme\"",
+        "msg": "sits on top of the text \"Tout a commencé en classe de maths au ly\" while the page scrolls: part of the line shows beside it",
+        "fix": "make the fixed nav one opaque band across the whole screen, or let it scroll away with the page",
+        "widths": [390],
+        "from": "consistency",
+        "ids": ["nav-covers"],
+        "wheres": ["header.site-header \"✧ marek. EN Toggle theme\""]
+      },
+      {
+        "check": "spill",
+        "where": "div.hero-inner.wrap > div.hero-workshop > div.studio-scene > svg.sketch.sketch-botanical",
+        "msg": "runs 19px past the bottom edge of the panel it sits on (div.hero-workshop > div.studio-scene > div.studio-art.mo-lq > img)",
+        "fix": "keep the box inside the panel it starts on: shrink it, or grow the panel to hold it",
+        "widths": [390],
+        "from": "consistency",
+        "ids": ["spill"],
+        "wheres": [
+          "div.hero-inner.wrap > div.hero-workshop > div.studio-scene > svg.sketch.sketch-botanical"
+        ]
+      },
+      {
+        "check": "spill",
+        "where": "section.hero.world-hero > div.hero-inner.wrap > div.hero-workshop > div.hero-fieldnote.liquid-glass \"MON TERRAIN DE JEU UX ↔︎ Code ↔︎Produit\"",
+        "msg": "runs 27px past the bottom edge of the panel it sits on (div.hero-workshop > div.studio-scene > div.studio-art.mo-lq > img)",
+        "fix": "keep the box inside the panel it starts on: shrink it, or grow the panel to hold it",
+        "widths": [390],
+        "from": "consistency",
+        "ids": ["spill"],
+        "wheres": [
+          "section.hero.world-hero > div.hero-inner.wrap > div.hero-workshop > div.hero-fieldnote.liquid-glass \"MON TERRAIN DE JEU UX ↔︎ Code ↔︎Produit\""
+        ]
+      },
+      {
+        "check": "heading-scale",
+        "where": "h2#projects-heading \"Des idées qui prennent vie.\"",
+        "msg": "an h2 at 41.6px, as large as the h1 (39px) or larger (and 2 more like it: \"Tout commence par « et s\", \"Mon parcours.\")",
+        "fix": "size headings by level: the h1 largest, one size per level, each level below the one above",
+        "widths": [390],
+        "from": "consistency",
+        "ids": ["heading-scale"],
+        "wheres": ["h2#projects-heading \"Des idées qui prennent vie.\""]
+      },
+      {
+        "check": "off-grid",
+        "where": "section#projects > div.section-heading > svg.sketch.sketch-orbit",
+        "msg": "left edge at 8px, 12px off the page margin at 20px (55 elements, like p.eyebrow)",
+        "fix": "move it onto the page margin, or the column edge its section uses",
+        "widths": [390],
+        "from": "consistency",
+        "ids": ["off-grid"],
+        "wheres": ["section#projects > div.section-heading > svg.sketch.sketch-orbit"]
+      },
+      {
+        "check": "edge-left",
+        "where": "section.hero.world-hero div.hero-workshop \"Mon terrain de jeuUX ↔︎ Code ↔︎P\"",
+        "msg": "starts at x 706.3; the lines are 160 and the column starts",
+        "fix": "start it on the .wrap left line",
+        "widths": [1440],
+        "from": "layout",
+        "ids": ["edge-left"],
+        "wheres": ["section.hero.world-hero div.hero-workshop \"Mon terrain de jeuUX ↔︎ Code ↔︎P\""]
+      },
+      {
+        "check": "edge-left",
+        "where": "section.hero.world-hero p \"UX ↔︎ Code ↔︎Produit\"",
+        "msg": "starts at x 786.9; the lines are 160 and the column starts",
+        "fix": "start it on the .wrap left line",
+        "widths": [1440, 390],
+        "from": "layout",
+        "ids": ["edge-left"],
+        "wheres": ["section.hero.world-hero p \"UX ↔︎ Code ↔︎Produit\""]
+      },
+      {
+        "check": "edge-left",
+        "where": "#projects h3 \"Blink\"",
+        "msg": "starts at x 189.8; the lines are 160 and the column starts",
+        "fix": "start it on the .wrap left line",
+        "widths": [1440],
+        "from": "layout",
+        "ids": ["edge-left"],
+        "wheres": ["#projects h3 \"Blink\""]
+      },
+      {
+        "check": "edge-left",
+        "where": "#projects p \"Un sélecteur de navigateur natif\"",
+        "msg": "starts at x 189.8; the lines are 160 and the column starts",
+        "fix": "start it on the .wrap left line",
+        "widths": [1440],
+        "from": "layout",
+        "ids": ["edge-left"],
+        "wheres": ["#projects p \"Un sélecteur de navigateur natif\""]
+      },
+      {
+        "check": "edge-left",
+        "where": "#projects h3 \"Portfolio Personnel\"",
+        "msg": "starts at x 765.8; the lines are 160 and the column starts",
+        "fix": "start it on the .wrap left line",
+        "widths": [1440],
+        "from": "layout",
+        "ids": ["edge-left"],
+        "wheres": ["#projects h3 \"Portfolio Personnel\""]
+      },
+      {
+        "check": "edge-left",
+        "where": "#projects p \"Un portfolio développeur ultra-r\"",
+        "msg": "starts at x 765.8; the lines are 160 and the column starts",
+        "fix": "start it on the .wrap left line",
+        "widths": [1440],
+        "from": "layout",
+        "ids": ["edge-left"],
+        "wheres": ["#projects p \"Un portfolio développeur ultra-r\""]
+      },
+      {
+        "check": "edge-left",
+        "where": "#projects h3 \"Minesweeper LLM Arena\"",
+        "msg": "starts at x 189.8; the lines are 160 and the column starts",
+        "fix": "start it on the .wrap left line",
+        "widths": [1440],
+        "from": "layout",
+        "ids": ["edge-left"],
+        "wheres": ["#projects h3 \"Minesweeper LLM Arena\""]
+      },
+      {
+        "check": "edge-left",
+        "where": "#projects p \"Projet de hackathon AI Gateway —\"",
+        "msg": "starts at x 189.8; the lines are 160 and the column starts",
+        "fix": "start it on the .wrap left line",
+        "widths": [1440],
+        "from": "layout",
+        "ids": ["edge-left"],
+        "wheres": ["#projects p \"Projet de hackathon AI Gateway —\""]
+      },
+      {
+        "check": "edge-left",
+        "where": "#projects h3 \"Next Armored\"",
+        "msg": "starts at x 765.8; the lines are 160 and the column starts",
+        "fix": "start it on the .wrap left line",
+        "widths": [1440],
+        "from": "layout",
+        "ids": ["edge-left"],
+        "wheres": ["#projects h3 \"Next Armored\""]
+      },
+      {
+        "check": "edge-left",
+        "where": "#projects p \"Toolkit de middleware NextJs pou\"",
+        "msg": "starts at x 765.8; the lines are 160 and the column starts",
+        "fix": "start it on the .wrap left line",
+        "widths": [1440],
+        "from": "layout",
+        "ids": ["edge-left"],
+        "wheres": ["#projects p \"Toolkit de middleware NextJs pou\""]
+      },
+      {
+        "check": "edge-left",
+        "where": "#about p.eyebrow \"02 / À propos\"",
+        "msg": "starts at x 597.3; the lines are 160 and the column starts",
+        "fix": "start it on the .wrap left line",
+        "widths": [1440],
+        "from": "layout",
+        "ids": ["edge-left"],
+        "wheres": ["#about p.eyebrow \"02 / À propos\""]
+      },
+      {
+        "check": "edge-left",
+        "where": "#about h2 \"Tout commence par« et si… »\"",
+        "msg": "starts at x 597.3; the lines are 160 and the column starts",
+        "fix": "start it on the .wrap left line",
+        "widths": [1440],
+        "from": "layout",
+        "ids": ["edge-left"],
+        "wheres": ["#about h2 \"Tout commence par« et si… »\""]
+      },
+      {
+        "check": "edge-left",
+        "where": "#about p \"Tout a commencé en classe de mat\"",
+        "msg": "starts at x 597.3; the lines are 160 and the column starts",
+        "fix": "start it on the .wrap left line",
+        "widths": [1440],
+        "from": "layout",
+        "ids": ["edge-left"],
+        "wheres": ["#about p \"Tout a commencé en classe de mat\""]
+      },
+      {
+        "check": "edge-left",
+        "where": "#about p \"En prépa, j'ai continué à coder \"",
+        "msg": "starts at x 597.3; the lines are 160 and the column starts",
+        "fix": "start it on the .wrap left line",
+        "widths": [1440],
+        "from": "layout",
+        "ids": ["edge-left"],
+        "wheres": ["#about p \"En prépa, j'ai continué à coder \""]
+      },
+      {
+        "check": "edge-left",
+        "where": "#about p \"Aujourd'hui, je me concentre sur\"",
+        "msg": "starts at x 597.3; the lines are 160 and the column starts",
+        "fix": "start it on the .wrap left line",
+        "widths": [1440],
+        "from": "layout",
+        "ids": ["edge-left"],
+        "wheres": ["#about p \"Aujourd'hui, je me concentre sur\""]
+      },
+      {
+        "check": "edge-left",
+        "where": "#about p \"Je suis aussi fasciné par la cyb\"",
+        "msg": "starts at x 597.3; the lines are 160 and the column starts",
+        "fix": "start it on the .wrap left line",
+        "widths": [1440],
+        "from": "layout",
+        "ids": ["edge-left"],
+        "wheres": ["#about p \"Je suis aussi fasciné par la cyb\""]
+      },
+      {
+        "check": "edge-left",
+        "where": "#about p \"J'apporte une grande attention a\"",
+        "msg": "starts at x 597.3; the lines are 160 and the column starts",
+        "fix": "start it on the .wrap left line",
+        "widths": [1440],
+        "from": "layout",
+        "ids": ["edge-left"],
+        "wheres": ["#about p \"J'apporte une grande attention a\""]
+      },
+      {
+        "check": "edge-left",
+        "where": "#about p \"Construire des choses qui compte\"",
+        "msg": "starts at x 654.2; the lines are 160 and the column starts",
+        "fix": "start it on the .wrap left line",
+        "widths": [1440, 390],
+        "from": "layout",
+        "ids": ["edge-left"],
+        "wheres": ["#about p \"Construire des choses qui compte\""]
+      },
+      {
+        "check": "edge-left",
+        "where": "#timeline ol.journey-list \"janv. 2023 → Aujourd'huiIngénieu\"",
+        "msg": "starts at x 664; the lines are 160 and the column starts",
+        "fix": "start it on the .wrap left line",
+        "widths": [1440, 390],
+        "from": "layout",
+        "ids": ["edge-left"],
+        "wheres": ["#timeline ol.journey-list \"janv. 2023 → Aujourd'huiIngénieu\""]
+      },
+      {
+        "check": "edge-left",
+        "where": "section.chapter.journal-chapter h3 \"Le prompt caching dans Claude Co\"",
+        "msg": "starts at x 343.6; the lines are 160 and the column starts",
+        "fix": "start it on the .wrap left line",
+        "widths": [1440, 390],
+        "from": "layout",
+        "ids": ["edge-left"],
+        "wheres": ["section.chapter.journal-chapter h3 \"Le prompt caching dans Claude Co\""]
+      },
+      {
+        "check": "edge-left",
+        "where": "section.chapter.journal-chapter p \"Lecture de cache, écriture de ca\"",
+        "msg": "starts at x 343.6; the lines are 160 and the column starts",
+        "fix": "start it on the .wrap left line",
+        "widths": [1440, 390],
+        "from": "layout",
+        "ids": ["edge-left"],
+        "wheres": ["section.chapter.journal-chapter p \"Lecture de cache, écriture de ca\""]
+      },
+      {
+        "check": "edge-left",
+        "where": "section.chapter.journal-chapter h3 \"Comment rester intellectuellemen\"",
+        "msg": "starts at x 343.6; the lines are 160 and the column starts",
+        "fix": "start it on the .wrap left line",
+        "widths": [1440, 390],
+        "from": "layout",
+        "ids": ["edge-left"],
+        "wheres": ["section.chapter.journal-chapter h3 \"Comment rester intellectuellemen\""]
+      },
+      {
+        "check": "edge-left",
+        "where": "section.chapter.journal-chapter p \"L'IA est capable d'écrire pratiq\"",
+        "msg": "starts at x 343.6; the lines are 160 and the column starts",
+        "fix": "start it on the .wrap left line",
+        "widths": [1440, 390],
+        "from": "layout",
+        "ids": ["edge-left"],
+        "wheres": ["section.chapter.journal-chapter p \"L'IA est capable d'écrire pratiq\""]
+      },
+      {
+        "check": "edge-left",
+        "where": "section.chapter.journal-chapter h3 \"Clickjacking : comment cinq lign\"",
+        "msg": "starts at x 343.6; the lines are 160 and the column starts",
+        "fix": "start it on the .wrap left line",
+        "widths": [1440, 390],
+        "from": "layout",
+        "ids": ["edge-left"],
+        "wheres": ["section.chapter.journal-chapter h3 \"Clickjacking : comment cinq lign\""]
+      },
+      {
+        "check": "edge-left",
+        "where": "section.chapter.journal-chapter p \"Une attaque par iframe invisible\"",
+        "msg": "starts at x 343.6; the lines are 160 and the column starts",
+        "fix": "start it on the .wrap left line",
+        "widths": [1440, 390],
+        "from": "layout",
+        "ids": ["edge-left"],
+        "wheres": ["section.chapter.journal-chapter p \"Une attaque par iframe invisible\""]
+      },
+      {
+        "check": "edge-left",
+        "where": "#running p.flex.items-center \"25 oct.\"",
+        "msg": "starts at x 555.7; the lines are 160 and the column starts",
+        "fix": "start it on the .wrap left line",
+        "widths": [1440, 390],
+        "from": "layout",
+        "ids": ["edge-left"],
+        "wheres": ["#running p.flex.items-center \"25 oct.\""]
+      },
+      {
+        "check": "edge-left",
+        "where": "#running div.text-center \"4:56min/km\"",
+        "msg": "starts at x 555.7; the lines are 160 and the column starts",
+        "fix": "start it on the .wrap left line",
+        "widths": [1440, 390],
+        "from": "layout",
+        "ids": ["edge-left"],
+        "wheres": ["#running div.text-center \"4:56min/km\""]
+      },
+      {
+        "check": "edge-left",
+        "where": "#running p.text-sm.font-bold \"4:56\"",
+        "msg": "starts at x 555.7; the lines are 160 and the column starts",
+        "fix": "start it on the .wrap left line",
+        "widths": [1440, 390],
+        "from": "layout",
+        "ids": ["edge-left"],
+        "wheres": ["#running p.text-sm.font-bold \"4:56\""]
+      },
+      {
+        "check": "edge-left",
+        "where": "#running p.text-xs.text-emerald-700/70 \"min/km\"",
+        "msg": "starts at x 555.7; the lines are 160 and the column starts",
+        "fix": "start it on the .wrap left line",
+        "widths": [1440, 390],
+        "from": "layout",
+        "ids": ["edge-left"],
+        "wheres": ["#running p.text-xs.text-emerald-700/70 \"min/km\""]
+      },
+      {
+        "check": "edge-left",
+        "where": "#running div.text-center \"89m\"",
+        "msg": "starts at x 639.8; the lines are 160 and the column starts",
+        "fix": "start it on the .wrap left line",
+        "widths": [1440, 390],
+        "from": "layout",
+        "ids": ["edge-left"],
+        "wheres": ["#running div.text-center \"89m\""]
+      },
+      {
+        "check": "edge-left",
+        "where": "#running p.text-sm.font-bold \"89\"",
+        "msg": "starts at x 639.8; the lines are 160 and the column starts",
+        "fix": "start it on the .wrap left line",
+        "widths": [1440, 390],
+        "from": "layout",
+        "ids": ["edge-left"],
+        "wheres": ["#running p.text-sm.font-bold \"89\""]
+      },
+      {
+        "check": "edge-left",
+        "where": "#running p.text-xs.text-emerald-700/70 \"m\"",
+        "msg": "starts at x 639.8; the lines are 160 and the column starts",
+        "fix": "start it on the .wrap left line",
+        "widths": [1440, 390],
+        "from": "layout",
+        "ids": ["edge-left"],
+        "wheres": ["#running p.text-xs.text-emerald-700/70 \"m\""]
+      },
+      {
+        "check": "edge-left",
+        "where": "#running div.text-center \"83min\"",
+        "msg": "starts at x 724; the lines are 160 and the column starts",
+        "fix": "start it on the .wrap left line",
+        "widths": [1440, 390],
+        "from": "layout",
+        "ids": ["edge-left"],
+        "wheres": ["#running div.text-center \"83min\""]
+      },
+      {
+        "check": "edge-left",
+        "where": "#running p.text-sm.font-bold \"83\"",
+        "msg": "starts at x 724; the lines are 160 and the column starts",
+        "fix": "start it on the .wrap left line",
+        "widths": [1440, 390],
+        "from": "layout",
+        "ids": ["edge-left"],
+        "wheres": ["#running p.text-sm.font-bold \"83\""]
+      },
+      {
+        "check": "edge-left",
+        "where": "#running p.text-xs.text-emerald-700/70 \"min\"",
+        "msg": "starts at x 724; the lines are 160 and the column starts",
+        "fix": "start it on the .wrap left line",
+        "widths": [1440, 390],
+        "from": "layout",
+        "ids": ["edge-left"],
+        "wheres": ["#running p.text-xs.text-emerald-700/70 \"min\""]
+      },
+      {
+        "check": "edge-left",
+        "where": "#running div.text-center \"157bpm\"",
+        "msg": "starts at x 808.2; the lines are 160 and the column starts",
+        "fix": "start it on the .wrap left line",
+        "widths": [1440, 390],
+        "from": "layout",
+        "ids": ["edge-left"],
+        "wheres": ["#running div.text-center \"157bpm\""]
+      },
+      {
+        "check": "edge-left",
+        "where": "#running p.text-sm.font-bold \"157\"",
+        "msg": "starts at x 808.2; the lines are 160 and the column starts",
+        "fix": "start it on the .wrap left line",
+        "widths": [1440, 390],
+        "from": "layout",
+        "ids": ["edge-left"],
+        "wheres": ["#running p.text-sm.font-bold \"157\""]
+      },
+      {
+        "check": "edge-left",
+        "where": "#running p.text-xs.text-emerald-700/70 \"bpm\"",
+        "msg": "starts at x 808.2; the lines are 160 and the column starts",
+        "fix": "start it on the .wrap left line",
+        "widths": [1440, 390],
+        "from": "layout",
+        "ids": ["edge-left"],
+        "wheres": ["#running p.text-xs.text-emerald-700/70 \"bpm\""]
+      },
+      {
+        "check": "screen-height",
+        "where": "#projects section.chapter.section-shell \"01 / De l’idée au produitDes idé\"",
+        "msg": "1666px, 1.85 screens; a section is exactly one or two (--h)",
+        "fix": "make the section exactly one or two screens (--h: 1 or 2)",
+        "widths": [1440, 390],
+        "from": "layout",
+        "ids": ["screen-height"],
+        "wheres": ["#projects section.chapter.section-shell \"01 / De l’idée au produitDes idé\""]
+      },
+      {
+        "check": "neighbour",
+        "where": "#projects section.chapter.section-shell \"01 / De l’idée au produitDes idé\"",
+        "msg": "framed, 20px of #about section.chapter.about-chapter \"Marek, enchanté !Nantes, FranceU\" shows",
+        "fix": "keep the next section's heading and picture out of this screen",
+        "widths": [1440],
+        "from": "layout",
+        "ids": ["neighbour"],
+        "wheres": ["#projects section.chapter.section-shell \"01 / De l’idée au produitDes idé\""]
+      },
+      {
+        "check": "neighbour",
+        "where": "#timeline section.chapter.section-shell \"03 / Au fil du cheminMon parcour\"",
+        "msg": "framed, 66px of section.chapter.journal-chapter section.chapter.journal-chapter \"04 / Notes de terrainLe journal \" shows",
+        "fix": "keep the next section's heading and picture out of this screen",
+        "widths": [1440],
+        "from": "layout",
+        "ids": ["neighbour"],
+        "wheres": ["#timeline section.chapter.section-shell \"03 / Au fil du cheminMon parcour\""]
+      },
+      {
+        "check": "screen-height",
+        "where": "section.chapter.journal-chapter section.chapter.journal-chapter \"04 / Notes de terrainLe journal \"",
+        "msg": "932px, 1.04 screens; a section is exactly one or two (--h)",
+        "fix": "make the section exactly one or two screens (--h: 1 or 2)",
+        "widths": [1440],
+        "from": "layout",
+        "ids": ["screen-height"],
+        "wheres": [
+          "section.chapter.journal-chapter section.chapter.journal-chapter \"04 / Notes de terrainLe journal \""
+        ]
+      },
+      {
+        "check": "screen-short",
+        "where": "#contact section.chapter.contact-chapter \"La suite s’écrit ensembleEt si o\"",
+        "msg": "694px tall; one screen under the nav is 900px",
+        "fix": "make the section one full screen (--h: 1, layout-v4.md section 2)",
+        "widths": [1440],
+        "from": "layout",
+        "ids": ["screen-short", "screen-height"],
+        "wheres": ["#contact section.chapter.contact-chapter \"La suite s’écrit ensembleEt si o\""]
+      },
+      {
+        "check": "neighbour",
+        "where": "#contact section.chapter.contact-chapter \"La suite s’écrit ensembleEt si o\"",
+        "msg": "framed, 206px of the footer shows",
+        "fix": "keep the next section's heading and picture out of this screen",
+        "widths": [1440],
+        "from": "layout",
+        "ids": ["neighbour"],
+        "wheres": ["#contact section.chapter.contact-chapter \"La suite s’écrit ensembleEt si o\""]
+      },
+      {
+        "check": "edge-left",
+        "where": "#running div.rounded-xl.p-4 \"0courses\"",
+        "msg": "starts at x 203; the lines are 20 and the column starts",
+        "fix": "start it on the .wrap left line",
+        "widths": [390],
+        "from": "layout",
+        "ids": ["edge-left"],
+        "wheres": ["#running div.rounded-xl.p-4 \"0courses\""]
+      },
+      {
+        "check": "neighbour",
+        "where": "section.chapter.journal-chapter section.chapter.journal-chapter \"04 / Notes de terrainLe journal \"",
+        "msg": "framed, 47px of #running section.chapter.relative \"05 / Hors écranMes coursesJe tra\" shows",
+        "fix": "keep the next section's heading and picture out of this screen",
+        "widths": [390],
+        "from": "layout",
+        "ids": ["neighbour"],
+        "wheres": [
+          "section.chapter.journal-chapter section.chapter.journal-chapter \"04 / Notes de terrainLe journal \""
+        ]
+      }
+    ],
+    "warns": [
+      {
+        "check": "copy-headings",
+        "where": "div.bg-card.border-border > div.mb-3.flex > div:nth-of-type(1) > h3.text-foreground.line-clamp-1 \"Course à pied le matin\"",
+        "msg": "the card title \"Course à pied le matin\" names no product, part, place or section (5 card titles like it) (and 4 more like it: \"Semi sur la Garonne - To\", \"Course à pied le matin\", \"Course à pied de nuit\", \"Course à pied en soirée\")",
+        "fix": "name the thing in every heading: the product, a part, the place or a section noun",
+        "widths": [1440],
+        "from": "consistency"
+      },
+      {
+        "check": "copy-buttons",
+        "where": "div.hero-inner.wrap > div.hero-copy > div.hero-actions > a.rounded-lg.border \"Voir mes projets ↗︎\"",
+        "msg": "\"Voir mes projets ↗︎\" does not start with a verb (book, buy, try, start, get, see...) (and 1 more like it: \"Envoyer un email ↗︎\")",
+        "fix": "label buttons with a verb and what the visitor gets (\"Book a room\", \"Start free trial\")",
+        "widths": [1440],
+        "from": "consistency"
+      },
+      {
+        "check": "copy-actions",
+        "where": "(the page)",
+        "msg": "the main action \"Voir mes projets\" does not read word for word the same in the closing section",
+        "fix": "few actions, one wording: at most 2 in the hero, the main action word for word in nav, hero and close",
+        "widths": [1440],
+        "from": "consistency"
+      },
+      {
+        "check": "col-edge",
+        "where": "section#about > div.section-shell.about-layout > div.about-story \"02 / À PROPOS Tout commence par « et si…\"",
+        "msg": "the second column starts at 3 places: 597px (section#about), 706px (section.hero.world-hero), 858px (section#contact)",
+        "fix": "start the second column of every split on the same one or two grid columns",
+        "widths": [1440],
+        "from": "consistency"
+      },
+      {
+        "check": "section-gaps",
+        "where": "main#main-content > section.hero.world-hero / section#projects",
+        "msg": "117px between these sections, -49% against the median 228px of gaps at a change of ground",
+        "fix": "use one gap between sections (all within 25% of each other)",
+        "widths": [1440, 390],
+        "from": "consistency"
+      },
+      {
+        "check": "section-gaps",
+        "where": "section#contact / footer#footer",
+        "msg": "169px between these sections, -26% against the median 227px",
+        "fix": "use one gap between sections (all within 25% of each other)",
+        "widths": [1440],
+        "from": "consistency"
+      },
+      {
+        "check": "photo-set",
+        "where": "article:nth-of-type(1) > a.project-card > div.project-artwork > img \"blink.HAuesc6b_Z1AfAio.webp\"",
+        "msg": "8 photographs in more than one look: saturation from 0.21 to 0.51; warm and cool photographs mixed (b* -41 to +10); the odd one out is blink.HAuesc6b_Z1AfAio.webp",
+        "fix": "grade the photographs to one look (light, colour, warmth), or replace the odd one out",
+        "widths": [1440],
+        "from": "consistency"
+      },
+      {
+        "check": "nav-family",
+        "where": "header.site-header",
+        "msg": "the nav's links and actions use 2 type families (Geist, MapleMono)",
+        "fix": "keep one nav on every screen: the same bar, fill, links and type",
+        "widths": [1440, 390],
+        "from": "consistency"
+      },
+      {
+        "check": "copy-length",
+        "where": "section#about \"Tout commence par « et si… »\"",
+        "msg": "4 sections over 90 words a screen outside the UI mocks (\"Tout commence par « et s\" 217, \"Le journal d’un curieux.\" 157, \"Mes courses\" 151); 116 words a screen across the page (1041 words in 9 screens): a tech page says it in about 80 or fewer",
+        "fix": "cut every section to its heading, one line and the product UI: the UI says the rest; no second paragraph, no list of feature sentences",
+        "widths": [1440],
+        "from": "consistency"
+      },
+      {
+        "check": "visual-caption",
+        "where": "div.hero-inner.wrap > div.hero-workshop > div.hero-guardian.liquid-glass > span:nth-of-type(2) \"La sécurité, dès la première ligne.\"",
+        "msg": "a small 12px line is laid over the lower half of the picture melo-studio-night.webp: \"La sécurité, dès la première ligne.\"; no caption or description under any image, render or visual (house rule)",
+        "fix": "take the line away: no caption or description under, over or on any image, render or visual; a licence credit goes in one footer line",
+        "widths": [1440],
+        "from": "consistency"
+      },
+      {
+        "check": "section-air",
+        "where": "section#contact \"La suite s’écrit ensembleEt si on constr\"",
+        "msg": "the content fills 53% of the section's height (369 of 694px): 55% or more (40% WARN) (SR-3)",
+        "fix": "fill the section to 55%: more content, a picture or a background layer, or merge it into the section above as its last block",
+        "widths": [1440],
+        "from": "consistency"
+      },
+      {
+        "check": "cut-text",
+        "where": "section.hero.world-hero > div.hero-inner.wrap > div.hero-copy > p.hero-location \"Nantes, France · Full-stack & UX\"",
+        "msg": "sits across the edge of a panel behind it (and 1 more like it: \"·\")",
+        "fix": "give the text room: no overflow clipping a line, no line past its box",
+        "widths": [390],
+        "from": "consistency"
+      },
+      {
+        "check": "heading-scale",
+        "where": "article:nth-of-type(1) > a.project-card > div.project-copy > h3 \"Blink\"",
+        "msg": "h3 headings in 4 sizes, 16.8px (\"Course à pied le matin\") to 21.6px (x1.29)",
+        "fix": "size headings by level: the h1 largest, one size per level, each level below the one above",
+        "widths": [390],
+        "from": "consistency"
+      },
+      {
+        "check": "photo-set",
+        "where": "article:nth-of-type(1) > a.project-card > div.project-artwork > img \"blink.HAuesc6b_Z1unzWn.webp\"",
+        "msg": "8 photographs in more than one look: warm and cool photographs mixed (b* -41 to +10); the odd one out is blink.HAuesc6b_Z1unzWn.webp",
+        "fix": "grade the photographs to one look (light, colour, warmth), or replace the odd one out",
+        "widths": [390],
+        "from": "consistency"
+      },
+      {
+        "check": "visual-caption",
+        "where": "div.hero-workshop > div.hero-fieldnote.liquid-glass > div > p \"UX ↔︎ Code ↔︎Produit\"",
+        "msg": "a muted 12px line of 1 row sits 0px under the picture melo-studio-night-small.webp: it reads as a caption: \"UX ↔︎ Code ↔︎Produit\"; no caption or description under any image, render or visual (house rule)",
+        "fix": "take the line away: no caption or description under, over or on any image, render or visual; a licence credit goes in one footer line",
+        "widths": [390],
+        "from": "consistency"
+      },
+      {
+        "check": "copy-exclaim",
+        "msg": "1 line with an exclamation mark",
+        "fix": "end on a full stop: copy.md bans exclamation marks (references/copy-tells.md)",
+        "widths": [],
+        "from": "copy",
+        "where": "copy x1: \"Marek, enchanté !\"",
+        "exact": false
+      },
+      {
+        "check": "copy-stat-strip",
+        "msg": "stat strip x1",
+        "fix": "a strip only of figures the brief gives (a price, hours, a count); otherwise put each number in the sentence it proves, or leave it out (references/copy-tells.md)",
+        "widths": [],
+        "from": "copy",
+        "where": "copy x1: \"0 / 9.9 / 5:16 / 109 ...\"",
+        "exact": false
+      },
+      {
+        "check": "copy-eyebrows",
+        "msg": "21 eyebrow or kicker labels",
+        "fix": "one or two a page; a heading that names the thing needs no label over it (references/copy-tells.md)",
+        "widths": [],
+        "from": "copy",
+        "where": "(the copy)",
+        "exact": false
+      }
+    ],
+    "crashed": [],
+    "seconds": {
+      "consistency": 147,
+      "layout": 13
+    }
+  },
+  "open": [
+    {
+      "check": "nav-covers",
+      "where": "header.site-header \"✧ marek. Projets Blog Présentations↗︎ Co\"",
+      "msg": "sits on top of the text \"En prépa, j'ai continué à coder : un jeu\" while the page scrolls: part of the line shows beside it",
+      "fix": "make the fixed nav one opaque band across the whole screen, or let it scroll away with the page",
+      "widths": [1440],
+      "from": "consistency",
+      "ids": ["nav-covers"],
+      "wheres": ["header.site-header \"✧ marek. Projets Blog Présentations↗︎ Co\""]
+    },
+    {
+      "check": "no-visual",
+      "where": "section#timeline \"Mon parcours.\"",
+      "msg": "pictures, effects and mocks cover 4% of this section; a feature section needs a visual (about 25% or more)",
+      "fix": "give the section a visual: a UI fragment on a ground, real icons, or a photograph that fits",
+      "widths": [1440, 390],
+      "from": "consistency",
+      "ids": ["no-visual"],
+      "wheres": ["section#timeline \"Mon parcours.\""]
+    },
+    {
+      "check": "no-visual",
+      "where": "section#running \"Mes courses\"",
+      "msg": "pictures, effects and mocks cover 7% of this section; a feature section needs a visual (about 25% or more)",
+      "fix": "give the section a visual: a UI fragment on a ground, real icons, or a photograph that fits",
+      "widths": [1440, 390],
+      "from": "consistency",
+      "ids": ["no-visual"],
+      "wheres": ["section#running \"Mes courses\""]
+    },
+    {
+      "check": "off-grid",
+      "where": "section.hero.world-hero > div.hero-inner.wrap > div.hero-copy > p.eyebrow \"✧ MAREK ELMAYAN / INGÉNIEUR LOGICIEL\"",
+      "msg": "left edge at 183.5px, 23.5px off the page margin at 160px (36 elements, like span.tiny-star)",
+      "fix": "move it onto the page margin, or the column edge its section uses",
+      "widths": [1440, 390],
+      "from": "consistency",
+      "ids": ["off-grid"],
+      "wheres": [
+        "section.hero.world-hero > div.hero-inner.wrap > div.hero-copy > p.eyebrow \"✧ MAREK ELMAYAN / INGÉNIEUR LOGICIEL\""
+      ]
+    },
+    {
+      "check": "section-height",
+      "where": "footer#footer \"✧marek.ProjetsBlogContactCVDesign System\"",
+      "msg": "the section is 218px tall (0.2 screens), 682px short of one screen (900px): every section after the hero is one screen or two, 2px either way (SR-2)",
+      "fix": "set the section to one screen or two (height: calc(var(--h,1) * 100vh), --h 1 or 2) and cut or split its content to fit",
+      "widths": [1440],
+      "from": "consistency",
+      "ids": ["section-height"],
+      "wheres": ["footer#footer \"✧marek.ProjetsBlogContactCVDesign System\""]
+    },
+    {
+      "check": "section-height",
+      "where": "section#timeline \"03 / Au fil du cheminMon parcours.Les ex\"",
+      "msg": "the section is 1395px tall (1.5 screens), 405px short of two screens (1800px): every section after the hero is one screen or two, 2px either way (SR-2)",
+      "fix": "set the section to one screen or two (height: calc(var(--h,1) * 100vh), --h 1 or 2) and cut or split its content to fit",
+      "widths": [1440, 390],
+      "from": "consistency",
+      "ids": ["section-height", "screen-height"],
+      "wheres": [
+        "section#timeline \"03 / Au fil du cheminMon parcours.Les ex\"",
+        "#timeline section.chapter.section-shell \"03 / Au fil du cheminMon parcour\""
+      ]
+    },
+    {
+      "check": "section-height",
+      "where": "section#about \"Marek, enchanté !Nantes, FranceUXCybersé\"",
+      "msg": "the section is 1241px tall (1.4 screens), 341px over one screen (900px): every section after the hero is one screen or two, 2px either way (and 4 more like it: \"05 / Hors écranMes cours\", \"La suite s’écrit ensembl\", \"01 / De l’idée au produi\") (SR-2)",
+      "fix": "set the section to one screen or two (height: calc(var(--h,1) * 100vh), --h 1 or 2) and cut or split its content to fit",
+      "widths": [1440, 390],
+      "from": "consistency",
+      "ids": ["section-height", "screen-height"],
+      "wheres": [
+        "section#about \"Marek, enchanté !Nantes, FranceUXCybersé\"",
+        "#about section.chapter.about-chapter \"Marek, enchanté !Nantes, FranceU\""
+      ]
+    },
+    {
+      "check": "section-height",
+      "where": "main#main-content > section.chapter.journal-chapter \"04 / Notes de terrainLe journal d’un cur\"",
+      "msg": "the section starts at 5202px, 198px above the screen grid (6 x 900px): sections start on whole screens (SR-2)",
+      "fix": "make every section above it exactly one or two screens tall, so this one starts on a whole screen",
+      "widths": [1440],
+      "from": "consistency",
+      "ids": ["section-height"],
+      "wheres": [
+        "main#main-content > section.chapter.journal-chapter \"04 / Notes de terrainLe journal d’un cur\""
+      ]
+    },
+    {
+      "check": "section-height",
+      "where": "section#running \"05 / Hors écranMes coursesJe trace ma ro\"",
+      "msg": "the section starts at 6134px, 166px above the screen grid (7 x 900px): sections start on whole screens (and 3 more like it: \"✧marek.ProjetsBlogContac\", \"Marek, enchanté !Nantes,\", \"La suite s’écrit ensembl\") (SR-2)",
+      "fix": "make every section above it exactly one or two screens tall, so this one starts on a whole screen",
+      "widths": [1440, 390],
+      "from": "consistency",
+      "ids": ["section-height", "screen-height"],
+      "wheres": [
+        "section#running \"05 / Hors écranMes coursesJe trace ma ro\"",
+        "#running section.chapter.relative \"05 / Hors écranMes coursesJe tra\""
+      ]
+    },
+    {
+      "check": "one-section",
+      "where": "section#about \"Marek, enchanté !Nantes, FranceUXCybersé\"",
+      "msg": "the screen at scroll 3600px (stride 4) shows 207px of section 3 and the content of 2 sections, over 24px each beside section 4: a screen shows one section (another may peek 8px, 24px WARN) (SR-4)",
+      "fix": "make each section exactly one screen or two, so a screen shows one section and no neighbour peeks",
+      "widths": [1440],
+      "from": "consistency",
+      "ids": ["one-section"],
+      "wheres": ["section#about \"Marek, enchanté !Nantes, FranceUXCybersé\""]
+    },
+    {
+      "check": "one-section",
+      "where": "div.section-shell > div.footer-top > a.wordmark > span.brand-spark \"✧\"",
+      "msg": "the screen at scroll 7254px (the top of section 7) shows 206px of section 8 and the heading of section 8 whole and the content of 2 sections, over 24px each beside section 7: a screen shows one section (another may peek 8px, 24px WARN) (SR-4)",
+      "fix": "make each section exactly one screen or two, so a screen shows one section and no neighbour peeks",
+      "widths": [1440],
+      "from": "consistency",
+      "ids": ["one-section"],
+      "wheres": ["div.section-shell > div.footer-top > a.wordmark > span.brand-spark \"✧\""]
+    },
+    {
+      "check": "one-section",
+      "where": "main#main-content > section.chapter.journal-chapter \"04 / Notes de terrainLe journal d’un cur\"",
+      "msg": "the screen at scroll 4500px (stride 5) shows 198px of section 5 and the content of 2 sections, over 24px each beside section 4: a screen shows one section (another may peek 8px, 24px WARN) (and 3 more like it: scroll 5400px, scroll 7200px, scroll 1800px) (SR-4)",
+      "fix": "make each section exactly one screen or two, so a screen shows one section and no neighbour peeks",
+      "widths": [1440],
+      "from": "consistency",
+      "ids": ["one-section"],
+      "wheres": [
+        "main#main-content > section.chapter.journal-chapter \"04 / Notes de terrainLe journal d’un cur\""
+      ]
+    },
+    {
+      "check": "container-edges",
+      "where": "header.site-header \"✧marek.ProjetsBlogPrésentations↗︎Contact\"",
+      "msg": "the nav's content runs 180px from the left and 174px from the right (read from its outermost blocks: no .wrap): the page's container starts at 160px; 180 and 174px are not one margin; the margin is 64-120px at 1440px (one container, equal margins, 2px either way) (SR-6)",
+      "fix": "use one container on every section and the nav (.wrap): one margin left and right, 64-120px on a desktop, 16-24px on a phone",
+      "widths": [1440],
+      "from": "consistency",
+      "ids": ["container-edges"],
+      "wheres": ["header.site-header \"✧marek.ProjetsBlogPrésentations↗︎Contact\""]
+    },
+    {
+      "check": "container-edges",
+      "where": "main#main-content > section.hero.world-hero \"✧ Marek Elmayan /Ingénieur logicielCurie\"",
+      "msg": "the content of section 1 runs 160px from the left and 160px from the right: the margin is 64-120px at 1440px (one container, equal margins, 2px either way) (and 7 more like it: \"01 / De l’idée au produi\", \"Marek, enchanté !Nantes,\", \"03 / Au fil du cheminMon\") (SR-6)",
+      "fix": "use one container on every section and the nav (.wrap): one margin left and right, 64-120px on a desktop, 16-24px on a phone",
+      "widths": [1440],
+      "from": "consistency",
+      "ids": ["container-edges"],
+      "wheres": [
+        "main#main-content > section.hero.world-hero \"✧ Marek Elmayan /Ingénieur logicielCurie\""
+      ]
+    },
+    {
+      "check": "container-edges",
+      "where": "a.skip-link \"Aller au contenu\"",
+      "msg": "a <a> at the top of the page, outside header.nav, main, footer.closing and nav.actionbar (SR-6)",
+      "fix": "build the page as header.nav, a main of sections (each one in-flow .wrap plus background layers) and footer.closing",
+      "widths": [1440],
+      "from": "consistency",
+      "ids": ["container-edges"],
+      "wheres": ["a.skip-link \"Aller au contenu\""]
+    },
+    {
+      "check": "container-edges",
+      "where": "section.hero.world-hero > div.hero-inner.wrap > div.hero-workshop > div.hero-guardian.liquid-glass \"La sécurité, dès la première ligne.\"",
+      "msg": "a box runs 1122-1312px, outside the container lines of section 1 at 160-1280px: full width is for background layers and grounds only (SR-6)",
+      "fix": "keep it inside the container lines (.wrap): full width is for background layers and grounds only",
+      "widths": [1440],
+      "from": "consistency",
+      "ids": ["container-edges"],
+      "wheres": [
+        "section.hero.world-hero > div.hero-inner.wrap > div.hero-workshop > div.hero-guardian.liquid-glass \"La sécurité, dès la première ligne.\""
+      ]
+    },
+    {
+      "check": "container-edges",
+      "where": "div.hero-inner.wrap > div.hero-workshop > div.hero-guardian.liquid-glass > span:nth-of-type(2) \"La sécurité, dès la première ligne.\"",
+      "msg": "\"La sécurité, dès la première lig\" runs 1188-1290px, outside the container lines of section 1 at 160-1280px: full width is for background layers and grounds only (SR-6)",
+      "fix": "keep it inside the container lines (.wrap): full width is for background layers and grounds only",
+      "widths": [1440],
+      "from": "consistency",
+      "ids": ["container-edges"],
+      "wheres": [
+        "div.hero-inner.wrap > div.hero-workshop > div.hero-guardian.liquid-glass > span:nth-of-type(2) \"La sécurité, dès la première ligne.\""
+      ]
+    },
+    {
+      "check": "container-edges",
+      "where": "section.hero.world-hero > div.hero-inner.wrap > div.hero-workshop > span.handwritten.hero-note \"Les bonnes idées commencent ici.\"",
+      "msg": "1 text block starts on a left line at x 1114, 954px from the container's left: text starts on the container's left, or on one split line (x 637, 732, 827) (and 8 more like it: x 716, x 705, x 622) (SR-6)",
+      "fix": "start the text on the container's left, or on the one split line every split shares",
+      "widths": [1440],
+      "from": "consistency",
+      "ids": ["container-edges"],
+      "wheres": [
+        "section.hero.world-hero > div.hero-inner.wrap > div.hero-workshop > span.handwritten.hero-note \"Les bonnes idées commencent ici.\""
+      ]
+    },
+    {
+      "check": "container-edges",
+      "where": "section#timeline > ol.journey-list \"janv. 2023 → Aujourd'huiIngénieur Logici\"",
+      "msg": "a box over half the container wide runs 664-1280px, not on the container's lines at 160-1280px (SR-6)",
+      "fix": "run the picture or box from the container's left line to its right line, or put it in a row or a split",
+      "widths": [1440],
+      "from": "consistency",
+      "ids": ["container-edges"],
+      "wheres": ["section#timeline > ol.journey-list \"janv. 2023 → Aujourd'huiIngénieur Logici\""]
+    },
+    {
+      "check": "row-lines",
+      "where": "astro-island:nth-of-type(1) > a.block.h-full > div.bg-card.border-border > div.my-auto.grid \"9.9km5:16min/km109m152bpm\"",
+      "msg": "a row of 4 items: its first item starts at 177px, the container's left line at 160px; its last item ends at 506px, the container's right line at 1280px (2px either way) (SR-7)",
+      "fix": "start the row's first item on the container's left line and end its last on the right line, every item one height",
+      "widths": [1440],
+      "from": "consistency",
+      "ids": ["row-lines"],
+      "wheres": [
+        "astro-island:nth-of-type(1) > a.block.h-full > div.bg-card.border-border > div.my-auto.grid \"9.9km5:16min/km109m152bpm\""
+      ]
+    },
+    {
+      "check": "row-lines",
+      "where": "astro-island:nth-of-type(4) > a.block.h-full > div.bg-card.border-border > div.my-auto.grid \"9.1km6:08min/km85m133bpm\"",
+      "msg": "a row of 4 items: its first item starts at 177px, the container's left line at 160px; its last item ends at 506px, the container's right line at 1280px (2px either way) (SR-7)",
+      "fix": "start the row's first item on the container's left line and end its last on the right line, every item one height",
+      "widths": [1440],
+      "from": "consistency",
+      "ids": ["row-lines"],
+      "wheres": [
+        "astro-island:nth-of-type(4) > a.block.h-full > div.bg-card.border-border > div.my-auto.grid \"9.1km6:08min/km85m133bpm\""
+      ]
+    },
+    {
+      "check": "row-lines",
+      "where": "astro-island:nth-of-type(3) > a.block.h-full > div.bg-card.border-border > div.my-auto.grid \"4.1km5:25min/km38m149bpm\"",
+      "msg": "a row of 4 items: its first item starts at 934px, the container's left line at 160px; its last item ends at 1263px, the container's right line at 1280px (2px either way) (and 6 more like it: \"10.1km4:25min/km137m170b\", \"4:06min/km21.2km62m184bp\", \"4:56min/km89m83min157bpm\") (SR-7)",
+      "fix": "start the row's first item on the container's left line and end its last on the right line, every item one height",
+      "widths": [1440],
+      "from": "consistency",
+      "ids": ["row-lines"],
+      "wheres": [
+        "astro-island:nth-of-type(3) > a.block.h-full > div.bg-card.border-border > div.my-auto.grid \"4.1km5:25min/km38m149bpm\""
+      ]
+    },
+    {
+      "check": "row-lines",
+      "where": "div.hero-inner.wrap > div.hero-workshop > div.hero-guardian.liquid-glass > span:nth-of-type(2) \"La sécurité, dès la première ligne.\"",
+      "msg": "\"La sécurité, dès la première lig\" ends at 1290px, past the container's right line at 1280px (SR-7)",
+      "fix": "end it at the container's right line",
+      "widths": [1440],
+      "from": "consistency",
+      "ids": ["row-lines"],
+      "wheres": [
+        "div.hero-inner.wrap > div.hero-workshop > div.hero-guardian.liquid-glass > span:nth-of-type(2) \"La sécurité, dès la première ligne.\""
+      ]
+    },
+    {
+      "check": "split-pair",
+      "where": "main#main-content > section.hero.world-hero > div.hero-inner.wrap \"✧ Marek Elmayan /Ingénieur logicielCurie\"",
+      "msg": "the two columns of the split start 54px apart at the top: a split's columns are top-aligned, 8px either way (SR-8)",
+      "fix": "top-align both columns of the split (align-items: start)",
+      "widths": [1440],
+      "from": "consistency",
+      "ids": ["split-pair"],
+      "wheres": [
+        "main#main-content > section.hero.world-hero > div.hero-inner.wrap \"✧ Marek Elmayan /Ingénieur logicielCurie\""
+      ]
+    },
+    {
+      "check": "split-pair",
+      "where": "section#contact > div.section-shell.contact-layout \"La suite s’écrit ensembleEt si on constr\"",
+      "msg": "the two columns of the split start 52px apart at the top (centred on each other): a split's columns are top-aligned, 8px either way (SR-8)",
+      "fix": "top-align both columns of the split (align-items: start)",
+      "widths": [1440],
+      "from": "consistency",
+      "ids": ["split-pair"],
+      "wheres": [
+        "section#contact > div.section-shell.contact-layout \"La suite s’écrit ensembleEt si on constr\""
+      ]
+    },
+    {
+      "check": "split-pair",
+      "where": "section#about > div.section-shell.about-layout \"Marek, enchanté !Nantes, FranceUXCybersé\"",
+      "msg": "the two columns of the split start 29px apart at the top: a split's columns are top-aligned, 8px either way (SR-8)",
+      "fix": "top-align both columns of the split (align-items: start)",
+      "widths": [1440],
+      "from": "consistency",
+      "ids": ["split-pair"],
+      "wheres": [
+        "section#about > div.section-shell.about-layout \"Marek, enchanté !Nantes, FranceUXCybersé\""
+      ]
+    },
+    {
+      "check": "nav-covers",
+      "where": "header.site-header \"✧ marek. EN Toggle theme\"",
+      "msg": "sits on top of the text \"Tout a commencé en classe de maths au ly\" while the page scrolls: part of the line shows beside it",
+      "fix": "make the fixed nav one opaque band across the whole screen, or let it scroll away with the page",
+      "widths": [390],
+      "from": "consistency",
+      "ids": ["nav-covers"],
+      "wheres": ["header.site-header \"✧ marek. EN Toggle theme\""]
+    },
+    {
+      "check": "spill",
+      "where": "div.hero-inner.wrap > div.hero-workshop > div.studio-scene > svg.sketch.sketch-botanical",
+      "msg": "runs 19px past the bottom edge of the panel it sits on (div.hero-workshop > div.studio-scene > div.studio-art.mo-lq > img)",
+      "fix": "keep the box inside the panel it starts on: shrink it, or grow the panel to hold it",
+      "widths": [390],
+      "from": "consistency",
+      "ids": ["spill"],
+      "wheres": [
+        "div.hero-inner.wrap > div.hero-workshop > div.studio-scene > svg.sketch.sketch-botanical"
+      ]
+    },
+    {
+      "check": "spill",
+      "where": "section.hero.world-hero > div.hero-inner.wrap > div.hero-workshop > div.hero-fieldnote.liquid-glass \"MON TERRAIN DE JEU UX ↔︎ Code ↔︎Produit\"",
+      "msg": "runs 27px past the bottom edge of the panel it sits on (div.hero-workshop > div.studio-scene > div.studio-art.mo-lq > img)",
+      "fix": "keep the box inside the panel it starts on: shrink it, or grow the panel to hold it",
+      "widths": [390],
+      "from": "consistency",
+      "ids": ["spill"],
+      "wheres": [
+        "section.hero.world-hero > div.hero-inner.wrap > div.hero-workshop > div.hero-fieldnote.liquid-glass \"MON TERRAIN DE JEU UX ↔︎ Code ↔︎Produit\""
+      ]
+    },
+    {
+      "check": "heading-scale",
+      "where": "h2#projects-heading \"Des idées qui prennent vie.\"",
+      "msg": "an h2 at 41.6px, as large as the h1 (39px) or larger (and 2 more like it: \"Tout commence par « et s\", \"Mon parcours.\")",
+      "fix": "size headings by level: the h1 largest, one size per level, each level below the one above",
+      "widths": [390],
+      "from": "consistency",
+      "ids": ["heading-scale"],
+      "wheres": ["h2#projects-heading \"Des idées qui prennent vie.\""]
+    },
+    {
+      "check": "off-grid",
+      "where": "section#projects > div.section-heading > svg.sketch.sketch-orbit",
+      "msg": "left edge at 8px, 12px off the page margin at 20px (55 elements, like p.eyebrow)",
+      "fix": "move it onto the page margin, or the column edge its section uses",
+      "widths": [390],
+      "from": "consistency",
+      "ids": ["off-grid"],
+      "wheres": ["section#projects > div.section-heading > svg.sketch.sketch-orbit"]
+    },
+    {
+      "check": "edge-left",
+      "where": "section.hero.world-hero div.hero-workshop \"Mon terrain de jeuUX ↔︎ Code ↔︎P\"",
+      "msg": "starts at x 706.3; the lines are 160 and the column starts",
+      "fix": "start it on the .wrap left line",
+      "widths": [1440],
+      "from": "layout",
+      "ids": ["edge-left"],
+      "wheres": ["section.hero.world-hero div.hero-workshop \"Mon terrain de jeuUX ↔︎ Code ↔︎P\""]
+    },
+    {
+      "check": "edge-left",
+      "where": "section.hero.world-hero p \"UX ↔︎ Code ↔︎Produit\"",
+      "msg": "starts at x 786.9; the lines are 160 and the column starts",
+      "fix": "start it on the .wrap left line",
+      "widths": [1440, 390],
+      "from": "layout",
+      "ids": ["edge-left"],
+      "wheres": ["section.hero.world-hero p \"UX ↔︎ Code ↔︎Produit\""]
+    },
+    {
+      "check": "edge-left",
+      "where": "#projects h3 \"Blink\"",
+      "msg": "starts at x 189.8; the lines are 160 and the column starts",
+      "fix": "start it on the .wrap left line",
+      "widths": [1440],
+      "from": "layout",
+      "ids": ["edge-left"],
+      "wheres": ["#projects h3 \"Blink\""]
+    },
+    {
+      "check": "edge-left",
+      "where": "#projects p \"Un sélecteur de navigateur natif\"",
+      "msg": "starts at x 189.8; the lines are 160 and the column starts",
+      "fix": "start it on the .wrap left line",
+      "widths": [1440],
+      "from": "layout",
+      "ids": ["edge-left"],
+      "wheres": ["#projects p \"Un sélecteur de navigateur natif\""]
+    },
+    {
+      "check": "edge-left",
+      "where": "#projects h3 \"Portfolio Personnel\"",
+      "msg": "starts at x 765.8; the lines are 160 and the column starts",
+      "fix": "start it on the .wrap left line",
+      "widths": [1440],
+      "from": "layout",
+      "ids": ["edge-left"],
+      "wheres": ["#projects h3 \"Portfolio Personnel\""]
+    },
+    {
+      "check": "edge-left",
+      "where": "#projects p \"Un portfolio développeur ultra-r\"",
+      "msg": "starts at x 765.8; the lines are 160 and the column starts",
+      "fix": "start it on the .wrap left line",
+      "widths": [1440],
+      "from": "layout",
+      "ids": ["edge-left"],
+      "wheres": ["#projects p \"Un portfolio développeur ultra-r\""]
+    },
+    {
+      "check": "edge-left",
+      "where": "#projects h3 \"Minesweeper LLM Arena\"",
+      "msg": "starts at x 189.8; the lines are 160 and the column starts",
+      "fix": "start it on the .wrap left line",
+      "widths": [1440],
+      "from": "layout",
+      "ids": ["edge-left"],
+      "wheres": ["#projects h3 \"Minesweeper LLM Arena\""]
+    },
+    {
+      "check": "edge-left",
+      "where": "#projects p \"Projet de hackathon AI Gateway —\"",
+      "msg": "starts at x 189.8; the lines are 160 and the column starts",
+      "fix": "start it on the .wrap left line",
+      "widths": [1440],
+      "from": "layout",
+      "ids": ["edge-left"],
+      "wheres": ["#projects p \"Projet de hackathon AI Gateway —\""]
+    },
+    {
+      "check": "edge-left",
+      "where": "#projects h3 \"Next Armored\"",
+      "msg": "starts at x 765.8; the lines are 160 and the column starts",
+      "fix": "start it on the .wrap left line",
+      "widths": [1440],
+      "from": "layout",
+      "ids": ["edge-left"],
+      "wheres": ["#projects h3 \"Next Armored\""]
+    },
+    {
+      "check": "edge-left",
+      "where": "#projects p \"Toolkit de middleware NextJs pou\"",
+      "msg": "starts at x 765.8; the lines are 160 and the column starts",
+      "fix": "start it on the .wrap left line",
+      "widths": [1440],
+      "from": "layout",
+      "ids": ["edge-left"],
+      "wheres": ["#projects p \"Toolkit de middleware NextJs pou\""]
+    },
+    {
+      "check": "edge-left",
+      "where": "#about p.eyebrow \"02 / À propos\"",
+      "msg": "starts at x 597.3; the lines are 160 and the column starts",
+      "fix": "start it on the .wrap left line",
+      "widths": [1440],
+      "from": "layout",
+      "ids": ["edge-left"],
+      "wheres": ["#about p.eyebrow \"02 / À propos\""]
+    },
+    {
+      "check": "edge-left",
+      "where": "#about h2 \"Tout commence par« et si… »\"",
+      "msg": "starts at x 597.3; the lines are 160 and the column starts",
+      "fix": "start it on the .wrap left line",
+      "widths": [1440],
+      "from": "layout",
+      "ids": ["edge-left"],
+      "wheres": ["#about h2 \"Tout commence par« et si… »\""]
+    },
+    {
+      "check": "edge-left",
+      "where": "#about p \"Tout a commencé en classe de mat\"",
+      "msg": "starts at x 597.3; the lines are 160 and the column starts",
+      "fix": "start it on the .wrap left line",
+      "widths": [1440],
+      "from": "layout",
+      "ids": ["edge-left"],
+      "wheres": ["#about p \"Tout a commencé en classe de mat\""]
+    },
+    {
+      "check": "edge-left",
+      "where": "#about p \"En prépa, j'ai continué à coder \"",
+      "msg": "starts at x 597.3; the lines are 160 and the column starts",
+      "fix": "start it on the .wrap left line",
+      "widths": [1440],
+      "from": "layout",
+      "ids": ["edge-left"],
+      "wheres": ["#about p \"En prépa, j'ai continué à coder \""]
+    },
+    {
+      "check": "edge-left",
+      "where": "#about p \"Aujourd'hui, je me concentre sur\"",
+      "msg": "starts at x 597.3; the lines are 160 and the column starts",
+      "fix": "start it on the .wrap left line",
+      "widths": [1440],
+      "from": "layout",
+      "ids": ["edge-left"],
+      "wheres": ["#about p \"Aujourd'hui, je me concentre sur\""]
+    },
+    {
+      "check": "edge-left",
+      "where": "#about p \"Je suis aussi fasciné par la cyb\"",
+      "msg": "starts at x 597.3; the lines are 160 and the column starts",
+      "fix": "start it on the .wrap left line",
+      "widths": [1440],
+      "from": "layout",
+      "ids": ["edge-left"],
+      "wheres": ["#about p \"Je suis aussi fasciné par la cyb\""]
+    },
+    {
+      "check": "edge-left",
+      "where": "#about p \"J'apporte une grande attention a\"",
+      "msg": "starts at x 597.3; the lines are 160 and the column starts",
+      "fix": "start it on the .wrap left line",
+      "widths": [1440],
+      "from": "layout",
+      "ids": ["edge-left"],
+      "wheres": ["#about p \"J'apporte une grande attention a\""]
+    },
+    {
+      "check": "edge-left",
+      "where": "#about p \"Construire des choses qui compte\"",
+      "msg": "starts at x 654.2; the lines are 160 and the column starts",
+      "fix": "start it on the .wrap left line",
+      "widths": [1440, 390],
+      "from": "layout",
+      "ids": ["edge-left"],
+      "wheres": ["#about p \"Construire des choses qui compte\""]
+    },
+    {
+      "check": "edge-left",
+      "where": "#timeline ol.journey-list \"janv. 2023 → Aujourd'huiIngénieu\"",
+      "msg": "starts at x 664; the lines are 160 and the column starts",
+      "fix": "start it on the .wrap left line",
+      "widths": [1440, 390],
+      "from": "layout",
+      "ids": ["edge-left"],
+      "wheres": ["#timeline ol.journey-list \"janv. 2023 → Aujourd'huiIngénieu\""]
+    },
+    {
+      "check": "edge-left",
+      "where": "section.chapter.journal-chapter h3 \"Le prompt caching dans Claude Co\"",
+      "msg": "starts at x 343.6; the lines are 160 and the column starts",
+      "fix": "start it on the .wrap left line",
+      "widths": [1440, 390],
+      "from": "layout",
+      "ids": ["edge-left"],
+      "wheres": ["section.chapter.journal-chapter h3 \"Le prompt caching dans Claude Co\""]
+    },
+    {
+      "check": "edge-left",
+      "where": "section.chapter.journal-chapter p \"Lecture de cache, écriture de ca\"",
+      "msg": "starts at x 343.6; the lines are 160 and the column starts",
+      "fix": "start it on the .wrap left line",
+      "widths": [1440, 390],
+      "from": "layout",
+      "ids": ["edge-left"],
+      "wheres": ["section.chapter.journal-chapter p \"Lecture de cache, écriture de ca\""]
+    },
+    {
+      "check": "edge-left",
+      "where": "section.chapter.journal-chapter h3 \"Comment rester intellectuellemen\"",
+      "msg": "starts at x 343.6; the lines are 160 and the column starts",
+      "fix": "start it on the .wrap left line",
+      "widths": [1440, 390],
+      "from": "layout",
+      "ids": ["edge-left"],
+      "wheres": ["section.chapter.journal-chapter h3 \"Comment rester intellectuellemen\""]
+    },
+    {
+      "check": "edge-left",
+      "where": "section.chapter.journal-chapter p \"L'IA est capable d'écrire pratiq\"",
+      "msg": "starts at x 343.6; the lines are 160 and the column starts",
+      "fix": "start it on the .wrap left line",
+      "widths": [1440, 390],
+      "from": "layout",
+      "ids": ["edge-left"],
+      "wheres": ["section.chapter.journal-chapter p \"L'IA est capable d'écrire pratiq\""]
+    },
+    {
+      "check": "edge-left",
+      "where": "section.chapter.journal-chapter h3 \"Clickjacking : comment cinq lign\"",
+      "msg": "starts at x 343.6; the lines are 160 and the column starts",
+      "fix": "start it on the .wrap left line",
+      "widths": [1440, 390],
+      "from": "layout",
+      "ids": ["edge-left"],
+      "wheres": ["section.chapter.journal-chapter h3 \"Clickjacking : comment cinq lign\""]
+    },
+    {
+      "check": "edge-left",
+      "where": "section.chapter.journal-chapter p \"Une attaque par iframe invisible\"",
+      "msg": "starts at x 343.6; the lines are 160 and the column starts",
+      "fix": "start it on the .wrap left line",
+      "widths": [1440, 390],
+      "from": "layout",
+      "ids": ["edge-left"],
+      "wheres": ["section.chapter.journal-chapter p \"Une attaque par iframe invisible\""]
+    },
+    {
+      "check": "edge-left",
+      "where": "#running p.flex.items-center \"25 oct.\"",
+      "msg": "starts at x 555.7; the lines are 160 and the column starts",
+      "fix": "start it on the .wrap left line",
+      "widths": [1440, 390],
+      "from": "layout",
+      "ids": ["edge-left"],
+      "wheres": ["#running p.flex.items-center \"25 oct.\""]
+    },
+    {
+      "check": "edge-left",
+      "where": "#running div.text-center \"4:56min/km\"",
+      "msg": "starts at x 555.7; the lines are 160 and the column starts",
+      "fix": "start it on the .wrap left line",
+      "widths": [1440, 390],
+      "from": "layout",
+      "ids": ["edge-left"],
+      "wheres": ["#running div.text-center \"4:56min/km\""]
+    },
+    {
+      "check": "edge-left",
+      "where": "#running p.text-sm.font-bold \"4:56\"",
+      "msg": "starts at x 555.7; the lines are 160 and the column starts",
+      "fix": "start it on the .wrap left line",
+      "widths": [1440, 390],
+      "from": "layout",
+      "ids": ["edge-left"],
+      "wheres": ["#running p.text-sm.font-bold \"4:56\""]
+    },
+    {
+      "check": "edge-left",
+      "where": "#running p.text-xs.text-emerald-700/70 \"min/km\"",
+      "msg": "starts at x 555.7; the lines are 160 and the column starts",
+      "fix": "start it on the .wrap left line",
+      "widths": [1440, 390],
+      "from": "layout",
+      "ids": ["edge-left"],
+      "wheres": ["#running p.text-xs.text-emerald-700/70 \"min/km\""]
+    },
+    {
+      "check": "edge-left",
+      "where": "#running div.text-center \"89m\"",
+      "msg": "starts at x 639.8; the lines are 160 and the column starts",
+      "fix": "start it on the .wrap left line",
+      "widths": [1440, 390],
+      "from": "layout",
+      "ids": ["edge-left"],
+      "wheres": ["#running div.text-center \"89m\""]
+    },
+    {
+      "check": "edge-left",
+      "where": "#running p.text-sm.font-bold \"89\"",
+      "msg": "starts at x 639.8; the lines are 160 and the column starts",
+      "fix": "start it on the .wrap left line",
+      "widths": [1440, 390],
+      "from": "layout",
+      "ids": ["edge-left"],
+      "wheres": ["#running p.text-sm.font-bold \"89\""]
+    },
+    {
+      "check": "edge-left",
+      "where": "#running p.text-xs.text-emerald-700/70 \"m\"",
+      "msg": "starts at x 639.8; the lines are 160 and the column starts",
+      "fix": "start it on the .wrap left line",
+      "widths": [1440, 390],
+      "from": "layout",
+      "ids": ["edge-left"],
+      "wheres": ["#running p.text-xs.text-emerald-700/70 \"m\""]
+    },
+    {
+      "check": "edge-left",
+      "where": "#running div.text-center \"83min\"",
+      "msg": "starts at x 724; the lines are 160 and the column starts",
+      "fix": "start it on the .wrap left line",
+      "widths": [1440, 390],
+      "from": "layout",
+      "ids": ["edge-left"],
+      "wheres": ["#running div.text-center \"83min\""]
+    },
+    {
+      "check": "edge-left",
+      "where": "#running p.text-sm.font-bold \"83\"",
+      "msg": "starts at x 724; the lines are 160 and the column starts",
+      "fix": "start it on the .wrap left line",
+      "widths": [1440, 390],
+      "from": "layout",
+      "ids": ["edge-left"],
+      "wheres": ["#running p.text-sm.font-bold \"83\""]
+    },
+    {
+      "check": "edge-left",
+      "where": "#running p.text-xs.text-emerald-700/70 \"min\"",
+      "msg": "starts at x 724; the lines are 160 and the column starts",
+      "fix": "start it on the .wrap left line",
+      "widths": [1440, 390],
+      "from": "layout",
+      "ids": ["edge-left"],
+      "wheres": ["#running p.text-xs.text-emerald-700/70 \"min\""]
+    },
+    {
+      "check": "edge-left",
+      "where": "#running div.text-center \"157bpm\"",
+      "msg": "starts at x 808.2; the lines are 160 and the column starts",
+      "fix": "start it on the .wrap left line",
+      "widths": [1440, 390],
+      "from": "layout",
+      "ids": ["edge-left"],
+      "wheres": ["#running div.text-center \"157bpm\""]
+    },
+    {
+      "check": "edge-left",
+      "where": "#running p.text-sm.font-bold \"157\"",
+      "msg": "starts at x 808.2; the lines are 160 and the column starts",
+      "fix": "start it on the .wrap left line",
+      "widths": [1440, 390],
+      "from": "layout",
+      "ids": ["edge-left"],
+      "wheres": ["#running p.text-sm.font-bold \"157\""]
+    },
+    {
+      "check": "edge-left",
+      "where": "#running p.text-xs.text-emerald-700/70 \"bpm\"",
+      "msg": "starts at x 808.2; the lines are 160 and the column starts",
+      "fix": "start it on the .wrap left line",
+      "widths": [1440, 390],
+      "from": "layout",
+      "ids": ["edge-left"],
+      "wheres": ["#running p.text-xs.text-emerald-700/70 \"bpm\""]
+    },
+    {
+      "check": "screen-height",
+      "where": "#projects section.chapter.section-shell \"01 / De l’idée au produitDes idé\"",
+      "msg": "1666px, 1.85 screens; a section is exactly one or two (--h)",
+      "fix": "make the section exactly one or two screens (--h: 1 or 2)",
+      "widths": [1440, 390],
+      "from": "layout",
+      "ids": ["screen-height"],
+      "wheres": ["#projects section.chapter.section-shell \"01 / De l’idée au produitDes idé\""]
+    },
+    {
+      "check": "neighbour",
+      "where": "#projects section.chapter.section-shell \"01 / De l’idée au produitDes idé\"",
+      "msg": "framed, 20px of #about section.chapter.about-chapter \"Marek, enchanté !Nantes, FranceU\" shows",
+      "fix": "keep the next section's heading and picture out of this screen",
+      "widths": [1440],
+      "from": "layout",
+      "ids": ["neighbour"],
+      "wheres": ["#projects section.chapter.section-shell \"01 / De l’idée au produitDes idé\""]
+    },
+    {
+      "check": "neighbour",
+      "where": "#timeline section.chapter.section-shell \"03 / Au fil du cheminMon parcour\"",
+      "msg": "framed, 66px of section.chapter.journal-chapter section.chapter.journal-chapter \"04 / Notes de terrainLe journal \" shows",
+      "fix": "keep the next section's heading and picture out of this screen",
+      "widths": [1440],
+      "from": "layout",
+      "ids": ["neighbour"],
+      "wheres": ["#timeline section.chapter.section-shell \"03 / Au fil du cheminMon parcour\""]
+    },
+    {
+      "check": "screen-height",
+      "where": "section.chapter.journal-chapter section.chapter.journal-chapter \"04 / Notes de terrainLe journal \"",
+      "msg": "932px, 1.04 screens; a section is exactly one or two (--h)",
+      "fix": "make the section exactly one or two screens (--h: 1 or 2)",
+      "widths": [1440],
+      "from": "layout",
+      "ids": ["screen-height"],
+      "wheres": [
+        "section.chapter.journal-chapter section.chapter.journal-chapter \"04 / Notes de terrainLe journal \""
+      ]
+    },
+    {
+      "check": "screen-short",
+      "where": "#contact section.chapter.contact-chapter \"La suite s’écrit ensembleEt si o\"",
+      "msg": "694px tall; one screen under the nav is 900px",
+      "fix": "make the section one full screen (--h: 1, layout-v4.md section 2)",
+      "widths": [1440],
+      "from": "layout",
+      "ids": ["screen-short", "screen-height"],
+      "wheres": ["#contact section.chapter.contact-chapter \"La suite s’écrit ensembleEt si o\""]
+    },
+    {
+      "check": "neighbour",
+      "where": "#contact section.chapter.contact-chapter \"La suite s’écrit ensembleEt si o\"",
+      "msg": "framed, 206px of the footer shows",
+      "fix": "keep the next section's heading and picture out of this screen",
+      "widths": [1440],
+      "from": "layout",
+      "ids": ["neighbour"],
+      "wheres": ["#contact section.chapter.contact-chapter \"La suite s’écrit ensembleEt si o\""]
+    },
+    {
+      "check": "edge-left",
+      "where": "#running div.rounded-xl.p-4 \"0courses\"",
+      "msg": "starts at x 203; the lines are 20 and the column starts",
+      "fix": "start it on the .wrap left line",
+      "widths": [390],
+      "from": "layout",
+      "ids": ["edge-left"],
+      "wheres": ["#running div.rounded-xl.p-4 \"0courses\""]
+    },
+    {
+      "check": "neighbour",
+      "where": "section.chapter.journal-chapter section.chapter.journal-chapter \"04 / Notes de terrainLe journal \"",
+      "msg": "framed, 47px of #running section.chapter.relative \"05 / Hors écranMes coursesJe tra\" shows",
+      "fix": "keep the next section's heading and picture out of this screen",
+      "widths": [390],
+      "from": "layout",
+      "ids": ["neighbour"],
+      "wheres": [
+        "section.chapter.journal-chapter section.chapter.journal-chapter \"04 / Notes de terrainLe journal \""
+      ]
+    }
+  ],
+  "waived": [
+    {
+      "check": "copy-fact",
+      "where": "h1#hello \"Curieux par nature. Développeur par pass\"",
+      "msg": "the first screen holds no number, price, date, place, platform or genre",
+      "fix": "put one hard fact from the brief on the first screen: a number, a price, a date, the place, the platforms it runs on or a game's genre; take it from the brief or remove the claim",
+      "widths": [1440],
+      "from": "consistency",
+      "ids": ["copy-fact"],
+      "wheres": ["h1#hello \"Curieux par nature. Développeur par pass\""],
+      "reason": "The first screen explicitly states the real location Nantes, France. The English location matcher does not recognize this French portfolio location line."
+    },
+    {
+      "check": "copy-headings",
+      "where": "h2#projects-heading \"Des idées qui prennent vie.\"",
+      "msg": "\"Des idées qui prennent vie.\" names no product, part, place or section (9 headings like it; at most one brand line per page) (and 8 more like it: \"Tout commence par « et s\", \"Mon parcours.\", \"Semestre d'échange\", \"CPGE PCSI/PSI*\", ...)",
+      "fix": "name the thing in every heading: the product, a part, the place or a section noun",
+      "widths": [1440],
+      "from": "consistency",
+      "ids": ["copy-headings"],
+      "wheres": ["h2#projects-heading \"Des idées qui prennent vie.\""],
+      "reason": "These are existing French portfolio section titles and factual job or education titles. The English commercial category vocabulary does not identify parcours, projets and the French education names."
+    },
+    {
+      "check": "tilt",
+      "where": "section.hero.world-hero > div.hero-inner.wrap > div.hero-workshop > span.handwritten.hero-note \"Les bonnes idées commencent ici.\"",
+      "msg": "rotated 5.0°",
+      "fix": "set it straight",
+      "widths": [1440],
+      "from": "consistency",
+      "ids": ["tilt"],
+      "wheres": [
+        "section.hero.world-hero > div.hero-inner.wrap > div.hero-workshop > span.handwritten.hero-note \"Les bonnes idées commencent ici.\""
+      ],
+      "reason": "The user explicitly requests a hand-drawn aesthetic. Only this decorative handwritten annotation has a slight static angle; cards, text columns and interactive controls stay straight."
+    },
+    {
+      "check": "focus-ring",
+      "where": ".focus\\:outline-none:focus",
+      "msg": "\".focus\\:outline-none:focus\" in Footer.rd-bUygk.css removes the focus outline and sets nothing in its place",
+      "fix": "keep the kit's :focus-visible ring, or put a change of the same strength (a 2px line in --action) in the rule that removes it",
+      "widths": [1440],
+      "from": "consistency",
+      "ids": ["focus-ring"],
+      "wheres": [".focus\\:outline-none:focus"],
+      "reason": "The global :focus-visible rule in src/styles/materials.css supplies a visible 2px outline with !important. This generated utility is not the computed keyboard focus style."
+    },
+    {
+      "check": "focus-ring",
+      "where": ".focus-visible\\:outline-none:focus-visible",
+      "msg": "\".focus-visible\\:outline-none:focus-visible\" in Footer.rd-bUygk.css removes the focus outline and sets nothing in its place",
+      "fix": "keep the kit's :focus-visible ring, or put a change of the same strength (a 2px line in --action) in the rule that removes it",
+      "widths": [1440],
+      "from": "consistency",
+      "ids": ["focus-ring"],
+      "wheres": [".focus-visible\\:outline-none:focus-visible"],
+      "reason": "The global :focus-visible rule in src/styles/materials.css supplies a visible 2px outline with !important. This generated utility is not the computed keyboard focus style."
+    }
+  ],
+  "warnCount": 18,
+  "at": "2026-11-08T17:23:39.760Z",
+  "openTold": true
+}

@@ -1,0 +1,72 @@
+{
+  "generator": "Built-in imagegen for the day and night studio; existing portrait and valley assets resized for the remaining files",
+  "prompts": "artifacts/rebrand/PROMPTS-MATERIALS.md",
+  "assets": [
+    {
+      "path": "public/melo/melo-studio.webp",
+      "width": 1440,
+      "height": 960,
+      "bytes": 219108
+    },
+    {
+      "path": "public/melo/melo-studio-small.webp",
+      "width": 720,
+      "height": 480,
+      "bytes": 68084
+    },
+    {
+      "path": "public/melo/melo-studio-night.webp",
+      "width": 1440,
+      "height": 960,
+      "bytes": 206056
+    },
+    {
+      "path": "public/melo/melo-studio-night-small.webp",
+      "width": 720,
+      "height": 480,
+      "bytes": 68518
+    },
+    {
+      "path": "public/melo/melo-welcome-small.webp",
+      "width": 480,
+      "height": 320,
+      "bytes": 33958
+    },
+    {
+      "path": "public/images/marek-profile.webp",
+      "width": 440,
+      "height": 440,
+      "bytes": 16170
+    },
+    {
+      "path": "public/images/marek-profile-small.webp",
+      "width": 96,
+      "height": 96,
+      "bytes": 1450
+    },
+    {
+      "path": "public/images/contact-day-480.webp",
+      "width": 480,
+      "height": 540,
+      "bytes": 17244
+    },
+    {
+      "path": "public/images/contact-day-800.webp",
+      "width": 800,
+      "height": 900,
+      "bytes": 30008
+    },
+    {
+      "path": "public/images/contact-night-480.webp",
+      "width": 480,
+      "height": 540,
+      "bytes": 23128
+    },
+    {
+      "path": "public/images/contact-night-800.webp",
+      "width": 800,
+      "height": 900,
+      "bytes": 45018
+    }
+  ]
+}

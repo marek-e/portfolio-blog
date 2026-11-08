@@ -1,0 +1,166 @@
+{
+  "url": "http://127.0.0.1:5300/index.html",
+  "views": {
+    "desktop": {
+      "width": 1440,
+      "height": 900,
+      "navH": 0,
+      "scrollHeight": 8032,
+      "screens": 8.92,
+      "sections": [
+        {
+          "n": 1,
+          "tag": "section",
+          "id": "",
+          "cls": "hero world-hero is-entered",
+          "top": 0,
+          "h": 900,
+          "hScreens": 1,
+          "offGrid": 0,
+          "tiles": [
+            {
+              "file": "desktop-sec-01-a.jpg",
+              "scrollY": 0
+            }
+          ]
+        },
+        {
+          "n": 2,
+          "tag": "section",
+          "id": "projects",
+          "cls": "chapter section-shell",
+          "top": 900,
+          "h": 1666,
+          "hScreens": 1.85,
+          "offGrid": 766,
+          "tiles": [
+            {
+              "file": "desktop-sec-02-a.jpg",
+              "scrollY": 900
+            },
+            {
+              "file": "desktop-sec-02-b.jpg",
+              "scrollY": 1666
+            }
+          ]
+        },
+        {
+          "n": 3,
+          "tag": "section",
+          "id": "about",
+          "cls": "chapter about-chapter",
+          "top": 2566,
+          "h": 1241,
+          "hScreens": 1.38,
+          "offGrid": 341,
+          "tiles": [
+            {
+              "file": "desktop-sec-03-a.jpg",
+              "scrollY": 2566
+            },
+            {
+              "file": "desktop-sec-03-b.jpg",
+              "scrollY": 2907
+            }
+          ]
+        },
+        {
+          "n": 4,
+          "tag": "section",
+          "id": "timeline",
+          "cls": "chapter section-shell journey-layout",
+          "top": 3807,
+          "h": 1301,
+          "hScreens": 1.45,
+          "offGrid": 401,
+          "tiles": [
+            {
+              "file": "desktop-sec-04-a.jpg",
+              "scrollY": 3807
+            },
+            {
+              "file": "desktop-sec-04-b.jpg",
+              "scrollY": 4208
+            }
+          ]
+        },
+        {
+          "n": 5,
+          "tag": "section",
+          "id": "",
+          "cls": "chapter journal-chapter",
+          "top": 5107,
+          "h": 903,
+          "hScreens": 1,
+          "offGrid": 3,
+          "tiles": [
+            {
+              "file": "desktop-sec-05-a.jpg",
+              "scrollY": 5107
+            },
+            {
+              "file": "desktop-sec-05-b.jpg",
+              "scrollY": 5110
+            }
+          ]
+        },
+        {
+          "n": 6,
+          "tag": "section",
+          "id": "running",
+          "cls": "chapter relative",
+          "top": 6011,
+          "h": 1109,
+          "hScreens": 1.23,
+          "offGrid": 209,
+          "tiles": [
+            {
+              "file": "desktop-sec-06-a.jpg",
+              "scrollY": 6011
+            },
+            {
+              "file": "desktop-sec-06-b.jpg",
+              "scrollY": 6220
+            }
+          ]
+        },
+        {
+          "n": 7,
+          "tag": "section",
+          "id": "contact",
+          "cls": "chapter contact-chapter",
+          "top": 7120,
+          "h": 694,
+          "hScreens": 0.77,
+          "offGrid": 694,
+          "tiles": [
+            {
+              "file": "desktop-sec-07-a.jpg",
+              "scrollY": 7120
+            }
+          ]
+        },
+        {
+          "n": 8,
+          "tag": "footer",
+          "id": "footer",
+          "cls": "site-footer",
+          "top": 7814,
+          "h": 218,
+          "hScreens": 0.24,
+          "offGrid": 218,
+          "tiles": [
+            {
+              "file": "desktop-sec-08-a.jpg",
+              "scrollY": 7132,
+              "cutTop": 682,
+              "height": 218
+            }
+          ]
+        }
+      ],
+      "consoleErrors": []
+    }
+  },
+  "at": "2026-11-08T17:01:28.176Z"
+}

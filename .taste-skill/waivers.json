@@ -1,0 +1,27 @@
+[
+  {
+    "check": "focus-ring",
+    "target": ".focus\\:outline-none:focus",
+    "reason": "The global :focus-visible rule in src/styles/materials.css supplies a visible 2px outline with !important. This generated utility is not the computed keyboard focus style."
+  },
+  {
+    "check": "focus-ring",
+    "target": ".focus-visible\\:outline-none:focus-visible",
+    "reason": "The global :focus-visible rule in src/styles/materials.css supplies a visible 2px outline with !important. This generated utility is not the computed keyboard focus style."
+  },
+  {
+    "check": "copy-fact",
+    "target": "h1#hello",
+    "reason": "The first screen explicitly states the real location Nantes, France. The English location matcher does not recognize this French portfolio location line."
+  },
+  {
+    "check": "copy-headings",
+    "target": "h2#projects-heading",
+    "reason": "These are existing French portfolio section titles and factual job or education titles. The English commercial category vocabulary does not identify parcours, projets and the French education names."
+  },
+  {
+    "check": "tilt",
+    "target": "span.handwritten.hero-note",
+    "reason": "The user explicitly requests a hand-drawn aesthetic. Only this decorative handwritten annotation has a slight static angle; cards, text columns and interactive controls stay straight."
+  }
+]

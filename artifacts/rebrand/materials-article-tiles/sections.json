@@ -1,0 +1,94 @@
+{
+  "url": "http://127.0.0.1:5300/en/blog/clickjacking/index.html",
+  "views": {
+    "desktop": {
+      "width": 1440,
+      "height": 900,
+      "navH": 0,
+      "scrollHeight": 9719,
+      "screens": 10.8,
+      "sections": [
+        {
+          "n": 1,
+          "tag": "header",
+          "id": "",
+          "cls": "article-masthead hero is-entered",
+          "top": 182,
+          "h": 512,
+          "hScreens": 0.57,
+          "offGrid": 512,
+          "tiles": [
+            {
+              "file": "desktop-sec-01-a.jpg",
+              "scrollY": 182
+            }
+          ]
+        },
+        {
+          "n": 2,
+          "tag": "div",
+          "id": "",
+          "cls": "article-body-grid",
+          "top": 726,
+          "h": 8711,
+          "hScreens": 9.68,
+          "offGrid": 611,
+          "tiles": [
+            {
+              "file": "desktop-sec-02-a.jpg",
+              "scrollY": 726
+            },
+            {
+              "file": "desktop-sec-02-b.jpg",
+              "scrollY": 1626
+            },
+            {
+              "file": "desktop-sec-02-c.jpg",
+              "scrollY": 2526
+            },
+            {
+              "file": "desktop-sec-02-d.jpg",
+              "scrollY": 3426
+            },
+            {
+              "file": "desktop-sec-02-e.jpg",
+              "scrollY": 4326
+            },
+            {
+              "file": "desktop-sec-02-f.jpg",
+              "scrollY": 5226
+            },
+            {
+              "file": "desktop-sec-02-g.jpg",
+              "scrollY": 6126
+            },
+            {
+              "file": "desktop-sec-02-h.jpg",
+              "scrollY": 7026
+            }
+          ]
+        },
+        {
+          "n": 3,
+          "tag": "footer",
+          "id": "footer",
+          "cls": "site-footer",
+          "top": 9501,
+          "h": 218,
+          "hScreens": 0.24,
+          "offGrid": 218,
+          "tiles": [
+            {
+              "file": "desktop-sec-03-a.jpg",
+              "scrollY": 8819,
+              "cutTop": 682,
+              "height": 218
+            }
+          ]
+        }
+      ],
+      "consoleErrors": []
+    }
+  },
+  "at": "2026-11-08T17:06:36.784Z"
+}

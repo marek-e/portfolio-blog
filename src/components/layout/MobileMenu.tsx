@@ -7,6 +7,7 @@ import {
   SheetContent,
   SheetFooter,
   SheetHeader,
+  SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
 import { ModeToggle } from './ModeToggle';
@@ -29,7 +30,12 @@ export function MobileMenu({ lang, currentPath }: MobileMenuProps) {
     <Sheet>
       <SheetTrigger
         render={
-          <Button variant="ghost" size="icon" aria-label={t.aria.openMenu} className="md:hidden" />
+          <Button
+            variant="ghost"
+            size="icon"
+            aria-label={t.aria.openMenu}
+            className="size-11 md:hidden"
+          />
         }
       >
         <Icon icon={Menu01Icon} strokeWidth={2} className="size-5" />
@@ -37,15 +43,16 @@ export function MobileMenu({ lang, currentPath }: MobileMenuProps) {
       <SheetContent
         showCloseButton={false}
         side="right"
-        className="w-[300px] rounded-l-xl border-l-white/20 bg-white/70 backdrop-blur-lg dark:border-l-white/10 dark:bg-black/70"
+        className="border-border bg-background w-[min(340px,90vw)] rounded-l-3xl"
       >
+        <SheetTitle className="sr-only">{t.aria.openMenu}</SheetTitle>
         <SheetHeader className="flex-row items-center justify-between pb-2">
           <a
             href={translatePath('/')}
             className="text-foreground flex items-center gap-2 font-semibold"
           >
             <Icon icon={Star} strokeWidth={2} fill="currentColor" className="text-primary size-5" />
-            <span className="text-lg">melmayan</span>
+            <span className="text-lg">marek.</span>
           </a>
           <SheetClose
             render={

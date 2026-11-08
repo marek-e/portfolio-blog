@@ -87,6 +87,33 @@ export function DesignSystemPreview({ lang }: { lang: Lang }) {
         </Link>
         <ModeToggle />
       </div>
+      <section className="border-border bg-card grid items-center gap-8 rounded-3xl border p-8 md:grid-cols-[1.4fr_1fr]">
+        <div>
+          <p className="eyebrow">Marek Elmayan / Visual identity</p>
+          <h2 className="mt-4 text-4xl">
+            Curious by nature.
+            <br />
+            <em className="text-primary">A builder at heart.</em>
+          </h2>
+          <p className="text-muted-foreground mt-6 text-sm leading-relaxed">
+            Georgia for editorial headlines. Geist for reading and interfaces. Maple Mono for code
+            and field notes.
+          </p>
+          <div className="mt-6 flex flex-wrap items-center gap-4">
+            <Button className="sculpted-button" size="lg">
+              Build with care
+            </Button>
+            <Badge variant="secondary">A little curiosity</Badge>
+          </div>
+        </div>
+        <img
+          src="/melo/melo-explorer.webp"
+          width={1000}
+          height={1076}
+          alt="Melo and Orbi studying a map"
+          className="mx-auto w-full max-w-64"
+        />
+      </section>
       {/* Colors */}
       <Section title="Colors">
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 md:grid-cols-6">

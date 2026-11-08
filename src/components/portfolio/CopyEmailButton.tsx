@@ -2,9 +2,8 @@
 
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { HugeiconsIcon } from '@hugeicons/react';
+import { Icon } from '@/components/shared/Icon';
 import { Check, Copy01Icon } from '@hugeicons/core-free-icons';
-import { cn } from '@/lib/utils';
 import { EMAIL } from '@/lib/socials';
 
 interface CopyEmailButtonProps {
@@ -28,41 +27,14 @@ export function CopyEmailButton({
     <Button
       variant="ghost"
       size="lg"
-      className="w-3/4 cursor-pointer md:w-auto"
+      className="gap-3"
       onClick={handleCopy}
-      aria-label={`${copied ? copiedText : copyLabel} ${EMAIL}`}
+      aria-label={`${copyLabel} ${EMAIL}`}
     >
-      <span
-        className={cn(
-          'motion-safe:transition-all motion-safe:duration-300',
-          copied ? 'scale-95 opacity-0' : 'scale-100 opacity-100'
-        )}
-      >
-        {EMAIL}
-      </span>
-      <span
-        className={cn(
-          'absolute motion-safe:transition-all motion-safe:duration-300',
-          copied ? 'scale-100 opacity-100' : 'scale-95 opacity-0'
-        )}
-      >
-        {copiedText}
-      </span>
-      <span className="relative ml-2 size-5">
-        <HugeiconsIcon
-          icon={Copy01Icon}
-          className={cn(
-            'absolute inset-0 size-5 motion-safe:transition-all motion-safe:duration-300',
-            copied ? 'scale-75 rotate-12 opacity-0' : 'scale-100 rotate-0 opacity-100'
-          )}
-        />
-        <HugeiconsIcon
-          icon={Check}
-          className={cn(
-            'absolute inset-0 size-5 text-green-500 motion-safe:transition-all motion-safe:duration-300',
-            copied ? 'scale-100 rotate-0 opacity-100' : 'scale-75 -rotate-12 opacity-0'
-          )}
-        />
+      <span>{EMAIL}</span>
+      <Icon icon={copied ? Check : Copy01Icon} className="size-4" />
+      <span role="status" className="sr-only">
+        {copied ? copiedText : ''}
       </span>
     </Button>
   );

@@ -1,0 +1,77 @@
+---
+interface Props {
+  kind?: 'code' | 'compass' | 'journal' | 'shield';
+  class?: string;
+}
+const { kind = 'code', class: className = '' } = Astro.props;
+---
+
+<span class:list={['craft-object', `craft-${kind}`, className]} aria-hidden="true">
+  <span class="craft-side"></span>
+  <span class="craft-face">
+    <svg viewBox="0 0 64 64" fill="none">
+      {
+        kind === 'code' ? (
+          <>
+            <path
+              d="m23 22-12 10 12 10m18-20 12 10-12 10m-6-24-7 28"
+              stroke="currentColor"
+              stroke-width="4"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </>
+        ) : kind === 'shield' ? (
+          <>
+            <>
+              <path
+                d="M32 8c9 6 15 8 20 9v17c0 10-12 18-20 22-8-4-20-12-20-22V17c5-1 11-3 20-9Z"
+                stroke="currentColor"
+                stroke-width="3"
+                stroke-linejoin="round"
+              />
+              <path
+                d="m23 32 6 6 13-14"
+                stroke="currentColor"
+                stroke-width="4"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </>
+          </>
+        ) : kind === 'journal' ? (
+          <>
+            <>
+              <path
+                d="M12 15c8-2 14-1 20 4 6-5 12-6 20-4v34c-8-2-14-1-20 4-6-5-12-6-20-4V15Z"
+                stroke="currentColor"
+                stroke-width="3"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M32 19v34m-13-29 7 2m-7 8 7 2m13-10 7-2m-7 12 7-2"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+              />
+            </>
+          </>
+        ) : (
+          <>
+            <>
+              <circle cx="32" cy="32" r="23" stroke="currentColor" stroke-width="2.5" />
+              <path d="m42 20-7 15-15 9 9-17 13-7Z" fill="currentColor" opacity=".85" />
+              <circle cx="32" cy="32" r="3" fill="var(--object-face)" />
+              <path
+                d="M32 4v5m0 46v5M4 32h5m46 0h5"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+              />
+            </>
+          </>
+        )
+      }
+    </svg>
+  </span>
+</span>

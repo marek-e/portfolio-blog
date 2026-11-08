@@ -37,7 +37,12 @@ export function BackToTop() {
   }, []);
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({
+      top: 0,
+      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches
+        ? 'instant'
+        : 'smooth',
+    });
   };
 
   return (
@@ -45,13 +50,15 @@ export function BackToTop() {
       onClick={scrollToTop}
       aria-label="Back to top"
       className={cn(
-        'fixed right-6 bottom-6 z-40 flex size-11 items-center justify-center rounded-full',
+        'fixed right-6 bottom-6 z-40 hidden size-11 items-center justify-center rounded-full md:flex',
         'bg-primary text-primary-foreground shadow-primary/25 shadow-lg',
-        'transition-all duration-300 ease-out',
+        'transition-[transform,opacity,box-shadow] duration-200 ease-out',
         'hover:shadow-primary/30 hover:scale-105 hover:shadow-xl',
         'focus-visible:ring-ring/50 focus-visible:ring-[3px] focus-visible:outline-none',
         'motion-reduce:transition-none motion-reduce:hover:scale-100',
-        visible ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-4 opacity-0'
+        visible
+          ? 'translate-y-0 opacity-100'
+          : 'pointer-events-none invisible translate-y-4 opacity-0'
       )}
     >
       <Icon icon={ArrowUp04Icon} strokeWidth={2} className="size-5" />

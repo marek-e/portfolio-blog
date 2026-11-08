@@ -1,0 +1,99 @@
+---
+interface Props {
+  kind?: 'botanical' | 'orbit' | 'spark';
+  class?: string;
+}
+const { kind = 'botanical', class: className = '' } = Astro.props;
+---
+
+<svg
+  class:list={['sketch', `sketch-${kind}`, className]}
+  viewBox="0 0 220 260"
+  fill="none"
+  aria-hidden="true"
+>
+  {
+    kind === 'botanical' ? (
+      <>
+        <path
+          d="M109 247C103 192 126 140 100 71M110 205C76 193 49 161 42 126M113 173C148 153 165 114 163 72M108 134C76 115 64 81 67 44"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+        />
+        <>
+          <path d="M102 169C66 174 47 153 45 133C70 131 94 143 102 169Z" class="leaf-peach" />
+          <path d="M111 187C142 180 165 158 159 139C135 143 115 163 111 187Z" class="leaf-sage" />
+          <path d="M111 145C139 136 152 116 148 99C124 104 113 120 111 145Z" class="leaf-sage" />
+          <path d="M100 113C75 109 59 89 63 73C82 79 97 91 100 113Z" class="leaf-lilac" />
+          <path d="M101 78C114 57 109 37 97 27C83 44 89 65 101 78Z" class="leaf-peach" />
+          <path d="M161 105C183 94 192 72 184 59C166 68 158 88 161 105Z" class="leaf-lilac" />
+          <path d="M49 151C27 140 20 116 27 103C45 116 51 135 49 151Z" class="leaf-peach" />
+          <path d="M65 66C48 54 42 31 53 18C70 33 72 50 65 66Z" class="leaf-sage" />
+        </>
+        <>
+          <path d="M178 181C170 172 171 159 180 157C189 155 191 170 178 181Z" class="leaf-lilac" />
+          <path d="M178 180C192 172 205 176 201 184C197 192 185 188 178 180Z" class="leaf-peach" />
+          <path
+            d="M178 179L170 199"
+            stroke="currentColor"
+            stroke-width="1.2"
+            stroke-linecap="round"
+          />
+        </>
+        <path
+          d="M30 203l3-9 4 9 9 3-9 3-4 10-3-10-9-3 9-3ZM178 34l2-7 3 7 7 2-7 3-3 7-2-7-7-3 7-2Z"
+          stroke="currentColor"
+          stroke-width="1.2"
+        />
+      </>
+    ) : kind === 'orbit' ? (
+      <>
+        <>
+          <path
+            d="M23 187C-5 147 37 101 61 121C87 144 38 208 22 172C9 144 52 114 103 111C156 108 185 84 176 59C168 33 132 44 141 67C152 97 192 112 202 137"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linecap="round"
+          />
+          <path
+            d="m189 132 14 6 3-15"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path d="m67 62 5-13 4 13 13 4-13 5-4 12-5-12-12-5 12-4Z" class="leaf-peach" />
+          <path
+            d="M135 194c15-17 33 1 0 18-28-20-9-34 0-18Z"
+            stroke="currentColor"
+            stroke-width="1.7"
+          />
+        </>
+      </>
+    ) : (
+      <>
+        <>
+          <path
+            d="m110 25 18 77 68 23-69 20-17 79-23-78-67-21 68-21 22-79Z"
+            class="leaf-lilac"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linejoin="round"
+          />
+          <path
+            d="m172 183 5 18 17 5-17 5-5 18-5-18-17-5 17-5 5-18Z"
+            class="leaf-peach"
+            stroke="currentColor"
+            stroke-width="1.5"
+          />
+          <path
+            d="m37 41 4 13 13 4-13 4-4 13-4-13-13-4 13-4 4-13Z"
+            stroke="currentColor"
+            stroke-width="1.5"
+          />
+        </>
+      </>
+    )
+  }
+</svg>

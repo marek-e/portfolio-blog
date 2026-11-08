@@ -37,6 +37,16 @@ export default [
     },
   },
   {
-    ignores: ['dist/', 'node_modules/', '.astro/', '.claude/', '.agents/', '.deepsec/'],
+    ignores: [
+      'dist/',
+      'node_modules/',
+      '.astro/',
+      '.claude/',
+      '.agents/',
+      '.deepsec/',
+      '.taste-skill/',
+      'public/assets/motion/',
+      'public/assets/moments/',
+    ],
   },
 ];

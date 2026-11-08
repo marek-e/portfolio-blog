@@ -1,103 +1,42 @@
 ---
-import { ArrowUp04Icon, RssIcon } from '@hugeicons/core-free-icons';
-import { Icon } from '../shared/Icon';
-import { Link } from '../ui/button';
-import { Separator } from '../ui/separator';
-import { SOCIALS } from '@/lib/socials';
-import { PRESENTATIONS_URL } from '@/lib/sites';
 import { getTranslations, getLangFromUrl, getTranslatedPath } from '@/i18n';
-import { LanguageSwitcher } from './LanguageSwitcher';
-import { Image } from 'astro:assets';
-import logo from '@/assets/logo.svg';
+import { PRESENTATIONS_URL } from '@/lib/sites';
 
 const lang = getLangFromUrl(Astro.url);
 const t = getTranslations(lang);
 const translatePath = getTranslatedPath(lang);
-const currentPath = Astro.url.pathname;
-
-const currentYear = new Date().getFullYear();
-
-const sitemapLinks = [
-  { href: '/', label: t.footer.home },
+const links = [
   { href: '/projects', label: t.footer.projects },
   { href: '/blog', label: t.footer.blog },
-  { href: '/design-system', label: t.footer.designSystem },
   { href: '/contact', label: t.footer.contact },
   { href: '/curriculum-vitae', label: t.footer.cv },
-  { href: PRESENTATIONS_URL, label: t.footer.presentations, external: true },
+  { href: '/design-system', label: t.footer.designSystem },
 ];
 ---
 
-<footer
-  id="footer"
-  class="bg-footer border-border text-foreground rounded-t-4xl border-t px-4 py-8 sm:px-6 lg:px-8"
->
-  <div class="flex flex-col items-center justify-between gap-4 sm:flex-row">
-    <div>
-      <h3 class="text-sm font-bold">{t.footer.sitemap}</h3>
-      <div class="mt-2 grid grid-cols-3 gap-0 sm:grid-cols-4">
+<footer id="footer" class="site-footer">
+  <div class="section-shell">
+    <div class="footer-top">
+      <a href={translatePath('/')} class="wordmark" aria-label={t.aria.homeLink}
+        ><span class="brand-spark" aria-hidden="true">✧</span><span
+          >marek<span class="text-primary">.</span></span
+        ></a
+      ><nav class="footer-links" aria-label={t.footer.sitemap}>
+        {links.map((link) => <a href={translatePath(link.href)}>{link.label}</a>)}<a
+          href={PRESENTATIONS_URL}
+          target="_blank"
+          rel="noopener noreferrer">{t.footer.presentations} ↗︎</a
+        ><a href={lang === 'fr' ? '/rss.xml' : '/en/rss.xml'}>RSS</a>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <p>© {new Date().getFullYear()} Marek Elmayan</p><p>
         {
-          sitemapLinks.map((link) => (
-            <Link
-              href={link.external ? link.href : translatePath(link.href)}
-              variant="link"
-              className="text-muted-foreground hover:text-foreground h-auto min-h-6 w-fit justify-start py-1 pr-3 pl-0 text-sm transition-colors"
-              {...(link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-            >
-              {link.label}
-            </Link>
-          ))
+          lang === 'fr'
+            ? 'Conçu avec soin, construit avec curiosité.'
+            : 'Designed with care, built with curiosity.'
         }
-      </div>
-    </div>
-    <div class="flex items-center justify-center gap-1">
-      {
-        SOCIALS.map((social) => (
-          <a
-            href={social.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={t.aria.followOn.replace('{platform}', social.name)}
-            class="text-muted-foreground hover:text-foreground motion-safe:hover:animate-wiggle p-2 transition-colors"
-          >
-            <Icon icon={social.icon} strokeWidth={2} className="size-5" />
-          </a>
-        ))
-      }
-      <a
-        href={lang === 'fr' ? '/rss.xml' : '/en/rss.xml'}
-        aria-label={t.aria.subscribeRss}
-        class="text-muted-foreground hover:text-foreground motion-safe:hover:animate-wiggle p-2 transition-colors"
-      >
-        <Icon icon={RssIcon} strokeWidth={2} className="size-5" />
-      </a>
-    </div>
-  </div>
-  <Separator className="bg-primary/50 my-8" />
-  <div class="flex flex-col items-center justify-between gap-4 sm:flex-row">
-    <div class="flex items-center gap-5">
-      <Image src={logo} alt="logo - ME" fetchpriority="low" class="size-12" />
-      <p class="text-sm">
-        © {currentYear} Marek Elmayan
-      </p>
-    </div>
-
-    <div class="flex items-center gap-4">
-      <LanguageSwitcher
-        client:load
-        currentLang={lang}
-        currentPath={currentPath}
-        className="bg-background"
-      />
-      <Link
-        href="#"
-        size="sm"
-        variant="link"
-        className="text-muted-foreground hover:text-foreground text-sm transition-colors"
-      >
-        {t.footer.backToTop}
-        <Icon icon={ArrowUp04Icon} strokeWidth={2} className="size-4" data-icon="inline-end" />
-      </Link>
+      </p><a href="#main-content" class="text-link">{t.footer.backToTop} ↑</a>
     </div>
   </div>
 </footer>

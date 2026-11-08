@@ -116,7 +116,7 @@ export function IntervalsActivityCard({ activity, lang = 'fr' }: IntervalsActivi
               <p className="text-sm font-bold text-violet-900 dark:text-violet-200">
                 {activity.distanceKm.toFixed(1)}
               </p>
-              <p className="text-xs text-violet-700/70 dark:text-violet-500">km</p>
+              <p className="text-xs text-violet-700 dark:text-violet-400">km</p>
             </div>
             <div className="text-center">
               <div className="mb-1 flex justify-center text-violet-600 dark:text-violet-500">
@@ -125,7 +125,7 @@ export function IntervalsActivityCard({ activity, lang = 'fr' }: IntervalsActivi
               <p className="text-sm font-bold text-violet-900 dark:text-violet-200">
                 {activity.elevationGain}
               </p>
-              <p className="text-xs text-violet-700/70 dark:text-violet-500">m</p>
+              <p className="text-xs text-violet-700 dark:text-violet-400">m</p>
             </div>
             <div className="text-center">
               <div className="mb-1 flex justify-center text-violet-600 dark:text-violet-500">
@@ -134,7 +134,7 @@ export function IntervalsActivityCard({ activity, lang = 'fr' }: IntervalsActivi
               <p className="text-sm font-bold text-violet-900 dark:text-violet-200">
                 {activity.durationMinutes}
               </p>
-              <p className="text-xs text-violet-700/70 dark:text-violet-500">min</p>
+              <p className="text-xs text-violet-700 dark:text-violet-400">min</p>
             </div>
             {activity.averageHeartRate && (
               <div className="text-center">
@@ -144,9 +144,7 @@ export function IntervalsActivityCard({ activity, lang = 'fr' }: IntervalsActivi
                 <p className="text-sm font-bold text-violet-900 dark:text-violet-200">
                   {activity.averageHeartRate}
                 </p>
-                <p className="text-xs text-violet-700/70 dark:text-violet-500">
-                  {t.strava.heartRate}
-                </p>
+                <p className="text-xs text-violet-700 dark:text-violet-400">{t.strava.heartRate}</p>
               </div>
             )}
           </div>

@@ -1,5 +1,6 @@
 ---
 import Navbar from '@/components/layout/Navbar.astro';
+import JournalSection from '@/components/portfolio/JournalSection.astro';
 import Hero from '@/components/portfolio/Hero.astro';
 import AboutSection from '@/components/portfolio/AboutSection.astro';
 import TimelineSection from '@/components/portfolio/TimelineSection.astro';
@@ -24,11 +25,12 @@ const t = getTranslations(lang);
 
 <Layout title={t.hero.pageTitle} description={t.hero.pageDescription}>
   <Navbar />
-  <main>
+  <main id="main-content">
     <Hero />
+    <FeaturedProjects />
     <AboutSection />
     <TimelineSection />
-    <FeaturedProjects />
+    <JournalSection />
     <StravaSection />
     <ContactSection />
   </main>

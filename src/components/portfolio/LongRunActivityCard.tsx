@@ -103,7 +103,7 @@ export function LongRunActivityCard({ activity, lang = 'fr' }: LongRunActivityCa
               <p className="text-sm font-bold text-emerald-900 dark:text-emerald-200">
                 {activity.paceMinPerKm}
               </p>
-              <p className="text-xs text-emerald-700/70 dark:text-emerald-500">{t.strava.pace}</p>
+              <p className="text-xs text-emerald-700 dark:text-emerald-400">{t.strava.pace}</p>
             </div>
             <div className="text-center">
               <div className="mb-1 flex justify-center text-emerald-600 dark:text-emerald-500">
@@ -112,7 +112,7 @@ export function LongRunActivityCard({ activity, lang = 'fr' }: LongRunActivityCa
               <p className="text-sm font-bold text-emerald-900 dark:text-emerald-200">
                 {activity.elevationGain}
               </p>
-              <p className="text-xs text-emerald-700/70 dark:text-emerald-500">m</p>
+              <p className="text-xs text-emerald-700 dark:text-emerald-400">m</p>
             </div>
             <div className="text-center">
               <div className="mb-1 flex justify-center text-emerald-600 dark:text-emerald-500">
@@ -121,7 +121,7 @@ export function LongRunActivityCard({ activity, lang = 'fr' }: LongRunActivityCa
               <p className="text-sm font-bold text-emerald-900 dark:text-emerald-200">
                 {activity.durationMinutes}
               </p>
-              <p className="text-xs text-emerald-700/70 dark:text-emerald-500">min</p>
+              <p className="text-xs text-emerald-700 dark:text-emerald-400">min</p>
             </div>
             {activity.averageHeartRate && (
               <div className="text-center">
@@ -131,7 +131,7 @@ export function LongRunActivityCard({ activity, lang = 'fr' }: LongRunActivityCa
                 <p className="text-sm font-bold text-emerald-900 dark:text-emerald-200">
                   {activity.averageHeartRate}
                 </p>
-                <p className="text-xs text-emerald-700/70 dark:text-emerald-500">
+                <p className="text-xs text-emerald-700 dark:text-emerald-400">
                   {t.strava.heartRate}
                 </p>
               </div>

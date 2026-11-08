@@ -1,35 +1,67 @@
 ---
-import { TimelineCards } from '@/components/portfolio/TimelineCards';
+import CraftObject from '@/components/brand/CraftObject.astro';
+import Sketch from '@/components/brand/Sketch.astro';
 import { getLocalizedTimeline } from '@/data/timeline';
-import { getTranslations, getLangFromUrl } from '@/i18n';
-import CursorSpotlight from './CursorSpotlight.astro';
+import { getTranslations, getLangFromUrl, getTranslatedPath } from '@/i18n';
+import { formatDateRange } from '@/types/timeline';
 
 const lang = getLangFromUrl(Astro.url);
 const t = getTranslations(lang);
-const timelineEntries = getLocalizedTimeline(lang);
+const translatePath = getTranslatedPath(lang);
+const entries = getLocalizedTimeline(lang).sort((a, b) => b.startDate.localeCompare(a.startDate));
 ---
 
-<CursorSpotlight>
-  <section id="timeline" class="relative py-20 md:py-32" aria-labelledby="timeline-heading">
-    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-      <div class="mb-16 text-center">
-        <h2
-          id="timeline-heading"
-          class="text-foreground text-3xl font-bold tracking-tight md:text-4xl"
-        >
-          {t.timeline.title}
-        </h2>
-        <p class="text-muted-foreground mx-auto mt-4 max-w-2xl text-lg">
-          {t.timeline.subtitle}
-        </p>
-      </div>
-
-      <TimelineCards
-        client:visible
-        entries={timelineEntries}
-        presentLabel={t.timeline.present}
-        lang={lang}
-      />
+<section
+  id="timeline"
+  class="chapter section-shell journey-layout"
+  aria-labelledby="timeline-heading"
+>
+  <div class="journey-heading">
+    <p class="eyebrow">03 / {lang === 'fr' ? 'Au fil du chemin' : 'Along the way'}</p><h2
+      id="timeline-heading"
+    >
+      {t.timeline.title}<span class="text-primary">.</span>
+    </h2><p class="section-intro">{t.timeline.subtitle}</p><a
+      href={translatePath('/curriculum-vitae')}
+      class="text-link">{t.hero.ctaCv} <span aria-hidden="true">↗︎</span></a
+    >
+    <div class="journey-map" aria-hidden="true">
+      <CraftObject kind="compass" /><Sketch kind="orbit" /><span class="handwritten"
+        >{
+          lang === 'fr'
+            ? 'Le chemin se dessine en avançant.'
+            : 'The path takes shape along the way.'
+        }</span
+      >
     </div>
-  </section>
-</CursorSpotlight>
+  </div>
+  <ol class="journey-list">
+    {
+      entries.map((entry) => (
+        <li class="journey-stop">
+          <>
+            <p class="eyebrow">
+              {formatDateRange(entry.startDate, entry.endDate, lang, t.timeline.present)}
+            </p>
+            <h3>{entry.title}</h3>
+            <p class="journey-organization">
+              {entry.link ? (
+                <a href={entry.link} target="_blank" rel="noopener noreferrer">
+                  {entry.organization} ↗︎
+                </a>
+              ) : (
+                entry.organization
+              )}
+            </p>
+            <p class="text-muted-foreground leading-relaxed">{entry.description}</p>
+            <div class="interest-tags">
+              {entry.tags?.map((tag) => (
+                <span>{tag}</span>
+              ))}
+            </div>
+          </>
+        </li>
+      ))
+    }
+  </ol>
+</section>

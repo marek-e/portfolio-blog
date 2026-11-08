@@ -1,10 +1,8 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 import Navbar from '@/components/layout/Navbar.astro';
-import BackgroundImage from '@/components/layout/BackgroundImage.astro';
+import Footer from '@/components/layout/Footer.astro';
 import { Link } from '@/components/ui/button';
-import { Icon } from '@/components/shared/Icon';
-import { Home } from '@hugeicons/core-free-icons';
 import { getLangFromUrl, getTranslatedPath, getTranslations } from '@/i18n';
 
 const lang = getLangFromUrl(Astro.url);
@@ -14,23 +12,25 @@ const translatePath = getTranslatedPath(lang);
 
 <Layout title={t.notFound.pageTitle} description={t.notFound.pageDescription}>
   <Navbar />
-  <section class="relative flex min-h-dvh items-center justify-center overflow-hidden">
-    <BackgroundImage />
-
-    <div class="relative z-10 mx-auto max-w-6xl px-4 text-center sm:px-6 lg:px-8">
-      <span class="text-primary/70 mb-4 block text-[12rem] leading-none font-black sm:text-[16rem]">
-        404
-      </span>
-      <h1 class="text-foreground -mt-16 mb-4 text-3xl font-bold sm:-mt-20 sm:text-4xl lg:text-5xl">
-        {t.notFound.heading}
-      </h1>
-      <p class="text-foreground/80 mx-auto mb-8 max-w-md text-lg">
-        {t.notFound.message}
-      </p>
-      <Link href={translatePath('/')} size="lg" className="px-8 py-6 text-base font-medium">
-        <Icon icon={Home} strokeWidth={3} className="size-4" />
-        {t.notFound.backHome}
-      </Link>
+  <main
+    id="main-content"
+    class="section-shell grid min-h-dvh items-center gap-8 pt-36 pb-16 md:grid-cols-2"
+  >
+    <div class="page-heading border-0">
+      <p class="eyebrow">404 / {lang === 'fr' ? 'Un détour imprévu' : 'An unexpected detour'}</p>
+      <h1>{t.notFound.heading}</h1>
+      <p class="text-muted-foreground my-8 max-w-md leading-relaxed">{t.notFound.message}</p>
+      <Link href={translatePath('/')} size="lg" className="sculpted-button"
+        >{t.notFound.backHome} <span aria-hidden="true">↗︎</span></Link
+      >
     </div>
-  </section>
+    <img
+      src="/melo/melo-explorer.webp"
+      alt=""
+      width="1000"
+      height="1076"
+      class="mx-auto w-full max-w-sm"
+    />
+  </main>
+  <Footer />
 </Layout>

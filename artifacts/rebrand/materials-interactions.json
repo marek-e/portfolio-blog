@@ -1,0 +1,14 @@
+{
+  "viewport": 390,
+  "documentWidth": 390,
+  "themeAfterToggle": "light",
+  "studioImageAfterToggle": "melo-studio-small.webp",
+  "menuExpandedAfterOpen": true,
+  "menuExpandedAfterClose": false,
+  "keyboardFocusOutline": "2px",
+  "method": "design skill consistency.mjs browser probe",
+  "remainingMenuPanelsAfterClose": 0,
+  "remainingMenuOverlaysAfterClose": 0,
+  "primaryActionReachableAfterClose": true,
+  "closeTransitionWaitMs": 800
+}

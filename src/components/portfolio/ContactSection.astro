@@ -1,54 +1,82 @@
 ---
 import { Link } from '@/components/ui/button';
-import { HugeiconsIcon } from '@hugeicons/react';
-import { Sent02Icon } from '@hugeicons/core-free-icons';
+import { Icon } from '@/components/shared/Icon';
 import { EMAIL, SOCIALS } from '@/lib/socials';
 import { getTranslations, getLangFromUrl } from '@/i18n';
 import { CopyEmailButton } from '@/components/portfolio/CopyEmailButton';
 
+interface Props {
+  standalone?: boolean;
+}
+const { standalone = false } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = getTranslations(lang);
+const Heading = standalone ? 'h1' : 'h2';
 ---
 
-<section id="contact" class="relative py-20 md:py-32">
-  <div class="mx-auto max-w-6xl px-4 text-center sm:px-6 lg:px-8">
-    <h2 class="text-foreground mb-4 text-3xl font-bold tracking-tight md:text-4xl">
-      {t.contact.title}
-    </h2>
-    <p class="text-muted-foreground mx-auto mb-8 max-w-lg text-lg">
-      {t.contact.subtitle}
-    </p>
-
-    <div class="mb-12 flex flex-col items-center justify-center gap-4 md:flex-row">
-      <Link
-        size="lg"
-        className="w-3/4 gap-2 md:w-auto"
-        href={`mailto:${EMAIL}`}
-        animation="scale"
-        aria-label={t.aria.sendEmail}
+<section id="contact" class="chapter contact-chapter" aria-labelledby="contact-heading">
+  <div class="section-shell contact-layout">
+    <div>
+      <p class="eyebrow">
+        {lang === 'fr' ? 'La suite s’écrit ensemble' : 'The next chapter starts here'}
+      </p>
+      <Heading id="contact-heading" class="contact-title"
+        >{lang === 'fr' ? 'Et si on construisait' : 'Let’s build'}<br /><em class="text-primary"
+          >{lang === 'fr' ? 'quelque chose ?' : 'something together.'}</em
+        ></Heading
       >
-        {t.contact.cta}
-        <HugeiconsIcon icon={Sent02Icon} className="size-5" data-icon="inline-start" />
-      </Link>
-      <CopyEmailButton copiedText={t.contact.copied} copyLabel={t.aria.copyEmail} client:load />
+      <p class="section-intro">{t.contact.subtitle}</p>
+      <div class="contact-actions">
+        <Link size="lg" className="sculpted-button" href={`mailto:${EMAIL}`}
+          >{t.contact.cta}<span aria-hidden="true">↗︎</span></Link
+        ><CopyEmailButton copiedText={t.contact.copied} copyLabel={t.aria.copyEmail} client:load />
+      </div>
+      <div class="contact-socials">
+        {
+          SOCIALS.map((social) => (
+            <a
+              href={social.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={t.aria.followOn.replace('{platform}', social.name)}
+            >
+              <Icon icon={social.icon} className="size-4" />
+            </a>
+          ))
+        }
+      </div>
     </div>
-    <p class="text-muted-foreground mx-auto mb-8 max-w-lg text-lg">
-      {t.contact.socialIntro}
-    </p>
-    <div class="flex items-center justify-center gap-4">
-      {
-        SOCIALS.map((social) => (
-          <a
-            href={social.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={t.aria.followOn.replace('{platform}', social.name)}
-            class="text-muted-foreground hover:text-foreground hover:bg-muted rounded-full p-3 transition-colors"
-          >
-            <HugeiconsIcon icon={social.icon} className="size-6" />
-          </a>
-        ))
-      }
+    <div class="contact-postcard" aria-hidden="true">
+      <img
+        src="/images/contact-day-800.webp"
+        srcset="/images/contact-day-480.webp 480w, /images/contact-day-800.webp 800w"
+        sizes="(max-width: 767px) 280px, 400px"
+        alt=""
+        width="800"
+        height="900"
+        loading="lazy"
+        class="landscape day-scene"
+      />
+      <img
+        src="/images/contact-night-800.webp"
+        srcset="/images/contact-night-480.webp 480w, /images/contact-night-800.webp 800w"
+        sizes="(max-width: 767px) 280px, 400px"
+        alt=""
+        width="800"
+        height="900"
+        loading="lazy"
+        class="landscape night-scene"
+      />
+      <img
+        src="/melo/melo-welcome.webp"
+        srcset="/melo/melo-welcome-small.webp 480w, /melo/melo-welcome.webp 800w"
+        sizes="(max-width: 767px) 310px, 450px"
+        alt=""
+        width="800"
+        height="533"
+        loading="lazy"
+        class="postcard-melo"
+      />
     </div>
   </div>
 </section>

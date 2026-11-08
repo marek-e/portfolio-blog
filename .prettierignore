@@ -5,3 +5,7 @@ pnpm-lock.yaml
 .claude
 .agents
 .deepsec
+
+.taste-skill
+public/assets/motion
+public/assets/moments

@@ -63,13 +63,13 @@ export function Callout({ children, variant = 'info', title, className }: Callou
       aria-label={title ? `${variant}: ${title}` : variant}
       className={cn(
         'not-prose',
-        'relative my-6 rounded-sm border p-4',
+        'article-callout relative my-8 rounded-2xl border p-5 pl-16',
         'motion-safe:transition-colors',
         config.classes,
         className
       )}
     >
-      <div className="bg-background absolute -top-4 -left-4 rounded-full p-1.5">
+      <div className="callout-object absolute top-5 left-4 rounded-xl p-2">
         <HugeiconsIcon
           icon={config.icon}
           strokeWidth={2}

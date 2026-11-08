@@ -1,68 +1,90 @@
 ---
 import { Link } from '@/components/ui/button';
 import { getTranslations, getLangFromUrl, getTranslatedPath } from '@/i18n';
-import BackgroundImage from '../layout/BackgroundImage.astro';
-import CursorSpotlight from './CursorSpotlight.astro';
-import { Badge } from '../ui/badge';
+import StudioScene from '@/components/brand/StudioScene.astro';
+import CraftObject from '@/components/brand/CraftObject.astro';
+import Sketch from '@/components/brand/Sketch.astro';
 
 const lang = getLangFromUrl(Astro.url);
 const t = getTranslations(lang);
 const translatePath = getTranslatedPath(lang);
+const fr = lang === 'fr';
 ---
 
-<CursorSpotlight>
-  <section class="relative flex min-h-dvh items-center justify-center overflow-hidden">
-    <BackgroundImage />
-
-    <!-- Content -->
-    <div class="relative z-10 mx-auto max-w-6xl px-4 text-center sm:px-6 lg:px-8">
-      <!-- Announcement Badge -->
-      <div class="mb-6 flex items-center justify-center gap-2">
-        {t.hero.badges.map((badge) => <Badge variant="glass">{badge}</Badge>)}
-      </div>
-
-      <!-- Headline -->
-      <h1
-        id="hello"
-        class="text-foreground mb-6 text-4xl font-bold drop-shadow-lg sm:text-5xl lg:text-6xl dark:text-white"
-      >
-        {t.hero.headline}
+<section class="hero world-hero" aria-labelledby="hello" data-enter>
+  <Sketch kind="orbit" class="hero-margin-sketch" />
+  <div class="hero-inner wrap">
+    <div class="hero-copy">
+      <p class="eyebrow">
+        <span class="tiny-star" aria-hidden="true">✧</span> Marek Elmayan <span
+          class="eyebrow-divider">/</span
+        >
+        {fr ? 'Ingénieur logiciel' : 'Software engineer'}
+      </p>
+      <h1 id="hello">
+        {fr ? 'Curieux par nature.' : 'Curious by nature.'}<br /><em
+          >{fr ? 'Développeur' : 'A builder'}<br /><span class="pencil-underline"
+            >{fr ? 'par passion.' : 'at heart.'}</span
+          ></em
+        >
       </h1>
-
-      <!-- Subtitle -->
-      <p
-        class="text-foreground/90 mx-auto mb-8 max-w-2xl text-lg drop-shadow-md sm:text-xl lg:text-2xl dark:text-white/90"
-      >
+      <p class="hero-description">
         {
-          t.hero.subtitle.split('\n').map((line, i) => (
-            <>
-              {i > 0 && <br />}
-              {line}
-            </>
-          ))
+          fr
+            ? 'Je transforme des idées en produits utiles, avec le souci du détail et l’envie de toujours apprendre.'
+            : 'I turn ideas into useful products, with care for the details and a constant desire to learn.'
         }
       </p>
-
-      <!-- CTAs -->
-      <div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
-        <Link
-          size="lg"
-          href={translatePath('/curriculum-vitae')}
-          className="w-1/2 px-8 py-6 font-semibold md:w-auto"
-          animation="scale"
+      <div class="hero-actions">
+        <Link href="#projects" size="lg" className="sculpted-button"
+          >{t.hero.ctaProjects}<span aria-hidden="true">↗︎</span></Link
+        ><a class="text-link" href={translatePath('/curriculum-vitae')}
+          >{t.hero.ctaCv}<span aria-hidden="true">↗︎</span></a
         >
-          {t.hero.ctaCv}
-        </Link>
-        <Link
-          variant="secondary"
-          size="lg"
-          href="#projects"
-          className="w-1/2 px-8 py-6 font-semibold md:w-auto"
-          animation="scale"
-        >
-          {t.hero.ctaProjects}
-        </Link>
       </div>
+      <p class="hero-location">
+        <span class="location-pin" aria-hidden="true"></span> Nantes, France <span>·</span> Full-stack
+        & UX
+      </p>
     </div>
-  </section>
-</CursorSpotlight>
+    <div class="hero-workshop" data-enter-media>
+      <StudioScene eager />
+      <div class="hero-fieldnote liquid-glass">
+        <CraftObject kind="code" /><div>
+          <span class="eyebrow">{fr ? 'Mon terrain de jeu' : 'My field of exploration'}</span><p>
+            UX <span>↔︎</span> Code <span>↔︎</span>
+            {fr ? 'Produit' : 'Product'}
+          </p>
+        </div>
+      </div>
+      <div class="hero-guardian liquid-glass">
+        <CraftObject kind="shield" /><span
+          >{fr ? 'La sécurité, dès la première ligne.' : 'Security, from the first line.'}</span
+        >
+      </div>
+      <span class="handwritten hero-note"
+        >{fr ? 'Les bonnes idées commencent ici.' : 'Good ideas start here.'}<svg
+          viewBox="0 0 85 60"
+          fill="none"
+          aria-hidden="true"
+          ><path
+            d="M4 8c56-16 82 11 50 36m-7-16 6 18 18-3"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"></path></svg
+        ></span
+      >
+    </div>
+  </div>
+  <div class="hero-bottom">
+    <a href="#projects"
+      ><span class="scroll-pebble" aria-hidden="true">↓</span>{
+        fr ? 'Voir ce que je construis' : 'See what I’m building'
+      }</a
+    ><span class="handwritten"
+      >{fr ? 'Avec un peu de curiosité…' : 'With a little curiosity…'}
+      <span aria-hidden="true">✧</span></span
+    >
+  </div>
+</section>

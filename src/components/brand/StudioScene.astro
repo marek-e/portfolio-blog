@@ -1,0 +1,30 @@
+---
+import Sketch from './Sketch.astro';
+interface Props {
+  compact?: boolean;
+  eager?: boolean;
+}
+const { compact = false, eager = false } = Astro.props;
+---
+
+<div class:list={['studio-scene', { 'studio-compact': compact }]} aria-hidden="true">
+  <div class="studio-art" data-moment="liquid-hover" data-moment-opts='{"strength":0.18}'>
+    <img
+      data-studio
+      data-day-src="/melo/melo-studio.webp"
+      data-night-src="/melo/melo-studio-night.webp"
+      data-day-set="/melo/melo-studio-small.webp 720w, /melo/melo-studio.webp 1440w"
+      data-night-set="/melo/melo-studio-night-small.webp 720w, /melo/melo-studio-night.webp 1440w"
+      srcset="/melo/melo-studio-small.webp 720w, /melo/melo-studio.webp 1440w"
+      sizes="(max-width: 767px) 100vw, 60vw"
+      src="/melo/melo-studio.webp"
+      width="1536"
+      height="1024"
+      alt=""
+      loading={eager ? 'eager' : 'lazy'}
+      fetchpriority={eager ? 'high' : 'auto'}
+    />
+  </div>
+  <Sketch kind="botanical" class="studio-botanical" />
+  <Sketch kind="spark" class="studio-spark" />
+</div>

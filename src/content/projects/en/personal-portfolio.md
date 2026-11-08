@@ -7,7 +7,8 @@ links:
   demo: 'https://melmayan.fr'
   repo: 'https://github.com/marek-e/portfolio-blog'
 publishDate: 2026-01-01
-image: '/logo.svg'
+image: '/projects/portfolio-studio.webp'
+imageAlt: 'Marek Elmayan portfolio with Melo and Orbi in their illustrated studio'
 status: 'completed'
 ---
 

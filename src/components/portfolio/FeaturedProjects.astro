@@ -1,93 +1,39 @@
 ---
 import { getCollection } from 'astro:content';
-import { getImage } from 'astro:assets';
-import { FeaturedProjectsCarousel } from '@/components/portfolio/FeaturedProjectsCarousel';
+import CraftObject from '@/components/brand/CraftObject.astro';
+import Sketch from '@/components/brand/Sketch.astro';
+import ProjectListCard from './ProjectListCard.astro';
 import { getTranslations, getLangFromUrl, getTranslatedPath } from '@/i18n';
-import { getProjectImageSafe } from '@/lib/images';
+import { sortProjects } from '@/lib/projects';
 
 const lang = getLangFromUrl(Astro.url);
 const t = getTranslations(lang);
 const translatePath = getTranslatedPath(lang);
-
-const allProjects = await getCollection('projects');
-const featuredProjects = allProjects
-  .filter((project) => project.id.startsWith(`${lang}/`))
-  .filter((project) => project.data.featured)
-  .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
-  .slice(0, 5);
-
-// Serialize projects for React component with optimized images
-const serializedProjects = await Promise.all(
-  featuredProjects.map(async (project) => {
-    const imageMetadata = getProjectImageSafe(project.data.image);
-    let optimizedImageUrl: string | undefined;
-
-    if (imageMetadata) {
-      const optimized = await getImage({ src: imageMetadata });
-      optimizedImageUrl = optimized.src;
-    }
-
-    return {
-      data: {
-        title: project.data.title,
-        description: project.data.description,
-        techStack: project.data.techStack,
-        links: project.data.links,
-        image: optimizedImageUrl,
-        imageAlt: project.data.imageAlt,
-        objectFit: project.data.objectFit,
-      },
-      slug: project.id.replace(/^(fr|en)\//, ''),
-    };
-  })
-);
-
-const carouselTranslations = {
-  liveDemo: t.projects.liveDemo,
-  code: t.projects.code,
-  viewDetails: t.projects.viewDetails,
-};
+const projects = sortProjects(
+  (await getCollection('projects')).filter(
+    (project) => project.id.startsWith(`${lang}/`) && project.data.featured
+  )
+).slice(0, 4);
 ---
 
-<section id="projects" class="relative py-20 md:py-32">
-  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-    <div class="mb-6 flex items-end justify-between md:mb-12">
-      <div>
-        <h2 class="text-foreground text-3xl font-bold tracking-tight md:text-4xl">
-          {t.projects.title}
-        </h2>
-        <p class="text-muted-foreground mt-2">{t.projects.subtitle}</p>
-      </div>
-      <a
-        href={translatePath('/projects')}
-        class="text-primary hover:text-primary/80 text-md hidden font-semibold transition-colors md:block"
-      >
-        {t.projects.viewAll}
-      </a>
+<section id="projects" class="chapter section-shell" aria-labelledby="projects-heading">
+  <div class="section-heading">
+    <CraftObject kind="code" class="section-object" />
+    <Sketch kind="orbit" class="heading-sketch" />
+    <div>
+      <p class="eyebrow">
+        01 / {lang === 'fr' ? 'De l’idée au produit' : 'From idea to product'}
+      </p><h2 id="projects-heading">
+        {lang === 'fr' ? 'Des idées qui prennent vie.' : 'Ideas, brought to life.'}
+      </h2><p class="section-intro">{t.projects.subtitle}</p>
     </div>
-
+    <a href={translatePath('/projects')} class="text-link">{t.projects.viewAll}</a>
+  </div>
+  <div class="featured-grid">
     {
-      featuredProjects.length > 0 ? (
-        <div class="md:px-12">
-          <FeaturedProjectsCarousel
-            client:visible
-            projects={serializedProjects}
-            translations={carouselTranslations}
-            lang={lang}
-          />
-        </div>
-      ) : (
-        <p class="text-muted-foreground">{t.projects.noProjects}</p>
-      )
+      projects.map((project, index) => (
+        <ProjectListCard project={project} tone={['lilac', 'peach', 'sky', 'sage'][index % 4]} />
+      ))
     }
-
-    <div class="mt-8 text-center md:hidden">
-      <a
-        href={translatePath('/projects')}
-        class="text-primary hover:text-primary/80 text-sm font-medium transition-colors"
-      >
-        {t.projects.viewAll}
-      </a>
-    </div>
   </div>
 </section>

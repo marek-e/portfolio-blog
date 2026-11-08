@@ -2,7 +2,8 @@
 import { ClientRouter } from 'astro:transitions';
 import '../styles/global.css';
 import { getAlternatePath, getLangFromUrl } from '@/i18n/config';
-import { BookmarkLanguageToggle } from '@/components/layout/BookmarkLanguageToggle';
+import '../styles/rebrand.css';
+import '../styles/materials.css';
 
 interface Props {
   title: string;
@@ -28,6 +29,7 @@ const socialImage = new URL(
 ).toString();
 
 const currentPath = Astro.url.pathname;
+const isNotFound = currentPath.startsWith('/404');
 const canonicalURL = new URL(currentPath, Astro.site);
 
 // Generate alternate URLs for hreflang tags
@@ -38,21 +40,28 @@ const enURL = new URL(enPath, Astro.site);
 ---
 
 <!doctype html>
-<html lang={lang} class="motion-safe:scroll-smooth">
+<html lang={lang} data-type="software" data-motion="live" data-radius="soft" data-buttons="pill">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-    <link rel="shortcut icon" href="/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/svg+xml" href="/favicon-rebrand.svg" />
+    <link rel="icon" type="image/png" href="/brand-icon-96.png" sizes="96x96" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/brand-icon-180.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="canonical" href={canonicalURL} />
 
     <!-- Alternate language links for SEO -->
-    <link rel="alternate" hreflang="fr" href={frURL} />
-    <link rel="alternate" hreflang="en" href={enURL} />
-    <link rel="alternate" hreflang="x-default" href={frURL} />
+    {
+      isNotFound ? (
+        <meta name="robots" content="noindex" />
+      ) : (
+        <>
+          <link rel="alternate" hreflang="fr" href={frURL} />
+          <link rel="alternate" hreflang="en" href={enURL} />
+          <link rel="alternate" hreflang="x-default" href={frURL} />
+        </>
+      )
+    }
 
     <!-- RSS Feed Discovery -->
     <link
@@ -63,6 +72,14 @@ const enURL = new URL(enPath, Astro.site);
     />
 
     <meta name="generator" content={Astro.generator} />
+    <meta name="page-type" content="software" />
+    <meta name="site-kind" content="software" />
+    <meta name="theme-color" content="#fbf6ee" />
+    <link rel="stylesheet" href="/assets/motion/motion.css" />
+    <script is:inline>
+      document.documentElement.classList.add('m-enter');
+      setTimeout(() => document.documentElement.classList.add('m-enter-done'), 700);
+    </script>
 
     <!-- Primary Meta Tags -->
     <title>{title}</title>
@@ -78,7 +95,7 @@ const enURL = new URL(enPath, Astro.site);
     <meta property="og:image:alt" content={socialImageAlt} />
 
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content={canonicalURL} />
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
@@ -93,22 +110,6 @@ const enURL = new URL(enPath, Astro.site);
     <!-- Preconnect to external origins -->
     <link rel="preconnect" href="https://static.cloudflareinsights.com" crossorigin />
 
-    <!-- Preload critical font -->
-    <link
-      rel="preload"
-      href="/fonts/MapleMono-Regular.ttf.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
-    <link
-      rel="preload"
-      href="/fonts/MapleMono-Bold.ttf.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
-
     <!-- Structured Data for Person -->
     <script is:inline type="application/ld+json">
       {
@@ -116,7 +117,7 @@ const enURL = new URL(enPath, Astro.site);
         "@type": "Person",
         "name": "Marek Elmayan",
         "url": "https://melmayan.fr",
-        "image": "https://melmayan.fr/favicon.svg",
+        "image": "https://melmayan.fr/brand-icon-512.png",
         "jobTitle": "Full-Stack Software Engineer",
         "description": "Portfolio et blog de Marek Elmayan, ingénieur logiciel full-stack. Spécialisation en UX, cybersécurité, IA et DevX.",
         "email": "melmayan.dev@gmail.com",
@@ -143,6 +144,7 @@ const enURL = new URL(enPath, Astro.site);
       }
     </script>
 
+    <slot name="head" />
     <ClientRouter />
     <script is:inline>
       const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
@@ -170,7 +172,40 @@ const enURL = new URL(enPath, Astro.site);
     </script>
   </head>
   <body class="bg-background text-foreground min-h-dvh antialiased">
-    <BookmarkLanguageToggle client:load currentLang={lang} currentPath={currentPath} />
+    <a class="skip-link" href="#main-content"
+      >{lang === 'fr' ? 'Aller au contenu' : 'Skip to content'}</a
+    >
     <slot />
+    <script is:inline type="module">
+      import * as motion from '/assets/motion/motion.js';
+      window.__momentsManual = true;
+      const moments = await import('/assets/moments/moments.js');
+      let dark = document.documentElement.classList.contains('dark');
+      const updateScenes = async () => {
+        moments.unmountAll(document);
+        const isDark = document.documentElement.classList.contains('dark');
+        const images = [...document.querySelectorAll('img[data-studio]')];
+        for (const img of images) {
+          img.src = isDark ? img.dataset.nightSrc : img.dataset.daySrc;
+          img.srcset = isDark ? img.dataset.nightSet : img.dataset.daySet;
+        }
+        await Promise.all(images.map((img) => img.decode().catch(() => {})));
+        await moments.mountAll(document);
+      };
+      const start = () => {
+        motion.refresh();
+        updateScenes();
+      };
+      document.addEventListener('astro:before-swap', () => moments.unmountAll(document));
+      document.addEventListener('astro:page-load', start);
+      new MutationObserver(() => {
+        const next = document.documentElement.classList.contains('dark');
+        if (next === dark) return;
+        dark = next;
+        moments.unmountAll(document);
+        updateScenes();
+      }).observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+      start();
+    </script>
   </body>
 </html>

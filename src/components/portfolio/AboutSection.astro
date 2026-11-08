@@ -1,22 +1,51 @@
 ---
+import Sketch from '@/components/brand/Sketch.astro';
 import { getTranslations, getLangFromUrl } from '@/i18n';
-import { DevIdCard } from '@/components/portfolio/DevIdCard';
-import { Citation } from '../mdx/Citation';
 
 const lang = getLangFromUrl(Astro.url);
 const t = getTranslations(lang);
 ---
 
-<section
-  id="about"
-  class="container mx-auto flex max-w-6xl flex-col gap-12 px-4 py-20 sm:px-6 md:py-32 lg:px-8"
->
-  <h2 class="text-foreground text-3xl font-bold tracking-tight md:text-4xl">
-    {t.about.title}
-  </h2>
-  <DevIdCard client:visible lang={lang} />
-  <div class="text-foreground/80 space-y-6 text-lg leading-relaxed">
-    {t.about.paragraphs.map((paragraph) => <p set:html={paragraph} />)}
+<section id="about" class="chapter about-chapter" aria-labelledby="about-heading">
+  <div class="section-shell about-layout">
+    <aside class="portrait-note">
+      <Sketch kind="botanical" />
+      <div class="portrait-frame">
+        <img
+          src="/images/marek-profile.webp"
+          width="400"
+          height="400"
+          alt="Marek Elmayan"
+          loading="lazy"
+        />
+      </div>
+      <p class="handwritten">{lang === 'fr' ? 'Marek, enchanté !' : 'Marek, nice to meet you!'}</p>
+      <p class="eyebrow">Nantes, France</p>
+      <div class="interest-tags">
+        {
+          [
+            'UX',
+            lang === 'fr' ? 'Cybersécurité' : 'Cybersecurity',
+            'AI',
+            'DevX',
+            'Open source',
+          ].map((tag) => <span>{tag}</span>)
+        }
+      </div>
+    </aside>
+    <div class="about-story">
+      <p class="eyebrow">02 / {t.about.title}</p>
+      <h2 id="about-heading">
+        {lang === 'fr' ? 'Tout commence par' : 'It all starts with'}<br /><em
+          >{lang === 'fr' ? '« et si… »' : '“what if…”'}</em
+        >
+      </h2>
+      <div class="story-paragraphs">
+        {t.about.paragraphs.map((paragraph) => <p set:html={paragraph} />)}
+      </div>
+      <blockquote class="personal-mantra">
+        <span aria-hidden="true">✧</span><p>{t.about.mantraContent}</p>
+      </blockquote>
+    </div>
   </div>
-  <Citation source={t.about.mantraTitle}>{t.about.mantraContent}</Citation>
 </section>

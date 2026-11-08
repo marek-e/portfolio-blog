@@ -1,0 +1,1422 @@
+[
+  {
+    "vw": 1440,
+    "vh": 900,
+    "L": 160,
+    "R": 1280,
+    "nav": 0,
+    "screen": 900,
+    "hero": {
+      "height": 900,
+      "h1": {
+        "size": 67.68,
+        "leading": 1.07,
+        "lines": 3,
+        "x": 160,
+        "y": 295,
+        "w": 546,
+        "h": 217
+      },
+      "lead": null,
+      "buttons": null,
+      "visual": null
+    },
+    "sections": [
+      {
+        "where": "section.hero.world-hero section.hero.world-hero \"✧ Marek Elmayan /Ingénieur logic\"",
+        "top": 0,
+        "height": 900,
+        "content": 772,
+        "frame": 0
+      },
+      {
+        "where": "#projects section.chapter.section-shell \"01 / De l’idée au produitDes idé\"",
+        "top": 900,
+        "height": 1666,
+        "content": 1437,
+        "frame": 900
+      },
+      {
+        "where": "#about section.chapter.about-chapter \"Marek, enchanté !Nantes, FranceU\"",
+        "top": 2566,
+        "height": 1241,
+        "content": 1015,
+        "frame": 2566
+      },
+      {
+        "where": "#timeline section.chapter.section-shell \"03 / Au fil du cheminMon parcour\"",
+        "top": 3807,
+        "height": 1395,
+        "content": 1155,
+        "frame": 3807
+      },
+      {
+        "where": "section.chapter.journal-chapter section.chapter.journal-chapter \"04 / Notes de terrainLe journal \"",
+        "top": 5202,
+        "height": 932,
+        "content": 697,
+        "frame": 5202
+      },
+      {
+        "where": "#running section.chapter.relative \"05 / Hors écranMes coursesJe tra\"",
+        "top": 6134,
+        "height": 1120,
+        "content": 879,
+        "frame": 6134
+      },
+      {
+        "where": "#contact section.chapter.contact-chapter \"La suite s’écrit ensembleEt si o\"",
+        "top": 7254,
+        "height": 694,
+        "content": 449,
+        "frame": 7254
+      }
+    ],
+    "findings": [
+      {
+        "rule": "edge-left",
+        "where": "section.hero.world-hero div.hero-workshop \"Mon terrain de jeuUX ↔︎ Code ↔︎P\"",
+        "detail": "starts at x 706.3; the lines are 160 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "section.hero.world-hero p \"UX ↔︎ Code ↔︎Produit\"",
+        "detail": "starts at x 786.9; the lines are 160 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#projects h3 \"Blink\"",
+        "detail": "starts at x 189.8; the lines are 160 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#projects p \"Un sélecteur de navigateur natif\"",
+        "detail": "starts at x 189.8; the lines are 160 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#projects h3 \"Portfolio Personnel\"",
+        "detail": "starts at x 765.8; the lines are 160 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#projects p \"Un portfolio développeur ultra-r\"",
+        "detail": "starts at x 765.8; the lines are 160 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#projects h3 \"Minesweeper LLM Arena\"",
+        "detail": "starts at x 189.8; the lines are 160 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#projects p \"Projet de hackathon AI Gateway —\"",
+        "detail": "starts at x 189.8; the lines are 160 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#projects h3 \"Next Armored\"",
+        "detail": "starts at x 765.8; the lines are 160 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#projects p \"Toolkit de middleware NextJs pou\"",
+        "detail": "starts at x 765.8; the lines are 160 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#about p.eyebrow \"02 / À propos\"",
+        "detail": "starts at x 597.3; the lines are 160 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#about h2 \"Tout commence par« et si… »\"",
+        "detail": "starts at x 597.3; the lines are 160 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#about p \"Tout a commencé en classe de mat\"",
+        "detail": "starts at x 597.3; the lines are 160 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#about p \"En prépa, j'ai continué à coder \"",
+        "detail": "starts at x 597.3; the lines are 160 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#about p \"Aujourd'hui, je me concentre sur\"",
+        "detail": "starts at x 597.3; the lines are 160 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#about p \"Je suis aussi fasciné par la cyb\"",
+        "detail": "starts at x 597.3; the lines are 160 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#about p \"J'apporte une grande attention a\"",
+        "detail": "starts at x 597.3; the lines are 160 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#about p \"Construire des choses qui compte\"",
+        "detail": "starts at x 654.2; the lines are 160 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#timeline ol.journey-list \"janv. 2023 → Aujourd'huiIngénieu\"",
+        "detail": "starts at x 664; the lines are 160 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "section.chapter.journal-chapter h3 \"Le prompt caching dans Claude Co\"",
+        "detail": "starts at x 343.6; the lines are 160 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "section.chapter.journal-chapter p \"Lecture de cache, écriture de ca\"",
+        "detail": "starts at x 343.6; the lines are 160 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "section.chapter.journal-chapter h3 \"Comment rester intellectuellemen\"",
+        "detail": "starts at x 343.6; the lines are 160 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "section.chapter.journal-chapter p \"L'IA est capable d'écrire pratiq\"",
+        "detail": "starts at x 343.6; the lines are 160 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "section.chapter.journal-chapter h3 \"Clickjacking : comment cinq lign\"",
+        "detail": "starts at x 343.6; the lines are 160 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "section.chapter.journal-chapter p \"Une attaque par iframe invisible\"",
+        "detail": "starts at x 343.6; the lines are 160 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running p.flex.items-center \"25 oct.\"",
+        "detail": "starts at x 555.7; the lines are 160 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running div.text-center \"4:56min/km\"",
+        "detail": "starts at x 555.7; the lines are 160 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running p.text-sm.font-bold \"4:56\"",
+        "detail": "starts at x 555.7; the lines are 160 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running p.text-xs.text-emerald-700/70 \"min/km\"",
+        "detail": "starts at x 555.7; the lines are 160 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running div.text-center \"89m\"",
+        "detail": "starts at x 639.8; the lines are 160 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running p.text-sm.font-bold \"89\"",
+        "detail": "starts at x 639.8; the lines are 160 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running p.text-xs.text-emerald-700/70 \"m\"",
+        "detail": "starts at x 639.8; the lines are 160 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running div.text-center \"83min\"",
+        "detail": "starts at x 724; the lines are 160 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running p.text-sm.font-bold \"83\"",
+        "detail": "starts at x 724; the lines are 160 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running p.text-xs.text-emerald-700/70 \"min\"",
+        "detail": "starts at x 724; the lines are 160 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running div.text-center \"157bpm\"",
+        "detail": "starts at x 808.2; the lines are 160 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running p.text-sm.font-bold \"157\"",
+        "detail": "starts at x 808.2; the lines are 160 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running p.text-xs.text-emerald-700/70 \"bpm\"",
+        "detail": "starts at x 808.2; the lines are 160 and the column starts"
+      },
+      {
+        "rule": "screen-height",
+        "where": "#projects section.chapter.section-shell \"01 / De l’idée au produitDes idé\"",
+        "detail": "1666px, 1.85 screens; a section is exactly one or two (--h)"
+      },
+      {
+        "rule": "neighbour",
+        "where": "#projects section.chapter.section-shell \"01 / De l’idée au produitDes idé\"",
+        "detail": "framed, 20px of #about section.chapter.about-chapter \"Marek, enchanté !Nantes, FranceU\" shows"
+      },
+      {
+        "rule": "screen-height",
+        "where": "#about section.chapter.about-chapter \"Marek, enchanté !Nantes, FranceU\"",
+        "detail": "1241px, 1.38 screens; a section is exactly one or two (--h)"
+      },
+      {
+        "rule": "screen-height",
+        "where": "#timeline section.chapter.section-shell \"03 / Au fil du cheminMon parcour\"",
+        "detail": "1395px, 1.55 screens; a section is exactly one or two (--h)"
+      },
+      {
+        "rule": "neighbour",
+        "where": "#timeline section.chapter.section-shell \"03 / Au fil du cheminMon parcour\"",
+        "detail": "framed, 66px of section.chapter.journal-chapter section.chapter.journal-chapter \"04 / Notes de terrainLe journal \" shows"
+      },
+      {
+        "rule": "screen-height",
+        "where": "section.chapter.journal-chapter section.chapter.journal-chapter \"04 / Notes de terrainLe journal \"",
+        "detail": "932px, 1.04 screens; a section is exactly one or two (--h)"
+      },
+      {
+        "rule": "screen-height",
+        "where": "#running section.chapter.relative \"05 / Hors écranMes coursesJe tra\"",
+        "detail": "1120px, 1.24 screens; a section is exactly one or two (--h)"
+      },
+      {
+        "rule": "screen-short",
+        "where": "#contact section.chapter.contact-chapter \"La suite s’écrit ensembleEt si o\"",
+        "detail": "694px tall; one screen under the nav is 900px"
+      },
+      {
+        "rule": "screen-height",
+        "where": "#contact section.chapter.contact-chapter \"La suite s’écrit ensembleEt si o\"",
+        "detail": "694px, 0.77 screens; a section is exactly one or two (--h)"
+      },
+      {
+        "rule": "neighbour",
+        "where": "#contact section.chapter.contact-chapter \"La suite s’écrit ensembleEt si o\"",
+        "detail": "framed, 206px of the footer shows"
+      }
+    ],
+    "size": "1440x900",
+    "overflowX": false
+  },
+  {
+    "vw": 1024,
+    "vh": 768,
+    "L": 40,
+    "R": 984,
+    "nav": 0,
+    "screen": 768,
+    "hero": {
+      "height": 768,
+      "h1": {
+        "size": 52.8,
+        "leading": 1.07,
+        "lines": 3,
+        "x": 40,
+        "y": 253,
+        "w": 460,
+        "h": 169
+      },
+      "lead": null,
+      "buttons": null,
+      "visual": null
+    },
+    "sections": [
+      {
+        "where": "section.hero.world-hero section.hero.world-hero \"✧ Marek Elmayan /Ingénieur logic\"",
+        "top": 0,
+        "height": 768,
+        "content": 684,
+        "frame": 0
+      },
+      {
+        "where": "#projects section.chapter.section-shell \"01 / De l’idée au produitDes idé\"",
+        "top": 768,
+        "height": 1577,
+        "content": 1347,
+        "frame": 768
+      },
+      {
+        "where": "#about section.chapter.about-chapter \"Marek, enchanté !Nantes, FranceU\"",
+        "top": 2345,
+        "height": 1360,
+        "content": 1134,
+        "frame": 2345
+      },
+      {
+        "where": "#timeline section.chapter.section-shell \"03 / Au fil du cheminMon parcour\"",
+        "top": 3704,
+        "height": 1495,
+        "content": 1255,
+        "frame": 3704
+      },
+      {
+        "where": "section.chapter.journal-chapter section.chapter.journal-chapter \"04 / Notes de terrainLe journal \"",
+        "top": 5200,
+        "height": 946,
+        "content": 712,
+        "frame": 5200
+      },
+      {
+        "where": "#running section.chapter.relative \"05 / Hors écranMes coursesJe tra\"",
+        "top": 6146,
+        "height": 1105,
+        "content": 864,
+        "frame": 6146
+      },
+      {
+        "where": "#contact section.chapter.contact-chapter \"La suite s’écrit ensembleEt si o\"",
+        "top": 7251,
+        "height": 616,
+        "content": 371,
+        "frame": 7251
+      }
+    ],
+    "findings": [
+      {
+        "rule": "edge-left",
+        "where": "section.hero.world-hero div.hero-workshop \"Mon terrain de jeuUX ↔︎ Code ↔︎P\"",
+        "detail": "starts at x 500.5; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "section.hero.world-hero p \"UX ↔︎ Code ↔︎Produit\"",
+        "detail": "starts at x 581.1; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#projects h3 \"Blink\"",
+        "detail": "starts at x 69.8; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#projects p \"Un sélecteur de navigateur natif\"",
+        "detail": "starts at x 69.8; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#projects h3 \"Portfolio Personnel\"",
+        "detail": "starts at x 557.8; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#projects p \"Un portfolio développeur ultra-r\"",
+        "detail": "starts at x 557.8; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#projects h3 \"Minesweeper LLM Arena\"",
+        "detail": "starts at x 69.8; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#projects p \"Projet de hackathon AI Gateway —\"",
+        "detail": "starts at x 69.8; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#projects h3 \"Next Armored\"",
+        "detail": "starts at x 557.8; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#projects p \"Toolkit de middleware NextJs pou\"",
+        "detail": "starts at x 557.8; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#about p.eyebrow \"02 / À propos\"",
+        "detail": "starts at x 418.7; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#about h2 \"Tout commence par« et si… »\"",
+        "detail": "starts at x 418.7; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#about p \"Tout a commencé en classe de mat\"",
+        "detail": "starts at x 418.7; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#about p \"En prépa, j'ai continué à coder \"",
+        "detail": "starts at x 418.7; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#about p \"Aujourd'hui, je me concentre sur\"",
+        "detail": "starts at x 418.7; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#about p \"Je suis aussi fasciné par la cyb\"",
+        "detail": "starts at x 418.7; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#about p \"J'apporte une grande attention a\"",
+        "detail": "starts at x 418.7; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#about p \"Construire des choses qui compte\"",
+        "detail": "starts at x 475.5; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#timeline ol.journey-list \"janv. 2023 → Aujourd'huiIngénieu\"",
+        "detail": "starts at x 473.6; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "section.chapter.journal-chapter h3 \"Le prompt caching dans Claude Co\"",
+        "detail": "starts at x 223.6; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "section.chapter.journal-chapter p \"Lecture de cache, écriture de ca\"",
+        "detail": "starts at x 223.6; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "section.chapter.journal-chapter h3 \"Comment rester intellectuellemen\"",
+        "detail": "starts at x 223.6; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "section.chapter.journal-chapter p \"L'IA est capable d'écrire pratiq\"",
+        "detail": "starts at x 223.6; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "section.chapter.journal-chapter h3 \"Clickjacking : comment cinq lign\"",
+        "detail": "starts at x 223.6; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "section.chapter.journal-chapter p \"Une attaque par iframe invisible\"",
+        "detail": "starts at x 223.6; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running p.flex.items-center \"25 oct.\"",
+        "detail": "starts at x 377; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running div.text-center \"4:56min/km\"",
+        "detail": "starts at x 377; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running p.text-sm.font-bold \"4:56\"",
+        "detail": "starts at x 377; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running p.text-xs.text-emerald-700/70 \"min/km\"",
+        "detail": "starts at x 377; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running div.text-center \"89m\"",
+        "detail": "starts at x 446.5; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running p.text-sm.font-bold \"89\"",
+        "detail": "starts at x 446.5; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running p.text-xs.text-emerald-700/70 \"m\"",
+        "detail": "starts at x 446.5; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running div.text-center \"83min\"",
+        "detail": "starts at x 516; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running p.text-sm.font-bold \"83\"",
+        "detail": "starts at x 516; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running p.text-xs.text-emerald-700/70 \"min\"",
+        "detail": "starts at x 516; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running div.text-center \"157bpm\"",
+        "detail": "starts at x 585.5; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running p.text-sm.font-bold \"157\"",
+        "detail": "starts at x 585.5; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running p.text-xs.text-emerald-700/70 \"bpm\"",
+        "detail": "starts at x 585.5; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "screen-height",
+        "where": "#projects section.chapter.section-shell \"01 / De l’idée au produitDes idé\"",
+        "detail": "1577px, 2.05 screens; a section is exactly one or two (--h)"
+      },
+      {
+        "rule": "neighbour",
+        "where": "#about section.chapter.about-chapter \"Marek, enchanté !Nantes, FranceU\"",
+        "detail": "framed, 64px of #timeline section.chapter.section-shell \"03 / Au fil du cheminMon parcour\" shows"
+      },
+      {
+        "rule": "neighbour-ground",
+        "where": "#timeline section.chapter.section-shell \"03 / Au fil du cheminMon parcour\"",
+        "detail": "framed, 41px of section.chapter.journal-chapter section.chapter.journal-chapter \"04 / Notes de terrainLe journal \"'s ground shows"
+      },
+      {
+        "rule": "screen-short",
+        "where": "#contact section.chapter.contact-chapter \"La suite s’écrit ensembleEt si o\"",
+        "detail": "616px tall; one screen under the nav is 768px"
+      },
+      {
+        "rule": "neighbour",
+        "where": "#contact section.chapter.contact-chapter \"La suite s’écrit ensembleEt si o\"",
+        "detail": "framed, 152px of the footer shows"
+      }
+    ],
+    "size": "1024x768",
+    "overflowX": false
+  },
+  {
+    "vw": 820,
+    "vh": 1180,
+    "L": 40,
+    "R": 780,
+    "nav": 0,
+    "screen": 1180,
+    "hero": {
+      "height": 1180,
+      "h1": {
+        "size": 52.8,
+        "leading": 1.07,
+        "lines": 4,
+        "x": 40,
+        "y": 430,
+        "w": 389,
+        "h": 226
+      },
+      "lead": null,
+      "buttons": null,
+      "visual": null
+    },
+    "sections": [
+      {
+        "where": "section.hero.world-hero section.hero.world-hero \"✧ Marek Elmayan /Ingénieur logic\"",
+        "top": 0,
+        "height": 1180,
+        "content": 980,
+        "frame": 0
+      },
+      {
+        "where": "#projects section.chapter.section-shell \"01 / De l’idée au produitDes idé\"",
+        "top": 1180,
+        "height": 1551,
+        "content": 1321,
+        "frame": 1180
+      },
+      {
+        "where": "#about section.chapter.about-chapter \"Marek, enchanté !Nantes, FranceU\"",
+        "top": 2731,
+        "height": 1498,
+        "content": 1272,
+        "frame": 2731
+      },
+      {
+        "where": "#timeline section.chapter.section-shell \"03 / Au fil du cheminMon parcour\"",
+        "top": 4228,
+        "height": 1594,
+        "content": 1354,
+        "frame": 4228
+      },
+      {
+        "where": "section.chapter.journal-chapter section.chapter.journal-chapter \"04 / Notes de terrainLe journal \"",
+        "top": 5823,
+        "height": 1021,
+        "content": 787,
+        "frame": 5823
+      },
+      {
+        "where": "#running section.chapter.relative \"05 / Hors écranMes coursesJe tra\"",
+        "top": 6844,
+        "height": 1309,
+        "content": 1068,
+        "frame": 6844
+      },
+      {
+        "where": "#contact section.chapter.contact-chapter \"La suite s’écrit ensembleEt si o\"",
+        "top": 8153,
+        "height": 621,
+        "content": 382,
+        "frame": 8153
+      }
+    ],
+    "findings": [
+      {
+        "rule": "edge-left",
+        "where": "section.hero.world-hero div.hero-workshop \"Mon terrain de jeuUX ↔︎ Code ↔︎P\"",
+        "detail": "starts at x 429.5; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "section.hero.world-hero p \"UX ↔︎ Code ↔︎Produit\"",
+        "detail": "starts at x 494.1; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#projects h3 \"Blink\"",
+        "detail": "starts at x 69.8; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#projects p \"Un sélecteur de navigateur natif\"",
+        "detail": "starts at x 69.8; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#projects h3 \"Portfolio Personnel\"",
+        "detail": "starts at x 455.8; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#projects p \"Un portfolio développeur ultra-r\"",
+        "detail": "starts at x 455.8; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#projects h3 \"Minesweeper LLM Arena\"",
+        "detail": "starts at x 69.8; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#projects p \"Projet de hackathon AI Gateway —\"",
+        "detail": "starts at x 69.8; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#projects h3 \"Next Armored\"",
+        "detail": "starts at x 455.8; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#projects p \"Toolkit de middleware NextJs pou\"",
+        "detail": "starts at x 455.8; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#about p.eyebrow \"02 / À propos\"",
+        "detail": "starts at x 318.7; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#about h2 \"Tout commence par« et si… »\"",
+        "detail": "starts at x 318.7; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#about p \"Tout a commencé en classe de mat\"",
+        "detail": "starts at x 318.7; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#about p \"En prépa, j'ai continué à coder \"",
+        "detail": "starts at x 318.7; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#about p \"Aujourd'hui, je me concentre sur\"",
+        "detail": "starts at x 318.7; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#about p \"Je suis aussi fasciné par la cyb\"",
+        "detail": "starts at x 318.7; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#about p \"J'apporte une grande attention a\"",
+        "detail": "starts at x 318.7; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#about p \"Construire des choses qui compte\"",
+        "detail": "starts at x 375.5; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#timeline ol.journey-list \"janv. 2023 → Aujourd'huiIngénieu\"",
+        "detail": "starts at x 392; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "section.chapter.journal-chapter h3 \"Le prompt caching dans Claude Co\"",
+        "detail": "starts at x 223.6; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "section.chapter.journal-chapter p \"Lecture de cache, écriture de ca\"",
+        "detail": "starts at x 223.6; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "section.chapter.journal-chapter h3 \"Comment rester intellectuellemen\"",
+        "detail": "starts at x 223.6; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "section.chapter.journal-chapter p \"L'IA est capable d'écrire pratiq\"",
+        "detail": "starts at x 223.6; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "section.chapter.journal-chapter h3 \"Clickjacking : comment cinq lign\"",
+        "detail": "starts at x 223.6; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "section.chapter.journal-chapter p \"Une attaque par iframe invisible\"",
+        "detail": "starts at x 223.6; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running p.flex.items-center \"25 oct.\"",
+        "detail": "starts at x 57; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running h3.mt-0.5.line-clamp-1 \"Course à pied en soirée\"",
+        "detail": "starts at x 57; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running div.text-center \"4:56min/km\"",
+        "detail": "starts at x 57; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running p.text-sm.font-bold \"4:56\"",
+        "detail": "starts at x 57; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running p.text-xs.text-emerald-700/70 \"min/km\"",
+        "detail": "starts at x 57; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running div.text-center \"89m\"",
+        "detail": "starts at x 141; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running p.text-sm.font-bold \"89\"",
+        "detail": "starts at x 141; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running p.text-xs.text-emerald-700/70 \"m\"",
+        "detail": "starts at x 141; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running div.text-center \"83min\"",
+        "detail": "starts at x 225; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running p.text-sm.font-bold \"83\"",
+        "detail": "starts at x 225; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running p.text-xs.text-emerald-700/70 \"min\"",
+        "detail": "starts at x 225; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running div.text-center \"157bpm\"",
+        "detail": "starts at x 309; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running p.text-sm.font-bold \"157\"",
+        "detail": "starts at x 309; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running p.text-xs.text-emerald-700/70 \"bpm\"",
+        "detail": "starts at x 309; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "screen-short",
+        "where": "section.chapter.journal-chapter section.chapter.journal-chapter \"04 / Notes de terrainLe journal \"",
+        "detail": "1021px tall; one screen under the nav is 1180px"
+      },
+      {
+        "rule": "neighbour",
+        "where": "section.chapter.journal-chapter section.chapter.journal-chapter \"04 / Notes de terrainLe journal \"",
+        "detail": "framed, 20px of #running section.chapter.relative \"05 / Hors écranMes coursesJe tra\" shows"
+      },
+      {
+        "rule": "screen-short",
+        "where": "#contact section.chapter.contact-chapter \"La suite s’écrit ensembleEt si o\"",
+        "detail": "621px tall; one screen under the nav is 1180px"
+      },
+      {
+        "rule": "neighbour",
+        "where": "#contact section.chapter.contact-chapter \"La suite s’écrit ensembleEt si o\"",
+        "detail": "framed, 218px of the footer shows"
+      }
+    ],
+    "size": "820x1180",
+    "overflowX": false
+  },
+  {
+    "vw": 768,
+    "vh": 1024,
+    "L": 40,
+    "R": 728,
+    "nav": 0,
+    "screen": 1024,
+    "hero": {
+      "height": 1024,
+      "h1": {
+        "size": 52.8,
+        "leading": 1.07,
+        "lines": 4,
+        "x": 40,
+        "y": 352,
+        "w": 362,
+        "h": 226
+      },
+      "lead": null,
+      "buttons": null,
+      "visual": null
+    },
+    "sections": [
+      {
+        "where": "section.hero.world-hero section.hero.world-hero \"✧ Marek Elmayan /Ingénieur logic\"",
+        "top": 0,
+        "height": 1024,
+        "content": 834,
+        "frame": 0
+      },
+      {
+        "where": "#projects section.chapter.section-shell \"01 / De l’idée au produitDes idé\"",
+        "top": 1024,
+        "height": 1580,
+        "content": 1350,
+        "frame": 1024
+      },
+      {
+        "where": "#about section.chapter.about-chapter \"Marek, enchanté !Nantes, FranceU\"",
+        "top": 2604,
+        "height": 1586,
+        "content": 1360,
+        "frame": 2604
+      },
+      {
+        "where": "#timeline section.chapter.section-shell \"03 / Au fil du cheminMon parcour\"",
+        "top": 4190,
+        "height": 1665,
+        "content": 1425,
+        "frame": 4190
+      },
+      {
+        "where": "section.chapter.journal-chapter section.chapter.journal-chapter \"04 / Notes de terrainLe journal \"",
+        "top": 5855,
+        "height": 1102,
+        "content": 868,
+        "frame": 5855
+      },
+      {
+        "where": "#running section.chapter.relative \"05 / Hors écranMes coursesJe tra\"",
+        "top": 6957,
+        "height": 1339,
+        "content": 1098,
+        "frame": 6957
+      },
+      {
+        "where": "#contact section.chapter.contact-chapter \"La suite s’écrit ensembleEt si o\"",
+        "top": 8296,
+        "height": 621,
+        "content": 382,
+        "frame": 8296
+      }
+    ],
+    "findings": [
+      {
+        "rule": "edge-left",
+        "where": "section.hero.world-hero div.hero-workshop \"Mon terrain de jeuUX ↔︎ Code ↔︎P\"",
+        "detail": "starts at x 402.1; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "section.hero.world-hero p \"UX ↔︎ Code ↔︎Produit\"",
+        "detail": "starts at x 466.7; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#projects h3 \"Blink\"",
+        "detail": "starts at x 69.8; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#projects p \"Un sélecteur de navigateur natif\"",
+        "detail": "starts at x 69.8; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#projects h3 \"Portfolio Personnel\"",
+        "detail": "starts at x 429.8; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#projects p \"Un portfolio développeur ultra-r\"",
+        "detail": "starts at x 429.8; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#projects h3 \"Minesweeper LLM Arena\"",
+        "detail": "starts at x 69.8; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#projects p \"Projet de hackathon AI Gateway —\"",
+        "detail": "starts at x 69.8; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#projects h3 \"Next Armored\"",
+        "detail": "starts at x 429.8; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#projects p \"Toolkit de middleware NextJs pou\"",
+        "detail": "starts at x 429.8; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#about p.eyebrow \"02 / À propos\"",
+        "detail": "starts at x 301.3; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#about h2 \"Tout commence par« et si… »\"",
+        "detail": "starts at x 301.3; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#about p \"Tout a commencé en classe de mat\"",
+        "detail": "starts at x 301.3; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#about p \"En prépa, j'ai continué à coder \"",
+        "detail": "starts at x 301.3; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#about p \"Aujourd'hui, je me concentre sur\"",
+        "detail": "starts at x 301.3; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#about p \"Je suis aussi fasciné par la cyb\"",
+        "detail": "starts at x 301.3; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#about p \"J'apporte une grande attention a\"",
+        "detail": "starts at x 301.3; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#about p \"Construire des choses qui compte\"",
+        "detail": "starts at x 358.2; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#timeline ol.journey-list \"janv. 2023 → Aujourd'huiIngénieu\"",
+        "detail": "starts at x 371.2; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "section.chapter.journal-chapter h3 \"Le prompt caching dans Claude Co\"",
+        "detail": "starts at x 223.6; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "section.chapter.journal-chapter p \"Lecture de cache, écriture de ca\"",
+        "detail": "starts at x 223.6; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "section.chapter.journal-chapter h3 \"Comment rester intellectuellemen\"",
+        "detail": "starts at x 223.6; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "section.chapter.journal-chapter p \"L'IA est capable d'écrire pratiq\"",
+        "detail": "starts at x 223.6; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "section.chapter.journal-chapter h3 \"Clickjacking : comment cinq lign\"",
+        "detail": "starts at x 223.6; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "section.chapter.journal-chapter p \"Une attaque par iframe invisible\"",
+        "detail": "starts at x 223.6; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running p.flex.items-center \"25 oct.\"",
+        "detail": "starts at x 57; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running h3.mt-0.5.line-clamp-1 \"Course à pied en soirée\"",
+        "detail": "starts at x 57; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running div.text-center \"4:56min/km\"",
+        "detail": "starts at x 57; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running p.text-sm.font-bold \"4:56\"",
+        "detail": "starts at x 57; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running p.text-xs.text-emerald-700/70 \"min/km\"",
+        "detail": "starts at x 57; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running div.text-center \"89m\"",
+        "detail": "starts at x 134.5; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running p.text-sm.font-bold \"89\"",
+        "detail": "starts at x 134.5; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running p.text-xs.text-emerald-700/70 \"m\"",
+        "detail": "starts at x 134.5; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running div.text-center \"83min\"",
+        "detail": "starts at x 212; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running p.text-sm.font-bold \"83\"",
+        "detail": "starts at x 212; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running p.text-xs.text-emerald-700/70 \"min\"",
+        "detail": "starts at x 212; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running div.text-center \"157bpm\"",
+        "detail": "starts at x 289.5; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running p.text-sm.font-bold \"157\"",
+        "detail": "starts at x 289.5; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running p.text-xs.text-emerald-700/70 \"bpm\"",
+        "detail": "starts at x 289.5; the lines are 40 and the column starts"
+      },
+      {
+        "rule": "neighbour",
+        "where": "#projects section.chapter.section-shell \"01 / De l’idée au produitDes idé\"",
+        "detail": "framed, 194px of #about section.chapter.about-chapter \"Marek, enchanté !Nantes, FranceU\" shows"
+      },
+      {
+        "rule": "neighbour",
+        "where": "#about section.chapter.about-chapter \"Marek, enchanté !Nantes, FranceU\"",
+        "detail": "framed, 343px of #timeline section.chapter.section-shell \"03 / Au fil du cheminMon parcour\" shows"
+      },
+      {
+        "rule": "neighbour",
+        "where": "#timeline section.chapter.section-shell \"03 / Au fil du cheminMon parcour\"",
+        "detail": "framed, 68px of section.chapter.journal-chapter section.chapter.journal-chapter \"04 / Notes de terrainLe journal \" shows"
+      },
+      {
+        "rule": "screen-short",
+        "where": "#contact section.chapter.contact-chapter \"La suite s’écrit ensembleEt si o\"",
+        "detail": "621px tall; one screen under the nav is 1024px"
+      },
+      {
+        "rule": "neighbour",
+        "where": "#contact section.chapter.contact-chapter \"La suite s’écrit ensembleEt si o\"",
+        "detail": "framed, 218px of the footer shows"
+      }
+    ],
+    "size": "768x1024",
+    "overflowX": false
+  },
+  {
+    "vw": 390,
+    "vh": 844,
+    "L": 20,
+    "R": 370,
+    "nav": 0,
+    "screen": 844,
+    "hero": {
+      "height": 844,
+      "h1": {
+        "size": 39,
+        "leading": 1.05,
+        "lines": 3,
+        "x": 20,
+        "y": 180,
+        "w": 350,
+        "h": 123
+      },
+      "lead": null,
+      "buttons": null,
+      "visual": null
+    },
+    "sections": [
+      {
+        "where": "section.hero.world-hero section.hero.world-hero \"✧ Marek Elmayan /Ingénieur logic\"",
+        "top": 0,
+        "height": 844,
+        "content": 724,
+        "frame": 0
+      },
+      {
+        "where": "#projects section.chapter.section-shell \"01 / De l’idée au produitDes idé\"",
+        "top": 844,
+        "height": 2494,
+        "content": 2367,
+        "frame": 844
+      },
+      {
+        "where": "#about section.chapter.about-chapter \"Marek, enchanté !Nantes, FranceU\"",
+        "top": 3338,
+        "height": 2211,
+        "content": 2067,
+        "frame": 3338
+      },
+      {
+        "where": "#timeline section.chapter.section-shell \"03 / Au fil du cheminMon parcour\"",
+        "top": 5549,
+        "height": 1841,
+        "content": 1697,
+        "frame": 5549
+      },
+      {
+        "where": "section.chapter.journal-chapter section.chapter.journal-chapter \"04 / Notes de terrainLe journal \"",
+        "top": 7390,
+        "height": 1435,
+        "content": 1284,
+        "frame": 7390
+      },
+      {
+        "where": "#running section.chapter.relative \"05 / Hors écranMes coursesJe tra\"",
+        "top": 8825,
+        "height": 1996,
+        "content": 1868,
+        "frame": 8825
+      },
+      {
+        "where": "#contact section.chapter.contact-chapter \"La suite s’écrit ensembleEt si o\"",
+        "top": 10821,
+        "height": 960,
+        "content": 821,
+        "frame": 10821
+      }
+    ],
+    "findings": [
+      {
+        "rule": "edge-left",
+        "where": "section.hero.world-hero p \"UX ↔︎ Code ↔︎Produit\"",
+        "detail": "starts at x 86.6; the lines are 20 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#about p \"Construire des choses qui compte\"",
+        "detail": "starts at x 76.9; the lines are 20 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#timeline ol.journey-list \"janv. 2023 → Aujourd'huiIngénieu\"",
+        "detail": "starts at x 28; the lines are 20 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "section.chapter.journal-chapter h3 \"Le prompt caching dans Claude Co\"",
+        "detail": "starts at x 41.8; the lines are 20 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "section.chapter.journal-chapter p \"Lecture de cache, écriture de ca\"",
+        "detail": "starts at x 41.8; the lines are 20 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "section.chapter.journal-chapter h3 \"Comment rester intellectuellemen\"",
+        "detail": "starts at x 41.8; the lines are 20 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "section.chapter.journal-chapter p \"L'IA est capable d'écrire pratiq\"",
+        "detail": "starts at x 41.8; the lines are 20 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "section.chapter.journal-chapter h3 \"Clickjacking : comment cinq lign\"",
+        "detail": "starts at x 41.8; the lines are 20 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "section.chapter.journal-chapter p \"Une attaque par iframe invisible\"",
+        "detail": "starts at x 41.8; the lines are 20 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running div.rounded-xl.p-4 \"0courses\"",
+        "detail": "starts at x 203; the lines are 20 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running p.flex.items-center \"25 oct.\"",
+        "detail": "starts at x 37; the lines are 20 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running div.text-center \"4:56min/km\"",
+        "detail": "starts at x 37; the lines are 20 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running p.text-sm.font-bold \"4:56\"",
+        "detail": "starts at x 37; the lines are 20 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running p.text-xs.text-emerald-700/70 \"min/km\"",
+        "detail": "starts at x 37; the lines are 20 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running div.text-center \"89m\"",
+        "detail": "starts at x 118; the lines are 20 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running p.text-sm.font-bold \"89\"",
+        "detail": "starts at x 118; the lines are 20 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running p.text-xs.text-emerald-700/70 \"m\"",
+        "detail": "starts at x 118; the lines are 20 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running div.text-center \"83min\"",
+        "detail": "starts at x 199; the lines are 20 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running p.text-sm.font-bold \"83\"",
+        "detail": "starts at x 199; the lines are 20 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running p.text-xs.text-emerald-700/70 \"min\"",
+        "detail": "starts at x 199; the lines are 20 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running div.text-center \"157bpm\"",
+        "detail": "starts at x 280; the lines are 20 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running p.text-sm.font-bold \"157\"",
+        "detail": "starts at x 280; the lines are 20 and the column starts"
+      },
+      {
+        "rule": "edge-left",
+        "where": "#running p.text-xs.text-emerald-700/70 \"bpm\"",
+        "detail": "starts at x 280; the lines are 20 and the column starts"
+      },
+      {
+        "rule": "screen-height",
+        "where": "#projects section.chapter.section-shell \"01 / De l’idée au produitDes idé\"",
+        "detail": "2494px, 2.96 screens; a section is exactly one or two (--h), or on a phone at least one that its content fills"
+      },
+      {
+        "rule": "screen-height",
+        "where": "#about section.chapter.about-chapter \"Marek, enchanté !Nantes, FranceU\"",
+        "detail": "2211px, 2.62 screens; a section is exactly one or two (--h), or on a phone at least one that its content fills"
+      },
+      {
+        "rule": "screen-height",
+        "where": "#timeline section.chapter.section-shell \"03 / Au fil du cheminMon parcour\"",
+        "detail": "1841px, 2.18 screens; a section is exactly one or two (--h), or on a phone at least one that its content fills"
+      },
+      {
+        "rule": "neighbour",
+        "where": "section.chapter.journal-chapter section.chapter.journal-chapter \"04 / Notes de terrainLe journal \"",
+        "detail": "framed, 47px of #running section.chapter.relative \"05 / Hors écranMes coursesJe tra\" shows"
+      },
+      {
+        "rule": "screen-height",
+        "where": "#running section.chapter.relative \"05 / Hors écranMes coursesJe tra\"",
+        "detail": "1996px, 2.36 screens; a section is exactly one or two (--h), or on a phone at least one that its content fills"
+      }
+    ],
+    "size": "390x844",
+    "overflowX": false
+  }
+]

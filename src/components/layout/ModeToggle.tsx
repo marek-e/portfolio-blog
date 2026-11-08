@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 export function ModeToggle() {
   const buttonRef = useRef<HTMLButtonElement>(null);
 
-  const toggleTheme = () => {
+  const toggleTheme = (event: React.MouseEvent<HTMLButtonElement>) => {
     const isDark = document.documentElement.classList.contains('dark');
     const next = isDark ? 'light' : 'dark';
     const system = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
@@ -23,6 +23,7 @@ export function ModeToggle() {
     };
 
     if (
+      event.detail === 0 ||
       !document.startViewTransition ||
       window.matchMedia('(prefers-reduced-motion: reduce)').matches
     ) {
@@ -57,18 +58,10 @@ export function ModeToggle() {
       variant="outline"
       size="icon"
       aria-label="Toggle theme"
-      className="hover:text-primary active:bg-primary/20 rounded-full bg-white"
+      className="hover:text-primary active:bg-primary/20 relative size-11 rounded-full bg-transparent"
     >
-      <HugeiconsIcon
-        icon={SunIcon}
-        strokeWidth={2}
-        className="size-5 scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90"
-      />
-      <HugeiconsIcon
-        icon={Moon02Icon}
-        strokeWidth={2}
-        className="absolute size-5 scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0"
-      />
+      <HugeiconsIcon icon={SunIcon} strokeWidth={2} className="size-5 dark:hidden" />
+      <HugeiconsIcon icon={Moon02Icon} strokeWidth={2} className="hidden size-5 dark:block" />
       <span className="sr-only">Toggle theme</span>
     </Button>
   );

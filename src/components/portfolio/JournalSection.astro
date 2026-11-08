@@ -1,0 +1,50 @@
+---
+import CraftObject from '@/components/brand/CraftObject.astro';
+import { getCollection } from 'astro:content';
+import { getLangFromUrl, getTranslatedPath, getTranslations } from '@/i18n';
+import { formatDate, getSlug } from '@/lib/blog';
+
+const lang = getLangFromUrl(Astro.url);
+const translatePath = getTranslatedPath(lang);
+const t = getTranslations(lang);
+const posts = (await getCollection('blog'))
+  .filter((post) => post.id.startsWith(`${lang}/`) && !post.data.draft)
+  .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
+  .slice(0, 3);
+---
+
+<section class="chapter journal-chapter" aria-labelledby="journal-heading">
+  <div class="section-shell">
+    <div class="section-heading">
+      <CraftObject kind="journal" class="section-object" />
+      <div>
+        <p class="eyebrow">04 / {lang === 'fr' ? 'Notes de terrain' : 'Field notes'}</p><h2
+          id="journal-heading"
+        >
+          {lang === 'fr' ? 'Le journal d’un curieux.' : 'A curious mind’s journal.'}
+        </h2><p class="section-intro">{t.blog.subtitle}</p>
+      </div><a href={translatePath('/blog')} class="text-link"
+        >{lang === 'fr' ? 'Tous les articles' : 'All articles'}
+        <span aria-hidden="true">↗︎</span></a
+      >
+    </div>
+    {
+      posts.map((post) => (
+        <a href={translatePath(`/blog/${getSlug(post.id, lang)}`)} class="journal-row">
+          <>
+            <time class="eyebrow" datetime={post.data.publishDate.toISOString()}>
+              {formatDate(post.data.publishDate, lang)}
+            </time>
+            <div>
+              <>
+                <h3>{post.data.title}</h3>
+                <p>{post.data.description}</p>
+              </>
+            </div>
+            <span aria-hidden="true">↗︎</span>
+          </>
+        </a>
+      ))
+    }
+  </div>
+</section>
