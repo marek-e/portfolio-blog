@@ -30,7 +30,7 @@
   transition: opacity 200ms var(--ease-out);
 }
 
-.button-3d-brightness > .button-3d-material {
+.button-3d-brightness > .glass-material {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -39,7 +39,7 @@
   filter: brightness(1.22) saturate(1.12);
 }
 
-.button-3d > .button-3d-material {
+.button-3d > .glass-material {
   position: absolute;
   inset: 0;
   z-index: -1;
@@ -51,7 +51,7 @@
   transition: opacity 200ms var(--ease-out);
 }
 
-.button-3d-reflections {
+.glass-reflections {
   transition: opacity 200ms var(--ease-out);
 }
 
@@ -66,12 +66,12 @@
   color: var(--depth-ink);
 }
 
-.button-3d-secondary .button-3d-reflections {
+.button-3d-secondary .glass-reflections {
   opacity: 0.72;
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .button-3d:not(:disabled):not([data-disabled]):hover > .button-3d-material {
+  .button-3d:not(:disabled):not([data-disabled]):hover > .glass-material {
     opacity: 1;
   }
 
@@ -79,7 +79,7 @@
     opacity: 1;
   }
 
-  .button-3d-secondary:not(:disabled):not([data-disabled]):hover .button-3d-reflections {
+  .button-3d-secondary:not(:disabled):not([data-disabled]):hover .glass-reflections {
     opacity: 0.84;
   }
 }
@@ -114,8 +114,8 @@
   }
 
   .button-3d-brightness,
-  .button-3d > .button-3d-material,
-  .button-3d-reflections {
+  .button-3d > .glass-material,
+  .glass-reflections {
     transition: opacity 160ms var(--ease-out);
   }
 

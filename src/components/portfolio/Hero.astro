@@ -1,8 +1,7 @@
 ---
 import { Image } from 'astro:assets';
-import { HugeiconsIcon } from '@hugeicons/react';
-import { ArrowRight02Icon } from '@hugeicons/core-free-icons';
-import { Link } from '@/components/ui/button';
+import { HeroActions } from './HeroActions';
+import { HeroStickers } from './HeroStickers';
 import { Doodle, MarkedText } from '@/components/shared/HandDrawn';
 import { getTranslations, getLangFromUrl, getTranslatedPath } from '@/i18n';
 import BackgroundImage from '@/components/layout/BackgroundImage.astro';
@@ -12,43 +11,13 @@ import portrait from '@/assets/mareke.avif';
 const lang = getLangFromUrl(Astro.url);
 const t = getTranslations(lang);
 const translatePath = getTranslatedPath(lang);
-
-const stickers = [
-  { tone: 'peach', position: '-rotate-6 top-[14%] left-[6%]', depth: 1.2 },
-  { tone: 'sky', position: 'rotate-3 top-[22%] right-[7%]', depth: 0.8 },
-  { tone: 'mint', position: 'rotate-6 bottom-[30%] left-[9%]', depth: 1.4 },
-  { tone: 'lilac', position: '-rotate-3 bottom-[24%] right-[10%]', depth: 1 },
-  { tone: 'butter', position: 'rotate-2 bottom-[12%] left-[26%]', depth: 0.6 },
-];
-
-const toneStyle = (tone: string) =>
-  `--tone: var(--pastel-${tone}); --tone-ink: var(--pastel-${tone}-ink);`;
 ---
 
 <CursorSpotlight>
   <section class="relative flex min-h-dvh items-center justify-center overflow-hidden pt-28 pb-20">
     <BackgroundImage />
 
-    <div aria-hidden="true" class="absolute inset-0 z-10 hidden lg:block" data-sticker-layer>
-      {
-        t.hero.badges.map((badge, index) => {
-          const sticker = stickers[index % stickers.length];
-          return (
-            <span
-              class={`hero-sticker absolute ${sticker.position}`}
-              style={`animation-delay: ${index * -1.7}s; --depth: ${sticker.depth};`}
-            >
-              <span
-                class="sticker-3d sticker-parallax block rounded-full px-4 py-1.5 font-mono text-sm font-medium"
-                style={toneStyle(sticker.tone)}
-              >
-                {badge}
-              </span>
-            </span>
-          );
-        })
-      }
-    </div>
+    <HeroStickers client:load badges={t.hero.badges} floating />
 
     <div
       class="relative z-10 mx-auto flex w-full max-w-5xl min-w-0 flex-col items-center px-4 text-center sm:px-6"
@@ -100,40 +69,22 @@ const toneStyle = (tone: string) =>
       </p>
 
       <div
-        class="relative mt-10 flex w-full flex-col items-center justify-center gap-3 sm:w-auto sm:flex-row"
+        class="relative mt-10 flex w-full flex-col items-center justify-center gap-4 sm:w-auto sm:flex-row sm:gap-5"
       >
         <Doodle
           name="arrow"
           strokeWidth={2.5}
           className="text-foreground/50 absolute top-1/2 -left-32 hidden h-14 w-24 -translate-y-3/4 md:block"
         />
-        <Link size="lg" href="#projects" className="w-full sm:w-auto" animation="scale">
-          {t.hero.ctaProjects}
-          <HugeiconsIcon icon={ArrowRight02Icon} className="size-4" data-icon="inline-end" />
-        </Link>
-        <Link
-          variant="pastel"
-          size="lg"
-          href={translatePath('/curriculum-vitae')}
-          className="w-full sm:w-auto"
-          animation="scale"
-        >
-          {t.hero.ctaCv}
-        </Link>
+        <HeroActions
+          client:load
+          projectsLabel={t.hero.ctaProjects}
+          cvLabel={t.hero.ctaCv}
+          cvHref={translatePath('/curriculum-vitae')}
+        />
       </div>
 
-      <ul class="mt-12 flex flex-wrap justify-center gap-2 lg:hidden">
-        {
-          t.hero.badges.map((badge, index) => (
-            <li
-              class="sticker-3d rounded-full px-3 py-1 font-mono text-xs font-medium"
-              style={toneStyle(stickers[index % stickers.length].tone)}
-            >
-              {badge}
-            </li>
-          ))
-        }
-      </ul>
+      <HeroStickers client:load badges={t.hero.badges} />
     </div>
 
     <a
@@ -149,85 +100,6 @@ const toneStyle = (tone: string) =>
 </CursorSpotlight>
 
 <style>
-  .hero-sticker {
-    animation: sticker-float 9s ease-in-out infinite;
-  }
-
-  .sticker-3d {
-    --tone-deep: color-mix(in oklab, var(--tone), black 28%);
-    position: relative;
-    isolation: isolate;
-    color: var(--tone-ink);
-    background-image: linear-gradient(
-      180deg,
-      color-mix(in oklab, color-mix(in oklab, var(--tone), white 30%) 72%, transparent),
-      color-mix(in oklab, var(--tone) 62%, transparent) 55%,
-      color-mix(in oklab, color-mix(in oklab, var(--tone), black 10%) 66%, transparent)
-    );
-    box-shadow:
-      inset 0 2px 3px -1px oklch(1 0 0 / 80%),
-      inset 0 -3px 5px -2px color-mix(in oklab, var(--tone-deep) 60%, transparent),
-      0 1px 1px color-mix(in oklab, var(--tone-deep) 55%, transparent),
-      0 2px 1.5px color-mix(in oklab, var(--tone-deep) 45%, transparent),
-      0 3px 2px color-mix(in oklab, var(--tone-deep) 35%, transparent),
-      0 4px 3px color-mix(in oklab, var(--tone-deep) 22%, transparent),
-      0 14px 24px -10px oklch(0.2 0.04 60 / 38%);
-    backdrop-filter: blur(10px) saturate(180%);
-    -webkit-backdrop-filter: blur(10px) saturate(180%);
-  }
-
-  .sticker-3d::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    border-radius: inherit;
-    background:
-      radial-gradient(ellipse 65% 50% at 45% 8%, oklch(1 0 0 / 75%), transparent 72%),
-      radial-gradient(
-        ellipse 95% 55% at 50% 110%,
-        color-mix(in oklab, var(--tone-deep) 45%, transparent),
-        transparent 70%
-      );
-    pointer-events: none;
-  }
-
-  :global(.dark) .sticker-3d {
-    --tone-deep: color-mix(in oklab, var(--tone), black 55%);
-    background-image: linear-gradient(
-      180deg,
-      color-mix(in oklab, var(--tone) 46%, transparent),
-      color-mix(in oklab, var(--tone) 28%, transparent) 55%,
-      color-mix(in oklab, var(--tone-deep) 40%, transparent)
-    );
-    box-shadow:
-      inset 0 2px 3px -1px oklch(1 0 0 / 35%),
-      inset 0 -3px 5px -2px oklch(0 0 0 / 45%),
-      0 1px 1px color-mix(in oklab, var(--tone-deep) 70%, transparent),
-      0 2px 1.5px color-mix(in oklab, var(--tone-deep) 55%, transparent),
-      0 3px 2px color-mix(in oklab, var(--tone-deep) 40%, transparent),
-      0 4px 3px oklch(0 0 0 / 25%),
-      0 0 22px -6px color-mix(in oklab, var(--tone) 55%, transparent),
-      0 14px 24px -10px oklch(0 0 0 / 60%);
-  }
-
-  :global(.dark) .sticker-3d::after {
-    background:
-      radial-gradient(ellipse 65% 50% at 45% 8%, oklch(1 0 0 / 32%), transparent 72%),
-      radial-gradient(ellipse 95% 55% at 50% 110%, oklch(0 0 0 / 40%), transparent 70%);
-  }
-
-  .sticker-parallax {
-    transform: perspective(500px)
-      translate3d(
-        calc(var(--px, 0) * var(--depth, 1) * 18px),
-        calc(var(--py, 0) * var(--depth, 1) * 12px),
-        0
-      )
-      rotateX(calc(var(--py, 0) * -18deg)) rotateY(calc(var(--px, 0) * 22deg));
-    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
   .scroll-hint {
     text-shadow: 0 1px 10px oklch(0 0 0 / 65%);
     filter: drop-shadow(0 1px 6px oklch(0 0 0 / 45%));
@@ -235,16 +107,6 @@ const toneStyle = (tone: string) =>
 
   .scroll-hint-dot {
     animation: scroll-hint 2.2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
-  }
-
-  @keyframes sticker-float {
-    0%,
-    100% {
-      translate: 0 0;
-    }
-    50% {
-      translate: 0 -10px;
-    }
   }
 
   @keyframes scroll-hint {
@@ -257,14 +119,8 @@ const toneStyle = (tone: string) =>
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .hero-sticker,
     .scroll-hint-dot {
       animation: none;
-    }
-
-    .sticker-parallax {
-      transform: none;
-      transition: none;
     }
   }
 </style>
@@ -272,7 +128,7 @@ const toneStyle = (tone: string) =>
 <script>
   function initStickerParallax() {
     const layer = document.querySelector<HTMLElement>('[data-sticker-layer]');
-    const section = layer?.parentElement;
+    const section = layer?.closest('section');
     if (!layer || !section) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     if (window.matchMedia('(pointer: coarse)').matches) return;
