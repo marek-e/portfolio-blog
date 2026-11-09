@@ -84,7 +84,12 @@ const sitemapLinks = [
     </div>
 
     <div class="flex items-center gap-5">
-      <LanguageSwitcher client:load currentLang={lang} currentPath={currentPath} />
+      <LanguageSwitcher
+        client:load
+        currentLang={lang}
+        currentPath={currentPath}
+        variant="classic"
+      />
       <a
         href="#"
         class="hand-underline-hover text-muted-foreground hover:text-foreground inline-flex items-center gap-1.5 text-sm"

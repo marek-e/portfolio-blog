@@ -1,0 +1,88 @@
+.language-switcher {
+  --liquid-blur: 6px;
+}
+
+.language-option {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 0.625rem;
+  border-radius: 999px;
+  color: color-mix(in oklab, var(--foreground) 70%, transparent);
+  font-size: 0.75rem;
+  font-weight: 600;
+  transition: color 160ms ease;
+}
+
+.language-option[aria-current='page'] {
+  color: oklch(from var(--primary) 0.25 0.07 h);
+}
+
+.language-option[aria-current='page']::before,
+.language-option[aria-current='page']::after {
+  position: absolute;
+  inset: 6px 0;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  content: '';
+}
+
+.language-option[aria-current='page']::before {
+  background: linear-gradient(
+    175deg,
+    oklch(from var(--primary) 0.94 0.04 h / 90%),
+    oklch(from var(--primary) 0.79 0.12 h / 90%) 38%,
+    oklch(from var(--primary) 0.75 0.13 h / 92%) 68%,
+    oklch(from var(--primary) 0.93 0.045 h / 94%)
+  );
+  box-shadow:
+    inset 0 1px 2px oklch(1 0 0 / 85%),
+    inset 0 -2px 3px oklch(from var(--primary) 0.45 0.09 h / 25%),
+    0 3px 7px -4px oklch(from var(--primary) 0.4 0.1 h / 48%);
+}
+
+.language-option[aria-current='page']::after {
+  background:
+    radial-gradient(ellipse 65% 20% at 30% 12%, oklch(1 0 0 / 70%), transparent),
+    radial-gradient(ellipse 55% 18% at 72% 88%, oklch(1 0 0 / 65%), transparent);
+}
+
+.dark .language-option[aria-current='page'] {
+  color: oklch(0.99 0.005 280);
+}
+
+.dark .language-option[aria-current='page']::before {
+  background: linear-gradient(
+    175deg,
+    oklch(from var(--primary) 0.82 0.08 h / 88%),
+    oklch(from var(--primary) 0.56 0.14 h / 88%) 38%,
+    oklch(from var(--primary) 0.5 0.14 h / 92%) 68%,
+    oklch(from var(--primary) 0.78 0.08 h / 94%)
+  );
+}
+
+.language-option:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: -2px;
+}
+
+.language-bookmark.liquid-glass {
+  --liquid-fill: oklch(from var(--primary) l c h / 32%);
+  box-shadow:
+    inset 1px 0 2px oklch(1 0 0 / 55%),
+    inset -1px 0 2px oklch(1 0 0 / 22%),
+    inset 0 -3px 4px -1px oklch(1 0 0 / 60%),
+    0 8px 18px -8px oklch(from var(--primary) 0.3 0.08 h / 38%);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .language-option:not([aria-current='page']):hover {
+    color: var(--primary);
+    background: oklch(from var(--primary) l c h / 10%);
+  }
+}

@@ -23,7 +23,7 @@ const translatePath = getTranslatedPath(lang);
       class="relative z-10 mx-auto flex w-full max-w-5xl min-w-0 flex-col items-center px-4 text-center sm:px-6"
     >
       <p
-        class="glass mb-10 flex max-w-full items-center gap-3 rounded-full py-1.5 pr-4 pl-1.5 text-sm"
+        class="liquid-glass hero-identity relative mb-10 flex max-w-full items-center gap-3 rounded-full py-1.5 pr-4 pl-1.5 text-sm"
       >
         <Image
           src={portrait}
@@ -33,7 +33,7 @@ const translatePath = getTranslatedPath(lang);
           class="size-7 rounded-full object-cover"
           loading="eager"
         />
-        <span class="text-foreground/80 font-mono text-xs tracking-wide">{t.hero.eyebrow}</span>
+        <span class="text-foreground font-mono text-xs tracking-wide">{t.hero.eyebrow}</span>
       </p>
 
       <h1
@@ -89,6 +89,7 @@ const translatePath = getTranslatedPath(lang);
 
     <a
       href="#about"
+      data-scroll-hint
       class="scroll-hint absolute bottom-8 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-3 font-mono text-[0.7rem] tracking-[0.3em] text-white/85 uppercase transition-colors hover:text-white md:flex"
     >
       {t.hero.scrollHint}
@@ -103,6 +104,10 @@ const translatePath = getTranslatedPath(lang);
   .scroll-hint {
     text-shadow: 0 1px 10px oklch(0 0 0 / 65%);
     filter: drop-shadow(0 1px 6px oklch(0 0 0 / 45%));
+  }
+
+  .scroll-hint[hidden] {
+    display: none;
   }
 
   .scroll-hint-dot {
@@ -126,6 +131,24 @@ const translatePath = getTranslatedPath(lang);
 </style>
 
 <script>
+  function initScrollHint() {
+    const hint = document.querySelector<HTMLAnchorElement>('[data-scroll-hint]');
+    if (!hint) return;
+
+    const updateVisibility = () => {
+      const hidden = window.scrollY > 0;
+      if (hint.hidden !== hidden) hint.hidden = hidden;
+    };
+
+    updateVisibility();
+    window.addEventListener('scroll', updateVisibility, { passive: true });
+    document.addEventListener(
+      'astro:before-swap',
+      () => window.removeEventListener('scroll', updateVisibility),
+      { once: true }
+    );
+  }
+
   function initStickerParallax() {
     const layer = document.querySelector<HTMLElement>('[data-sticker-layer]');
     const section = layer?.closest('section');
@@ -152,5 +175,7 @@ const translatePath = getTranslatedPath(lang);
   }
 
   initStickerParallax();
+  initScrollHint();
   document.addEventListener('astro:after-swap', initStickerParallax);
+  document.addEventListener('astro:after-swap', initScrollHint);
 </script>

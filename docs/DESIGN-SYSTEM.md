@@ -93,11 +93,13 @@ Radiant rules, learned from review:
 - The element needs a positioning context for the layers: `Button` has `relative` in its base class, and fixed elements like back-to-top already have one. Don't put `position` in the utility, because it would override `fixed`.
 - White on orange is about 3:1. Keep the label semibold, and don't use radiant for small body-size text links.
 
-Every variant has a visible hover cue, without moving: radiant gets a stronger glow and the light sweep, pastel a stronger glow, ghost a fill, destructive a stronger fill and shadow, and link an underline. Buttons don't lift on hover.
+Every variant has a visible hover cue, without moving: radiant gets a stronger glow and the light sweep, pastel swaps the orange and purple ends of its gradient border with a subtle primary-tinted fill, ghost a fill, destructive a stronger fill and shadow, and link an underline. Buttons don't lift on hover.
+
+The pastel button has one masked border layer, with distinct orange and purple arcs joined by rose transitions. The arcs rotate through one and a half turns over 500ms with the strong ease-in-out curve `cubic-bezier(0.77, 0, 0.175, 1)`, reversing smoothly on leave, while the pill and label stay still. There is no static gradient underneath the moving border. The fill tint fades over 180ms. Keyboard focus and reduced motion keep the border stationary. Disabled controls do not trigger either effect.
 
 The radiant glow is always on at full strength. Hover only intensifies it; it must never appear only on hover.
 
-The same style applies to back-to-top, the active language in `LanguageSwitcher` (with the inner core turned off, `[--radiant-core:transparent]`, because it looks busy at that size; inactive options hover to a quiet `bg-primary/10` tint, never a raised white pill), and the "Live" button on project cards.
+The same radiant style applies to back-to-top and the "Live" button on project cards. In the mobile header, `LanguageSwitcher` uses a thin liquid-glass track and a softly bevelled brand-coloured lens for the current language, with 44px targets. The footer keeps its original compact frosted track and radiant active language through `variant="classic"`. Inactive options get a quiet primary tint on hover. The desktop language tab uses the same clear glass with a brighter rounded lower edge; its flag appears on hover or keyboard focus.
 
 ## Hand-drawn marks
 
@@ -112,13 +114,16 @@ One flourish per section at most. Don't sprinkle doodles.
 ## Hero
 
 - Day/night valley photo, serif headline with `MarkedText` on the name, and sparkles.
-- The project CTA uses primary `Button3D`; the CV CTA uses its secondary variant. Both keep the shared even brightness fade on hover.
+- The project CTA uses the classic radiant button; the CV CTA uses the classic `pastel` variant. Their flatter treatment distinguishes actions from the sculpted floating pills.
+- The navbar and portrait identity bar use thin `liquid-glass` containers, with a clear centre, soft perimeter reflections and restrained backdrop blur. The identity bar gets a darker transparent fill over the moon in dark mode for text contrast.
+- In light mode, the navbar adds a faint foreground contour and a soft contact shadow so it remains distinct against pale page backgrounds.
+- The desktop navbar hover pill uses the shared `GlassMaterial` lens with softer primary-tinted reflections. It moves between links over 200ms using transforms; reduced motion places it immediately.
 - Floating hashtag stickers (desktop): translucent 3D glass pills.
   - Use the same `GlassMaterial` SVG lens as `Button3D`, with curved reflections, a thin coloured contour and a bright lower edge. Its geometry measures the untransformed pill so parallax cannot distort the rounded ends.
   - Pastel material tokens preserve each tag's colour. A translucent face and soft shadow give the pills depth over the photo without backdrop blur or a stacked lip.
   - Pointer parallax with a per-sticker depth; off for touch and reduced motion.
 - On mobile the tags become a row of the same pills, without parallax.
-- The scroll hint is white with a dark text shadow so it reads over both photos.
+- The scroll hint is white with a dark text shadow so it reads over both photos. It is visible only at scroll position zero, and returns when the user scrolls back to the top.
 
 ## Mobile
 

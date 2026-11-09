@@ -20,11 +20,11 @@ export function BookmarkLanguageToggle({ currentLang, currentPath }: BookmarkLan
       className={cn(
         'fixed top-0 right-6 z-40 hidden md:flex',
         'w-11 flex-col items-center justify-end rounded-b-2xl pb-2',
-        'group from-primary/80 to-primary/50 cursor-pointer bg-linear-to-b shadow-lg',
-        'border-primary border',
+        'language-bookmark liquid-glass group cursor-pointer',
         'h-6 transition-all duration-500',
         'ease-[linear(0,0.1144,0.3475,0.5885,0.7844,0.9194,0.9987,1.0359,1.046,1.0413,1.0308,1.0196,1.0104,1.004,1.0002,0.9984,1)]',
         'motion-safe:hover:h-12',
+        'focus-visible:h-12',
         'motion-reduce:h-12',
         // Focus state
         'focus-visible:ring-ring focus:outline-none focus-visible:ring-2'
@@ -44,6 +44,7 @@ export function BookmarkLanguageToggle({ currentLang, currentPath }: BookmarkLan
                 'ease-[linear(0,0.1144,0.3475,0.5885,0.7844,0.9194,0.9987,1.0359,1.046,1.0413,1.0308,1.0196,1.0104,1.004,1.0002,0.9984,1)]',
                 'motion-safe:scale-75 motion-safe:opacity-0',
                 'motion-safe:group-hover:scale-100 motion-safe:group-hover:opacity-100',
+                'group-focus-visible:scale-100 group-focus-visible:opacity-100',
                 // Reduced motion: always visible
                 'motion-reduce:scale-100 motion-reduce:opacity-100'
               )}

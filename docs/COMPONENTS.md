@@ -263,8 +263,10 @@ Pill-shaped language toggle with active state highlighting.
 <LanguageSwitcher currentLang="fr" currentPath={Astro.url.pathname} />
 ```
 
-- Frosted-glass track
-- Active language uses the radiant primary style
+- Thin liquid-glass track
+- Active language uses a bevelled primary-coloured glass lens
+- Header uses 44px language targets and visible keyboard focus
+- Footer uses `variant="classic"` to keep its original compact frosted track and radiant active language
 - Uses `aria-current="page"` for accessibility
 - Shown in the footer and in the mobile top bar
 
@@ -278,7 +280,8 @@ Fixed bookmark-style language toggle with tooltip.
 
 - Fixed position at top-right of viewport
 - Expands on hover to reveal flag icon
-- 3D shadow and glass highlight effects
+- Translucent primary-tinted glass with a rounded lower highlight
+- Flag reveal also responds to keyboard focus
 - Includes tooltip with localized label
 - Respects `prefers-reduced-motion`
 - Hidden on mobile (`md:flex`)

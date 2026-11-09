@@ -5,13 +5,21 @@ interface LanguageSwitcherProps {
   currentLang: Lang;
   currentPath: string;
   className?: string;
+  variant?: 'glass' | 'classic';
 }
 
-export function LanguageSwitcher({ currentLang, currentPath, className }: LanguageSwitcherProps) {
+export function LanguageSwitcher({
+  currentLang,
+  currentPath,
+  className,
+  variant = 'glass',
+}: LanguageSwitcherProps) {
   return (
     <div
       className={cn(
-        'flex items-center gap-0.5 rounded-full border border-black/10 bg-white/55 p-0.5 backdrop-blur-md dark:border-white/10 dark:bg-white/5',
+        variant === 'glass'
+          ? 'language-switcher liquid-glass relative flex items-center gap-0.5 rounded-full p-0.5'
+          : 'flex items-center gap-0.5 rounded-full border border-black/10 bg-white/55 p-0.5 backdrop-blur-md dark:border-white/10 dark:bg-white/5',
         className
       )}
     >
@@ -19,12 +27,16 @@ export function LanguageSwitcher({ currentLang, currentPath, className }: Langua
         <a
           key={lang}
           href={getAlternatePath(currentPath, currentLang, lang)}
-          className={cn(
-            'relative rounded-full border border-transparent px-2.5 py-1 text-xs font-semibold transition-colors',
-            lang === currentLang
-              ? 'btn-radiant [--radiant-core:transparent]'
-              : 'text-foreground/65 hover:text-primary hover:bg-primary/10'
-          )}
+          className={
+            variant === 'glass'
+              ? 'language-option'
+              : cn(
+                  'relative rounded-full border border-transparent px-2.5 py-1 text-xs font-semibold transition-colors',
+                  lang === currentLang
+                    ? 'btn-radiant [--radiant-core:transparent]'
+                    : 'text-foreground/65 hover:text-primary hover:bg-primary/10'
+                )
+          }
           aria-current={lang === currentLang ? 'page' : undefined}
         >
           {lang.toUpperCase()}

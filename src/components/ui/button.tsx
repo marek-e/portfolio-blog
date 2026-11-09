@@ -6,14 +6,21 @@ import { forwardRef } from 'react';
 
 type ButtonProps = ButtonPrimitive.Props & VariantProps<typeof buttonVariants>;
 
+function PastelBorder() {
+  return (
+    <span className="button-pastel-border" aria-hidden="true">
+      <span className="button-pastel-colours" />
+    </span>
+  );
+}
+
 const buttonVariants = cva(
   "focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:aria-invalid:border-destructive/50 relative rounded-full border border-transparent text-sm font-medium focus-visible:ring-[3px] aria-invalid:ring-[3px] [&_svg:not([class*='size-'])]:size-4 inline-flex items-center justify-center whitespace-nowrap transition-all duration-200 ease-out active:scale-[0.97] motion-reduce:active:scale-100 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none shrink-0 [&_svg]:shrink-0 outline-none group/button select-none",
   {
     variants: {
       variant: {
         default: 'btn-radiant',
-        pastel:
-          'ring-pastel text-foreground shadow-[0_10px_30px_-14px_oklch(0.6_0.15_330/45%)] hover:shadow-[0_16px_36px_-10px_oklch(0.6_0.15_330/60%)]',
+        pastel: 'btn-pastel text-foreground',
         ghost:
           'hover:bg-muted hover:text-foreground dark:hover:bg-muted/60 aria-expanded:bg-muted aria-expanded:text-foreground',
         destructive:
@@ -46,14 +53,20 @@ const buttonVariants = cva(
 );
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = 'default', size = 'default', animation = 'none', ...props }, ref) => {
+  (
+    { className, variant = 'default', size = 'default', animation = 'none', children, ...props },
+    ref
+  ) => {
     return (
       <ButtonPrimitive
         ref={ref}
         data-slot="button"
         className={cn(buttonVariants({ variant, size, animation, className }))}
         {...props}
-      />
+      >
+        {variant === 'pastel' && <PastelBorder />}
+        {children}
+      </ButtonPrimitive>
     );
   }
 );
@@ -62,14 +75,20 @@ Button.displayName = 'Button';
 type LinkProps = React.ComponentPropsWithRef<'a'> & VariantProps<typeof buttonVariants>;
 
 const Link = forwardRef<HTMLAnchorElement, LinkProps>(
-  ({ className, variant = 'default', size = 'default', animation = 'none', ...props }, ref) => {
+  (
+    { className, variant = 'default', size = 'default', animation = 'none', children, ...props },
+    ref
+  ) => {
     return (
       <a
         ref={ref}
         data-slot="link"
         className={cn(buttonVariants({ variant, size, animation, className }))}
         {...props}
-      />
+      >
+        {variant === 'pastel' && <PastelBorder />}
+        {children}
+      </a>
     );
   }
 );

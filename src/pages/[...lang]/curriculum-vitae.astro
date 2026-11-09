@@ -53,6 +53,9 @@ const t = getTranslations(lang);
           class={buttonVariants({ variant: 'pastel', size: 'lg', animation: 'scale' })}
           aria-label={t.cv.downloadPdf}
         >
+          <span class="button-pastel-border" aria-hidden="true">
+            <span class="button-pastel-colours"></span>
+          </span>
           <HugeiconsIcon icon={PrinterIcon} className="size-4" />
           {t.cv.downloadPdf}
         </button>

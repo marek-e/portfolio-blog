@@ -1,0 +1,63 @@
+.liquid-glass {
+  --liquid-fill: oklch(0.98 0.005 80 / 14%);
+  --liquid-shine: oklch(1 0 0 / 72%);
+  --liquid-return: oklch(1 0 0 / 32%);
+  --liquid-shadow: oklch(0.2 0.025 280 / 16%);
+  --liquid-blur: 8px;
+  isolation: isolate;
+  border: 1px solid transparent;
+  background:
+    linear-gradient(120deg, oklch(1 0 0 / 8%), transparent 38%, transparent 68%, oklch(1 0 0 / 4%)),
+    var(--liquid-fill);
+  background-origin: border-box;
+  background-repeat: no-repeat;
+  box-shadow:
+    inset 0 1px 2px var(--liquid-shine),
+    inset 0 -1px 2px var(--liquid-return),
+    inset 1px 0 2px oklch(1 0 0 / 24%),
+    inset -1px 0 2px oklch(1 0 0 / 12%),
+    var(--liquid-elevation, 0 10px 30px -18px var(--liquid-shadow));
+  -webkit-backdrop-filter: blur(var(--liquid-blur)) saturate(135%);
+  backdrop-filter: blur(var(--liquid-blur)) saturate(135%);
+}
+
+.liquid-glass::before {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background:
+    radial-gradient(ellipse 45% 12% at 24% 2%, oklch(1 0 0 / 56%), transparent),
+    radial-gradient(ellipse 32% 10% at 80% 98%, oklch(1 0 0 / 26%), transparent);
+  pointer-events: none;
+  content: '';
+}
+
+.dark .liquid-glass {
+  --liquid-fill: oklch(0.15 0.025 275 / 24%);
+  --liquid-shine: oklch(0.97 0.008 260 / 48%);
+  --liquid-return: oklch(0.9 0.02 260 / 24%);
+  --liquid-shadow: oklch(0.08 0.02 280 / 52%);
+}
+
+.hero-identity {
+  --liquid-blur: 6px;
+}
+
+.dark .hero-identity {
+  --liquid-fill: oklch(0.12 0.02 275 / 44%);
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .liquid-glass {
+    background-color: var(--card);
+  }
+}
+
+@media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
+  .liquid-glass {
+    background: var(--card);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
