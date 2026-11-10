@@ -15,11 +15,21 @@
     0 32px 56px -29px var(--card-3d-shadow);
 }
 
+.card-3d-backdrop,
 .card-3d-material {
   position: absolute;
   inset: 0;
   z-index: -1;
   border-radius: inherit;
+  pointer-events: none;
+}
+
+.card-3d-backdrop {
+  -webkit-backdrop-filter: blur(var(--card-3d-blur, 14px)) saturate(var(--card-3d-saturation, 1.25));
+  backdrop-filter: blur(var(--card-3d-blur, 14px)) saturate(var(--card-3d-saturation, 1.25));
+}
+
+.card-3d-material {
   background:
     radial-gradient(
       ellipse at 12% 5%,
@@ -32,8 +42,6 @@
       oklch(from var(--primary) l c h / 8%) 47%,
       oklch(from var(--card-3d-white) l c h / 26%)
     );
-  -webkit-backdrop-filter: blur(var(--card-3d-blur, 14px)) saturate(var(--card-3d-saturation, 1.25));
-  backdrop-filter: blur(var(--card-3d-blur, 14px)) saturate(var(--card-3d-saturation, 1.25));
   box-shadow:
     inset 1px 1px 3px var(--card-3d-shine),
     inset -1px -2px 3px var(--card-3d-rim),
@@ -67,6 +75,98 @@
     radial-gradient(ellipse 8% 45% at 100% 78%, var(--card-3d-shine), transparent 90%),
     radial-gradient(ellipse 28% 24% at 100% 100%, var(--card-3d-light), transparent 80%);
   box-shadow: inset 0 0 0 0.5px var(--card-3d-edge);
+}
+
+.card-3d-reflection {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.card-3d-reflection-light {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(
+    circle,
+    oklch(from var(--primary) 0.97 0.025 h / 10%),
+    oklch(from var(--primary) 0.88 0.07 h / 6%) 28%,
+    transparent 70%
+  );
+  opacity: 0;
+  transform: translate3d(-1000px, -1000px, 0);
+  transition: opacity 160ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.card-3d-reflection-edge {
+  padding: 1px;
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+}
+
+.card-3d-reflection-edge .card-3d-reflection-light {
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(
+    circle,
+    var(--card-3d-shine),
+    color-mix(in oklab, var(--primary) 45%, var(--card-3d-white)) 30%,
+    transparent 70%
+  );
+}
+
+.card-3d-reflection-band .card-3d-reflection-light {
+  width: 640px;
+  height: 640px;
+  background: linear-gradient(
+    125deg,
+    transparent 37%,
+    oklch(from var(--card-3d-shine) l c h / 3%) 43%,
+    oklch(from var(--card-3d-shine) l c h / 18%) 48%,
+    oklch(from var(--card-3d-shine) l c h / 4%) 53%,
+    transparent 60%
+  );
+  mask-image: radial-gradient(ellipse 45% 60%, #000, transparent 75%);
+}
+
+.card-3d-optics {
+  position: absolute;
+  pointer-events: none;
+}
+
+.card-3d-refraction {
+  display: none;
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  padding: 22px;
+  border-radius: inherit;
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.card-3d-refraction[data-refraction-ready] {
+  display: block;
+}
+
+@media (prefers-reduced-motion: reduce),
+  (pointer: coarse),
+  (hover: none),
+  (prefers-reduced-transparency: reduce),
+  (prefers-contrast: more) {
+  .card-3d-reflection,
+  .card-3d-refraction[data-refraction-ready] {
+    display: none;
+  }
 }
 
 .card-3d-icon {
@@ -168,6 +268,9 @@
 @media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
   .card-3d-material {
     background-color: var(--card-3d-body);
+  }
+
+  .card-3d-backdrop {
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
   }
