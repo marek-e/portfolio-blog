@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { Moon02Icon, SunIcon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
 
-import { Button } from '@/components/ui/button';
+import '@/styles/mode-toggle.css';
 
 export function ModeToggle() {
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -51,25 +51,16 @@ export function ModeToggle() {
   };
 
   return (
-    <Button
+    <button
       ref={buttonRef}
+      type="button"
       onClick={toggleTheme}
-      variant="ghost"
-      size="icon"
       aria-label="Toggle theme"
-      className="hover:text-primary active:bg-primary/20 rounded-full"
+      className="mode-toggle"
     >
-      <HugeiconsIcon
-        icon={SunIcon}
-        strokeWidth={2}
-        className="size-5 scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90"
-      />
-      <HugeiconsIcon
-        icon={Moon02Icon}
-        strokeWidth={2}
-        className="absolute size-5 scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0"
-      />
-      <span className="sr-only">Toggle theme</span>
-    </Button>
+      <span className="mode-toggle-endcap" aria-hidden="true" />
+      <HugeiconsIcon icon={SunIcon} strokeWidth={2} className="mode-toggle-sun" />
+      <HugeiconsIcon icon={Moon02Icon} strokeWidth={2} className="mode-toggle-moon" />
+    </button>
   );
 }

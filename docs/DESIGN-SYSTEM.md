@@ -134,6 +134,7 @@ One flourish per section at most. Don't sprinkle doodles.
 - The navbar and portrait identity bar use thin `liquid-glass` containers, with a clear centre, soft perimeter reflections and restrained backdrop blur. The identity bar gets a darker transparent fill over the moon in dark mode for text contrast.
 - In light mode, the navbar adds a faint foreground contour and a soft contact shadow so it remains distinct against pale page backgrounds.
 - The desktop navbar hover pill uses the shared `GlassMaterial` lens with a stronger primary-coloured face and rim, tinted highlights and subdued white reflections. It moves between links over 200ms using transforms; reduced motion places it immediately.
+- The theme switch highlights the navbar's rounded right end on hover or keyboard focus. A neutral fill and a soft vertical divider fade in over 180ms while the icon stays still. The endcap is part of the clickable control; mobile keeps a 44px target. Reduced motion removes the fade, and increased contrast uses a solid fill. Outside the navbar, the switch stays unboxed.
 - Floating hashtag stickers (desktop): translucent 3D glass pills.
   - Use the same `GlassMaterial` SVG lens as `Button3D`, with curved reflections, a thin coloured contour and a bright lower edge. Its geometry measures the untransformed pill so parallax cannot distort the rounded ends.
   - Pastel material tokens preserve each tag's colour. A translucent face and soft shadow give the pills depth over the photo without backdrop blur or a stacked lip.
