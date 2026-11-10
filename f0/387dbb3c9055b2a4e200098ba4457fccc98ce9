@@ -1,0 +1,53 @@
+src/components/portfolio/TimelineCards.tsx
+  s_8caa937e16258c::t_c7a582be51e69a 152,154-155
+  s_8caa937e16258c::t_71a94b6690056b 15-34,39,43,50,69-75,190,194,202-205
+  s_8caa937e16258c::t_6b8346385a2e4f 137-140,142,153,183
+  s_8caa937e16258c::t_dacb2d1bda3412 3,134,141
+src/styles/card-3d.css
+  s_8caa937e16258c::t_6b8346385a2e4f 35-36,126-160
+  s_8caa937e16258c::t_f10cce8466824f 161
+src/components/portfolio/ContactSection.astro
+  s_8caa937e16258c::t_dacb2d1bda3412 3
+  s_8caa937e16258c::t_6b8346385a2e4f 52
+  s_8caa937e16258c::t_5866be99d80156 6,9,88
+  s_8caa937e16258c::t_237f498d7f0942 31
+  s_8caa937e16258c::t_aa89cc280cddc6 32,34-48,51,53-63,65-87,89-90
+  s_8caa937e16258c::t_462861feca4bd1 97,100-106,109
+  s_8caa937e16258c::t_f8ec1ea0bead23 29,94-96,98-99,107-108,110-129
+src/components/portfolio/CopyEmailButton.tsx
+  s_8caa937e16258c::t_8a698da58ffd7c 31,53
+src/components/portfolio/TimelineSection.astro
+  s_8caa937e16258c::t_71a94b6690056b 29-56
+src/components/design-system/DesignSystemPreview.tsx
+  s_8caa937e16258c::t_61789ba5aed3ca 311-316
+src/components/ui/card-3d.tsx
+  s_8caa937e16258c::t_dacb2d1bda3412 6-7,9-11,14,26
+  s_8caa937e16258c::t_6b8346385a2e4f 8,12,16,19
+src/components/portfolio/ProjectCardReact.tsx
+  s_8caa937e16258c::t_dacb2d1bda3412 2,58,61,83,151
+src/components/portfolio/ContactSocialLinks.tsx
+  s_8caa937e16258c::t_5866be99d80156 1-28
+docs/DESIGN-SYSTEM.md
+  s_8caa937e16258c::t_61789ba5aed3ca 70-72
+  s_8caa937e16258c::t_71a94b6690056b 74-75
+  s_8caa937e16258c::t_dacb2d1bda3412 15
+  s_8caa937e16258c::t_5866be99d80156 86
+  s_8caa937e16258c::t_88c7a5a135020e 73
+  s_8caa937e16258c::t_6a0786875e463d 87
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "f0387dbb3c9055b2a4e200098ba4457fccc98ce9",
+  "prompts": {},
+  "sessions": {
+    "s_8caa937e16258c": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1c491-472e-70d3-a168-d07468a8633f",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
