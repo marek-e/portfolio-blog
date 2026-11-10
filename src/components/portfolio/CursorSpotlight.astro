@@ -24,6 +24,13 @@ const { class: className = '' } = Astro.props;
     z-index: 1;
     overflow: hidden;
     pointer-events: none;
+    mask-image: linear-gradient(
+      to bottom,
+      transparent,
+      black 150px,
+      black calc(100% - 150px),
+      transparent
+    );
   }
 
   .cursor-spotlight-wrapper[data-spotlight-glass] {

@@ -312,6 +312,7 @@ export function DesignSystemPreview({ lang }: { lang: Lang }) {
           <h3 className="font-display-soft text-2xl font-semibold">Glass variant</h3>
           <p className="text-muted-foreground leading-relaxed">
             A clearer face and thin reflections for timeline entries and the contact panel.
+            Spotlight reflections use warm tints in light mode and pale highlights in dark mode.
           </p>
         </Card3D>
       </Section>
