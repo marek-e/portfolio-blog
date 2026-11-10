@@ -64,16 +64,16 @@ const linksClasses =
 
   :global(.nav-hover-pill) {
     --depth-tint: var(--primary);
-    --depth-white: oklch(1 0 0);
-    --depth-core: color-mix(in oklab, var(--primary) 28%, var(--card));
-    --depth-rim: color-mix(in oklab, var(--primary) 42%, var(--card));
-    --depth-refraction: oklch(from var(--primary) 0.97 0.025 h);
+    --depth-white: oklch(from var(--primary) 0.97 0.025 h);
+    --depth-core: color-mix(in oklab, var(--primary) 40%, var(--card));
+    --depth-rim: color-mix(in oklab, var(--primary) 54%, var(--card));
+    --depth-refraction: oklch(from var(--primary) 0.92 0.06 h);
     position: absolute;
     top: 0;
     left: 0;
     isolation: isolate;
     border-radius: 999px;
-    background: oklch(from var(--primary) l c h / 12%);
+    background: oklch(from var(--primary) l c h / 18%);
     box-shadow: 0 4px 9px -5px oklch(from var(--primary) 0.4 0.09 h / 30%);
     opacity: 0;
     transform-origin: top left;
@@ -93,10 +93,14 @@ const linksClasses =
   }
 
   :global(.dark .nav-hover-pill) {
-    --depth-white: oklch(from var(--primary) 0.96 0.015 h);
-    --depth-core: color-mix(in oklab, var(--primary) 24%, var(--card));
-    --depth-rim: color-mix(in oklab, var(--primary) 42%, var(--card));
-    --depth-refraction: oklch(from var(--primary) 0.87 0.035 h);
+    --depth-white: oklch(from var(--primary) 0.92 0.04 h);
+    --depth-core: color-mix(in oklab, var(--primary) 36%, var(--card));
+    --depth-rim: color-mix(in oklab, var(--primary) 54%, var(--card));
+    --depth-refraction: oklch(from var(--primary) 0.82 0.085 h);
+  }
+
+  :global(.nav-hover-pill .glass-reflections) {
+    opacity: 0.6;
   }
 </style>
 

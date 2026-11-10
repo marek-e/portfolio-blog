@@ -220,6 +220,9 @@ export function DesignSystemPreview({ lang }: { lang: Lang }) {
               <Button variant="destructive">Destructive</Button>
               <Button variant="link">Link</Button>
             </div>
+            <Button variant="pastel" className="mt-3 w-full sm:w-96">
+              A longer pastel button
+            </Button>
           </div>
           <Separator />
           <div>

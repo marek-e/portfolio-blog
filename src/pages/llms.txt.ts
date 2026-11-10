@@ -29,7 +29,7 @@ export const GET: APIRoute = async ({ site }) => {
 
   const content = `# Marek Elmayan
 
-> Portfolio and technical blog of Marek Elmayan, full-stack software engineer.
+> Portfolio and technical blog of Marek Elmayan, AI Engineer.
 > Specializations: web development, UX, cybersecurity, AI, and developer experience (DevX).
 > Contact: melmayan.dev@gmail.com
 

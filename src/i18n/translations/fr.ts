@@ -11,12 +11,12 @@ export const fr: UITranslations = {
     contact: 'Contact',
   },
   hero: {
-    eyebrow: 'Ingénieur full-stack · Paris',
+    eyebrow: 'AI Engineer · Paris',
     greeting: 'Hey, je suis',
     name: 'Marek Elmayan',
     scrollHint: 'Défiler',
     pageTitle: 'Marek Elmayan | Portfolio',
-    pageDescription: 'Portfolio et blog de Marek Elmayan, ingénieur logiciel full-stack.',
+    pageDescription: 'Portfolio et blog de Marek Elmayan, AI Engineer.',
     badges: ['#UX', '#Cybersecurity', '#AI', '#DevX', '#OpenSource'],
     headline: 'Hey, je suis Marek Elmayan 👋',
     subtitle:
@@ -110,7 +110,7 @@ export const fr: UITranslations = {
   },
   cv: {
     pageTitle: 'Marek_Elmayan_CV_FR',
-    pageDescription: 'Curriculum Vitae de Marek Elmayan, ingénieur logiciel full-stack',
+    pageDescription: 'Curriculum Vitae de Marek Elmayan, AI Engineer',
     downloadPdf: 'Télécharger en PDF',
     sections: {
       experience: 'Expérience professionnelle',
@@ -151,7 +151,7 @@ export const fr: UITranslations = {
     },
     values: {
       name: 'Marek Elmayan',
-      job: 'Ingénieur Logiciel Full-Stack',
+      job: 'AI Engineer',
       nature: 'Curieux',
       gameTime: '{age} ans',
       location: 'Paris, France',

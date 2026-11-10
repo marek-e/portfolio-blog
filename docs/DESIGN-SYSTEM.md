@@ -95,7 +95,7 @@ Radiant rules, learned from review:
 
 Every variant has a visible hover cue, without moving: radiant gets a stronger glow and the light sweep, pastel swaps the orange and purple ends of its gradient border with a subtle primary-tinted fill, ghost a fill, destructive a stronger fill and shadow, and link an underline. Buttons don't lift on hover.
 
-The pastel button has one masked border layer, with distinct orange and purple arcs joined by rose transitions. The arcs rotate through one and a half turns over 500ms with the strong ease-in-out curve `cubic-bezier(0.77, 0, 0.175, 1)`, reversing smoothly on leave, while the pill and label stay still. There is no static gradient underneath the moving border. The fill tint fades over 180ms. Keyboard focus and reduced motion keep the border stationary. Disabled controls do not trigger either effect.
+The pastel button has one masked border layer, with a linear orange-to-rose-to-purple blend spread across the full width so long pills keep smooth colour transitions. The oversized gradient covers the border throughout its half-turn rotation over 500ms with the strong ease-in-out curve `cubic-bezier(0.77, 0, 0.175, 1)`, reversing smoothly on leave, while the pill and label stay still. There is no static gradient underneath the moving border. The fill tint fades over 250ms with the same easing as the border. Keyboard focus and reduced motion keep the border stationary. Disabled controls do not trigger either effect.
 
 The radiant glow is always on at full strength. Hover only intensifies it; it must never appear only on hover.
 
@@ -117,7 +117,7 @@ One flourish per section at most. Don't sprinkle doodles.
 - The project CTA uses the classic radiant button; the CV CTA uses the classic `pastel` variant. Their flatter treatment distinguishes actions from the sculpted floating pills.
 - The navbar and portrait identity bar use thin `liquid-glass` containers, with a clear centre, soft perimeter reflections and restrained backdrop blur. The identity bar gets a darker transparent fill over the moon in dark mode for text contrast.
 - In light mode, the navbar adds a faint foreground contour and a soft contact shadow so it remains distinct against pale page backgrounds.
-- The desktop navbar hover pill uses the shared `GlassMaterial` lens with softer primary-tinted reflections. It moves between links over 200ms using transforms; reduced motion places it immediately.
+- The desktop navbar hover pill uses the shared `GlassMaterial` lens with a stronger primary-coloured face and rim, tinted highlights and subdued white reflections. It moves between links over 200ms using transforms; reduced motion places it immediately.
 - Floating hashtag stickers (desktop): translucent 3D glass pills.
   - Use the same `GlassMaterial` SVG lens as `Button3D`, with curved reflections, a thin coloured contour and a bright lower edge. Its geometry measures the untransformed pill so parallax cannot distort the rounded ends.
   - Pastel material tokens preserve each tag's colour. A translucent face and soft shadow give the pills depth over the photo without backdrop blur or a stacked lip.
