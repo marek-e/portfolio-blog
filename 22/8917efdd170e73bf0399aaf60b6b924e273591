@@ -1,0 +1,26 @@
+docs/DESIGN-SYSTEM.md
+  s_122b00ac2b20ed::t_d8b3fb9010527f 74
+src/components/portfolio/CursorSpotlight.astro
+  s_122b00ac2b20ed::t_610c2d1d42a7ef 27-33
+src/components/design-system/DesignSystemPreview.tsx
+  s_122b00ac2b20ed::t_d8b3fb9010527f 315
+src/styles/card-3d.css
+  s_122b00ac2b20ed::t_1f62109190686f 100-101,122,134-136,228-231
+  s_122b00ac2b20ed::t_e22f2491b01f0b 11-14
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "228917efdd170e73bf0399aaf60b6b924e273591",
+  "prompts": {},
+  "sessions": {
+    "s_122b00ac2b20ed": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1c6b0-b6b7-72c0-80a1-5ebc65da1c19",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
