@@ -71,7 +71,9 @@ The home page project carousel uses `Card3D` with compact padding and concentric
 
 The glass variant uses 6px backdrop blur and narrow edge highlights. Both variants share the same radius, exterior contour and opaque accessibility fallbacks.
 
-The timeline line follows the entry accents in order: peach, sky, mint, lilac and butter. Gradient stops align with the centre of each year badge and update when the layout resizes. The existing scroll reveal stays in place, with a faint neutral dotted line underneath and a static pastel gradient before JavaScript runs.
+The timeline line follows the entry accents in order: peach, sky, mint, lilac and butter. Gradient stops and curve endpoints align with the centre of each year badge and update when the layout resizes. Broad alternating curves bow up to 36px on desktop and 18px on mobile, staying inside the spine gutter. The line keeps its scroll reveal and faint neutral dotted base, with a static pastel path before JavaScript runs.
+
+Timeline cards use the selected Sweep entrance: a 700ms strong ease-out from the outer screen edge, with a 48px rise, a 5° tilt and scale from 0.94 to 1. Desktop entries alternate sides; mobile entries enter from the right. Each card plays once as its stationary row enters view. Wider cards and more vertical spacing give the reveal room. Keyboard focus and reduced motion reveal cards immediately. Completed animations release their transforms, and cards stay visible without JavaScript.
 
 `Card3D` has a 2.75rem radius, a translucent primary-tinted face with 14px backdrop blur, and one thin exterior contour. The face, rim, icon tile and shadow use the same primary hue so warm and cool tints do not clash. One continuous rounded surface uses soft inset shading and asymmetric corner highlights; separate filled inner rectangles create visible seams and must not be added. The optional `.card-3d-icon` tile is 64px square and uses the same continuous shading. Reduced transparency, increased contrast and browsers without backdrop filtering use an opaque face.
 

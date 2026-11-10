@@ -12,7 +12,7 @@ const timelineEntries = getLocalizedTimeline(lang);
 
 <CursorSpotlight>
   <section id="timeline" class="relative py-20 md:py-24" aria-label={t.timeline.title}>
-    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-12">
       <SectionHeading
         eyebrow={t.timeline.eyebrow}
         title={t.timeline.title}
@@ -27,15 +27,19 @@ const timelineEntries = getLocalizedTimeline(lang);
 </CursorSpotlight>
 
 <script>
-  function initTimelineGradient() {
+  function initTimeline() {
     const timeline = document.querySelector<HTMLElement>('.timeline');
     if (!timeline) return;
 
     const line = timeline.querySelector<HTMLElement>('[data-timeline-line]')!;
     const years = [...timeline.querySelectorAll<HTMLElement>('[data-timeline-year]')];
     const stops = [...timeline.querySelectorAll<SVGStopElement>('#timeline-ink stop')];
+    const paths = [...timeline.querySelectorAll<SVGPathElement>('[data-timeline-path]')];
+    const cards = [...timeline.querySelectorAll<HTMLElement>('.timeline-card')];
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const animations = new Map<HTMLElement, Animation>();
 
-    const updateStops = () => {
+    const updateLine = () => {
       const bounds = line.getBoundingClientRect();
       const offsets = years.map((year) => {
         const badge = year.getBoundingClientRect();
@@ -43,18 +47,107 @@ const timelineEntries = getLocalizedTimeline(lang);
       });
 
       stops.forEach((stop, index) => stop.setAttribute('offset', `${offsets[index]}%`));
+
+      const { width, height } = line.querySelector('svg')!.viewBox.baseVal;
+      const center = width / 2;
+      const positions = offsets.map((offset) => (offset / 100) * height);
+      let path = `M${center} 0L${center} ${positions[0]}`;
+
+      positions.slice(1).forEach((position, index) => {
+        const previous = positions[index];
+        const bend = index % 2 === 0 ? width : 0;
+        const handle = (position - previous) / 3;
+        path += `C${bend} ${previous + handle} ${bend} ${position - handle} ${center} ${position}`;
+      });
+
+      path += `L${center} ${height}`;
+      paths.forEach((element) => element.setAttribute('d', path));
     };
 
-    const observer = new ResizeObserver(updateStops);
-    observer.observe(timeline);
-    document.addEventListener('astro:before-swap', () => observer.disconnect(), { once: true });
+    const revealCard = (card: HTMLElement) => {
+      card.removeAttribute('data-timeline-pending');
+      card.dataset.timelineRevealed = '';
+      animations.get(card)?.cancel();
+      animations.delete(card);
+      entranceObserver.unobserve(card.closest('.timeline-item')!);
+    };
+
+    const entranceObserver = new IntersectionObserver(
+      (observations) => {
+        observations.forEach((observation) => {
+          if (!observation.isIntersecting) return;
+          entranceObserver.unobserve(observation.target);
+          const card = observation.target.querySelector<HTMLElement>('.timeline-card')!;
+          if (!card.hasAttribute('data-timeline-pending')) return;
+
+          const desktop = window.matchMedia('(min-width: 768px)').matches;
+          const direction = desktop && cards.indexOf(card) % 2 === 0 ? -1 : 1;
+          const distance = window.innerWidth * (desktop ? 0.46 : 0.72);
+          const animation = card.animate(
+            [
+              {
+                opacity: 0,
+                transform: `translateX(${direction * distance}px) translateY(48px) rotate(${direction * 5}deg) scale(0.94)`,
+              },
+              { opacity: 1, offset: 0.3 },
+              { opacity: 1, transform: 'translateX(0) translateY(0) rotate(0) scale(1)' },
+            ],
+            { duration: 700, easing: 'cubic-bezier(0.23, 1, 0.32, 1)', fill: 'both' }
+          );
+          animations.set(card, animation);
+          animation.onfinish = () => revealCard(card);
+        });
+      },
+      { threshold: 0.18, rootMargin: '0px 0px -8% 0px' }
+    );
+
+    if (!reducedMotion.matches) {
+      cards.forEach((card) => {
+        card.dataset.timelinePending = '';
+        entranceObserver.observe(card.closest('.timeline-item')!);
+      });
+    }
+
+    const revealOnFocus = (event: FocusEvent) => {
+      const card = (event.target as HTMLElement).closest<HTMLElement>('.timeline-card');
+      if (card) revealCard(card);
+    };
+    const revealForReducedMotion = () => {
+      if (reducedMotion.matches) cards.forEach(revealCard);
+    };
+    const resizeObserver = new ResizeObserver(updateLine);
+    resizeObserver.observe(timeline);
+    timeline.addEventListener('focusin', revealOnFocus);
+    reducedMotion.addEventListener('change', revealForReducedMotion);
+
+    document.addEventListener(
+      'astro:before-swap',
+      () => {
+        resizeObserver.disconnect();
+        entranceObserver.disconnect();
+        cards.forEach(revealCard);
+        timeline.removeEventListener('focusin', revealOnFocus);
+        reducedMotion.removeEventListener('change', revealForReducedMotion);
+      },
+      { once: true }
+    );
   }
 
-  initTimelineGradient();
-  document.addEventListener('astro:after-swap', initTimelineGradient);
+  initTimeline();
+  document.addEventListener('astro:after-swap', initTimeline);
 </script>
 
 <style>
+  :global(.timeline-card[data-timeline-pending]) {
+    opacity: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :global(.timeline-card[data-timeline-pending]) {
+      opacity: 1;
+    }
+  }
+
   @supports (animation-timeline: view()) {
     @media (prefers-reduced-motion: no-preference) {
       :global(.timeline) {
@@ -67,12 +160,6 @@ const timelineEntries = getLocalizedTimeline(lang);
         animation-timeline: --timeline;
         animation-range: entry 0% exit 0%;
       }
-
-      :global(.timeline-card) {
-        animation: timeline-rise linear both;
-        animation-timeline: view();
-        animation-range: entry 0% cover 14rem;
-      }
     }
   }
 
@@ -82,15 +169,6 @@ const timelineEntries = getLocalizedTimeline(lang);
     }
     to {
       clip-path: inset(0 0 0 0);
-    }
-  }
-
-  @keyframes timeline-rise {
-    from {
-      transform: translateY(2.5rem) scale(0.96);
-    }
-    to {
-      transform: none;
     }
   }
 </style>

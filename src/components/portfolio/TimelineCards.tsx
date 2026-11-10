@@ -34,22 +34,23 @@ const ACCENTS = [
   },
 ];
 
-const LINE_PATH = 'M8 0C3 90 13 170 8 250S3 420 8 500s5 170 0 250 5 170 0 250';
+const LINE_PATH = 'M48 0C0 80 0 170 48 250S96 420 48 500S0 670 48 750S96 920 48 1000';
 
 function TimelineLine({ count }: { count: number }) {
   return (
     <div
       aria-hidden="true"
       data-timeline-line=""
-      className="pointer-events-none absolute inset-y-2 left-7 w-4 -translate-x-1/2 [mask-image:linear-gradient(to_bottom,black_85%,transparent)] md:left-1/2"
+      className="pointer-events-none absolute inset-y-2 left-6 w-12 -translate-x-1/2 [mask-image:linear-gradient(to_bottom,black_85%,transparent)] md:left-1/2 md:w-24"
     >
       <svg
-        viewBox="0 0 16 1000"
+        viewBox="0 0 96 1000"
         preserveAspectRatio="none"
         fill="none"
         className="text-foreground/15 absolute inset-0 h-full w-full overflow-visible"
       >
         <path
+          data-timeline-path=""
           d={LINE_PATH}
           stroke="currentColor"
           strokeWidth={1.5}
@@ -59,7 +60,7 @@ function TimelineLine({ count }: { count: number }) {
         />
       </svg>
       <svg
-        viewBox="0 0 16 1000"
+        viewBox="0 0 96 1000"
         preserveAspectRatio="none"
         fill="none"
         className="timeline-progress absolute inset-0 h-full w-full overflow-visible"
@@ -76,6 +77,7 @@ function TimelineLine({ count }: { count: number }) {
           </linearGradient>
         </defs>
         <path
+          data-timeline-path=""
           d={LINE_PATH}
           stroke="url(#timeline-ink)"
           strokeWidth={2.5}
@@ -186,7 +188,7 @@ function TimelineCard({
 
 export function TimelineCards({ entries, presentLabel, lang }: TimelineCardsProps) {
   return (
-    <div className="timeline relative mx-auto w-full max-w-5xl">
+    <div className="timeline relative mx-auto w-full max-w-[76rem]">
       <TimelineLine count={entries.length} />
       <ol className="relative">
         {entries.map((entry, index) => {
@@ -196,7 +198,7 @@ export function TimelineCards({ entries, presentLabel, lang }: TimelineCardsProp
           return (
             <li
               key={entry.id}
-              className="timeline-item relative grid grid-cols-[3rem_minmax(0,1fr)] gap-x-2 pb-8 last:pb-0 md:grid-cols-[1fr_6rem_1fr] md:gap-x-0 md:pb-0 md:not-first:-mt-24"
+              className="timeline-item relative grid grid-cols-[3rem_minmax(0,1fr)] gap-x-2 pb-16 last:pb-0 md:grid-cols-[1fr_6rem_1fr] md:gap-x-0 md:not-first:-mt-8"
             >
               <div className="col-start-1 row-start-1 flex items-start justify-center pt-7 md:col-start-2">
                 <span
