@@ -1,0 +1,28 @@
+src/components/portfolio/FeaturedProjectsCarousel.tsx
+  s_af72a17058b685::t_22d43d665124b2 7,13-15,34-62,131
+docs/DESIGN-SYSTEM.md
+  s_af72a17058b685::t_8bea8f8eb62a25 92
+  s_af72a17058b685::t_22d43d665124b2 70,93,118
+src/styles/project-card.css
+  s_af72a17058b685::t_c552470979b0ec 1-52
+src/components/portfolio/ProjectCardReact.tsx
+  s_af72a17058b685::t_c552470979b0ec 4,56,72,86,111-112,120,132
+  s_af72a17058b685::t_4a3e57bb13c5b2 46-50,55,73-74,83,92,96-105
+  s_af72a17058b685::t_b280365fe0fb76 53-54,57-60
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "f724b0916298236dadefe595a4b8462ebdc5a82c",
+  "prompts": {},
+  "sessions": {
+    "s_af72a17058b685": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1c625-cc95-7402-b7c5-3d9ec62d8166",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
