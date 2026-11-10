@@ -67,7 +67,7 @@ Radius: `rounded-3xl` for cards, `rounded-2xl` for small tiles, `rounded-full` f
 
 `Card3D` and `Button3D` add the clear glass treatment shown on `/design-system`: rounded bevels, curved reflections and diffused shadows. Brand accents follow `primary`, orange in light mode and purple in dark. Keep these components to home page highlights and occasional CTAs, following the same placement rules as glass surfaces.
 
-The home page project carousel uses `Card3D` with compact padding and concentric image corners. The current work entry uses the default `Card3D` in the timeline; past entries use `variant="glass"` for a clearer face and thinner reflections. The shared contact panel also uses the glass variant on both the home and contact pages, with the existing glass ribbon artwork behind the panel so translucency is visible. The ribbons fade outside the card, leaving the page background plain, and disappear under reduced transparency or increased contrast. Project and timeline cards retain semantic `article` elements through `Card3D`'s `as` prop.
+The home page project carousel uses `Card3D` with `variant="glass"`, compact padding, concentric image corners and a tight shadow that fits the carousel gutters. Titles and descriptions reserve two lines, and neutral translucent technology chips share a two-row area so the card footers align. Extra technology counts stay beside the final visible chip. Logo padding balances the artwork's visual weight across projects. The current work entry uses the default `Card3D` in the timeline; past entries use `variant="glass"` for a clearer face and thinner reflections. The shared contact panel also uses the glass variant on both the home and contact pages, with the existing glass ribbon artwork behind the panel so translucency is visible. The ribbons fade outside the card, leaving the page background plain, and disappear under reduced transparency or increased contrast. Project and timeline cards retain semantic `article` elements through `Card3D`'s `as` prop.
 
 The glass variant uses 6px backdrop blur and narrow edge highlights. Both variants share the same radius, exterior contour and opaque accessibility fallbacks.
 
@@ -88,6 +88,8 @@ The home page developer ID card uses the approved type specimen layout: a large 
 The `Button3D` secondary variant uses cool neutral glass, slate text and softer reflections. Its faint blue-grey edge and shadow distinguish it from the primary variant's brand-coloured lens.
 
 The contact panel's social links use the secondary `Button3D` in the 48px circular icon size. Only the social icon wiggles on hover, with motion disabled under reduced motion; the glass lens stays still. These render as links with translated accessible labels on both the home and contact pages.
+
+Home page project cards keep the classic flat pills: radiant for "Live" and pastel for "Code", both with 44px targets. The title link covers the card, so there is no separate details arrow. On a fine pointer, hovering the card fades in a brighter primary-tinted face and rim over 200ms. The artwork retains its subtle 4% zoom; the card, text and action buttons stay still. Hovering "Live" or "Code" uses the button's own feedback instead. Keyboard focus on the card link reveals the highlight immediately. Reduced motion keeps the highlight without the artwork zoom. Carousel navigation retains the secondary glass lens in a 44px circular target.
 
 On a fine pointer, 3D buttons fade in a brighter copy of their glass lens over 200ms with the strong `--ease-out` curve. The glass brightens evenly, preserving its hue; the label, reflections and outer shape stay still. The brighter lens uses a static brightness and saturation filter, and only its opacity animates. Transitions reverse smoothly when interrupted. Disabled buttons and touch do not trigger hover; reduced motion uses a 160ms opacity fade. Press feedback lasts 160ms and does not animate keyboard presses.
 
@@ -113,7 +115,7 @@ The pastel button has one masked border layer, with a linear orange-to-rose-to-p
 
 The radiant glow is always on at full strength. Hover only intensifies it; it must never appear only on hover.
 
-The same radiant style applies to back-to-top and the "Live" button on project cards. In the mobile header, `LanguageSwitcher` uses a thin liquid-glass track and a softly bevelled brand-coloured lens for the current language, with 44px targets. The footer keeps its original compact frosted track and radiant active language through `variant="classic"`. Inactive options get a quiet primary tint on hover. The desktop language tab uses the same clear glass with a brighter rounded lower edge; its flag appears on hover or keyboard focus.
+The same radiant style applies to back-to-top. In the mobile header, `LanguageSwitcher` uses a thin liquid-glass track and a softly bevelled brand-coloured lens for the current language, with 44px targets. The footer keeps its original compact frosted track and radiant active language through `variant="classic"`. Inactive options get a quiet primary tint on hover. The desktop language tab uses the same clear glass with a brighter rounded lower edge; its flag appears on hover or keyboard focus.
 
 ## Hand-drawn marks
 

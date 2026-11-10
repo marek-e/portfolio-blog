@@ -1,8 +1,7 @@
 import { Link } from '@/components/ui/button';
 import { Card3D } from '@/components/ui/card-3d';
-import { HugeiconsIcon } from '@hugeicons/react';
-import { ArrowUpRight01Icon } from '@hugeicons/core-free-icons';
 import { cn } from '@/lib/utils';
+import '@/styles/project-card.css';
 
 export interface ProjectData {
   title: string;
@@ -35,15 +34,6 @@ const PANEL_TONES = [
   'from-pastel-butter/80 to-pastel-peach/50 dark:from-pastel-butter/14 dark:to-pastel-peach/8',
 ] as const;
 
-const CHIP_TONES = [
-  'bg-pastel-sky/45 dark:bg-pastel-sky/12 dark:text-pastel-sky',
-  'bg-pastel-mint/50 dark:bg-pastel-mint/12 dark:text-pastel-mint',
-  'bg-pastel-lilac/45 dark:bg-pastel-lilac/12 dark:text-pastel-lilac',
-  'bg-pastel-peach/50 dark:bg-pastel-peach/12 dark:text-pastel-peach',
-  'bg-pastel-rose/45 dark:bg-pastel-rose/12 dark:text-pastel-rose',
-  'bg-pastel-butter/60 dark:bg-pastel-butter/12 dark:text-pastel-butter',
-] as const;
-
 function pickTone<T>(key: string, tones: readonly T[]): T {
   const hash = [...key].reduce((acc, char) => acc + char.charCodeAt(0), 0);
   return tones[hash % tones.length];
@@ -53,9 +43,21 @@ export function ProjectCardReact({ project, projectUrl, translations }: ProjectC
   const { title, description, techStack, links, image, imageAlt, objectFit } = project;
   const isContained = objectFit === 'contain' || objectFit === 'scale-down';
   const hiddenTechCount = techStack.length - 3;
+  const artworkPadding = projectUrl.endsWith('/personal-portfolio')
+    ? 'p-[16%]'
+    : projectUrl.endsWith('/next-armored')
+      ? 'p-[5%]'
+      : 'p-[11%]';
 
   return (
-    <Card3D as="article" className="group h-full gap-0 p-3 sm:p-3">
+    <Card3D
+      as="article"
+      variant="glass"
+      className="project-card h-full gap-0 p-3 sm:p-3"
+      style={{
+        boxShadow: '0 2px 3px -1px var(--card-3d-edge), 0 12px 24px -20px var(--card-3d-shadow)',
+      }}
+    >
       <div
         className={cn(
           'relative aspect-[4/3] overflow-hidden rounded-[2rem] bg-linear-to-br',
@@ -67,8 +69,9 @@ export function ProjectCardReact({ project, projectUrl, translations }: ProjectC
             src={image}
             alt={imageAlt || `Screenshot of ${title}`}
             className={cn(
-              'h-full w-full transition-transform duration-500 ease-out motion-safe:group-hover:scale-[1.04]',
-              isContained && 'p-8 drop-shadow-[0_12px_24px_oklch(0.3_0.05_300/18%)]'
+              'project-card-artwork h-full w-full',
+              isContained && 'drop-shadow-[0_12px_24px_oklch(0.3_0.05_300/18%)]',
+              isContained && artworkPadding
             )}
             style={{ objectFit }}
             loading="lazy"
@@ -77,40 +80,36 @@ export function ProjectCardReact({ project, projectUrl, translations }: ProjectC
       </div>
 
       <div className="flex flex-1 flex-col px-3.5 pt-5 pb-3">
-        <h3 className="font-display-soft text-foreground text-2xl font-semibold tracking-tight">
+        <h3 className="font-display-soft text-foreground min-h-16 text-2xl leading-8 font-semibold tracking-tight">
           <a
             href={projectUrl}
-            className="focus-visible:after:ring-ring after:absolute after:inset-0 after:rounded-[2.75rem] focus-visible:outline-none focus-visible:after:ring-2"
+            className="project-card-link focus-visible:after:ring-ring after:absolute after:inset-0 after:rounded-[2.75rem] focus-visible:outline-none focus-visible:after:ring-2"
           >
             {title}
             <span className="sr-only"> · {translations.viewDetails}</span>
           </a>
         </h3>
-        <p className="text-muted-foreground mt-2 line-clamp-2 text-sm leading-relaxed">
+        <p className="text-muted-foreground mt-2 line-clamp-2 min-h-[2lh] text-sm leading-relaxed">
           {description}
         </p>
 
-        <ul className="mt-4 flex flex-wrap gap-1.5">
-          {techStack.slice(0, 3).map((tech) => (
-            <li
-              key={tech}
-              className={cn(
-                'text-foreground/80 rounded-full px-2.5 py-0.5 font-mono text-xs whitespace-nowrap',
-                pickTone(tech, CHIP_TONES)
+        <ul className="mt-3 flex min-h-14 flex-wrap content-start gap-1.5">
+          {techStack.slice(0, 3).map((tech, index) => (
+            <li key={tech} className="flex min-w-0 items-center gap-1.5">
+              <span className="bg-card/65 text-muted-foreground border-border/60 inline-flex h-6 items-center rounded-full border px-2.5 font-mono text-xs whitespace-nowrap">
+                {tech}
+              </span>
+              {index === 2 && hiddenTechCount > 0 && (
+                <span className="bg-card/65 text-muted-foreground border-border/60 inline-flex h-6 items-center rounded-full border px-2 font-mono text-xs">
+                  +{hiddenTechCount}
+                </span>
               )}
-            >
-              {tech}
             </li>
           ))}
-          {hiddenTechCount > 0 && (
-            <li className="text-muted-foreground border-border rounded-full border px-2.5 py-0.5 font-mono text-xs">
-              +{hiddenTechCount}
-            </li>
-          )}
         </ul>
 
-        <div className="mt-auto flex items-center justify-between gap-2 pt-6">
-          <div className="relative z-10 flex gap-1.5">
+        <div className="mt-auto pt-5">
+          <div className="project-card-actions relative z-10 flex w-fit gap-2">
             {links?.demo && (
               <Link
                 variant="default"
@@ -118,7 +117,7 @@ export function ProjectCardReact({ project, projectUrl, translations }: ProjectC
                 href={links.demo}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-3.5"
+                className="h-11 px-4"
               >
                 {translations.liveDemo}
               </Link>
@@ -130,22 +129,12 @@ export function ProjectCardReact({ project, projectUrl, translations }: ProjectC
                 href={links.repo}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-3.5"
+                className="h-11 px-4"
               >
                 {translations.code}
               </Link>
             )}
           </div>
-          <span
-            aria-hidden="true"
-            className="glass-strong text-foreground group-hover:bg-primary group-hover:text-primary-foreground flex size-10 shrink-0 items-center justify-center rounded-full transition-colors duration-300 group-hover:border-transparent"
-          >
-            <HugeiconsIcon
-              icon={ArrowUpRight01Icon}
-              strokeWidth={2}
-              className="size-4 transition-transform duration-300 motion-safe:group-hover:rotate-45"
-            />
-          </span>
         </div>
       </div>
     </Card3D>
