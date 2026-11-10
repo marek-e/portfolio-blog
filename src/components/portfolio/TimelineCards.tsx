@@ -1,5 +1,6 @@
 import { Briefcase01Icon, Mortarboard01Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
+import { Card3D } from '@/components/ui/card-3d';
 import { formatDateRange, type TimelineEntry } from '@/types/timeline';
 import type { Lang } from '@/i18n/config';
 import { cn } from '@/lib/utils';
@@ -11,26 +12,42 @@ interface TimelineCardsProps {
 }
 
 const ACCENTS = [
-  'bg-pastel-peach/60 dark:bg-pastel-peach/12 dark:text-pastel-peach',
-  'bg-pastel-sky/60 dark:bg-pastel-sky/12 dark:text-pastel-sky',
-  'bg-pastel-mint/60 dark:bg-pastel-mint/12 dark:text-pastel-mint',
-  'bg-pastel-lilac/60 dark:bg-pastel-lilac/12 dark:text-pastel-lilac',
-  'bg-pastel-butter/70 dark:bg-pastel-butter/12 dark:text-pastel-butter',
+  {
+    color: 'var(--pastel-peach)',
+    className: 'bg-pastel-peach/60 dark:bg-pastel-peach/12 dark:text-pastel-peach',
+  },
+  {
+    color: 'var(--pastel-sky)',
+    className: 'bg-pastel-sky/60 dark:bg-pastel-sky/12 dark:text-pastel-sky',
+  },
+  {
+    color: 'var(--pastel-mint)',
+    className: 'bg-pastel-mint/60 dark:bg-pastel-mint/12 dark:text-pastel-mint',
+  },
+  {
+    color: 'var(--pastel-lilac)',
+    className: 'bg-pastel-lilac/60 dark:bg-pastel-lilac/12 dark:text-pastel-lilac',
+  },
+  {
+    color: 'var(--pastel-butter)',
+    className: 'bg-pastel-butter/70 dark:bg-pastel-butter/12 dark:text-pastel-butter',
+  },
 ];
 
 const LINE_PATH = 'M8 0C3 90 13 170 8 250S3 420 8 500s5 170 0 250 5 170 0 250';
 
-function TimelineLine() {
+function TimelineLine({ count }: { count: number }) {
   return (
     <div
       aria-hidden="true"
+      data-timeline-line=""
       className="pointer-events-none absolute inset-y-2 left-7 w-4 -translate-x-1/2 [mask-image:linear-gradient(to_bottom,black_85%,transparent)] md:left-1/2"
     >
       <svg
         viewBox="0 0 16 1000"
         preserveAspectRatio="none"
         fill="none"
-        className="text-foreground/30 absolute inset-0 h-full w-full overflow-visible"
+        className="text-foreground/15 absolute inset-0 h-full w-full overflow-visible"
       >
         <path
           d={LINE_PATH}
@@ -49,9 +66,13 @@ function TimelineLine() {
       >
         <defs>
           <linearGradient id="timeline-ink" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" style={{ stopColor: 'var(--marker)' }} />
-            <stop offset="55%" style={{ stopColor: 'var(--pastel-lilac)' }} />
-            <stop offset="100%" style={{ stopColor: 'var(--pastel-sky)' }} />
+            {Array.from({ length: count }, (_, index) => (
+              <stop
+                key={index}
+                offset={`${((index + 0.5) / count) * 100}%`}
+                style={{ stopColor: ACCENTS[index % ACCENTS.length].color }}
+              />
+            ))}
           </linearGradient>
         </defs>
         <path
@@ -110,10 +131,15 @@ function TimelineCard({
   presentLabel: string;
 }) {
   const icon = entry.type === 'education' ? Mortarboard01Icon : Briefcase01Icon;
+  const isCurrentRole = entry.type === 'work' && entry.endDate === null;
 
   return (
-    <article className="glass rounded-3xl p-5 transition duration-300 hover:-translate-y-0.5 hover:shadow-lg sm:p-6 md:p-7">
-      <div className="mb-5 flex items-center justify-between gap-4">
+    <Card3D
+      as="article"
+      variant={isCurrentRole ? 'default' : 'glass'}
+      className="gap-0 p-5 sm:p-6 md:p-7"
+    >
+      <div className="mb-5 flex flex-wrap items-center justify-between gap-4">
         <div className="flex items-center gap-3">
           <span
             className={cn(
@@ -123,7 +149,10 @@ function TimelineCard({
           >
             <HugeiconsIcon icon={icon} className="size-4.5" strokeWidth={1.8} />
           </span>
-          <time className="text-muted-foreground font-mono text-xs" dateTime={entry.startDate}>
+          <time
+            className="text-muted-foreground font-mono text-xs whitespace-nowrap"
+            dateTime={entry.startDate}
+          >
             {formatDateRange(entry.startDate, entry.endDate, lang, presentLabel)}
           </time>
         </div>
@@ -151,18 +180,18 @@ function TimelineCard({
           ))}
         </ul>
       )}
-    </article>
+    </Card3D>
   );
 }
 
 export function TimelineCards({ entries, presentLabel, lang }: TimelineCardsProps) {
   return (
     <div className="timeline relative mx-auto w-full max-w-5xl">
-      <TimelineLine />
+      <TimelineLine count={entries.length} />
       <ol className="relative">
         {entries.map((entry, index) => {
           const isLeft = index % 2 === 0;
-          const accent = ACCENTS[index % ACCENTS.length];
+          const accent = ACCENTS[index % ACCENTS.length].className;
 
           return (
             <li
@@ -170,7 +199,10 @@ export function TimelineCards({ entries, presentLabel, lang }: TimelineCardsProp
               className="timeline-item relative grid grid-cols-[3rem_minmax(0,1fr)] gap-x-2 pb-8 last:pb-0 md:grid-cols-[1fr_6rem_1fr] md:gap-x-0 md:pb-0 md:not-first:-mt-24"
             >
               <div className="col-start-1 row-start-1 flex items-start justify-center pt-7 md:col-start-2">
-                <span className="bg-card ring-foreground/5 relative z-10 rounded-full shadow-sm ring-1">
+                <span
+                  data-timeline-year=""
+                  className="bg-card ring-foreground/5 relative z-10 rounded-full shadow-sm ring-1"
+                >
                   <span
                     className={cn(
                       'text-foreground/85 block rounded-full px-2.5 py-1 font-mono text-xs font-medium',

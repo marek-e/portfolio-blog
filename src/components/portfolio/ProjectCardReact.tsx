@@ -1,4 +1,5 @@
 import { Link } from '@/components/ui/button';
+import { Card3D } from '@/components/ui/card-3d';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { ArrowUpRight01Icon } from '@hugeicons/core-free-icons';
 import { cn } from '@/lib/utils';
@@ -54,10 +55,10 @@ export function ProjectCardReact({ project, projectUrl, translations }: ProjectC
   const hiddenTechCount = techStack.length - 3;
 
   return (
-    <article className="group glass relative flex h-full flex-col rounded-3xl p-2.5 transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_28px_60px_-28px_var(--glass-shadow)]">
+    <Card3D as="article" className="group h-full gap-0 p-3 sm:p-3">
       <div
         className={cn(
-          'relative aspect-[4/3] overflow-hidden rounded-[1.25rem] bg-linear-to-br',
+          'relative aspect-[4/3] overflow-hidden rounded-[2rem] bg-linear-to-br',
           pickTone(title, PANEL_TONES)
         )}
       >
@@ -79,7 +80,7 @@ export function ProjectCardReact({ project, projectUrl, translations }: ProjectC
         <h3 className="font-display-soft text-foreground text-2xl font-semibold tracking-tight">
           <a
             href={projectUrl}
-            className="focus-visible:after:ring-ring after:absolute after:inset-0 after:rounded-3xl focus-visible:outline-none focus-visible:after:ring-2"
+            className="focus-visible:after:ring-ring after:absolute after:inset-0 after:rounded-[2.75rem] focus-visible:outline-none focus-visible:after:ring-2"
           >
             {title}
             <span className="sr-only"> · {translations.viewDetails}</span>
@@ -147,6 +148,6 @@ export function ProjectCardReact({ project, projectUrl, translations }: ProjectC
           </span>
         </div>
       </div>
-    </article>
+    </Card3D>
   );
 }

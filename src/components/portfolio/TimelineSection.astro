@@ -26,6 +26,34 @@ const timelineEntries = getLocalizedTimeline(lang);
   </section>
 </CursorSpotlight>
 
+<script>
+  function initTimelineGradient() {
+    const timeline = document.querySelector<HTMLElement>('.timeline');
+    if (!timeline) return;
+
+    const line = timeline.querySelector<HTMLElement>('[data-timeline-line]')!;
+    const years = [...timeline.querySelectorAll<HTMLElement>('[data-timeline-year]')];
+    const stops = [...timeline.querySelectorAll<SVGStopElement>('#timeline-ink stop')];
+
+    const updateStops = () => {
+      const bounds = line.getBoundingClientRect();
+      const offsets = years.map((year) => {
+        const badge = year.getBoundingClientRect();
+        return ((badge.top + badge.height / 2 - bounds.top) / bounds.height) * 100;
+      });
+
+      stops.forEach((stop, index) => stop.setAttribute('offset', `${offsets[index]}%`));
+    };
+
+    const observer = new ResizeObserver(updateStops);
+    observer.observe(timeline);
+    document.addEventListener('astro:before-swap', () => observer.disconnect(), { once: true });
+  }
+
+  initTimelineGradient();
+  document.addEventListener('astro:after-swap', initTimelineGradient);
+</script>
+
 <style>
   @supports (animation-timeline: view()) {
     @media (prefers-reduced-motion: no-preference) {

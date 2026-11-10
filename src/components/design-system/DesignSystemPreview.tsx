@@ -308,6 +308,12 @@ export function DesignSystemPreview({ lang }: { lang: Lang }) {
             </p>
           </div>
         </div>
+        <Card3D variant="glass" className="mt-8 w-full max-w-sm">
+          <h3 className="font-display-soft text-2xl font-semibold">Glass variant</h3>
+          <p className="text-muted-foreground leading-relaxed">
+            A clearer face and thin reflections for timeline entries and the contact panel.
+          </p>
+        </Card3D>
       </Section>
 
       <Section title="Developer ID card">

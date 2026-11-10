@@ -12,7 +12,7 @@ Decisions taken during the 2026 rebrand review. Treat them as constraints, not s
 2. **The hero keeps the day/night valley photos** (`BackgroundImage.astro`). No full-page gradient or aurora backgrounds: the page background stays the plain `--background`.
 3. **The desktop navbar and the footer keep their original layout.** The footer's details follow the design language: an eyebrow label, a hand-drawn underline on link hover (`.hand-underline-hover`, which draws in), a single-stroke hand-drawn divider (`Doodle name="line"`; the two-stroke `underline` looks glitchy when stretched wide), and the name in the display serif. Footer social icons stay plain with the wiggle on hover (`motion-safe:hover:animate-wiggle`), so they don't duplicate the round buttons in the contact panel just above. Don't restructure either of them as part of other work.
 4. **Mobile navigation is a bottom tab bar** (`MobileTabBar.astro`), never a hamburger sheet. Every destination is one tap away.
-5. **Glass is for the home page and a few CTAs.** Blog, projects, CV and other pages use solid `surface` cards or pastel-tinted fills. If glass shows up on a reading page, it's a mistake.
+5. **Glass is for the home page and a few CTAs.** The shared contact panel uses `Card3D` on both the home and contact pages. Blog, projects, CV and other pages use solid `surface` cards or pastel-tinted fills. If glass shows up on a reading page, it's a mistake.
 6. **Pastels must stay vivid.** Low-alpha pastel fills (`/12`) read as washed out and were rejected. See [Pastels](#pastels) for the minimums.
 7. **Hand-drawn marks replace default decorations.** Section titles use the marker underline and links use the hand-drawn stroke, never `decoration-wavy` or plain underlines.
 8. **Craft is checked at 4× zoom.** Edge hairlines, double rims and fringes are bugs, even if they're invisible at 1×. See [Edge artifacts](#edge-artifacts).
@@ -67,6 +67,12 @@ Radius: `rounded-3xl` for cards, `rounded-2xl` for small tiles, `rounded-full` f
 
 `Card3D` and `Button3D` add the clear glass treatment shown on `/design-system`: rounded bevels, curved reflections and diffused shadows. Brand accents follow `primary`, orange in light mode and purple in dark. Keep these components to home page highlights and occasional CTAs, following the same placement rules as glass surfaces.
 
+The home page project carousel uses `Card3D` with compact padding and concentric image corners. The current work entry uses the default `Card3D` in the timeline; past entries use `variant="glass"` for a clearer face and thinner reflections. The shared contact panel also uses the glass variant on both the home and contact pages, with the existing glass ribbon artwork behind the panel so translucency is visible. The ribbons fade outside the card, leaving the page background plain, and disappear under reduced transparency or increased contrast. Project and timeline cards retain semantic `article` elements through `Card3D`'s `as` prop.
+
+The glass variant uses 6px backdrop blur and narrow edge highlights. Both variants share the same radius, exterior contour and opaque accessibility fallbacks.
+
+The timeline line follows the entry accents in order: peach, sky, mint, lilac and butter. Gradient stops align with the centre of each year badge and update when the layout resizes. The existing scroll reveal stays in place, with a faint neutral dotted line underneath and a static pastel gradient before JavaScript runs.
+
 `Card3D` has a 2.75rem radius, a translucent primary-tinted face with 14px backdrop blur, and one thin exterior contour. The face, rim, icon tile and shadow use the same primary hue so warm and cool tints do not clash. One continuous rounded surface uses soft inset shading and asymmetric corner highlights; separate filled inner rectangles create visible seams and must not be added. The optional `.card-3d-icon` tile is 64px square and uses the same continuous shading. Reduced transparency, increased contrast and browsers without backdrop filtering use an opaque face.
 
 `Button3D` is a pill with primary and secondary variants. Its translucent SVG lens has coloured edge refraction, curved reflections and a concentrated band of light along the bottom. The lens adapts to the button's dimensions to keep the ends rounded, including the icon size. Buttons use neither bitmap assets nor backdrop blur, and support focus, disabled states and reduced motion.
@@ -76,6 +82,8 @@ The home page developer ID card uses the approved type specimen layout: a large 
 ## Buttons
 
 The `Button3D` secondary variant uses cool neutral glass, slate text and softer reflections. Its faint blue-grey edge and shadow distinguish it from the primary variant's brand-coloured lens.
+
+The contact panel's social links use the secondary `Button3D` in the 48px circular icon size. Only the social icon wiggles on hover, with motion disabled under reduced motion; the glass lens stays still. These render as links with translated accessible labels on both the home and contact pages.
 
 On a fine pointer, 3D buttons fade in a brighter copy of their glass lens over 200ms with the strong `--ease-out` curve. The glass brightens evenly, preserving its hue; the label, reflections and outer shape stay still. The brighter lens uses a static brightness and saturation filter, and only its opacity animates. Transitions reverse smoothly when interrupted. Disabled buttons and touch do not trigger hover; reduced motion uses a 160ms opacity fade. Press feedback lasts 160ms and does not animate keyboard presses.
 

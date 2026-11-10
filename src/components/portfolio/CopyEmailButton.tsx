@@ -28,7 +28,7 @@ export function CopyEmailButton({
     <Button
       variant="pastel"
       size="lg"
-      className="relative cursor-pointer font-mono text-sm"
+      className="relative cursor-pointer font-mono text-sm max-[360px]:px-4 max-[360px]:text-xs"
       onClick={handleCopy}
       aria-label={`${copied ? copiedText : copyLabel} ${EMAIL}`}
     >
@@ -50,7 +50,7 @@ export function CopyEmailButton({
       </span>
       <span
         className={cn(
-          'relative -mr-2 ml-1 size-8 rounded-full transition-colors duration-300',
+          'relative -mr-2 ml-1 size-8 shrink-0 rounded-full transition-colors duration-300',
           copied ? 'bg-pastel-mint/70 dark:bg-pastel-mint/20' : 'bg-foreground/6'
         )}
       >

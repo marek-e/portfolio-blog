@@ -1,10 +1,12 @@
 ---
 import { Link } from '@/components/ui/button';
+import { Card3D } from '@/components/ui/card-3d';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { Sent02Icon } from '@hugeicons/core-free-icons';
-import { EMAIL, SOCIALS } from '@/lib/socials';
+import { EMAIL } from '@/lib/socials';
 import { getTranslations, getLangFromUrl } from '@/i18n';
 import { CopyEmailButton } from '@/components/portfolio/CopyEmailButton';
+import { ContactSocialLinks } from '@/components/portfolio/ContactSocialLinks';
 import { Doodle } from '@/components/shared/HandDrawn';
 import SectionHeading from '@/components/shared/SectionHeading.astro';
 
@@ -24,75 +26,104 @@ const isPage = as === 'h1';
   aria-labelledby="contact-title"
 >
   <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-    <div
-      class="glass relative isolate overflow-hidden rounded-[2.5rem] px-6 py-16 text-center sm:px-10 md:px-16 md:py-24"
-    >
-      <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10">
-        <span
-          class="bg-pastel-peach/60 dark:bg-pastel-peach/12 absolute -top-24 -left-20 size-80 rounded-full blur-3xl"
-        ></span>
-        <span
-          class="bg-pastel-lilac/55 dark:bg-pastel-lilac/14 absolute -right-24 -bottom-28 size-96 rounded-full blur-3xl"
-        ></span>
-        <span
-          class="bg-pastel-sky/45 dark:bg-pastel-sky/10 absolute bottom-0 left-1/3 size-64 rounded-full blur-3xl"
-        ></span>
-      </div>
-
-      <SectionHeading
-        title={t.contact.title}
-        id="contact-title"
-        as={as}
-        eyebrow={isPage ? undefined : t.contact.eyebrow}
-        subtitle={t.contact.subtitle}
-        align="center"
-        class="md:[&_h1]:text-7xl md:[&_h2]:text-7xl"
-      />
-
+    <div class="contact-stage relative isolate">
       <div
-        class="relative mx-auto mt-12 flex w-full max-w-md flex-col items-stretch justify-center gap-3 sm:w-fit sm:max-w-none sm:flex-row sm:items-center"
+        class="contact-backdrop pointer-events-none absolute -inset-x-3 -inset-y-8 -z-10 overflow-hidden rounded-[4.75rem] sm:-inset-x-8"
+        aria-hidden="true"
       >
-        <Doodle
-          name="loop"
-          strokeWidth={2.5}
-          className="text-foreground/40 absolute top-1/2 right-full mr-5 hidden h-14 w-40 -translate-y-1/3 lg:block"
+        <img
+          src="/images/dev-id-ribbon.webp"
+          alt=""
+          width="1024"
+          height="1024"
+          loading="lazy"
+          class="contact-ribbon absolute -bottom-32 -left-40 w-80 max-w-none rotate-12 sm:-bottom-56 sm:-left-28 sm:w-[34rem]"
         />
-        <Link
-          size="lg"
-          className="gap-2"
-          href={`mailto:${EMAIL}`}
-          animation="scale"
-          aria-label={t.aria.sendEmail}
-        >
-          {t.contact.cta}
-          <HugeiconsIcon icon={Sent02Icon} className="size-4" data-icon="inline-end" />
-        </Link>
-        <CopyEmailButton copiedText={t.contact.copied} copyLabel={t.aria.copyEmail} client:load />
+        <img
+          src="/images/dev-id-ribbon.webp"
+          alt=""
+          width="1024"
+          height="1024"
+          loading="lazy"
+          class="contact-ribbon absolute -top-32 -right-40 w-80 max-w-none -rotate-12 sm:-top-56 sm:-right-28 sm:w-[34rem]"
+        />
       </div>
+      <Card3D
+        variant="glass"
+        className="gap-0 overflow-hidden px-6 py-16 text-center sm:px-10 sm:py-16 md:px-16 md:py-24"
+      >
+        <SectionHeading
+          title={t.contact.title}
+          id="contact-title"
+          as={as}
+          eyebrow={isPage ? undefined : t.contact.eyebrow}
+          subtitle={t.contact.subtitle}
+          align="center"
+          class="md:[&_h1]:text-7xl md:[&_h2]:text-7xl"
+        />
 
-      <div class="mt-14 flex flex-col items-center gap-4">
-        <p class="eyebrow">{t.contact.socialIntro}</p>
-        <ul class="flex items-center justify-center gap-3">
-          {
-            SOCIALS.map((social) => (
-              <li>
-                <a
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={t.aria.followOn.replace('{platform}', social.name)}
-                  class="glass group text-foreground/75 hover:text-primary focus-visible:ring-ring flex size-12 items-center justify-center rounded-full transition duration-300 outline-none focus-visible:ring-2"
-                >
-                  <HugeiconsIcon
-                    icon={social.icon}
-                    className="motion-safe:group-hover:animate-wiggle size-5"
-                  />
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
+        <div
+          class="relative mx-auto mt-12 flex w-full max-w-md flex-col items-stretch justify-center gap-3 sm:w-fit sm:max-w-none sm:flex-row sm:items-center"
+        >
+          <Doodle
+            name="loop"
+            strokeWidth={2.5}
+            className="text-foreground/40 absolute top-1/2 right-full mr-5 hidden h-14 w-40 -translate-y-1/3 lg:block"
+          />
+          <Link
+            size="lg"
+            className="gap-2"
+            href={`mailto:${EMAIL}`}
+            animation="scale"
+            aria-label={t.aria.sendEmail}
+          >
+            {t.contact.cta}
+            <HugeiconsIcon icon={Sent02Icon} className="size-4" data-icon="inline-end" />
+          </Link>
+          <CopyEmailButton copiedText={t.contact.copied} copyLabel={t.aria.copyEmail} client:load />
+        </div>
+
+        <div class="mt-14 flex flex-col items-center gap-4">
+          <p class="eyebrow">{t.contact.socialIntro}</p>
+          <ContactSocialLinks followLabel={t.aria.followOn} />
+        </div>
+      </Card3D>
     </div>
   </div>
 </section>
+
+<style>
+  .contact-ribbon {
+    opacity: 0.55;
+  }
+
+  .contact-backdrop {
+    mask-image:
+      linear-gradient(to right, transparent, black 2rem, black calc(100% - 2rem), transparent),
+      linear-gradient(to bottom, transparent, black 2rem, black calc(100% - 2rem), transparent);
+    mask-composite: intersect;
+  }
+
+  :global(.dark) .contact-ribbon {
+    filter: hue-rotate(265deg) saturate(0.75);
+    opacity: 0.4;
+  }
+
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .contact-stage :global(.card-3d-material) {
+      background: var(--card);
+    }
+  }
+
+  @media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
+    .contact-backdrop {
+      display: none;
+    }
+
+    .contact-stage :global(.card-3d-material) {
+      background: var(--card);
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
+  }
+</style>
