@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import { Button, Link } from '@/components/ui/button';
 import { Button3D } from '@/components/ui/button-3d';
 import { Card3D } from '@/components/ui/card-3d';
+import { DevIdCard } from '@/components/portfolio/DevIdCard';
 import { Badge } from '@/components/ui/badge';
 import {
   Card,
@@ -306,6 +307,19 @@ export function DesignSystemPreview({ lang }: { lang: Lang }) {
               For home page highlights and occasional calls to action.
             </p>
           </div>
+        </div>
+      </Section>
+
+      <Section title="Developer ID card">
+        <div className="grid items-center gap-8 md:grid-cols-2">
+          <DevIdCard lang={lang} />
+          <p className="text-muted-foreground text-sm leading-relaxed">
+            The front pairs editorial typography, Melo and five technology logos with a glass frame.
+            Both faces share the same pearlescent hover, and both themes share the same artwork
+            geometry. The back pairs an iridescent glass ribbon with live typography. Click the left
+            or right half to turn it in that direction. Keyboard and reduced-motion preferences show
+            the other face immediately.
+          </p>
         </div>
       </Section>
 

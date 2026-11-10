@@ -139,8 +139,10 @@ export const en: UITranslations = {
     latest: 'Latest',
   },
   devCard: {
-    cardTitle: 'Developer ID Card',
+    cardTitle: 'Developer ID',
     ariaLabel: 'Developer ID card for Marek Elmayan',
+    turnOver: 'Turn over',
+    showFront: 'Show my ID',
     fields: {
       name: 'NAME',
       job: 'JOB',

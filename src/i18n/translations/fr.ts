@@ -140,8 +140,10 @@ export const fr: UITranslations = {
     latest: 'Dernier article',
   },
   devCard: {
-    cardTitle: 'Carte de développeur',
+    cardTitle: 'Carte développeur',
     ariaLabel: 'Carte développeur de Marek Elmayan',
+    turnOver: 'Retourner la carte',
+    showFront: 'Voir ma carte',
     fields: {
       name: 'NOM',
       job: 'MÉTIER',

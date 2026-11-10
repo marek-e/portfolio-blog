@@ -130,6 +130,8 @@ export interface UITranslations {
   devCard: {
     cardTitle: string;
     ariaLabel: string;
+    turnOver: string;
+    showFront: string;
     fields: {
       name: string;
       job: string;

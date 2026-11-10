@@ -52,7 +52,7 @@ export const TECH_STACK: TechItem[] = [
     ),
   },
   {
-    name: 'AWS Serverless',
+    name: 'AWS',
     icon: (
       <img
         src="/icons/aws-lambda-logo.svg"
