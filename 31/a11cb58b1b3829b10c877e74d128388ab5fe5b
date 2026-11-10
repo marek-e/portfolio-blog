@@ -1,0 +1,31 @@
+src/components/portfolio/IntervalsActivityCard.tsx
+  s_716bcb1e04664a::t_3ef958a46dc8b9 36
+  s_716bcb1e04664a::t_a402825d0324b6 6
+src/components/portfolio/ActivityCardParts.tsx
+  s_716bcb1e04664a::t_3ef958a46dc8b9 3
+  s_716bcb1e04664a::t_596f4e190a1518 259
+  s_716bcb1e04664a::t_a7d09af4beb3c7 79
+  s_716bcb1e04664a::t_3493ccbb25c351 102-105,255-258,260
+src/components/portfolio/ActivityCard.tsx
+  s_716bcb1e04664a::t_3ef958a46dc8b9 28
+  s_716bcb1e04664a::t_a402825d0324b6 4
+src/components/portfolio/LongRunActivityCard.tsx
+  s_716bcb1e04664a::t_3ef958a46dc8b9 28
+  s_716bcb1e04664a::t_a402825d0324b6 4
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "31a11cb58b1b3829b10c877e74d128388ab5fe5b",
+  "prompts": {},
+  "sessions": {
+    "s_716bcb1e04664a": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1c584-8b91-7c90-ad08-2cd3e53fdf9a",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
