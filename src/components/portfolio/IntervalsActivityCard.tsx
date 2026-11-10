@@ -3,12 +3,7 @@ import type { Lang } from '@/i18n/config';
 import { getTranslations } from '@/i18n';
 import { useReducedMotion } from '@/lib/useReducedMotion';
 import { cn } from '@/lib/utils';
-import {
-  WorkoutRunIcon,
-  MountainIcon,
-  HeartCheckIcon,
-  Clock05Icon,
-} from '@hugeicons/core-free-icons';
+import { WorkoutRunIcon, MountainIcon, Heart, Clock05Icon } from '@hugeicons/core-free-icons';
 import {
   ActivityCardLink,
   ActivityHeader,
@@ -38,7 +33,7 @@ export function IntervalsActivityCard({ activity, lang = 'fr' }: IntervalsActivi
     { icon: MountainIcon, value: activity.elevationGain, unit: 'm' },
     { icon: Clock05Icon, value: activity.durationMinutes, unit: 'min' },
     ...(activity.averageHeartRate
-      ? [{ icon: HeartCheckIcon, value: activity.averageHeartRate, unit: t.strava.heartRate }]
+      ? [{ icon: Heart, value: activity.averageHeartRate, unit: t.strava.heartRate }]
       : []),
   ];
 

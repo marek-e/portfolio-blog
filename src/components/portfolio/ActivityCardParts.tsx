@@ -1,5 +1,6 @@
 import { useEffect, useId, useState, type ReactNode } from 'react';
 import type { HugeiconsIconProps } from '@hugeicons/react';
+import { Calendar03Icon, Heart } from '@hugeicons/core-free-icons';
 import type { Lang } from '@/i18n/config';
 import { decodePolyline, polylineToSvgPath } from '@/lib/polyline';
 import { cn } from '@/lib/utils';
@@ -75,7 +76,7 @@ export function ActivityCardLink({
       target="_blank"
       rel="noopener noreferrer"
       className={cn(
-        'group glass focus-visible:ring-ring focus-visible:ring-offset-background relative flex h-full flex-col overflow-hidden rounded-3xl p-5 transition duration-300 outline-none hover:-translate-y-0.5 hover:shadow-[0_28px_60px_-28px_var(--glass-shadow)] focus-visible:ring-2 focus-visible:ring-offset-2',
+        'group glass focus-visible:ring-ring focus-visible:ring-offset-background relative flex h-full flex-col overflow-hidden rounded-3xl p-5 transition duration-300 outline-none hover:-translate-y-0.5 hover:shadow-[inset_0_1px_0_var(--glass-highlight),0_0_0_1px_var(--glass-edge),0_1px_2px_oklch(0_0_0/4%),0_28px_60px_-28px_var(--glass-shadow)] focus-visible:ring-2 focus-visible:ring-offset-2',
         className
       )}
     >
@@ -98,7 +99,10 @@ export function ActivityHeader({
   return (
     <div className="relative">
       <div className="flex min-h-6 items-center justify-between gap-3">
-        <p className="eyebrow">{date}</p>
+        <p className="eyebrow flex items-center gap-1.5">
+          <Icon icon={Calendar03Icon} size={12} strokeWidth={2} aria-hidden="true" />
+          {date}
+        </p>
         {tag && (
           <span
             className={cn(
@@ -248,7 +252,12 @@ export function ActivityStats({ stats }: { stats: ActivityStat[] }) {
       {stats.map((stat) => (
         <div key={stat.unit} className="flex flex-col-reverse items-center gap-1 text-center">
           <dt className="text-muted-foreground flex items-center gap-1 font-mono text-[0.7rem]">
-            <Icon icon={stat.icon} size={12} strokeWidth={2} />
+            <Icon
+              icon={stat.icon}
+              size={12}
+              strokeWidth={2}
+              className={cn(stat.icon === Heart && 'fill-current text-(--ring-rose)')}
+            />
             {stat.unit}
           </dt>
           <dd className="text-foreground font-mono text-base font-medium tabular-nums">

@@ -1,12 +1,7 @@
 import type { RunningActivity } from '@/types/strava';
 import type { Lang } from '@/i18n/config';
 import { getTranslations } from '@/i18n';
-import {
-  DashboardSpeed01Icon,
-  MountainIcon,
-  HeartCheckIcon,
-  Clock05Icon,
-} from '@hugeicons/core-free-icons';
+import { DashboardSpeed01Icon, MountainIcon, Heart, Clock05Icon } from '@hugeicons/core-free-icons';
 import {
   ActivityCardLink,
   ActivityHeader,
@@ -30,7 +25,7 @@ export function LongRunActivityCard({ activity, lang = 'fr' }: LongRunActivityCa
     { icon: MountainIcon, value: activity.elevationGain, unit: 'm' },
     { icon: Clock05Icon, value: activity.durationMinutes, unit: 'min' },
     ...(activity.averageHeartRate
-      ? [{ icon: HeartCheckIcon, value: activity.averageHeartRate, unit: t.strava.heartRate }]
+      ? [{ icon: Heart, value: activity.averageHeartRate, unit: t.strava.heartRate }]
       : []),
   ];
 
