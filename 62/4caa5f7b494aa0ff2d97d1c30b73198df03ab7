@@ -1,0 +1,73 @@
+src/i18n/ui.ts
+  s_a53ec57c33191e::t_74ff503234c2dc 132-133
+docs/DESIGN-SYSTEM.md
+  s_a53ec57c33191e::t_1c11185332b440 75
+  s_a53ec57c33191e::t_dc00be76c380dd 74
+src/components/portfolio/DevIdCard/GlassFrame.tsx
+  s_a53ec57c33191e::t_085c210481d144 4-19
+  s_a53ec57c33191e::t_9be5b1d9670899 1-2,21-22
+  s_a53ec57c33191e::t_ad1928c53319d7 3
+src/layouts/Layout.astro
+  s_a53ec57c33191e::t_8fd6376583bbb9 6
+src/components/design-system/DesignSystemPreview.tsx
+  s_a53ec57c33191e::t_9947023e99673b 320-321
+  s_a53ec57c33191e::t_8e54cd996d4a47 5,313-316,322
+  s_a53ec57c33191e::t_522031e788606d 317-319,323-325
+src/components/portfolio/DevIdCard/PearlescentOverlay.tsx
+  s_a53ec57c33191e::t_7106c2ba85e654 1-9
+src/styles/dev-id-card.css
+  s_a53ec57c33191e::t_7ff43f1bbc298c 265-268,270-271,275-324
+  s_a53ec57c33191e::t_085c210481d144 62-69,71-73,76
+  s_a53ec57c33191e::t_fc59849c576940 26-31,198-203
+  s_a53ec57c33191e::t_b07372437d70a9 334
+  s_a53ec57c33191e::t_b44296c0e4d332 56-61,77-78
+  s_a53ec57c33191e::t_90ba29d4e4dd3e 2,330-332,335-336,339,341,345-346,349-350,363
+  s_a53ec57c33191e::t_8fd6376583bbb9 1,3-25,32-47,192-197,204-263,269,272-273,325-329,368-408
+  s_a53ec57c33191e::t_a39a430e18167d 70
+  s_a53ec57c33191e::t_7106c2ba85e654 74-75
+  s_a53ec57c33191e::t_a77fb63b65db57 48-55,79-108,110-159,161,163-182,184-191,333,337-338,340,342-344,347-348,351-362
+  s_a53ec57c33191e::t_b269bf5079af7e 109,160,162,183
+  s_a53ec57c33191e::t_8e54cd996d4a47 264,364-367
+  s_a53ec57c33191e::t_7b5a46d9b1eaab 274
+src/components/portfolio/DevIdCard/useTiltEffect.ts
+  s_a53ec57c33191e::t_21f60834889d02 1,4,6,10-31,33-39,41,44-52,54-55,58-62,64-70,73-75,84-86,88-103,105-114,116
+  s_a53ec57c33191e::t_fc59849c576940 42-43,76-83
+src/components/portfolio/DevIdCard/index.tsx
+  s_a53ec57c33191e::t_7106c2ba85e654 9,102-103
+  s_a53ec57c33191e::t_7b5a46d9b1eaab 52
+  s_a53ec57c33191e::t_1c11185332b440 119,131
+  s_a53ec57c33191e::t_90ba29d4e4dd3e 120-124,130
+  s_a53ec57c33191e::t_1771fe0506d992 22-23,49,97,125-129
+  s_a53ec57c33191e::t_82debeb57b08d4 57
+  s_a53ec57c33191e::t_74ff503234c2dc 1,21,43-45,48,90,92,115
+  s_a53ec57c33191e::t_fc59849c576940 50,88,91,96,110,113-114
+  s_a53ec57c33191e::t_9be5b1d9670899 2,6,10,24,32-36,51,53-56,58-87,89,93
+  s_a53ec57c33191e::t_7ff43f1bbc298c 98-101,104-109,111-112
+  s_a53ec57c33191e::t_2460d44005549f 37
+src/i18n/translations/fr.ts
+  s_a53ec57c33191e::t_9be5b1d9670899 142
+  s_a53ec57c33191e::t_74ff503234c2dc 144-145
+src/components/portfolio/DevIdCard/constants.tsx
+  s_a53ec57c33191e::t_9be5b1d9670899 55
+src/i18n/translations/en.ts
+  s_a53ec57c33191e::t_9be5b1d9670899 141
+  s_a53ec57c33191e::t_74ff503234c2dc 143-144
+src/components/portfolio/DevIdCard/TechStackBadge.tsx
+  s_a53ec57c33191e::t_9be5b1d9670899 10-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "624caa5f7b494aa0ff2d97d1c30b73198df03ab7",
+  "prompts": {},
+  "sessions": {
+    "s_a53ec57c33191e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1bd0b-f2ab-71c1-9495-70e197bc4edb",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
