@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useState, type ReactNode } from 'react';
 import { Button, Link } from '@/components/ui/button';
 import { Button3D } from '@/components/ui/button-3d';
 import { Card3D } from '@/components/ui/card-3d';
@@ -59,674 +59,897 @@ import {
   BreadcrumbEllipsis,
 } from '@/components/ui/breadcrumb';
 import { PastelCard, PastelCards } from '@/components/mdx/PastelCard';
-import { ModeToggle } from '../layout/ModeToggle';
-import { LanguageSwitcher } from '../layout/LanguageSwitcher';
-import { Icon } from '../shared/Icon';
-import { Doodle, MarkedText } from '../shared/HandDrawn';
+import { LanguageSwitcher } from '@/components/layout/LanguageSwitcher';
+import { Icon } from '@/components/shared/Icon';
+import { Doodle, MarkedText } from '@/components/shared/HandDrawn';
 import {
-  ArrowLeftIcon,
   ArrowRight01Icon,
   Search01Icon,
   Mail01Icon,
   SparklesIcon,
 } from '@hugeicons/core-free-icons';
 import { getTranslatedPath, type Lang } from '@/i18n';
+import type { DesignSystemGroup } from './sections';
 
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
+function Specimen({
+  title,
+  description,
+  children,
+}: {
+  title: string;
+  description?: string;
+  children: ReactNode;
+}) {
   return (
-    <section className="space-y-4">
-      <h2 className="text-foreground text-2xl font-semibold tracking-tight md:text-3xl">{title}</h2>
-      <div className="surface rounded-3xl p-6 md:p-8">{children}</div>
-    </section>
-  );
-}
-
-function Caption({ children }: { children: React.ReactNode }) {
-  return <p className="eyebrow mb-3">{children}</p>;
-}
-
-const pastelSwatches = [
-  { name: 'Peach', className: 'bg-pastel-peach' },
-  { name: 'Rose', className: 'bg-pastel-rose' },
-  { name: 'Lilac', className: 'bg-pastel-lilac' },
-  { name: 'Sky', className: 'bg-pastel-sky' },
-  { name: 'Mint', className: 'bg-pastel-mint' },
-  { name: 'Butter', className: 'bg-pastel-butter' },
-  { name: 'Marker', className: 'bg-marker' },
-  { name: 'Ink', className: 'bg-ink' },
-  { name: 'Paper', className: 'bg-paper' },
-];
-
-const doodleNames = ['underline', 'squiggle', 'sparkle', 'arrow', 'loop', 'circle'] as const;
-
-export function DesignSystemPreview({ lang, ageAtBuild }: { lang: Lang; ageAtBuild: number }) {
-  const [inputValue, setInputValue] = useState('');
-  const translatePath = getTranslatedPath(lang);
-
-  return (
-    <div className="space-y-12">
-      <div className="flex items-center justify-between">
-        <Link href={translatePath('/')} variant="ghost" className="flex h-11 items-center gap-2">
-          <Icon icon={ArrowLeftIcon} strokeWidth={2} />
-          <span className="text-sm font-medium">Back to home</span>
-        </Link>
-        <ModeToggle />
+    <div className="border-border space-y-6 border-t pt-8">
+      <div className="space-y-2">
+        <h3 className="font-sans text-base font-semibold">{title}</h3>
+        {description && (
+          <p className="text-muted-foreground max-w-xl text-sm leading-relaxed">{description}</p>
+        )}
       </div>
-      {/* Colors */}
-      <Section title="Colors">
-        <Caption>Pastels & brand</Caption>
-        <div className="grid grid-cols-3 gap-4 sm:grid-cols-5 md:grid-cols-9">
-          {pastelSwatches.map((swatch) => (
-            <ColorSwatch key={swatch.name} name={swatch.name} className={swatch.className} />
-          ))}
-        </div>
-        <div className="bg-pastel mt-6 mb-8 h-12 rounded-2xl" />
-        <Caption>Semantic tokens</Caption>
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 md:grid-cols-6">
-          <ColorSwatch name="Background" className="bg-background" />
-          <ColorSwatch name="Foreground" className="bg-foreground" />
-          <ColorSwatch name="Primary" className="bg-primary" />
-          <ColorSwatch name="Secondary" className="bg-secondary" />
-          <ColorSwatch name="Muted" className="bg-muted" />
-          <ColorSwatch name="Accent" className="bg-accent" />
-          <ColorSwatch name="Destructive" className="bg-destructive" />
-          <ColorSwatch name="Card" className="bg-card" />
-          <ColorSwatch name="Border" className="bg-border" />
-          <ColorSwatch name="Input" className="bg-input" />
-          <ColorSwatch name="Ring" className="bg-ring" />
-        </div>
-      </Section>
-
-      {/* Typography */}
-      <Section title="Language controls">
-        <Caption>Plain mobile controls</Caption>
-        <LanguageSwitcher
-          currentLang={lang}
-          currentPath={translatePath('/design-system')}
-          variant="plain"
-          className="w-fit"
-        />
-      </Section>
-
-      <Section title="Typography">
-        <div className="space-y-4">
-          <Caption>Display · Fraunces</Caption>
-          <p className="font-display-soft text-5xl leading-[1.05] font-semibold tracking-tight md:text-6xl">
-            Crafted with <MarkedText>care</MarkedText>
-          </p>
-          <p className="font-display-wonk text-muted-foreground text-2xl">
-            Italic, soft and a little wonky.
-          </p>
-          <Separator className="my-6" />
-          <h1 className="text-4xl font-semibold tracking-tight">Heading 1</h1>
-          <h2 className="text-3xl font-semibold tracking-tight">Heading 2</h2>
-          <h3 className="font-display-soft text-2xl font-semibold tracking-tight">Heading 3</h3>
-          <h4 className="font-display-soft text-xl font-semibold tracking-tight">Heading 4</h4>
-          <Separator className="my-6" />
-          <Caption>Body & UI · Geist</Caption>
-          <p className="text-muted-foreground text-base leading-relaxed">
-            Clear body text leaves room for expressive headings. Geist also carries navigation,
-            buttons, tags, dates and captions across the site.
-          </p>
-          <p className="text-muted-foreground text-sm">
-            Captions and supporting text · Écriture, expérience & idées.
-          </p>
-          <Separator className="my-6" />
-          <p className="eyebrow">Section label · 2026</p>
-          <div className="mt-3 flex flex-wrap items-center gap-3">
-            <Badge>Astro</Badge>
-            <Badge variant="outline">React</Badge>
-            <span className="text-muted-foreground font-sans text-xs">
-              11 novembre 2026 · 5 min
-            </span>
-          </div>
-          <Separator className="my-6" />
-          <Caption>Code & metrics · Maple Mono</Caption>
-          <p className="text-foreground/80 font-mono text-sm">
-            const craft = (idea: string) =&gt; ship(idea);
-          </p>
-          <p className="font-mono text-2xl font-medium tabular-nums">10.42 km · 5:24 /km</p>
-        </div>
-      </Section>
-
-      <Section title="Surfaces">
-        <div className="grid gap-4 sm:grid-cols-2">
-          <div className="glass rounded-3xl p-6">
-            <p className="font-display-soft text-xl font-semibold">glass</p>
-            <p className="text-muted-foreground mt-1 text-sm">Signature translucent surface.</p>
-          </div>
-          <div className="glass-strong rounded-3xl p-6">
-            <p className="font-display-soft text-xl font-semibold">glass-strong</p>
-            <p className="text-muted-foreground mt-1 text-sm">Dense content, menus, popovers.</p>
-          </div>
-          <div className="ring-pastel rounded-3xl p-6">
-            <p className="font-display-soft text-xl font-semibold">ring-pastel</p>
-            <p className="text-muted-foreground mt-1 text-sm">One highlighted element per view.</p>
-          </div>
-          <div className="bg-pastel text-ink rounded-3xl p-6">
-            <p className="font-display-soft text-xl font-semibold">bg-pastel</p>
-            <p className="text-ink/70 mt-1 text-sm">Soft gradient fill.</p>
-          </div>
-        </div>
-      </Section>
-
-      <Section title="Doodles">
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
-          {doodleNames.map((name) => (
-            <div
-              key={name}
-              className="bg-foreground/[0.03] flex flex-col items-center gap-3 rounded-2xl p-5"
-            >
-              <Doodle
-                name={name}
-                className={
-                  name === 'sparkle' ? 'text-pastel-lilac size-10' : 'text-marker h-10 w-28'
-                }
-              />
-              <span className="text-muted-foreground font-mono text-xs">{name}</span>
-            </div>
-          ))}
-        </div>
-      </Section>
-
-      {/* Buttons */}
-      <Section title="Button">
-        <div className="space-y-6">
-          <div>
-            <p className="text-muted-foreground mb-3 text-sm font-medium">Variants</p>
-            <div className="flex flex-wrap gap-3">
-              <Button variant="default">Default</Button>
-              <Button variant="pastel">Pastel</Button>
-              <Button variant="ghost">Ghost</Button>
-              <Button variant="destructive">Destructive</Button>
-              <Button variant="link">Link</Button>
-            </div>
-            <Button variant="pastel" className="mt-3 w-full sm:w-96">
-              A longer pastel button
-            </Button>
-          </div>
-          <Separator />
-          <div>
-            <p className="text-muted-foreground mb-3 text-sm font-medium">Sizes</p>
-            <div className="flex flex-wrap items-center gap-3">
-              <Button size="xs">Extra Small</Button>
-              <Button size="sm">Small</Button>
-              <Button size="default">Default</Button>
-              <Button size="lg">Large</Button>
-            </div>
-          </div>
-          <Separator />
-          <div>
-            <p className="text-muted-foreground mb-3 text-sm font-medium">States</p>
-            <div className="flex flex-wrap gap-3">
-              <Button>Normal</Button>
-              <Button disabled>Disabled</Button>
-            </div>
-          </div>
-        </div>
-      </Section>
-
-      <Section title="3D button">
-        <div className="space-y-8">
-          <div>
-            <Caption>Clear glass</Caption>
-            <div className="flex flex-wrap items-center gap-7 py-6 sm:gap-8">
-              <Button3D size="lg" className="w-full sm:w-auto sm:min-w-52">
-                Primary
-              </Button3D>
-              <Button3D variant="secondary" size="lg" className="w-full sm:w-auto sm:min-w-52">
-                Secondary
-              </Button3D>
-            </div>
-          </div>
-          <Separator />
-          <div>
-            <Caption>Sizes & states</Caption>
-            <div className="flex flex-wrap items-center gap-4">
-              <Button3D size="sm">Small</Button3D>
-              <Button3D>Default</Button3D>
-              <Button3D size="icon" aria-label="Search">
-                <Icon icon={Search01Icon} />
-              </Button3D>
-              <Button3D disabled>Disabled</Button3D>
-            </div>
-          </div>
-        </div>
-      </Section>
-
-      <Section title="3D card">
-        <div className="grid items-center gap-8 md:grid-cols-[1.1fr_1fr]">
-          <Card3D className="min-h-88 w-full max-w-sm justify-between">
-            <div className="card-3d-icon text-primary">
-              <Icon icon={SparklesIcon} className="size-7" aria-hidden="true" />
-            </div>
-            <div className="space-y-3">
-              <h3 className="font-display-soft text-3xl font-semibold tracking-tight">
-                Glass card
-              </h3>
-              <p className="text-muted-foreground max-w-60 text-base leading-relaxed">
-                A clear glass container for content and actions.
-              </p>
-            </div>
-            <Button3D
-              className="self-start"
-              render={<a href={translatePath('/projects')} />}
-              nativeButton={false}
-            >
-              Explore
-              <Icon icon={ArrowRight01Icon} aria-hidden="true" />
-            </Button3D>
-          </Card3D>
-          <div className="space-y-3">
-            <Caption>Clear glass</Caption>
-            <p className="text-muted-foreground text-sm leading-relaxed">
-              Rounded glass edges, curved highlights and a soft primary-colour shadow give the
-              surface its depth. Add your own heading, content and actions.
-            </p>
-            <p className="text-muted-foreground text-sm leading-relaxed">
-              For home page highlights and occasional calls to action.
-            </p>
-          </div>
-        </div>
-        <Card3D variant="glass" className="mt-8 w-full max-w-sm">
-          <h3 className="font-display-soft text-2xl font-semibold">Glass variant</h3>
-          <p className="text-muted-foreground leading-relaxed">
-            A clearer face and thin reflections for timeline entries and the contact panel.
-            Spotlight reflections use warm tints in light mode and pale highlights in dark mode.
-          </p>
-        </Card3D>
-      </Section>
-
-      <Section title="Developer ID card">
-        <div className="grid items-center gap-8 md:grid-cols-2">
-          <DevIdCard lang={lang} ageAtBuild={ageAtBuild} />
-          <p className="text-muted-foreground text-sm leading-relaxed">
-            The front pairs editorial typography, Melo and five technology logos with a glass frame.
-            Both faces share the same pearlescent hover, and both themes share the same artwork
-            geometry. The back pairs an iridescent glass ribbon with live typography. Click the left
-            or right half to turn it in that direction. Keyboard and reduced-motion preferences show
-            the other face immediately.
-          </p>
-        </div>
-      </Section>
-
-      {/* Badge */}
-      <Section title="Badge">
-        <div className="space-y-4">
-          <div>
-            <p className="text-muted-foreground mb-3 text-sm font-medium">Standard</p>
-            <div className="flex flex-wrap gap-3">
-              <Badge variant="default">Default</Badge>
-              <Badge variant="secondary">Secondary</Badge>
-              <Badge variant="outline">Outline</Badge>
-              <Badge variant="glass">Glass</Badge>
-              <Badge variant="destructive">Destructive</Badge>
-            </div>
-          </div>
-          <Separator />
-          <div>
-            <p className="text-muted-foreground mb-3 text-sm font-medium">Pastel (Filled)</p>
-            <div className="flex flex-wrap gap-3">
-              <Badge variant="pastel-blue">Blue</Badge>
-              <Badge variant="pastel-green">Green</Badge>
-              <Badge variant="pastel-yellow">Yellow</Badge>
-              <Badge variant="pastel-pink">Pink</Badge>
-              <Badge variant="pastel-purple">Purple</Badge>
-              <Badge variant="pastel-orange">Orange</Badge>
-              <Badge variant="pastel-teal">Teal</Badge>
-              <Badge variant="pastel-rose">Rose</Badge>
-            </div>
-          </div>
-          <Separator />
-          <div>
-            <p className="text-muted-foreground mb-3 text-sm font-medium">Pastel (Outlined)</p>
-            <div className="flex flex-wrap gap-3">
-              <Badge variant="pastel-blue-outline">Blue</Badge>
-              <Badge variant="pastel-green-outline">Green</Badge>
-              <Badge variant="pastel-yellow-outline">Yellow</Badge>
-              <Badge variant="pastel-pink-outline">Pink</Badge>
-              <Badge variant="pastel-purple-outline">Purple</Badge>
-              <Badge variant="pastel-orange-outline">Orange</Badge>
-              <Badge variant="pastel-teal-outline">Teal</Badge>
-              <Badge variant="pastel-rose-outline">Rose</Badge>
-            </div>
-          </div>
-        </div>
-      </Section>
-
-      {/* Card */}
-      <Section title="Card">
-        <div className="grid gap-6 md:grid-cols-2">
-          <Card>
-            <CardHeader>
-              <CardTitle>Card Title</CardTitle>
-              <CardDescription>Card description with supporting text.</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p>Card content goes here. This is where the main content lives.</p>
-            </CardContent>
-            <CardFooter>
-              <Button size="sm">Action</Button>
-            </CardFooter>
-          </Card>
-          <Card size="sm">
-            <CardHeader>
-              <CardTitle>Small Card</CardTitle>
-              <CardDescription>Compact variant</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p>Smaller padding for denser layouts.</p>
-            </CardContent>
-          </Card>
-        </div>
-      </Section>
-
-      {/* Form Elements */}
-      <Section title="Form Elements">
-        <div className="grid gap-6 md:grid-cols-2">
-          <div className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="input-demo">Input</Label>
-              <Input
-                id="input-demo"
-                placeholder="Enter text..."
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="input-disabled">Disabled Input</Label>
-              <Input id="input-disabled" placeholder="Disabled" disabled />
-            </div>
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="textarea-demo">Textarea</Label>
-            <Textarea id="textarea-demo" placeholder="Enter a longer message..." />
-          </div>
-        </div>
-      </Section>
-
-      {/* Select */}
-      <Section title="Select">
-        <div className="max-w-xs">
-          <Select>
-            <SelectTrigger>
-              <SelectValue render={() => <span>Select an option</span>} />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="option1">Option 1</SelectItem>
-              <SelectItem value="option2">Option 2</SelectItem>
-              <SelectItem value="option3">Option 3</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-      </Section>
-
-      {/* Dropdown Menu */}
-      <Section title="Dropdown Menu">
-        <DropdownMenu>
-          <DropdownMenuTrigger render={<Button variant="ghost">Open Menu</Button>} />
-          <DropdownMenuContent>
-            <DropdownMenuItem>Profile</DropdownMenuItem>
-            <DropdownMenuItem>Settings</DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>Logout</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </Section>
-
-      {/* Alert Dialog */}
-      <Section title="Alert Dialog">
-        <AlertDialog>
-          <AlertDialogTrigger render={<Button variant="destructive">Delete Item</Button>} />
-          <AlertDialogContent>
-            <AlertDialogHeader>
-              <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-              <AlertDialogDescription>
-                This action cannot be undone. This will permanently delete the item from your
-                account.
-              </AlertDialogDescription>
-            </AlertDialogHeader>
-            <AlertDialogFooter>
-              <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <AlertDialogAction>Continue</AlertDialogAction>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialog>
-      </Section>
-
-      {/* Separator */}
-      <Section title="Separator">
-        <div className="space-y-4">
-          <p className="text-muted-foreground text-sm">Horizontal separator:</p>
-          <Separator />
-          <div className="flex h-12 items-center gap-4">
-            <span>Item 1</span>
-            <Separator orientation="vertical" />
-            <span>Item 2</span>
-            <Separator orientation="vertical" />
-            <span>Item 3</span>
-          </div>
-        </div>
-      </Section>
-
-      {/* Tooltip */}
-      <Section title="Tooltip">
-        <div className="flex flex-wrap gap-6">
-          <Tooltip>
-            <TooltipTrigger render={<Button variant="ghost">Hover me (top)</Button>} />
-            <TooltipContent side="top">Tooltip on top</TooltipContent>
-          </Tooltip>
-          <Tooltip>
-            <TooltipTrigger render={<Button variant="ghost">Hover me (bottom)</Button>} />
-            <TooltipContent side="bottom">Tooltip on bottom</TooltipContent>
-          </Tooltip>
-          <Tooltip>
-            <TooltipTrigger render={<Button variant="ghost">Hover me (left)</Button>} />
-            <TooltipContent side="left">Tooltip on left</TooltipContent>
-          </Tooltip>
-          <Tooltip>
-            <TooltipTrigger render={<Button variant="ghost">Hover me (right)</Button>} />
-            <TooltipContent side="right">Tooltip on right</TooltipContent>
-          </Tooltip>
-        </div>
-      </Section>
-
-      {/* Field */}
-      <Section title="Field">
-        <div className="grid gap-6 md:grid-cols-2">
-          <FieldGroup>
-            <Field>
-              <FieldLabel htmlFor="field-email">Email address</FieldLabel>
-              <Input id="field-email" type="email" placeholder="you@example.com" />
-              <FieldDescription>We'll never share your email.</FieldDescription>
-            </Field>
-            <Field>
-              <FieldLabel htmlFor="field-password">Password</FieldLabel>
-              <Input id="field-password" type="password" placeholder="••••••••" />
-            </Field>
-          </FieldGroup>
-          <FieldGroup>
-            <Field data-invalid="true">
-              <FieldLabel htmlFor="field-error">With error</FieldLabel>
-              <Input id="field-error" aria-invalid="true" defaultValue="invalid@" />
-              <FieldError>Please enter a valid email address.</FieldError>
-            </Field>
-          </FieldGroup>
-        </div>
-      </Section>
-
-      {/* InputGroup */}
-      <Section title="InputGroup">
-        <div className="grid gap-6 md:grid-cols-2">
-          <div className="space-y-4">
-            <p className="text-muted-foreground mb-2 text-sm font-medium">With icon addon</p>
-            <InputGroup>
-              <InputGroupAddon align="inline-start">
-                <Icon icon={Search01Icon} className="size-4" />
-              </InputGroupAddon>
-              <InputGroupInput placeholder="Search..." />
-            </InputGroup>
-          </div>
-          <div className="space-y-4">
-            <p className="text-muted-foreground mb-2 text-sm font-medium">With button</p>
-            <InputGroup>
-              <InputGroupAddon align="inline-start">
-                <Icon icon={Mail01Icon} className="size-4" />
-              </InputGroupAddon>
-              <InputGroupInput placeholder="Enter email..." />
-              <InputGroupButton>Subscribe</InputGroupButton>
-            </InputGroup>
-          </div>
-        </div>
-      </Section>
-
-      {/* PastelCard */}
-      <Section title="PastelCard">
-        <div className="space-y-6">
-          <div>
-            <p className="text-muted-foreground mb-3 text-sm font-medium">Color variants</p>
-            <PastelCards>
-              <PastelCard label="Slate" emoji="⚪" title="Slate variant" color="slate">
-                The slate pastel card.
-              </PastelCard>
-              <PastelCard label="Stone" emoji="🪨" title="Stone variant" color="stone">
-                The stone pastel card.
-              </PastelCard>
-              <PastelCard label="Red" emoji="🔴" title="Red variant" color="red">
-                The red pastel card.
-              </PastelCard>
-              <PastelCard label="Orange" emoji="🟠" title="Orange variant" color="orange">
-                The orange pastel card.
-              </PastelCard>
-              <PastelCard label="Green" emoji="🟢" title="Green variant" color="green">
-                The green pastel card.
-              </PastelCard>
-              <PastelCard label="Blue" emoji="🔵" title="Blue variant" color="blue">
-                The blue pastel card.
-              </PastelCard>
-              <PastelCard label="Purple" emoji="🟣" title="Purple variant" color="purple">
-                The purple pastel card.
-              </PastelCard>
-              <PastelCard label="Pink" emoji="🩷" title="Pink variant" color="pink">
-                The pink pastel card.
-              </PastelCard>
-            </PastelCards>
-          </div>
-          <Separator />
-          <div>
-            <p className="text-muted-foreground mb-3 text-sm font-medium">
-              Optional props (label, emoji, title, children)
-            </p>
-            <PastelCards>
-              <PastelCard label="All" emoji="✨" title="Everything" color="blue">
-                Label, emoji, title and children.
-              </PastelCard>
-              <PastelCard emoji="🎨" title="No label" color="purple">
-                Without the uppercase chip in the corner.
-              </PastelCard>
-              <PastelCard label="No emoji" title="No emoji" color="green">
-                The big icon at the top is gone.
-              </PastelCard>
-              <PastelCard label="No title" emoji="📦" color="orange">
-                Just a label, an emoji and some body text.
-              </PastelCard>
-              <PastelCard label="No children" emoji="🪄" title="No children" color="pink" />
-              <PastelCard emoji="🌙" title="Title only" color="slate" />
-              <PastelCard label="Label only" color="red" />
-              <PastelCard emoji="👻" color="stone" />
-              <PastelCard title="Title + body" color="blue">
-                A card with just a title and some children.
-              </PastelCard>
-              <PastelCard color="purple">Children only — no label, emoji, or title.</PastelCard>
-              <PastelCard label="Empty" color="green" />
-              <PastelCard color="pink" />
-            </PastelCards>
-          </div>
-        </div>
-      </Section>
-
-      {/* Breadcrumb */}
-      <Section title="Breadcrumb">
-        <div className="space-y-6">
-          <div>
-            <p className="text-muted-foreground mb-3 text-sm font-medium">Basic</p>
-            <Breadcrumb>
-              <BreadcrumbList>
-                <BreadcrumbItem>
-                  <BreadcrumbLink href="#">Home</BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator />
-                <BreadcrumbItem>
-                  <BreadcrumbLink href="#">Blog</BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator />
-                <BreadcrumbItem>
-                  <BreadcrumbPage>Current Page</BreadcrumbPage>
-                </BreadcrumbItem>
-              </BreadcrumbList>
-            </Breadcrumb>
-          </div>
-          <Separator />
-          <div>
-            <p className="text-muted-foreground mb-3 text-sm font-medium">With ellipsis</p>
-            <Breadcrumb>
-              <BreadcrumbList>
-                <BreadcrumbItem>
-                  <BreadcrumbLink href="#">Home</BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator />
-                <BreadcrumbItem>
-                  <BreadcrumbEllipsis />
-                </BreadcrumbItem>
-                <BreadcrumbSeparator />
-                <BreadcrumbItem>
-                  <BreadcrumbLink href="#">Category</BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator />
-                <BreadcrumbItem>
-                  <BreadcrumbPage>Current Page</BreadcrumbPage>
-                </BreadcrumbItem>
-              </BreadcrumbList>
-            </Breadcrumb>
-          </div>
-        </div>
-      </Section>
+      {children}
     </div>
   );
 }
 
-function ColorSwatch({ name, className }: { name: string; className: string }) {
-  const [colorValue, setColorValue] = useState<string>('');
-  const [copied, setCopied] = useState(false);
-  const swatchRef = useRef<HTMLDivElement>(null);
+function Caption({ children }: { children: ReactNode }) {
+  return <p className="eyebrow mb-4">{children}</p>;
+}
 
-  const setSwatchRef = (el: HTMLDivElement | null) => {
-    swatchRef.current = el;
-    if (el && !colorValue) {
-      setColorValue(getComputedStyle(el).backgroundColor);
-    }
-  };
+const pastels = [
+  { name: 'Peach', fr: 'Pêche', token: 'pastel-peach', className: 'bg-pastel-peach' },
+  { name: 'Rose', fr: 'Rose', token: 'pastel-rose', className: 'bg-pastel-rose' },
+  { name: 'Lilac', fr: 'Lilas', token: 'pastel-lilac', className: 'bg-pastel-lilac' },
+  { name: 'Sky', fr: 'Ciel', token: 'pastel-sky', className: 'bg-pastel-sky' },
+  { name: 'Mint', fr: 'Menthe', token: 'pastel-mint', className: 'bg-pastel-mint' },
+  { name: 'Butter', fr: 'Beurre', token: 'pastel-butter', className: 'bg-pastel-butter' },
+];
 
-  const handleCopy = async () => {
-    if (!colorValue) return;
-    await navigator.clipboard.writeText(colorValue);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 1500);
+const semanticTokens = [
+  'background',
+  'foreground',
+  'primary',
+  'secondary',
+  'muted',
+  'accent',
+  'destructive',
+  'card',
+  'border',
+  'input',
+  'ring',
+  'marker',
+];
+const doodleNames = ['underline', 'squiggle', 'sparkle', 'arrow', 'loop', 'circle'] as const;
+
+export function DesignSystemPreview({
+  group,
+  lang,
+  ageAtBuild,
+}: {
+  group: DesignSystemGroup;
+  lang: Lang;
+  ageAtBuild: number;
+}) {
+  const [inputValue, setInputValue] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const text = (fr: string, en: string) => (lang === 'fr' ? fr : en);
+  const translatePath = getTranslatedPath(lang);
+  const categories = {
+    development: text('Développement', 'Development'),
+    design: 'Design',
+    writing: text('Écriture', 'Writing'),
   };
 
   return (
-    <div className="space-y-2">
-      <div
-        ref={setSwatchRef}
+    <div className="min-w-0 space-y-12">
+      {group === 'foundations' && (
+        <>
+          <Specimen
+            title={text('La couleur de marque', 'Brand colour')}
+            description={text(
+              'Orange le jour, violet la nuit. Le token primary suit le thème du site.',
+              'Orange by day, purple by night. The primary token follows the site theme.'
+            )}
+          >
+            <div className="grid gap-4 sm:grid-cols-2">
+              <ColorSwatch
+                name={text('Jour · Orange', 'Day · Orange')}
+                token="day-primary"
+                lang={lang}
+                large
+              />
+              <ColorSwatch
+                name={text('Nuit · Violet', 'Night · Purple')}
+                token="night-primary"
+                lang={lang}
+                large
+              />
+            </div>
+          </Specimen>
+          <Specimen
+            title={text('La palette pastel', 'Pastel palette')}
+            description={text(
+              'Des accents pour les cartes, les badges et les annotations. Cliquer sur une couleur copie sa variable CSS.',
+              'Accents for cards, badges and annotations. Select a colour to copy its CSS variable.'
+            )}
+          >
+            <div className="grid grid-cols-2 gap-x-4 gap-y-6 sm:grid-cols-3 xl:grid-cols-6">
+              {pastels.map((swatch) => (
+                <ColorSwatch
+                  key={swatch.token}
+                  name={text(swatch.fr, swatch.name)}
+                  token={swatch.token}
+                  lang={lang}
+                />
+              ))}
+            </div>
+            <div className="border-pastel-mint bg-pastel-mint/35 dark:border-pastel-mint/40 dark:bg-pastel-mint/12 rounded-2xl border p-5">
+              <p className="text-pastel-mint-ink text-sm font-medium">
+                {text('Un fond teinté, une encre lisible.', 'A tinted background, readable ink.')}
+              </p>
+              <p className="text-muted-foreground mt-2 text-sm leading-relaxed">
+                {text(
+                  'Utiliser les variantes -ink pour le texte coloré. Les paragraphes gardent la couleur de texte du site.',
+                  'Use the -ink variants for coloured text. Paragraphs keep the site text colour.'
+                )}
+              </p>
+            </div>
+          </Specimen>
+          <Specimen title={text('Les tokens sémantiques', 'Semantic tokens')}>
+            <div className="grid grid-cols-2 gap-x-4 gap-y-6 sm:grid-cols-3 xl:grid-cols-4">
+              {semanticTokens.map((token) => (
+                <ColorSwatch key={token} name={token} token={token} lang={lang} />
+              ))}
+            </div>
+          </Specimen>
+          <Specimen title={text('Trois polices, trois rôles', 'Three typefaces, three roles')}>
+            <div className="space-y-8">
+              <div>
+                <Caption>01 · Fraunces</Caption>
+                <p className="font-display-soft text-4xl leading-[1.1] font-semibold tracking-tight sm:text-5xl lg:text-6xl">
+                  {text('Le sens du', 'Made with')}{' '}
+                  <MarkedText>{text('détail', 'care')}</MarkedText>
+                </p>
+                <p className="text-muted-foreground mt-5 text-sm leading-relaxed">
+                  {text(
+                    'Titres de page, de section et de carte. Une dernière expression en italique, soulignée au marqueur.',
+                    'Page, section and card headings. An italic closing word with a hand-drawn marker.'
+                  )}
+                </p>
+              </div>
+              <div className="grid gap-6 border-t pt-8 sm:grid-cols-2">
+                <div>
+                  <Caption>02 · Geist</Caption>
+                  <p className="text-xl leading-relaxed">
+                    {text('Des mots faciles à lire.', 'Words that are easy to read.')}
+                  </p>
+                  <p className="text-muted-foreground mt-3 text-sm leading-relaxed">
+                    {text(
+                      'Paragraphes, navigation, boutons, dates et légendes. Le texte courant laisse les titres prendre leur place.',
+                      'Body copy, navigation, buttons, dates and captions. Quiet supporting text gives headings room.'
+                    )}
+                  </p>
+                  <div className="mt-5 flex flex-wrap gap-3">
+                    <Badge>Astro</Badge>
+                    <Badge variant="outline">React</Badge>
+                  </div>
+                </div>
+                <div>
+                  <Caption>03 · Maple Mono</Caption>
+                  <p className="font-mono text-xl font-medium tabular-nums">10.42 km · 5:24 /km</p>
+                  <p className="text-muted-foreground mt-3 text-sm leading-relaxed">
+                    {text(
+                      "Code, mesures et signatures techniques. Une ponctuation, pas la police de toute l'interface.",
+                      'Code, metrics and technical signatures. An accent, rather than the default UI typeface.'
+                    )}
+                  </p>
+                  <code className="text-primary mt-5 block text-sm">const craft = 'care';</code>
+                </div>
+              </div>
+            </div>
+          </Specimen>
+          <Specimen
+            title={text('Les traits dessinés', 'Hand-drawn marks')}
+            description={text(
+              'Le marqueur accompagne les titres. Les autres traits restent des accents ponctuels.',
+              'The marker accompanies headings. Other marks are occasional accents.'
+            )}
+          >
+            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
+              {doodleNames.map((name) => (
+                <div
+                  key={name}
+                  className="bg-muted/50 flex flex-col items-center gap-4 rounded-2xl px-3 py-6"
+                >
+                  <Doodle
+                    name={name}
+                    className={
+                      name === 'sparkle' ? 'text-pastel-lilac size-10' : 'text-marker h-10 w-24'
+                    }
+                  />
+                  <code className="text-muted-foreground text-xs">{name}</code>
+                </div>
+              ))}
+            </div>
+          </Specimen>
+        </>
+      )}
+
+      {group === 'materials' && (
+        <>
+          <Specimen title={text('Choisir une surface', 'Choose a surface')}>
+            <div className="grid gap-6 sm:grid-cols-2">
+              <div className="surface rounded-3xl p-6">
+                <Caption>{text('Lecture · Projets · Blog', 'Reading · Projects · Blog')}</Caption>
+                <p className="font-display-soft text-2xl font-semibold">
+                  {text('Le papier', 'Paper')}
+                </p>
+                <p className="text-muted-foreground mt-3 text-sm leading-relaxed">
+                  {text(
+                    'Une surface pleine, une bordure fine et une ombre douce. La base des pages de contenu.',
+                    'A solid surface, a thin border and a soft shadow. The foundation for content pages.'
+                  )}
+                </p>
+                <code className="text-muted-foreground mt-6 block text-xs">
+                  surface · rounded-3xl
+                </code>
+              </div>
+              <div className="bg-pastel-peach/35 border-pastel-peach dark:bg-pastel-peach/12 dark:border-pastel-peach/40 rounded-3xl border p-6">
+                <Caption>{text('Annotations · Encadrés', 'Annotations · Callouts')}</Caption>
+                <p className="font-display-soft text-pastel-peach-ink text-2xl font-semibold">
+                  {text('Le pastel', 'Pastel')}
+                </p>
+                <p className="text-muted-foreground mt-3 text-sm leading-relaxed">
+                  {text(
+                    'Une teinte franche pour regrouper une idée ou distinguer une information dans un article.',
+                    'A clear tint to group an idea or distinguish information within an article.'
+                  )}
+                </p>
+                <code className="text-muted-foreground mt-6 block text-xs">
+                  pastel-peach · pastel-peach-ink
+                </code>
+              </div>
+            </div>
+          </Specimen>
+          <Specimen
+            title={text('Le verre, en contexte', 'Glass, in context')}
+            description={text(
+              "Réservé aux cartes de l'accueil et à quelques appels à l'action, dont le panneau de contact partagé. Les deux variantes utilisent le même contour.",
+              'Reserved for homepage cards and occasional calls to action, including the shared contact panel. Both variants share the same contour.'
+            )}
+          >
+            <div className="relative isolate grid gap-6 py-6 sm:grid-cols-2">
+              <div
+                className="pointer-events-none absolute inset-0 -z-10 overflow-hidden rounded-3xl"
+                aria-hidden="true"
+              >
+                <div className="bg-pastel h-full w-full opacity-70 dark:opacity-25" />
+              </div>
+              <Card3D className="m-3 gap-5 p-6 sm:m-2 sm:p-7">
+                <div className="card-3d-icon text-primary">
+                  <Icon icon={SparklesIcon} className="size-7" aria-hidden="true" />
+                </div>
+                <div>
+                  <h4 className="font-display-soft text-2xl font-semibold">
+                    {text('Au premier plan', 'In the foreground')}
+                  </h4>
+                  <p className="text-muted-foreground mt-3 text-sm leading-relaxed">
+                    {text(
+                      "La carte de l'expérience actuelle, avec une matière plus présente.",
+                      'The current experience card, with a more pronounced material.'
+                    )}
+                  </p>
+                </div>
+                <code className="text-muted-foreground mt-auto text-xs">Card3D · default</code>
+              </Card3D>
+              <Card3D variant="glass" className="m-3 gap-5 p-6 sm:m-2 sm:p-7">
+                <div className="card-3d-icon text-primary">
+                  <Icon icon={Mail01Icon} className="size-7" aria-hidden="true" />
+                </div>
+                <div>
+                  <h4 className="font-display-soft text-2xl font-semibold">
+                    {text('Tout en transparence', 'A clearer view')}
+                  </h4>
+                  <p className="text-muted-foreground mt-3 text-sm leading-relaxed">
+                    {text(
+                      'Les projets, le parcours et le contact, avec des reflets plus fins.',
+                      'Projects, past experience and contact, with finer reflections.'
+                    )}
+                  </p>
+                </div>
+                <code className="text-muted-foreground mt-auto text-xs">Card3D · glass</code>
+              </Card3D>
+            </div>
+            <div className="flex flex-wrap gap-x-8 gap-y-3 text-sm">
+              <span>
+                <code>glass</code>
+                <span className="text-muted-foreground">
+                  {' '}
+                  · {text('translucide', 'translucent')}
+                </span>
+              </span>
+              <span>
+                <code>glass-strong</code>
+                <span className="text-muted-foreground">
+                  {' '}
+                  · {text('contenu dense', 'dense content')}
+                </span>
+              </span>
+              <span>
+                <code>ring-pastel</code>
+                <span className="text-muted-foreground">
+                  {' '}
+                  · {text('un accent par vue', 'one accent per view')}
+                </span>
+              </span>
+            </div>
+          </Specimen>
+          <Specimen title={text('La carte développeur', 'Developer ID card')}>
+            <div className="grid items-center gap-8 lg:grid-cols-[1.1fr_0.9fr]">
+              <div className="mx-auto w-full max-w-sm">
+                <DevIdCard lang={lang} ageAtBuild={ageAtBuild} />
+              </div>
+              <div className="space-y-5">
+                <p className="font-display-soft text-2xl leading-snug font-semibold">
+                  {text(
+                    'La même identité, sur les deux faces.',
+                    'The same identity, on both sides.'
+                  )}
+                </p>
+                <p className="text-muted-foreground text-sm leading-relaxed">
+                  {text(
+                    "La carte de l'accueil réunit la typographie éditoriale, Melo et le cadre de verre. Le verso garde la signature et le ruban irisé.",
+                    'The homepage card combines editorial type, Melo and a glass frame. The reverse keeps the signature and iridescent ribbon.'
+                  )}
+                </p>
+                <p className="text-muted-foreground text-sm leading-relaxed">
+                  {text(
+                    'Cliquer à gauche ou à droite pour la retourner. Au clavier et avec la réduction des animations, le changement est immédiat.',
+                    'Click the left or right half to turn it. Keyboard activation and reduced motion switch faces immediately.'
+                  )}
+                </p>
+              </div>
+            </div>
+          </Specimen>
+        </>
+      )}
+
+      {group === 'actions' && (
+        <>
+          <Specimen
+            title={text('Les boutons classiques', 'Classic buttons')}
+            description={text(
+              'Radiant pour une action principale, pastel pour une alternative. Les variantes discrètes accompagnent le contenu.',
+              'Radiant for the primary action, pastel for an alternative. Quieter variants accompany content.'
+            )}
+          >
+            <div className="flex flex-wrap items-center gap-4">
+              <Link href={translatePath('/projects')} className="min-h-11">
+                {text('Voir les projets', 'View projects')}
+                <Icon icon={ArrowRight01Icon} aria-hidden="true" />
+              </Link>
+              <Link href={translatePath('/cv')} variant="pastel" className="min-h-11">
+                {text('Voir mon CV', 'View my CV')}
+              </Link>
+              <Button variant="ghost" className="min-h-11">
+                Ghost
+              </Button>
+              <Button variant="destructive" className="min-h-11">
+                {text('Supprimer', 'Delete')}
+              </Button>
+              <Button variant="link" className="min-h-11">
+                {text('En savoir plus', 'Learn more')}
+              </Button>
+            </div>
+            <div className="grid gap-6 sm:grid-cols-2">
+              <div>
+                <Caption>{text('Tailles', 'Sizes')}</Caption>
+                <div className="flex flex-wrap items-center gap-3">
+                  <Button size="xs">XS</Button>
+                  <Button size="sm">SM</Button>
+                  <Button>MD</Button>
+                  <Button size="lg">LG</Button>
+                </div>
+              </div>
+              <div>
+                <Caption>{text('États', 'States')}</Caption>
+                <div className="flex flex-wrap gap-3">
+                  <Button className="min-h-11">{text('Disponible', 'Enabled')}</Button>
+                  <Button disabled className="min-h-11">
+                    {text('Désactivé', 'Disabled')}
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </Specimen>
+          <Specimen
+            title={text('Les boutons de verre', 'Glass buttons')}
+            description={text(
+              "Pour les appels à l'action de l'accueil et les liens sociaux du contact. Le libellé reste immobile au survol.",
+              'For homepage calls to action and contact social links. The label stays still on hover.'
+            )}
+          >
+            <div className="flex flex-wrap items-center gap-6 py-4">
+              <Button3D size="lg">{text('Principal', 'Primary')}</Button3D>
+              <Button3D variant="secondary" size="lg">
+                {text('Secondaire', 'Secondary')}
+              </Button3D>
+            </div>
+            <div className="flex flex-wrap items-center gap-4">
+              <Button3D size="sm">SM</Button3D>
+              <Button3D>MD</Button3D>
+              <Button3D variant="secondary" size="icon" aria-label={text('Rechercher', 'Search')}>
+                <Icon icon={Search01Icon} />
+              </Button3D>
+              <Button3D disabled>{text('Désactivé', 'Disabled')}</Button3D>
+            </div>
+          </Specimen>
+          <Specimen title={text('Les badges', 'Badges')}>
+            <div className="space-y-6">
+              <div>
+                <Caption>{text('Neutres & sémantiques', 'Neutral & semantic')}</Caption>
+                <div className="flex flex-wrap gap-3">
+                  <Badge>Default</Badge>
+                  <Badge variant="secondary">Secondary</Badge>
+                  <Badge variant="outline">Outline</Badge>
+                  <Badge variant="glass">Glass</Badge>
+                  <Badge variant="destructive">Destructive</Badge>
+                </div>
+              </div>
+              <div>
+                <Caption>{text('Pastels pleins', 'Filled pastels')}</Caption>
+                <div className="flex flex-wrap gap-3">
+                  {(
+                    ['blue', 'green', 'yellow', 'pink', 'purple', 'orange', 'teal', 'rose'] as const
+                  ).map((color) => (
+                    <Badge key={color} variant={`pastel-${color}`}>
+                      {color}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <Caption>{text('Pastels détourés', 'Outlined pastels')}</Caption>
+                <div className="flex flex-wrap gap-3">
+                  {(
+                    ['blue', 'green', 'yellow', 'pink', 'purple', 'orange', 'teal', 'rose'] as const
+                  ).map((color) => (
+                    <Badge key={color} variant={`pastel-${color}-outline`}>
+                      {color}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </Specimen>
+        </>
+      )}
+
+      {group === 'forms' && (
+        <>
+          <Specimen title={text('Les champs de saisie', 'Text inputs')}>
+            <div className="grid gap-6 sm:grid-cols-2">
+              <div className="space-y-5">
+                <div className="space-y-2">
+                  <Label htmlFor="input-demo">{text('Votre nom', 'Your name')}</Label>
+                  <Input
+                    id="input-demo"
+                    placeholder="Marek Elmayan"
+                    value={inputValue}
+                    onChange={(event) => setInputValue(event.target.value)}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="input-disabled">
+                    {text('Champ désactivé', 'Disabled input')}
+                  </Label>
+                  <Input
+                    id="input-disabled"
+                    placeholder={text('Indisponible', 'Unavailable')}
+                    disabled
+                  />
+                </div>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="textarea-demo">Message</Label>
+                <Textarea
+                  id="textarea-demo"
+                  className="min-h-32"
+                  placeholder={text('Parlons de votre projet…', 'Tell me about your project…')}
+                />
+              </div>
+            </div>
+          </Specimen>
+          <Specimen title={text('Aide & validation', 'Guidance & validation')}>
+            <div className="grid gap-6 sm:grid-cols-2">
+              <FieldGroup>
+                <Field>
+                  <FieldLabel htmlFor="field-email">
+                    {text('Adresse email', 'Email address')}
+                  </FieldLabel>
+                  <Input
+                    id="field-email"
+                    type="email"
+                    placeholder="you@example.com"
+                    aria-describedby="email-help"
+                  />
+                  <FieldDescription id="email-help">
+                    {text('Pour répondre à votre message.', 'To reply to your message.')}
+                  </FieldDescription>
+                </Field>
+                <Field>
+                  <FieldLabel htmlFor="field-password">
+                    {text('Mot de passe', 'Password')}
+                  </FieldLabel>
+                  <Input
+                    id="field-password"
+                    type="password"
+                    autoComplete="new-password"
+                    placeholder="••••••••"
+                  />
+                </Field>
+              </FieldGroup>
+              <FieldGroup>
+                <Field data-invalid="true">
+                  <FieldLabel htmlFor="field-error">
+                    {text('Adresse à corriger', 'Address to correct')}
+                  </FieldLabel>
+                  <Input
+                    id="field-error"
+                    aria-invalid="true"
+                    aria-describedby="email-error"
+                    defaultValue="invalid@"
+                  />
+                  <FieldError id="email-error">
+                    {text(
+                      'Saisissez une adresse email complète.',
+                      'Enter a complete email address.'
+                    )}
+                  </FieldError>
+                </Field>
+              </FieldGroup>
+            </div>
+          </Specimen>
+          <Specimen title={text('Les champs composés', 'Input groups')}>
+            <div className="grid gap-6 sm:grid-cols-2">
+              <div className="space-y-2">
+                <Label htmlFor="search-demo">
+                  {text('Rechercher un article', 'Search articles')}
+                </Label>
+                <InputGroup>
+                  <InputGroupAddon align="inline-start">
+                    <Icon icon={Search01Icon} className="size-4" />
+                  </InputGroupAddon>
+                  <InputGroupInput
+                    id="search-demo"
+                    placeholder={text('Un sujet, un mot-clé…', 'A topic, a keyword…')}
+                  />
+                </InputGroup>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="subscribe-demo">
+                  {text('Inscription · Démonstration', 'Subscribe · Demo')}
+                </Label>
+                <InputGroup>
+                  <InputGroupAddon align="inline-start">
+                    <Icon icon={Mail01Icon} className="size-4" />
+                  </InputGroupAddon>
+                  <InputGroupInput id="subscribe-demo" type="email" placeholder="you@example.com" />
+                  <InputGroupButton
+                    aria-label={text(
+                      "S'inscrire, démonstration sans envoi",
+                      'Subscribe, demonstration only'
+                    )}
+                  >
+                    {text("S'inscrire", 'Subscribe')}
+                  </InputGroupButton>
+                </InputGroup>
+              </div>
+            </div>
+          </Specimen>
+          <Specimen title={text('La sélection', 'Selection')}>
+            <div className="max-w-xs space-y-2">
+              <Label htmlFor="category-demo">{text('Catégorie', 'Category')}</Label>
+              <Select
+                value={selectedCategory}
+                onValueChange={setSelectedCategory}
+                items={categories}
+              >
+                <SelectTrigger id="category-demo" className="min-h-11 w-full">
+                  <SelectValue placeholder={text('Choisir une catégorie', 'Choose a category')} />
+                </SelectTrigger>
+                <SelectContent>
+                  {Object.entries(categories).map(([value, label]) => (
+                    <SelectItem key={value} value={value}>
+                      {label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          </Specimen>
+        </>
+      )}
+
+      {group === 'overlays' && (
+        <>
+          <Specimen title={text('Le menu déroulant', 'Dropdown menu')}>
+            <DropdownMenu>
+              <DropdownMenuTrigger
+                render={
+                  <Button variant="pastel" className="min-h-11">
+                    {text('Ouvrir le menu', 'Open menu')}
+                  </Button>
+                }
+              />
+              <DropdownMenuContent>
+                <DropdownMenuItem>{text('Profil', 'Profile')}</DropdownMenuItem>
+                <DropdownMenuItem>{text('Paramètres', 'Settings')}</DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>{text('Déconnexion', 'Sign out')}</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </Specimen>
+          <Specimen
+            title={text('La confirmation', 'Confirmation')}
+            description={text(
+              'Cet exemple ne supprime aucune donnée.',
+              'This example does not delete any data.'
+            )}
+          >
+            <AlertDialog>
+              <AlertDialogTrigger
+                render={
+                  <Button variant="destructive" className="min-h-11">
+                    {text('Supprimer un élément', 'Delete an item')}
+                  </Button>
+                }
+              />
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>
+                    {text('Supprimer cet élément ?', 'Delete this item?')}
+                  </AlertDialogTitle>
+                  <AlertDialogDescription>
+                    {text(
+                      'Ceci est une démonstration du dialogue de confirmation. Aucune donnée ne sera supprimée.',
+                      'This is a confirmation dialog demonstration. No data will be deleted.'
+                    )}
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>{text('Annuler', 'Cancel')}</AlertDialogCancel>
+                  <AlertDialogAction>{text('Confirmer', 'Confirm')}</AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
+          </Specimen>
+          <Specimen
+            title={text('Les infobulles', 'Tooltips')}
+            description={text(
+              'Une aide complémentaire, également visible à la prise de focus.',
+              'Supplementary guidance, also available on keyboard focus.'
+            )}
+          >
+            <div className="flex flex-wrap gap-3">
+              {(['top', 'bottom', 'left', 'right'] as const).map((side, index) => (
+                <Tooltip key={side}>
+                  <TooltipTrigger
+                    render={
+                      <Button variant="ghost" className="min-h-11">
+                        {text(['En haut', 'En bas', 'À gauche', 'À droite'][index], side)}
+                      </Button>
+                    }
+                  />
+                  <TooltipContent side={side}>
+                    {text('Une précision utile.', 'A useful detail.')}
+                  </TooltipContent>
+                </Tooltip>
+              ))}
+            </div>
+          </Specimen>
+        </>
+      )}
+
+      {group === 'content' && (
+        <>
+          <Specimen
+            title={text('Les cartes de contenu', 'Content cards')}
+            description={text(
+              'Des cartes pleines pour les pages de lecture. Les titres éditoriaux gardent Fraunces.',
+              'Solid cards for reading pages. Editorial headings keep Fraunces.'
+            )}
+          >
+            <div className="grid gap-6 sm:grid-cols-2">
+              <Card className="rounded-3xl">
+                <CardHeader>
+                  <CardTitle className="font-display-soft text-2xl font-semibold">
+                    {text('Une idée à explorer', 'An idea to explore')}
+                  </CardTitle>
+                  <CardDescription>
+                    {text('Projet, article ou ressource.', 'A project, article or resource.')}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground leading-relaxed">
+                    {text(
+                      'Un titre, quelques mots de contexte et une action explicite.',
+                      'A heading, a little context and a clear action.'
+                    )}
+                  </p>
+                </CardContent>
+                <CardFooter>
+                  <Link href={translatePath('/blog')} variant="pastel" className="min-h-11">
+                    {text('Lire le blog', 'Read the blog')}
+                    <Icon icon={ArrowRight01Icon} aria-hidden="true" />
+                  </Link>
+                </CardFooter>
+              </Card>
+              <Card size="sm" className="rounded-3xl">
+                <CardHeader>
+                  <CardTitle className="font-display-soft text-xl font-semibold">
+                    {text('Format compact', 'Compact format')}
+                  </CardTitle>
+                  <CardDescription>
+                    {text('Une densité adaptée au contenu.', 'Density that suits the content.')}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground leading-relaxed">
+                    {text(
+                      "Moins d'espace intérieur pour les informations secondaires.",
+                      'Less internal space for supporting information.'
+                    )}
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+          </Specimen>
+          <Specimen title={text('Les encadrés pastel', 'Pastel cards')}>
+            <PastelCards>
+              {(
+                ['slate', 'stone', 'red', 'orange', 'green', 'blue', 'purple', 'pink'] as const
+              ).map((color) => (
+                <PastelCard
+                  key={color}
+                  label={color}
+                  title={text('Une idée à retenir', 'An idea to remember')}
+                  color={color}
+                >
+                  {text(
+                    'Une bordure teintée et une ombre décalée pour les encadrés du blog.',
+                    'A tinted border and offset shadow for blog callouts.'
+                  )}
+                </PastelCard>
+              ))}
+            </PastelCards>
+            <div className="grid gap-6 sm:grid-cols-2">
+              <PastelCard color="blue" title={text('Sans étiquette', 'Without a label')}>
+                {text('Le titre et le texte suffisent.', 'A heading and body copy are enough.')}
+              </PastelCard>
+              <PastelCard color="green">
+                {text(
+                  'Un encadré peut aussi contenir du texte seul.',
+                  'A callout can also contain only body copy.'
+                )}
+              </PastelCard>
+            </div>
+          </Specimen>
+          <Specimen title={text("Le fil d'Ariane", 'Breadcrumbs')}>
+            <div className="space-y-6">
+              <Breadcrumb>
+                <BreadcrumbList>
+                  <BreadcrumbItem>
+                    <BreadcrumbLink href={translatePath('/')}>
+                      {text('Accueil', 'Home')}
+                    </BreadcrumbLink>
+                  </BreadcrumbItem>
+                  <BreadcrumbSeparator />
+                  <BreadcrumbItem>
+                    <BreadcrumbLink href={translatePath('/blog')}>Blog</BreadcrumbLink>
+                  </BreadcrumbItem>
+                  <BreadcrumbSeparator />
+                  <BreadcrumbItem>
+                    <BreadcrumbPage>{text('Article', 'Article')}</BreadcrumbPage>
+                  </BreadcrumbItem>
+                </BreadcrumbList>
+              </Breadcrumb>
+              <Breadcrumb>
+                <BreadcrumbList>
+                  <BreadcrumbItem>
+                    <BreadcrumbLink href={translatePath('/')}>
+                      {text('Accueil', 'Home')}
+                    </BreadcrumbLink>
+                  </BreadcrumbItem>
+                  <BreadcrumbSeparator />
+                  <BreadcrumbItem>
+                    <BreadcrumbEllipsis />
+                  </BreadcrumbItem>
+                  <BreadcrumbSeparator />
+                  <BreadcrumbItem>
+                    <BreadcrumbPage>{text('Page actuelle', 'Current page')}</BreadcrumbPage>
+                  </BreadcrumbItem>
+                </BreadcrumbList>
+              </Breadcrumb>
+            </div>
+          </Specimen>
+          <Specimen
+            title={text('Les langues', 'Languages')}
+            description={text(
+              'Le contrôle compact utilisé dans la navigation mobile.',
+              'The compact control used in mobile navigation.'
+            )}
+          >
+            <LanguageSwitcher
+              currentLang={lang}
+              currentPath={translatePath('/design-system')}
+              variant="plain"
+              className="w-fit"
+            />
+          </Specimen>
+          <Specimen title={text('Les séparateurs', 'Separators')}>
+            <div className="space-y-6">
+              <Separator />
+              <div className="flex h-8 items-center gap-4 text-sm">
+                <span>Astro</span>
+                <Separator orientation="vertical" />
+                <span>React</span>
+                <Separator orientation="vertical" />
+                <span>TypeScript</span>
+              </div>
+            </div>
+          </Specimen>
+        </>
+      )}
+    </div>
+  );
+}
+
+function ColorSwatch({
+  name,
+  token,
+  lang,
+  large = false,
+}: {
+  name: string;
+  token: string;
+  lang: Lang;
+  large?: boolean;
+}) {
+  const [status, setStatus] = useState<'idle' | 'copied' | 'error'>('idle');
+  const variable = `var(--${token})`;
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(variable);
+      setStatus('copied');
+    } catch {
+      setStatus('error');
+    }
+    setTimeout(() => setStatus('idle'), 2000);
+  };
+
+  return (
+    <div className="min-w-0 space-y-3">
+      <button
+        type="button"
         onClick={handleCopy}
-        className={`border-foreground/10 h-14 w-full cursor-pointer rounded-2xl border transition-transform hover:scale-103 active:scale-97 ${className}`}
-        title="Click to copy"
+        aria-label={`${lang === 'fr' ? 'Copier' : 'Copy'} ${variable}`}
+        className={`border-foreground/10 block w-full cursor-copy rounded-2xl border ${large ? 'h-28' : 'h-20'}`}
+        style={{ backgroundColor: variable }}
       />
-      <div className="flex flex-col justify-between gap-1">
-        <p className="text-foreground text-sm font-medium">{name}</p>
-        <p className="text-muted-foreground truncate font-sans text-[0.65rem]">
-          {copied ? '✓ Copied' : colorValue}
+      <div className="min-w-0 space-y-1">
+        <p className="text-sm font-medium">{name}</p>
+        <p aria-live="polite" className="text-muted-foreground font-sans text-xs break-words">
+          {status === 'copied'
+            ? lang === 'fr'
+              ? 'Variable copiée'
+              : 'Variable copied'
+            : status === 'error'
+              ? lang === 'fr'
+                ? 'Copie indisponible'
+                : 'Copy unavailable'
+              : `--${token}`}
         </p>
       </div>
     </div>
