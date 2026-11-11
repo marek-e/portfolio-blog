@@ -94,8 +94,9 @@ const labels = getTranslations(getLangFromUrl(Astro.url)).hero.music;
       audio.pause();
       return;
     }
+    const previousAttemptFailed = audio.dataset.error || audio.error;
     delete audio.dataset.error;
-    if (audio.error) audio.load();
+    if (previousAttemptFailed) audio.load();
     try {
       await audio.play();
     } catch (error) {
