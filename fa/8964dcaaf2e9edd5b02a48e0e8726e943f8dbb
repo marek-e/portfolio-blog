@@ -1,0 +1,34 @@
+src/i18n/translations/en.ts
+  s_b47ba44e656b5e::t_0a87d05af93688 164,171
+src/components/portfolio/AboutSection.astro
+  s_b47ba44e656b5e::t_d72bbf376e7258 22
+  s_b47ba44e656b5e::t_7b287bea06e056 4
+src/pages/[...lang]/design-system.astro
+  s_b47ba44e656b5e::t_099b8ca1eee595 7,32
+src/i18n/translations/fr.ts
+  s_b47ba44e656b5e::t_0a87d05af93688 165,172
+src/i18n/ui.ts
+  s_b47ba44e656b5e::t_0a87d05af93688 153,160
+src/components/design-system/DesignSystemPreview.tsx
+  s_b47ba44e656b5e::t_099b8ca1eee595 101,331
+src/components/portfolio/DevIdCard/index.tsx
+  s_b47ba44e656b5e::t_56905a0b56f36a 1
+  s_b47ba44e656b5e::t_61ca34aa0a2142 39-40
+  s_b47ba44e656b5e::t_3825a82b9bf10f 16,19-22,24
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "fa8964dcaaf2e9edd5b02a48e0e8726e943f8dbb",
+  "prompts": {},
+  "sessions": {
+    "s_b47ba44e656b5e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e1ae028b-4cb4-4ad6-b24c-c1b7a7149d93",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
