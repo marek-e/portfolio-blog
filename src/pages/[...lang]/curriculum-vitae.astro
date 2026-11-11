@@ -50,7 +50,12 @@ const t = getTranslations(lang);
         </p>
         <button
           onclick="window.print()"
-          class={buttonVariants({ variant: 'pastel', size: 'lg', animation: 'scale' })}
+          class={buttonVariants({
+            variant: 'pastel',
+            size: 'lg',
+            animation: 'scale',
+            className: 'cursor-pointer',
+          })}
           aria-label={t.cv.downloadPdf}
         >
           <span class="button-pastel-border" aria-hidden="true">
@@ -60,11 +65,7 @@ const t = getTranslations(lang);
           {t.cv.downloadPdf}
         </button>
       </div>
-      <div
-        class="bg-muted/60 rounded-3xl p-2 md:p-3 print:rounded-none print:bg-transparent print:p-0"
-      >
-        <CV lang={lang} />
-      </div>
+      <CV lang={lang} />
     </div>
   </main>
   <Footer />
