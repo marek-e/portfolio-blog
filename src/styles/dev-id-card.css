@@ -126,7 +126,7 @@
   width: 62%;
   color: color-mix(in oklch, var(--foreground) 80%, var(--primary));
   font-family: var(--font-sans);
-  font-size: clamp(0.625rem, 2.8cqw, 0.8125rem);
+  font-size: clamp(0.75rem, 2.8cqw, 0.8125rem);
   line-height: 1.5;
 }
 
@@ -169,6 +169,7 @@
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
   padding-top: 0.8rem;
+  padding-bottom: 1.25rem;
   border-top: 1px solid oklch(from var(--primary) l c h / 18%);
 }
 
@@ -180,7 +181,7 @@
   gap: 0.4rem;
   color: color-mix(in oklch, var(--foreground) 80%, var(--primary));
   font-family: var(--font-sans);
-  font-size: clamp(0.5rem, 2.7cqw, 0.7rem);
+  font-size: 0.75rem;
   line-height: 1.4;
 }
 
@@ -330,6 +331,11 @@
 }
 
 @container (max-width: 340px) {
+  .dev-id-card-stack {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.65rem 0;
+  }
+
   .dev-id-card-name {
     font-size: 13.3cqw;
   }
@@ -359,7 +365,7 @@
   }
 
   .dev-id-card-tech {
-    font-size: 0.625rem;
+    font-size: 0.75rem;
   }
 }
 

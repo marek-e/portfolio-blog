@@ -52,6 +52,8 @@ export function HeroStickers({
       {pills}
     </div>
   ) : (
-    <ul className="mt-12 flex flex-wrap justify-center gap-2 lg:hidden">{pills}</ul>
+    <ul className="hero-mobile-stickers mt-8 flex max-w-80 flex-wrap justify-center gap-2 md:mt-12 md:max-w-none lg:hidden">
+      {pills}
+    </ul>
   );
 }

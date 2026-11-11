@@ -6,7 +6,7 @@ export const fr: UITranslations = {
     presentationsShort: 'Slides',
     projects: 'Projets',
     blog: 'Blog',
-    presentations: 'Présentations',
+    presentations: 'Slides',
     design: 'Design',
     contact: 'Contact',
   },
@@ -39,16 +39,20 @@ export const fr: UITranslations = {
   about: {
     eyebrow: '01 — Qui je suis',
     title: 'À propos',
+    summary:
+      "Je construis des produits de l'UX au backend. J'aime comprendre les détails qui rendent une interface agréable à utiliser, explorer la cybersécurité et expérimenter avec les outils IA.",
     paragraphs: [
       "Tout a commencé en classe de maths au lycée. Je finissais toujours mes exercices en avance, alors je passais mon temps sur ma calculatrice TI. D'abord un programme pour résoudre les équations du second degré, puis un Snake, et finalement un jeu de bataille navale complet. Des milliers de lignes de code pour une interface basique, mais un jeu qui fonctionnait et surtout une nouvelle passion.",
-      "En prépa, j'ai continué à coder : <a href=\"/projects/petanque\" class=\"text-primary hover:underline\">un jeu de pétanque en Python</a> pour simuler la 2ème loi de Newton. Plus tard en école d'ingénieur, j'ai découvert le HTML, CSS et JavaScript. C'est là que j'ai réalisé qu'on pouvait créer des choses qui comptent vraiment pour les utilisateurs et toute les compléxités que cela implique.",
-      "Aujourd'hui, je me concentre sur le bout en bout, de l'UX au backend. Je n'ai pas l'étincelle du designer pour construire une UI parfait (ça ressemble souvent à un enfant qui choisit des couleurs aléatoires) mais ce qui me passionne, ce sont tous ces petits détails UX : une animation fluide, une interface intuitive qui ne force pas l'utilisateur à réfléchir. Des produits qui livrent une réelle valeur.",
+      "En prépa, j'ai continué à coder : <a href=\"/projects/petanque\" class=\"text-primary hover:underline\">un jeu de pétanque en Python</a> pour simuler la deuxième loi de Newton. Plus tard en école d'ingénieur, j'ai découvert le HTML, CSS et JavaScript. C'est là que j'ai réalisé qu'on pouvait créer des choses qui comptent vraiment pour les utilisateurs et toutes les complexités que cela implique.",
+      "Aujourd'hui, je me concentre sur le bout en bout, de l'UX au backend. Ce qui me passionne, ce sont tous ces petits détails UX : une animation fluide, une interface intuitive qui ne force pas l'utilisateur à réfléchir. Des produits qui livrent une réelle valeur.",
       "Je suis aussi fasciné par la cybersécurité, je me forme, j'essaye d'appliquer les bonnes pratiques et j'audite du code. Il m'arrive de participer à des CTF à mes heures perdues pour m'exercer et apprendre de nouvelles techniques.",
-      "J'apporte une grande attention a la DevX, or avec l'apparition de nouveaux outils comme les LLMs, notre flux de travail en tant que développeur est en pleine évolution. Et je suis convaincu que maitriser les outils IA est une compétence essentielle pour le futur.",
+      "J'apporte une grande attention à la DevX, or avec l'apparition de nouveaux outils comme les LLMs, notre flux de travail en tant que développeur est en pleine évolution. Et je suis convaincu que maîtriser les outils IA est une compétence essentielle pour le futur.",
     ],
     mantraContent:
       'Construire des choses qui comptent. Être utile en ajoutant une réelle valeur. Et continuer à apprendre au quotidien.',
     mantraTitle: 'Mon mantra',
+    readMore: 'Lire la suite de mon histoire',
+    readLess: 'Réduire mon histoire',
   },
   timeline: {
     eyebrow: '02 — Études & expériences',
@@ -65,6 +69,9 @@ export const fr: UITranslations = {
     liveDemo: 'Live',
     code: 'Code',
     viewDetails: 'Voir les détails',
+    previous: 'Projet précédent',
+    next: 'Projet suivant',
+    slide: 'Projet {current} sur {count}',
   },
   contact: {
     eyebrow: '05 — Écrivez-moi',
@@ -87,7 +94,7 @@ export const fr: UITranslations = {
     home: 'Accueil',
     blog: 'Blog',
     projects: 'Projets',
-    presentations: 'Présentations',
+    presentations: 'Slides',
     contact: 'Contact',
     designSystem: 'Design System',
     backToTop: 'Haut de page',
@@ -97,8 +104,11 @@ export const fr: UITranslations = {
     pageTitle: '404 - Page non trouvée | melmayan.fr',
     pageDescription: 'Page non trouvée',
     heading: 'Page non trouvée',
-    message: "Désolé, la page que vous cherchez n'existe pas ou a été déplacée.",
+    message: "Ce sentier n'est pas sur la carte. Retrouvons le bon chemin.",
     backHome: "Retour à l'accueil",
+    browseBlog: 'Parcourir le blog',
+    sceneDescription:
+      "Melo est assis sur un rocher alpin et étudie une carte, perplexe, accompagné d'un petit robot flottant. Une lanterne éclaire le sentier et un panneau en bois indique le chemin du retour.",
   },
   theme: {
     light: 'Clair',
@@ -115,6 +125,8 @@ export const fr: UITranslations = {
     homeLink: "Marek Elmayan - retour à l'accueil",
     copyEmail: "Copier l'adresse email",
     postActions: "Plus d'actions",
+    toggleTheme: 'Changer de thème',
+    visitWebsite: 'Visiter le site de {organization}',
   },
   designSystem: {
     pageTitle: 'Design System | melmayan.fr',
@@ -195,6 +207,13 @@ export const fr: UITranslations = {
     tagIntervals: 'Fractionné',
     tagCommute: 'Trajet',
     tagRace: 'Compétition',
+    activityNames: {
+      morning: 'Course à pied le matin',
+      afternoon: 'Course à pied l’après-midi',
+      evening: 'Course à pied en soirée',
+      night: 'Course à pied de nuit',
+      lunch: 'Course à pied le midi',
+    },
   },
   projectsPage: {
     eyebrow: 'Travaux choisis',

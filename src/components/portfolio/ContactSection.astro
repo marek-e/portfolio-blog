@@ -22,7 +22,7 @@ const isPage = as === 'h1';
 
 <section
   id="contact"
-  class="relative pt-20 pb-16 md:pt-24 md:pb-20"
+  class="relative pt-12 pb-12 md:pt-24 md:pb-20"
   aria-labelledby="contact-title"
 >
   <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -50,7 +50,7 @@ const isPage = as === 'h1';
       </div>
       <Card3D
         variant="glass"
-        className="gap-0 overflow-hidden px-6 py-16 text-center sm:px-10 sm:py-16 md:px-16 md:py-24"
+        className="gap-0 overflow-hidden px-4 py-10 text-center sm:px-10 sm:py-16 md:px-16 md:py-24"
       >
         <SectionHeading
           title={t.contact.title}
@@ -63,7 +63,7 @@ const isPage = as === 'h1';
         />
 
         <div
-          class="relative mx-auto mt-12 flex w-full max-w-md flex-col items-stretch justify-center gap-3 sm:w-fit sm:max-w-none sm:flex-row sm:items-center"
+          class="relative mx-auto mt-8 flex w-full max-w-md flex-col items-stretch justify-center gap-3 sm:w-fit sm:max-w-none sm:flex-row sm:items-center md:mt-12"
         >
           <Doodle
             name="loop"
@@ -83,7 +83,7 @@ const isPage = as === 'h1';
           <CopyEmailButton copiedText={t.contact.copied} copyLabel={t.aria.copyEmail} client:load />
         </div>
 
-        <div class="mt-14 flex flex-col items-center gap-4">
+        <div class="mt-8 flex flex-col items-center gap-4 md:mt-14">
           <p class="eyebrow">{t.contact.socialIntro}</p>
           <ContactSocialLinks followLabel={t.aria.followOn} />
         </div>

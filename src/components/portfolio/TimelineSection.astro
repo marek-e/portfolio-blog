@@ -11,14 +11,15 @@ const timelineEntries = getLocalizedTimeline(lang);
 ---
 
 <CursorSpotlight>
-  <section id="timeline" class="relative py-20 md:py-24" aria-label={t.timeline.title}>
+  <section id="timeline" class="relative py-12 md:py-24" aria-label={t.timeline.title}>
     <div class="mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-12">
       <SectionHeading
         eyebrow={t.timeline.eyebrow}
+        mobileEyebrow={t.timeline.eyebrow.replace(/^02/, '03')}
         title={t.timeline.title}
         subtitle={t.timeline.subtitle}
         align="center"
-        class="mb-16 md:mb-24"
+        class="mb-8 md:mb-24"
       />
 
       <TimelineCards entries={timelineEntries} presentLabel={t.timeline.present} lang={lang} />
@@ -82,17 +83,21 @@ const timelineEntries = getLocalizedTimeline(lang);
 
           const desktop = window.matchMedia('(min-width: 768px)').matches;
           const direction = desktop && cards.indexOf(card) % 2 === 0 ? -1 : 1;
-          const distance = window.innerWidth * (desktop ? 0.46 : 0.72);
+          const distance = desktop ? window.innerWidth * 0.46 : 16;
           const animation = card.animate(
             [
               {
                 opacity: 0,
-                transform: `translateX(${direction * distance}px) translateY(48px) rotate(${direction * 5}deg) scale(0.94)`,
+                transform: `translateX(${direction * distance}px) translateY(${desktop ? 48 : 16}px) rotate(${desktop ? direction * 5 : 0}deg) scale(${desktop ? 0.94 : 1})`,
               },
               { opacity: 1, offset: 0.3 },
               { opacity: 1, transform: 'translateX(0) translateY(0) rotate(0) scale(1)' },
             ],
-            { duration: 700, easing: 'cubic-bezier(0.23, 1, 0.32, 1)', fill: 'both' }
+            {
+              duration: desktop ? 700 : 250,
+              easing: 'cubic-bezier(0.23, 1, 0.32, 1)',
+              fill: 'both',
+            }
           );
           animations.set(card, animation);
           animation.onfinish = () => revealCard(card);

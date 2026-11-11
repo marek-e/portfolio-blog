@@ -5,7 +5,7 @@ import { HugeiconsIcon } from '@hugeicons/react';
 import { applyTheme, getTheme } from '@/lib/theme';
 import '@/styles/mode-toggle.css';
 
-export function ModeToggle() {
+export function ModeToggle({ label = 'Toggle theme' }: { label?: string }) {
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   const toggleTheme = () => {
@@ -45,7 +45,7 @@ export function ModeToggle() {
       ref={buttonRef}
       type="button"
       onClick={toggleTheme}
-      aria-label="Toggle theme"
+      aria-label={label}
       className="mode-toggle"
     >
       <span className="mode-toggle-endcap" aria-hidden="true" />

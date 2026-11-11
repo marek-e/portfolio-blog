@@ -45,16 +45,19 @@ const groups = [
       <div class="footer-art-day"></div>
     </div>
     <div
-      class="footer-content relative mx-auto grid gap-8 pt-12 md:grid-cols-[minmax(0,1fr)_minmax(0,1.25fr)] md:gap-[clamp(2rem,6vw,7rem)] md:pt-[clamp(3rem,4.5vw,5rem)]"
+      class="footer-content relative mx-auto grid gap-6 pt-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1.25fr)] md:gap-8 md:gap-[clamp(2rem,6vw,7rem)] md:pt-[clamp(3rem,4.5vw,5rem)]"
     >
       <div class="min-w-0">
-        <a href={translatePath('/')} class="footer-identity flex w-fit flex-col items-start gap-4">
+        <a
+          href={translatePath('/')}
+          class="footer-identity flex w-fit items-center gap-3 md:flex-col md:items-start md:gap-4"
+        >
           <img
             src={logo.src}
             alt=""
             width="67"
             height="48"
-            class="h-12 w-auto"
+            class="h-8 w-auto md:h-12"
             loading="lazy"
             data-footer-logo
           />
@@ -63,15 +66,15 @@ const groups = [
             >Marek Elmayan</span
           >
         </a>
-        <p class="text-muted-foreground mt-3 font-sans text-xs leading-relaxed">
+        <p class="text-muted-foreground mt-3 hidden font-sans text-xs leading-relaxed md:block">
           AI Engineer · Full-Stack Developer
         </p>
         <p
-          class="text-muted-foreground mt-4 max-w-104 text-[0.9375rem] leading-relaxed text-pretty"
+          class="text-muted-foreground mt-4 hidden max-w-104 text-[0.9375rem] leading-relaxed text-pretty md:block"
         >
           {t.hero.subtitle.split('\n')[0]}
         </p>
-        <div class="mt-4 -ml-3 flex gap-1">
+        <div class="mt-4 -ml-3 hidden gap-1 md:flex">
           {
             SOCIALS.map((social) => (
               <a
@@ -95,16 +98,27 @@ const groups = [
         </div>
       </div>
       <nav
-        class="grid grid-cols-2 gap-x-4 gap-y-7 md:grid-cols-3 md:gap-6 md:pt-3"
+        class="grid grid-cols-2 gap-x-4 gap-y-5 md:grid-cols-3 md:gap-6 md:pt-3"
         aria-label={t.footer.sitemap}
       >
         {
           groups.map((group) => (
-            <div class="min-w-0">
+            <div
+              class:list={[
+                'min-w-0',
+                group.title === t.footer.resources && 'col-span-2 md:col-span-1',
+              ]}
+            >
               <h2 class="font-sans text-[0.9375rem] leading-normal font-semibold tracking-normal">
                 {group.title}
               </h2>
-              <ul class="mt-3 grid md:mt-5">
+              <ul
+                class:list={[
+                  'mt-2 grid md:mt-5',
+                  group.title === t.footer.resources &&
+                    'grid-cols-2 gap-x-4 md:grid-cols-1 md:gap-x-0',
+                ]}
+              >
                 {group.links.map((link) => (
                   <li>
                     <a
@@ -260,6 +274,7 @@ const groups = [
       grid-template-areas: 'theme' 'top' 'copyright';
       grid-template-columns: minmax(0, 1fr);
       gap: 0.75rem;
+      padding-bottom: max(2rem, env(safe-area-inset-bottom));
     }
 
     .footer-copyright,
@@ -273,7 +288,7 @@ const groups = [
     }
 
     .footer-content {
-      padding-bottom: 17rem;
+      padding-bottom: 14rem;
     }
 
     .footer-art-day {

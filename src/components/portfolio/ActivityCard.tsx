@@ -9,6 +9,7 @@ import {
   HeroMetric,
   RouteSketch,
   formatActivityDate,
+  formatActivityDistance,
   type ActivityStat,
 } from './ActivityCardParts';
 
@@ -32,13 +33,14 @@ export function ActivityCard({ activity, lang = 'fr' }: ActivityCardProps) {
   return (
     <ActivityCardLink href={activity.stravaUrl}>
       <ActivityHeader
+        lang={lang}
         date={formatActivityDate(activity.date, lang)}
         name={activity.name}
         tone="peach"
       />
 
       <div className="my-5 flex items-center justify-between gap-3">
-        <HeroMetric value={activity.distanceKm.toFixed(1)} unit="km" />
+        <HeroMetric value={formatActivityDistance(activity.distanceKm, lang)} unit="km" />
         <RouteSketch polyline={activity.routePolyline} tone="peach" />
       </div>
 

@@ -37,8 +37,11 @@ export interface UITranslations {
     eyebrow: string;
     title: string;
     paragraphs: string[];
+    summary: string;
     mantraContent: string;
     mantraTitle: string;
+    readMore: string;
+    readLess: string;
   };
   timeline: {
     eyebrow: string;
@@ -55,6 +58,9 @@ export interface UITranslations {
     liveDemo: string;
     code: string;
     viewDetails: string;
+    previous: string;
+    next: string;
+    slide: string;
   };
   contact: {
     eyebrow: string;
@@ -88,6 +94,8 @@ export interface UITranslations {
     heading: string;
     message: string;
     backHome: string;
+    browseBlog: string;
+    sceneDescription: string;
   };
   theme: {
     light: string;
@@ -104,6 +112,8 @@ export interface UITranslations {
     homeLink: string;
     copyEmail: string;
     postActions: string;
+    toggleTheme: string;
+    visitWebsite: string;
   };
   designSystem: {
     pageTitle: string;
@@ -182,6 +192,13 @@ export interface UITranslations {
     tagIntervals: string;
     tagCommute: string;
     tagRace: string;
+    activityNames: {
+      morning: string;
+      afternoon: string;
+      evening: string;
+      night: string;
+      lunch: string;
+    };
   };
   projectsPage: {
     eyebrow: string;

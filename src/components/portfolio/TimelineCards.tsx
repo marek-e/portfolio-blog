@@ -4,6 +4,7 @@ import { Card3D } from '@/components/ui/card-3d';
 import { formatDateRange, type TimelineEntry } from '@/types/timeline';
 import type { Lang } from '@/i18n/config';
 import { cn } from '@/lib/utils';
+import { getTranslations } from '@/i18n';
 
 interface TimelineCardsProps {
   entries: TimelineEntry[];
@@ -41,7 +42,7 @@ function TimelineLine({ count }: { count: number }) {
     <div
       aria-hidden="true"
       data-timeline-line=""
-      className="pointer-events-none absolute inset-y-2 left-6 w-12 -translate-x-1/2 [mask-image:linear-gradient(to_bottom,black_85%,transparent)] md:left-1/2 md:w-24"
+      className="pointer-events-none absolute inset-y-2 left-5 w-10 -translate-x-1/2 [mask-image:linear-gradient(to_bottom,black_85%,transparent)] md:left-1/2 md:w-24"
     >
       <svg
         viewBox="0 0 96 1000"
@@ -89,7 +90,7 @@ function TimelineLine({ count }: { count: number }) {
   );
 }
 
-function OrganizationLogo({ entry }: { entry: TimelineEntry }) {
+function OrganizationLogo({ entry, lang }: { entry: TimelineEntry; lang: Lang }) {
   if (!entry.logo) return null;
 
   const image = (
@@ -113,8 +114,11 @@ function OrganizationLogo({ entry }: { entry: TimelineEntry }) {
       href={entry.link}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label={`Visit ${entry.organization} website`}
-      className="-m-2 flex min-h-11 shrink-0 items-center rounded-xl p-2 transition-opacity hover:opacity-70"
+      aria-label={getTranslations(lang).aria.visitWebsite.replace(
+        '{organization}',
+        entry.organization
+      )}
+      className="-m-2 flex min-h-11 min-w-11 shrink-0 items-center rounded-xl p-2 transition-opacity hover:opacity-70"
     >
       {image}
     </a>
@@ -139,9 +143,9 @@ function TimelineCard({
     <Card3D
       as="article"
       variant={isCurrentRole ? 'default' : 'glass'}
-      className="gap-0 p-5 sm:p-6 md:p-7"
+      className="gap-0 p-4 sm:p-6 md:p-7"
     >
-      <div className="mb-5 flex flex-wrap items-center justify-between gap-4">
+      <div className="mb-3 flex flex-wrap items-center justify-between gap-4 md:mb-5">
         <div className="flex items-center gap-3">
           <span
             className={cn(
@@ -158,7 +162,7 @@ function TimelineCard({
             {formatDateRange(entry.startDate, entry.endDate, lang, presentLabel)}
           </time>
         </div>
-        <OrganizationLogo entry={entry} />
+        <OrganizationLogo entry={entry} lang={lang} />
       </div>
       <header className="mb-3">
         <h3 className="font-display-soft text-foreground text-xl leading-snug font-semibold tracking-tight text-balance md:text-2xl">
@@ -198,7 +202,7 @@ export function TimelineCards({ entries, presentLabel, lang }: TimelineCardsProp
           return (
             <li
               key={entry.id}
-              className="timeline-item relative grid grid-cols-[3rem_minmax(0,1fr)] gap-x-2 pb-16 last:pb-0 md:grid-cols-[1fr_6rem_1fr] md:gap-x-0 md:not-first:-mt-8"
+              className="timeline-item relative grid grid-cols-[2.5rem_minmax(0,1fr)] gap-x-1 pb-8 last:pb-0 md:grid-cols-[1fr_6rem_1fr] md:gap-x-0 md:pb-16 md:not-first:-mt-8"
             >
               <div className="col-start-1 row-start-1 flex items-start justify-center pt-7 md:col-start-2">
                 <span
@@ -207,7 +211,7 @@ export function TimelineCards({ entries, presentLabel, lang }: TimelineCardsProp
                 >
                   <span
                     className={cn(
-                      'text-foreground/85 block rounded-full px-2.5 py-1 font-mono text-xs font-medium',
+                      'text-foreground/85 block rounded-full px-1.5 py-1 font-mono text-xs font-medium md:px-2.5',
                       accent
                     )}
                   >

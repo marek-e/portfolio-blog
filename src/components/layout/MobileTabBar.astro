@@ -48,7 +48,7 @@ const isActive = (href: string, external: boolean) => {
               href={tab.href}
               aria-current={active ? 'page' : undefined}
               class={cn(
-                'flex min-h-14 flex-col items-center justify-center gap-1 rounded-full px-1 text-[0.68rem] font-medium transition-all duration-200 active:scale-95',
+                'flex min-h-14 flex-col items-center justify-center gap-1 rounded-full px-1 text-xs font-medium transition-colors duration-150',
                 active
                   ? 'text-foreground bg-white/80 shadow-[inset_0_1px_0_oklch(1_0_0/90%),0_4px_12px_-4px_oklch(0_0_0/25%)] dark:bg-white/15 dark:shadow-[inset_0_1px_0_oklch(1_0_0/20%)]'
                   : 'text-foreground/70 hover:text-foreground'
@@ -70,7 +70,50 @@ const isActive = (href: string, external: boolean) => {
 </nav>
 
 <style>
+  @media (max-width: 767px) {
+    :global(body:has([data-mobile-tab-bar][hidden])) {
+      padding-bottom: 0;
+    }
+  }
+
   .mobile-tab-bar {
     bottom: max(0.75rem, env(safe-area-inset-bottom));
   }
 </style>
+
+<script>
+  function initFooterVisibility() {
+    const nav = document.querySelector<HTMLElement>('[data-mobile-tab-bar]');
+    const footer = document.getElementById('footer');
+    if (!nav || !footer) return;
+
+    const bounds = footer.getBoundingClientRect();
+    let footerVisible = bounds.top < window.innerHeight && bounds.bottom > 0;
+    const updateVisibility = () => {
+      nav.hidden = footerVisible && !nav.contains(document.activeElement);
+    };
+    const onFocusChange = () => queueMicrotask(updateVisibility);
+    const observer = new IntersectionObserver(([entry]) => {
+      footerVisible = entry.isIntersecting;
+      updateVisibility();
+    });
+
+    updateVisibility();
+    observer.observe(footer);
+    nav.addEventListener('focusin', onFocusChange);
+    nav.addEventListener('focusout', onFocusChange);
+
+    document.addEventListener(
+      'astro:before-swap',
+      () => {
+        observer.disconnect();
+        nav.removeEventListener('focusin', onFocusChange);
+        nav.removeEventListener('focusout', onFocusChange);
+      },
+      { once: true }
+    );
+  }
+
+  initFooterVisibility();
+  document.addEventListener('astro:after-swap', initFooterVisibility);
+</script>

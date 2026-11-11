@@ -21,6 +21,7 @@
 }
 
 .project-card-artwork {
+  padding: var(--project-image-padding, 0%);
   transition: transform 200ms var(--ease-out);
 }
 
@@ -48,5 +49,11 @@
 
   .project-card-artwork {
     transition: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .project-card-artwork {
+    padding-block: calc(var(--project-image-padding, 0%) / 3);
   }
 }

@@ -85,7 +85,7 @@ export function MarkedText({
         draw
         strokeWidth={4}
         className={cn(
-          'text-marker absolute -bottom-[0.14em] left-[-2%] z-0 h-[0.28em] w-[104%]',
+          'text-marker absolute -bottom-[0.16em] left-[-1%] z-0 h-[0.16em] w-[102%] md:-bottom-[0.14em] md:left-[-2%] md:h-[0.28em] md:w-[104%] [&_path]:stroke-[2.5] md:[&_path]:stroke-[4] [&_path:nth-child(2)]:hidden md:[&_path:nth-child(2)]:inline',
           markerClassName
         )}
       />

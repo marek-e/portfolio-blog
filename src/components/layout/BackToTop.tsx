@@ -3,7 +3,7 @@ import { ArrowUp04Icon } from '@hugeicons/core-free-icons';
 import { Icon } from '../shared/Icon';
 import { cn } from '@/lib/utils';
 
-export function BackToTop() {
+export function BackToTop({ label = 'Back to top' }: { label?: string }) {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -37,16 +37,21 @@ export function BackToTop() {
   }, []);
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({
+      top: 0,
+      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches
+        ? 'instant'
+        : 'smooth',
+    });
   };
 
   return (
     <button
       onClick={scrollToTop}
-      aria-label="Back to top"
+      aria-label={label}
       tabIndex={visible ? 0 : -1}
       className={cn(
-        'fixed right-4 bottom-28 z-40 flex size-11 items-center justify-center rounded-full md:right-6 md:bottom-6',
+        'fixed right-6 bottom-6 z-40 hidden size-11 items-center justify-center rounded-full md:flex',
         'btn-radiant border',
         'transition-all duration-300 ease-out',
         'hover:scale-105',

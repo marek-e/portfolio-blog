@@ -1,5 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
-import Autoplay from 'embla-carousel-autoplay';
+import { useEffect, useState } from 'react';
 import {
   Carousel,
   CarouselContent,
@@ -11,6 +10,7 @@ import {
 import { ProjectCardReact, type ProjectData } from './ProjectCardReact';
 import { cn } from '@/lib/utils';
 import { defaultLang, type Lang } from '@/i18n/config';
+import { useReducedMotion } from '@/lib/useReducedMotion';
 
 interface FeaturedProjectsCarouselProps {
   projects: Array<{
@@ -21,6 +21,9 @@ interface FeaturedProjectsCarouselProps {
     liveDemo: string;
     code: string;
     viewDetails: string;
+    previous: string;
+    next: string;
+    slide: string;
   };
   lang: Lang;
 }
@@ -34,57 +37,56 @@ export function FeaturedProjectsCarousel({
   translations,
   lang,
 }: FeaturedProjectsCarouselProps) {
+  const reducedMotion = useReducedMotion();
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
-  const [count, setCount] = useState(0);
-
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    setPrefersReducedMotion(mediaQuery.matches);
-
-    const handler = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
-    mediaQuery.addEventListener('change', handler);
-    return () => mediaQuery.removeEventListener('change', handler);
-  }, []);
-
-  // Create autoplay plugin with configuration
-  const autoplayPlugin = useCallback(() => {
-    if (prefersReducedMotion) return undefined;
-    return Autoplay({
-      delay: 4000,
-      stopOnInteraction: false,
-      stopOnMouseEnter: true,
-    });
-  }, [prefersReducedMotion]);
+  const [count, setCount] = useState(projects.length);
 
   useEffect(() => {
     if (!api) return;
 
-    setCount(api.scrollSnapList().length);
-    setCurrent(api.selectedScrollSnap());
-
-    api.on('select', () => {
+    const update = () => {
+      setCount(api.scrollSnapList().length);
       setCurrent(api.selectedScrollSnap());
-    });
+      api.rootNode().style.height = window.matchMedia('(max-width: 767px)').matches
+        ? `calc(${api.slideNodes()[api.selectedScrollSnap()].offsetHeight}px + 4rem)`
+        : '';
+    };
+
+    update();
+    api.on('select', update);
+    api.on('reInit', update);
+    api.on('resize', update);
+
+    return () => {
+      api.off('select', update);
+      api.off('reInit', update);
+      api.off('resize', update);
+      api.rootNode().style.height = '';
+    };
   }, [api]);
+
+  const slideLabel = (index: number) =>
+    translations.slide.replace('{current}', String(index + 1)).replace('{count}', String(count));
 
   return (
     <div className="relative">
       <Carousel
         setApi={setApi}
-        opts={{
-          align: 'start',
-          loop: true,
-        }}
-        plugins={autoplayPlugin() ? [autoplayPlugin()!] : undefined}
+        opts={{ align: 'start', loop: true, ...(reducedMotion ? { duration: 0 } : {}) }}
+        aria-labelledby="projects-title"
         className="w-full"
       >
-        <CarouselContent className="-ml-4 py-2" viewportClassName="-mx-3 -my-6 px-3 py-6">
-          {projects.map((project) => (
+        <CarouselContent
+          className="-ml-4 items-start py-2 md:items-stretch"
+          viewportClassName="-mx-3 -my-6 px-3 py-6 touch-pan-y"
+        >
+          {projects.map((project, index) => (
             <CarouselItem
               key={project.slug}
+              aria-label={translations.slide
+                .replace('{current}', String(index + 1))
+                .replace('{count}', String(projects.length))}
               className="h-auto basis-full pl-4 md:basis-1/2 lg:basis-1/3"
             >
               <ProjectCardReact
@@ -95,35 +97,41 @@ export function FeaturedProjectsCarousel({
             </CarouselItem>
           ))}
         </CarouselContent>
-
-        {/* Navigation arrows */}
-        <CarouselPrevious
-          className="-left-14 hidden size-11 md:inline-flex [&_svg]:size-4.5"
-          aria-label="Previous projects"
-        />
-        <CarouselNext
-          className="-right-14 hidden size-11 md:inline-flex [&_svg]:size-4.5"
-          aria-label="Next projects"
-        />
+        <div className="mt-4 flex items-center justify-between md:mt-0">
+          <CarouselPrevious
+            className="static size-11 translate-y-0 md:absolute md:top-1/2 md:-left-14 md:-translate-y-1/2 [&_svg]:size-4.5"
+            aria-label={translations.previous}
+          />
+          <p
+            className="text-muted-foreground font-sans text-sm tabular-nums md:sr-only"
+            aria-live="polite"
+            aria-atomic="true"
+          >
+            {slideLabel(current)}
+          </p>
+          <CarouselNext
+            className="static size-11 translate-y-0 md:absolute md:top-1/2 md:-right-14 md:-translate-y-1/2 [&_svg]:size-4.5"
+            aria-label={translations.next}
+          />
+        </div>
       </Carousel>
-
-      {/* Navigation dots */}
-      <div className="mt-8 flex justify-center">
+      <div className="mt-6 hidden justify-center md:flex">
         <div className="glass flex items-center rounded-full px-2">
           {Array.from({ length: count }).map((_, index) => (
             <button
               key={index}
-              onClick={() => api?.scrollTo(index)}
-              className="group/dot flex h-8 cursor-pointer items-center rounded-full px-1.5"
-              aria-label={`Go to slide ${index + 1}`}
+              disabled={!api}
+              onClick={(event) => api?.scrollTo(index, event.detail === 0)}
+              className="group/dot flex size-11 cursor-pointer items-center justify-center rounded-full"
+              aria-label={slideLabel(index)}
               aria-current={current === index ? 'true' : undefined}
             >
               <span
                 className={cn(
-                  'block h-1.5 rounded-full transition-all duration-300',
+                  'block size-2 rounded-full',
                   current === index
-                    ? 'bg-foreground w-6'
-                    : 'bg-foreground/20 group-hover/dot:bg-foreground/40 w-1.5'
+                    ? 'bg-foreground'
+                    : 'bg-foreground/35 group-hover/dot:bg-foreground/60'
                 )}
               />
             </button>

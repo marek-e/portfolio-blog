@@ -9,6 +9,7 @@ import {
   ActivityStats,
   HeroMetric,
   formatActivityDate,
+  formatActivityDistance,
   formatFinishTime,
   toneClasses,
   type ActivityStat,
@@ -24,13 +25,14 @@ export function CommuteActivityCard({ activity, lang = 'fr' }: CommuteActivityCa
   const { dot } = toneClasses('sky');
 
   const stats: ActivityStat[] = [
-    { icon: WorkoutRunIcon, value: activity.distanceKm.toFixed(1), unit: 'km' },
+    { icon: WorkoutRunIcon, value: formatActivityDistance(activity.distanceKm, lang), unit: 'km' },
     { icon: DashboardSpeed01Icon, value: activity.paceMinPerKm, unit: t.strava.pace },
   ];
 
   return (
     <ActivityCardLink href={activity.stravaUrl}>
       <ActivityHeader
+        lang={lang}
         date={formatActivityDate(activity.date, lang)}
         name={activity.name}
         tag={t.strava.tagCommute}

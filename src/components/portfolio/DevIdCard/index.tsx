@@ -133,7 +133,11 @@ export function DevIdCard({ lang, ageAtBuild }: DevIdCardProps) {
           cardRef.current?.toggleAttribute('data-instant', isKeyboard);
           setRotation((angle) => angle + direction * 180);
         }}
-      />
+      >
+        <span className="bg-card/90 text-foreground absolute right-4 bottom-3 rounded-full px-3 py-1 font-sans text-xs shadow-sm">
+          {isFlipped ? t.devCard.showFront : t.devCard.turnOver}
+        </span>
+      </button>
     </div>
   );
 }

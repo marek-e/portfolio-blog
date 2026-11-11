@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils';
 interface Props {
   title: string;
   eyebrow?: string;
+  mobileEyebrow?: string;
   subtitle?: string;
   align?: 'start' | 'center';
   as?: 'h1' | 'h2';
@@ -15,6 +16,7 @@ interface Props {
 const {
   title,
   eyebrow,
+  mobileEyebrow,
   subtitle,
   align = 'start',
   as: Tag = 'h2',
@@ -34,7 +36,20 @@ const hasAction = Astro.slots.has('default');
   )}
 >
   <div class={cn('flex flex-col gap-3', align === 'center' && 'items-center')}>
-    {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+    {
+      eyebrow && (
+        <p class="eyebrow">
+          {mobileEyebrow ? (
+            <>
+              <span class="md:hidden">{mobileEyebrow}</span>
+              <span class="hidden md:inline">{eyebrow}</span>
+            </>
+          ) : (
+            eyebrow
+          )}
+        </p>
+      )
+    }
     <Tag id={id} class="text-foreground text-4xl leading-[1.05] font-semibold md:text-6xl">
       {lead}<MarkedText>{last}</MarkedText>
     </Tag>

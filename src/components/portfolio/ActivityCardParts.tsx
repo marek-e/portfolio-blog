@@ -4,6 +4,7 @@ import { Calendar03Icon, Heart } from '@hugeicons/core-free-icons';
 import type { Lang } from '@/i18n/config';
 import { decodePolyline, polylineToSvgPath } from '@/lib/polyline';
 import { cn } from '@/lib/utils';
+import { getTranslations } from '@/i18n';
 import { Icon } from '../shared/Icon';
 
 export type ActivityTone = 'peach' | 'sky' | 'lilac' | 'mint' | 'butter';
@@ -53,6 +54,13 @@ export function formatActivityDate(
   return date.toLocaleDateString(lang === 'fr' ? 'fr-FR' : 'en-US', options);
 }
 
+export function formatActivityDistance(distance: number, lang: Lang) {
+  return distance.toLocaleString(lang === 'fr' ? 'fr-FR' : 'en-US', {
+    minimumFractionDigits: 1,
+    maximumFractionDigits: 1,
+  });
+}
+
 export function formatFinishTime(seconds: number): string {
   const h = Math.floor(seconds / 3600);
   const m = Math.floor((seconds % 3600) / 60);
@@ -90,15 +98,27 @@ export function ActivityHeader({
   name,
   tag,
   tone,
+  lang,
 }: {
   date: string;
   name: string;
   tag?: ReactNode;
   tone: ActivityTone;
+  lang: Lang;
 }) {
+  const names = getTranslations(lang).strava.activityNames;
+  const localizedNames: Record<string, string> = {
+    'Course à pied le matin': names.morning,
+    'Course à pied l’après-midi': names.afternoon,
+    "Course à pied l'après-midi": names.afternoon,
+    'Course à pied en soirée': names.evening,
+    'Course à pied de nuit': names.night,
+    'Course à pied le midi': names.lunch,
+  };
+
   return (
     <div className="relative">
-      <div className="flex min-h-6 items-center justify-between gap-3">
+      <div className="flex min-h-6 flex-wrap items-center justify-between gap-x-3 gap-y-1">
         <p className="eyebrow flex items-center gap-1.5">
           <Icon icon={Calendar03Icon} size={12} strokeWidth={2} aria-hidden="true" />
           {date}
@@ -114,8 +134,8 @@ export function ActivityHeader({
           </span>
         )}
       </div>
-      <h3 className="font-display-soft text-foreground mt-1.5 line-clamp-1 text-lg font-semibold tracking-tight">
-        {name}
+      <h3 className="font-display-soft text-foreground mt-1.5 text-lg font-semibold tracking-tight">
+        {localizedNames[name] ?? name}
       </h3>
     </div>
   );
@@ -251,7 +271,7 @@ export function ActivityStats({ stats }: { stats: ActivityStat[] }) {
     >
       {stats.map((stat) => (
         <div key={stat.unit} className="flex flex-col-reverse items-center gap-1 text-center">
-          <dt className="text-muted-foreground flex items-center gap-1 font-sans text-[0.7rem]">
+          <dt className="text-muted-foreground flex items-center gap-1 font-sans text-xs">
             <Icon
               icon={stat.icon}
               size={12}

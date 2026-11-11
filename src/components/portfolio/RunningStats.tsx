@@ -14,9 +14,10 @@ interface AnimatedCounterProps {
   value: number;
   duration?: number;
   suffix?: string;
+  lang: Lang;
 }
 
-function AnimatedCounter({ value, duration = 1500, suffix = '' }: AnimatedCounterProps) {
+function AnimatedCounter({ value, duration = 1500, suffix = '', lang }: AnimatedCounterProps) {
   const [displayValue, setDisplayValue] = useState(0);
   const isReducedMotion = useReducedMotion();
   const counterRef = useRef<HTMLSpanElement>(null);
@@ -76,7 +77,7 @@ function AnimatedCounter({ value, duration = 1500, suffix = '' }: AnimatedCounte
 
   return (
     <span ref={counterRef}>
-      {displayValue.toLocaleString()}
+      {displayValue.toLocaleString(lang === 'fr' ? 'fr-FR' : 'en-US')}
       {suffix}
     </span>
   );
@@ -121,7 +122,7 @@ export function RunningStats({ stats, lang = 'fr' }: RunningStatsProps) {
 
   const toggleClass = (isActive: boolean) =>
     cn(
-      'min-h-10 rounded-full px-4 text-sm font-medium transition-all',
+      'min-h-11 rounded-full px-4 text-sm font-medium transition-all',
       isActive
         ? 'bg-foreground text-background shadow-sm'
         : 'text-muted-foreground hover:text-foreground cursor-pointer'
@@ -165,7 +166,7 @@ export function RunningStats({ stats, lang = 'fr' }: RunningStatsProps) {
             />
             <p className="eyebrow relative">{item.label}</p>
             <p className="text-foreground relative mt-3 font-mono text-[clamp(1.6rem,7.5vw,2.25rem)] font-medium tracking-tight tabular-nums md:mt-4 md:text-6xl">
-              <AnimatedCounter value={item.value} duration={1000 + index * 200} />
+              <AnimatedCounter lang={lang} value={item.value} duration={1000 + index * 200} />
               {item.suffix && (
                 <span className="text-muted-foreground ml-1 text-sm font-normal tracking-normal md:ml-1.5 md:text-2xl">
                   {item.suffix.trim()}

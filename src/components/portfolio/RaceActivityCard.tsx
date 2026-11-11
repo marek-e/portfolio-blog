@@ -18,6 +18,7 @@ import {
   ActivityStats,
   HeroMetric,
   formatActivityDate,
+  formatActivityDistance,
   formatFinishTime,
   type ActivityStat,
 } from './ActivityCardParts';
@@ -48,7 +49,7 @@ export function RaceActivityCard({ activity, lang = 'fr' }: RaceActivityCardProp
 
   const stats: ActivityStat[] = [
     { icon: DashboardSpeed01Icon, value: activity.paceMinPerKm, unit: t.strava.pace },
-    { icon: WorkoutRunIcon, value: activity.distanceKm.toFixed(1), unit: 'km' },
+    { icon: WorkoutRunIcon, value: formatActivityDistance(activity.distanceKm, lang), unit: 'km' },
     { icon: MountainIcon, value: activity.elevationGain, unit: 'm' },
     ...(activity.averageHeartRate
       ? [{ icon: Heart, value: activity.averageHeartRate, unit: t.strava.heartRate }]
@@ -80,7 +81,7 @@ export function RaceActivityCard({ activity, lang = 'fr' }: RaceActivityCardProp
             key={i}
             aria-hidden="true"
             className={cn(
-              'pointer-events-none absolute rounded-sm',
+              'pointer-events-none absolute hidden rounded-sm md:block',
               CONFETTI_COLORS[i % CONFETTI_COLORS.length],
               !reducedMotion && 'race-confetti'
             )}
@@ -100,6 +101,7 @@ export function RaceActivityCard({ activity, lang = 'fr' }: RaceActivityCardProp
         ))}
 
         <ActivityHeader
+          lang={lang}
           date={formatActivityDate(activity.date, lang, {
             day: 'numeric',
             month: 'long',

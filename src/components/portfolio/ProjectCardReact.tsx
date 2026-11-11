@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react';
 import { Link } from '@/components/ui/button';
 import { Card3D } from '@/components/ui/card-3d';
 import { cn, pickByHash } from '@/lib/utils';
@@ -45,14 +46,14 @@ export function ProjectCardReact({ project, projectUrl, translations }: ProjectC
     <Card3D
       as="article"
       variant="glass"
-      className="project-card h-full gap-0 p-3 sm:p-3"
+      className="project-card gap-0 p-3 sm:p-3 md:h-full"
       style={{
         boxShadow: '0 2px 3px -1px var(--card-3d-edge), 0 12px 24px -20px var(--card-3d-shadow)',
       }}
     >
       <div
         className={cn(
-          'relative aspect-[4/3] overflow-hidden rounded-[2rem] bg-linear-to-br',
+          'relative aspect-[16/9] overflow-hidden rounded-[2rem] bg-linear-to-br md:aspect-[4/3]',
           pickByHash(title, PANEL_TONES)
         )}
       >
@@ -64,14 +65,19 @@ export function ProjectCardReact({ project, projectUrl, translations }: ProjectC
               'project-card-artwork h-full w-full',
               isContained && 'drop-shadow-[0_12px_24px_oklch(0.3_0.05_300/18%)]'
             )}
-            style={{ objectFit, padding: isContained ? `${imagePadding}%` : undefined }}
+            style={
+              {
+                objectFit,
+                '--project-image-padding': isContained ? `${imagePadding}%` : '0%',
+              } as CSSProperties
+            }
             loading="lazy"
           />
         )}
       </div>
 
       <div className="flex flex-1 flex-col px-3.5 pt-5 pb-3">
-        <h3 className="font-display-soft text-foreground min-h-16 text-2xl leading-8 font-semibold tracking-tight">
+        <h3 className="font-display-soft text-foreground text-2xl leading-8 font-semibold tracking-tight md:min-h-16">
           <a
             href={projectUrl}
             className="project-card-link focus-visible:after:outline-foreground after:absolute after:inset-0 after:rounded-[2.75rem] focus-visible:outline-none focus-visible:after:outline-2 focus-visible:after:outline-offset-2"
@@ -80,11 +86,11 @@ export function ProjectCardReact({ project, projectUrl, translations }: ProjectC
             <span className="sr-only"> · {translations.viewDetails}</span>
           </a>
         </h3>
-        <p className="text-muted-foreground mt-2 line-clamp-2 min-h-[2lh] text-sm leading-relaxed">
+        <p className="text-muted-foreground mt-2 text-sm leading-relaxed md:line-clamp-2 md:min-h-[2lh]">
           {description}
         </p>
 
-        <ul className="mt-3 flex min-h-14 flex-wrap content-start gap-1.5">
+        <ul className="mt-3 flex flex-wrap content-start gap-1.5 md:min-h-14">
           {techStack.slice(0, 3).map((tech, index) => (
             <li key={tech} className="flex min-w-0 items-center gap-1.5">
               <span className="bg-card/65 text-muted-foreground border-border/60 inline-flex h-6 items-center rounded-full border px-2.5 font-sans text-xs whitespace-nowrap">

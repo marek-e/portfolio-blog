@@ -3,7 +3,7 @@ import type { UITranslations } from '../ui';
 export const en: UITranslations = {
   nav: {
     home: 'Home',
-    presentationsShort: 'Slides',
+    presentationsShort: 'Talks',
     projects: 'Projects',
     blog: 'Blog',
     presentations: 'Talks',
@@ -39,16 +39,20 @@ export const en: UITranslations = {
   about: {
     eyebrow: '01 — Who I am',
     title: 'About Me',
+    summary:
+      'I build products from UX to backend. I enjoy the details that make an interface easy to use, exploring cybersecurity and experimenting with AI tools.',
     paragraphs: [
       'Everything started in high school during my math classes. I was pretty good and always finished exercises early, so I spent time on my calculator. First, a program to solve second-degree equations, then a Snake game, and finally a full battleship game. Thousands of lines of code for a basic interface, but a working game, and above all a new passion ignited.',
       'In prépa (French prep school for engineering), I coded <a href="/en/projects/petanque" class="text-primary hover:underline">a petanque game in Python</a> to simulate Newton\'s laws. Later in engineering school, I discovered HTML, CSS, and JavaScript. That\'s when I realized you could build things that truly matter to users and all the complexities that come with it.',
-      "Today, I'm at a point in my career where I've taken a deep breath to understand what really drives me. I love frontend and UX, I don't have the designer spark of building a perfect UI (mine looks like a 5-year-old choosing random colors), but all those UX tweaks: smooth animations, intuitive interfaces that don't make users overthink. Building user-friendly products that deliver actual value.",
+      'Today, I work across the whole product, from UX to backend. I enjoy the details that make an interface easy to use: smooth animations, clear interactions and products that solve real problems.',
       'I also love cybersecurity, I follow the news, I train and apply best practices to my code. It happens to me to participate in CTFs in my free time to practice and learn new techniques.',
       "I pay a lot of attention to DevX, as the advent of LLMs is changing our workflow as a developer. And I'm convinced that mastering AI tools is an essential skill for the future.",
     ],
     mantraContent:
       'Build things that matter. Being useful by adding real value. And keep learning every day.',
     mantraTitle: 'My mantra',
+    readMore: 'Read the rest of my story',
+    readLess: 'Show less of my story',
   },
   timeline: {
     eyebrow: '02 — Work & education',
@@ -65,6 +69,9 @@ export const en: UITranslations = {
     liveDemo: 'Live',
     code: 'Code',
     viewDetails: 'View Details',
+    previous: 'Previous project',
+    next: 'Next project',
+    slide: 'Project {current} of {count}',
   },
   contact: {
     eyebrow: '05 — Say hello',
@@ -97,8 +104,11 @@ export const en: UITranslations = {
     pageTitle: '404 - Page Not Found | melmayan.fr',
     pageDescription: 'Page not found',
     heading: 'Page not found',
-    message: "Sorry, the page you're looking for doesn't exist or has been moved.",
-    backHome: 'Back to Home',
+    message: "This trail isn't on the map. Let's find you a way back.",
+    backHome: 'Back home',
+    browseBlog: 'Browse the blog',
+    sceneDescription:
+      'Melo sits on an alpine rock, puzzling over a map beside a floating robot. A lantern lights the trail, and a wooden signpost points the way home.',
   },
   theme: {
     light: 'Light',
@@ -115,6 +125,8 @@ export const en: UITranslations = {
     homeLink: 'Marek Elmayan - back to home',
     copyEmail: 'Copy email address',
     postActions: 'More actions',
+    toggleTheme: 'Change theme',
+    visitWebsite: 'Visit {organization} website',
   },
   designSystem: {
     pageTitle: 'Design System | melmayan.fr',
@@ -194,6 +206,13 @@ export const en: UITranslations = {
     tagIntervals: 'Intervals',
     tagCommute: 'Commute',
     tagRace: 'Race',
+    activityNames: {
+      morning: 'Morning run',
+      afternoon: 'Afternoon run',
+      evening: 'Evening run',
+      night: 'Night run',
+      lunch: 'Lunchtime run',
+    },
   },
   projectsPage: {
     eyebrow: 'Selected work',

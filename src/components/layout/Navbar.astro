@@ -18,13 +18,18 @@ const linksClasses =
   'text-foreground/80 hover:text-foreground flex items-center gap-2 relative z-10 rounded-full px-3 py-1.5 text-sm transition-colors';
 ---
 
-<nav data-floating-navbar class="fixed top-6 left-1/2 z-50 w-fit -translate-x-1/2">
-  <div class="navbar-glass liquid-glass relative flex items-center gap-6 rounded-full px-6 py-3">
+<nav
+  data-floating-navbar
+  class="absolute inset-x-4 top-3 z-50 md:fixed md:inset-x-auto md:top-6 md:left-1/2 md:w-fit md:-translate-x-1/2"
+>
+  <div
+    class="navbar-glass liquid-glass relative flex items-center justify-between gap-3 rounded-full md:justify-start md:gap-6 md:px-6 md:py-3"
+  >
     <a
       href={translatePath('/')}
       data-nav-logo-link
       aria-label={t.aria.homeLink}
-      class="text-foreground group/logo flex items-center gap-2 font-semibold transition-all duration-300 ease-in-out hover:opacity-80 motion-reduce:hover:underline"
+      class="text-foreground group/logo flex items-center justify-center gap-2 font-semibold transition-all duration-300 ease-in-out hover:opacity-80 motion-reduce:hover:underline max-md:min-h-11 max-md:min-w-11"
     >
       <AnimatedLogo class="size-8" />
     </a>
@@ -46,9 +51,14 @@ const linksClasses =
       }
     </div>
 
-    <div class="flex items-center gap-6">
-      <LanguageSwitcher currentLang={lang} currentPath={currentPath} className="md:hidden" />
-      <ModeToggle client:load />
+    <div class="flex items-center gap-3 md:gap-6">
+      <LanguageSwitcher
+        currentLang={lang}
+        currentPath={currentPath}
+        variant="plain"
+        className="md:hidden"
+      />
+      <ModeToggle client:load label={t.aria.toggleTheme} />
     </div>
   </div>
 </nav>
@@ -63,6 +73,22 @@ const linksClasses =
   [data-footer-hidden] {
     opacity: 0;
     pointer-events: none;
+  }
+
+  @media (max-width: 767px) {
+    .navbar-glass {
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
+
+    .navbar-glass::before,
+    .navbar-glass :global(.mode-toggle-endcap) {
+      display: none;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {

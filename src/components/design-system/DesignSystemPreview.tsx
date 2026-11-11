@@ -60,6 +60,7 @@ import {
 } from '@/components/ui/breadcrumb';
 import { PastelCard, PastelCards } from '@/components/mdx/PastelCard';
 import { ModeToggle } from '../layout/ModeToggle';
+import { LanguageSwitcher } from '../layout/LanguageSwitcher';
 import { Icon } from '../shared/Icon';
 import { Doodle, MarkedText } from '../shared/HandDrawn';
 import {
@@ -137,6 +138,16 @@ export function DesignSystemPreview({ lang, ageAtBuild }: { lang: Lang; ageAtBui
       </Section>
 
       {/* Typography */}
+      <Section title="Language controls">
+        <Caption>Plain mobile controls</Caption>
+        <LanguageSwitcher
+          currentLang={lang}
+          currentPath={translatePath('/design-system')}
+          variant="plain"
+          className="w-fit"
+        />
+      </Section>
+
       <Section title="Typography">
         <div className="space-y-4">
           <Caption>Display · Fraunces</Caption>

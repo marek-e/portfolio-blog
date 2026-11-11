@@ -76,6 +76,10 @@
 }
 
 @media (max-width: 767px) {
+  .mode-toggle-endcap {
+    inset: -4px -12px -4px -8px;
+  }
+
   .mode-toggle {
     width: 44px;
     height: 44px;

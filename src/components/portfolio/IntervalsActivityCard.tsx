@@ -11,6 +11,7 @@ import {
   HeroMetric,
   RouteSketch,
   formatActivityDate,
+  formatActivityDistance,
   toneClasses,
   type ActivityStat,
 } from './ActivityCardParts';
@@ -29,7 +30,7 @@ export function IntervalsActivityCard({ activity, lang = 'fr' }: IntervalsActivi
   const { dot } = toneClasses('lilac');
 
   const stats: ActivityStat[] = [
-    { icon: WorkoutRunIcon, value: activity.distanceKm.toFixed(1), unit: 'km' },
+    { icon: WorkoutRunIcon, value: formatActivityDistance(activity.distanceKm, lang), unit: 'km' },
     { icon: MountainIcon, value: activity.elevationGain, unit: 'm' },
     { icon: Clock05Icon, value: activity.durationMinutes, unit: 'min' },
     ...(activity.averageHeartRate
@@ -52,6 +53,7 @@ export function IntervalsActivityCard({ activity, lang = 'fr' }: IntervalsActivi
 
       <ActivityCardLink href={activity.stravaUrl}>
         <ActivityHeader
+          lang={lang}
           date={formatActivityDate(activity.date, lang)}
           name={activity.name}
           tag={t.strava.tagIntervals}

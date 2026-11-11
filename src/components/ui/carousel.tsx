@@ -21,8 +21,8 @@ type CarouselProps = {
 type CarouselContextProps = {
   carouselRef: ReturnType<typeof useEmblaCarousel>[0];
   api: ReturnType<typeof useEmblaCarousel>[1];
-  scrollPrev: () => void;
-  scrollNext: () => void;
+  scrollPrev: (event?: React.MouseEvent<HTMLButtonElement>) => void;
+  scrollNext: (event?: React.MouseEvent<HTMLButtonElement>) => void;
   canScrollPrev: boolean;
   canScrollNext: boolean;
 } & CarouselProps;
@@ -64,25 +64,31 @@ function Carousel({
     setCanScrollNext(api.canScrollNext());
   }, []);
 
-  const scrollPrev = React.useCallback(() => {
-    api?.scrollPrev();
-  }, [api]);
+  const scrollPrev = React.useCallback(
+    (event?: React.MouseEvent<HTMLButtonElement>) => {
+      api?.scrollPrev(event?.detail === 0);
+    },
+    [api]
+  );
 
-  const scrollNext = React.useCallback(() => {
-    api?.scrollNext();
-  }, [api]);
+  const scrollNext = React.useCallback(
+    (event?: React.MouseEvent<HTMLButtonElement>) => {
+      api?.scrollNext(event?.detail === 0);
+    },
+    [api]
+  );
 
   const handleKeyDown = React.useCallback(
     (event: React.KeyboardEvent<HTMLDivElement>) => {
       if (event.key === 'ArrowLeft') {
         event.preventDefault();
-        scrollPrev();
+        api?.scrollPrev(true);
       } else if (event.key === 'ArrowRight') {
         event.preventDefault();
-        scrollNext();
+        api?.scrollNext(true);
       }
     },
-    [scrollPrev, scrollNext]
+    [api]
   );
 
   React.useEffect(() => {

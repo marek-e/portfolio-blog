@@ -41,6 +41,22 @@
   --sticker-shadow: oklch(0.08 0.02 280 / 48%);
 }
 
+@media (max-width: 767px) {
+  .hero-mobile-stickers {
+    row-gap: 0.25rem;
+  }
+
+  .hero-mobile-stickers::before {
+    order: 1;
+    flex-basis: 100%;
+    content: '';
+  }
+
+  .hero-mobile-stickers > :nth-child(n + 4) {
+    order: 2;
+  }
+}
+
 .hero-sticker {
   animation: sticker-float 9s ease-in-out infinite;
 }

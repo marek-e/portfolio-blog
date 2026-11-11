@@ -51,14 +51,22 @@ const carouselTranslations = {
   liveDemo: t.projects.liveDemo,
   code: t.projects.code,
   viewDetails: t.projects.viewDetails,
+  previous: t.projects.previous,
+  next: t.projects.next,
+  slide: t.projects.slide,
 };
 ---
 
-<section id="projects" class="relative py-20 md:py-24" aria-labelledby="projects-title">
+<section
+  id="projects"
+  class="featured-projects relative py-12 md:py-24"
+  aria-labelledby="projects-title"
+>
   <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
     <SectionHeading
       id="projects-title"
       eyebrow={t.projects.eyebrow}
+      mobileEyebrow={t.projects.eyebrow.replace(/^03/, '01')}
       title={t.projects.title}
       subtitle={t.projects.subtitle}
       class="mb-10 md:mb-14"
@@ -92,3 +100,15 @@ const carouselTranslations = {
     </div>
   </div>
 </section>
+
+<style>
+  .featured-projects :global(astro-island[ssr] [data-slot='carousel-content']) {
+    overflow-x: auto;
+    touch-action: auto;
+    scroll-snap-type: x mandatory;
+  }
+
+  .featured-projects :global(astro-island[ssr] [data-slot='carousel-item']) {
+    scroll-snap-align: start;
+  }
+</style>

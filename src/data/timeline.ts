@@ -133,18 +133,20 @@ const timelineDataWithTranslations: TimelineEntryWithTranslations[] = [
 ];
 
 export function getLocalizedTimeline(lang: Lang): TimelineEntry[] {
-  return timelineDataWithTranslations.map((entry) => ({
-    id: entry.id,
-    type: entry.type,
-    startDate: entry.startDate,
-    endDate: entry.endDate,
-    logo: entry.logo,
-    logoWidth: entry.logoWidth,
-    logoInverted: entry.logoInverted,
-    tags: entry.tags,
-    link: entry.link,
-    title: entry.translations[lang].title,
-    organization: entry.translations[lang].organization,
-    description: entry.translations[lang].description,
-  }));
+  return [...timelineDataWithTranslations]
+    .sort((a, b) => b.startDate.localeCompare(a.startDate))
+    .map((entry) => ({
+      id: entry.id,
+      type: entry.type,
+      startDate: entry.startDate,
+      endDate: entry.endDate,
+      logo: entry.logo,
+      logoWidth: entry.logoWidth,
+      logoInverted: entry.logoInverted,
+      tags: entry.tags,
+      link: entry.link,
+      title: entry.translations[lang].title,
+      organization: entry.translations[lang].organization,
+      description: entry.translations[lang].description,
+    }));
 }

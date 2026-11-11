@@ -9,6 +9,7 @@ import {
   HeroMetric,
   RouteSketch,
   formatActivityDate,
+  formatActivityDistance,
   type ActivityStat,
 } from './ActivityCardParts';
 
@@ -36,6 +37,7 @@ export function LongRunActivityCard({ activity, lang = 'fr' }: LongRunActivityCa
         className="bg-pastel-mint/40 dark:bg-pastel-mint/10 pointer-events-none absolute -top-16 -right-16 size-44 rounded-full blur-3xl"
       />
       <ActivityHeader
+        lang={lang}
         date={formatActivityDate(activity.date, lang)}
         name={activity.name}
         tag={t.strava.tagLongRun}
@@ -43,7 +45,7 @@ export function LongRunActivityCard({ activity, lang = 'fr' }: LongRunActivityCa
       />
 
       <div className="relative my-5 flex items-center justify-between gap-3">
-        <HeroMetric value={activity.distanceKm.toFixed(1)} unit="km" />
+        <HeroMetric value={formatActivityDistance(activity.distanceKm, lang)} unit="km" />
         <RouteSketch polyline={activity.routePolyline} tone="mint" />
       </div>
 
