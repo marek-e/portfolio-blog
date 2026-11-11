@@ -96,11 +96,11 @@ export function ProjectCardReact({ project, projectUrl, translations }: ProjectC
         <ul className="mt-3 flex min-h-14 flex-wrap content-start gap-1.5">
           {techStack.slice(0, 3).map((tech, index) => (
             <li key={tech} className="flex min-w-0 items-center gap-1.5">
-              <span className="bg-card/65 text-muted-foreground border-border/60 inline-flex h-6 items-center rounded-full border px-2.5 font-mono text-xs whitespace-nowrap">
+              <span className="bg-card/65 text-muted-foreground border-border/60 inline-flex h-6 items-center rounded-full border px-2.5 font-sans text-xs whitespace-nowrap">
                 {tech}
               </span>
               {index === 2 && hiddenTechCount > 0 && (
-                <span className="bg-card/65 text-muted-foreground border-border/60 inline-flex h-6 items-center rounded-full border px-2 font-mono text-xs">
+                <span className="bg-card/65 text-muted-foreground border-border/60 inline-flex h-6 items-center rounded-full border px-2 font-sans text-xs">
                   +{hiddenTechCount}
                 </span>
               )}

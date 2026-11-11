@@ -51,7 +51,7 @@ function formatDate(date: string | null, presentLabel: string, lang: Lang): stri
 ---
 
 <div
-  class="cv-container bg-card text-card-foreground mx-auto rounded-[1.25rem] p-6 font-[Geist] shadow-[0_1px_2px_oklch(0_0_0/5%),0_12px_32px_-16px_oklch(0.35_0.04_300/25%)] sm:p-10 md:p-14"
+  class="cv-container bg-card text-card-foreground mx-auto rounded-[1.25rem] p-6 font-sans shadow-[0_1px_2px_oklch(0_0_0/5%),0_12px_32px_-16px_oklch(0.35_0.04_300/25%)] sm:p-10 md:p-14"
 >
   <header class="cv-section mb-6 print:mb-4">
     <div class="flex flex-col items-start gap-6 sm:flex-row">
@@ -80,7 +80,7 @@ function formatDate(date: string | null, presentLabel: string, lang: Lang): stri
         <p class="font-display-wonk text-primary mt-1 text-xl">{cv.title}</p>
 
         <div
-          class="text-muted-foreground mt-5 flex flex-wrap gap-x-5 gap-y-2 font-mono text-xs print:mt-3"
+          class="text-muted-foreground mt-5 flex flex-wrap gap-x-5 gap-y-2 font-sans text-xs print:mt-3"
         >
           <a
             href={`mailto:${cv.email}`}
@@ -149,7 +149,7 @@ function formatDate(date: string | null, presentLabel: string, lang: Lang): stri
                 <span class="font-bold">{exp.company}</span> - {exp.location}
               </p>
             </div>
-            <span class="text-muted-foreground font-mono text-xs whitespace-nowrap sm:pt-1">
+            <span class="text-muted-foreground font-sans text-xs whitespace-nowrap sm:pt-1">
               {formatDate(exp.startDate, t.cv.present, lang)} →
               {formatDate(exp.endDate, t.cv.present, lang)}
             </span>
@@ -180,7 +180,7 @@ function formatDate(date: string | null, presentLabel: string, lang: Lang): stri
               </p>
               {edu.note && <p class="text-muted-foreground mt-0.5 text-xs italic">{edu.note}</p>}
             </div>
-            <span class="text-muted-foreground font-mono text-xs whitespace-nowrap sm:pt-1">
+            <span class="text-muted-foreground font-sans text-xs whitespace-nowrap sm:pt-1">
               {formatDate(edu.startDate, '', lang)} → {formatDate(edu.endDate, '', lang)}
             </span>
           </div>
@@ -201,7 +201,7 @@ function formatDate(date: string | null, presentLabel: string, lang: Lang): stri
             <span class="min-w-[120px] pt-0.5 text-sm font-medium">{category.category}</span>
             <div class="flex flex-wrap gap-1.5">
               {category.skills.map((skill) => (
-                <span class="bg-secondary text-foreground/80 inline-flex items-center rounded-full px-2.5 py-0.5 font-mono text-xs">
+                <span class="bg-secondary text-foreground/80 inline-flex items-center rounded-full px-2.5 py-0.5 font-sans text-xs">
                   {skill}
                 </span>
               ))}

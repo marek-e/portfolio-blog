@@ -21,7 +21,7 @@ export function Citation({ children, author, source, url, className }: CitationP
           'not-prose',
           'border-pastel-rose bg-pastel-rose/20 dark:border-pastel-rose/60 dark:bg-pastel-rose/8 relative rounded-r-lg border-l-4 py-2 pr-4 pl-6',
           'text-muted-foreground font-display-soft text-lg italic',
-          'before:absolute before:-top-2 before:left-1 before:font-serif before:leading-none',
+          'before:font-display before:absolute before:-top-2 before:left-1 before:leading-none',
           'before:text-pastel-rose dark:before:text-pastel-rose/60 before:text-5xl before:content-["""]'
         )}
       >

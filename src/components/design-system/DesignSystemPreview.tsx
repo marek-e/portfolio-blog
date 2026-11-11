@@ -150,22 +150,31 @@ export function DesignSystemPreview({ lang }: { lang: Lang }) {
           <h1 className="text-4xl font-semibold tracking-tight">Heading 1</h1>
           <h2 className="text-3xl font-semibold tracking-tight">Heading 2</h2>
           <h3 className="font-display-soft text-2xl font-semibold tracking-tight">Heading 3</h3>
-          <h4 className="text-xl font-semibold tracking-tight">Heading 4</h4>
+          <h4 className="font-display-soft text-xl font-semibold tracking-tight">Heading 4</h4>
           <Separator className="my-6" />
-          <Caption>Body · Geist</Caption>
+          <Caption>Body & UI · Geist</Caption>
           <p className="text-muted-foreground text-base leading-relaxed">
-            Body text - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua.
+            Clear body text leaves room for expressive headings. Geist also carries navigation,
+            buttons, tags, dates and captions across the site.
           </p>
           <p className="text-muted-foreground text-sm">
-            Small text - Used for captions and helper text.
+            Captions and supporting text · Écriture, expérience & idées.
           </p>
           <Separator className="my-6" />
-          <Caption>Mono · Maple Mono</Caption>
+          <p className="eyebrow">Section label · 2026</p>
+          <div className="mt-3 flex flex-wrap items-center gap-3">
+            <Badge>Astro</Badge>
+            <Badge variant="outline">React</Badge>
+            <span className="text-muted-foreground font-sans text-xs">
+              11 novembre 2026 · 5 min
+            </span>
+          </div>
+          <Separator className="my-6" />
+          <Caption>Code & metrics · Maple Mono</Caption>
           <p className="text-foreground/80 font-mono text-sm">
             const craft = (idea: string) =&gt; ship(idea);
           </p>
-          <p className="eyebrow">Eyebrow label · 2026</p>
+          <p className="font-mono text-2xl font-medium tabular-nums">10.42 km · 5:24 /km</p>
         </div>
       </Section>
 
@@ -705,7 +714,7 @@ function ColorSwatch({ name, className }: { name: string; className: string }) {
       />
       <div className="flex flex-col justify-between gap-1">
         <p className="text-foreground text-sm font-medium">{name}</p>
-        <p className="text-muted-foreground truncate font-mono text-[0.65rem]">
+        <p className="text-muted-foreground truncate font-sans text-[0.65rem]">
           {copied ? '✓ Copied' : colorValue}
         </p>
       </div>

@@ -217,7 +217,7 @@
 
 .kvam-text {
   fill: var(--kvam-ink);
-  font-family: MapleMono, ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  font-family: var(--font-mono);
   font-weight: 600;
   letter-spacing: 0.02em;
 }
@@ -242,7 +242,7 @@
 
 .kvam-digits {
   fill: var(--kvam-hi);
-  font-family: MapleMono, ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  font-family: var(--font-mono);
   font-weight: 600;
 }
 

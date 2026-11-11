@@ -35,7 +35,7 @@ const t = getTranslations(getLangFromUrl(Astro.url));
     const arrow = document.createElement('span');
     button.type = 'button';
     button.className =
-      'border-primary/40 bg-card text-primary shadow-primary/20 hover:bg-primary/10 focus-visible:ring-ring/50 absolute z-40 inline-flex items-center gap-1.5 rounded-full border px-3 py-1 font-mono text-xs shadow-lg transition-colors outline-none focus-visible:ring-[3px]';
+      'border-primary/40 bg-card text-primary shadow-primary/20 hover:bg-primary/10 focus-visible:ring-ring/50 absolute z-40 inline-flex items-center gap-1.5 rounded-full border px-3 py-1 font-sans text-xs shadow-lg transition-colors outline-none focus-visible:ring-[3px]';
     arrow.setAttribute('aria-hidden', 'true');
     arrow.textContent = pageTop(link) > pageTop(target) ? '↓' : '↑';
     button.append(arrow, link.dataset.scrollBack ?? '');

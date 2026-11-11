@@ -34,7 +34,7 @@ export function SoundtrackStopButton({ label }: { label: string }) {
           </Button3D>
         }
       />
-      <TooltipContent side="right" sideOffset={8} className="font-mono motion-reduce:animate-none">
+      <TooltipContent side="right" sideOffset={8} className="font-sans motion-reduce:animate-none">
         {label}
       </TooltipContent>
     </Tooltip>

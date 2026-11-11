@@ -129,7 +129,7 @@ const isCover = objectFit === 'cover';
   />
   <Navbar />
   <main class="container mx-auto max-w-5xl px-4 pt-36 pb-24 md:pt-44">
-    <Breadcrumb className="mb-10 font-mono text-xs">
+    <Breadcrumb className="mb-10 font-sans text-xs">
       <BreadcrumbList>
         <BreadcrumbItem>
           <BreadcrumbLink href={translatePath('/')}>
@@ -161,7 +161,7 @@ const isCover = objectFit === 'cover';
           </Badge>
           <time
             datetime={publishDate.toISOString()}
-            class="text-muted-foreground font-mono text-xs"
+            class="text-muted-foreground font-sans text-xs"
           >
             {formatProjectDate(publishDate, lang)}
           </time>
@@ -241,7 +241,7 @@ const isCover = objectFit === 'cover';
           ))
         }
         <div class={cn(facts.length > 0 && 'md:border-foreground/10 md:border-l md:pl-6')}>
-          <h2 class="eyebrow mb-3 font-mono font-normal tracking-[0.08em]">
+          <h2 class="eyebrow mb-3 font-sans font-normal tracking-[0.08em]">
             {t.projectsPage.techStack}
           </h2>
           <div class="flex flex-wrap gap-1.5">
@@ -287,7 +287,7 @@ const isCover = objectFit === 'cover';
             <ul class="relative space-y-3">
               {lessons.map((lesson) => (
                 <li class="flex items-start gap-3">
-                  <span class="text-muted-foreground mt-0.5 font-mono text-xs">&rarr;</span>
+                  <span class="text-muted-foreground mt-0.5 font-sans text-xs">&rarr;</span>
                   <span class="text-foreground/85 leading-relaxed">{lesson}</span>
                 </li>
               ))}
@@ -313,7 +313,7 @@ const isCover = objectFit === 'cover';
                       loading="lazy"
                     />
                     {item.caption && (
-                      <figcaption class="text-muted-foreground px-3 pt-3 pb-2 text-center font-mono text-xs">
+                      <figcaption class="text-muted-foreground px-3 pt-3 pb-2 text-center font-sans text-xs">
                         {item.caption}
                       </figcaption>
                     )}

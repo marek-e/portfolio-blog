@@ -106,7 +106,7 @@ export function ActivityHeader({
         {tag && (
           <span
             className={cn(
-              'text-foreground/80 inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 font-mono text-[0.7rem] tracking-wide uppercase',
+              'text-foreground/80 inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 font-sans text-[0.7rem] tracking-wide uppercase',
               TONES[tone].chip
             )}
           >
@@ -251,7 +251,7 @@ export function ActivityStats({ stats }: { stats: ActivityStat[] }) {
     >
       {stats.map((stat) => (
         <div key={stat.unit} className="flex flex-col-reverse items-center gap-1 text-center">
-          <dt className="text-muted-foreground flex items-center gap-1 font-mono text-[0.7rem]">
+          <dt className="text-muted-foreground flex items-center gap-1 font-sans text-[0.7rem]">
             <Icon
               icon={stat.icon}
               size={12}

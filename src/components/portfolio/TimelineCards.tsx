@@ -152,7 +152,7 @@ function TimelineCard({
             <HugeiconsIcon icon={icon} className="size-4.5" strokeWidth={1.8} />
           </span>
           <time
-            className="text-muted-foreground font-mono text-xs whitespace-nowrap"
+            className="text-muted-foreground font-sans text-xs whitespace-nowrap"
             dateTime={entry.startDate}
           >
             {formatDateRange(entry.startDate, entry.endDate, lang, presentLabel)}
@@ -173,7 +173,7 @@ function TimelineCard({
             <li
               key={tag}
               className={cn(
-                'text-foreground/80 rounded-full px-2.5 py-0.5 font-mono text-xs',
+                'text-foreground/80 rounded-full px-2.5 py-0.5 font-sans text-xs',
                 accent
               )}
             >

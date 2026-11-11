@@ -125,7 +125,7 @@
   gap: clamp(0.65rem, 3.5cqw, 1rem);
   width: 62%;
   color: color-mix(in oklch, var(--foreground) 80%, var(--primary));
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: clamp(0.625rem, 2.8cqw, 0.8125rem);
   line-height: 1.5;
 }
@@ -179,7 +179,7 @@
   align-items: center;
   gap: 0.4rem;
   color: color-mix(in oklch, var(--foreground) 80%, var(--primary));
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: clamp(0.5rem, 2.7cqw, 0.7rem);
   line-height: 1.4;
 }

@@ -16,7 +16,7 @@ const { tags, class: className } = Astro.props;
     <ul class={cn('flex flex-wrap gap-1.5', className)}>
       {tags.map((tag) => (
         <li>
-          <Badge variant={getTagColor(tag)} className="font-mono text-xs">
+          <Badge variant={getTagColor(tag)} className="font-sans text-xs">
             {tag}
           </Badge>
         </li>

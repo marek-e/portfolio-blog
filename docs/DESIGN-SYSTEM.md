@@ -20,16 +20,20 @@ Decisions taken during the 2026 rebrand review. Treat them as constraints, not s
 
 ## Typography
 
-| Role                             | Font                  | How                                                   |
-| -------------------------------- | --------------------- | ----------------------------------------------------- |
-| Display (h1, h2, card titles)    | Fraunces              | automatic on `h1`/`h2`; `font-display-soft` elsewhere |
-| Artistic accent word             | Fraunces italic, WONK | `font-display-wonk`, or `MarkedText`                  |
-| Body                             | Geist                 | default `font-sans`                                   |
-| Code, tags, dates, stats, labels | MapleMono             | `font-mono`; `eyebrow` for small uppercase labels     |
+| Role                                                              | Font                  | How                                                       |
+| ----------------------------------------------------------------- | --------------------- | --------------------------------------------------------- |
+| Page, section, editorial and portfolio card titles                | Fraunces              | automatic on `h1`/`h2`; `font-display-soft` elsewhere     |
+| Artistic accent word                                              | Fraunces italic, WONK | `font-display-wonk`, or `MarkedText`                      |
+| Body, navigation, controls, captions, dates and tags              | Geist                 | default `font-sans`; `eyebrow` for small uppercase labels |
+| Code, technical diagrams, running metrics and identity signatures | MapleMono             | `font-mono`; use `tabular-nums` for changing metrics      |
 
-- MapleMono is the developer signature. Keep it for metadata and numbers, never for paragraphs.
+- Fraunces carries the artistic character. Keep paragraphs and small UI text in Geist so the serif titles have room to stand out.
+- Use Geist for supporting text, including badges, breadcrumbs, footer copy and CV metadata. UI headings such as footer navigation and dialog titles use `font-sans` explicitly instead of inheriting the display serif.
+- MapleMono is a deliberate developer signature on code, technical diagrams, running numbers, the hero identity/music badge and the ID card's small header and reverse signature. It is not the default for every short string.
+- Use shared font tokens instead of hard-coded family names, including print styles. Regular and bold Geist italics and medium MapleMono have matching font files; body and display fonts are preloaded.
+- Body text uses regular weight, UI emphasis uses medium or semibold, and display titles use semibold. Prose bold uses the loaded 700 weight.
 - Section titles always go through `SectionHeading.astro`. It italicises the last word and draws the marker under it.
-- Home sections carry numbered eyebrows (`01 — …` to `05 — …`), translated in both languages.
+- Home sections carry numbered eyebrows, translated in both languages.
 
 ## Colour
 

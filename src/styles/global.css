@@ -2,9 +2,11 @@
 @import 'tw-animate-css';
 @import 'shadcn/tailwind.css';
 @import '@fontsource/geist/latin-400.css';
+@import '@fontsource/geist/latin-400-italic.css';
 @import '@fontsource/geist/latin-500.css';
 @import '@fontsource/geist/latin-600.css';
 @import '@fontsource/geist/latin-700.css';
+@import '@fontsource/geist/latin-700-italic.css';
 @import '@fontsource-variable/fraunces/full.css';
 @import '@fontsource-variable/fraunces/full-italic.css';
 @plugin '@tailwindcss/typography';
@@ -15,6 +17,14 @@
   font-family: 'MapleMono';
   src: url('/fonts/MapleMono-Regular.ttf.woff2') format('woff2');
   font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MapleMono';
+  src: url('/fonts/MapleMono-Medium.ttf.woff2') format('woff2');
+  font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
@@ -518,8 +528,10 @@
 }
 
 @utility eyebrow {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.5;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--muted-foreground);
@@ -644,7 +656,7 @@ html:active-view-transition-type(theme-transition)::view-transition-new(root) {
     color: black !important;
     font-size: 11pt;
     line-height: 1.4;
-    font-family: 'Geist', sans-serif;
+    font-family: var(--font-sans);
     margin: 0 !important;
     padding: 0 !important;
   }
@@ -759,12 +771,17 @@ html:active-view-transition-type(theme-transition)::view-transition-new(root) {
 }
 
 .prose h3 {
+  @apply font-display-soft;
   font-size: 1.5em;
   font-weight: 600;
 }
 
+.prose h4 {
+  @apply font-display-soft;
+}
+
 .prose strong {
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .prose h1 a,

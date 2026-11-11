@@ -1,6 +1,8 @@
 ---
 import { ClientRouter } from 'astro:transitions';
 import '../styles/global.css';
+import bodyFont from '@fontsource/geist/files/geist-latin-400-normal.woff2?url';
+import displayFont from '@fontsource-variable/fraunces/files/fraunces-latin-full-normal.woff2?url';
 import '../styles/liquid-glass.css';
 import '../styles/language-switcher.css';
 import '../styles/dev-id-card.css';
@@ -98,13 +100,9 @@ const enURL = new URL(enPath, Astro.site);
     <link rel="preconnect" href="https://static.cloudflareinsights.com" crossorigin />
 
     <!-- Preload critical font -->
-    <link
-      rel="preload"
-      href="/fonts/MapleMono-Regular.ttf.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
+    <link rel="preload" href={bodyFont} as="font" type="font/woff2" crossorigin />
+
+    <link rel="preload" href={displayFont} as="font" type="font/woff2" crossorigin />
 
     <!-- Structured Data for Person -->
     <script is:inline type="application/ld+json">
