@@ -128,16 +128,30 @@ const groups = [
     <div class="footer-utilities relative mx-auto mt-auto">
       <p class="footer-copyright font-mono text-xs">© {currentYear} Marek Elmayan</p>
       <GlassThemeSwitch lang={lang} client:visible />
-      <a
-        href="#"
+      <button
+        type="button"
+        data-back-to-top
         class="footer-back-to-top hover:bg-primary/10 focus-visible:bg-primary/10 inline-flex min-h-11 items-center gap-2 rounded-full px-3 text-[0.8125rem] opacity-80 transition-[background-color,opacity] duration-150 hover:opacity-100 focus-visible:opacity-100 motion-reduce:transition-none md:-mr-3"
       >
         {t.footer.backToTop}
         <Icon icon={ArrowUp04Icon} strokeWidth={1.7} className="size-4" />
-      </a>
+      </button>
     </div>
   </div>
 </footer>
+
+<script>
+  document.addEventListener('click', (event) => {
+    if (!(event.target instanceof Element) || !event.target.closest('[data-back-to-top]')) return;
+
+    window.scrollTo({
+      top: 0,
+      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches
+        ? 'instant'
+        : 'smooth',
+    });
+  });
+</script>
 
 <style>
   .illustrated-footer {
