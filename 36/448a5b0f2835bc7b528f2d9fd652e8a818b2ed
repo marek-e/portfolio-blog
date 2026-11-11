@@ -1,0 +1,33 @@
+public/_headers
+  s_a04488f731526f::t_f6652fcdafb199 10
+docs/DESIGN-SYSTEM.md
+  s_742e33891954a6::t_42bddb186da056 17
+src/i18n/translations/en.ts
+  s_a04488f731526f::t_77341c04cec4e3 46
+src/i18n/translations/fr.ts
+  s_a04488f731526f::t_4f1be94e813165 46
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "36448a5b0f2835bc7b528f2d9fd652e8a818b2ed",
+  "prompts": {},
+  "sessions": {
+    "s_742e33891954a6": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1cc72-ede4-7663-ae09-a53a79fc8ec2",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    },
+    "s_a04488f731526f": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1cc78-90fe-7d30-87af-5521079a6da0",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
