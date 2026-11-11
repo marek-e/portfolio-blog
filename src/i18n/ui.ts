@@ -21,6 +21,17 @@ export interface UITranslations {
     ctaProjects: string;
     ctaContact: string;
     ctaCv: string;
+    music: {
+      title: string;
+      controls: string;
+      play: string;
+      pause: string;
+      stop: string;
+      volume: string;
+      off: string;
+      on: string;
+      error: string;
+    };
   };
   about: {
     eyebrow: string;

@@ -24,6 +24,17 @@ export const en: UITranslations = {
     ctaProjects: 'View Projects',
     ctaContact: 'Get in Touch',
     ctaCv: 'View my CV',
+    music: {
+      title: 'Background music',
+      controls: 'Music controls',
+      play: 'Play music',
+      pause: 'Pause music',
+      stop: 'Stop music',
+      volume: 'Music volume',
+      off: 'Sound off',
+      on: 'Now playing',
+      error: 'Unable to play. Try again.',
+    },
   },
   about: {
     eyebrow: '01 — Who I am',

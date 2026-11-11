@@ -24,6 +24,17 @@ export const fr: UITranslations = {
     ctaProjects: 'Voir mes projets',
     ctaContact: 'Me contacter',
     ctaCv: 'Voir mon CV',
+    music: {
+      title: "Musique d'ambiance",
+      controls: 'Contrôles de la musique',
+      play: 'Lancer la musique',
+      pause: 'Mettre en pause',
+      stop: 'Arrêter la musique',
+      volume: 'Volume de la musique',
+      off: 'Son désactivé',
+      on: 'En écoute',
+      error: 'Lecture impossible. Réessayer.',
+    },
   },
   about: {
     eyebrow: '01 — Qui je suis',

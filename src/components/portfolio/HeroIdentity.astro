@@ -1,0 +1,456 @@
+---
+import { MusicNote04Icon, PauseIcon, PlayIcon, VolumeLowIcon } from '@hugeicons/core-free-icons';
+import { Icon } from '@/components/shared/Icon';
+import type { UITranslations } from '@/i18n/ui';
+import portrait from '@/assets/hero-portrait.webp';
+
+interface Props {
+  name: string;
+  eyebrow: string;
+  musicLabels: UITranslations['hero']['music'];
+}
+
+const { name, eyebrow, musicLabels } = Astro.props;
+---
+
+<div
+  class="hero-island text-foreground relative z-20 mb-11 h-11 w-60 max-w-full text-left font-mono"
+  data-hero-island
+  data-soundtrack
+  data-expanded="false"
+  data-playing="false"
+>
+  <span class="hero-island-surface liquid-glass" aria-hidden="true"></span>
+  <img
+    src={portrait.src}
+    alt=""
+    width={88}
+    height={88}
+    class="hero-island-portrait absolute size-7 rounded-full object-cover"
+    loading="eager"
+  />
+  <button
+    type="button"
+    class="hero-island-trigger absolute inset-0 cursor-pointer rounded-full"
+    aria-label={`${name}, ${eyebrow}. ${musicLabels.controls}`}
+    aria-expanded="false"
+    aria-controls="hero-music-controls"
+  >
+    <span
+      class="hero-island-summary absolute flex h-11 items-center font-mono text-xs tracking-wide"
+      data-soundtrack-summary
+      data-idle-label={eyebrow}
+      data-playing-label={musicLabels.title}
+    >
+      {eyebrow}
+    </span>
+    <span
+      class="hero-island-indicator absolute top-0 right-3 flex h-11 items-center"
+      aria-hidden="true"
+    >
+      <Icon icon={MusicNote04Icon} className="soundtrack-note size-4" />
+      <span class="soundtrack-bars"><i></i><i></i><i></i></span>
+    </span>
+  </button>
+  <div
+    id="hero-music-controls"
+    class="hero-island-panel absolute inset-x-0 top-0 h-22"
+    role="group"
+    aria-label={musicLabels.controls}
+    aria-hidden="true"
+    inert
+  >
+    <span
+      class="absolute top-3.5 left-0 flex size-5 items-center justify-center"
+      aria-hidden="true"
+    >
+      <Icon icon={MusicNote04Icon} className="size-5" />
+    </span>
+    <div class="hero-island-track absolute top-3.5 left-8 max-w-40">
+      <p
+        class="truncate text-xs leading-5"
+        data-soundtrack-heading
+        data-title-label={musicLabels.title}
+        data-error-label={musicLabels.error}
+      >
+        {musicLabels.title}
+      </p>
+      <p
+        class="sr-only"
+        role="status"
+        data-soundtrack-status
+        data-off-label={musicLabels.off}
+        data-on-label={musicLabels.on}
+        data-error-label={musicLabels.error}
+      >
+        {musicLabels.off}
+      </p>
+    </div>
+    <button
+      type="button"
+      class="hero-island-play soundtrack-toggle absolute top-5.5 -right-3 flex size-11 cursor-pointer items-center justify-center rounded-full"
+      aria-label={musicLabels.play}
+      data-soundtrack-toggle
+      data-play-label={musicLabels.play}
+      data-pause-label={musicLabels.pause}
+    >
+      <Icon
+        icon={PlayIcon}
+        className="soundtrack-play size-4.5"
+        fill="currentColor"
+        aria-hidden="true"
+      />
+      <Icon
+        icon={PauseIcon}
+        className="soundtrack-pause size-4.5"
+        fill="currentColor"
+        aria-hidden="true"
+      />
+    </button>
+    <label
+      class="hero-island-volume absolute top-10 right-10 left-0 grid h-11 grid-cols-[1.25rem_minmax(0,1fr)] items-center gap-3"
+    >
+      <Icon icon={VolumeLowIcon} className="size-3.5 justify-self-center" aria-hidden="true" />
+      <span class="sr-only">{musicLabels.volume}</span>
+      <input
+        type="range"
+        min="0"
+        max="100"
+        step="1"
+        value="35"
+        class="h-11 w-full min-w-0 cursor-pointer"
+        style="--soundtrack-volume: 35%;"
+        data-soundtrack-volume
+      />
+    </label>
+  </div>
+</div>
+
+<style>
+  .hero-island {
+    --island-fill: oklch(1 0 0 / 26%);
+    --island-shadow: oklch(0.2 0.02 280 / 22%);
+    --island-ease: linear(
+      0,
+      0.1144,
+      0.3475,
+      0.5885,
+      0.7844,
+      0.9194,
+      0.9987,
+      1.0359,
+      1.046,
+      1.0413,
+      1.0308,
+      1.0196,
+      1.0104,
+      1.004,
+      1.0002,
+      0.9984,
+      1
+    );
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  :global(.dark) .hero-island {
+    --island-fill: oklch(0.16 0.014 280 / 56%);
+    --island-shadow: oklch(0.06 0.01 280 / 48%);
+  }
+
+  .hero-island-trigger {
+    z-index: 2;
+    outline: none;
+  }
+
+  .hero-island-trigger::after {
+    position: absolute;
+    inset: 0;
+    content: '';
+  }
+
+  .hero-island[data-expanded='true'] .hero-island-trigger::after {
+    inset: 0 -1.25rem -2.75rem;
+  }
+
+  .hero-island-surface {
+    position: absolute;
+    top: 0;
+    right: -1.25rem;
+    left: -1.25rem;
+    height: 5.5rem;
+    border: 0;
+    border-radius: 1.604167rem / 2.75rem;
+    background:
+      linear-gradient(
+        120deg,
+        oklch(1 0 0 / 14%),
+        transparent 38%,
+        transparent 72%,
+        oklch(1 0 0 / 5%)
+      ),
+      var(--island-fill);
+    box-shadow:
+      inset 0 0 0 1px oklch(1 0 0 / 28%),
+      inset 0 1px 0 oklch(1 0 0 / 50%),
+      0 2px 4px -2px var(--island-shadow),
+      0 16px 30px -16px var(--island-shadow);
+    -webkit-backdrop-filter: blur(10px) saturate(125%);
+    backdrop-filter: blur(10px) saturate(125%);
+    transform: scale(0.857143, 0.5);
+    transform-origin: top center;
+    transition:
+      transform 400ms var(--island-ease),
+      border-radius 400ms var(--island-ease);
+    pointer-events: none;
+  }
+
+  .hero-island-surface::before {
+    background:
+      radial-gradient(ellipse 65% 50% at 0% 0%, oklch(1 0 0 / 24%), transparent 72%),
+      radial-gradient(ellipse 35% 40% at 100% 100%, oklch(1 0 0 / 12%), transparent 72%);
+  }
+
+  .hero-island-portrait {
+    z-index: 1;
+    top: 0.5rem;
+    left: 0.5rem;
+    transition:
+      opacity 160ms ease,
+      transform 400ms var(--island-ease);
+    pointer-events: none;
+  }
+
+  .hero-island-summary {
+    top: 0;
+    left: 3rem;
+    white-space: nowrap;
+  }
+
+  .hero-island-summary,
+  .hero-island-indicator {
+    transition: opacity 160ms ease;
+  }
+
+  .hero-island-panel {
+    z-index: 3;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+      opacity 160ms ease,
+      visibility 160ms;
+  }
+
+  .hero-island-play,
+  .hero-island-volume {
+    pointer-events: auto;
+  }
+
+  .hero-island-play {
+    isolation: isolate;
+    background: transparent;
+    color: oklch(1 0 0);
+    transition: transform 160ms var(--island-ease);
+  }
+
+  .hero-island-play::before,
+  .hero-island-play::after {
+    position: absolute;
+    inset: 4px;
+    z-index: -1;
+    border-radius: 50%;
+    content: '';
+  }
+
+  .hero-island-play::before {
+    background: linear-gradient(
+      160deg,
+      color-mix(in oklch, var(--primary), white 16%),
+      var(--primary) 65%,
+      color-mix(in oklch, var(--primary), black 8%)
+    );
+    box-shadow:
+      inset 0 1px 0 oklch(1 0 0 / 36%),
+      0 3px 8px -4px var(--primary);
+  }
+
+  .hero-island-play::after {
+    background: oklch(1 0 0 / 14%);
+    opacity: 0;
+    transition: opacity 160ms ease;
+  }
+
+  .hero-island-play :global(path) {
+    stroke: none;
+  }
+
+  .hero-island-play :global(.soundtrack-play) {
+    transform: translateX(1px);
+  }
+
+  .hero-island-play:not(:focus-visible):active {
+    transform: scale(0.96);
+  }
+
+  .hero-island[data-error='true'] .hero-island-track > p:first-child {
+    font-size: 0.625rem;
+    line-height: 0.875rem;
+    white-space: normal;
+  }
+
+  .hero-island[data-expanded='true'] .hero-island-surface {
+    border-radius: 1.5rem;
+    transform: scale(1);
+  }
+
+  .hero-island[data-expanded='true'] .hero-island-portrait {
+    opacity: 0;
+    transform: translateX(-0.25rem) scale(0.9);
+  }
+
+  .hero-island[data-expanded='true'] .hero-island-summary,
+  .hero-island[data-expanded='true'] .hero-island-indicator {
+    opacity: 0;
+  }
+
+  .hero-island[data-expanded='true'] .hero-island-panel {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .hero-island:has(.hero-island-trigger:focus-visible) .hero-island-surface {
+    outline: 2px solid var(--ring);
+    outline-offset: 4px;
+  }
+
+  .hero-island[data-instant] *,
+  .hero-island:has(:focus-visible) * {
+    transition: none;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .hero-island-play:hover {
+      background: transparent;
+    }
+
+    .hero-island-play:hover::after {
+      opacity: 1;
+    }
+  }
+
+  @supports not (backdrop-filter: blur(1px)) {
+    .hero-island-surface {
+      background: var(--card);
+    }
+  }
+
+  @media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
+    .hero-island-surface {
+      background: var(--card);
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+      box-shadow: inset 0 0 0 1px var(--foreground);
+    }
+
+    .hero-island-surface::before {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-island * {
+      transition: none;
+    }
+
+    .hero-island-play:not(:focus-visible):active {
+      transform: none;
+    }
+  }
+</style>
+
+<script>
+  function initHeroIsland() {
+    const island = document.querySelector<HTMLElement>('[data-hero-island]');
+    const trigger = island?.querySelector<HTMLButtonElement>('.hero-island-trigger');
+    const panel = island?.querySelector<HTMLElement>('#hero-music-controls');
+    if (!island || !trigger || !panel) return;
+
+    const controller = new AbortController();
+    const options = { signal: controller.signal };
+    const pointer = window.matchMedia('(hover: hover) and (pointer: fine)');
+    let keyboardInteraction = false;
+
+    const setExpanded = (expanded: boolean, instant = false) => {
+      island.toggleAttribute('data-instant', instant);
+      island.dataset.expanded = String(expanded);
+      trigger.setAttribute('aria-expanded', String(expanded));
+      panel.inert = !expanded;
+      panel.setAttribute('aria-hidden', String(!expanded));
+    };
+
+    island.addEventListener(
+      'pointerenter',
+      (event) => {
+        if (pointer.matches && event.pointerType !== 'touch') setExpanded(true);
+      },
+      options
+    );
+    island.addEventListener(
+      'pointerleave',
+      (event) => {
+        if (
+          pointer.matches &&
+          event.pointerType !== 'touch' &&
+          !(keyboardInteraction && panel.contains(document.activeElement))
+        ) {
+          setExpanded(false);
+        }
+      },
+      options
+    );
+    trigger.addEventListener(
+      'click',
+      (event) => {
+        if (event.detail === 0) keyboardInteraction = true;
+        setExpanded(trigger.getAttribute('aria-expanded') !== 'true', event.detail === 0);
+      },
+      options
+    );
+    island.addEventListener(
+      'focusout',
+      (event) => {
+        if (
+          island.dataset.expanded === 'true' &&
+          (!(event.relatedTarget instanceof Node) || !island.contains(event.relatedTarget))
+        ) {
+          setExpanded(false, true);
+        }
+      },
+      options
+    );
+    document.addEventListener(
+      'keydown',
+      (event) => {
+        if (event.key === 'Tab' || island.contains(document.activeElement)) {
+          keyboardInteraction = true;
+        }
+        if (event.key !== 'Escape' || island.dataset.expanded !== 'true') return;
+        if (panel.contains(document.activeElement)) trigger.focus({ preventScroll: true });
+        setExpanded(false, true);
+      },
+      options
+    );
+    document.addEventListener(
+      'pointerdown',
+      (event) => {
+        keyboardInteraction = false;
+        if (event.target instanceof Node && !island.contains(event.target)) setExpanded(false);
+      },
+      options
+    );
+    document.addEventListener('astro:before-swap', () => controller.abort(), { once: true });
+  }
+
+  initHeroIsland();
+  document.addEventListener('astro:after-swap', initHeroIsland);
+</script>

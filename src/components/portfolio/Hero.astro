@@ -1,12 +1,11 @@
 ---
-import { Image } from 'astro:assets';
+import HeroIdentity from './HeroIdentity.astro';
 import { HeroActions } from './HeroActions';
 import { HeroStickers } from './HeroStickers';
 import { Doodle, MarkedText } from '@/components/shared/HandDrawn';
 import { getTranslations, getLangFromUrl, getTranslatedPath } from '@/i18n';
 import BackgroundImage from '@/components/layout/BackgroundImage.astro';
 import CursorSpotlight from './CursorSpotlight.astro';
-import portrait from '@/assets/mareke.avif';
 
 const lang = getLangFromUrl(Astro.url);
 const t = getTranslations(lang);
@@ -22,19 +21,7 @@ const translatePath = getTranslatedPath(lang);
     <div
       class="relative z-10 mx-auto flex w-full max-w-5xl min-w-0 flex-col items-center px-4 text-center sm:px-6"
     >
-      <p
-        class="liquid-glass hero-identity relative mb-10 flex max-w-full items-center gap-3 rounded-full py-1.5 pr-4 pl-1.5 text-sm"
-      >
-        <Image
-          src={portrait}
-          alt=""
-          width={56}
-          height={56}
-          class="size-7 rounded-full object-cover"
-          loading="eager"
-        />
-        <span class="text-foreground font-mono text-xs tracking-wide">{t.hero.eyebrow}</span>
-      </p>
+      <HeroIdentity name={t.hero.name} eyebrow={t.hero.eyebrow} musicLabels={t.hero.music} />
 
       <h1
         id="hello"

@@ -6,6 +6,7 @@ import '../styles/language-switcher.css';
 import '../styles/dev-id-card.css';
 import { getAlternatePath, getLangFromUrl } from '@/i18n/config';
 import { BookmarkLanguageToggle } from '@/components/layout/BookmarkLanguageToggle';
+import SoundtrackPlayer from '@/components/layout/SoundtrackPlayer.astro';
 
 interface Props {
   title: string;
@@ -168,5 +169,6 @@ const enURL = new URL(enPath, Astro.site);
   <body class="bg-background text-foreground min-h-dvh antialiased max-md:pb-28">
     <BookmarkLanguageToggle client:load currentLang={lang} currentPath={currentPath} />
     <slot />
+    <SoundtrackPlayer />
   </body>
 </html>
