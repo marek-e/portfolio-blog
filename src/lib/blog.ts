@@ -1,4 +1,5 @@
 import type { Lang } from '@/i18n/config';
+import { pickByHash } from '@/lib/utils';
 
 const pastelVariants = [
   'pastel-blue-outline',
@@ -15,8 +16,7 @@ const pastelVariants = [
  * Get a consistent pastel color variant for a tag based on its name
  */
 export function getTagColor(tag: string) {
-  const hash = tag.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
-  return pastelVariants[hash % pastelVariants.length];
+  return pickByHash(tag, pastelVariants);
 }
 
 /**

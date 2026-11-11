@@ -1,6 +1,6 @@
 import { Link } from '@/components/ui/button';
 import { Card3D } from '@/components/ui/card-3d';
-import { cn } from '@/lib/utils';
+import { cn, pickByHash } from '@/lib/utils';
 import '@/styles/project-card.css';
 
 export interface ProjectData {
@@ -35,11 +35,6 @@ const PANEL_TONES = [
   'from-pastel-butter/80 to-pastel-peach/50 dark:from-pastel-butter/14 dark:to-pastel-peach/8',
 ] as const;
 
-function pickTone<T>(key: string, tones: readonly T[]): T {
-  const hash = [...key].reduce((acc, char) => acc + char.charCodeAt(0), 0);
-  return tones[hash % tones.length];
-}
-
 export function ProjectCardReact({ project, projectUrl, translations }: ProjectCardReactProps) {
   const { title, description, techStack, links, image, imageAlt, objectFit, imagePadding } =
     project;
@@ -58,7 +53,7 @@ export function ProjectCardReact({ project, projectUrl, translations }: ProjectC
       <div
         className={cn(
           'relative aspect-[4/3] overflow-hidden rounded-[2rem] bg-linear-to-br',
-          pickTone(title, PANEL_TONES)
+          pickByHash(title, PANEL_TONES)
         )}
       >
         {image && (
