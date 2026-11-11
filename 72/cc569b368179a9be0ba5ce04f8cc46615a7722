@@ -1,0 +1,34 @@
+src/components/ui/button-3d.tsx
+  s_a53ec57c33191e::t_fa10bbd1445105 3,6,38,40
+src/components/ui/glass-material.tsx
+  s_a53ec57c33191e::t_fa10bbd1445105 1-133
+docs/DESIGN-SYSTEM.md
+  s_a53ec57c33191e::t_951b1c4735fa51 115,117-118
+src/styles/hero-stickers.css
+  s_a53ec57c33191e::t_4f1688a1ab6657 1-78
+src/components/portfolio/HeroActions.tsx
+  s_a53ec57c33191e::t_4f1688a1ab6657 1-34
+src/styles/three-dimensional.css
+  s_a53ec57c33191e::t_fa10bbd1445105 33,42,54,69,74,82,117-118
+src/components/portfolio/Hero.astro
+  s_a53ec57c33191e::t_fa10bbd1445105 3-4,20,72,79-84,87,131
+src/components/portfolio/HeroStickers.tsx
+  s_a53ec57c33191e::t_64120f30752f0e 13-19,41
+  s_a53ec57c33191e::t_4f1688a1ab6657 1-12,20-40,42-57
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "72cc569b368179a9be0ba5ce04f8cc46615a7722",
+  "prompts": {},
+  "sessions": {
+    "s_a53ec57c33191e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1bd0b-f2ab-71c1-9495-70e197bc4edb",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}

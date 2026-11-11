@@ -1,0 +1,50 @@
+src/i18n/translations/en.ts
+  s_c6b6eabeed01f3::t_3f8ad9fab5cfc6 14,19,113
+  s_a53ec57c33191e::t_224f9699f6373b 153
+src/pages/llms.txt.ts
+  s_c6b6eabeed01f3::t_3f8ad9fab5cfc6 32
+src/styles/global.css
+  s_c6b6eabeed01f3::t_146dee090f845c 468
+  s_c6b6eabeed01f3::t_f8fd14309bef8c 432,434-438
+  s_c6b6eabeed01f3::t_767a73d801c86c 452
+src/components/design-system/DesignSystemPreview.tsx
+  s_c6b6eabeed01f3::t_f8fd14309bef8c 223-225
+src/components/layout/Navbar.astro
+  s_c6b6eabeed01f3::t_76a40e1aade139 67-70,76,96-103
+src/layouts/Layout.astro
+  s_c6b6eabeed01f3::t_3f8ad9fab5cfc6 115-116
+src/data/cv.ts
+  s_c6b6eabeed01f3::t_3f8ad9fab5cfc6 76-77,80-81
+docs/DESIGN-SYSTEM.md
+  s_c6b6eabeed01f3::t_76a40e1aade139 120
+  s_c6b6eabeed01f3::t_f8fd14309bef8c 98
+src/i18n/translations/fr.ts
+  s_c6b6eabeed01f3::t_3f8ad9fab5cfc6 14,19,113
+  s_a53ec57c33191e::t_56f96638ad04fd 154
+src/pages/[...lang]/curriculum-vitae.astro
+  s_c6b6eabeed01f3::t_3f8ad9fab5cfc6 33,37
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "1a73e773344964c4636bb584fdbb6f1297d6d69a",
+  "prompts": {},
+  "sessions": {
+    "s_a53ec57c33191e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1bd0b-f2ab-71c1-9495-70e197bc4edb",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    },
+    "s_c6b6eabeed01f3": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1c293-8dab-7540-91c0-859137dcbd44",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}

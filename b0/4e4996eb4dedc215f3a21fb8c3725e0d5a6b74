@@ -1,0 +1,18 @@
+package.json
+  h_34454149dac528 18
+pnpm-lock.yaml
+  h_34454149dac528 1-158
+pnpm-workspace.yaml
+  h_34454149dac528 1-2
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "b04e4996eb4dedc215f3a21fb8c3725e0d5a6b74",
+  "prompts": {},
+  "humans": {
+    "h_34454149dac528": {
+      "author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}

@@ -1,0 +1,33 @@
+docs/DESIGN-SYSTEM.md
+  s_4fe220ca659a78::t_8a0a35cebd5444 13
+src/components/layout/Footer.astro
+  s_4fe220ca659a78::t_bc23415836afac 111,117
+  s_4fe220ca659a78::t_5879fad6f44384 51-59
+src/components/layout/Navbar.astro
+  s_4fe220ca659a78::t_5879fad6f44384 25
+  s_4fe220ca659a78::t_bc23415836afac 43,70,124-125,131
+src/components/layout/navbar-footer-transition.ts
+  s_4fe220ca659a78::t_5879fad6f44384 1-6,13,15,21-26,32-39,67,70,84,102-116,122-123,125-127,129,132,139,141-142,144,147-151,153-156,158-163,180
+  s_4fe220ca659a78::t_bc23415836afac 7-12,16-20,27-31,40,53-54,56,58-59,61-63,71-72,74-77,79-83,85-101,117-121,124,128,143,146,164-167,170-171,173-179,181-185,187-198,200-204,206-221,227-237
+  s_4fe220ca659a78::t_621a10d002bc45 41-52,57,168-169,172,186,222-225
+  s_4fe220ca659a78::t_a5875b7f65a91c 55,60,65-66,68-69,73,78,130-131,133-138,140,145,152
+  s_4fe220ca659a78::t_6f4b93a4cf75ce 64,199,205,226
+  s_4fe220ca659a78::t_88a3fe858dee2b 157
+  s_4fe220ca659a78::t_73f1a033dfc59e 14
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "0652199eca3d7332019af33ee3aee6a92e9c1b5d",
+  "prompts": {},
+  "sessions": {
+    "s_4fe220ca659a78": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1ca20-d3fb-7e93-9d0c-57697c27c78f",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}

@@ -1,0 +1,23 @@
+docs/DESIGN-SYSTEM.md
+  s_43b60851e46865::t_3d30b51c123d89 137
+src/components/layout/ModeToggle.tsx
+  s_43b60851e46865::t_3d30b51c123d89 5,54,56,59,61-64
+src/styles/mode-toggle.css
+  s_43b60851e46865::t_3d30b51c123d89 1-95
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "05d81db63f12c8d75721dfdcdcce8ceab94fecf5",
+  "prompts": {},
+  "sessions": {
+    "s_43b60851e46865": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1c6b1-edd3-7b33-8de1-9f578562a652",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}

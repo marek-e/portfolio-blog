@@ -1,0 +1,60 @@
+src/components/layout/BackToTop.tsx
+  s_5f7837446e6e9f::t_8ce51fb6e78278 47
+  s_f30876c60c4baa::t_834cca3d42dd11 53
+src/styles/dev-id-card.css
+  s_5f7837446e6e9f::t_83da4e1a9a18fa 328
+src/components/ui/button-3d.tsx
+  s_5f7837446e6e9f::t_8ce51fb6e78278 10
+src/components/portfolio/ActivityCardParts.tsx
+  s_5f7837446e6e9f::t_83da4e1a9a18fa 79
+src/components/layout/BookmarkLanguageToggle.tsx
+  s_5f7837446e6e9f::t_8ce51fb6e78278 28
+  s_5f7837446e6e9f::t_83da4e1a9a18fa 27
+src/components/portfolio/ProjectCardReact.tsx
+  s_5f7837446e6e9f::t_8ce51fb6e78278 86
+src/styles/language-switcher.css
+  s_5f7837446e6e9f::t_83da4e1a9a18fa 70
+src/components/portfolio/FeaturedProjectsCarousel.tsx
+  s_5f7837446e6e9f::t_8ce51fb6e78278 141
+src/styles/global.css
+  s_5f7837446e6e9f::t_6198e1609d0222 539
+  s_5f7837446e6e9f::t_8ce51fb6e78278 524-527
+  s_5f7837446e6e9f::t_c3e920eda79e54 528-530
+docs/DESIGN-SYSTEM.md
+  s_5f7837446e6e9f::t_b9164af5d647f0 89
+  s_5f7837446e6e9f::t_6198e1609d0222 88
+src/components/ui/button.tsx
+  s_4fe220ca659a78::t_d9e8c451f2b5da 18
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "42a09cccf61d63535597c01aaacb17716519de06",
+  "prompts": {},
+  "sessions": {
+    "s_4fe220ca659a78": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1ca20-d3fb-7e93-9d0c-57697c27c78f",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    },
+    "s_5f7837446e6e9f": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1ca35-63d2-7693-9229-db2168014dbf",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    },
+    "s_f30876c60c4baa": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1c7f9-2430-7fd0-a535-5a1caf3e9634",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}

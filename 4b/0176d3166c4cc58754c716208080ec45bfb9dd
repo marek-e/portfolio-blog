@@ -1,0 +1,75 @@
+src/styles/language-switcher.css
+  s_a53ec57c33191e::t_43fc334b3b6a95 1-88
+docs/COMPONENTS.md
+  s_a53ec57c33191e::t_43fc334b3b6a95 266-267,283-284
+  s_a53ec57c33191e::t_eed9f211daf593 268
+  s_a53ec57c33191e::t_e48b8a8179de75 269
+src/components/portfolio/Hero.astro
+  s_a53ec57c33191e::t_6de2afeaa35f58 36
+  s_a53ec57c33191e::t_3b19c9eb7e3e29 26
+  s_a53ec57c33191e::t_b342b1980d9860 92,109-112,134-151,178,180
+docs/DESIGN-SYSTEM.md
+  s_a53ec57c33191e::t_976e91967ab5cd 98
+  s_a53ec57c33191e::t_b342b1980d9860 126
+  s_a53ec57c33191e::t_1d4aa94dcbc660 120
+  s_a53ec57c33191e::t_e48b8a8179de75 102
+  s_a53ec57c33191e::t_6de2afeaa35f58 117
+  s_a53ec57c33191e::t_a23a8f201a6cb1 118
+  s_a53ec57c33191e::t_0171ba84a94321 96-97
+  s_a53ec57c33191e::t_a97271c5ca3f13 119
+src/components/ui/button.tsx
+  s_a53ec57c33191e::t_75f07dc4ae1ad1 9-16,66-69,88-91
+  s_a53ec57c33191e::t_d896f87a676279 56-59,78-81
+  s_a53ec57c33191e::t_a24862d7a9d476 23
+src/layouts/Layout.astro
+  s_a53ec57c33191e::t_3b19c9eb7e3e29 4-5
+src/styles/liquid-glass.css
+  s_a53ec57c33191e::t_a97271c5ca3f13 19
+  s_a53ec57c33191e::t_a23a8f201a6cb1 1-18,20-63
+src/pages/[...lang]/curriculum-vitae.astro
+  s_a53ec57c33191e::t_9902cf5840f665 56-58
+src/components/layout/Footer.astro
+  s_a53ec57c33191e::t_e48b8a8179de75 87-92
+src/components/portfolio/HeroActions.tsx
+  s_a53ec57c33191e::t_6de2afeaa35f58 3,14,17-18,20
+src/components/layout/Navbar.astro
+  s_a53ec57c33191e::t_418cd0c3368055 61
+  s_a53ec57c33191e::t_1d4aa94dcbc660 4,18,32,57,65-102,110-111,115-121,125,127-142
+  s_a53ec57c33191e::t_a97271c5ca3f13 22,58-60,62-64
+src/styles/global.css
+  s_a53ec57c33191e::t_75f07dc4ae1ad1 426-429,431,471-472,479,481
+  s_a53ec57c33191e::t_976e91967ab5cd 443
+  s_a53ec57c33191e::t_0b9e16ba38e448 463-466
+  s_a53ec57c33191e::t_50d70ff9b7d424 416,418,420-425,444-445,475-478
+  s_a53ec57c33191e::t_a24862d7a9d476 112-114,117-119,411-412,434-441,480
+  s_a53ec57c33191e::t_3006648497d618 470
+  s_a53ec57c33191e::t_21d49a404042e6 415
+  s_a53ec57c33191e::t_0bfb46206034f0 417,419
+  s_a53ec57c33191e::t_d896f87a676279 468-469
+  s_a53ec57c33191e::t_e85a67bf8e676d 409-410,413-414,446-451,454-458,460-462,467,473,482-485
+  s_a53ec57c33191e::t_08782ed1d4188e 430,432-433,442
+  s_a53ec57c33191e::t_f8d48b83fb51af 452-453,459,474
+src/components/layout/LanguageSwitcher.tsx
+  s_a53ec57c33191e::t_bc41e3b5f6730d 11-16,20-21
+  s_a53ec57c33191e::t_e48b8a8179de75 8,22,30-39
+src/components/layout/NavHoverPill.tsx
+  s_a53ec57c33191e::t_1d4aa94dcbc660 1-9
+src/components/layout/BookmarkLanguageToggle.tsx
+  s_a53ec57c33191e::t_43fc334b3b6a95 23,27,47
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "4b0176d3166c4cc58754c716208080ec45bfb9dd",
+  "prompts": {},
+  "sessions": {
+    "s_a53ec57c33191e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1bd0b-f2ab-71c1-9495-70e197bc4edb",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
