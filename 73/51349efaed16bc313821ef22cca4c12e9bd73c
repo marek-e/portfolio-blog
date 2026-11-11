@@ -1,0 +1,60 @@
+docs/DESIGN-SYSTEM.md
+  s_f30876c60c4baa::t_ee46d8956a6b6e 13,120,122
+  s_f30876c60c4baa::t_0de69ac39d8bfa 121
+tests/glass-theme-switch.test.mjs
+  s_f30876c60c4baa::t_dc02d652490aca 1-114
+src/components/layout/glass-theme-switch/pixels.ts
+  s_f30876c60c4baa::t_45766e309c9b85 19-20,28-34,37-45,49-50,64-65,79-83,96-97,100-113,154-159
+  s_f30876c60c4baa::t_b8a7638309f11d 1-18,21-27,35-36,46-48,51-63,66-78,84-95,98-99,114-153,160-167
+src/components/layout/glass-theme-switch/renderer.ts
+  s_f30876c60c4baa::t_45766e309c9b85 5-14,41-54,102-108,129-130
+  s_f30876c60c4baa::t_6a487fb1445315 80-83,94
+  s_f30876c60c4baa::t_c26c360e43c36a 76,93,95-100,146-149,196
+  s_f30876c60c4baa::t_809943e5c3d36d 1-4,38-40,55-67,69,72,75,77-79,84-87,90,101,109-113,116-123,125-126,134-136,144-145,150-155,169-171,177-187,189-190,193-195,199-208,213-219,229-230,233
+  s_f30876c60c4baa::t_8ad44fe2dd66ae 15-37,68,70-71,73-74,88-89,91-92,114-115,124,127-128,131-133,137-143,156-168,172-176,188,191-192,197-198,209-212,220-228,231-232,234-241
+src/components/layout/glass-theme-switch/styles.css
+  s_f30876c60c4baa::t_8ad44fe2dd66ae 1-27,30,33-50,52-104
+  s_f30876c60c4baa::t_45766e309c9b85 28-29,31-32
+  s_f30876c60c4baa::t_1560bcf07b624a 51
+src/components/layout/glass-theme-switch/physics.ts
+  s_f30876c60c4baa::t_45766e309c9b85 46-47,72,74-77,87-89,96-97
+  s_f30876c60c4baa::t_b8a7638309f11d 1-45,48-71,73,78-86,90-95
+docs/COMPONENTS.md
+  s_f30876c60c4baa::t_1560bcf07b624a 216-217,219-225,231-233
+  s_f30876c60c4baa::t_c26c360e43c36a 227-230
+  s_f30876c60c4baa::t_f1330900bfaffb 287
+  s_f30876c60c4baa::t_cfca462161784c 289
+  s_f30876c60c4baa::t_ee46d8956a6b6e 218,226
+src/styles/global.css
+  s_f30876c60c4baa::t_45766e309c9b85 47-56,61-62,68,151-152,157-158,164
+src/components/layout/glass-theme-switch/shaders.ts
+  s_f30876c60c4baa::t_809943e5c3d36d 1-78,80,82-134
+  s_f30876c60c4baa::t_247f64836dd45d 79,81
+src/components/layout/Footer.astro
+  s_f30876c60c4baa::t_fc735569f6cb00 7,248-250,254-255,267
+  s_f30876c60c4baa::t_45766e309c9b85 44-46,172-203,265-266
+  s_f30876c60c4baa::t_ee46d8956a6b6e 128-137,214-219,224-239,245-247,251-253
+  s_f30876c60c4baa::t_20a6906c90d2f2 268
+src/components/layout/GlassThemeSwitch.tsx
+  s_f30876c60c4baa::t_45766e309c9b85 5-6,45-46,56-59,67,74,84-85,113-116,118-124,128-129,137-141,146,148-152,154,158,165-172
+  s_f30876c60c4baa::t_8ad44fe2dd66ae 1-4,7-21,34-44,47-55,60-66,68-73,75-83,86-112,117,125-127,130-136,142-145,147,153,155-157,159-164,173-181,188-193
+  s_f30876c60c4baa::t_8806f026b7a822 22-33,182-187
+src/components/layout/glass-theme-switch/preview.ts
+  s_f30876c60c4baa::t_45766e309c9b85 1-43
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "7351349efaed16bc313821ef22cca4c12e9bd73c",
+  "prompts": {},
+  "sessions": {
+    "s_f30876c60c4baa": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1c7f9-2430-7fd0-a535-5a1caf3e9634",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
