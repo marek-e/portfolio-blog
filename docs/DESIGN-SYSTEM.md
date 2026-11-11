@@ -14,7 +14,7 @@ Decisions taken during the 2026 rebrand review. Treat them as constraints, not s
 4. **Mobile navigation is a bottom tab bar** (`MobileTabBar.astro`), never a hamburger sheet. Every destination is one tap away.
 5. **Glass is for the home page and a few CTAs.** The shared contact panel uses `Card3D` on both the home and contact pages. Blog, projects, CV and other pages use solid `surface` cards or pastel-tinted fills. If glass shows up on a reading page, it's a mistake.
 6. **Pastels must stay vivid.** Low-alpha pastel fills (`/12`) read as washed out and were rejected. See [Pastels](#pastels) for the minimums.
-7. **Hand-drawn marks replace default decorations.** Section titles use the marker underline and links use the hand-drawn stroke, never `decoration-wavy` or plain underlines. Footer links use a primary-tinted ghost fill instead.
+7. **Hand-drawn marks replace default decorations.** Section titles use the marker underline and editorial links use the hand-drawn stroke, never `decoration-wavy`. Inline biography links use foreground text and a permanent 1px native underline with a 4px offset and 40% foreground colour, changing to full primary on hover or keyboard focus. This keeps wrapped links quiet and identifiable without colour alone. Footer links use a primary-tinted ghost fill instead.
 8. **Craft is checked at 4× zoom.** Edge hairlines, double rims and fringes are bugs, even if they're invisible at 1×. See [Edge artifacts](#edge-artifacts).
 9. **Mobile is tested from 320px up to 430px**, in both languages and both themes, before anything ships.
 
