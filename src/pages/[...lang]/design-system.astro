@@ -143,10 +143,26 @@ const text = (fr: string, en: string) => (lang === 'fr' ? fr : en);
         else link.removeAttribute('aria-current');
       });
     };
-    const observer = new IntersectionObserver(update, { rootMargin: '-112px 0px -65% 0px' });
-    sections.forEach((section) => observer.observe(section));
-    update();
-    document.addEventListener('astro:before-swap', () => observer.disconnect(), { once: true });
+    let observer: IntersectionObserver | undefined;
+    const observe = () => {
+      observer?.disconnect();
+      const bottomMargin = window.innerHeight * 0.65;
+      observer = new IntersectionObserver(update, {
+        rootMargin: `-112px 0px -${bottomMargin}px 0px`,
+      });
+      sections.forEach((section) => observer?.observe(section));
+      update();
+    };
+    observe();
+    window.addEventListener('resize', observe);
+    document.addEventListener(
+      'astro:before-swap',
+      () => {
+        observer?.disconnect();
+        window.removeEventListener('resize', observe);
+      },
+      { once: true }
+    );
   }
 
   document.addEventListener('astro:page-load', initDesignSystemNavigation);
