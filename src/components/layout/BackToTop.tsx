@@ -3,7 +3,7 @@ import { ArrowUp04Icon } from '@hugeicons/core-free-icons';
 import { Icon } from '../shared/Icon';
 import { cn } from '@/lib/utils';
 
-export function BackToTop() {
+export function BackToTop({ label = 'Back to top' }: { label?: string }) {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -37,19 +37,25 @@ export function BackToTop() {
   }, []);
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({
+      top: 0,
+      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches
+        ? 'instant'
+        : 'smooth',
+    });
   };
 
   return (
     <button
       onClick={scrollToTop}
-      aria-label="Back to top"
+      aria-label={label}
+      tabIndex={visible ? 0 : -1}
       className={cn(
-        'fixed right-6 bottom-6 z-40 flex size-11 items-center justify-center rounded-full',
-        'bg-primary text-primary-foreground shadow-primary/25 shadow-lg',
+        'fixed right-6 bottom-6 z-40 hidden size-11 items-center justify-center rounded-full md:flex',
+        'btn-radiant border',
         'transition-all duration-300 ease-out',
-        'hover:shadow-primary/30 hover:scale-105 hover:shadow-xl',
-        'focus-visible:ring-ring/50 focus-visible:ring-[3px] focus-visible:outline-none',
+        'hover:scale-105',
+        'focus-visible:translate-y-0 focus-visible:opacity-100 focus-visible:transition-none',
         'motion-reduce:transition-none motion-reduce:hover:scale-100',
         visible ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-4 opacity-0'
       )}

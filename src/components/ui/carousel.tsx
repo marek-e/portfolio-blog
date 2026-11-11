@@ -2,7 +2,7 @@ import * as React from 'react';
 import useEmblaCarousel, { type UseEmblaCarouselType } from 'embla-carousel-react';
 
 import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
+import { Button3D } from '@/components/ui/button-3d';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { ArrowLeft04Icon, ArrowRight04Icon } from '@hugeicons/core-free-icons';
 
@@ -21,8 +21,8 @@ type CarouselProps = {
 type CarouselContextProps = {
   carouselRef: ReturnType<typeof useEmblaCarousel>[0];
   api: ReturnType<typeof useEmblaCarousel>[1];
-  scrollPrev: () => void;
-  scrollNext: () => void;
+  scrollPrev: (event?: React.MouseEvent<HTMLButtonElement>) => void;
+  scrollNext: (event?: React.MouseEvent<HTMLButtonElement>) => void;
   canScrollPrev: boolean;
   canScrollNext: boolean;
 } & CarouselProps;
@@ -64,25 +64,31 @@ function Carousel({
     setCanScrollNext(api.canScrollNext());
   }, []);
 
-  const scrollPrev = React.useCallback(() => {
-    api?.scrollPrev();
-  }, [api]);
+  const scrollPrev = React.useCallback(
+    (event?: React.MouseEvent<HTMLButtonElement>) => {
+      api?.scrollPrev(event?.detail === 0);
+    },
+    [api]
+  );
 
-  const scrollNext = React.useCallback(() => {
-    api?.scrollNext();
-  }, [api]);
+  const scrollNext = React.useCallback(
+    (event?: React.MouseEvent<HTMLButtonElement>) => {
+      api?.scrollNext(event?.detail === 0);
+    },
+    [api]
+  );
 
   const handleKeyDown = React.useCallback(
     (event: React.KeyboardEvent<HTMLDivElement>) => {
       if (event.key === 'ArrowLeft') {
         event.preventDefault();
-        scrollPrev();
+        api?.scrollPrev(true);
       } else if (event.key === 'ArrowRight') {
         event.preventDefault();
-        scrollNext();
+        api?.scrollNext(true);
       }
     },
-    [scrollPrev, scrollNext]
+    [api]
   );
 
   React.useEffect(() => {
@@ -128,11 +134,19 @@ function Carousel({
   );
 }
 
-function CarouselContent({ className, ...props }: React.ComponentProps<'div'>) {
+function CarouselContent({
+  className,
+  viewportClassName,
+  ...props
+}: React.ComponentProps<'div'> & { viewportClassName?: string }) {
   const { carouselRef, orientation } = useCarousel();
 
   return (
-    <div ref={carouselRef} className="-mx-1 overflow-hidden px-1" data-slot="carousel-content">
+    <div
+      ref={carouselRef}
+      className={cn('-mx-1 overflow-hidden px-1', viewportClassName)}
+      data-slot="carousel-content"
+    >
       <div
         className={cn('flex', orientation === 'horizontal' ? '-ml-4' : '-mt-4 flex-col', className)}
         {...props}
@@ -161,19 +175,19 @@ function CarouselItem({ className, ...props }: React.ComponentProps<'div'>) {
 
 function CarouselPrevious({
   className,
-  variant = 'outline',
-  size = 'icon-sm',
+  variant = 'secondary',
+  size = 'icon',
   ...props
-}: React.ComponentProps<typeof Button>) {
+}: React.ComponentProps<typeof Button3D>) {
   const { orientation, scrollPrev, canScrollPrev } = useCarousel();
 
   return (
-    <Button
+    <Button3D
       data-slot="carousel-previous"
       variant={variant}
       size={size}
       className={cn(
-        'absolute cursor-pointer touch-manipulation rounded-full bg-white',
+        'absolute cursor-pointer touch-manipulation rounded-full',
         orientation === 'horizontal'
           ? 'top-1/2 -left-12 -translate-y-1/2'
           : '-top-12 left-1/2 -translate-x-1/2 rotate-90',
@@ -185,25 +199,25 @@ function CarouselPrevious({
     >
       <HugeiconsIcon icon={ArrowLeft04Icon} strokeWidth={2} />
       <span className="sr-only">Previous slide</span>
-    </Button>
+    </Button3D>
   );
 }
 
 function CarouselNext({
   className,
-  variant = 'outline',
-  size = 'icon-sm',
+  variant = 'secondary',
+  size = 'icon',
   ...props
-}: React.ComponentProps<typeof Button>) {
+}: React.ComponentProps<typeof Button3D>) {
   const { orientation, scrollNext, canScrollNext } = useCarousel();
 
   return (
-    <Button
+    <Button3D
       data-slot="carousel-next"
       variant={variant}
       size={size}
       className={cn(
-        'absolute cursor-pointer touch-manipulation rounded-full bg-white',
+        'absolute cursor-pointer touch-manipulation rounded-full',
         orientation === 'horizontal'
           ? 'top-1/2 -right-12 -translate-y-1/2'
           : '-bottom-12 left-1/2 -translate-x-1/2 rotate-90',
@@ -215,7 +229,7 @@ function CarouselNext({
     >
       <HugeiconsIcon icon={ArrowRight04Icon} strokeWidth={2} />
       <span className="sr-only">Next slide</span>
-    </Button>
+    </Button3D>
   );
 }
 

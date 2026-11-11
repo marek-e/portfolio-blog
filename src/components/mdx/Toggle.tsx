@@ -20,11 +20,14 @@ export function Toggle({
 
   return (
     <div
-      className={cn('not-prose border-border my-6 overflow-hidden rounded-lg border', className)}
+      className={cn(
+        'not-prose border-pastel-lilac dark:border-pastel-lilac/40 my-6 overflow-hidden rounded-lg border',
+        className
+      )}
     >
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="bg-muted/50 hover:bg-muted flex w-full cursor-pointer items-center justify-between px-4 py-3 text-left transition-colors"
+        className="bg-pastel-lilac/40 hover:bg-pastel-lilac/60 dark:bg-pastel-lilac/15 dark:hover:bg-pastel-lilac/22 text-pastel-lilac-ink flex w-full cursor-pointer items-center justify-between px-4 py-3 text-left transition-colors"
         aria-expanded={isOpen}
       >
         <span className="font-medium">{title}</span>
@@ -36,7 +39,7 @@ export function Toggle({
       </button>
       <div
         className={cn(
-          'border-border h-0 overflow-hidden border-t px-4 py-0 transition-all duration-300',
+          'border-pastel-lilac dark:border-pastel-lilac/40 h-0 overflow-hidden border-t px-4 py-0 transition-all duration-300',
           isOpen && 'h-auto p-4'
         )}
       >

@@ -8,6 +8,7 @@ links:
   repo: 'https://github.com/marek-e/next-armored'
 publishDate: 2025-01-24
 image: '/projects/n-armor.svg'
+imagePadding: 5
 imageAlt: 'Next Armored logo - armor with N letter'
 status: 'in-progress'
 ---

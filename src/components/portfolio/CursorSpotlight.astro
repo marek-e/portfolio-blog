@@ -7,6 +7,9 @@ const { class: className = '' } = Astro.props;
 ---
 
 <div class:list={['cursor-spotlight-wrapper', className]} data-spotlight>
+  <span class="cursor-spotlight-field" aria-hidden="true">
+    <span class="cursor-spotlight"></span>
+  </span>
   <slot />
 </div>
 
@@ -15,9 +18,33 @@ const { class: className = '' } = Astro.props;
     position: relative;
   }
 
-  .cursor-spotlight-wrapper::before {
-    content: '';
-    position: fixed;
+  .cursor-spotlight-field {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    overflow: hidden;
+    pointer-events: none;
+    mask-image: linear-gradient(
+      to bottom,
+      transparent,
+      black 150px,
+      black calc(100% - 150px),
+      transparent
+    );
+  }
+
+  .cursor-spotlight-wrapper[data-spotlight-glass] {
+    isolation: isolate;
+  }
+
+  .cursor-spotlight-wrapper[data-spotlight-glass] .cursor-spotlight-field {
+    z-index: -1;
+  }
+
+  .cursor-spotlight {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 600px;
     height: 600px;
     border-radius: 50%;
@@ -28,70 +55,159 @@ const { class: className = '' } = Astro.props;
       oklch(from var(--primary) l c h / 0.02) 50%,
       transparent 70%
     );
-    transform: translate(-50%, -50%);
-    left: var(--spotlight-x, -1000px);
-    top: var(--spotlight-y, -1000px);
+    transform: translate3d(-1000px, -1000px, 0);
     pointer-events: none;
-    z-index: 1;
     opacity: 0;
-    transition: opacity 0.3s ease-out;
-    will-change: left, top;
+    transition: opacity 200ms cubic-bezier(0.23, 1, 0.32, 1);
   }
 
-  .cursor-spotlight-wrapper[data-spotlight-active]::before {
+  .cursor-spotlight-wrapper[data-spotlight-active] .cursor-spotlight {
     opacity: 1;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .cursor-spotlight-wrapper::before {
-      display: none;
-    }
-  }
-
-  @media (pointer: coarse) {
-    .cursor-spotlight-wrapper::before {
+  @media (prefers-reduced-motion: reduce),
+    (pointer: coarse),
+    (hover: none),
+    (prefers-reduced-transparency: reduce),
+    (prefers-contrast: more) {
+    .cursor-spotlight-field {
       display: none;
     }
   }
 </style>
 
 <script>
+  import { initGlassRefraction } from '@/lib/glass-refraction';
+
   function initCursorSpotlight() {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      return;
-    }
-
-    if (window.matchMedia('(pointer: coarse)').matches) {
-      return;
-    }
-
+    const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const reducedTransparency = window.matchMedia('(prefers-reduced-transparency: reduce)');
+    const increasedContrast = window.matchMedia('(prefers-contrast: more)');
+    const preferences = [finePointer, reducedMotion, reducedTransparency, increasedContrast];
+    const enabled = () =>
+      finePointer.matches &&
+      !reducedMotion.matches &&
+      !reducedTransparency.matches &&
+      !increasedContrast.matches;
     const wrappers = document.querySelectorAll<HTMLElement>('[data-spotlight]');
 
-    wrappers.forEach((wrapper) => {
-      let rafId: number | null = null;
+    const cleanups = [...wrappers].map((wrapper) => {
+      const spotlight = wrapper.querySelector<HTMLElement>('.cursor-spotlight')!;
+      const cards = [...wrapper.querySelectorAll<HTMLElement>('[data-slot="card-3d"]')].map(
+        (card) => ({
+          card,
+          lights: [...card.querySelectorAll<HTMLElement>('.card-3d-reflection-light')].map(
+            (element) => ({
+              element,
+              radius: parseFloat(getComputedStyle(element).width) / 2,
+              band: element.parentElement!.classList.contains('card-3d-reflection-band'),
+            })
+          ),
+        })
+      );
+      const refraction = initGlassRefraction(
+        cards.map(({ card }) => card),
+        enabled
+      );
+      wrapper.toggleAttribute('data-spotlight-glass', cards.length > 0);
+      let frame = 0;
+      let pointer: { x: number; y: number } | null = null;
 
-      const updatePosition = (x: number, y: number) => {
-        if (rafId) {
-          cancelAnimationFrame(rafId);
-        }
-
-        rafId = requestAnimationFrame(() => {
-          wrapper.style.setProperty('--spotlight-x', `${x}px`);
-          wrapper.style.setProperty('--spotlight-y', `${y}px`);
+      const deactivate = () => {
+        pointer = null;
+        cancelAnimationFrame(frame);
+        frame = 0;
+        wrapper.removeAttribute('data-spotlight-active');
+        cards.forEach(({ lights }) => {
+          lights.forEach(({ element }) => (element.style.opacity = '0'));
         });
       };
 
-      wrapper.addEventListener('mouseenter', () => {
+      const update = () => {
+        frame = 0;
+        if (!pointer || !enabled() || document.hidden) return deactivate();
+
+        const bounds = wrapper.getBoundingClientRect();
+        if (
+          pointer.x < bounds.left ||
+          pointer.x > bounds.right ||
+          pointer.y < bounds.top ||
+          pointer.y > bounds.bottom
+        ) {
+          return deactivate();
+        }
+
+        const position = pointer;
+        const reflections = cards.map(({ card, lights }) => {
+          const box = card.getBoundingClientRect();
+          const distance = Math.hypot(
+            Math.max(box.left - position.x, 0, position.x - box.right),
+            Math.max(box.top - position.y, 0, position.y - box.bottom)
+          );
+          const visible = box.bottom > 0 && box.top < window.innerHeight;
+          const entering = card.closest('[data-timeline-pending]');
+          return {
+            lights,
+            x: position.x - box.left,
+            y: position.y - box.top,
+            width: box.width,
+            height: box.height,
+            opacity: visible && !entering ? Math.max(0, 1 - distance / 240) : 0,
+          };
+        });
+
         wrapper.setAttribute('data-spotlight-active', '');
-      });
+        spotlight.style.transform = `translate3d(${position.x - bounds.left - 300}px, ${position.y - bounds.top - 300}px, 0)`;
+        reflections.forEach(({ lights, x, y, width, height, opacity }) => {
+          lights.forEach(({ element, radius, band }) => {
+            const lightX = band ? width / 2 - (x - width / 2) * 0.35 : x;
+            const lightY = band ? height / 2 - (y - height / 2) * 0.35 : y;
+            element.style.transform = `translate3d(${lightX - radius}px, ${lightY - radius}px, 0)`;
+            element.style.opacity = String(opacity);
+          });
+        });
+      };
 
-      wrapper.addEventListener('mouseleave', () => {
-        wrapper.removeAttribute('data-spotlight-active');
-      });
+      const schedule = () => {
+        if (pointer && !frame) frame = requestAnimationFrame(update);
+      };
+      const onPointerMove = (event: PointerEvent) => {
+        if (event.pointerType !== 'mouse' || !enabled()) return;
+        pointer = { x: event.clientX, y: event.clientY };
+        schedule();
+      };
+      const onVisibilityChange = () => {
+        if (document.hidden) deactivate();
+      };
+      const onPreferenceChange = () => {
+        deactivate();
+        refraction.refresh();
+      };
 
-      wrapper.addEventListener('mousemove', (e: MouseEvent) => {
-        updatePosition(e.clientX, e.clientY);
-      });
+      wrapper.addEventListener('pointermove', onPointerMove);
+      wrapper.addEventListener('pointerleave', deactivate);
+      window.addEventListener('scroll', schedule, { passive: true });
+      document.addEventListener('visibilitychange', onVisibilityChange);
+      preferences.forEach((preference) =>
+        preference.addEventListener('change', onPreferenceChange)
+      );
+
+      return () => {
+        deactivate();
+        refraction.destroy();
+        wrapper.removeEventListener('pointermove', onPointerMove);
+        wrapper.removeEventListener('pointerleave', deactivate);
+        window.removeEventListener('scroll', schedule);
+        document.removeEventListener('visibilitychange', onVisibilityChange);
+        preferences.forEach((preference) =>
+          preference.removeEventListener('change', onPreferenceChange)
+        );
+      };
+    });
+
+    document.addEventListener('astro:before-swap', () => cleanups.forEach((cleanup) => cleanup()), {
+      once: true,
     });
   }
 

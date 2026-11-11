@@ -8,23 +8,25 @@ This page is generated automatically by the `DesignSystemPreview` component insi
 
 ## Available Components
 
-| Component     | Type              | Context Required | Notes                        |
-| ------------- | ----------------- | ---------------- | ---------------------------- |
-| Button        | Static-safe       | No               | Can use directly in Astro    |
-| Badge         | Static-safe       | No               | Can use directly in Astro    |
-| Card          | Static-safe       | No               | Can use directly in Astro    |
-| Input         | Static-safe       | No               | Can use directly in Astro    |
-| Textarea      | Static-safe       | No               | Can use directly in Astro    |
-| Label         | Static-safe       | No               | Can use directly in Astro    |
-| Separator     | Static-safe       | No               | Can use directly in Astro    |
-| Field         | Static-safe       | No               | Form field layout primitives |
-| InputGroup    | Static-safe       | No               | Input with addons/buttons    |
-| Alert Dialog  | **Needs wrapper** | Yes              | Wrap in React component      |
-| Dropdown Menu | **Needs wrapper** | Yes              | Wrap in React component      |
-| Select        | **Needs wrapper** | Yes              | Wrap in React component      |
-| Combobox      | **Needs wrapper** | Yes              | Wrap in React component      |
-| Sheet         | **Needs wrapper** | Yes              | Wrap in React component      |
-| Tooltip       | **Needs wrapper** | Yes              | Uses Base UI, wrap in React  |
+| Component     | Type              | Context Required | Notes                                 |
+| ------------- | ----------------- | ---------------- | ------------------------------------- |
+| Button        | Static-safe       | No               | Can use directly in Astro             |
+| Button3D      | Static-safe       | No               | Clear glass primary/secondary buttons |
+| Card3D        | Static-safe       | No               | Clear glass content container         |
+| Badge         | Static-safe       | No               | Can use directly in Astro             |
+| Card          | Static-safe       | No               | Can use directly in Astro             |
+| Input         | Static-safe       | No               | Can use directly in Astro             |
+| Textarea      | Static-safe       | No               | Can use directly in Astro             |
+| Label         | Static-safe       | No               | Can use directly in Astro             |
+| Separator     | Static-safe       | No               | Can use directly in Astro             |
+| Field         | Static-safe       | No               | Form field layout primitives          |
+| InputGroup    | Static-safe       | No               | Input with addons/buttons             |
+| Alert Dialog  | **Needs wrapper** | Yes              | Wrap in React component               |
+| Dropdown Menu | **Needs wrapper** | Yes              | Wrap in React component               |
+| Select        | **Needs wrapper** | Yes              | Wrap in React component               |
+| Combobox      | **Needs wrapper** | Yes              | Wrap in React component               |
+| Sheet         | **Needs wrapper** | Yes              | Wrap in React component               |
+| Tooltip       | **Needs wrapper** | Yes              | Uses Base UI, wrap in React           |
 
 ## Adding New Components
 
@@ -52,7 +54,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 ---
 
-<Button variant="outline">Click me</Button>
+<Button variant="pastel">Click me</Button>
 <Badge variant="secondary">New</Badge>
 ```
 
@@ -117,8 +119,7 @@ import { DeleteConfirm } from '@/components/<domain>/DeleteConfirm';
 
 ```tsx
 <Button variant="default">Primary action</Button>
-<Button variant="secondary">Secondary action</Button>
-<Button variant="outline">Outlined</Button>
+<Button variant="pastel">Secondary action</Button>
 <Button variant="ghost">Subtle</Button>
 <Button variant="destructive">Dangerous action</Button>
 <Button variant="link">Link style</Button>
@@ -144,6 +145,25 @@ import { DeleteConfirm } from '@/components/<domain>/DeleteConfirm';
 ```
 
 ## Card Structure
+
+### 3D glass components
+
+`Button3D` and `Card3D` are separate components, previewed on `/design-system`. Use them for home page highlights and occasional CTAs.
+
+```tsx
+import { Button3D } from '@/components/ui/button-3d';
+import { Card3D } from '@/components/ui/card-3d';
+
+<Card3D>
+  <h3>Glass card</h3>
+  <p>Content goes here.</p>
+  <Button3D variant="primary">Explore</Button3D>
+</Card3D>;
+```
+
+`Button3D` supports `primary` and `secondary` variants, `sm`, `default`, `lg` and `icon` sizes, native button props, and Base UI's `render` prop. For links, pass `render={<a href="/projects" />}` and `nativeButton={false}`. `Card3D` accepts div props and arbitrary children. Both accept `className` and adapt to the current theme. All button sizes meet the 44px touch target. On fine pointers, enabled buttons brighten their glass evenly on hover and fade back on leave, without moving the label or reflections. Hover and press feedback respect reduced motion.
+
+`Card3D` uses an independent CSS lens with a 2.75rem radius. Place an optional `.card-3d-icon` wrapper inside the card to give an icon the matching 64px glass tile shown in the preview. It inherits the card's material tokens.
 
 ```tsx
 <Card>
@@ -193,18 +213,52 @@ Theme switcher with circular reveal animation (View Transitions API).
 - Fade fallback on Firefox
 - Respects `prefers-reduced-motion`
 
-### MobileMenu (`layout/`)
+### GlassThemeSwitch (`layout/`)
 
-Hamburger menu for mobile navigation.
+The footer's centered light/dark switch, with a WebGL glass lens, morphing pixel icons and blue/amber edge lighting, inspired by [Zsolt Kacso's Glass Light Toggle](https://experiments.thisiswhitespace.com/glass-light-toggle).
 
 ```astro
-<MobileMenu client:load />
+<GlassThemeSwitch lang={lang} client:visible />
 ```
 
-- Opens a Sheet (slide-out drawer) from right
-- Automatically hidden on `md:` breakpoint and above
-- Contains all navigation links
-- Close on link click or backdrop tap
+- Click, tap or drag the knob; Space, Enter and the arrow keys also switch themes.
+- Shares the navbar's theme state and saved-preference behavior.
+- Centers between copyright and back-to-top on desktop, with 32px bottom clearance. On mobile, back-to-top and copyright stack below. Language controls remain in the header.
+- Hydrates when visible. Stars twinkle, sun rays breathe and fine grain changes while visible; rendering pauses offscreen, in a hidden tab or with increased contrast. Reduced motion draws only on input.
+- The knob uses velocity stretch, eased press compression, resistant end stops and projected spring landings. Its light strip follows a separate spring and completes its return around the opposite side.
+- Each pixel has its own stagger, curl, spring, inertia and brightness; the glass refracts separate RGB samples through sharp and blurred icon textures.
+- Dragging blends the footer landscape, sky and lighting continuously. Text changes tone at the midpoint to preserve contrast; the site theme and saved preference commit on release.
+- Reduced motion settles immediately. WebGL loss and increased contrast use the native icon fallback.
+- The fallback renders during SSR and follows the page theme before hydration.
+
+### MobileTabBar (`layout/`)
+
+Bottom tab bar for mobile navigation, rendered by `Navbar.astro`. Static, no hydration.
+
+```astro
+<MobileTabBar />
+```
+
+- Five tabs: home, projects, blog, slides (external), contact
+- Current page gets `aria-current="page"`, a raised bubble and a primary icon
+- Hidden from `md:` up; sits above the iOS safe area
+- `Layout.astro` adds `max-md:pb-28` to `body` so content clears it
+
+### SectionHeading (`shared/`)
+
+Title block for every section and page title.
+
+```astro
+<SectionHeading eyebrow="01 — Qui je suis" title={t.about.title} id="about-title" as="h2" />
+```
+
+- Italicises the last word and draws the marker underline under it
+- Optional `eyebrow`, `subtitle`, `align="start|center"`, `as="h1|h2"`, `id`
+- Default slot renders a right-side action (e.g. "View all")
+
+### HandDrawn (`shared/`)
+
+`Doodle` (underline, squiggle, sparkle, arrow, loop, circle) and `MarkedText`. See [DESIGN-SYSTEM.md](DESIGN-SYSTEM.md#hand-drawn-marks).
 
 ### Icon (`shared/`)
 
@@ -224,12 +278,15 @@ import { Star } from '@hugeicons/core-free-icons';
 Pill-shaped language toggle with active state highlighting.
 
 ```astro
-<LanguageSwitcher client:load currentLang="fr" currentPath={Astro.url.pathname} />
+<LanguageSwitcher currentLang="fr" currentPath={Astro.url.pathname} />
 ```
 
-- Glass-morphism styling with backdrop blur
-- Active language highlighted with primary color
+- Thin liquid-glass track
+- Active language uses a bevelled primary-coloured glass lens
+- Header uses 44px language targets and visible keyboard focus
+- `variant="classic"` provides a compact frosted track and radiant active language
 - Uses `aria-current="page"` for accessibility
+- Shown in the mobile top bar; desktop uses the language tab
 
 ### BookmarkLanguageToggle (`layout/`)
 
@@ -241,7 +298,8 @@ Fixed bookmark-style language toggle with tooltip.
 
 - Fixed position at top-right of viewport
 - Expands on hover to reveal flag icon
-- 3D shadow and glass highlight effects
+- Translucent primary-tinted glass with a rounded lower highlight
+- Flag reveal also responds to keyboard focus
 - Includes tooltip with localized label
 - Respects `prefers-reduced-motion`
 - Hidden on mobile (`md:flex`)

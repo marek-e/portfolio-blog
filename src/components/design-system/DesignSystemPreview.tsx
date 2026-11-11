@@ -1,5 +1,8 @@
 import { useRef, useState } from 'react';
 import { Button, Link } from '@/components/ui/button';
+import { Button3D } from '@/components/ui/button-3d';
+import { Card3D } from '@/components/ui/card-3d';
+import { DevIdCard } from '@/components/portfolio/DevIdCard';
 import { Badge } from '@/components/ui/badge';
 import {
   Card,
@@ -57,31 +60,53 @@ import {
 } from '@/components/ui/breadcrumb';
 import { PastelCard, PastelCards } from '@/components/mdx/PastelCard';
 import { ModeToggle } from '../layout/ModeToggle';
+import { LanguageSwitcher } from '../layout/LanguageSwitcher';
 import { Icon } from '../shared/Icon';
-import { ArrowLeftIcon, Search01Icon, Mail01Icon } from '@hugeicons/core-free-icons';
+import { Doodle, MarkedText } from '../shared/HandDrawn';
+import {
+  ArrowLeftIcon,
+  ArrowRight01Icon,
+  Search01Icon,
+  Mail01Icon,
+  SparklesIcon,
+} from '@hugeicons/core-free-icons';
 import { getTranslatedPath, type Lang } from '@/i18n';
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <section className="space-y-4">
-      <h2 className="text-2xl font-semibold tracking-tight">{title}</h2>
-      <div className="border-border bg-card rounded-xl border p-6">{children}</div>
+      <h2 className="text-foreground text-2xl font-semibold tracking-tight md:text-3xl">{title}</h2>
+      <div className="surface rounded-3xl p-6 md:p-8">{children}</div>
     </section>
   );
 }
 
-export function DesignSystemPreview({ lang }: { lang: Lang }) {
+function Caption({ children }: { children: React.ReactNode }) {
+  return <p className="eyebrow mb-3">{children}</p>;
+}
+
+const pastelSwatches = [
+  { name: 'Peach', className: 'bg-pastel-peach' },
+  { name: 'Rose', className: 'bg-pastel-rose' },
+  { name: 'Lilac', className: 'bg-pastel-lilac' },
+  { name: 'Sky', className: 'bg-pastel-sky' },
+  { name: 'Mint', className: 'bg-pastel-mint' },
+  { name: 'Butter', className: 'bg-pastel-butter' },
+  { name: 'Marker', className: 'bg-marker' },
+  { name: 'Ink', className: 'bg-ink' },
+  { name: 'Paper', className: 'bg-paper' },
+];
+
+const doodleNames = ['underline', 'squiggle', 'sparkle', 'arrow', 'loop', 'circle'] as const;
+
+export function DesignSystemPreview({ lang, ageAtBuild }: { lang: Lang; ageAtBuild: number }) {
   const [inputValue, setInputValue] = useState('');
   const translatePath = getTranslatedPath(lang);
 
   return (
     <div className="space-y-12">
       <div className="flex items-center justify-between">
-        <Link
-          href={translatePath('/')}
-          variant="outline"
-          className="flex h-11 items-center gap-2 bg-white"
-        >
+        <Link href={translatePath('/')} variant="ghost" className="flex h-11 items-center gap-2">
           <Icon icon={ArrowLeftIcon} strokeWidth={2} />
           <span className="text-sm font-medium">Back to home</span>
         </Link>
@@ -89,6 +114,14 @@ export function DesignSystemPreview({ lang }: { lang: Lang }) {
       </div>
       {/* Colors */}
       <Section title="Colors">
+        <Caption>Pastels & brand</Caption>
+        <div className="grid grid-cols-3 gap-4 sm:grid-cols-5 md:grid-cols-9">
+          {pastelSwatches.map((swatch) => (
+            <ColorSwatch key={swatch.name} name={swatch.name} className={swatch.className} />
+          ))}
+        </div>
+        <div className="bg-pastel mt-6 mb-8 h-12 rounded-2xl" />
+        <Caption>Semantic tokens</Caption>
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 md:grid-cols-6">
           <ColorSwatch name="Background" className="bg-background" />
           <ColorSwatch name="Foreground" className="bg-foreground" />
@@ -105,19 +138,94 @@ export function DesignSystemPreview({ lang }: { lang: Lang }) {
       </Section>
 
       {/* Typography */}
+      <Section title="Language controls">
+        <Caption>Plain mobile controls</Caption>
+        <LanguageSwitcher
+          currentLang={lang}
+          currentPath={translatePath('/design-system')}
+          variant="plain"
+          className="w-fit"
+        />
+      </Section>
+
       <Section title="Typography">
         <div className="space-y-4">
-          <h1 className="text-4xl font-bold tracking-tight">Heading 1</h1>
+          <Caption>Display · Fraunces</Caption>
+          <p className="font-display-soft text-5xl leading-[1.05] font-semibold tracking-tight md:text-6xl">
+            Crafted with <MarkedText>care</MarkedText>
+          </p>
+          <p className="font-display-wonk text-muted-foreground text-2xl">
+            Italic, soft and a little wonky.
+          </p>
+          <Separator className="my-6" />
+          <h1 className="text-4xl font-semibold tracking-tight">Heading 1</h1>
           <h2 className="text-3xl font-semibold tracking-tight">Heading 2</h2>
-          <h3 className="text-2xl font-semibold tracking-tight">Heading 3</h3>
-          <h4 className="text-xl font-semibold tracking-tight">Heading 4</h4>
-          <p className="text-muted-foreground text-base">
-            Body text - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua.
+          <h3 className="font-display-soft text-2xl font-semibold tracking-tight">Heading 3</h3>
+          <h4 className="font-display-soft text-xl font-semibold tracking-tight">Heading 4</h4>
+          <Separator className="my-6" />
+          <Caption>Body & UI · Geist</Caption>
+          <p className="text-muted-foreground text-base leading-relaxed">
+            Clear body text leaves room for expressive headings. Geist also carries navigation,
+            buttons, tags, dates and captions across the site.
           </p>
           <p className="text-muted-foreground text-sm">
-            Small text - Used for captions and helper text.
+            Captions and supporting text · Écriture, expérience & idées.
           </p>
+          <Separator className="my-6" />
+          <p className="eyebrow">Section label · 2026</p>
+          <div className="mt-3 flex flex-wrap items-center gap-3">
+            <Badge>Astro</Badge>
+            <Badge variant="outline">React</Badge>
+            <span className="text-muted-foreground font-sans text-xs">
+              11 novembre 2026 · 5 min
+            </span>
+          </div>
+          <Separator className="my-6" />
+          <Caption>Code & metrics · Maple Mono</Caption>
+          <p className="text-foreground/80 font-mono text-sm">
+            const craft = (idea: string) =&gt; ship(idea);
+          </p>
+          <p className="font-mono text-2xl font-medium tabular-nums">10.42 km · 5:24 /km</p>
+        </div>
+      </Section>
+
+      <Section title="Surfaces">
+        <div className="grid gap-4 sm:grid-cols-2">
+          <div className="glass rounded-3xl p-6">
+            <p className="font-display-soft text-xl font-semibold">glass</p>
+            <p className="text-muted-foreground mt-1 text-sm">Signature translucent surface.</p>
+          </div>
+          <div className="glass-strong rounded-3xl p-6">
+            <p className="font-display-soft text-xl font-semibold">glass-strong</p>
+            <p className="text-muted-foreground mt-1 text-sm">Dense content, menus, popovers.</p>
+          </div>
+          <div className="ring-pastel rounded-3xl p-6">
+            <p className="font-display-soft text-xl font-semibold">ring-pastel</p>
+            <p className="text-muted-foreground mt-1 text-sm">One highlighted element per view.</p>
+          </div>
+          <div className="bg-pastel text-ink rounded-3xl p-6">
+            <p className="font-display-soft text-xl font-semibold">bg-pastel</p>
+            <p className="text-ink/70 mt-1 text-sm">Soft gradient fill.</p>
+          </div>
+        </div>
+      </Section>
+
+      <Section title="Doodles">
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
+          {doodleNames.map((name) => (
+            <div
+              key={name}
+              className="bg-foreground/[0.03] flex flex-col items-center gap-3 rounded-2xl p-5"
+            >
+              <Doodle
+                name={name}
+                className={
+                  name === 'sparkle' ? 'text-pastel-lilac size-10' : 'text-marker h-10 w-28'
+                }
+              />
+              <span className="text-muted-foreground font-mono text-xs">{name}</span>
+            </div>
+          ))}
         </div>
       </Section>
 
@@ -128,12 +236,14 @@ export function DesignSystemPreview({ lang }: { lang: Lang }) {
             <p className="text-muted-foreground mb-3 text-sm font-medium">Variants</p>
             <div className="flex flex-wrap gap-3">
               <Button variant="default">Default</Button>
-              <Button variant="secondary">Secondary</Button>
-              <Button variant="outline">Outline</Button>
+              <Button variant="pastel">Pastel</Button>
               <Button variant="ghost">Ghost</Button>
               <Button variant="destructive">Destructive</Button>
               <Button variant="link">Link</Button>
             </div>
+            <Button variant="pastel" className="mt-3 w-full sm:w-96">
+              A longer pastel button
+            </Button>
           </div>
           <Separator />
           <div>
@@ -156,6 +266,90 @@ export function DesignSystemPreview({ lang }: { lang: Lang }) {
         </div>
       </Section>
 
+      <Section title="3D button">
+        <div className="space-y-8">
+          <div>
+            <Caption>Clear glass</Caption>
+            <div className="flex flex-wrap items-center gap-7 py-6 sm:gap-8">
+              <Button3D size="lg" className="w-full sm:w-auto sm:min-w-52">
+                Primary
+              </Button3D>
+              <Button3D variant="secondary" size="lg" className="w-full sm:w-auto sm:min-w-52">
+                Secondary
+              </Button3D>
+            </div>
+          </div>
+          <Separator />
+          <div>
+            <Caption>Sizes & states</Caption>
+            <div className="flex flex-wrap items-center gap-4">
+              <Button3D size="sm">Small</Button3D>
+              <Button3D>Default</Button3D>
+              <Button3D size="icon" aria-label="Search">
+                <Icon icon={Search01Icon} />
+              </Button3D>
+              <Button3D disabled>Disabled</Button3D>
+            </div>
+          </div>
+        </div>
+      </Section>
+
+      <Section title="3D card">
+        <div className="grid items-center gap-8 md:grid-cols-[1.1fr_1fr]">
+          <Card3D className="min-h-88 w-full max-w-sm justify-between">
+            <div className="card-3d-icon text-primary">
+              <Icon icon={SparklesIcon} className="size-7" aria-hidden="true" />
+            </div>
+            <div className="space-y-3">
+              <h3 className="font-display-soft text-3xl font-semibold tracking-tight">
+                Glass card
+              </h3>
+              <p className="text-muted-foreground max-w-60 text-base leading-relaxed">
+                A clear glass container for content and actions.
+              </p>
+            </div>
+            <Button3D
+              className="self-start"
+              render={<a href={translatePath('/projects')} />}
+              nativeButton={false}
+            >
+              Explore
+              <Icon icon={ArrowRight01Icon} aria-hidden="true" />
+            </Button3D>
+          </Card3D>
+          <div className="space-y-3">
+            <Caption>Clear glass</Caption>
+            <p className="text-muted-foreground text-sm leading-relaxed">
+              Rounded glass edges, curved highlights and a soft primary-colour shadow give the
+              surface its depth. Add your own heading, content and actions.
+            </p>
+            <p className="text-muted-foreground text-sm leading-relaxed">
+              For home page highlights and occasional calls to action.
+            </p>
+          </div>
+        </div>
+        <Card3D variant="glass" className="mt-8 w-full max-w-sm">
+          <h3 className="font-display-soft text-2xl font-semibold">Glass variant</h3>
+          <p className="text-muted-foreground leading-relaxed">
+            A clearer face and thin reflections for timeline entries and the contact panel.
+            Spotlight reflections use warm tints in light mode and pale highlights in dark mode.
+          </p>
+        </Card3D>
+      </Section>
+
+      <Section title="Developer ID card">
+        <div className="grid items-center gap-8 md:grid-cols-2">
+          <DevIdCard lang={lang} ageAtBuild={ageAtBuild} />
+          <p className="text-muted-foreground text-sm leading-relaxed">
+            The front pairs editorial typography, Melo and five technology logos with a glass frame.
+            Both faces share the same pearlescent hover, and both themes share the same artwork
+            geometry. The back pairs an iridescent glass ribbon with live typography. Click the left
+            or right half to turn it in that direction. Keyboard and reduced-motion preferences show
+            the other face immediately.
+          </p>
+        </div>
+      </Section>
+
       {/* Badge */}
       <Section title="Badge">
         <div className="space-y-4">
@@ -165,6 +359,7 @@ export function DesignSystemPreview({ lang }: { lang: Lang }) {
               <Badge variant="default">Default</Badge>
               <Badge variant="secondary">Secondary</Badge>
               <Badge variant="outline">Outline</Badge>
+              <Badge variant="glass">Glass</Badge>
               <Badge variant="destructive">Destructive</Badge>
             </div>
           </div>
@@ -270,7 +465,7 @@ export function DesignSystemPreview({ lang }: { lang: Lang }) {
       {/* Dropdown Menu */}
       <Section title="Dropdown Menu">
         <DropdownMenu>
-          <DropdownMenuTrigger render={<Button variant="outline">Open Menu</Button>} />
+          <DropdownMenuTrigger render={<Button variant="ghost">Open Menu</Button>} />
           <DropdownMenuContent>
             <DropdownMenuItem>Profile</DropdownMenuItem>
             <DropdownMenuItem>Settings</DropdownMenuItem>
@@ -319,19 +514,19 @@ export function DesignSystemPreview({ lang }: { lang: Lang }) {
       <Section title="Tooltip">
         <div className="flex flex-wrap gap-6">
           <Tooltip>
-            <TooltipTrigger render={<Button variant="outline">Hover me (top)</Button>} />
+            <TooltipTrigger render={<Button variant="ghost">Hover me (top)</Button>} />
             <TooltipContent side="top">Tooltip on top</TooltipContent>
           </Tooltip>
           <Tooltip>
-            <TooltipTrigger render={<Button variant="outline">Hover me (bottom)</Button>} />
+            <TooltipTrigger render={<Button variant="ghost">Hover me (bottom)</Button>} />
             <TooltipContent side="bottom">Tooltip on bottom</TooltipContent>
           </Tooltip>
           <Tooltip>
-            <TooltipTrigger render={<Button variant="outline">Hover me (left)</Button>} />
+            <TooltipTrigger render={<Button variant="ghost">Hover me (left)</Button>} />
             <TooltipContent side="left">Tooltip on left</TooltipContent>
           </Tooltip>
           <Tooltip>
-            <TooltipTrigger render={<Button variant="outline">Hover me (right)</Button>} />
+            <TooltipTrigger render={<Button variant="ghost">Hover me (right)</Button>} />
             <TooltipContent side="right">Tooltip on right</TooltipContent>
           </Tooltip>
         </div>
@@ -525,12 +720,14 @@ function ColorSwatch({ name, className }: { name: string; className: string }) {
       <div
         ref={setSwatchRef}
         onClick={handleCopy}
-        className={`border-border h-12 w-full cursor-pointer rounded-lg border transition-transform hover:scale-103 active:scale-97 ${className}`}
+        className={`border-foreground/10 h-14 w-full cursor-pointer rounded-2xl border transition-transform hover:scale-103 active:scale-97 ${className}`}
         title="Click to copy"
       />
       <div className="flex flex-col justify-between gap-1">
-        <p className="text-foreground text-semibold text-sm">{name}</p>
-        <p className="text-muted-foreground text-xs">{copied ? '✓ Copied' : colorValue}</p>
+        <p className="text-foreground text-sm font-medium">{name}</p>
+        <p className="text-muted-foreground truncate font-sans text-[0.65rem]">
+          {copied ? '✓ Copied' : colorValue}
+        </p>
       </div>
     </div>
   );

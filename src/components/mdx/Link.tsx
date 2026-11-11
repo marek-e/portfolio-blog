@@ -12,11 +12,7 @@ function isExternal(href: string): boolean {
   return /^https?:\/\//i.test(href) || href.startsWith('//');
 }
 
-const linkStyles = cn(
-  'underline decoration-primary decoration-wavy decoration-[1.3px] underline-offset-[5px]',
-  'transition-all duration-200 ease-out',
-  'hover:text-primary/80 hover:decoration-[1.8px] hover:underline-offset-[5.5px]'
-);
+const linkStyles = 'hand-underline';
 
 export function Link({ href, children, newTab, className, ...rest }: LinkProps) {
   if (!href) {

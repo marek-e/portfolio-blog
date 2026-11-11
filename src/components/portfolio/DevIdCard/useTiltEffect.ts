@@ -1,141 +1,117 @@
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useEffect, useRef } from 'react';
 import { useReducedMotion } from '@/lib/useReducedMotion';
 
-interface TiltState {
-  rotateX: number;
-  rotateY: number;
-  glareX: number;
-  glareY: number;
-}
-
-interface UseTiltEffectOptions {
-  maxTilt?: number;
-  springFactor?: number;
-}
-
-const INITIAL_TILT: TiltState = {
-  rotateX: 0,
-  rotateY: 0,
-  glareX: 50,
-  glareY: 50,
-};
-
-function lerp(start: number, end: number, factor: number): number {
-  return start + (end - start) * factor;
-}
-
-function clamp(value: number, min: number, max: number): number {
-  return Math.min(Math.max(value, min), max);
-}
-
-export function useTiltEffect(options: UseTiltEffectOptions = {}) {
-  const { maxTilt = 12, springFactor = 0.1 } = options;
-
+export function useTiltEffect() {
   const cardRef = useRef<HTMLDivElement>(null);
-  const animationRef = useRef<number | null>(null);
-
+  const tiltRef = useRef<HTMLDivElement>(null);
   const isReducedMotion = useReducedMotion();
-  const [isHovering, setIsHovering] = useState(false);
-  const [currentTilt, setCurrentTilt] = useState<TiltState>(INITIAL_TILT);
-  const [targetTilt, setTargetTilt] = useState<TiltState>(INITIAL_TILT);
-
-  const calculateTilt = useCallback(
-    (clientX: number, clientY: number): TiltState => {
-      if (!cardRef.current || isReducedMotion) return INITIAL_TILT;
-
-      const rect = cardRef.current.getBoundingClientRect();
-      const x = ((clientX - rect.left) / rect.width - 0.5) * 2;
-      const y = ((clientY - rect.top) / rect.height - 0.5) * 2;
-
-      return {
-        rotateX: clamp(-y * maxTilt, -maxTilt, maxTilt),
-        rotateY: clamp(x * maxTilt, -maxTilt, maxTilt),
-        glareX: clamp((x + 1) * 50, 0, 100),
-        glareY: clamp((y + 1) * 50, 0, 100),
-      };
-    },
-    [isReducedMotion, maxTilt]
-  );
 
   useEffect(() => {
-    if (isReducedMotion) return;
+    const card = cardRef.current;
+    const surface = tiltRef.current;
+    if (!card || !surface) return;
 
-    const animate = () => {
-      setCurrentTilt((prev) => {
-        const newTilt = {
-          rotateX: lerp(prev.rotateX, targetTilt.rotateX, springFactor),
-          rotateY: lerp(prev.rotateY, targetTilt.rotateY, springFactor),
-          glareX: lerp(prev.glareX, targetTilt.glareX, springFactor),
-          glareY: lerp(prev.glareY, targetTilt.glareY, springFactor),
-        };
+    const sheens = card.querySelectorAll<HTMLElement>('.dev-id-card-sheen');
+    const glares = card.querySelectorAll<HTMLElement>('.dev-id-card-glare');
+    const pointer = window.matchMedia('(hover: hover) and (pointer: fine)');
+    const position = { x: 0, y: 0 };
+    const velocity = { x: 0, y: 0 };
+    const target = { x: 0, y: 0 };
+    let frame = 0;
+    let previousTime = 0;
 
-        const isSettled =
-          Math.abs(newTilt.rotateX - targetTilt.rotateX) < 0.01 &&
-          Math.abs(newTilt.rotateY - targetTilt.rotateY) < 0.01;
-
-        if (isSettled && !isHovering) {
-          return targetTilt;
-        }
-
-        return newTilt;
+    const paint = () => {
+      surface.style.transform = `rotateX(${-position.y * 5}deg) rotateY(${position.x * 6}deg)`;
+      sheens.forEach((sheen) => {
+        sheen.style.transform = `translate3d(${position.x * 22}%, ${position.y * 12}%, 0)`;
       });
-
-      animationRef.current = requestAnimationFrame(animate);
+      glares.forEach((glare) => {
+        glare.style.transform = `translate3d(${position.x * 28}%, ${position.y * 22}%, 0)`;
+      });
     };
 
-    animationRef.current = requestAnimationFrame(animate);
+    const animate = (time: number) => {
+      const elapsed = Math.min((time - (previousTime || time)) / 1000, 0.032);
+      previousTime = time;
+      for (const axis of ['x', 'y'] as const) {
+        velocity[axis] += ((target[axis] - position[axis]) * 100 - velocity[axis] * 10) * elapsed;
+        position[axis] += velocity[axis] * elapsed;
+      }
+
+      const settled = (['x', 'y'] as const).every(
+        (axis) =>
+          Math.abs(target[axis] - position[axis]) < 0.001 && Math.abs(velocity[axis]) < 0.001
+      );
+      if (settled) {
+        Object.assign(position, target);
+        Object.assign(velocity, { x: 0, y: 0 });
+      }
+      paint();
+      frame = settled ? 0 : requestAnimationFrame(animate);
+      if (settled) previousTime = 0;
+    };
+
+    const start = () => {
+      if (!frame) frame = requestAnimationFrame(animate);
+    };
+
+    const reset = () => {
+      card.removeAttribute('data-hovered');
+      Object.assign(target, { x: 0, y: 0 });
+      start();
+    };
+
+    const stop = () => {
+      cancelAnimationFrame(frame);
+      frame = 0;
+      previousTime = 0;
+      card.removeAttribute('data-hovered');
+      for (const state of [position, velocity, target]) Object.assign(state, { x: 0, y: 0 });
+      paint();
+    };
+
+    const move = (event: PointerEvent) => {
+      if (isReducedMotion || !pointer.matches || event.pointerType === 'touch') return;
+      const bounds = card.getBoundingClientRect();
+      target.x = Math.max(
+        -1,
+        Math.min(1, ((event.clientX - bounds.left) / bounds.width - 0.5) * 2)
+      );
+      target.y = Math.max(
+        -1,
+        Math.min(1, ((event.clientY - bounds.top) / bounds.height - 0.5) * 2)
+      );
+      card.setAttribute('data-hovered', '');
+      start();
+    };
+
+    const visibilityChanged = () => {
+      if (document.hidden) stop();
+    };
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) stop();
+    });
+
+    stop();
+    if (!isReducedMotion) {
+      card.addEventListener('pointermove', move);
+      card.addEventListener('pointerleave', reset);
+      card.addEventListener('pointercancel', reset);
+      pointer.addEventListener('change', stop);
+      document.addEventListener('visibilitychange', visibilityChanged);
+      observer.observe(card);
+    }
 
     return () => {
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
-      }
+      stop();
+      observer.disconnect();
+      card.removeEventListener('pointermove', move);
+      card.removeEventListener('pointerleave', reset);
+      card.removeEventListener('pointercancel', reset);
+      pointer.removeEventListener('change', stop);
+      document.removeEventListener('visibilitychange', visibilityChanged);
     };
-  }, [targetTilt, isHovering, isReducedMotion, springFactor]);
+  }, [isReducedMotion]);
 
-  const handlers = {
-    onMouseMove: (e: React.MouseEvent<HTMLDivElement>) => {
-      if (isReducedMotion) return;
-      setTargetTilt(calculateTilt(e.clientX, e.clientY));
-    },
-    onMouseEnter: () => setIsHovering(true),
-    onMouseLeave: () => {
-      setIsHovering(false);
-      setTargetTilt(INITIAL_TILT);
-    },
-    onTouchMove: (e: React.TouchEvent<HTMLDivElement>) => {
-      if (isReducedMotion) return;
-      const touch = e.touches[0];
-      if (touch) {
-        setTargetTilt(calculateTilt(touch.clientX, touch.clientY));
-      }
-    },
-    onTouchStart: () => setIsHovering(true),
-    onTouchEnd: () => {
-      setIsHovering(false);
-      setTargetTilt(INITIAL_TILT);
-    },
-  };
-
-  const cardStyle: React.CSSProperties = isReducedMotion
-    ? {}
-    : {
-        transform: `perspective(1000px) rotateX(${currentTilt.rotateX}deg) rotateY(${currentTilt.rotateY}deg)`,
-        transformStyle: 'preserve-3d',
-        willChange: 'transform',
-      };
-
-  const shadowX = currentTilt.rotateY * 1.5;
-  const shadowY = -currentTilt.rotateX * 1.5;
-  const boxShadow = isReducedMotion
-    ? '0 25px 50px -12px rgba(0, 0, 0, 0.15)'
-    : `${shadowX}px ${shadowY + 20}px 40px rgba(0, 0, 0, 0.2)`;
-
-  return {
-    cardRef,
-    handlers,
-    cardStyle,
-    boxShadow,
-    currentTilt,
-    isReducedMotion,
-  };
+  return { cardRef, tiltRef };
 }

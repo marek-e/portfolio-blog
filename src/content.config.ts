@@ -18,6 +18,7 @@ const projects = defineCollection({
     image: z.string(),
     imageAlt: z.string().optional(),
     objectFit: z.enum(['cover', 'contain', 'fill', 'none', 'scale-down']).default('contain'),
+    imagePadding: z.number().min(0).max(40).default(11),
     publishDate: z.coerce.date(),
     // Optional fields for richer detail pages
     status: z.enum(['completed', 'in-progress', 'archived', 'concept']).default('completed'),

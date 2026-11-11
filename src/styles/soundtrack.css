@@ -1,0 +1,120 @@
+.soundtrack-dock[hidden],
+[data-soundtrack] .soundtrack-pause,
+[data-soundtrack] .soundtrack-bars,
+[data-soundtrack][data-playing='true'] .soundtrack-play,
+[data-soundtrack][data-playing='true'] .soundtrack-note {
+  display: none;
+}
+
+[data-soundtrack][data-playing='true'] .soundtrack-pause {
+  display: block;
+}
+
+[data-soundtrack][data-playing='true'] .soundtrack-bars {
+  display: flex;
+}
+
+.soundtrack-toggle {
+  background: color-mix(in oklch, var(--primary) 14%, transparent);
+  color: var(--foreground);
+  transition: background-color 160ms ease;
+}
+
+.soundtrack-toggle:focus-visible,
+.soundtrack-dock :focus-visible,
+[data-soundtrack-volume]:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 3px;
+}
+
+[data-soundtrack-volume] {
+  appearance: none;
+  background: transparent;
+}
+
+[data-soundtrack-volume]::-webkit-slider-runnable-track {
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(
+    to right,
+    var(--primary) var(--soundtrack-volume),
+    color-mix(in oklch, var(--foreground) 25%, transparent) var(--soundtrack-volume)
+  );
+}
+
+[data-soundtrack-volume]::-moz-range-track {
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(
+    to right,
+    var(--primary) var(--soundtrack-volume),
+    color-mix(in oklch, var(--foreground) 25%, transparent) var(--soundtrack-volume)
+  );
+}
+
+[data-soundtrack-volume]::-webkit-slider-thumb {
+  appearance: none;
+  width: 10px;
+  height: 10px;
+  margin-top: -3.5px;
+  border-radius: 50%;
+  background: var(--primary);
+}
+
+[data-soundtrack-volume]::-moz-range-thumb {
+  width: 10px;
+  height: 10px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--primary);
+}
+
+.soundtrack-bars {
+  height: 1rem;
+  align-items: center;
+  gap: 2px;
+}
+
+.soundtrack-bars i {
+  width: 2px;
+  height: 100%;
+  border-radius: 999px;
+  background: currentColor;
+  animation: soundtrack-level 700ms ease-in-out infinite alternate;
+}
+
+.soundtrack-bars i:nth-child(2) {
+  animation-duration: 950ms;
+  animation-direction: alternate-reverse;
+}
+
+.soundtrack-bars i:nth-child(3) {
+  animation-duration: 550ms;
+}
+
+@keyframes soundtrack-level {
+  from {
+    transform: scaleY(0.3);
+  }
+  to {
+    transform: scaleY(0.85);
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .soundtrack-toggle:hover {
+    background: color-mix(in oklch, var(--primary) 25%, transparent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .soundtrack-toggle {
+    transition: none;
+  }
+  .soundtrack-bars i {
+    animation: none;
+  }
+  .soundtrack-bars i:nth-child(2) {
+    height: 50%;
+  }
+}

@@ -1,9 +1,11 @@
 ---
-import { Link } from '@/components/ui/button';
+import HeroIdentity from './HeroIdentity.astro';
+import { HeroActions } from './HeroActions';
+import { HeroStickers } from './HeroStickers';
+import { Doodle, MarkedText } from '@/components/shared/HandDrawn';
 import { getTranslations, getLangFromUrl, getTranslatedPath } from '@/i18n';
-import BackgroundImage from '../layout/BackgroundImage.astro';
+import BackgroundImage from '@/components/layout/BackgroundImage.astro';
 import CursorSpotlight from './CursorSpotlight.astro';
-import { Badge } from '../ui/badge';
 
 const lang = getLangFromUrl(Astro.url);
 const t = getTranslations(lang);
@@ -11,58 +13,188 @@ const translatePath = getTranslatedPath(lang);
 ---
 
 <CursorSpotlight>
-  <section class="relative flex min-h-dvh items-center justify-center overflow-hidden">
+  <section
+    class="hero-section relative flex min-h-dvh items-center justify-center overflow-hidden pt-24 pb-28 md:pt-28 md:pb-20"
+  >
     <BackgroundImage />
+    <div
+      class="hero-mobile-shade pointer-events-none absolute inset-0 hidden dark:block md:dark:hidden"
+      aria-hidden="true"
+    >
+    </div>
 
-    <!-- Content -->
-    <div class="relative z-10 mx-auto max-w-6xl px-4 text-center sm:px-6 lg:px-8">
-      <!-- Announcement Badge -->
-      <div class="mb-6 flex items-center justify-center gap-2">
-        {t.hero.badges.map((badge) => <Badge variant="glass">{badge}</Badge>)}
-      </div>
+    <HeroStickers client:load badges={t.hero.badges} floating />
 
-      <!-- Headline -->
+    <div
+      class="relative z-10 mx-auto flex w-full max-w-5xl min-w-0 flex-col items-center px-4 text-center sm:px-6"
+    >
+      <HeroIdentity name={t.hero.name} eyebrow={t.hero.eyebrow} musicLabels={t.hero.music} />
+
       <h1
         id="hello"
-        class="text-foreground mb-6 text-4xl font-bold drop-shadow-lg sm:text-5xl lg:text-6xl dark:text-white"
+        class="text-foreground relative text-[clamp(2.25rem,11.5vw,7.5rem)] leading-[0.95] font-medium tracking-[-0.035em] drop-shadow-[0_2px_24px_oklch(1_0_0/45%)] dark:text-white dark:drop-shadow-[0_2px_24px_oklch(0_0_0/55%)]"
       >
-        {t.hero.headline}
+        <span class="block">{t.hero.greeting}</span>
+        <span class="relative mt-2 inline-block">
+          <MarkedText>{t.hero.name}</MarkedText>
+          <Doodle
+            name="sparkle"
+            className="text-pastel-lilac absolute -top-[0.2em] -right-[0.55em] size-[0.42em] rotate-12"
+          />
+          <Doodle
+            name="sparkle"
+            className="text-pastel-peach absolute top-[0.05em] -left-[0.5em] size-[0.24em] -rotate-12"
+          />
+        </span>
       </h1>
 
-      <!-- Subtitle -->
       <p
-        class="text-foreground/90 mx-auto mb-8 max-w-2xl text-lg drop-shadow-md sm:text-xl lg:text-2xl dark:text-white/90"
+        class="hero-copy text-foreground/85 mx-auto mt-10 max-w-2xl text-lg leading-relaxed text-pretty drop-shadow-md md:text-xl dark:text-white/90"
       >
         {
           t.hero.subtitle.split('\n').map((line, i) => (
-            <>
+            <span class={i > 0 ? 'hidden md:inline' : undefined}>
               {i > 0 && <br />}
+              {i > 0 && ' '}
               {line}
-            </>
+            </span>
           ))
         }
       </p>
 
-      <!-- CTAs -->
-      <div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
-        <Link
-          size="lg"
-          href={translatePath('/curriculum-vitae')}
-          className="w-1/2 px-8 py-6 font-semibold md:w-auto"
-          animation="scale"
-        >
-          {t.hero.ctaCv}
-        </Link>
-        <Link
-          variant="secondary"
-          size="lg"
-          href="#projects"
-          className="w-1/2 px-8 py-6 font-semibold md:w-auto"
-          animation="scale"
-        >
-          {t.hero.ctaProjects}
-        </Link>
+      <div
+        class="hero-actions relative mt-10 flex w-full flex-col items-center justify-center gap-4 sm:w-auto sm:flex-row sm:gap-5"
+      >
+        <Doodle
+          name="arrow"
+          strokeWidth={2.5}
+          className="text-foreground/50 absolute top-1/2 -left-32 hidden h-14 w-24 -translate-y-3/4 md:block"
+        />
+        <HeroActions
+          client:load
+          projectsLabel={t.hero.ctaProjects}
+          cvLabel={t.hero.ctaCv}
+          cvHref={translatePath('/curriculum-vitae')}
+        />
       </div>
+
+      <HeroStickers client:load badges={t.hero.badges} />
     </div>
+
+    <a
+      href="#about"
+      data-scroll-hint
+      class="scroll-hint absolute bottom-8 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-3 font-sans text-[0.7rem] tracking-[0.3em] text-white/85 uppercase transition-colors hover:text-white md:flex"
+    >
+      {t.hero.scrollHint}
+      <span class="relative h-12 w-px overflow-hidden bg-white/30">
+        <span class="scroll-hint-dot absolute inset-x-0 top-0 h-4 bg-white"></span>
+      </span>
+    </a>
   </section>
 </CursorSpotlight>
+
+<style>
+  .hero-mobile-shade {
+    background: linear-gradient(
+      oklch(0.12 0.02 280 / 28%),
+      oklch(0.12 0.02 280 / 35%) 60%,
+      transparent
+    );
+  }
+
+  @media (max-width: 767px) and (max-height: 700px) {
+    .hero-section {
+      padding-top: 5rem;
+    }
+
+    .hero-copy {
+      margin-top: 1.25rem;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .hero-actions {
+      gap: 0.75rem;
+      margin-top: 1.25rem;
+    }
+  }
+
+  .scroll-hint {
+    text-shadow: 0 1px 10px oklch(0 0 0 / 65%);
+    filter: drop-shadow(0 1px 6px oklch(0 0 0 / 45%));
+  }
+
+  .scroll-hint[hidden] {
+    display: none;
+  }
+
+  .scroll-hint-dot {
+    animation: scroll-hint 2.2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+  }
+
+  @keyframes scroll-hint {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(300%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-hint-dot {
+      animation: none;
+    }
+  }
+</style>
+
+<script>
+  function initScrollHint() {
+    const hint = document.querySelector<HTMLAnchorElement>('[data-scroll-hint]');
+    if (!hint) return;
+
+    const updateVisibility = () => {
+      const hidden = window.scrollY > 0;
+      if (hint.hidden !== hidden) hint.hidden = hidden;
+    };
+
+    updateVisibility();
+    window.addEventListener('scroll', updateVisibility, { passive: true });
+    document.addEventListener(
+      'astro:before-swap',
+      () => window.removeEventListener('scroll', updateVisibility),
+      { once: true }
+    );
+  }
+
+  function initStickerParallax() {
+    const layer = document.querySelector<HTMLElement>('[data-sticker-layer]');
+    const section = layer?.closest('section');
+    if (!layer || !section) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (window.matchMedia('(pointer: coarse)').matches) return;
+
+    let frame = 0;
+    section.addEventListener('pointermove', (event) => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        const rect = section.getBoundingClientRect();
+        const x = (event.clientX - rect.left) / rect.width - 0.5;
+        const y = (event.clientY - rect.top) / rect.height - 0.5;
+        layer.style.setProperty('--px', x.toFixed(3));
+        layer.style.setProperty('--py', y.toFixed(3));
+      });
+    });
+
+    section.addEventListener('pointerleave', () => {
+      layer.style.setProperty('--px', '0');
+      layer.style.setProperty('--py', '0');
+    });
+  }
+
+  initStickerParallax();
+  initScrollHint();
+  document.addEventListener('astro:after-swap', initStickerParallax);
+  document.addEventListener('astro:after-swap', initScrollHint);
+</script>

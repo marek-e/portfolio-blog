@@ -6,35 +6,37 @@ import { forwardRef } from 'react';
 
 type ButtonProps = ButtonPrimitive.Props & VariantProps<typeof buttonVariants>;
 
+function PastelBorder() {
+  return (
+    <span className="button-pastel-border" aria-hidden="true">
+      <span className="button-pastel-colours" />
+    </span>
+  );
+}
+
 const buttonVariants = cva(
-  "focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:aria-invalid:border-destructive/50 rounded-lg border border-transparent bg-clip-padding text-sm font-medium focus-visible:ring-[3px] aria-invalid:ring-[3px] [&_svg:not([class*='size-'])]:size-4 inline-flex items-center justify-center whitespace-nowrap transition-all duration-100 active:scale-[0.97] motion-reduce:active:scale-100 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none shrink-0 [&_svg]:shrink-0 outline-none group/button select-none",
+  "aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:aria-invalid:border-destructive/50 relative rounded-full border border-transparent text-sm font-medium aria-invalid:ring-[3px] [&_svg:not([class*='size-'])]:size-4 inline-flex items-center justify-center whitespace-nowrap transition-all duration-200 ease-out focus-visible:transition-none active:scale-[0.97] motion-reduce:active:scale-100 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none shrink-0 [&_svg]:shrink-0 group/button select-none",
   {
     variants: {
       variant: {
-        default: 'bg-primary text-primary-foreground hover:bg-primary/90',
-        outline:
-          'border-border bg-white hover:bg-muted hover:text-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50 aria-expanded:bg-muted aria-expanded:text-foreground',
-        secondary:
-          'bg-secondary text-secondary-foreground hover:bg-secondary/80 aria-expanded:bg-secondary aria-expanded:text-secondary-foreground',
+        default: 'btn-radiant',
+        pastel: 'btn-pastel text-foreground',
         ghost:
-          'hover:bg-muted hover:text-foreground dark:hover:bg-muted/50 aria-expanded:bg-muted aria-expanded:text-foreground',
+          'hover:bg-muted hover:text-foreground dark:hover:bg-muted/60 aria-expanded:bg-muted aria-expanded:text-foreground',
         destructive:
-          'bg-destructive/10 hover:bg-destructive/20 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/20 text-destructive focus-visible:border-destructive/40 dark:hover:bg-destructive/30',
+          'bg-destructive/10 hover:bg-destructive/20 hover:shadow-md hover:shadow-destructive/15 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/20 text-destructive focus-visible:border-destructive/40 dark:hover:bg-destructive/30',
         link: 'text-primary underline-offset-4 hover:underline active:scale-100',
-        glass:
-          'text-foreground border border-white/20 bg-white/10 px-8 py-6 text-base font-medium backdrop-blur-sm hover:bg-white/20 dark:border-white/10 dark:bg-black/30 dark:text-white dark:hover:bg-black/50',
       },
       size: {
         default:
-          'h-10 gap-1.5 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2',
-        xs: "h-8 gap-1 rounded-[min(var(--radius-md),10px)] px-2 text-xs in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3",
-        sm: "h-9 gap-1 rounded-[min(var(--radius-md),12px)] px-2.5 text-[0.8rem] in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3.5",
-        lg: 'h-12 gap-1.5 px-2.5 has-data-[icon=inline-end]:pr-3 has-data-[icon=inline-start]:pl-3',
+          'h-10 gap-1.5 px-4 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2',
+        xs: "h-8 gap-1 px-3 text-xs in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3",
+        sm: "h-9 gap-1 px-3.5 text-[0.8rem] in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3.5",
+        lg: 'h-12 gap-2 px-6 text-[0.95rem] has-data-[icon=inline-end]:pr-5 has-data-[icon=inline-start]:pl-5',
         icon: 'size-8',
         'icon-xs':
-          "size-6 rounded-[min(var(--radius-md),10px)] in-data-[slot=button-group]:rounded-lg [&_svg:not([class*='size-'])]:size-3",
-        'icon-sm':
-          'size-7 rounded-[min(var(--radius-md),12px)] in-data-[slot=button-group]:rounded-lg',
+          "size-6 in-data-[slot=button-group]:rounded-lg [&_svg:not([class*='size-'])]:size-3",
+        'icon-sm': 'size-7 in-data-[slot=button-group]:rounded-lg',
         'icon-lg': 'size-9',
       },
       animation: {
@@ -51,14 +53,20 @@ const buttonVariants = cva(
 );
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = 'default', size = 'default', animation = 'none', ...props }, ref) => {
+  (
+    { className, variant = 'default', size = 'default', animation = 'none', children, ...props },
+    ref
+  ) => {
     return (
       <ButtonPrimitive
         ref={ref}
         data-slot="button"
         className={cn(buttonVariants({ variant, size, animation, className }))}
         {...props}
-      />
+      >
+        {variant === 'pastel' && <PastelBorder />}
+        {children}
+      </ButtonPrimitive>
     );
   }
 );
@@ -67,14 +75,20 @@ Button.displayName = 'Button';
 type LinkProps = React.ComponentPropsWithRef<'a'> & VariantProps<typeof buttonVariants>;
 
 const Link = forwardRef<HTMLAnchorElement, LinkProps>(
-  ({ className, variant = 'default', size = 'default', animation = 'none', ...props }, ref) => {
+  (
+    { className, variant = 'default', size = 'default', animation = 'none', children, ...props },
+    ref
+  ) => {
     return (
       <a
         ref={ref}
         data-slot="link"
         className={cn(buttonVariants({ variant, size, animation, className }))}
         {...props}
-      />
+      >
+        {variant === 'pastel' && <PastelBorder />}
+        {children}
+      </a>
     );
   }
 );

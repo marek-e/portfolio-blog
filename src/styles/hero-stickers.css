@@ -1,0 +1,94 @@
+.hero-glass-pill {
+  --depth-tint: var(--tone);
+  --depth-white: oklch(1 0 0);
+  --depth-core: color-mix(in oklab, var(--tone) 64%, var(--card));
+  --depth-rim: color-mix(in oklab, var(--tone) 74%, var(--card));
+  --depth-refraction: oklch(from var(--tone) 0.97 0.025 h);
+  --sticker-shadow: oklch(from var(--tone) 0.35 0.08 h / 28%);
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  color: var(--tone-ink);
+  background: oklch(from var(--tone) l c h / 16%);
+  font-family: var(--font-sans);
+  font-weight: 500;
+  white-space: nowrap;
+  box-shadow:
+    0 3px 5px -3px var(--sticker-shadow),
+    0 12px 24px -10px var(--sticker-shadow),
+    0 20px 30px -16px oklch(from var(--tone) l c h / 35%);
+}
+
+.hero-glass-pill > .glass-material {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+  opacity: 0.94;
+}
+
+.dark .hero-glass-pill {
+  --depth-white: oklch(from var(--tone) 0.96 0.015 h);
+  --depth-core: color-mix(in oklab, var(--tone) 35%, var(--card));
+  --depth-rim: color-mix(in oklab, var(--tone) 55%, var(--card));
+  --depth-refraction: oklch(from var(--tone) 0.88 0.035 h);
+  --sticker-shadow: oklch(0.08 0.02 280 / 48%);
+}
+
+@media (max-width: 767px) {
+  .hero-mobile-stickers {
+    row-gap: 0.25rem;
+  }
+
+  .hero-mobile-stickers::before {
+    order: 1;
+    flex-basis: 100%;
+    content: '';
+  }
+
+  .hero-mobile-stickers > :nth-child(n + 4) {
+    order: 2;
+  }
+}
+
+.hero-sticker {
+  animation: sticker-float 9s ease-in-out infinite;
+}
+
+.sticker-parallax {
+  transform: perspective(500px)
+    translate3d(
+      calc(var(--px, 0) * var(--depth, 1) * 18px),
+      calc(var(--py, 0) * var(--depth, 1) * 12px),
+      0
+    )
+    rotateX(calc(var(--py, 0) * -18deg)) rotateY(calc(var(--px, 0) * 22deg));
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes sticker-float {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-sticker {
+    animation: none;
+  }
+
+  .sticker-parallax {
+    transform: none;
+    transition: none;
+  }
+}

@@ -8,6 +8,7 @@ links:
   repo: 'https://github.com/marek-e/portfolio-blog'
 publishDate: 2026-01-01
 image: '/logo.svg'
+imagePadding: 16
 status: 'completed'
 ---
 

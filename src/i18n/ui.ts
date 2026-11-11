@@ -1,5 +1,7 @@
 export interface UITranslations {
   nav: {
+    home: string;
+    presentationsShort: string;
     projects: string;
     blog: string;
     presentations: string;
@@ -7,6 +9,10 @@ export interface UITranslations {
     contact: string;
   };
   hero: {
+    eyebrow: string;
+    greeting: string;
+    name: string;
+    scrollHint: string;
     pageTitle: string;
     pageDescription: string;
     badges: string[];
@@ -15,19 +21,36 @@ export interface UITranslations {
     ctaProjects: string;
     ctaContact: string;
     ctaCv: string;
+    music: {
+      title: string;
+      controls: string;
+      play: string;
+      pause: string;
+      stop: string;
+      volume: string;
+      off: string;
+      on: string;
+      error: string;
+    };
   };
   about: {
+    eyebrow: string;
     title: string;
     paragraphs: string[];
+    summary: string;
     mantraContent: string;
     mantraTitle: string;
+    readMore: string;
+    readLess: string;
   };
   timeline: {
+    eyebrow: string;
     title: string;
     subtitle: string;
     present: string;
   };
   projects: {
+    eyebrow: string;
     title: string;
     subtitle: string;
     viewAll: string;
@@ -35,8 +58,12 @@ export interface UITranslations {
     liveDemo: string;
     code: string;
     viewDetails: string;
+    previous: string;
+    next: string;
+    slide: string;
   };
   contact: {
+    eyebrow: string;
     title: string;
     subtitle: string;
     cta: string;
@@ -48,6 +75,9 @@ export interface UITranslations {
     pageDescription: string;
   };
   footer: {
+    explore: string;
+    about: string;
+    resources: string;
     sitemap: string;
     home: string;
     contact: string;
@@ -64,6 +94,9 @@ export interface UITranslations {
     heading: string;
     message: string;
     backHome: string;
+    browseBlog: string;
+    choosePath: string;
+    sceneDescription: string;
   };
   theme: {
     light: string;
@@ -71,6 +104,7 @@ export interface UITranslations {
     system: string;
   };
   aria: {
+    mainNavigation: string;
     openMenu: string;
     closeMenu: string;
     sendEmail: string;
@@ -79,6 +113,8 @@ export interface UITranslations {
     homeLink: string;
     copyEmail: string;
     postActions: string;
+    toggleTheme: string;
+    visitWebsite: string;
   };
   designSystem: {
     pageTitle: string;
@@ -113,26 +149,31 @@ export interface UITranslations {
     noPosts: string;
     copyMarkdown: string;
     copied: string;
+    eyebrow: string;
+    latest: string;
   };
   devCard: {
     cardTitle: string;
     ariaLabel: string;
+    turnOver: string;
+    showFront: string;
     fields: {
       name: string;
       job: string;
       nature: string;
-      gameTime: string;
+      age: string;
       location: string;
     };
     values: {
       name: string;
       job: string;
       nature: string;
-      gameTime: string;
+      age: string;
       location: string;
     };
   };
   strava: {
+    eyebrow: string;
     title: string;
     subtitle: string;
     intro: string;
@@ -151,8 +192,18 @@ export interface UITranslations {
     tagLongRun: string;
     tagIntervals: string;
     tagCommute: string;
+    tagRace: string;
+    activityNames: {
+      morning: string;
+      afternoon: string;
+      evening: string;
+      night: string;
+      lunch: string;
+    };
   };
   projectsPage: {
+    eyebrow: string;
+    countLabel: string;
     pageTitle: string;
     pageDescription: string;
     title: string;

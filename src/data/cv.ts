@@ -65,20 +65,20 @@ const cvData: CVData = {
   email: 'elmayan.marek@gmail.com',
   phone: '+33 6 XX XX XX XX',
   location: {
-    fr: 'Nantes, France',
-    en: 'Nantes, France',
+    fr: 'Paris, France',
+    en: 'Paris, France',
   },
   linkedin: 'linkedin.com/in/marek-elmayan',
   github: 'github.com/marek-e',
   website: 'melmayan.fr',
   profilePicture: '/images/profile.jpg',
   title: {
-    fr: 'Ingénieur Logiciel Full-Stack',
-    en: 'Full-Stack Software Engineer',
+    fr: 'AI Engineer',
+    en: 'AI Engineer',
   },
   summary: {
-    fr: "Ingénieur logiciel full-stack avec 3+ ans d'expérience en développement web, spécialisé en TypeScript, React et Node.js. Conception et livraison de fonctionnalités full-stack (Next.js, REST APIs, AWS Serverless) visant l'amélioration de l'expérience utilisateur et la maintenabilité du code. Passionné par la sécurité web et l'intégration d'IA dans les workflows de développement. Autonome et curieux.",
-    en: 'Full-stack software engineer with 3+ years of experience in web development, specialized in TypeScript, React, and Node.js. Design and delivery of full-stack features (Next.js, REST APIs, AWS Serverless) focused on user experience and code maintainability. Passionate about web security and integrating AI into development workflows. Self-driven and curious.',
+    fr: "AI Engineer avec 3+ ans d'expérience en développement web, spécialisé en TypeScript, React et Node.js. Conception et livraison de fonctionnalités full-stack (Next.js, REST APIs, AWS Serverless) visant l'amélioration de l'expérience utilisateur et la maintenabilité du code. Passionné par la sécurité web et l'intégration d'IA dans les workflows de développement. Autonome et curieux.",
+    en: 'AI Engineer with 3+ years of experience in web development, specialized in TypeScript, React, and Node.js. Design and delivery of full-stack features (Next.js, REST APIs, AWS Serverless) focused on user experience and code maintainability. Passionate about web security and integrating AI into development workflows. Self-driven and curious.',
   },
   experience: [
     {
@@ -89,7 +89,7 @@ const cvData: CVData = {
         fr: {
           title: 'Ingénieur Logiciel Full-Stack',
           company: 'Theodo',
-          location: 'Nantes, France',
+          location: 'Paris, France',
           description: [
             "Développement d'applications web à fort impact pour des clients variés",
             "Prise de décisions techniques et conception d'architecture logicielle",
@@ -101,7 +101,7 @@ const cvData: CVData = {
         en: {
           title: 'Full-Stack Software Engineer',
           company: 'Theodo',
-          location: 'Nantes, France',
+          location: 'Paris, France',
           description: [
             'Building high-impact web applications for various clients',
             'Leading technical decisions and software architecture design',

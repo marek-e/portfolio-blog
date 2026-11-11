@@ -1,0 +1,104 @@
+.theme-glass {
+  position: relative;
+  display: block;
+  width: 96px;
+  height: calc(96px * 224 / 432);
+  flex-shrink: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 16px;
+  background: transparent;
+  cursor: pointer;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.theme-glass[data-dragging] {
+  cursor: grabbing;
+}
+
+.theme-glass:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 5px;
+}
+
+.theme-glass-canvas {
+  position: absolute;
+  top: -171.4286%;
+  left: -88.8889%;
+  display: block;
+  width: 277.7778%;
+  height: 442.8571%;
+  pointer-events: none;
+}
+
+.theme-glass-fallback {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  padding: 3px;
+  border-radius: inherit;
+  background: oklch(0.2 0.02 285 / 85%);
+  box-shadow: inset 0 1px 5px oklch(0.1 0 0 / 45%);
+}
+
+.theme-glass-fallback > span {
+  display: grid;
+  width: 44%;
+  height: 100%;
+  margin-left: auto;
+  place-items: center;
+  border: 1px solid oklch(1 0 0 / 35%);
+  border-radius: 13px;
+  background: oklch(1 0 0 / 20%);
+  color: oklch(0.99 0.005 300);
+  box-shadow: 0 3px 10px oklch(from var(--primary) l c h / 55%);
+}
+
+.dark .theme-glass-fallback > span {
+  margin-left: 0;
+}
+
+.theme-glass-fallback-sun,
+.theme-glass-fallback-moon {
+  grid-area: 1 / 1;
+}
+
+.theme-glass-fallback-moon,
+.dark .theme-glass-fallback-sun {
+  display: none;
+}
+
+.dark .theme-glass-fallback-moon {
+  display: block;
+}
+
+.theme-glass[data-rendering='webgl'] .theme-glass-fallback {
+  visibility: hidden;
+}
+
+@media (max-width: 767px) {
+  .theme-glass {
+    width: 104px;
+    height: calc(104px * 224 / 432);
+  }
+}
+
+@media (prefers-contrast: more) {
+  .theme-glass-canvas {
+    visibility: hidden;
+  }
+
+  .theme-glass[data-rendering='webgl'] .theme-glass-fallback {
+    visibility: visible;
+    background: var(--background);
+    outline: 1px solid var(--foreground);
+  }
+
+  .theme-glass-fallback > span {
+    background: var(--primary);
+    color: var(--foreground);
+  }
+}

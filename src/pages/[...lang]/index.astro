@@ -24,7 +24,7 @@ const t = getTranslations(lang);
 
 <Layout title={t.hero.pageTitle} description={t.hero.pageDescription}>
   <Navbar />
-  <main>
+  <main class="home-sections">
     <Hero />
     <AboutSection />
     <TimelineSection />
@@ -33,5 +33,45 @@ const t = getTranslations(lang);
     <ContactSection />
   </main>
   <Footer />
-  <BackToTop client:load />
+  <BackToTop client:load label={t.footer.backToTop} />
 </Layout>
+
+<script>
+  function initHomeOrder() {
+    const main = document.querySelector('.home-sections');
+    const projects = main?.querySelector('#projects');
+    const about = main?.querySelector('#about');
+    const running = main?.querySelector('#running');
+    if (!main || !projects || !about || !running) return;
+
+    const mobile = window.matchMedia('(max-width: 767px)');
+    const updateOrder = () => main.insertBefore(projects, mobile.matches ? about : running);
+    updateOrder();
+    mobile.addEventListener('change', updateOrder);
+    document.addEventListener(
+      'astro:before-swap',
+      () => mobile.removeEventListener('change', updateOrder),
+      { once: true }
+    );
+  }
+
+  initHomeOrder();
+  document.addEventListener('astro:after-swap', initHomeOrder);
+</script>
+
+<style>
+  @media (max-width: 767px) {
+    .home-sections {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .home-sections > :global(#projects) {
+      order: -1;
+    }
+
+    .home-sections > :global(:first-child) {
+      order: -2;
+    }
+  }
+</style>

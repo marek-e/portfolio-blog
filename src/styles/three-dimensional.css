@@ -1,0 +1,125 @@
+.button-3d {
+  --depth-tint: var(--primary);
+  --depth-white: oklch(1 0 0);
+  --depth-ink: oklch(from var(--primary) 0.29 0.09 h);
+  --depth-core: color-mix(in oklab, var(--depth-tint) 64%, var(--card));
+  --depth-rim: color-mix(in oklab, var(--depth-tint) 74%, var(--card));
+  --depth-shadow: oklch(from var(--primary) l c h / 22%);
+  --depth-caustic: oklch(from var(--primary) 0.78 0.16 h / 38%);
+  background-origin: border-box;
+  background-repeat: no-repeat;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --depth-refraction: oklch(from var(--primary) 0.97 0.035 calc(h - 75));
+  color: var(--depth-ink);
+  background: oklch(from var(--depth-tint) l c h / 16%);
+  box-shadow:
+    0 3px 5px -3px var(--depth-shadow),
+    0 16px 24px -12px var(--depth-shadow),
+    0 22px 32px -13px var(--depth-caustic);
+  transition: transform 160ms var(--ease-out);
+}
+
+.button-3d-brightness {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms var(--ease-out);
+}
+
+.button-3d-brightness > .glass-material {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  filter: brightness(1.22) saturate(1.12);
+}
+
+.button-3d > .glass-material {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+  opacity: 0.94;
+  transition: opacity 200ms var(--ease-out);
+}
+
+.glass-reflections {
+  transition: opacity 200ms var(--ease-out);
+}
+
+.button-3d-secondary {
+  --depth-tint: oklch(from var(--pastel-sky) 0.72 0.035 calc(h + 15));
+  --depth-core: color-mix(in oklab, var(--depth-tint) 28%, var(--card));
+  --depth-rim: color-mix(in oklab, var(--depth-tint) 38%, var(--card));
+  --depth-ink: oklch(from var(--pastel-sky-ink) 0.4 0.04 calc(h + 10));
+  --depth-refraction: color-mix(in oklab, var(--pastel-sky) 6%, var(--card));
+  --depth-shadow: oklch(from var(--pastel-sky) 0.6 0.04 h / 22%);
+  --depth-caustic: oklch(from var(--pastel-sky) 0.86 0.04 h / 16%);
+  color: var(--depth-ink);
+}
+
+.button-3d-secondary .glass-reflections {
+  opacity: 0.72;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .button-3d:not(:disabled):not([data-disabled]):hover > .glass-material {
+    opacity: 1;
+  }
+
+  .button-3d:not(:disabled):not([data-disabled]):hover > .button-3d-brightness {
+    opacity: 1;
+  }
+
+  .button-3d-secondary:not(:disabled):not([data-disabled]):hover .glass-reflections {
+    opacity: 0.84;
+  }
+}
+
+.button-3d:not(:disabled):not([data-disabled]):active:not(:focus-visible) {
+  transform: scale(0.96);
+}
+
+.dark .button-3d {
+  --depth-white: oklch(from var(--primary) 0.94 0.025 h);
+  --depth-ink: oklch(from var(--primary) 0.99 0.005 h);
+  --depth-core: color-mix(in oklab, var(--depth-tint) 50%, var(--card));
+  --depth-rim: color-mix(in oklab, var(--depth-tint) 64%, var(--card));
+  --depth-shadow: oklch(from var(--primary) 0.08 0.03 h / 50%);
+  --depth-caustic: oklch(from var(--primary) l c h / 30%);
+}
+
+.dark .button-3d-secondary {
+  --depth-tint: oklch(from var(--pastel-sky) 0.54 0.025 h);
+  --depth-core: color-mix(in oklab, var(--depth-tint) 45%, var(--card));
+  --depth-rim: color-mix(in oklab, var(--depth-tint) 70%, var(--card));
+  --depth-white: oklch(from var(--pastel-sky) 0.94 0.015 h);
+  --depth-ink: oklch(from var(--pastel-sky-ink) 0.9 0.02 h);
+  --depth-refraction: oklch(from var(--pastel-sky) 0.84 0.025 h);
+  --depth-shadow: oklch(from var(--pastel-sky) 0.08 0.01 h / 45%);
+  --depth-caustic: oklch(from var(--pastel-sky) 0.8 0.03 h / 10%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button-3d {
+    transition: none;
+  }
+
+  .button-3d-brightness,
+  .button-3d > .glass-material,
+  .glass-reflections {
+    transition: opacity 160ms var(--ease-out);
+  }
+
+  .button-3d:not(:disabled):not([data-disabled]):active:not(:focus-visible) {
+    transform: none;
+  }
+}

@@ -1,4 +1,5 @@
 import type { Lang } from '@/i18n/config';
+import { pickByHash } from '@/lib/utils';
 import type { CollectionEntry } from 'astro:content';
 
 const pastelVariants = [
@@ -53,8 +54,7 @@ export function getStatusVariant(
  * Get a consistent pastel color variant for a tech stack item
  */
 export function getTechColor(tech: string) {
-  const hash = tech.split('').reduce((acc, char) => acc + char.charCodeAt(0) + 99, 0);
-  return pastelVariants[hash % pastelVariants.length];
+  return pickByHash(tech, pastelVariants, 99);
 }
 
 /**

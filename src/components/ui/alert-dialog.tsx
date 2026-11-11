@@ -99,7 +99,7 @@ function AlertDialogTitle({
     <AlertDialogPrimitive.Title
       data-slot="alert-dialog-title"
       className={cn(
-        'text-sm font-medium sm:group-data-[size=default]/alert-dialog-content:group-has-data-[slot=alert-dialog-media]/alert-dialog-content:col-start-2',
+        'font-sans text-sm font-medium tracking-normal sm:group-data-[size=default]/alert-dialog-content:group-has-data-[slot=alert-dialog-media]/alert-dialog-content:col-start-2',
         className
       )}
       {...props}
@@ -129,7 +129,7 @@ function AlertDialogAction({ className, ...props }: React.ComponentProps<typeof 
 
 function AlertDialogCancel({
   className,
-  variant = 'outline',
+  variant = 'ghost',
   size = 'default',
   ...props
 }: AlertDialogPrimitive.Close.Props &

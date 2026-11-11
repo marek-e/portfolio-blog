@@ -8,9 +8,8 @@ import type { Lang } from '@/i18n/config';
 
 type BlogPost = CollectionEntry<'blog'>;
 
-// Cache fonts in memory to avoid refetching
-let geistRegular: ArrayBuffer | null = null;
-let geistBold: ArrayBuffer | null = null;
+let geistRegular: Buffer | null = null;
+let geistBold: Buffer | null = null;
 
 // Cache the artwork in memory to avoid re-encoding it for every post. The
 // in-flight promise is cached too, so posts generated concurrently share a
@@ -61,18 +60,10 @@ async function loadFonts() {
     return { geistRegular, geistBold };
   }
 
-  // Fetch Geist fonts from Fontsource CDN (TTF format)
-  const [regularRes, boldRes] = await Promise.all([
-    fetch('https://cdn.jsdelivr.net/fontsource/fonts/geist@latest/latin-400-normal.ttf'),
-    fetch('https://cdn.jsdelivr.net/fontsource/fonts/geist@latest/latin-700-normal.ttf'),
+  [geistRegular, geistBold] = await Promise.all([
+    readFile(new URL(import.meta.resolve('@fontsource/geist/files/geist-latin-400-normal.woff'))),
+    readFile(new URL(import.meta.resolve('@fontsource/geist/files/geist-latin-700-normal.woff'))),
   ]);
-
-  if (!regularRes.ok || !boldRes.ok) {
-    throw new Error('Failed to load Geist fonts');
-  }
-
-  geistRegular = await regularRes.arrayBuffer();
-  geistBold = await boldRes.arrayBuffer();
 
   return { geistRegular, geistBold };
 }

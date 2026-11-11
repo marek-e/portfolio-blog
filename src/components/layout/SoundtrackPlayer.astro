@@ -1,0 +1,131 @@
+---
+import { SoundtrackStopButton } from './SoundtrackStopButton';
+import { getLangFromUrl, getTranslations } from '@/i18n';
+import '@/styles/soundtrack.css';
+
+const labels = getTranslations(getLangFromUrl(Astro.url)).hero.music;
+---
+
+<div id="soundtrack-engine" transition:persist="site-soundtrack">
+  <template>
+    <audio id="site-soundtrack" loop preload="none">
+      <source src="/audio/motivo-abierto-loop.ogg" type="audio/ogg; codecs=opus" />
+      <source src="/audio/motivo-abierto-loop.mp3" type="audio/mpeg" />
+    </audio>
+  </template>
+</div>
+
+<div
+  class="soundtrack-dock fixed bottom-28 left-4 z-40 flex size-11 items-center justify-center md:bottom-6 md:left-6"
+  data-soundtrack
+  data-soundtrack-dock
+  data-playing="false"
+  hidden
+>
+  <SoundtrackStopButton client:load label={labels.stop} />
+</div>
+
+<script>
+  const engine = document.querySelector<HTMLElement>('#soundtrack-engine')!;
+  const template = engine.querySelector<HTMLTemplateElement>('template')!;
+  const root = engine.attachShadow({ mode: 'open' });
+  root.append(template.content.cloneNode(true));
+  const audio = root.querySelector<HTMLAudioElement>('audio')!;
+  audio.volume = 0.35;
+  const volumeAdjustable = Math.abs(audio.volume - 0.35) < 0.01;
+  let footerVisible = false;
+  const footerObserver = new IntersectionObserver(([entry]) => {
+    footerVisible = entry.isIntersecting;
+    syncSoundtrack();
+  });
+
+  function syncSoundtrack() {
+    const playing = !audio.paused;
+    document.querySelectorAll<HTMLElement>('[data-soundtrack]').forEach((element) => {
+      element.dataset.playing = String(playing);
+      element.dataset.error = String(!!audio.dataset.error);
+    });
+    document.querySelectorAll<HTMLButtonElement>('[data-soundtrack-toggle]').forEach((button) => {
+      button.setAttribute(
+        'aria-label',
+        (playing ? button.dataset.pauseLabel : button.dataset.playLabel)!
+      );
+    });
+    document.querySelectorAll<HTMLElement>('[data-soundtrack-summary]').forEach((summary) => {
+      summary.textContent = (playing ? summary.dataset.playingLabel : summary.dataset.idleLabel)!;
+    });
+    document.querySelectorAll<HTMLElement>('[data-soundtrack-heading]').forEach((heading) => {
+      heading.textContent = (
+        audio.dataset.error ? heading.dataset.errorLabel : heading.dataset.titleLabel
+      )!;
+    });
+    document.querySelectorAll<HTMLElement>('[data-soundtrack-status]').forEach((status) => {
+      status.textContent = audio.dataset.error
+        ? status.dataset.errorLabel!
+        : (playing ? status.dataset.onLabel : status.dataset.offLabel)!;
+    });
+    document.querySelectorAll<HTMLInputElement>('[data-soundtrack-volume]').forEach((slider) => {
+      (slider.closest('label') ?? slider).hidden = !volumeAdjustable;
+      slider.value = String(Math.round(audio.volume * 100));
+      slider.style.setProperty('--soundtrack-volume', `${slider.value}%`);
+    });
+    const dock = document.querySelector<HTMLElement>('[data-soundtrack-dock]');
+    if (dock) dock.hidden = !playing || footerVisible;
+  }
+
+  function observeFooter() {
+    footerObserver.disconnect();
+    const footer = document.querySelector('#footer');
+    footerVisible =
+      !!footer &&
+      footer.getBoundingClientRect().top < innerHeight &&
+      footer.getBoundingClientRect().bottom > 0;
+    if (footer) footerObserver.observe(footer);
+    syncSoundtrack();
+  }
+
+  document.addEventListener('click', async (event) => {
+    if (!(event.target instanceof Element)) return;
+    if (event.target.closest('[data-soundtrack-stop]')) {
+      audio.pause();
+      audio.currentTime = 0;
+      return;
+    }
+    if (!event.target.closest('[data-soundtrack-toggle]')) return;
+    if (!audio.paused) {
+      audio.pause();
+      return;
+    }
+    const previousAttemptFailed = audio.dataset.error || audio.error;
+    delete audio.dataset.error;
+    if (previousAttemptFailed) audio.load();
+    try {
+      await audio.play();
+    } catch (error) {
+      if (!(error instanceof DOMException && error.name === 'AbortError')) {
+        audio.pause();
+        audio.dataset.error = 'true';
+      }
+    }
+    syncSoundtrack();
+  });
+
+  document.addEventListener('input', (event) => {
+    if (
+      event.target instanceof HTMLInputElement &&
+      event.target.matches('[data-soundtrack-volume]')
+    ) {
+      audio.volume = Number(event.target.value) / 100;
+    }
+  });
+
+  for (const event of ['play', 'pause', 'volumechange'])
+    audio.addEventListener(event, syncSoundtrack);
+  audio.addEventListener('error', () => {
+    audio.pause();
+    audio.dataset.error = 'true';
+    syncSoundtrack();
+  });
+  document.addEventListener('astro:after-swap', observeFooter);
+  observeFooter();
+</script>
