@@ -1,0 +1,21 @@
+src/components/layout/Footer.astro
+  s_ff544f8b41e90f::t_96f9efb3dc15e5 149-151
+  s_ff544f8b41e90f::t_1ed5bb9a3a1e3c 131-133,138,143-148,152-154
+  s_ff544f8b41e90f::t_06989a2390c6f9 155
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "75b2b93119daab1cfbc41972aae1a750031ea1d0",
+  "prompts": {},
+  "sessions": {
+    "s_ff544f8b41e90f": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1cb2d-2dae-73a3-9a0a-8ba83ba1828a",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
