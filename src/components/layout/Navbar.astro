@@ -22,6 +22,7 @@ const linksClasses =
   <div class="navbar-glass liquid-glass relative flex items-center gap-6 rounded-full px-6 py-3">
     <a
       href={translatePath('/')}
+      data-nav-logo-link
       aria-label={t.aria.homeLink}
       class="text-foreground group/logo flex items-center gap-2 font-semibold transition-all duration-300 ease-in-out hover:opacity-80 motion-reduce:hover:underline"
     >
@@ -39,7 +40,7 @@ const linksClasses =
             {...(link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
           >
             <Icon icon={link.icon} strokeWidth={2} className="size-4" />
-            {link.label}
+            <span data-nav-label>{link.label}</span>
           </a>
         ))
       }
@@ -66,7 +67,7 @@ const linksClasses =
 
   @media (prefers-reduced-motion: reduce) {
     [data-floating-navbar] {
-      transition: none;
+      transition: opacity 120ms ease;
     }
   }
 
@@ -120,47 +121,14 @@ const linksClasses =
 </style>
 
 <script>
+  import { initNavbarFooterTransition } from './navbar-footer-transition';
+
   let cleanupFooterVisibility: (() => void) | undefined;
 
   function initFooterVisibility() {
     cleanupFooterVisibility?.();
 
-    const navbar = document.querySelector<HTMLElement>('[data-floating-navbar]');
-    const footer = document.getElementById('footer');
-    if (!navbar || !footer) return;
-
-    const desktop = window.matchMedia('(min-width: 768px)');
-    let frame = 0;
-
-    const update = () => {
-      frame = 0;
-      const hidden =
-        desktop.matches &&
-        footer.getBoundingClientRect().top <= 0 &&
-        !navbar.contains(document.activeElement);
-
-      navbar.toggleAttribute('data-footer-hidden', hidden);
-      navbar.inert = hidden;
-    };
-
-    const scheduleUpdate = () => {
-      if (!frame) frame = requestAnimationFrame(update);
-    };
-
-    window.addEventListener('scroll', scheduleUpdate, { passive: true });
-    window.addEventListener('resize', scheduleUpdate);
-    navbar.addEventListener('focusout', scheduleUpdate);
-    desktop.addEventListener('change', scheduleUpdate);
-
-    cleanupFooterVisibility = () => {
-      cancelAnimationFrame(frame);
-      window.removeEventListener('scroll', scheduleUpdate);
-      window.removeEventListener('resize', scheduleUpdate);
-      navbar.removeEventListener('focusout', scheduleUpdate);
-      desktop.removeEventListener('change', scheduleUpdate);
-    };
-
-    update();
+    cleanupFooterVisibility = initNavbarFooterTransition();
   }
 
   document.addEventListener('astro:before-swap', () => cleanupFooterVisibility?.());
