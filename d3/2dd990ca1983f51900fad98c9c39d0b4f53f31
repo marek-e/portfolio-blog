@@ -1,0 +1,21 @@
+src/data/cv.ts
+  s_26c6e968d19a7b::t_b457b8ec65607d 76-77,80-81,90,94-99,103,107-112,204-215
+src/data/timeline.ts
+  s_26c6e968d19a7b::t_a9d7a7da724b3e 32,35,38,41
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "d32dd990ca1983f51900fad98c9c39d0b4f53f31",
+  "prompts": {},
+  "sessions": {
+    "s_26c6e968d19a7b": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1cc89-0eda-7561-b01a-28707d9bb686",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
