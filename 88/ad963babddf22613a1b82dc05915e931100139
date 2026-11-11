@@ -1,0 +1,31 @@
+src/content.config.ts
+  s_b47ba44e656b5e::t_90abad49da81f9 21
+src/content/projects/en/personal-portfolio.md
+  s_b47ba44e656b5e::t_90abad49da81f9 11
+src/content/projects/en/next-armored.md
+  s_b47ba44e656b5e::t_90abad49da81f9 11
+src/content/projects/fr/personal-portfolio.md
+  s_b47ba44e656b5e::t_90abad49da81f9 11
+src/components/portfolio/FeaturedProjects.astro
+  s_b47ba44e656b5e::t_90abad49da81f9 43
+src/content/projects/fr/next-armored.md
+  s_b47ba44e656b5e::t_90abad49da81f9 11
+src/components/portfolio/ProjectCardReact.tsx
+  s_b47ba44e656b5e::t_56c6fae6d7fc76 17,44-45,70,72
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "88ad963babddf22613a1b82dc05915e931100139",
+  "prompts": {},
+  "sessions": {
+    "s_b47ba44e656b5e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e1ae028b-4cb4-4ad6-b24c-c1b7a7149d93",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
