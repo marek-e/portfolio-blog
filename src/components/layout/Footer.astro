@@ -140,7 +140,11 @@ const groups = [
       </nav>
     </div>
     <div class="footer-utilities relative mx-auto mt-auto">
-      <p class="footer-copyright font-sans text-xs">© {currentYear} Marek Elmayan</p>
+      <p class="footer-copyright font-sans text-xs leading-relaxed">
+        <span>© {currentYear} Marek Elmayan</span>
+        <span class="hidden md:inline" aria-hidden="true"> · </span>
+        <span class="block md:inline">{t.footer.exploration}</span>
+      </p>
       <GlassThemeSwitch lang={lang} client:visible />
       <button
         type="button"
@@ -213,24 +217,8 @@ const groups = [
     opacity: 0;
   }
 
-  .footer-scene[data-theme-preview] {
-    --primary: color-mix(in oklab, var(--day-primary) var(--footer-daylight), var(--night-primary));
-    --foreground: var(--night-foreground);
-    --muted-foreground: var(--night-muted-foreground);
-    color: var(--foreground);
-  }
-
   .footer-scene[data-theme-preview] .footer-art {
     background-image: url('/images/footer-night-v1.webp');
-  }
-
-  .footer-scene[data-preview-tone='day'] {
-    --foreground: var(--day-foreground);
-    --muted-foreground: var(--day-muted-foreground);
-  }
-
-  .footer-scene[data-preview-midpoint=''] {
-    --muted-foreground: var(--foreground);
   }
 
   .footer-content {

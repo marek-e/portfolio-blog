@@ -98,6 +98,7 @@ export const en: UITranslations = {
     presentations: 'Talks',
     designSystem: 'Design System',
     backToTop: 'Back to top',
+    exploration: 'Always something to explore.',
     cv: 'CV',
   },
   notFound: {

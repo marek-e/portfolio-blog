@@ -7,9 +7,6 @@ export function createFooterPreview(button: HTMLButtonElement, initial: number) 
   const update = (next: number) => {
     value = next;
     if (!ready || !scene || !day) return;
-    scene.style.setProperty('--footer-daylight', `${(next * 100).toFixed(3)}%`);
-    scene.dataset.previewTone = next > 0.5 ? 'day' : 'night';
-    scene.dataset.previewMidpoint = next > 0.2 && next < 0.8 ? '' : 'false';
     day.style.opacity = String(next);
   };
   if (scene && day) {
@@ -34,9 +31,6 @@ export function createFooterPreview(button: HTMLButtonElement, initial: number) 
       disposed = true;
       if (!scene || !day) return;
       delete scene.dataset.themePreview;
-      delete scene.dataset.previewTone;
-      delete scene.dataset.previewMidpoint;
-      scene.style.removeProperty('--footer-daylight');
       day.style.removeProperty('opacity');
     },
   };
