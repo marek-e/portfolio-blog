@@ -1,0 +1,26 @@
+src/lib/projects.ts
+  s_b47ba44e656b5e::t_d2f47c964159bc 2,57
+src/components/portfolio/ProjectCardReact.tsx
+  s_b47ba44e656b5e::t_05c471922a0706 56
+  s_b47ba44e656b5e::t_23bbf35db0276e 3
+src/lib/blog.ts
+  s_b47ba44e656b5e::t_d2f47c964159bc 2,19
+src/lib/utils.ts
+  s_b47ba44e656b5e::t_b87e5075440e94 7-11
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "6b3516e81a50cc3264dd326333ce648702231e14",
+  "prompts": {},
+  "sessions": {
+    "s_b47ba44e656b5e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e1ae028b-4cb4-4ad6-b24c-c1b7a7149d93",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
