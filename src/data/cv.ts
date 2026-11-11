@@ -91,12 +91,12 @@ const cvData: CVData = {
           company: 'Theodo',
           location: 'Paris, France',
           description: [
+            "Stage à partir de janvier 2023, ingénieur full-stack depuis septembre 2023, puis prise récente de responsabilités d'AI Tech Lead",
             'Développement de produits avec une usine agentique, principalement Claude Code et ponctuellement Codex',
             "Planification avec les agents à partir de documents d'exigences produit (PRD), puis implémentation, validation et ouverture de pull requests autonomes dans un environnement de développement cloud",
             'Préparation des bases de code pour les agents avec des règles de lint et des contrôles automatisés de qualité du code',
             'Audits de sécurité des bases de code et amélioration continue du workflow de développement avec les agents',
             "Développement d'applications web full-stack et décisions d'architecture pour des clients variés",
-            "Stage à partir de janvier 2023, ingénieur full-stack depuis septembre 2023, puis prise récente de responsabilités d'AI Tech Lead",
           ],
         },
         en: {
@@ -104,12 +104,12 @@ const cvData: CVData = {
           company: 'Theodo',
           location: 'Paris, France',
           description: [
+            'Joined as an intern in January 2023, became a full-stack software engineer in September 2023, and recently took on AI Tech Lead responsibilities',
             'Building products with a coding-agent factory, mainly using Claude Code and occasionally Codex',
             'Planning with agents from product requirements documents (PRDs), followed by autonomous implementation, validation, and pull request creation in a cloud development environment',
             'Preparing codebases for coding agents through lint rules and automated code-quality checks',
             'Auditing codebase security and continuously improving the agent development workflow',
             'Developing full-stack web applications and making architecture decisions for various clients',
-            'Joined as an intern in January 2023, became a full-stack software engineer in September 2023, and recently took on AI Tech Lead responsibilities',
           ],
         },
       },
