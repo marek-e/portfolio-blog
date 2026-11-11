@@ -1,0 +1,74 @@
+src/components/portfolio/ProjectListCard.astro
+  s_8cf848ec8791e3::t_669acfc5586206 90
+src/components/portfolio/ProjectCardReact.tsx
+  s_8cf848ec8791e3::t_669acfc5586206 99,103
+src/components/portfolio/CV.astro
+  s_8cf848ec8791e3::t_669acfc5586206 54,83,152,183,204
+src/components/mdx/Citation.tsx
+  s_8cf848ec8791e3::t_8a0eb1c90a29db 24
+src/components/layout/Footer.astro
+  s_8cf848ec8791e3::t_669acfc5586206 66,129
+src/layouts/Layout.astro
+  s_8cf848ec8791e3::t_8a0eb1c90a29db 103
+  s_8cf848ec8791e3::t_669acfc5586206 4-5,104-105
+src/components/portfolio/Hero.astro
+  s_8cf848ec8791e3::t_669acfc5586206 80
+src/styles/dev-id-card.css
+  s_8cf848ec8791e3::t_669acfc5586206 128,182
+src/components/blog/PostTags.astro
+  s_8cf848ec8791e3::t_669acfc5586206 19
+src/components/portfolio/TimelineCards.tsx
+  s_8cf848ec8791e3::t_669acfc5586206 155,176
+src/pages/[...lang]/projects/[slug].astro
+  s_8cf848ec8791e3::t_669acfc5586206 132,164,244,290,316
+src/components/ui/alert-dialog.tsx
+  s_8cf848ec8791e3::t_669acfc5586206 102
+src/components/blog/kv-adding-machine/kv-adding-machine.css
+  s_8cf848ec8791e3::t_669acfc5586206 220,245
+src/styles/hero-stickers.css
+  s_8cf848ec8791e3::t_669acfc5586206 16
+src/components/mdx/ScrollTo.astro
+  s_8cf848ec8791e3::t_669acfc5586206 38
+docs/DESIGN-SYSTEM.md
+  s_8cf848ec8791e3::t_8a0eb1c90a29db 23,25-34,36
+  s_8cf848ec8791e3::t_a8469d3c73429f 24
+src/pages/[...lang]/blog/[slug].astro
+  s_8cf848ec8791e3::t_669acfc5586206 117,141
+src/components/design-system/DesignSystemPreview.tsx
+  s_8cf848ec8791e3::t_8a0eb1c90a29db 155,157-158,161,164-173,177,717
+  s_8cf848ec8791e3::t_c842585229d3c8 153
+src/components/mdx/ChapterVideo.astro
+  s_8cf848ec8791e3::t_669acfc5586206 43
+src/styles/global.css
+  s_8cf848ec8791e3::t_669acfc5586206 5,9,24-31,531,533-534,659,774,779-782,784
+src/components/ui/badge.tsx
+  s_8cf848ec8791e3::t_669acfc5586206 8
+src/pages/[...lang]/projects/index.astro
+  s_8cf848ec8791e3::t_669acfc5586206 53
+src/components/layout/SoundtrackStopButton.tsx
+  s_8cf848ec8791e3::t_669acfc5586206 37
+src/components/portfolio/ActivityCardParts.tsx
+  s_8cf848ec8791e3::t_669acfc5586206 109,254
+src/pages/[...lang]/blog/index.astro
+  s_8cf848ec8791e3::t_669acfc5586206 74,107
+src/components/blog/PostMeta.astro
+  s_8cf848ec8791e3::t_669acfc5586206 20
+src/lib/og-image.tsx
+  s_8cf848ec8791e3::t_a2d03db3c16d13 11-12,63-65
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "e2533d6bb4e09e175a339a41428a529d7b099de6",
+  "prompts": {},
+  "sessions": {
+    "s_8cf848ec8791e3": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1cbda-b1c7-7e61-b2c2-935c061dce06",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
