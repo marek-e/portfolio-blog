@@ -7,7 +7,7 @@
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
   Referrer-Policy: strict-origin-when-cross-origin
-  Permissions-Policy: geolocation=(), microphone=(), camera=(), browsing-topics=()
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
 
   # Content Security Policy
   # Tailored for Astro + React + shadcn/ui with theme switching
