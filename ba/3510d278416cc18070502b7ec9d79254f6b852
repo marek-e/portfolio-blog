@@ -1,0 +1,19 @@
+src/components/layout/Footer.astro
+  s_61d12b99e95fe7::t_fada583d0cc009 292-300
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "ba3510d278416cc18070502b7ec9d79254f6b852",
+  "prompts": {},
+  "sessions": {
+    "s_61d12b99e95fe7": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1cca2-e75c-7153-b2c2-c722a6621707",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
