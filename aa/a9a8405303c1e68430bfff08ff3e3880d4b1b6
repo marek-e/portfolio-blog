@@ -1,0 +1,19 @@
+src/components/portfolio/AboutSection.astro
+  s_a04488f731526f::t_72238691408010 52-56
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "aaa9a8405303c1e68430bfff08ff3e3880d4b1b6",
+  "prompts": {},
+  "sessions": {
+    "s_a04488f731526f": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1cc78-90fe-7d30-87af-5521079a6da0",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
