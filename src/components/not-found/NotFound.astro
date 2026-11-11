@@ -1,0 +1,440 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import AnimatedLogo from '@/components/layout/AnimatedLogo.astro';
+import { ModeToggle } from '@/components/layout/ModeToggle';
+import { LanguageSwitcher } from '@/components/layout/LanguageSwitcher';
+import { getLangFromUrl, getTranslatedPath, getTranslations, type Lang } from '@/i18n';
+
+const currentLang = getLangFromUrl(Astro.url);
+const currentTranslations = getTranslations(currentLang);
+const locales = (['fr', 'en'] as Lang[]).map((lang) => ({
+  lang,
+  t: getTranslations(lang),
+  path: getTranslatedPath(lang),
+}));
+const metadata = Object.fromEntries(locales.map(({ lang, t }) => [lang, t.notFound]));
+---
+
+<Layout
+  title={currentTranslations.notFound.pageTitle}
+  description={currentTranslations.notFound.pageDescription}
+>
+  <script is:inline data-astro-rerun define:vars={{ metadata }}>
+    {
+      const lang = location.pathname.split('/')[1] === 'en' ? 'en' : 'fr';
+      document.documentElement.lang = lang;
+      document.title = metadata[lang].pageTitle;
+      document.querySelector('meta[name="description"]').content = metadata[lang].pageDescription;
+    }
+  </script>
+  <div class="lost-page">
+    <header class="lost-header">
+      {
+        locales.map(({ lang, t, path }) => (
+          <a
+            class="lost-brand"
+            href={path('/')}
+            aria-label={t.aria.homeLink}
+            data-error-locale={lang}
+          >
+            <AnimatedLogo class="size-12" />
+            <span>melmayan.fr</span>
+          </a>
+        ))
+      }
+      <div class="lost-utilities">
+        {
+          locales.map(({ lang, t }) => (
+            <div class="lost-locale-tools" data-error-locale={lang}>
+              <LanguageSwitcher
+                currentLang={lang}
+                currentPath={lang === 'en' ? '/en/404' : '/404'}
+                variant="plain"
+                className="lost-language"
+              />
+              <ModeToggle client:load label={t.aria.toggleTheme} />
+            </div>
+          ))
+        }
+      </div>
+    </header>
+    <main id="main-content" class="lost-main">
+      <div class="lost-scene">
+        <div class="lost-canvas">
+          <div class="lost-art" aria-hidden="true">
+            {
+              ['day', 'night'].map((theme) => (
+                <picture>
+                  <source
+                    media="(max-width: 1023px) and (max-aspect-ratio: 4/5)"
+                    srcset={`/images/404/alpine-${theme}-mobile-448.webp 448w, /images/404/alpine-${theme}-mobile.webp 896w`}
+                    sizes="100vw"
+                    width="896"
+                    height="1344"
+                  />
+                  <img
+                    src={`/images/404/alpine-${theme}.webp`}
+                    alt=""
+                    width="1536"
+                    height="1024"
+                    fetchpriority="high"
+                    class={`lost-${theme}`}
+                  />
+                </picture>
+              ))
+            }
+          </div>
+          {
+            locales.map(({ lang, t, path }) => (
+              <nav
+                class="lost-signpost"
+                aria-label={t.aria.mainNavigation}
+                aria-describedby={`lost-sign-hint-${lang}`}
+                data-error-locale={lang}
+                lang={lang}
+              >
+                <div class="lost-sign-hint">
+                  <p id={`lost-sign-hint-${lang}`}>{t.notFound.choosePath}</p>
+                  <svg class="lost-hint-arrow" viewBox="0 0 120 100" fill="none" aria-hidden="true">
+                    <path
+                      d="M108 8C110 50 68 90 18 96M30 82L18 96L36 98"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      vector-effect="non-scaling-stroke"
+                    />
+                  </svg>
+                </div>
+                {[
+                  { href: '/', label: t.footer.home },
+                  { href: '/projects', label: t.nav.projects },
+                  { href: '/blog', label: t.nav.blog },
+                ].map(({ href, label }) => (
+                  <a href={path(href)}>
+                    <span>{label}</span>
+                  </a>
+                ))}
+              </nav>
+            ))
+          }
+        </div>
+        <span class="lost-code font-display-wonk" aria-hidden="true">404</span>
+        {
+          locales.map(({ lang, t }) => (
+            <div data-error-locale={lang} lang={lang}>
+              <div class="lost-copy">
+                <h1>
+                  <span class="sr-only">404 · </span>
+                  {t.notFound.heading}
+                </h1>
+                <p>{t.notFound.message}</p>
+              </div>
+              <p class="sr-only">{t.notFound.sceneDescription}</p>
+            </div>
+          ))
+        }
+      </div>
+    </main>
+  </div>
+</Layout>
+
+<style>
+  :global(body:has(.lost-page)) {
+    padding-bottom: 0;
+  }
+  :global(body:has(.lost-page) .language-bookmark) {
+    display: none !important;
+  }
+  :global(html[lang='fr']) [data-error-locale='en'],
+  :global(html[lang='en']) [data-error-locale='fr'] {
+    display: none !important;
+  }
+  .lost-page {
+    --scene-height: 100svh;
+    --scene-sky: #b9b6cc;
+    --scene-ink: #303a3a;
+    --scene-muted: #4b5558;
+    --scene-ground: #b4a28a;
+    --sign-ink: #17110b;
+    position: relative;
+    min-height: 100svh;
+    background: var(--scene-ground);
+    color: var(--scene-ink);
+    isolation: isolate;
+    overflow: clip;
+  }
+  :global(.dark) .lost-page {
+    --scene-sky: #283e65;
+    --scene-ink: #f0eee6;
+    --scene-muted: #d6dce0;
+    --scene-ground: #333b45;
+  }
+  .lost-header {
+    position: absolute;
+    inset: 0 0 auto;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem clamp(1.25rem, 4vw, 4rem);
+  }
+  .lost-brand {
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+    gap: 0.75rem;
+    border-radius: 0.5rem;
+    color: #fff5e7;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    text-shadow: 0 1px 5px #172333;
+  }
+  .lost-brand :global(.logo) {
+    filter: drop-shadow(0 1px 4px #17233380);
+  }
+  .lost-brand :global(.logo rect) {
+    animation: none;
+  }
+  .lost-locale-tools {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .lost-locale-tools :global(.lost-language a) {
+    position: relative;
+    border-radius: 0.375rem;
+    color: var(--scene-ink);
+    background: none;
+    font-weight: 500;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.35em;
+  }
+  .lost-locale-tools :global(.lost-language a + a)::before {
+    content: '/' / '';
+    position: absolute;
+    left: -0.125rem;
+    color: var(--scene-muted);
+    font-weight: 400;
+  }
+  .lost-locale-tools :global(.lost-language a[aria-current='page']),
+  .lost-locale-tools :global(.lost-language a:hover),
+  .lost-locale-tools :global(.lost-language a:focus-visible) {
+    text-decoration-line: underline;
+  }
+  .lost-scene {
+    position: relative;
+    height: var(--scene-height);
+    min-height: 30rem;
+    background: var(--scene-sky);
+    overflow: clip;
+  }
+  .lost-canvas {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: max(100%, calc(var(--scene-height) * 1.5));
+    aspect-ratio: 3 / 2;
+    transform: translateX(-50%);
+  }
+  .lost-art,
+  .lost-art picture,
+  .lost-art img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .lost-art img {
+    object-fit: cover;
+  }
+  .lost-art::after {
+    content: '';
+    position: absolute;
+    inset: 92% 0 0;
+    background: linear-gradient(transparent, var(--scene-ground));
+  }
+  .lost-utilities :global(.mode-toggle) {
+    width: 44px;
+    height: 44px;
+  }
+  .lost-main {
+    display: flow-root;
+  }
+  .lost-night {
+    opacity: 0;
+  }
+  :global(.dark) .lost-day {
+    opacity: 0;
+  }
+  :global(.dark) .lost-night {
+    opacity: 1;
+  }
+  .lost-code {
+    position: absolute;
+    left: 50%;
+    top: 16.5%;
+    transform: translate(-50%, -50%);
+    color: var(--scene-ink);
+    font-size: clamp(4.5rem, 10vw, 10rem);
+    line-height: 1;
+    letter-spacing: -0.06em;
+  }
+  .lost-copy {
+    position: absolute;
+    top: 29%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(90vw, 44rem);
+    text-align: center;
+  }
+  .lost-copy h1 {
+    font-size: clamp(1.875rem, 3.8vw, 3.75rem);
+    line-height: 1.15;
+    font-weight: 550;
+    text-wrap: balance;
+  }
+  .lost-copy p {
+    max-width: 26rem;
+    margin: 0.875rem auto 0;
+    color: var(--scene-muted);
+    font-size: clamp(0.9375rem, 1.25vw, 1.125rem);
+    line-height: 1.6;
+    text-wrap: balance;
+  }
+  .lost-signpost {
+    position: absolute;
+    top: 52%;
+    left: 54.7%;
+    width: 16.5%;
+    height: 28.5%;
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    gap: 0;
+  }
+  .lost-sign-hint {
+    position: absolute;
+    bottom: 93%;
+    left: 65%;
+    width: clamp(7rem, 12vw, 10rem);
+    color: var(--scene-ink);
+    text-align: center;
+    pointer-events: none;
+  }
+  .lost-sign-hint p {
+    font-size: clamp(0.75rem, 1.2vw, 0.875rem);
+    font-weight: 500;
+    line-height: 1.35;
+    text-wrap: balance;
+  }
+  .lost-hint-arrow {
+    display: block;
+    width: clamp(3rem, 5vw, 4.5rem);
+    height: auto;
+    aspect-ratio: 6 / 5;
+    overflow: visible;
+  }
+  .lost-signpost a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    border-radius: 0.5rem;
+    color: var(--sign-ink);
+    font-family: var(--font-display);
+    font-size: clamp(1.1875rem, 2vw, 1.875rem);
+    font-weight: 700;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.2em;
+  }
+  .lost-signpost a:hover,
+  .lost-signpost a:focus-visible {
+    text-decoration-line: underline;
+  }
+  .lost-signpost a:focus-visible {
+    outline-color: var(--sign-ink);
+    outline-offset: -3px;
+  }
+  @media (max-width: 1023px) {
+    .lost-page {
+      --scene-height: calc(100svh - 64px);
+    }
+    .lost-header {
+      position: relative;
+      min-height: 64px;
+      gap: 1rem;
+      padding-block: 0.625rem;
+      background: var(--scene-sky);
+    }
+    .lost-brand {
+      min-height: 44px;
+      color: var(--scene-ink);
+      text-shadow: none;
+    }
+    .lost-brand :global(.logo) {
+      width: 44px;
+      height: 44px;
+      filter: none;
+    }
+    .lost-code {
+      top: 11%;
+      font-size: clamp(4.5rem, 15vw, 7rem);
+    }
+    .lost-copy {
+      top: 24%;
+      width: calc(100% - 2.5rem);
+    }
+    .lost-copy h1 {
+      font-size: clamp(1.75rem, 4vw, 3rem);
+    }
+    .lost-copy p {
+      max-width: 22rem;
+      margin-top: 0.625rem;
+      font-size: 0.9375rem;
+      line-height: 1.5;
+    }
+  }
+  @media (max-width: 1023px) and (max-aspect-ratio: 4/5) {
+    .lost-canvas {
+      width: 100%;
+      aspect-ratio: 2 / 3;
+    }
+    .lost-art img {
+      mask-image: linear-gradient(transparent, black 25%);
+    }
+    .lost-copy {
+      top: 20%;
+    }
+    .lost-signpost {
+      top: 56.3%;
+      left: 58%;
+      width: 34%;
+      height: 29.7%;
+    }
+    .lost-signpost a {
+      font-size: clamp(1.1875rem, 3vw, 1.625rem);
+    }
+    .lost-sign-hint {
+      left: 10%;
+      width: min(9rem, 35vw);
+    }
+  }
+  @media (max-width: 479px) {
+    .lost-brand span {
+      display: none;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    :global(html:has(.lost-page)::view-transition-old(root)),
+    :global(html:has(.lost-page)::view-transition-new(root)) {
+      animation: none !important;
+    }
+    .lost-page :global(*),
+    .lost-page :global(*::before),
+    .lost-page :global(*::after) {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+</style>

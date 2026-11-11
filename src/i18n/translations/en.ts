@@ -107,6 +107,7 @@ export const en: UITranslations = {
     message: "This trail isn't on the map. Let's find you a way back.",
     backHome: 'Back home',
     browseBlog: 'Browse the blog',
+    choosePath: 'Choose a path',
     sceneDescription:
       'Melo sits on an alpine rock, puzzling over a map beside a floating robot. A lantern lights the trail, and a wooden signpost points the way home.',
   },

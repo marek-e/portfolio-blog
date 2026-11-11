@@ -95,6 +95,7 @@ export interface UITranslations {
     message: string;
     backHome: string;
     browseBlog: string;
+    choosePath: string;
     sceneDescription: string;
   };
   theme: {

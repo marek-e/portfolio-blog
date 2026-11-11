@@ -107,6 +107,7 @@ export const fr: UITranslations = {
     message: "Ce sentier n'est pas sur la carte. Retrouvons le bon chemin.",
     backHome: "Retour à l'accueil",
     browseBlog: 'Parcourir le blog',
+    choosePath: 'Choisissez un chemin',
     sceneDescription:
       "Melo est assis sur un rocher alpin et étudie une carte, perplexe, accompagné d'un petit robot flottant. Une lanterne éclaire le sentier et un panneau en bois indique le chemin du retour.",
   },
