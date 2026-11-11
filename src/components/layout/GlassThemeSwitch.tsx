@@ -5,11 +5,8 @@ import { createGlassRenderer, type GlassRenderer } from './glass-theme-switch/re
 import { landing, resist } from './glass-theme-switch/physics';
 import { createFooterPreview } from './glass-theme-switch/preview';
 import type { Lang } from '@/i18n';
+import { applyTheme, getTheme } from '@/lib/theme';
 import './glass-theme-switch/styles.css';
-
-function getTheme(): 'light' | 'dark' {
-  return document.documentElement.classList.contains('dark') ? 'dark' : 'light';
-}
 
 function subscribeTheme(onChange: () => void) {
   const observer = new MutationObserver(onChange);
@@ -31,12 +28,6 @@ export function GlassThemeSwitch({ lang }: { lang: Lang }) {
           switchLight: 'Switch to light theme',
           switchDark: 'Switch to dark theme',
         };
-  const setTheme = (next: 'light' | 'dark') => {
-    const system = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    if (next === system) localStorage.removeItem('theme');
-    else localStorage.setItem('theme', next);
-    document.documentElement.classList.toggle('dark', next === 'dark');
-  };
   const buttonRef = useRef<HTMLButtonElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const rendererRef = useRef<GlassRenderer | null>(null);
@@ -83,7 +74,7 @@ export function GlassThemeSwitch({ lang }: { lang: Lang }) {
 
   const commit = (next: number, velocity = 0, immediate = false, dragged = false) => {
     rendererRef.current?.release(next, velocity, immediate, dragged);
-    setTheme(next ? 'light' : 'dark');
+    applyTheme(next ? 'light' : 'dark');
   };
   const cancel = () => {
     if (!gesture.current.active) return;

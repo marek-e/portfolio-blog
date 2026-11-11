@@ -2,25 +2,15 @@ import { useRef } from 'react';
 import { Moon02Icon, SunIcon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
 
+import { applyTheme, getTheme } from '@/lib/theme';
 import '@/styles/mode-toggle.css';
 
 export function ModeToggle() {
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   const toggleTheme = () => {
-    const isDark = document.documentElement.classList.contains('dark');
-    const next = isDark ? 'light' : 'dark';
-    const system = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-
-    if (next === system) {
-      localStorage.removeItem('theme');
-    } else {
-      localStorage.setItem('theme', next);
-    }
-
-    const toggleClass = () => {
-      document.documentElement.classList[next === 'dark' ? 'add' : 'remove']('dark');
-    };
+    const next = getTheme() === 'dark' ? 'light' : 'dark';
+    const toggleClass = () => applyTheme(next);
 
     if (
       !document.startViewTransition ||
