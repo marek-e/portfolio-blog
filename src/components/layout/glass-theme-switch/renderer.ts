@@ -1,4 +1,12 @@
-import { clamp, createMotion, daylight, hitKnob, knobGeometry, stepMotion } from './physics';
+import {
+  clamp,
+  createMotion,
+  daylight,
+  hitKnob,
+  isAtRest,
+  knobGeometry,
+  stepMotion,
+} from './physics';
 import { createPixelRaster } from './pixels';
 import { fragmentSource, vertexSource } from './shaders';
 
@@ -67,7 +75,11 @@ export function createGlassRenderer(
   const motion = createMotion(initial);
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   const contrast = window.matchMedia('(prefers-contrast: more)');
+  const IDLE_FRAME_MS = 1000 / 12;
+  const SETTLE_MS = 800;
   let frame = 0;
+  let idleTimer = 0;
+  let restingSince = 0;
   let previousTime = 0;
   let lastPreview = -1;
   let visible = true;
@@ -123,11 +135,21 @@ export function createGlassRenderer(
     gl.uniform1f(uniforms.time, reduced.matches ? 0 : time / 1000);
     gl.drawArrays(gl.TRIANGLES, 0, 3);
     preview();
-    if (!reduced.matches) request();
+    if (reduced.matches) return;
+    restingSince = isAtRest(motion) ? restingSince || time : 0;
+    if (restingSince && time - restingSince > SETTLE_MS)
+      idleTimer = window.setTimeout(request, IDLE_FRAME_MS);
+    else request();
   };
   const request = () => {
+    clearTimeout(idleTimer);
     if (!frame && !disposed && visible && !document.hidden && !contrast.matches)
       frame = requestAnimationFrame(draw);
+  };
+  const stop = () => {
+    cancelAnimationFrame(frame);
+    clearTimeout(idleTimer);
+    frame = 0;
   };
   const resize = () => {
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -138,8 +160,7 @@ export function createGlassRenderer(
     request();
   };
   const visibility = () => {
-    cancelAnimationFrame(frame);
-    frame = 0;
+    stop();
     previousTime = 0;
     if (document.hidden || contrast.matches) {
       if (!motion.dragging) stepMotion(motion, 0, true);
@@ -158,10 +179,8 @@ export function createGlassRenderer(
   resizeObserver.observe(canvas);
   const intersection = new IntersectionObserver(([entry]) => {
     visible = entry.isIntersecting;
-    if (!visible) {
-      cancelAnimationFrame(frame);
-      frame = 0;
-    } else {
+    if (!visible) stop();
+    else {
       previousTime = 0;
       request();
     }
@@ -223,7 +242,7 @@ export function createGlassRenderer(
     destroy() {
       if (disposed) return;
       disposed = true;
-      cancelAnimationFrame(frame);
+      stop();
       resizeObserver.disconnect();
       intersection.disconnect();
       reduced.removeEventListener('change', preference);

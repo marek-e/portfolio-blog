@@ -55,6 +55,19 @@ export function stepMotion(state: GlassMotion, dt: number, immediate = false) {
   else if (state.orbit > 0.985) state.direction = -1;
 }
 
+export function isAtRest(state: GlassMotion, tolerance = 0.001) {
+  return (
+    !state.dragging &&
+    Math.abs(state.target - state.progress) < tolerance &&
+    Math.abs(state.velocity) < tolerance &&
+    Math.abs(ease(clamp(state.progress)) - state.orbit) < tolerance &&
+    Math.abs(state.orbitVelocity) < tolerance &&
+    Math.abs(state.hoverTarget - state.hover) < tolerance &&
+    Math.abs(state.pressTarget - state.press) < tolerance &&
+    state.kick < tolerance * 8
+  );
+}
+
 export function knobGeometry(state: GlassMotion) {
   const over = Math.min(0.5, Math.max(-state.progress, state.progress - 1, 0));
   const stretch = Math.min(Math.abs(state.velocity) * 6.5, 16);
