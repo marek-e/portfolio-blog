@@ -1,0 +1,29 @@
+src/i18n/translations/en.ts
+  s_b8dc9797d08a37::t_153d83d4e03371 220,223
+src/components/portfolio/HeroStickers.tsx
+  s_b8dc9797d08a37::t_153d83d4e03371 51
+src/components/portfolio/RaceActivityCard.tsx
+  s_b8dc9797d08a37::t_153d83d4e03371 69-71
+src/i18n/translations/fr.ts
+  s_b8dc9797d08a37::t_153d83d4e03371 221,224
+src/components/portfolio/IntervalsActivityCard.tsx
+  s_b8dc9797d08a37::t_153d83d4e03371 52-54
+src/components/layout/LanguageSwitcher.tsx
+  s_b8dc9797d08a37::t_153d83d4e03371 45
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "a1a1df0d2f9c7bb9266ab5dfa56078793ad464fa",
+  "prompts": {},
+  "sessions": {
+    "s_b8dc9797d08a37": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1cc6a-b2d8-70f2-b4ef-9e0f9a91088f",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
