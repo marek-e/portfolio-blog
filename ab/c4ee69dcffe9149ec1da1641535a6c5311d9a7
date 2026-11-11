@@ -1,0 +1,27 @@
+src/components/layout/glass-theme-switch/physics.ts
+  s_b47ba44e656b5e::t_4ffcb16bf64c1f 58-70
+src/components/layout/glass-theme-switch/renderer.ts
+  s_b47ba44e656b5e::t_bebbccb8490e80 182-183
+  s_b47ba44e656b5e::t_681d16adf86f63 245
+  s_b47ba44e656b5e::t_d2eb0c15425432 78-79,81-82
+  s_b47ba44e656b5e::t_364bad6a448a1f 163
+  s_b47ba44e656b5e::t_3332a9bd778a3a 138-142,145,149-152
+  s_b47ba44e656b5e::t_a03f5e0076ece1 1-9
+  s_b47ba44e656b5e::t_4a482683f3a6ba 153
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "abc4ee69dcffe9149ec1da1641535a6c5311d9a7",
+  "prompts": {},
+  "sessions": {
+    "s_b47ba44e656b5e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e1ae028b-4cb4-4ad6-b24c-c1b7a7149d93",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
