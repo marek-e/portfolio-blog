@@ -1,0 +1,53 @@
+src/pages/en/404.astro
+  s_6e5057cdd1ed5d::t_bcff8a50d49559 1-5
+output/imagegen/404-alpine/prompts-mobile-v4.json
+  s_6e5057cdd1ed5d::t_5824d2c099ed00 1-13
+output/imagegen/404-alpine/prompts.json
+  s_6e5057cdd1ed5d::t_7af3fe5a309402 1-2,4-13
+  s_6e5057cdd1ed5d::t_2f74d94396ac72 3
+output/imagegen/404-alpine/prompts-golden-v3.json
+  s_6e5057cdd1ed5d::t_ec84645d326c00 1-9,11
+  s_6e5057cdd1ed5d::t_90b4d0534f8dcc 10
+src/pages/404.astro
+  s_6e5057cdd1ed5d::t_bcff8a50d49559 2,5
+src/i18n/translations/en.ts
+  s_6e5057cdd1ed5d::t_fdefccc88a21a0 110
+output/imagegen/404-alpine/prompts-natural-v2.json
+  s_6e5057cdd1ed5d::t_0c8d19f1f56982 1-11,13
+  s_6e5057cdd1ed5d::t_fc5b8544c9dc3b 12
+src/i18n/ui.ts
+  s_6e5057cdd1ed5d::t_fdefccc88a21a0 98
+src/components/not-found/NotFound.astro
+  s_6e5057cdd1ed5d::t_f1bd14c71c72e5 40-41,52-53,182-195,197,199,203-214,216-224,417,422-425
+  s_6e5057cdd1ed5d::t_57564a19beb8f2 63-86,88-91,93-95,109-118,124,154-155,168,228-235,237-238,339-341,358-361,368,381-382,385,389,396-403,406-408,411-412,416
+  s_6e5057cdd1ed5d::t_fdefccc88a21a0 92,315-317,321-323,325-330,332,334,337,418
+  s_6e5057cdd1ed5d::t_a50b09991d2473 34-39
+  s_6e5057cdd1ed5d::t_d0a4a9b82efafa 198,215,369-370,372-375,378
+  s_6e5057cdd1ed5d::t_b8e5b4ff56a69c 96-108,318-320,331,333,335-336,419-420
+  s_6e5057cdd1ed5d::t_c46a7554dbc338 404
+  s_6e5057cdd1ed5d::t_052ee302131fa0 159,346-347
+  s_6e5057cdd1ed5d::t_8e2a730df2b162 87,119-120,242,365-367,371,376-377,379-380,383,386-388,392-395,409-410,413-415,421
+  s_6e5057cdd1ed5d::t_bcff8a50d49559 1-17,22-31,45,59-62,121-122,134,137-142,149,153,160-167,172-181,225-227,236,239,251,274-278,280-282,284-307,312-313,324,338,342-345,348-350,353,427-428,436-440
+  s_6e5057cdd1ed5d::t_91996b2ba43f89 146-147,151,252-264,308-311,314,364
+  s_6e5057cdd1ed5d::t_419e837f632efa 18-21,32-33,42-44,46,49-51,54,56-58,123,125-133,135-136,143-145,148,150,152,196,201-202,240-241,243-250,265-273,283,351-352,354-357,362-363,384,390-391,405,426,433-435
+  s_6e5057cdd1ed5d::t_d39f32f140061d 47-48,55,200,429-432
+  s_6e5057cdd1ed5d::t_42b5be6d107944 156-158,169-171,279
+src/i18n/translations/fr.ts
+  s_6e5057cdd1ed5d::t_fdefccc88a21a0 110
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "3e86ee1c54e3fba3c2c30a814964fa58e6be93c4",
+  "prompts": {},
+  "sessions": {
+    "s_6e5057cdd1ed5d": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1cbfe-f1e6-7be2-8d3c-aba336344e2b",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
