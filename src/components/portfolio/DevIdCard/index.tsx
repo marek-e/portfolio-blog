@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useSyncExternalStore } from 'react';
 import { BirthdayCakeIcon, Location03Icon, SparklesIcon } from '@hugeicons/core-free-icons';
 
 import type { Lang } from '@/i18n/config';
@@ -13,10 +13,15 @@ import { BIRTH_DATE, TECH_STACK, getAge } from './constants';
 
 interface DevIdCardProps {
   lang: Lang;
+  ageAtBuild: number;
 }
 
-export function DevIdCard({ lang }: DevIdCardProps) {
+const subscribeToNothing = () => () => {};
+const getCurrentAge = () => getAge(BIRTH_DATE);
+
+export function DevIdCard({ lang, ageAtBuild }: DevIdCardProps) {
   const t = getTranslations(lang);
+  const age = useSyncExternalStore(subscribeToNothing, getCurrentAge, () => ageAtBuild);
 
   const { cardRef, tiltRef } = useTiltEffect();
   const [rotation, setRotation] = useState(0);
@@ -31,8 +36,8 @@ export function DevIdCard({ lang }: DevIdCardProps) {
     },
     { label: t.devCard.fields.nature, value: t.devCard.values.nature, icon: SparklesIcon },
     {
-      label: t.devCard.fields.gameTime,
-      value: t.devCard.values.gameTime.replace('{age}', String(getAge(BIRTH_DATE))),
+      label: t.devCard.fields.age,
+      value: t.devCard.values.age.replace('{age}', String(age)),
       icon: BirthdayCakeIcon,
     },
   ];

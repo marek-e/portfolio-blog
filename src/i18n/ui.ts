@@ -150,14 +150,14 @@ export interface UITranslations {
       name: string;
       job: string;
       nature: string;
-      gameTime: string;
+      age: string;
       location: string;
     };
     values: {
       name: string;
       job: string;
       nature: string;
-      gameTime: string;
+      age: string;
       location: string;
     };
   };

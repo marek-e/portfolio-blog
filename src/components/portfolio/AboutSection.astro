@@ -1,6 +1,7 @@
 ---
 import { getTranslations, getLangFromUrl } from '@/i18n';
 import { DevIdCard } from '@/components/portfolio/DevIdCard';
+import { BIRTH_DATE, getAge } from '@/components/portfolio/DevIdCard/constants';
 import { Doodle } from '@/components/shared/HandDrawn';
 import SectionHeading from '@/components/shared/SectionHeading.astro';
 
@@ -18,7 +19,7 @@ const afterMantra = rest.slice(1);
   <div class="mt-14 grid gap-14 lg:mt-20 lg:grid-cols-12 lg:gap-16">
     <div class="min-w-0 lg:col-span-5">
       <div class="lg:sticky lg:top-28">
-        <DevIdCard client:visible lang={lang} />
+        <DevIdCard client:visible lang={lang} ageAtBuild={getAge(BIRTH_DATE)} />
       </div>
     </div>
 

@@ -98,7 +98,7 @@ const pastelSwatches = [
 
 const doodleNames = ['underline', 'squiggle', 'sparkle', 'arrow', 'loop', 'circle'] as const;
 
-export function DesignSystemPreview({ lang }: { lang: Lang }) {
+export function DesignSystemPreview({ lang, ageAtBuild }: { lang: Lang; ageAtBuild: number }) {
   const [inputValue, setInputValue] = useState('');
   const translatePath = getTranslatedPath(lang);
 
@@ -328,7 +328,7 @@ export function DesignSystemPreview({ lang }: { lang: Lang }) {
 
       <Section title="Developer ID card">
         <div className="grid items-center gap-8 md:grid-cols-2">
-          <DevIdCard lang={lang} />
+          <DevIdCard lang={lang} ageAtBuild={ageAtBuild} />
           <p className="text-muted-foreground text-sm leading-relaxed">
             The front pairs editorial typography, Melo and five technology logos with a glass frame.
             Both faces share the same pearlescent hover, and both themes share the same artwork
