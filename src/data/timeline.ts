@@ -29,16 +29,16 @@ const timelineDataWithTranslations: TimelineEntryWithTranslations[] = [
     link: 'https://www.theodo.fr',
     translations: {
       fr: {
-        title: 'Ingénieur Logiciel Full-Stack',
+        title: 'De stagiaire à AI Tech Lead',
         organization: 'Theodo',
         description:
-          "Développement d'applications web à fort impact pour des clients variés. Prise de décisions techniques et accompagnement de développeurs juniors. Gestion de projet suivant les principes Agile & Lean Tech.",
+          "Développement d'applications web pour des clients variés, prise de décisions techniques et accompagnement de développeurs juniors. Travail suivant les principes Agile & Lean Tech. Aujourd'hui, développement de produits à l'aide d'usines agentiques.",
       },
       en: {
-        title: 'Full-Stack Software Engineer',
+        title: 'From intern to AI Tech Lead',
         organization: 'Theodo',
         description:
-          'Building high-impact web applications for various clients. Leading technical decisions and mentoring junior developers. Project management following Agile & Lean Tech principles.',
+          'Building web applications for various clients, making technical decisions, and mentoring junior developers. Working with Agile & Lean Tech principles. Now building products using AI agent factories.',
       },
     },
   },

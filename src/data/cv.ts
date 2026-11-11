@@ -73,12 +73,12 @@ const cvData: CVData = {
   website: 'melmayan.fr',
   profilePicture: '/images/profile.jpg',
   title: {
-    fr: 'AI Engineer',
-    en: 'AI Engineer',
+    fr: 'Ingénieur logiciel & AI Tech Lead',
+    en: 'Software Engineer & AI Tech Lead',
   },
   summary: {
-    fr: "AI Engineer avec 3+ ans d'expérience en développement web, spécialisé en TypeScript, React et Node.js. Conception et livraison de fonctionnalités full-stack (Next.js, REST APIs, AWS Serverless) visant l'amélioration de l'expérience utilisateur et la maintenabilité du code. Passionné par la sécurité web et l'intégration d'IA dans les workflows de développement. Autonome et curieux.",
-    en: 'AI Engineer with 3+ years of experience in web development, specialized in TypeScript, React, and Node.js. Design and delivery of full-stack features (Next.js, REST APIs, AWS Serverless) focused on user experience and code maintainability. Passionate about web security and integrating AI into development workflows. Self-driven and curious.',
+    fr: "Ingénieur logiciel full-stack chez Theodo depuis 2023, aujourd'hui en rôle d'AI Tech Lead. Je développe des produits avec des agents de programmation, principalement Claude Code et ponctuellement Codex. Mon travail porte sur la qualité des bases de code, les règles de lint, la sécurité et l'amélioration continue d'un workflow allant des exigences produit à la pull request.",
+    en: 'Full-stack software engineer at Theodo since 2023, now acting as an AI Tech Lead. I build products with coding agents, mainly Claude Code and occasionally Codex. My work focuses on codebase quality, lint rules, security, and improving a workflow that takes product requirements through to a pull request.',
   },
   experience: [
     {
@@ -87,27 +87,29 @@ const cvData: CVData = {
       endDate: null,
       translations: {
         fr: {
-          title: 'Ingénieur Logiciel Full-Stack',
+          title: 'Ingénieur logiciel / AI Tech Lead',
           company: 'Theodo',
           location: 'Paris, France',
           description: [
-            "Développement d'applications web à fort impact pour des clients variés",
-            "Prise de décisions techniques et conception d'architecture logicielle",
-            'Gestion de projet suivant les principes Agile & Lean Tech',
-            'Workflows de développement assistés par IA',
-            'Audit de sécurité web et mise en place des bonnes pratiques de sécurité',
+            "Stage à partir de janvier 2023, ingénieur full-stack depuis septembre 2023, puis prise récente de responsabilités d'AI Tech Lead",
+            'Développement de produits avec une usine agentique, principalement Claude Code et ponctuellement Codex',
+            "Planification avec les agents à partir de documents d'exigences produit (PRD), puis implémentation, validation et ouverture de pull requests autonomes dans un environnement de développement cloud",
+            'Préparation des bases de code pour les agents avec des règles de lint et des contrôles automatisés de qualité du code',
+            'Audits de sécurité des bases de code et amélioration continue du workflow de développement avec les agents',
+            "Développement d'applications web full-stack et décisions d'architecture pour des clients variés",
           ],
         },
         en: {
-          title: 'Full-Stack Software Engineer',
+          title: 'Software Engineer / AI Tech Lead',
           company: 'Theodo',
           location: 'Paris, France',
           description: [
-            'Building high-impact web applications for various clients',
-            'Leading technical decisions and software architecture design',
-            'Project management following Agile & Lean Tech principles',
-            'AI assisted development workflows',
-            'Web security audit and implementation of security best practices',
+            'Joined as an intern in January 2023, became a full-stack software engineer in September 2023, and recently took on AI Tech Lead responsibilities',
+            'Building products with a coding-agent factory, mainly using Claude Code and occasionally Codex',
+            'Planning with agents from product requirements documents (PRDs), followed by autonomous implementation, validation, and pull request creation in a cloud development environment',
+            'Preparing codebases for coding agents through lint rules and automated code-quality checks',
+            'Auditing codebase security and continuously improving the agent development workflow',
+            'Developing full-stack web applications and making architecture decisions for various clients',
           ],
         },
       },
@@ -199,6 +201,18 @@ const cvData: CVData = {
     },
   ],
   skills: [
+    {
+      translations: {
+        fr: {
+          category: 'Développement assisté par IA',
+          skills: ['Claude Code', 'Codex', 'Agents de programmation autonomes'],
+        },
+        en: {
+          category: 'AI-assisted development',
+          skills: ['Claude Code', 'Codex', 'Autonomous coding agents'],
+        },
+      },
+    },
     {
       translations: {
         fr: {
