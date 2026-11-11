@@ -40,6 +40,7 @@ const serializedProjects = await Promise.all(
         image: optimizedImageUrl,
         imageAlt: project.data.imageAlt,
         objectFit: project.data.objectFit,
+        imagePadding: project.data.imagePadding,
       },
       slug: project.id.replace(/^(fr|en)\//, ''),
     };

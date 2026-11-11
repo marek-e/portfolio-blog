@@ -14,6 +14,7 @@ export interface ProjectData {
   image?: string;
   imageAlt?: string;
   objectFit?: 'cover' | 'contain' | 'fill' | 'none' | 'scale-down';
+  imagePadding: number;
 }
 
 interface ProjectCardReactProps {
@@ -40,14 +41,10 @@ function pickTone<T>(key: string, tones: readonly T[]): T {
 }
 
 export function ProjectCardReact({ project, projectUrl, translations }: ProjectCardReactProps) {
-  const { title, description, techStack, links, image, imageAlt, objectFit } = project;
+  const { title, description, techStack, links, image, imageAlt, objectFit, imagePadding } =
+    project;
   const isContained = objectFit === 'contain' || objectFit === 'scale-down';
   const hiddenTechCount = techStack.length - 3;
-  const artworkPadding = projectUrl.endsWith('/personal-portfolio')
-    ? 'p-[16%]'
-    : projectUrl.endsWith('/next-armored')
-      ? 'p-[5%]'
-      : 'p-[11%]';
 
   return (
     <Card3D
@@ -70,10 +67,9 @@ export function ProjectCardReact({ project, projectUrl, translations }: ProjectC
             alt={imageAlt || `Screenshot of ${title}`}
             className={cn(
               'project-card-artwork h-full w-full',
-              isContained && 'drop-shadow-[0_12px_24px_oklch(0.3_0.05_300/18%)]',
-              isContained && artworkPadding
+              isContained && 'drop-shadow-[0_12px_24px_oklch(0.3_0.05_300/18%)]'
             )}
-            style={{ objectFit }}
+            style={{ objectFit, padding: isContained ? `${imagePadding}%` : undefined }}
             loading="lazy"
           />
         )}
