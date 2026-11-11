@@ -1,0 +1,19 @@
+src/data/cv.ts
+  s_26c6e968d19a7b::t_aa9a15dbb8396d 94,107
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "791841e5af72f91fecb33f92426e28575091ab1c",
+  "prompts": {},
+  "sessions": {
+    "s_26c6e968d19a7b": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1cc89-0eda-7561-b01a-28707d9bb686",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
