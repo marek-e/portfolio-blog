@@ -83,7 +83,7 @@ export function ProjectCardReact({ project, projectUrl, translations }: ProjectC
         <h3 className="font-display-soft text-foreground min-h-16 text-2xl leading-8 font-semibold tracking-tight">
           <a
             href={projectUrl}
-            className="project-card-link focus-visible:after:ring-ring after:absolute after:inset-0 after:rounded-[2.75rem] focus-visible:outline-none focus-visible:after:ring-2"
+            className="project-card-link focus-visible:after:outline-foreground after:absolute after:inset-0 after:rounded-[2.75rem] focus-visible:outline-none focus-visible:after:outline-2 focus-visible:after:outline-offset-2"
           >
             {title}
             <span className="sr-only"> · {translations.viewDetails}</span>

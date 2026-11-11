@@ -138,7 +138,7 @@ export function FeaturedProjectsCarousel({
             <button
               key={index}
               onClick={() => api?.scrollTo(index)}
-              className="group/dot flex h-8 cursor-pointer items-center px-1.5"
+              className="group/dot flex h-8 cursor-pointer items-center rounded-full px-1.5"
               aria-label={`Go to slide ${index + 1}`}
               aria-current={current === index ? 'true' : undefined}
             >

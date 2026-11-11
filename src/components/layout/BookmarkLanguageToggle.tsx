@@ -24,10 +24,8 @@ export function BookmarkLanguageToggle({ currentLang, currentPath }: BookmarkLan
         'h-6 transition-all duration-500',
         'ease-[linear(0,0.1144,0.3475,0.5885,0.7844,0.9194,0.9987,1.0359,1.046,1.0413,1.0308,1.0196,1.0104,1.004,1.0002,0.9984,1)]',
         'motion-safe:hover:h-12',
-        'focus-visible:h-12',
-        'motion-reduce:h-12',
-        // Focus state
-        'focus-visible:ring-ring focus:outline-none focus-visible:ring-2'
+        'focus-visible:h-12 focus-visible:transition-none',
+        'motion-reduce:h-12'
       )}
     >
       {/* Flag circle with tooltip */}

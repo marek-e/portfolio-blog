@@ -44,12 +44,13 @@ export function BackToTop() {
     <button
       onClick={scrollToTop}
       aria-label="Back to top"
+      tabIndex={visible ? 0 : -1}
       className={cn(
         'fixed right-4 bottom-28 z-40 flex size-11 items-center justify-center rounded-full md:right-6 md:bottom-6',
         'btn-radiant border',
         'transition-all duration-300 ease-out',
         'hover:scale-105',
-        'focus-visible:ring-ring/50 focus-visible:ring-[3px] focus-visible:outline-none',
+        'focus-visible:translate-y-0 focus-visible:opacity-100 focus-visible:transition-none',
         'motion-reduce:transition-none motion-reduce:hover:scale-100',
         visible ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-4 opacity-0'
       )}

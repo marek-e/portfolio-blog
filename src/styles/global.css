@@ -521,6 +521,13 @@
   * {
     @apply border-border outline-ring/50;
   }
+  :focus-visible {
+    outline: 2px solid var(--foreground);
+    outline-offset: 4px;
+  }
+  .hero-island:focus-visible {
+    --ring: var(--foreground);
+  }
   body {
     @apply bg-background text-foreground font-sans;
     transition:
@@ -529,6 +536,7 @@
   }
   html {
     @apply font-sans;
+    scroll-padding-block: 7rem;
   }
   html,
   body {

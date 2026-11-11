@@ -76,7 +76,7 @@ export function ActivityCardLink({
       target="_blank"
       rel="noopener noreferrer"
       className={cn(
-        'group glass focus-visible:ring-ring focus-visible:ring-offset-background relative flex h-full flex-col overflow-hidden rounded-3xl p-5 transition duration-300 outline-none hover:-translate-y-0.5 hover:shadow-[inset_0_1px_0_var(--glass-highlight),0_0_0_1px_var(--glass-edge),0_1px_2px_oklch(0_0_0/4%),0_28px_60px_-28px_var(--glass-shadow)] focus-visible:ring-2 focus-visible:ring-offset-2',
+        'group glass relative flex h-full flex-col overflow-hidden rounded-3xl p-5 transition duration-300 hover:-translate-y-0.5 hover:shadow-[inset_0_1px_0_var(--glass-highlight),0_0_0_1px_var(--glass-edge),0_1px_2px_oklch(0_0_0/4%),0_28px_60px_-28px_var(--glass-shadow)]',
         className
       )}
     >

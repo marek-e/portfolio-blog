@@ -85,6 +85,8 @@ The home page developer ID card uses the approved type specimen layout: a large 
 
 ## Buttons
 
+Keyboard focus uses a solid 2px foreground outline with a 4px offset so it stays distinct in both themes and survives decorative box shadows. Project title links outline the whole card. The page reserves 7rem of scroll clearance at both edges so fixed navigation does not cover focused controls. Hidden back-to-top controls stay out of the tab order.
+
 The `Button3D` secondary variant uses cool neutral glass, slate text and softer reflections. Its faint blue-grey edge and shadow distinguish it from the primary variant's brand-coloured lens.
 
 The contact panel's social links use the secondary `Button3D` in the 48px circular icon size. Only the social icon wiggles on hover, with motion disabled under reduced motion; the glass lens stays still. These render as links with translated accessible labels on both the home and contact pages.
