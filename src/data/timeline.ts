@@ -32,7 +32,7 @@ const timelineDataWithTranslations: TimelineEntryWithTranslations[] = [
         title: 'De stagiaire à AI Tech Lead',
         organization: 'Theodo',
         description:
-          "Développement d'applications web pour des clients variés, prise de décisions techniques et accompagnement de développeurs juniors. Travail suivant les principes Agile & Lean Tech. Aujourd'hui, développement de produits à l'aide de fabriques d'agents IA.",
+          "Développement d'applications web pour des clients variés, prise de décisions techniques et accompagnement de développeurs juniors. Travail suivant les principes Agile & Lean Tech. Aujourd'hui, développement de produits à l'aide d'usines agentiques.",
       },
       en: {
         title: 'From intern to AI Tech Lead',

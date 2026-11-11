@@ -91,7 +91,7 @@ const cvData: CVData = {
           company: 'Theodo',
           location: 'Paris, France',
           description: [
-            "Développement de produits avec une fabrique d'agents de programmation, principalement Claude Code et ponctuellement Codex",
+            'Développement de produits avec une usine agentique, principalement Claude Code et ponctuellement Codex',
             "Planification avec les agents à partir de documents d'exigences produit (PRD), puis implémentation, validation et ouverture de pull requests autonomes dans un environnement de développement cloud",
             'Préparation des bases de code pour les agents avec des règles de lint et des contrôles automatisés de qualité du code',
             'Audits de sécurité des bases de code et amélioration continue du workflow de développement avec les agents',
