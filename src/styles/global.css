@@ -44,20 +44,28 @@
 }
 
 :root {
-  --background: oklch(0.9896 0.0051 67.76);
-  --foreground: oklch(0.145 0 0);
+  --day-background: oklch(0.9896 0.0051 67.76);
+  --night-background: oklch(0.1461 0.0153 297.71);
+  --day-foreground: oklch(0.145 0 0);
+  --night-foreground: oklch(0.985 0 0);
+  --day-muted-foreground: oklch(0.3677 0 0);
+  --night-muted-foreground: oklch(0.8514 0 0);
+  --day-primary: oklch(0.67 0.16 58);
+  --night-primary: oklch(70.2% 0.183 293.541);
+  --background: var(--day-background);
+  --foreground: var(--day-foreground);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.67 0.16 58);
-  --primary-invert: oklch(70.2% 0.183 293.541);
+  --primary: var(--day-primary);
+  --primary-invert: var(--night-primary);
   /* --primary: oklch(0.714 0.1863 41.33); */
   --primary-foreground: oklch(0.99 0.002 95);
   --secondary: oklch(0.967 0.001 286.375);
   --secondary-foreground: oklch(0.21 0.006 285.885);
   --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.3677 0 0);
+  --muted-foreground: var(--day-muted-foreground);
   --accent: oklch(0.97 0 0);
   --accent-foreground: oklch(0.205 0 0);
   --destructive: oklch(0.58 0.22 27);
@@ -140,20 +148,20 @@
 }
 
 .dark {
-  --background: oklch(0.1461 0.0153 297.71);
-  --foreground: oklch(0.985 0 0);
+  --background: var(--night-background);
+  --foreground: var(--night-foreground);
   --card: oklch(0.1905 0.0303 295.64);
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.205 0 0);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(70.2% 0.183 293.541);
-  --primary-invert: oklch(0.67 0.16 58);
+  --primary: var(--night-primary);
+  --primary-invert: var(--day-primary);
   /* --primary: oklch(0.5913 0.2445 291.73); */
   --primary-foreground: oklch(0.28 0.07 46);
   --secondary: oklch(0.274 0.006 286.033);
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.8514 0 0);
+  --muted-foreground: var(--night-muted-foreground);
   --accent: oklch(0.371 0 0);
   --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.704 0.191 22.216);

@@ -4,13 +4,12 @@ import { Icon } from '../shared/Icon';
 import { SOCIALS } from '@/lib/socials';
 import { PRESENTATIONS_URL } from '@/lib/sites';
 import { getTranslations, getLangFromUrl, getTranslatedPath } from '@/i18n';
-import { LanguageSwitcher } from './LanguageSwitcher';
+import { GlassThemeSwitch } from './GlassThemeSwitch';
 import logo from '@/assets/logo.svg';
 
 const lang = getLangFromUrl(Astro.url);
 const t = getTranslations(lang);
 const translatePath = getTranslatedPath(lang);
-const currentPath = Astro.url.pathname;
 const currentYear = new Date().getFullYear();
 
 const groups = [
@@ -42,7 +41,9 @@ const groups = [
 
 <footer id="footer" class="illustrated-footer text-foreground overflow-clip">
   <div class="footer-scene bg-background relative isolate min-h-screen">
-    <div class="footer-art pointer-events-none absolute -z-10 h-screen" aria-hidden="true"></div>
+    <div class="footer-art pointer-events-none absolute -z-10 h-screen" aria-hidden="true">
+      <div class="footer-art-day"></div>
+    </div>
     <div
       class="footer-content relative mx-auto grid gap-8 pt-12 md:grid-cols-[minmax(0,1fr)_minmax(0,1.25fr)] md:gap-[clamp(2rem,6vw,7rem)] md:pt-[clamp(3rem,4.5vw,5rem)]"
     >
@@ -124,20 +125,16 @@ const groups = [
         }
       </nav>
     </div>
-    <div
-      class="footer-utilities relative mx-auto mt-auto flex min-h-20 flex-col-reverse items-center justify-between gap-3 py-5 md:flex-row md:gap-6 md:py-4"
-    >
-      <p class="font-mono text-xs">© {currentYear} Marek Elmayan</p>
-      <div class="footer-controls flex w-full items-center justify-between gap-6 md:w-auto">
-        <LanguageSwitcher currentLang={lang} currentPath={currentPath} variant="classic" />
-        <a
-          href="#"
-          class="hover:bg-primary/10 focus-visible:bg-primary/10 -mr-3 inline-flex min-h-11 items-center gap-2 rounded-full px-3 text-[0.8125rem] opacity-80 transition-[background-color,opacity] duration-150 hover:opacity-100 focus-visible:opacity-100 motion-reduce:transition-none"
-        >
-          {t.footer.backToTop}
-          <Icon icon={ArrowUp04Icon} strokeWidth={1.7} className="size-4" />
-        </a>
-      </div>
+    <div class="footer-utilities relative mx-auto mt-auto">
+      <p class="footer-copyright font-mono text-xs">© {currentYear} Marek Elmayan</p>
+      <GlassThemeSwitch lang={lang} client:visible />
+      <a
+        href="#"
+        class="footer-back-to-top hover:bg-primary/10 focus-visible:bg-primary/10 inline-flex min-h-11 items-center gap-2 rounded-full px-3 text-[0.8125rem] opacity-80 transition-[background-color,opacity] duration-150 hover:opacity-100 focus-visible:opacity-100 motion-reduce:transition-none md:-mr-3"
+      >
+        {t.footer.backToTop}
+        <Icon icon={ArrowUp04Icon} strokeWidth={1.7} className="size-4" />
+      </a>
     </div>
   </div>
 </footer>
@@ -172,6 +169,38 @@ const groups = [
     mask-image: linear-gradient(to bottom, transparent, black 35%);
   }
 
+  .footer-art-day {
+    position: absolute;
+    inset: 0;
+    background: url('/images/footer-day-v1.webp') center bottom / cover no-repeat;
+    opacity: 0;
+  }
+
+  .footer-scene[data-theme-preview] {
+    --background: color-mix(
+      in oklab,
+      var(--day-background) var(--footer-daylight),
+      var(--night-background)
+    );
+    --primary: color-mix(in oklab, var(--day-primary) var(--footer-daylight), var(--night-primary));
+    --foreground: var(--night-foreground);
+    --muted-foreground: var(--night-muted-foreground);
+    color: var(--foreground);
+  }
+
+  .footer-scene[data-theme-preview] .footer-art {
+    background-image: url('/images/footer-night-v1.webp');
+  }
+
+  .footer-scene[data-preview-tone='day'] {
+    --foreground: var(--day-foreground);
+    --muted-foreground: var(--day-muted-foreground);
+  }
+
+  .footer-scene[data-preview-midpoint=''] {
+    --muted-foreground: var(--foreground);
+  }
+
   .footer-content {
     padding-bottom: 16rem;
   }
@@ -182,17 +211,48 @@ const groups = [
   }
 
   .footer-utilities {
+    display: grid;
+    grid-template-areas: 'copyright theme top';
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: center;
+    gap: 1.5rem;
+    padding-block: 2rem;
     color: oklch(0.99 0.005 300);
     text-shadow: 0 1px 6px oklch(0.12 0.02 295 / 65%);
   }
 
-  .illustrated-footer a:focus-visible,
-  .footer-controls :global(a:focus-visible) {
+  .footer-copyright {
+    grid-area: copyright;
+    justify-self: start;
+  }
+
+  .footer-utilities :global(.theme-glass) {
+    grid-area: theme;
+    justify-self: center;
+  }
+
+  .footer-back-to-top {
+    grid-area: top;
+    justify-self: end;
+  }
+
+  .illustrated-footer a:focus-visible {
     outline: 2px solid var(--primary);
     outline-offset: 4px;
   }
 
   @media (max-width: 767px) {
+    .footer-utilities {
+      grid-template-areas: 'theme' 'top' 'copyright';
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0.75rem;
+    }
+
+    .footer-copyright,
+    .footer-back-to-top {
+      justify-self: center;
+    }
+
     .footer-content,
     .footer-utilities {
       width: min(100% - 3rem, 36rem);
@@ -200,6 +260,10 @@ const groups = [
 
     .footer-content {
       padding-bottom: 17rem;
+    }
+
+    .footer-art-day {
+      background-position: 58% bottom;
     }
 
     .footer-art {

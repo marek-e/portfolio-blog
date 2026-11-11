@@ -213,6 +213,24 @@ Theme switcher with circular reveal animation (View Transitions API).
 - Fade fallback on Firefox
 - Respects `prefers-reduced-motion`
 
+### GlassThemeSwitch (`layout/`)
+
+The footer's centered light/dark switch, with a WebGL glass lens, morphing pixel icons and blue/amber edge lighting, inspired by [Zsolt Kacso's Glass Light Toggle](https://experiments.thisiswhitespace.com/glass-light-toggle).
+
+```astro
+<GlassThemeSwitch lang={lang} client:visible />
+```
+
+- Click, tap or drag the knob; Space, Enter and the arrow keys also switch themes.
+- Shares the navbar's theme state and saved-preference behavior.
+- Centers between copyright and back-to-top on desktop, with 32px bottom clearance. On mobile, back-to-top and copyright stack below. Language controls remain in the header.
+- Hydrates when visible. Stars twinkle, sun rays breathe and fine grain changes while visible; rendering pauses offscreen, in a hidden tab or with increased contrast. Reduced motion draws only on input.
+- The knob uses velocity stretch, eased press compression, resistant end stops and projected spring landings. Its light strip follows a separate spring and completes its return around the opposite side.
+- Each pixel has its own stagger, curl, spring, inertia and brightness; the glass refracts separate RGB samples through sharp and blurred icon textures.
+- Dragging blends the footer landscape, sky and lighting continuously. Text changes tone at the midpoint to preserve contrast; the site theme and saved preference commit on release.
+- Reduced motion settles immediately. WebGL loss and increased contrast use the native icon fallback.
+- The fallback renders during SSR and follows the page theme before hydration.
+
 ### MobileTabBar (`layout/`)
 
 Bottom tab bar for mobile navigation, rendered by `Navbar.astro`. Static, no hydration.
@@ -266,9 +284,9 @@ Pill-shaped language toggle with active state highlighting.
 - Thin liquid-glass track
 - Active language uses a bevelled primary-coloured glass lens
 - Header uses 44px language targets and visible keyboard focus
-- Footer uses `variant="classic"` to keep its original compact frosted track and radiant active language
+- `variant="classic"` provides a compact frosted track and radiant active language
 - Uses `aria-current="page"` for accessibility
-- Shown in the footer and in the mobile top bar
+- Shown in the mobile top bar; desktop uses the language tab
 
 ### BookmarkLanguageToggle (`layout/`)
 
