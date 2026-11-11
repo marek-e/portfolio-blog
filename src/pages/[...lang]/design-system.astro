@@ -4,8 +4,12 @@ import Navbar from '@/components/layout/Navbar.astro';
 import Footer from '@/components/layout/Footer.astro';
 import SectionHeading from '@/components/shared/SectionHeading.astro';
 import { DesignSystemPreview } from '@/components/design-system/DesignSystemPreview';
+import { getDesignSystemSections } from '@/components/design-system/sections';
 import { BIRTH_DATE, getAge } from '@/components/portfolio/DevIdCard/constants';
-import { getTranslations, defaultLang } from '@/i18n';
+import { getTranslations, getTranslatedPath, defaultLang } from '@/i18n';
+import { Link } from '@/components/ui/button';
+import { Icon } from '@/components/shared/Icon';
+import { ArrowLeftIcon } from '@hugeicons/core-free-icons';
 
 export function getStaticPaths() {
   return [
@@ -16,20 +20,157 @@ export function getStaticPaths() {
 
 const lang = Astro.params.lang ?? defaultLang;
 const t = getTranslations(lang);
+const sections = getDesignSystemSections(lang);
+const translatePath = getTranslatedPath(lang);
+const text = (fr: string, en: string) => (lang === 'fr' ? fr : en);
 ---
 
 <Layout title={t.designSystem.pageTitle} description={t.designSystem.pageDescription}>
   <Navbar />
-  <main class="container mx-auto max-w-5xl px-4 pt-36 pb-24 md:pt-44">
-    <SectionHeading
-      as="h1"
-      eyebrow="Paper & Glass"
-      title={t.designSystem.title}
-      subtitle={t.designSystem.description}
-      class="mb-16"
-    />
+  <main class="design-system mx-auto max-w-6xl px-4 pt-28 pb-24 sm:px-6 md:pt-40 lg:px-8">
+    <Link href={translatePath('/')} variant="ghost" className="mb-8 -ml-3 min-h-11 gap-2">
+      <Icon icon={ArrowLeftIcon} aria-hidden="true" />
+      {text("Retour à l'accueil", 'Back to home')}
+    </Link>
+    <div class="grid items-center gap-10 pb-12 md:pb-20 lg:grid-cols-[1.4fr_0.6fr] lg:gap-16">
+      <SectionHeading
+        as="h1"
+        eyebrow="Paper & Glass · melmayan.fr"
+        title={t.designSystem.title}
+        subtitle={t.designSystem.description}
+      />
+      <figure
+        class="border-border grid grid-cols-[auto_1fr] items-center gap-x-6 gap-y-5 border-l pl-6 lg:grid-cols-1 lg:border-l-0 lg:pl-0"
+      >
+        <span
+          aria-hidden="true"
+          class="font-display-wonk text-primary text-8xl leading-none lg:text-[9rem]">Aa</span
+        >
+        <figcaption class="text-muted-foreground text-sm leading-relaxed">
+          {text('Fraunces pour le caractère.', 'Fraunces for character.')}<br />
+          {text('Geist pour la clarté.', 'Geist for clarity.')}
+        </figcaption>
+        <div
+          class="col-span-full flex gap-2"
+          aria-label={text('La palette pastel', 'The pastel palette')}
+        >
+          <span class="bg-pastel-peach h-3 flex-1 rounded-full"></span>
+          <span class="bg-pastel-rose h-3 flex-1 rounded-full"></span>
+          <span class="bg-pastel-lilac h-3 flex-1 rounded-full"></span>
+          <span class="bg-pastel-sky h-3 flex-1 rounded-full"></span>
+          <span class="bg-pastel-mint h-3 flex-1 rounded-full"></span>
+          <span class="bg-pastel-butter h-3 flex-1 rounded-full"></span>
+        </div>
+      </figure>
+    </div>
 
-    <DesignSystemPreview client:load lang={lang} ageAtBuild={getAge(BIRTH_DATE)} />
+    <div
+      class="border-border grid items-start gap-10 border-t pt-8 lg:grid-cols-[11rem_minmax(0,1fr)] lg:gap-12 lg:pt-12"
+    >
+      <aside class="min-w-0 lg:sticky lg:top-28">
+        <nav aria-label={text('Sections du design system', 'Design system sections')}>
+          <p class="eyebrow mb-3">{text('Dans cette page', 'On this page')}</p>
+          <ol class="flex flex-wrap gap-1 lg:flex-col">
+            {
+              sections.map((section) => (
+                <li>
+                  <a
+                    href={`#${section.id}`}
+                    data-section-link={section.id}
+                    class="design-system-link text-muted-foreground hover:bg-primary/10 hover:text-foreground flex min-h-11 items-center gap-3 rounded-xl px-3 py-2 text-sm"
+                  >
+                    <span class="text-primary text-xs tabular-nums">{section.number}</span>
+                    <span>{section.title}</span>
+                  </a>
+                </li>
+              ))
+            }
+          </ol>
+        </nav>
+        <p class="text-muted-foreground mt-6 hidden text-xs leading-relaxed lg:block">
+          {
+            text(
+              'Le thème se change depuis la navigation. Les exemples suivent le même thème que le site.',
+              'Change the theme in the navigation. Every example follows the site theme.'
+            )
+          }
+        </p>
+      </aside>
+      <div class="min-w-0 space-y-20 md:space-y-28">
+        {
+          sections.map((section) => (
+            <section
+              id={section.id}
+              data-design-section
+              aria-labelledby={`${section.id}-title`}
+              class="min-w-0 scroll-mt-0"
+            >
+              <SectionHeading
+                id={`${section.id}-title`}
+                eyebrow={`${section.number} · Paper & Glass`}
+                title={section.title}
+                subtitle={section.description}
+                class="mb-10"
+              />
+              <DesignSystemPreview
+                client:visible
+                group={section.id}
+                lang={lang}
+                ageAtBuild={getAge(BIRTH_DATE)}
+              />
+            </section>
+          ))
+        }
+      </div>
+    </div>
   </main>
   <Footer />
 </Layout>
+
+<script>
+  function initDesignSystemNavigation() {
+    const sections = Array.from(document.querySelectorAll<HTMLElement>('[data-design-section]'));
+    const links = Array.from(document.querySelectorAll<HTMLAnchorElement>('[data-section-link]'));
+    if (!sections.length) return;
+
+    const update = () => {
+      const threshold = window.innerHeight * 0.35;
+      const current =
+        sections.findLast((section) => section.getBoundingClientRect().top <= threshold) ??
+        sections[0];
+      links.forEach((link) => {
+        if (link.dataset.sectionLink === current.id) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+      });
+    };
+    let observer: IntersectionObserver | undefined;
+    const observe = () => {
+      observer?.disconnect();
+      const bottomMargin = window.innerHeight * 0.65;
+      observer = new IntersectionObserver(update, {
+        rootMargin: `-112px 0px -${bottomMargin}px 0px`,
+      });
+      sections.forEach((section) => observer?.observe(section));
+      update();
+    };
+    observe();
+    window.addEventListener('resize', observe);
+    document.addEventListener(
+      'astro:before-swap',
+      () => {
+        observer?.disconnect();
+        window.removeEventListener('resize', observe);
+      },
+      { once: true }
+    );
+  }
+
+  document.addEventListener('astro:page-load', initDesignSystemNavigation);
+</script>
+
+<style>
+  .design-system-link[aria-current='location'] {
+    background: color-mix(in oklch, var(--primary) 10%, transparent);
+    color: var(--foreground);
+  }
+</style>

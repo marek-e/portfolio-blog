@@ -4,6 +4,8 @@ Visual rules for melmayan.fr. The goal is a site that feels **premium** (people 
 
 The live reference is `/design-system`. Update it when you add or change a token, utility or component variant.
 
+The reference follows the home page's editorial layout, numbered `SectionHeading` titles and shared typography. Six linked sections cover foundations, materials, actions, forms, overlays and content. Desktop uses a sticky section index; mobile keeps the same links in the page flow. Examples are translated in French and English and follow the site theme. Colour swatches copy their CSS variable, so the reference stays valid across themes. Glass appears only in material and action specimens; the reference itself uses the plain page background.
+
 ## Directives
 
 Decisions taken during the 2026 rebrand review. Treat them as constraints, not suggestions.

@@ -133,7 +133,8 @@ export const en: UITranslations = {
     pageTitle: 'Design System | melmayan.fr',
     pageDescription: 'Component library and design tokens preview',
     title: 'Design System',
-    description: 'A preview of all available components and design tokens.',
+    description:
+      'The visual reference for this site. Editorial type, pastels and touches of glass, from the homepage to reading pages.',
   },
   cv: {
     pageTitle: 'Marek_Elmayan_CV_EN',
