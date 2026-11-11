@@ -32,6 +32,7 @@ const labels = getTranslations(getLangFromUrl(Astro.url)).hero.music;
   root.append(template.content.cloneNode(true));
   const audio = root.querySelector<HTMLAudioElement>('audio')!;
   audio.volume = 0.35;
+  const volumeAdjustable = Math.abs(audio.volume - 0.35) < 0.01;
   let footerVisible = false;
   const footerObserver = new IntersectionObserver(([entry]) => {
     footerVisible = entry.isIntersecting;
@@ -64,6 +65,7 @@ const labels = getTranslations(getLangFromUrl(Astro.url)).hero.music;
         : (playing ? status.dataset.onLabel : status.dataset.offLabel)!;
     });
     document.querySelectorAll<HTMLInputElement>('[data-soundtrack-volume]').forEach((slider) => {
+      (slider.closest('label') ?? slider).hidden = !volumeAdjustable;
       slider.value = String(Math.round(audio.volume * 100));
       slider.style.setProperty('--soundtrack-volume', `${slider.value}%`);
     });
