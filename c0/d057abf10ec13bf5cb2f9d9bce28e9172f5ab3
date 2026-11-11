@@ -1,0 +1,19 @@
+src/pages/[...lang]/design-system.astro
+  s_742e33891954a6::t_94c31e56bd39b8 146-165
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "c0d057abf10ec13bf5cb2f9d9bce28e9172f5ab3",
+  "prompts": {},
+  "sessions": {
+    "s_742e33891954a6": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1cc72-ede4-7663-ae09-a53a79fc8ec2",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
