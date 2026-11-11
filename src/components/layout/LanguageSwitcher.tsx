@@ -42,7 +42,7 @@ export function LanguageSwitcher({
                 : cn(
                     'relative inline-flex h-7 min-w-11 items-center justify-center rounded-full border border-transparent px-2.5 text-xs font-semibold transition-colors max-md:h-11',
                     lang === currentLang
-                      ? 'btn-radiant [--radiant-core:transparent]'
+                      ? 'bg-secondary text-secondary-foreground'
                       : 'text-foreground/65 hover:text-primary hover:bg-primary/10'
                   )
           }

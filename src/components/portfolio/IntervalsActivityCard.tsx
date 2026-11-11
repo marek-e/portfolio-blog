@@ -49,6 +49,9 @@ export function IntervalsActivityCard({ activity, lang = 'fr' }: IntervalsActivi
           transform-origin: center;
           animation: intervalsPulse 1.8s ease-in-out infinite;
         }
+        @media (prefers-reduced-motion: reduce) {
+          .intervals-tick { animation: none; }
+        }
       `}</style>
 
       <ActivityCardLink href={activity.stravaUrl}>

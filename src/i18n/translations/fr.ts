@@ -218,10 +218,10 @@ export const fr: UITranslations = {
   },
   projectsPage: {
     eyebrow: 'Travaux choisis',
-    countLabel: 'projets',
+    countLabel: 'projets sélectionnés',
     pageTitle: 'Projets | Marek Elmayan',
     pageDescription: 'Découvrez mes projets de développement web, applications et expérimentations',
-    title: 'Tous mes projets',
+    title: 'Projets sélectionnés',
     subtitle: "Une collection de ce que j'ai construit, de l'idée à la production.",
     noProjects: 'Aucun projet pour le moment.',
     role: 'Rôle',

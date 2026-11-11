@@ -66,6 +66,9 @@ export function RaceActivityCard({ activity, lang = 'fr' }: RaceActivityCardProp
         .race-confetti {
           animation: raceConfettiFloat ease-in-out infinite;
         }
+        @media (prefers-reduced-motion: reduce) {
+          .race-confetti { animation: none; }
+        }
       `}</style>
 
       <ActivityCardLink

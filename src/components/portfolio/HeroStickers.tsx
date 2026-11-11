@@ -48,7 +48,7 @@ export function HeroStickers({
   });
 
   return floating ? (
-    <div aria-hidden="true" className="absolute inset-0 z-10 hidden lg:block" data-sticker-layer>
+    <div className="absolute inset-0 z-10 hidden lg:block" data-sticker-layer>
       {pills}
     </div>
   ) : (
