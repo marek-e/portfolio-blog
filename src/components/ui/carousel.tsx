@@ -2,7 +2,7 @@ import * as React from 'react';
 import useEmblaCarousel, { type UseEmblaCarouselType } from 'embla-carousel-react';
 
 import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
+import { Button3D } from '@/components/ui/button-3d';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { ArrowLeft04Icon, ArrowRight04Icon } from '@hugeicons/core-free-icons';
 
@@ -169,14 +169,14 @@ function CarouselItem({ className, ...props }: React.ComponentProps<'div'>) {
 
 function CarouselPrevious({
   className,
-  variant = 'pastel',
-  size = 'icon-sm',
+  variant = 'secondary',
+  size = 'icon',
   ...props
-}: React.ComponentProps<typeof Button>) {
+}: React.ComponentProps<typeof Button3D>) {
   const { orientation, scrollPrev, canScrollPrev } = useCarousel();
 
   return (
-    <Button
+    <Button3D
       data-slot="carousel-previous"
       variant={variant}
       size={size}
@@ -193,20 +193,20 @@ function CarouselPrevious({
     >
       <HugeiconsIcon icon={ArrowLeft04Icon} strokeWidth={2} />
       <span className="sr-only">Previous slide</span>
-    </Button>
+    </Button3D>
   );
 }
 
 function CarouselNext({
   className,
-  variant = 'pastel',
-  size = 'icon-sm',
+  variant = 'secondary',
+  size = 'icon',
   ...props
-}: React.ComponentProps<typeof Button>) {
+}: React.ComponentProps<typeof Button3D>) {
   const { orientation, scrollNext, canScrollNext } = useCarousel();
 
   return (
-    <Button
+    <Button3D
       data-slot="carousel-next"
       variant={variant}
       size={size}
@@ -223,7 +223,7 @@ function CarouselNext({
     >
       <HugeiconsIcon icon={ArrowRight04Icon} strokeWidth={2} />
       <span className="sr-only">Next slide</span>
-    </Button>
+    </Button3D>
   );
 }
 

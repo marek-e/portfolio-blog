@@ -4,15 +4,13 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  useCarousel,
+  CarouselNext,
+  CarouselPrevious,
   type CarouselApi,
 } from '@/components/ui/carousel';
 import { ProjectCardReact, type ProjectData } from './ProjectCardReact';
 import { cn } from '@/lib/utils';
 import { defaultLang, type Lang } from '@/i18n/config';
-import { Button3D } from '@/components/ui/button-3d';
-import { HugeiconsIcon } from '@hugeicons/react';
-import { ArrowLeft04Icon, ArrowRight04Icon } from '@hugeicons/core-free-icons';
 
 interface FeaturedProjectsCarouselProps {
   projects: Array<{
@@ -29,35 +27,6 @@ interface FeaturedProjectsCarouselProps {
 
 function translatePath(lang: Lang, path: string): string {
   return lang === defaultLang ? path : `/${lang}${path}`;
-}
-
-function ProjectCarouselControls() {
-  const { scrollPrev, scrollNext, canScrollPrev, canScrollNext } = useCarousel();
-
-  return (
-    <>
-      <Button3D
-        variant="secondary"
-        size="icon"
-        className="absolute top-1/2 -left-14 hidden size-11 -translate-y-1/2 md:inline-flex [&_svg]:size-4.5"
-        disabled={!canScrollPrev}
-        onClick={scrollPrev}
-        aria-label="Previous projects"
-      >
-        <HugeiconsIcon icon={ArrowLeft04Icon} strokeWidth={2} />
-      </Button3D>
-      <Button3D
-        variant="secondary"
-        size="icon"
-        className="absolute top-1/2 -right-14 hidden size-11 -translate-y-1/2 md:inline-flex [&_svg]:size-4.5"
-        disabled={!canScrollNext}
-        onClick={scrollNext}
-        aria-label="Next projects"
-      >
-        <HugeiconsIcon icon={ArrowRight04Icon} strokeWidth={2} />
-      </Button3D>
-    </>
-  );
 }
 
 export function FeaturedProjectsCarousel({
@@ -128,7 +97,14 @@ export function FeaturedProjectsCarousel({
         </CarouselContent>
 
         {/* Navigation arrows */}
-        <ProjectCarouselControls />
+        <CarouselPrevious
+          className="-left-14 hidden size-11 md:inline-flex [&_svg]:size-4.5"
+          aria-label="Previous projects"
+        />
+        <CarouselNext
+          className="-right-14 hidden size-11 md:inline-flex [&_svg]:size-4.5"
+          aria-label="Next projects"
+        />
       </Carousel>
 
       {/* Navigation dots */}
