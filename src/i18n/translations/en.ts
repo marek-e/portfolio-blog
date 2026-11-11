@@ -69,6 +69,9 @@ export const en: UITranslations = {
       'Get in touch with Marek Elmayan for projects, collaborations, or just to say hi.',
   },
   footer: {
+    explore: 'Explore',
+    about: 'About',
+    resources: 'Resources',
     sitemap: 'Sitemap',
     home: 'Home',
     contact: 'Contact',

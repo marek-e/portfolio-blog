@@ -1,102 +1,201 @@
 ---
 import { ArrowUp04Icon, RssIcon } from '@hugeicons/core-free-icons';
 import { Icon } from '../shared/Icon';
-import { Doodle } from '../shared/HandDrawn';
 import { SOCIALS } from '@/lib/socials';
 import { PRESENTATIONS_URL } from '@/lib/sites';
 import { getTranslations, getLangFromUrl, getTranslatedPath } from '@/i18n';
 import { LanguageSwitcher } from './LanguageSwitcher';
-import { Image } from 'astro:assets';
 import logo from '@/assets/logo.svg';
 
 const lang = getLangFromUrl(Astro.url);
 const t = getTranslations(lang);
 const translatePath = getTranslatedPath(lang);
 const currentPath = Astro.url.pathname;
-
 const currentYear = new Date().getFullYear();
 
-const sitemapLinks = [
-  { href: '/', label: t.footer.home },
-  { href: '/projects', label: t.footer.projects },
-  { href: '/blog', label: t.footer.blog },
-  { href: '/design-system', label: t.footer.designSystem },
-  { href: '/contact', label: t.footer.contact },
-  { href: '/curriculum-vitae', label: t.footer.cv },
-  { href: PRESENTATIONS_URL, label: t.footer.presentations, external: true },
+const groups = [
+  {
+    title: t.footer.explore,
+    links: [
+      { href: translatePath('/projects'), label: t.footer.projects },
+      { href: translatePath('/blog'), label: t.footer.blog },
+      { href: PRESENTATIONS_URL, label: t.footer.presentations, external: true },
+    ],
+  },
+  {
+    title: t.footer.about,
+    links: [
+      { href: translatePath('/'), label: t.footer.home },
+      { href: translatePath('/curriculum-vitae'), label: t.footer.cv },
+      { href: translatePath('/contact'), label: t.footer.contact },
+    ],
+  },
+  {
+    title: t.footer.resources,
+    links: [
+      { href: translatePath('/design-system'), label: t.footer.designSystem },
+      { href: lang === 'fr' ? '/rss.xml' : '/en/rss.xml', label: 'RSS' },
+    ],
+  },
 ];
 ---
 
-<footer
-  id="footer"
-  class="bg-footer border-border text-foreground rounded-t-4xl border-t px-4 py-8 sm:px-6 lg:px-8"
->
-  <div class="flex flex-col items-center justify-between gap-6 sm:flex-row">
-    <div>
-      <h3 class="eyebrow">{t.footer.sitemap}</h3>
-      <div class="mt-3 grid grid-cols-3 gap-x-6 gap-y-1 sm:grid-cols-4">
+<footer id="footer" class="illustrated-footer text-foreground overflow-clip">
+  <div class="footer-scene bg-background relative isolate min-h-screen">
+    <div class="footer-art pointer-events-none absolute -z-10 h-screen" aria-hidden="true"></div>
+    <div
+      class="footer-content relative mx-auto grid gap-8 pt-12 md:grid-cols-[minmax(0,1fr)_minmax(0,1.25fr)] md:gap-[clamp(2rem,6vw,7rem)] md:pt-[clamp(3rem,4.5vw,5rem)]"
+    >
+      <div class="min-w-0">
+        <a href={translatePath('/')} class="footer-identity flex w-fit flex-col items-start gap-4">
+          <img src={logo.src} alt="" width="67" height="48" class="h-12 w-auto" loading="lazy" />
+          <span
+            class="font-display-wonk text-[clamp(2rem,3vw,3rem)] leading-[1.15] font-semibold tracking-[-0.04em]"
+            >Marek Elmayan</span
+          >
+        </a>
+        <p class="text-muted-foreground mt-3 font-mono text-xs leading-relaxed">
+          AI Engineer · Full-Stack Developer
+        </p>
+        <p
+          class="text-muted-foreground mt-4 max-w-104 text-[0.9375rem] leading-relaxed text-pretty"
+        >
+          {t.hero.subtitle.split('\n')[0]}
+        </p>
+        <div class="mt-4 -ml-3 flex gap-1">
+          {
+            SOCIALS.map((social) => (
+              <a
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={t.aria.followOn.replace('{platform}', social.name)}
+                class="hover:text-primary motion-safe:hover:animate-wiggle grid size-11 place-items-center rounded-full"
+              >
+                <Icon icon={social.icon} strokeWidth={1.7} className="size-5" />
+              </a>
+            ))
+          }
+          <a
+            href={lang === 'fr' ? '/rss.xml' : '/en/rss.xml'}
+            aria-label={t.aria.subscribeRss}
+            class="hover:text-primary motion-safe:hover:animate-wiggle grid size-11 place-items-center rounded-full"
+          >
+            <Icon icon={RssIcon} strokeWidth={1.7} className="size-5" />
+          </a>
+        </div>
+      </div>
+      <nav
+        class="grid grid-cols-2 gap-x-4 gap-y-7 md:grid-cols-3 md:gap-6 md:pt-3"
+        aria-label={t.footer.sitemap}
+      >
         {
-          sitemapLinks.map((link) => (
-            <a
-              href={link.external ? link.href : translatePath(link.href)}
-              class="hand-underline-hover text-muted-foreground hover:text-foreground w-fit py-1 text-sm"
-              {...(link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-            >
-              {link.label}
-            </a>
+          groups.map((group) => (
+            <div class="min-w-0">
+              <h2 class="font-sans text-[0.9375rem] leading-normal font-semibold tracking-normal">
+                {group.title}
+              </h2>
+              <ul class="mt-3 grid md:mt-5">
+                {group.links.map((link) => (
+                  <li>
+                    <a
+                      href={link.href}
+                      class="text-muted-foreground hover:bg-primary/10 hover:text-foreground focus-visible:bg-primary/10 focus-visible:text-foreground -ml-3 flex min-h-11 w-fit min-w-11 items-center rounded-full px-3 py-2 text-[0.9375rem] leading-normal font-normal transition-colors duration-150 motion-reduce:transition-none"
+                      {...('external' in link
+                        ? { target: '_blank', rel: 'noopener noreferrer' }
+                        : {})}
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
           ))
         }
+      </nav>
+    </div>
+    <div
+      class="footer-utilities relative mx-auto mt-auto flex min-h-20 flex-col-reverse items-center justify-between gap-3 py-5 md:flex-row md:gap-6 md:py-4"
+    >
+      <p class="font-mono text-xs">© {currentYear} Marek Elmayan</p>
+      <div class="footer-controls flex w-full items-center justify-between gap-6 md:w-auto">
+        <LanguageSwitcher currentLang={lang} currentPath={currentPath} variant="classic" />
+        <a
+          href="#"
+          class="hover:bg-primary/10 focus-visible:bg-primary/10 -mr-3 inline-flex min-h-11 items-center gap-2 rounded-full px-3 text-[0.8125rem] opacity-80 transition-[background-color,opacity] duration-150 hover:opacity-100 focus-visible:opacity-100 motion-reduce:transition-none"
+        >
+          {t.footer.backToTop}
+          <Icon icon={ArrowUp04Icon} strokeWidth={1.7} className="size-4" />
+        </a>
       </div>
-    </div>
-    <div class="flex items-center justify-center gap-1">
-      {
-        SOCIALS.map((social) => (
-          <a
-            href={social.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={t.aria.followOn.replace('{platform}', social.name)}
-            class="text-muted-foreground hover:text-primary motion-safe:hover:animate-wiggle p-2 transition-colors"
-          >
-            <Icon icon={social.icon} strokeWidth={2} className="size-5" />
-          </a>
-        ))
-      }
-      <a
-        href={lang === 'fr' ? '/rss.xml' : '/en/rss.xml'}
-        aria-label={t.aria.subscribeRss}
-        class="text-muted-foreground hover:text-primary motion-safe:hover:animate-wiggle p-2 transition-colors"
-      >
-        <Icon icon={RssIcon} strokeWidth={2} className="size-5" />
-      </a>
-    </div>
-  </div>
-
-  <Doodle name="line" strokeWidth={1.5} className="text-primary/40 my-8 h-3 w-full" />
-
-  <div class="flex flex-col items-center justify-between gap-4 sm:flex-row">
-    <div class="flex items-center gap-4">
-      <Image src={logo} alt="logo - ME" fetchpriority="low" class="size-11" />
-      <p class="flex items-baseline gap-2">
-        <span class="text-muted-foreground font-mono text-xs">© {currentYear}</span>
-        <span class="font-display-soft text-lg font-semibold tracking-tight">Marek Elmayan</span>
-      </p>
-    </div>
-
-    <div class="flex items-center gap-5">
-      <LanguageSwitcher
-        client:load
-        currentLang={lang}
-        currentPath={currentPath}
-        variant="classic"
-      />
-      <a
-        href="#"
-        class="hand-underline-hover text-muted-foreground hover:text-foreground inline-flex items-center gap-1.5 text-sm"
-      >
-        {t.footer.backToTop}
-        <Icon icon={ArrowUp04Icon} strokeWidth={2} className="size-4" />
-      </a>
     </div>
   </div>
 </footer>
+
+<style>
+  .illustrated-footer {
+    --footer-art: url('/images/footer-day-v1.webp');
+  }
+
+  :global(.dark) .illustrated-footer {
+    --footer-art: url('/images/footer-night-v1.webp');
+  }
+
+  .footer-scene {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .footer-scene::after {
+    position: absolute;
+    z-index: -1;
+    inset: auto 0 0;
+    height: 12rem;
+    background: linear-gradient(transparent, oklch(0.12 0.02 295 / 65%));
+    content: '';
+    pointer-events: none;
+  }
+
+  .footer-art {
+    inset: auto 0 0;
+    background: var(--footer-art) center bottom / cover no-repeat;
+    mask-image: linear-gradient(to bottom, transparent, black 35%);
+  }
+
+  .footer-content {
+    padding-bottom: 16rem;
+  }
+
+  .footer-content,
+  .footer-utilities {
+    width: min(100% - 4rem, 80rem);
+  }
+
+  .footer-utilities {
+    color: oklch(0.99 0.005 300);
+    text-shadow: 0 1px 6px oklch(0.12 0.02 295 / 65%);
+  }
+
+  .illustrated-footer a:focus-visible,
+  .footer-controls :global(a:focus-visible) {
+    outline: 2px solid var(--primary);
+    outline-offset: 4px;
+  }
+
+  @media (max-width: 767px) {
+    .footer-content,
+    .footer-utilities {
+      width: min(100% - 3rem, 36rem);
+    }
+
+    .footer-content {
+      padding-bottom: 17rem;
+    }
+
+    .footer-art {
+      background-position: 58% bottom;
+      mask-image: linear-gradient(to bottom, transparent, black 60%);
+    }
+  }
+</style>

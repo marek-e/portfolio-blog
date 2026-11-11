@@ -58,6 +58,9 @@ export interface UITranslations {
     pageDescription: string;
   };
   footer: {
+    explore: string;
+    about: string;
+    resources: string;
     sitemap: string;
     home: string;
     contact: string;

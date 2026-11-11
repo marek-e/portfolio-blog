@@ -69,6 +69,9 @@ export const fr: UITranslations = {
       'Contactez Marek Elmayan pour vos projets, collaborations, ou simplement pour dire bonjour.',
   },
   footer: {
+    explore: 'Explorer',
+    about: 'À propos',
+    resources: 'Ressources',
     sitemap: 'Liens utiles',
     home: 'Accueil',
     blog: 'Blog',
