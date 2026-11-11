@@ -1,0 +1,19 @@
+src/components/layout/SoundtrackPlayer.astro
+  s_b47ba44e656b5e::t_c656db1a869d71 97,99
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "a154423cafad80dfe5af2945941f98e690a4c59b",
+  "prompts": {},
+  "sessions": {
+    "s_b47ba44e656b5e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e1ae028b-4cb4-4ad6-b24c-c1b7a7149d93",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
