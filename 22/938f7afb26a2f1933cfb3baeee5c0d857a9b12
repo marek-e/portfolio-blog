@@ -1,0 +1,29 @@
+src/i18n/translations/fr.ts
+  s_61d12b99e95fe7::t_a3f38a263345e6 101
+artifacts/footer-sky/sky-blend-prompts.txt
+  s_61d12b99e95fe7::t_6187152f33d0a8 1-19
+docs/DESIGN-SYSTEM.md
+  s_61d12b99e95fe7::t_406310e15450c1 23,128
+src/components/layout/Footer.astro
+  s_61d12b99e95fe7::t_a3f38a263345e6 143-147
+src/i18n/ui.ts
+  s_61d12b99e95fe7::t_a3f38a263345e6 90
+src/i18n/translations/en.ts
+  s_61d12b99e95fe7::t_a3f38a263345e6 101
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "22938f7afb26a2f1933cfb3baeee5c0d857a9b12",
+  "prompts": {},
+  "sessions": {
+    "s_61d12b99e95fe7": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1cca2-e75c-7153-b2c2-c722a6621707",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
