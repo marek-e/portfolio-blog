@@ -46,7 +46,7 @@ export function ProjectCardReact({ project, projectUrl, translations }: ProjectC
     <Card3D
       as="article"
       variant="glass"
-      className="project-card gap-0 p-3 sm:p-3 md:h-full"
+      className="project-card h-full gap-0 p-3 sm:p-3"
       style={{
         boxShadow: '0 2px 3px -1px var(--card-3d-edge), 0 12px 24px -20px var(--card-3d-shadow)',
       }}

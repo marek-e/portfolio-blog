@@ -48,9 +48,6 @@ export function FeaturedProjectsCarousel({
     const update = () => {
       setCount(api.scrollSnapList().length);
       setCurrent(api.selectedScrollSnap());
-      api.rootNode().style.height = window.matchMedia('(max-width: 767px)').matches
-        ? `calc(${api.slideNodes()[api.selectedScrollSnap()].offsetHeight}px + 4rem)`
-        : '';
     };
 
     update();
@@ -62,7 +59,6 @@ export function FeaturedProjectsCarousel({
       api.off('select', update);
       api.off('reInit', update);
       api.off('resize', update);
-      api.rootNode().style.height = '';
     };
   }, [api]);
 
@@ -78,7 +74,7 @@ export function FeaturedProjectsCarousel({
         className="w-full"
       >
         <CarouselContent
-          className="-ml-4 items-start py-2 md:items-stretch"
+          className="-ml-4 items-stretch py-2"
           viewportClassName="-mx-3 -my-6 px-3 py-6 touch-pan-y"
         >
           {projects.map((project, index) => (
