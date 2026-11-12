@@ -40,7 +40,7 @@ const groups = [
 ---
 
 <footer id="footer" class="illustrated-footer text-foreground overflow-clip">
-  <div class="footer-scene bg-background relative isolate min-h-screen">
+  <div class="footer-scene relative isolate min-h-screen">
     <div class="footer-art pointer-events-none absolute -z-10 h-screen" aria-hidden="true">
       <div class="footer-art-day"></div>
     </div>
@@ -140,12 +140,16 @@ const groups = [
       </nav>
     </div>
     <div class="footer-utilities relative mx-auto mt-auto">
-      <p class="footer-copyright font-sans text-xs">© {currentYear} Marek Elmayan</p>
+      <p class="footer-copyright font-sans text-xs leading-relaxed">
+        <span>© {currentYear} Marek Elmayan</span>
+        <span class="hidden md:inline" aria-hidden="true"> · </span>
+        <span class="block md:inline">{t.footer.exploration}</span>
+      </p>
       <GlassThemeSwitch lang={lang} client:visible />
       <button
         type="button"
         data-back-to-top
-        class="footer-back-to-top hover:bg-primary/10 focus-visible:bg-primary/10 inline-flex min-h-11 items-center gap-2 rounded-full px-3 text-[0.8125rem] opacity-80 transition-[background-color,opacity] duration-150 hover:opacity-100 focus-visible:opacity-100 motion-reduce:transition-none md:-mr-3"
+        class="footer-back-to-top hover:bg-primary/10 focus-visible:bg-primary/10 inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-full px-3 text-[0.8125rem] opacity-80 transition-[background-color,opacity] duration-150 hover:opacity-100 focus-visible:opacity-100 motion-reduce:transition-none md:-mr-3"
       >
         {t.footer.backToTop}
         <Icon icon={ArrowUp04Icon} strokeWidth={1.7} className="size-4" />
@@ -194,7 +198,16 @@ const groups = [
   .footer-art {
     inset: auto 0 0;
     background: var(--footer-art) center bottom / cover no-repeat;
-    mask-image: linear-gradient(to bottom, transparent, black 35%);
+    mask-image: linear-gradient(
+      to bottom,
+      transparent 6%,
+      rgb(0 0 0 / 4%) 16%,
+      rgb(0 0 0 / 16%) 26%,
+      rgb(0 0 0 / 42%) 38%,
+      rgb(0 0 0 / 74%) 50%,
+      rgb(0 0 0 / 94%) 60%,
+      black 68%
+    );
   }
 
   .footer-art-day {
@@ -204,29 +217,8 @@ const groups = [
     opacity: 0;
   }
 
-  .footer-scene[data-theme-preview] {
-    --background: color-mix(
-      in oklab,
-      var(--day-background) var(--footer-daylight),
-      var(--night-background)
-    );
-    --primary: color-mix(in oklab, var(--day-primary) var(--footer-daylight), var(--night-primary));
-    --foreground: var(--night-foreground);
-    --muted-foreground: var(--night-muted-foreground);
-    color: var(--foreground);
-  }
-
   .footer-scene[data-theme-preview] .footer-art {
     background-image: url('/images/footer-night-v1.webp');
-  }
-
-  .footer-scene[data-preview-tone='day'] {
-    --foreground: var(--day-foreground);
-    --muted-foreground: var(--day-muted-foreground);
-  }
-
-  .footer-scene[data-preview-midpoint=''] {
-    --muted-foreground: var(--foreground);
   }
 
   .footer-content {
@@ -244,7 +236,7 @@ const groups = [
     grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
     align-items: center;
     gap: 1.5rem;
-    padding-block: 2rem;
+    padding-block: 2rem 1.25rem;
     color: oklch(0.99 0.005 300);
     text-shadow: 0 1px 6px oklch(0.12 0.02 295 / 65%);
   }
@@ -274,7 +266,7 @@ const groups = [
       grid-template-areas: 'theme' 'top' 'copyright';
       grid-template-columns: minmax(0, 1fr);
       gap: 0.75rem;
-      padding-bottom: max(2rem, env(safe-area-inset-bottom));
+      padding-bottom: max(1.25rem, env(safe-area-inset-bottom));
     }
 
     .footer-copyright,
@@ -297,7 +289,15 @@ const groups = [
 
     .footer-art {
       background-position: 58% bottom;
-      mask-image: linear-gradient(to bottom, transparent, black 60%);
+      mask-image: linear-gradient(
+        to bottom,
+        transparent 6%,
+        rgb(0 0 0 / 4%) 24%,
+        rgb(0 0 0 / 16%) 44%,
+        rgb(0 0 0 / 42%) 48%,
+        rgb(0 0 0 / 82%) 54%,
+        black 64%
+      );
     }
   }
 </style>

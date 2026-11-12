@@ -1,0 +1,10 @@
+Mode: built-in image_gen
+
+Use case: lighting-weather
+Asset type: light-theme portfolio footer artwork.
+Input image: edit target.
+Primary request: gently brighten the mood of this exact light-theme scene. Make it feel sunnier, fresher and more welcoming, as a small color-and-light refinement. The current muted grey-olive distance and beige foreground should gain a little life without becoming a sugary fantasy scene.
+Light and palette: soft golden-hour sunlight with a clear pale blue upper sky and a few delicate peach-pink clouds near the horizon. Lift the grey haze into luminous warm atmospheric depth, with softly blue-lilac mountain layers. Give the meadow fresher natural greens with warm sunlit tips, and make the existing small pink and lavender wildflowers a little more lively. The lake gains gentle clear blue and peach reflections with a little more light. Preserve soft shadows and local color variation; no uniform orange cast.
+Rendering: keep the same smooth softly realistic environment, dimensional mascot materials, gentle selective focus and calm atmosphere. A restrained increase in color and warmth, not stronger bloom or higher global exposure. Keep the upper sky pale and calm for dark HTML navigation and a CSS fade into the page background.
+Invariants: change ONLY environmental lighting and color. Preserve the EXACT 16:9 framing, all mountains, lake shoreline, trees, plants, rocks and BOTH companions. Keep every character design, pose, position and size, including the purple fox, pale tail, brown backpack, and the little white floating robot with its warm amber face and ring.
+Avoid: extra flowers or objects, extra characters, stars, rainbows, exaggerated rays, glowing outlines, heavy bloom, HDR, saturated orange wash, candy colors, plastic scenery, painting/canvas textures, text, UI, borders or watermarks.

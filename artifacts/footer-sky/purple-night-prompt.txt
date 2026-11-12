@@ -1,0 +1,10 @@
+Mode: built-in image_gen
+
+Use case: lighting-weather
+Asset type: dark-theme portfolio footer artwork.
+Input image: edit target.
+Primary request: make this exact night scene feel a little brighter, more inviting and quietly magical. The current cool grey and navy palette feels sad. Add more purple and lavender color and make the stars easier to see, while keeping the restrained soft 3D realism and natural atmosphere.
+Color and light: gently shift the sky from grey-blue toward rich indigo and soft plum. Give the middle sky a little violet color, distant mountain layers soft lavender and periwinkle light, and the horizon a delicate rose-lilac afterglow. Bring some muted violet color into the lake reflections and nearby flowers. Preserve natural green vegetation and tonal depth so the scene is not uniformly purple. Lift shadow detail slightly, keeping it unmistakably night. The robot's small amber glow remains a warm focal point.
+Stars: make individual stars visibly brighter and a little more distinct, with irregular spacing and a natural mix of faint and medium-bright points. Make the existing Milky Way a soft but clearly readable lavender-silver band in the middle sky. It must remain visible above the peaks, since the upper part of the image fades under a CSS mask on the website. Keep dark gaps and breathing space rather than dense glitter. No large starbursts or saturated nebula.
+Invariants: change only color, environmental lighting and star visibility. Keep the EXACT camera, 16:9 composition, mountain shapes, lake shoreline, vegetation, rocks and BOTH companions, including every character design, pose, position and size. Keep the purple fox with pale tail and brown backpack and floating white robot unchanged and recognizable. Preserve the smooth dimensional rendering and selective focus.
+Constraints: gentle refinement, not a dramatic fantasy makeover. Calm dark upper sky for light navigation text and a smooth page-background fade. No moon, planets, aurora, shooting stars, extra objects, extra characters, text, UI, borders, watermark, hand-painted textures, plastic shine, HDR or heavy bloom.

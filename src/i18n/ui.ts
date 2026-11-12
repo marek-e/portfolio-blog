@@ -87,6 +87,7 @@ export interface UITranslations {
     designSystem: string;
     cv: string;
     backToTop: string;
+    exploration: string;
   };
   notFound: {
     pageTitle: string;

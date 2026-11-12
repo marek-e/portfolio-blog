@@ -1,0 +1,19 @@
+Mode: built-in image_gen
+
+Light theme
+Use case: lighting-weather
+Asset type: light-theme portfolio footer artwork with a natural sky-to-page transition.
+Input image: edit target.
+Primary request: refine ONLY the upper sky so the artwork itself gradually blends into the website's warm ivory page background. Keep the approved bright sunlit green meadow and soft peach daylight below.
+Sky transition: the entire top edge must be smooth, nearly uniform #fefbf8. Keep roughly the upper 10 percent almost this exact color, then blend very gently into the existing pale blue sky through the next 25 to 30 percent. It should read as soft atmospheric light and airy haze inside the sky, not a rectangular overlay, border, vignette, cutout or obvious horizontal stripe. Keep the existing delicate peach clouds lower in the sky, leaving the upper area quiet.
+Invariants: below the upper 40 percent, preserve EVERYTHING: current colors, brightness, soft realistic 3D rendering, selective focus, mountain and cliff shapes, lake and reflections, grasses and flowers, rocks, and both companions. Keep the purple fox with pale tail and backpack and white floating amber robot EXACTLY the same identities, poses, positions and sizes. No camera changes or crop; retain exact wide 16:9 composition.
+Constraints: no new objects or subjects, no new sky phenomena, no text or UI, no watermark, no hand-painted textures, no change in the inviting mood. This is a targeted upper-sky edit, not a new scene. Opaque image, no transparency: the color transition is part of the sky artwork itself.
+
+Dark theme
+Use case: lighting-weather
+Asset type: dark-theme portfolio footer artwork with a natural sky-to-page transition.
+Input image: edit target.
+Primary request: refine ONLY the upper sky so the artwork itself gradually blends into the website's near-black plum page background. Keep the approved bright purple-lavender night, readable stars and luminous Milky Way below.
+Sky transition: the entire top edge must be smooth, nearly uniform #0b0910. Keep roughly the upper 10 percent almost this exact color, then blend very gently into the existing indigo-purple starry sky through the next 25 to 30 percent. It should read as soft atmospheric light and deepening night inside the sky, not a rectangular overlay, border, vignette, cutout or obvious horizontal stripe. Let stars gradually become visible lower in the sky, preserving the bright Milky Way across the middle sky above the mountains.
+Invariants: below the upper 40 percent, preserve EVERYTHING: current colors, brightness, soft realistic 3D rendering, selective focus, mountain and cliff shapes, lake and reflections, grasses and flowers, rocks, and both companions. Keep the purple fox with pale tail and backpack and white floating amber robot EXACTLY the same identities, poses, positions and sizes. No camera changes or crop; retain exact wide 16:9 composition.
+Constraints: no new objects or subjects, no new sky phenomena, no text or UI, no watermark, no hand-painted textures, no change in the inviting mood. This is a targeted upper-sky edit, not a new scene. Opaque image, no transparency: the color transition is part of the sky artwork itself.
