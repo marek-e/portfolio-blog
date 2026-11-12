@@ -36,7 +36,7 @@ const {
      z-0, not -z-10: a negative z-index would paint the artwork behind the
      opaque bg-background on <body>, hiding it completely. z-0 keeps it above
      that and below both the spotlight glow (z-1) and the page content (z-10). -->
-<picture class="absolute inset-0 z-0 dark:hidden">
+<picture class="absolute inset-0 z-0 dark:hidden" data-hero-background="light">
   <Image
     src={lightSrc}
     srcset={`${lightSrc} 2048w`}
@@ -50,7 +50,7 @@ const {
     loading="eager"
   />
 </picture>
-<picture class="absolute inset-0 z-0 hidden dark:block">
+<picture class="absolute inset-0 z-0 hidden dark:block" data-hero-background="dark">
   <Image
     src={darkSrc}
     srcset={`${darkSrc} 2048w`}
@@ -103,15 +103,15 @@ const {
 </style>
 
 <script>
-  // Run immediately (not on DOMContentLoaded) to avoid flash
-  (() => {
+  function initBackgroundImages() {
     const placeholder = document.getElementById('bg-placeholder');
-    const images = document.querySelectorAll<HTMLImageElement>('picture img');
+    if (!placeholder) return;
 
-    let loadedCount = 0;
-    const totalImages = images.length;
+    const images = document.querySelectorAll<HTMLImageElement>('[data-hero-background] img');
+    const loadedImages = new Set<HTMLImageElement>();
 
     const hidePlaceholder = () => {
+      themeObserver.disconnect();
       if (placeholder) {
         placeholder.style.opacity = '0';
         setTimeout(() => {
@@ -120,15 +120,30 @@ const {
       }
     };
 
-    const countLoaded = () => {
-      loadedCount++;
-      if (loadedCount === totalImages) {
+    const revealIfReady = () => {
+      const theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+      if (
+        [...loadedImages].some((img) => img.closest('picture')?.dataset.heroBackground === theme)
+      ) {
         hidePlaceholder();
       }
     };
 
+    const markLoaded = (img: HTMLImageElement) => {
+      loadedImages.add(img);
+      revealIfReady();
+    };
+
+    const themeObserver = new MutationObserver(revealIfReady);
+    themeObserver.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+    });
+    document.addEventListener('astro:before-swap', () => themeObserver.disconnect(), {
+      once: true,
+    });
+
     images.forEach((img) => {
-      // If already loaded (cached or preloaded), don't animate - just count it.
       // We can't listen for load on the element itself: it has already fired,
       // so a listener attached now would never run. naturalWidth is no help
       // either - a preloaded image reports complete before it has decoded, so
@@ -137,7 +152,7 @@ const {
       // placeholder stays up when the image really did fail.
       if (img.complete) {
         const probe = new Image();
-        probe.addEventListener('load', countLoaded);
+        probe.addEventListener('load', () => markLoaded(img));
         probe.addEventListener('error', () => {
           console.warn('Background image failed to load');
         });
@@ -147,12 +162,15 @@ const {
         img.classList.add('is-loading');
         img.addEventListener('load', () => {
           img.classList.add('loaded');
-          countLoaded();
+          markLoaded(img);
         });
         img.addEventListener('error', () => {
           console.warn('Background image failed to load');
         });
       }
     });
-  })();
+  }
+
+  initBackgroundImages();
+  document.addEventListener('astro:after-swap', initBackgroundImages);
 </script>
