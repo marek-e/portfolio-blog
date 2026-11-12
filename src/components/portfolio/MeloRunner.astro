@@ -1,0 +1,556 @@
+---
+import { getLangFromUrl, getTranslations } from '@/i18n';
+
+const t = getTranslations(getLangFromUrl(Astro.url));
+---
+
+<div class="melo-runway" data-melo-runway>
+  <div class="melo-runner" data-melo-runner data-pose="idle">
+    <div class="melo-shadow" data-melo-shadow aria-hidden="true"></div>
+    <div class="melo-direction" data-melo-direction aria-hidden="true">
+      <div class="melo-facing" data-melo-facing>
+        <div class="melo-wind" data-melo-wind>
+          {Array.from({ length: 5 }, () => <span class="melo-streak" />)}
+        </div>
+      </div>
+    </div>
+    <div class="melo-idle-art" data-melo-idle-art aria-hidden="true">
+      <canvas class="melo-character" data-melo-character width="512" height="512"></canvas>
+      <img
+        class="melo-fallback"
+        src="/melo/naruto-run/melo-naruto-idle-hd.webp"
+        alt=""
+        width="512"
+        height="512"
+        loading="lazy"
+        decoding="async"
+        draggable="false"
+      />
+      <span class="melo-seal-feedback" data-melo-feedback></span>
+    </div>
+    <div hidden aria-hidden="true">
+      <img
+        src="/melo/naruto-run/melo-naruto-run-hd.webp"
+        alt=""
+        width="4096"
+        height="512"
+        loading="lazy"
+        decoding="async"
+        data-melo-sprite
+      />
+      {
+        ['idle', 'raise', 'seal', 'blink', 'turn-0', 'turn-1', 'turn-2', 'turn-3'].map((pose) => (
+          <img
+            class={`melo-${pose}`}
+            src={`/melo/naruto-run/melo-naruto-${pose}-hd.webp`}
+            alt=""
+            width="512"
+            height="512"
+            loading="lazy"
+            decoding="async"
+          />
+        ))
+      }
+    </div>
+    <button
+      class="melo-trigger"
+      type="button"
+      aria-label={t.strava.meloShadowClones}
+      data-melo-trigger
+      hidden></button>
+  </div>
+  {
+    [-1, 1].map((direction) => (
+      <div class="melo-clone" data-melo-clone data-direction={direction} hidden aria-hidden="true">
+        <div class="melo-shadow" data-clone-shadow />
+        <div class="melo-clone-facing" data-clone-facing>
+          <div class="melo-wind">
+            {Array.from({ length: 5 }, () => (
+              <span class="melo-streak" />
+            ))}
+          </div>
+          <div class="melo-frame">
+            <img
+              class="melo-clone-sprite"
+              src="/melo/naruto-run/melo-naruto-run-hd.webp"
+              alt=""
+              width="4096"
+              height="512"
+              loading="lazy"
+              decoding="async"
+              draggable="false"
+            />
+            <img
+              class="melo-clone-idle"
+              src="/melo/naruto-run/melo-naruto-idle-hd.webp"
+              alt=""
+              width="512"
+              height="512"
+              loading="lazy"
+              decoding="async"
+              draggable="false"
+            />
+          </div>
+        </div>
+      </div>
+    ))
+  }
+  {
+    [-1, 1].map((direction) => (
+      <div class="melo-burst" data-melo-burst data-direction={direction} hidden aria-hidden="true">
+        {Array.from({ length: 7 }, () => (
+          <span class="melo-puff" />
+        ))}
+      </div>
+    ))
+  }
+</div>
+
+<script>
+  import { createMeloInteractions } from './melo-interactions';
+  import { createMeloPoses } from './melo-poses';
+
+  function initMeloRunner() {
+    const runway = document.querySelector<HTMLElement>('[data-melo-runway]');
+    const runner = runway?.querySelector<HTMLElement>('[data-melo-runner]');
+    const direction = runway?.querySelector<HTMLElement>('[data-melo-direction]');
+    const facing = runway?.querySelector<HTMLElement>('[data-melo-facing]');
+    const wind = runway?.querySelector<HTMLElement>('[data-melo-wind]');
+    const shadow = runway?.querySelector<HTMLElement>('[data-melo-shadow]');
+    if (!runway || !runner || !direction || !facing || !wind || !shadow) return;
+
+    const poses = createMeloPoses(runner);
+    const interactions = createMeloInteractions(runway, runner, poses, () => reset());
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let visible = false;
+    let frameRequest = 0;
+    let previousScroll = window.scrollY;
+    let previousTime = performance.now();
+    let previousX: number | null = null;
+    let stridePhase = 1;
+    let stopTimeout = 0;
+
+    const showIdle = () => {
+      interactions.setRunning(false);
+    };
+
+    const showFrame = (frame: number, lean = 0) => {
+      poses.setFrame(frame, lean);
+      const airborne = runner.dataset.pose === 'run' && frame % 4 === 3;
+      shadow.style.transform = `translateX(-50%) scale(${airborne ? 0.78 : 1})`;
+      shadow.style.opacity = airborne ? '0.12' : '0.2';
+    };
+
+    const stopRunning = () => {
+      window.clearTimeout(stopTimeout);
+      wind.removeAttribute('data-running');
+      wind.style.opacity = '0';
+      facing.style.transform = 'rotate(0deg)';
+      stridePhase = Math.round((stridePhase - 1) / 4) * 4 + 1;
+      showFrame(stridePhase % 8);
+      showIdle();
+    };
+
+    const update = (time: number) => {
+      frameRequest = 0;
+      if (reducedMotion.matches || !visible || document.hidden) return;
+
+      const bounds = runway.getBoundingClientRect();
+      const size = runner.offsetWidth;
+      const clearance = 24;
+      const progress = Math.max(
+        0,
+        Math.min(
+          1,
+          (window.innerHeight - size - clearance - bounds.top) /
+            Math.max(1, window.innerHeight - size - clearance * 2)
+        )
+      );
+      const delta = window.scrollY - previousScroll;
+      const elapsed = Math.max(1, Math.min(64, time - previousTime));
+      const naturalX = 8 + progress * Math.max(0, bounds.width - size - 16);
+      const x =
+        interactions.isKeyboardFocused() && runner.matches(':has(:focus-visible)')
+          ? Math.max(8, Math.min(bounds.width - size - 8, naturalX))
+          : naturalX;
+      const distance = previousX === null ? 0 : Math.abs(x - previousX);
+      previousScroll = window.scrollY;
+      previousTime = time;
+      previousX = x;
+
+      runner.style.transform = `translate3d(${x}px, 0, 0)`;
+      if (interactions.isKeyboardFocused()) {
+        stopRunning();
+        showIdle();
+        return;
+      }
+      if (Math.abs(delta) > 0.5 && distance > 0) {
+        stridePhase += distance / (size * 0.09);
+        const speed = Math.min(1, Math.abs(delta) / (elapsed * 2));
+        interactions.setRunning(true);
+        poses.setDirection(delta > 0 ? 1 : -1);
+        facing.style.transform = `rotate(${3 + speed * 5}deg)`;
+        showFrame(Math.floor(stridePhase) % 8, 3 + speed * 5);
+        wind.dataset.running = '';
+        wind.style.opacity = `${0.25 + speed * 0.65}`;
+        wind.style.transform = `scaleX(${0.6 + speed * 0.8})`;
+        window.clearTimeout(stopTimeout);
+        stopTimeout = window.setTimeout(stopRunning, 100);
+      }
+    };
+
+    const schedule = () => {
+      if (!frameRequest && visible && !reducedMotion.matches && !document.hidden) {
+        frameRequest = requestAnimationFrame(update);
+      }
+    };
+
+    const reset = () => {
+      stopRunning();
+      showIdle();
+      interactions.reset();
+      poses.reset();
+      previousScroll = window.scrollY;
+      previousTime = performance.now();
+      previousX = null;
+      if (reducedMotion.matches) {
+        cancelAnimationFrame(frameRequest);
+        frameRequest = 0;
+        runner.style.removeProperty('transform');
+        direction.style.removeProperty('transform');
+        facing.style.removeProperty('transform');
+        shadow.style.removeProperty('transform');
+        shadow.style.removeProperty('opacity');
+        stridePhase = 1;
+      } else {
+        schedule();
+      }
+    };
+
+    const observer = new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      interactions.setActive(visible);
+      previousScroll = window.scrollY;
+      previousTime = performance.now();
+      previousX = null;
+      if (!visible) {
+        stopRunning();
+        showIdle();
+        poses.reset();
+      }
+      schedule();
+    });
+    observer.observe(runway);
+    const preloadObserver = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        runway.querySelectorAll<HTMLImageElement>('img').forEach((image) => {
+          image.loading = 'eager';
+        });
+        preloadObserver.disconnect();
+      },
+      { rootMargin: '600px' }
+    );
+    preloadObserver.observe(runway);
+    const resizeObserver = new ResizeObserver(reset);
+    resizeObserver.observe(runway);
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', reset);
+    runner.addEventListener('focusout', reset);
+    document.addEventListener('visibilitychange', reset);
+    reducedMotion.addEventListener('change', reset);
+
+    document.addEventListener(
+      'astro:before-swap',
+      () => {
+        stopRunning();
+        showIdle();
+        interactions.destroy();
+        poses.destroy();
+        cancelAnimationFrame(frameRequest);
+        observer.disconnect();
+        preloadObserver.disconnect();
+        resizeObserver.disconnect();
+        window.removeEventListener('scroll', schedule);
+        window.removeEventListener('resize', reset);
+        runner.removeEventListener('focusout', reset);
+        document.removeEventListener('visibilitychange', reset);
+        reducedMotion.removeEventListener('change', reset);
+      },
+      { once: true }
+    );
+  }
+
+  initMeloRunner();
+  document.addEventListener('astro:after-swap', initMeloRunner);
+</script>
+
+<style>
+  .melo-runway {
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    position: relative;
+    height: clamp(9rem, 15vw, 12rem);
+    margin-bottom: 1rem;
+    overflow: clip;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .melo-runner,
+  .melo-clone {
+    width: clamp(9rem, 15vw, 12rem);
+  }
+
+  .melo-runner {
+    position: relative;
+    aspect-ratio: 1;
+    transform: translateX(calc(50vw - 50%));
+  }
+
+  .melo-facing {
+    position: relative;
+    height: 100%;
+    transform-origin: 50% 75%;
+    transition: transform 160ms var(--ease-out);
+  }
+
+  .melo-direction,
+  .melo-clone-facing {
+    position: relative;
+  }
+
+  .melo-runner:not([data-running]) .melo-shadow,
+  .melo-clone[data-still] .melo-shadow {
+    left: 54%;
+  }
+
+  .melo-shadow {
+    position: absolute;
+    top: 91%;
+    left: 54%;
+    width: 38%;
+    height: 6%;
+    background: radial-gradient(ellipse, var(--muted-foreground), transparent 70%);
+    opacity: 0.2;
+    transform: translateX(-50%);
+    transition:
+      transform 160ms var(--ease-out),
+      opacity 160ms var(--ease-out);
+  }
+
+  .melo-runner[data-running][data-facing='-1'] > .melo-shadow {
+    left: 46%;
+  }
+
+  .melo-frame {
+    position: relative;
+    overflow: clip;
+    aspect-ratio: 1;
+  }
+
+  .melo-clone-sprite {
+    display: block;
+    width: 800%;
+    max-width: none;
+    height: 100%;
+    transform: translateX(-12.5%);
+  }
+
+  .melo-direction {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+  }
+
+  .melo-runner[data-pose='run'] .melo-direction {
+    opacity: 1;
+  }
+
+  .melo-runner[data-melo-painted] .melo-fallback {
+    opacity: 0;
+  }
+
+  .melo-idle-art {
+    position: absolute;
+    inset: 0;
+    transform-origin: 50% 94%;
+  }
+
+  .melo-character,
+  .melo-fallback,
+  .melo-clone-idle {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .melo-seal-feedback {
+    position: absolute;
+    top: 53%;
+    left: 42%;
+    width: 27%;
+    height: 23%;
+    background: radial-gradient(ellipse, var(--primary), transparent 70%);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 100ms var(--ease-out);
+  }
+
+  .melo-trigger {
+    position: absolute;
+    inset: 8% 15% 4%;
+    padding: 0;
+    border: 0;
+    border-radius: 9999px;
+    background: transparent;
+    cursor: pointer;
+    pointer-events: auto;
+    touch-action: manipulation;
+  }
+
+  .melo-trigger[aria-disabled='true'] {
+    pointer-events: none;
+    cursor: default;
+  }
+
+  .melo-trigger:focus-visible {
+    outline: 2px solid var(--foreground);
+    outline-offset: 4px;
+  }
+
+  .melo-clone {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+  }
+
+  .melo-clone-idle {
+    opacity: 0;
+  }
+
+  .melo-clone[data-still] .melo-clone-sprite {
+    opacity: 0;
+  }
+
+  .melo-clone[data-still] .melo-clone-idle {
+    opacity: 1;
+  }
+
+  .melo-burst {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: clamp(9rem, 15vw, 12rem);
+    aspect-ratio: 1;
+    pointer-events: none;
+  }
+
+  .melo-puff {
+    position: absolute;
+    top: 20%;
+    left: 24%;
+    width: 32%;
+    aspect-ratio: 1;
+    border-radius: 46% 54% 61% 39% / 56% 44% 58% 42%;
+    background: radial-gradient(
+      ellipse at 45% 45%,
+      var(--muted-foreground) 15%,
+      color-mix(in srgb, var(--muted-foreground) 70%, var(--background)) 45%,
+      transparent 72%
+    );
+    opacity: 0;
+  }
+
+  .melo-clone[data-running] .melo-wind {
+    opacity: 0.7;
+    transform: scaleX(1);
+  }
+
+  .melo-wind {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transform: scaleX(0.6);
+    transform-origin: 35% 50%;
+    transition:
+      opacity 160ms var(--ease-out),
+      transform 160ms var(--ease-out);
+  }
+
+  .melo-streak {
+    position: absolute;
+    top: 26%;
+    left: -15%;
+    width: 46%;
+    height: 2px;
+    border-radius: 50%;
+    background: linear-gradient(90deg, transparent, var(--primary));
+    opacity: 0;
+    animation: melo-wind 480ms linear infinite paused;
+  }
+
+  .melo-streak:nth-child(2) {
+    top: 38%;
+    width: 62%;
+    animation-duration: 400ms;
+    animation-delay: -180ms;
+  }
+
+  .melo-streak:nth-child(3) {
+    top: 51%;
+    width: 38%;
+    animation-delay: -320ms;
+  }
+
+  .melo-streak:nth-child(4) {
+    top: 64%;
+    width: 56%;
+    animation-duration: 560ms;
+    animation-delay: -120ms;
+  }
+
+  .melo-streak:nth-child(5) {
+    top: 75%;
+    width: 32%;
+    animation-duration: 400ms;
+    animation-delay: -280ms;
+  }
+
+  .melo-wind[data-running] .melo-streak,
+  .melo-clone[data-running] .melo-streak {
+    animation-play-state: running;
+  }
+
+  @keyframes melo-wind {
+    0% {
+      transform: translateX(12%);
+      opacity: 0;
+    }
+    25% {
+      opacity: 0.8;
+    }
+    100% {
+      transform: translateX(-45%);
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .melo-facing,
+    .melo-shadow,
+    .melo-seal-feedback,
+    .melo-wind {
+      transition: none;
+    }
+
+    .melo-wind {
+      display: none;
+    }
+
+    .melo-streak {
+      animation: none;
+    }
+  }
+</style>

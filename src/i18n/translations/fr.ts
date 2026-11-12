@@ -201,6 +201,7 @@ export const fr: UITranslations = {
     runs: 'courses',
     avgPace: 'Allure moyenne',
     viewOnStrava: 'Voir sur Strava',
+    meloShadowClones: 'Déclencher le multi-clonage de Melo',
     noActivities: 'Aucune activité disponible. Essayez plus tard.',
     elevation: 'Dénivelé',
     duration: 'Durée',

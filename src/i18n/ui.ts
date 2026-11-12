@@ -185,6 +185,7 @@ export interface UITranslations {
     runs: string;
     avgPace: string;
     viewOnStrava: string;
+    meloShadowClones: string;
     noActivities: string;
     elevation: string;
     duration: string;

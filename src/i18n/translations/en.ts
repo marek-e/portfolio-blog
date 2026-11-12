@@ -200,6 +200,7 @@ export const en: UITranslations = {
     runs: 'runs',
     avgPace: 'Average Pace',
     viewOnStrava: 'View on Strava',
+    meloShadowClones: "Summon Melo's shadow clones",
     noActivities: 'No activities available. Try again later.',
     elevation: 'Elevation',
     duration: 'Duration',
