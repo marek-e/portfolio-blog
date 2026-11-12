@@ -15,12 +15,12 @@ Check foot registration through the turn, fast reversals, feedback during an exi
 
 New artwork uses built-in image generation, exported as registered 512-pixel assets.
 
-| Asset        | Saved file                                                                 |
-| ------------ | -------------------------------------------------------------------------- |
-| Turn 1       | [melo-naruto-turn-0-hd.webp](../../public/melo/melo-naruto-turn-0-hd.webp) |
-| Turn 2       | [melo-naruto-turn-1-hd.webp](../../public/melo/melo-naruto-turn-1-hd.webp) |
-| Turn 3       | [melo-naruto-turn-2-hd.webp](../../public/melo/melo-naruto-turn-2-hd.webp) |
-| Turn 4       | [melo-naruto-turn-3-hd.webp](../../public/melo/melo-naruto-turn-3-hd.webp) |
-| Blink        | [melo-naruto-blink-hd.webp](../../public/melo/melo-naruto-blink-hd.webp)   |
-| Turn prompt  | [turn-frames-prompt.txt](turn-frames-prompt.txt)                           |
-| Blink prompt | [blink-prompt.txt](blink-prompt.txt)                                       |
+| Asset        | Saved file                                                                            |
+| ------------ | ------------------------------------------------------------------------------------- |
+| Turn 1       | [melo-naruto-turn-0-hd.webp](../../public/melo/naruto-run/melo-naruto-turn-0-hd.webp) |
+| Turn 2       | [melo-naruto-turn-1-hd.webp](../../public/melo/naruto-run/melo-naruto-turn-1-hd.webp) |
+| Turn 3       | [melo-naruto-turn-2-hd.webp](../../public/melo/naruto-run/melo-naruto-turn-2-hd.webp) |
+| Turn 4       | [melo-naruto-turn-3-hd.webp](../../public/melo/naruto-run/melo-naruto-turn-3-hd.webp) |
+| Blink        | [melo-naruto-blink-hd.webp](../../public/melo/naruto-run/melo-naruto-blink-hd.webp)   |
+| Turn prompt  | [turn-frames-prompt.txt](turn-frames-prompt.txt)                                      |
+| Blink prompt | [blink-prompt.txt](blink-prompt.txt)                                                  |
