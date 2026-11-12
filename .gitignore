@@ -25,3 +25,4 @@ pnpm-debug.log*
 
 # claude code personal settings
 .claude/settings.local.json
+artifacts/homepage-performance-2026-11-11/
