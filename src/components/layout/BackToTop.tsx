@@ -12,20 +12,20 @@ export function BackToTop({ label = 'Back to top' }: { label?: string }) {
 
     let footerVisible = false;
 
+    const handleScroll = () => {
+      const scrolled = window.scrollY > 300;
+      setVisible(scrolled && !footerVisible);
+    };
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         footerVisible = entry.isIntersecting;
-        if (footerVisible) setVisible(false);
+        handleScroll();
       },
       { threshold: 0 }
     );
 
     observer.observe(footer);
-
-    const handleScroll = () => {
-      const scrolled = window.scrollY > 300;
-      setVisible(scrolled && !footerVisible);
-    };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
@@ -51,9 +51,9 @@ export function BackToTop({ label = 'Back to top' }: { label?: string }) {
       aria-label={label}
       tabIndex={visible ? 0 : -1}
       className={cn(
-        'fixed right-6 bottom-6 z-40 hidden size-11 items-center justify-center rounded-full md:flex',
+        'fixed right-4 bottom-[calc(max(0.75rem,env(safe-area-inset-bottom))+5.25rem)] z-40 flex size-11 items-center justify-center rounded-full md:right-6 md:bottom-6',
         'btn-radiant border',
-        'transition-all duration-300 ease-out',
+        'transition-[transform,opacity] duration-300 ease-out',
         'hover:scale-105',
         'focus-visible:translate-y-0 focus-visible:opacity-100 focus-visible:transition-none',
         'motion-reduce:transition-none motion-reduce:hover:scale-100',
