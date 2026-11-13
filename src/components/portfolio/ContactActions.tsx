@@ -9,12 +9,11 @@ import { EMAIL } from '@/lib/socials';
 
 interface ContactActionsProps {
   cta: string;
-  sendLabel: string;
   copiedText: string;
   copyLabel: string;
 }
 
-export function ContactActions({ cta, sendLabel, copiedText, copyLabel }: ContactActionsProps) {
+export function ContactActions({ cta, copiedText, copyLabel }: ContactActionsProps) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
@@ -35,7 +34,6 @@ export function ContactActions({ cta, sendLabel, copiedText, copyLabel }: Contac
         nativeButton={false}
         role="link"
         render={<a href={`mailto:${EMAIL}`} />}
-        aria-label={sendLabel}
       >
         {cta}
         <HugeiconsIcon icon={Sent02Icon} className="size-4" aria-hidden="true" />
