@@ -33,23 +33,24 @@ export function Pre({ children, className, 'data-language': language, ...props }
           type="button"
           data-copy-button
           className={cn(
-            'border-border bg-background text-muted-foreground absolute top-3 right-3 z-10 cursor-pointer rounded-md border p-2',
+            'group/copy border-border bg-background text-muted-foreground absolute top-3 right-3 z-10 grid cursor-pointer rounded-md border p-2',
             'opacity-0 group-hover:opacity-100 motion-safe:transition-opacity',
             'hover:bg-muted hover:text-foreground',
-            'focus:ring-ring focus:opacity-100 focus:ring-2 focus:outline-none',
-            'active:scale-95 motion-safe:transition-transform'
+            'focus:ring-ring focus:opacity-100 focus:ring-2 focus:outline-none'
           )}
           aria-label="Copy code"
         >
           <span
             data-copy-icon
-            className="block motion-safe:transition-all motion-safe:duration-200"
+            aria-hidden="true"
+            className="col-start-1 row-start-1 opacity-100 transition-opacity duration-160 ease-[cubic-bezier(0.23,1,0.32,1)] group-data-copied/copy:opacity-0 group-data-copy-instant/copy:transition-none motion-reduce:transition-none"
           >
             <Icon icon={Copy01Icon} strokeWidth={2} className="size-4" />
           </span>
           <span
             data-check-icon
-            className="hidden scale-0 text-green-500 motion-safe:transition-all motion-safe:duration-200"
+            aria-hidden="true"
+            className="col-start-1 row-start-1 text-green-500 opacity-0 transition-opacity duration-160 ease-[cubic-bezier(0.23,1,0.32,1)] group-data-copied/copy:opacity-100 group-data-copy-instant/copy:transition-none motion-reduce:transition-none"
           >
             <Icon icon={Check} strokeWidth={2} className="size-4" />
           </span>

@@ -8,46 +8,66 @@ const html = processFileTree(fileTreeHtml, 'Directory');
 <file-tree set:html={html} class="not-prose" data-pagefind-ignore />
 
 <script>
-  function setupFileTreeAnimations() {
-    const DURATION = 150;
+  class FileTree extends HTMLElement {
+    controller?: AbortController;
 
-    document
-      .querySelectorAll<HTMLDetailsElement>('file-tree .directory > details')
-      .forEach((details) => {
+    connectedCallback() {
+      this.controller?.abort();
+      this.controller = new AbortController();
+      const { signal } = this.controller;
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+      this.querySelectorAll<HTMLDetailsElement>('.directory > details').forEach((details) => {
         const summary = details.querySelector<HTMLElement>(':scope > summary');
-        if (!summary) return;
+        const content = details.querySelector<HTMLElement>(':scope > ul');
+        if (!summary || !content) return;
 
-        summary.addEventListener('click', (e) => {
-          e.preventDefault();
-          const content = details.querySelector<HTMLElement>(':scope > ul');
-          if (!content || content.getAnimations().length > 0) return;
+        let expanded = details.open;
+        let animation: Animation | undefined;
+        const settle = () => {
+          animation?.cancel();
+          animation = undefined;
+          details.open = expanded;
+          content.style.overflow = '';
+        };
 
-          if (details.open) {
-            const h = content.offsetHeight;
-            content.style.overflow = 'hidden';
-            const anim = content.animate(
-              { height: [`${h}px`, '0px'], opacity: [1, 0] },
-              { duration: DURATION, easing: 'ease-in' }
-            );
-            anim.onfinish = () => {
-              details.open = false;
-              content.style.overflow = '';
-            };
-          } else {
+        summary.addEventListener(
+          'click',
+          (event) => {
+            event.preventDefault();
+            const height = details.open ? content.getBoundingClientRect().height : 0;
+            const opacity = details.open ? getComputedStyle(content).opacity : '0';
+            expanded = !expanded;
+            if (event.detail === 0 || reducedMotion.matches) {
+              settle();
+              return;
+            }
+
+            animation?.cancel();
             details.open = true;
-            const h = content.offsetHeight;
             content.style.overflow = 'hidden';
-            content.animate(
-              { height: ['0px', `${h}px`], opacity: [0, 1] },
-              { duration: DURATION, easing: 'ease-out' }
+            animation = content.animate(
+              [
+                { height: `${height}px`, opacity },
+                { height: `${expanded ? content.scrollHeight : 0}px`, opacity: expanded ? 1 : 0 },
+              ],
+              { duration: 150, easing: 'cubic-bezier(0.23, 1, 0.32, 1)', fill: 'both' }
             );
-            setTimeout(() => (content.style.overflow = ''), DURATION);
-          }
-        });
+            animation.onfinish = settle;
+          },
+          { signal }
+        );
+        reducedMotion.addEventListener('change', settle, { signal });
+        signal.addEventListener('abort', settle, { once: true });
       });
+    }
+
+    disconnectedCallback() {
+      this.controller?.abort();
+    }
   }
 
-  setupFileTreeAnimations();
+  if (!customElements.get('file-tree')) customElements.define('file-tree', FileTree);
 </script>
 
 <style>

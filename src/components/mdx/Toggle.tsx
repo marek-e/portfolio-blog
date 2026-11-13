@@ -17,6 +17,7 @@ export function Toggle({
   className,
 }: ToggleProps) {
   const [isOpen, setIsOpen] = useState(defaultOpen);
+  const [immediate, setImmediate] = useState(false);
 
   return (
     <div
@@ -26,7 +27,11 @@ export function Toggle({
       )}
     >
       <button
-        onClick={() => setIsOpen(!isOpen)}
+        type="button"
+        onClick={(event) => {
+          setImmediate(event.detail === 0);
+          setIsOpen((open) => !open);
+        }}
         className="bg-pastel-lilac/40 hover:bg-pastel-lilac/60 dark:bg-pastel-lilac/15 dark:hover:bg-pastel-lilac/22 text-pastel-lilac-ink flex w-full cursor-pointer items-center justify-between px-4 py-3 text-left transition-colors"
         aria-expanded={isOpen}
       >
@@ -34,16 +39,26 @@ export function Toggle({
         <HugeiconsIcon
           icon={ArrowDown01Icon}
           strokeWidth={2}
-          className={cn('size-5 transition-transform', isOpen && 'rotate-180')}
+          className={cn(
+            'size-5 transition-transform duration-250 ease-[cubic-bezier(0.23,1,0.32,1)] motion-reduce:transition-none',
+            isOpen && 'rotate-180',
+            immediate && 'transition-none'
+          )}
         />
       </button>
       <div
         className={cn(
-          'border-pastel-lilac dark:border-pastel-lilac/40 h-0 overflow-hidden border-t px-4 py-0 transition-all duration-300',
-          isOpen && 'h-auto p-4'
+          'grid transition-[grid-template-rows] duration-250 ease-[cubic-bezier(0.23,1,0.32,1)] motion-reduce:transition-none',
+          isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]',
+          immediate && 'transition-none'
         )}
+        inert={!isOpen}
       >
-        {children}
+        <div className="min-h-0 overflow-hidden">
+          <div className="border-pastel-lilac dark:border-pastel-lilac/40 border-t p-4">
+            {children}
+          </div>
+        </div>
       </div>
     </div>
   );

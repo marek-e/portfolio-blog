@@ -172,25 +172,57 @@ const translatePath = getTranslatedPath(lang);
     const layer = document.querySelector<HTMLElement>('[data-sticker-layer]');
     const section = layer?.closest('section');
     if (!layer || !section) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    if (window.matchMedia('(pointer: coarse)').matches) return;
-
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
+    const stickers = [...layer.querySelectorAll<HTMLElement>('.sticker-parallax')].map(
+      (element) => ({
+        element,
+        depth: Number(getComputedStyle(element).getPropertyValue('--depth')) || 1,
+      })
+    );
+    const enabled = () => !reducedMotion.matches && finePointer.matches;
     let frame = 0;
-    section.addEventListener('pointermove', (event) => {
-      cancelAnimationFrame(frame);
-      frame = requestAnimationFrame(() => {
-        const rect = section.getBoundingClientRect();
-        const x = (event.clientX - rect.left) / rect.width - 0.5;
-        const y = (event.clientY - rect.top) / rect.height - 0.5;
-        layer.style.setProperty('--px', x.toFixed(3));
-        layer.style.setProperty('--py', y.toFixed(3));
-      });
-    });
+    let pointer: { x: number; y: number } | null = null;
 
-    section.addEventListener('pointerleave', () => {
-      layer.style.setProperty('--px', '0');
-      layer.style.setProperty('--py', '0');
-    });
+    const reset = () => {
+      cancelAnimationFrame(frame);
+      frame = 0;
+      pointer = null;
+      stickers.forEach(({ element }) => element.style.removeProperty('transform'));
+    };
+    const update = () => {
+      frame = 0;
+      if (!pointer || !enabled()) return reset();
+      const rect = section.getBoundingClientRect();
+      const x = Number(((pointer.x - rect.left) / rect.width - 0.5).toFixed(3));
+      const y = Number(((pointer.y - rect.top) / rect.height - 0.5).toFixed(3));
+      stickers.forEach(({ element, depth }) => {
+        element.style.transform = `perspective(500px) translate3d(${x * depth * 18}px, ${y * depth * 12}px, 0) rotateX(${y * -18}deg) rotateY(${x * 22}deg)`;
+      });
+    };
+    const move = (event: PointerEvent) => {
+      if (!enabled() || event.pointerType === 'touch') return;
+      pointer = { x: event.clientX, y: event.clientY };
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+
+    section.addEventListener('pointermove', move);
+    section.addEventListener('pointerleave', reset);
+    section.addEventListener('pointercancel', reset);
+    reducedMotion.addEventListener('change', reset);
+    finePointer.addEventListener('change', reset);
+    document.addEventListener(
+      'astro:before-swap',
+      () => {
+        reset();
+        section.removeEventListener('pointermove', move);
+        section.removeEventListener('pointerleave', reset);
+        section.removeEventListener('pointercancel', reset);
+        reducedMotion.removeEventListener('change', reset);
+        finePointer.removeEventListener('change', reset);
+      },
+      { once: true }
+    );
   }
 
   initStickerParallax();

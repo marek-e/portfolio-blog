@@ -21,11 +21,11 @@ export function BookmarkLanguageToggle({ currentLang, currentPath }: BookmarkLan
         'fixed top-0 right-6 z-40 hidden md:flex',
         'w-11 flex-col items-center justify-end rounded-b-2xl pb-2',
         'language-bookmark liquid-glass group cursor-pointer',
-        'h-6 transition-all duration-500',
-        'ease-[linear(0,0.1144,0.3475,0.5885,0.7844,0.9194,0.9987,1.0359,1.046,1.0413,1.0308,1.0196,1.0104,1.004,1.0002,0.9984,1)]',
-        'motion-safe:hover:h-12',
-        'focus-visible:h-12 focus-visible:transition-none',
-        'motion-reduce:h-12'
+        'h-12 -translate-y-6 transition-transform duration-200',
+        'ease-[cubic-bezier(0.23,1,0.32,1)]',
+        '[@media(hover:hover)_and_(pointer:fine)]:hover:translate-y-0',
+        'focus-visible:translate-y-0 focus-visible:transition-none',
+        'motion-reduce:translate-y-0 motion-reduce:transition-none'
       )}
     >
       {/* Flag circle with tooltip */}
@@ -37,14 +37,13 @@ export function BookmarkLanguageToggle({ currentLang, currentPath }: BookmarkLan
                 'relative size-6 overflow-hidden rounded-full',
                 // 3D effect - shadow for depth
                 'shadow-[0_2px_4px_rgba(0,0,0,0.3),inset_0_-2px_4px_rgba(0,0,0,0.15)]',
-                // Animation with spring
-                'transition-all duration-500',
-                'ease-[linear(0,0.1144,0.3475,0.5885,0.7844,0.9194,0.9987,1.0359,1.046,1.0413,1.0308,1.0196,1.0104,1.004,1.0002,0.9984,1)]',
+                'transition-[scale,opacity] duration-200',
+                'ease-[cubic-bezier(0.23,1,0.32,1)]',
                 'motion-safe:scale-75 motion-safe:opacity-0',
-                'motion-safe:group-hover:scale-100 motion-safe:group-hover:opacity-100',
-                'group-focus-visible:scale-100 group-focus-visible:opacity-100',
+                '[@media(hover:hover)_and_(pointer:fine)]:group-hover:scale-100 [@media(hover:hover)_and_(pointer:fine)]:group-hover:opacity-100',
+                'group-focus-visible:scale-100 group-focus-visible:opacity-100 group-focus-visible:transition-none',
                 // Reduced motion: always visible
-                'motion-reduce:scale-100 motion-reduce:opacity-100'
+                'motion-reduce:scale-100 motion-reduce:opacity-100 motion-reduce:transition-none'
               )}
             >
               <img

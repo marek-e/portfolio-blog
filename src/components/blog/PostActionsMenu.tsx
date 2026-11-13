@@ -148,7 +148,7 @@ export function PostActionsMenu({
           <HugeiconsIcon
             icon={RssIcon}
             strokeWidth={2}
-            className="group-hover/rss:animate-wiggle size-4 shrink-0 transition-transform duration-300"
+            className="motion-safe:group-hover/rss:animate-wiggle size-4 shrink-0"
           />
           RSS
         </DropdownMenuItem>

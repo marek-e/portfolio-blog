@@ -173,6 +173,8 @@ One flourish per section at most. Don't sprinkle doodles.
 - Everything decorative stops under `prefers-reduced-motion`.
 - Scroll-driven animations must leave content fully visible when unsupported (Firefox) or before JS loads. A section must never render as a blank gap.
 
+Code-copy feedback updates immediately and crossfades over 160ms, without shrinking icons to zero. File-tree folders reverse from their current height over 150ms; blog disclosures use a reversible 250ms expansion. Keyboard activation and reduced motion switch these states immediately. Menus and tooltips keep opacity feedback under reduced motion and skip animation for Base UI's instant states. Running totals update immediately when the time range changes. The desktop language tab reveals through translation over 200ms, with immediate keyboard focus and a fully visible reduced-motion state. Shared classic buttons transition only colour, opacity and press transforms over 160ms; hover filters and shadows change without interpolation. These controls use the strong ease-out curve `cubic-bezier(0.23, 1, 0.32, 1)`.
+
 ## Edge artifacts
 
 Check new visual components at 4× zoom, in light and dark. Common causes:
