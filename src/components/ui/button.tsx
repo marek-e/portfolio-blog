@@ -15,7 +15,7 @@ function PastelBorder() {
 }
 
 const buttonVariants = cva(
-  "aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:aria-invalid:border-destructive/50 relative rounded-full border border-transparent text-sm font-medium aria-invalid:ring-[3px] [&_svg:not([class*='size-'])]:size-4 inline-flex items-center justify-center whitespace-nowrap transition-all duration-200 ease-out focus-visible:transition-none active:scale-[0.97] motion-reduce:active:scale-100 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none shrink-0 [&_svg]:shrink-0 group/button select-none",
+  "aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:aria-invalid:border-destructive/50 relative rounded-full border border-transparent text-sm font-medium aria-invalid:ring-[3px] [&_svg:not([class*='size-'])]:size-4 inline-flex items-center justify-center whitespace-nowrap transition-[color,background-color,border-color,opacity,transform,scale] duration-160 ease-[cubic-bezier(0.23,1,0.32,1)] focus-visible:transition-none active:not-focus-visible:scale-[0.97] motion-reduce:active:scale-100 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none shrink-0 [&_svg]:shrink-0 group/button select-none",
   {
     variants: {
       variant: {
@@ -41,7 +41,7 @@ const buttonVariants = cva(
       },
       animation: {
         none: '',
-        scale: 'motion-safe:hover:scale-101 motion-safe:active:scale-99',
+        scale: 'motion-safe:hover:scale-101 motion-safe:active:not-focus-visible:scale-99',
       },
     },
     defaultVariants: {

@@ -62,13 +62,7 @@
 }
 
 .sticker-parallax {
-  transform: perspective(500px)
-    translate3d(
-      calc(var(--px, 0) * var(--depth, 1) * 18px),
-      calc(var(--py, 0) * var(--depth, 1) * 12px),
-      0
-    )
-    rotateX(calc(var(--py, 0) * -18deg)) rotateY(calc(var(--px, 0) * 22deg));
+  transform: perspective(500px) translate3d(0, 0, 0) rotateX(0deg) rotateY(0deg);
   transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
