@@ -1,0 +1,19 @@
+src/components/portfolio/ContactActions.tsx
+  s_25623344b1925a::t_075af31cce4bea 16
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "436c8a4dc073b466a4f71c5326596b3cbfc0595b",
+  "prompts": {},
+  "sessions": {
+    "s_25623344b1925a": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1d1f0-1681-76d2-a675-e6762a130b00",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
