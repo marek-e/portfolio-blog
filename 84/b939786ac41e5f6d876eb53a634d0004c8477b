@@ -1,0 +1,30 @@
+src/components/portfolio/ContactActions.tsx
+  s_25623344b1925a::t_5bd440395d2644 1-57
+src/components/portfolio/ContactSection.astro
+  s_25623344b1925a::t_5bd440395d2644 4,20,43,48,57,60-66,68,73-105,111-169,174-177,190-193,211-216
+src/i18n/translations/en.ts
+  s_25623344b1925a::t_5bd440395d2644 77-79
+docs/DESIGN-SYSTEM.md
+  s_25623344b1925a::t_cf57c246903bb7 78,100
+  s_25623344b1925a::t_e9d8f84ea30ec4 101
+src/components/portfolio/StravaSection.astro
+  s_25623344b1925a::t_5bd440395d2644 106
+src/i18n/translations/fr.ts
+  s_25623344b1925a::t_5bd440395d2644 77-80
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "84b939786ac41e5f6d876eb53a634d0004c8477b",
+  "prompts": {},
+  "sessions": {
+    "s_25623344b1925a": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1d1f0-1681-76d2-a675-e6762a130b00",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
