@@ -74,9 +74,9 @@ export const en: UITranslations = {
     slide: 'Project {current} of {count}',
   },
   contact: {
-    eyebrow: '05 — Say hello',
-    title: "Let's work together",
-    subtitle: 'Have a project in mind or just want to say hi?',
+    eyebrow: '05 — Contact',
+    title: 'Have a project in mind?',
+    subtitle: "Tell me a little about it. I'd be happy to talk it through with you.",
     cta: 'Send me an email',
     socialIntro: 'Or find me here',
     copied: 'Copied!',

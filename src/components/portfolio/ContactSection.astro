@@ -1,13 +1,8 @@
 ---
-import { Link } from '@/components/ui/button';
 import { Card3D } from '@/components/ui/card-3d';
-import { HugeiconsIcon } from '@hugeicons/react';
-import { Sent02Icon } from '@hugeicons/core-free-icons';
-import { EMAIL } from '@/lib/socials';
 import { getTranslations, getLangFromUrl } from '@/i18n';
-import { CopyEmailButton } from '@/components/portfolio/CopyEmailButton';
+import { ContactActions } from '@/components/portfolio/ContactActions';
 import { ContactSocialLinks } from '@/components/portfolio/ContactSocialLinks';
-import { Doodle } from '@/components/shared/HandDrawn';
 import SectionHeading from '@/components/shared/SectionHeading.astro';
 
 interface Props {
@@ -22,7 +17,7 @@ const isPage = as === 'h1';
 
 <section
   id="contact"
-  class="relative pt-12 pb-12 md:pt-24 md:pb-20"
+  class="relative pt-24 pb-12 md:pt-32 md:pb-20"
   aria-labelledby="contact-title"
 >
   <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -45,12 +40,12 @@ const isPage = as === 'h1';
           width="1024"
           height="1024"
           loading="lazy"
-          class="contact-ribbon absolute -top-32 -right-40 w-80 max-w-none -rotate-12 sm:-top-56 sm:-right-28 sm:w-[34rem]"
+          class="contact-ribbon contact-ribbon-upper absolute -top-32 -right-40 w-80 max-w-none -rotate-12 sm:-top-56 sm:-right-28 sm:w-[34rem]"
         />
       </div>
       <Card3D
         variant="glass"
-        className="gap-0 overflow-hidden px-4 py-10 text-center sm:px-10 sm:py-16 md:px-16 md:py-24"
+        className="gap-0 overflow-hidden px-4 pt-12 pb-10 text-center sm:px-10 sm:pb-14"
       >
         <SectionHeading
           title={t.contact.title}
@@ -59,42 +54,124 @@ const isPage = as === 'h1';
           eyebrow={isPage ? undefined : t.contact.eyebrow}
           subtitle={t.contact.subtitle}
           align="center"
-          class="md:[&_h1]:text-7xl md:[&_h2]:text-7xl"
+          class="contact-heading md:[&_h1]:text-5xl lg:[&_h1]:text-6xl md:[&_h2]:text-5xl lg:[&_h2]:text-6xl"
         />
 
-        <div
-          class="relative mx-auto mt-8 flex w-full max-w-md flex-col items-stretch justify-center gap-3 sm:w-fit sm:max-w-none sm:flex-row sm:items-center md:mt-12"
-        >
-          <Doodle
-            name="loop"
-            strokeWidth={2.5}
-            className="text-foreground/40 absolute top-1/2 right-full mr-5 hidden h-14 w-40 -translate-y-1/3 lg:block"
-          />
-          <Link
-            size="lg"
-            className="gap-2"
-            href={`mailto:${EMAIL}`}
-            animation="scale"
-            aria-label={t.aria.sendEmail}
-          >
-            {t.contact.cta}
-            <HugeiconsIcon icon={Sent02Icon} className="size-4" data-icon="inline-end" />
-          </Link>
-          <CopyEmailButton copiedText={t.contact.copied} copyLabel={t.aria.copyEmail} client:load />
-        </div>
+        <ContactActions
+          cta={t.contact.cta}
+          copiedText={t.contact.copied}
+          copyLabel={t.aria.copyEmail}
+          client:load
+        />
 
-        <div class="mt-8 flex flex-col items-center gap-4 md:mt-14">
+        <div class="mt-8 flex flex-col items-center gap-3">
           <p class="eyebrow">{t.contact.socialIntro}</p>
           <ContactSocialLinks followLabel={t.aria.followOn} />
         </div>
       </Card3D>
+      <div class="contact-decorations" aria-hidden="true">
+        <img
+          src="/images/contact-melo-orbi.webp"
+          alt=""
+          width="640"
+          height="384"
+          loading="lazy"
+          class="contact-companions"
+        />
+        <img
+          src="/images/contact-paper-plane.webp"
+          alt=""
+          width="720"
+          height="287"
+          loading="lazy"
+          class="contact-plane"
+        />
+        <svg
+          class="contact-corner-mark"
+          viewBox="0 0 120 48"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M6 38c17 7 18-14 33-9s24 10 37 1" opacity="0.45"></path>
+          <path
+            d="M90 26C81 25 66 19 67 10c2-12 17 0 23 16Zm0 0c2-14 18-25 21-18 4 10-9 16-21 18Zm0 0c-10-2-15 4-11 9 5 5 10-3 11-9Zm0 0c8-5 17-3 15 4-2 7-12 4-15-4Z"
+          ></path>
+          <path d="m88 30 6-13m-1 2c0-5 1-7 4-8m-3 8c4-3 6-3 8-2"></path>
+        </svg>
+      </div>
     </div>
   </div>
 </section>
 
 <style>
+  .contact-decorations {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .contact-decorations img {
+    position: absolute;
+    height: auto;
+    user-select: none;
+  }
+
+  .contact-companions {
+    top: 0;
+    right: 9%;
+    width: clamp(7.2rem, 18vw, 12.6rem);
+    transform: translateY(-92%);
+    filter: drop-shadow(0 3px 2px color-mix(in oklab, var(--day-foreground) 18%, transparent));
+  }
+
+  .contact-plane {
+    top: -1.5rem;
+    left: 0.75rem;
+    width: clamp(5rem, 18vw, 13rem);
+  }
+
+  @media (min-width: 768px) {
+    .contact-companions {
+      right: 22%;
+    }
+
+    .contact-plane {
+      right: 0.75rem;
+      left: auto;
+    }
+  }
+
+  .contact-corner-mark {
+    position: absolute;
+    bottom: 0.5rem;
+    left: clamp(1.25rem, 3vw, 2rem);
+    width: clamp(4rem, 8vw, 6.5rem);
+    height: auto;
+    color: var(--primary);
+    opacity: 0.7;
+  }
+
+  .contact-stage :global(.contact-heading h1),
+  .contact-stage :global(.contact-heading h2) {
+    text-wrap: balance;
+  }
+
+  .contact-stage :global(.contact-heading p:not(.eyebrow)) {
+    max-width: 36rem;
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+
   .contact-ribbon {
     opacity: 0.55;
+  }
+
+  .contact-ribbon-upper {
+    opacity: 0.44;
   }
 
   .contact-backdrop {
@@ -107,6 +184,10 @@ const isPage = as === 'h1';
   :global(.dark) .contact-ribbon {
     filter: hue-rotate(265deg) saturate(0.75);
     opacity: 0.4;
+  }
+
+  :global(.dark) .contact-ribbon-upper {
+    opacity: 0.32;
   }
 
   @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
@@ -124,6 +205,12 @@ const isPage = as === 'h1';
       background: var(--card);
       -webkit-backdrop-filter: none;
       backdrop-filter: none;
+    }
+  }
+
+  @media (prefers-contrast: more) {
+    .contact-decorations {
+      display: none;
     }
   }
 </style>
