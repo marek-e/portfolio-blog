@@ -1,0 +1,71 @@
+artifacts/logo-3d/.gitignore
+  s_243491aebfba66::t_b8eb4f02536ca8 6
+  s_243491aebfba66::t_70b1bdbac563f2 5,7
+artifacts/logo-3d/neon-glass/design.json
+  s_243491aebfba66::t_aa0db4275fc9bc 23,36,49
+  s_243491aebfba66::t_f10ed21c3fed32 9
+  s_243491aebfba66::t_0eb4b3e1ba85f6 22
+  s_f5276f3bdb0d64::t_48767bad0cf08b 12,19,24-26,43
+  s_243491aebfba66::t_5b5e79ec7007aa 1,11,62
+  s_243491aebfba66::t_ab670862c5b9d4 6
+  s_243491aebfba66::t_70076d29c41f0c 3-5,7-8,10,13-18,20-21,27-34,37-42,44-47,50-51
+  s_8ce16714b66c1d::t_156961532aa152 2,52-61
+  s_243491aebfba66::t_2d34f15e38b0f8 35,48
+artifacts/logo-3d/neon-glass/README.md
+  s_243491aebfba66::t_70b1bdbac563f2 1-2,4,6,10-18,20,22-28,30-32
+  s_243491aebfba66::t_cdb6aaaa78c745 9,19,35
+  s_243491aebfba66::t_0ef62c7d9b8186 3,33
+  s_243491aebfba66::t_f10ed21c3fed32 5,7-8,21,29,34,36
+artifacts/logo-3d/neon-glass/create.py
+  s_243491aebfba66::t_b18a4ce489bdc6 142
+  s_243491aebfba66::t_09d23ffeaa24f1 134
+  s_243491aebfba66::t_73af30f07e55ae 12-14,133,135,137-140
+  s_243491aebfba66::t_b7595531af1a68 31
+  s_243491aebfba66::t_5b5e79ec7007aa 1-11,15-26,28-30,32-37,40-51,53-61,73-79,99,107-111,117-126,128-132,136,141,143-144,146-149,152-154,158-181,184-187,189-206,210-213,215-217,219-225
+  s_243491aebfba66::t_70b1bdbac563f2 145,150-151
+  s_243491aebfba66::t_70076d29c41f0c 38-39,52,112-116,156,182-183
+  s_243491aebfba66::t_2d34f15e38b0f8 155,157
+  s_243491aebfba66::t_4422946825ef67 214,218
+  s_243491aebfba66::t_0eb4b3e1ba85f6 62-67
+  s_243491aebfba66::t_aa0db4275fc9bc 127
+  s_243491aebfba66::t_ea1448198f1cb7 188
+  s_243491aebfba66::t_279d8da2816ece 68-72,80-98,100-106
+  s_243491aebfba66::t_ab670862c5b9d4 27,207-209
+artifacts/logo-3d/README.md
+  s_243491aebfba66::t_0ef62c7d9b8186 34-37
+artifacts/logo-3d/neon-glass/construction.py
+  s_243491aebfba66::t_73af30f07e55ae 1-8,10-14,16-26
+  s_243491aebfba66::t_4422946825ef67 9,15
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "66ded32844a10e38c8fc2d177e5099e09b5a0076",
+  "prompts": {},
+  "sessions": {
+    "s_243491aebfba66": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1d1f6-a2fd-7841-8a22-ec93f3286bd2",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": null
+    },
+    "s_8ce16714b66c1d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "643786fb-6b6e-4569-b176-dc0909408720",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    },
+    "s_f5276f3bdb0d64": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1d200-fcb6-78b2-8e72-a76e650158af",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": null
+    }
+  }
+}
