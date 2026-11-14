@@ -1,0 +1,19 @@
+src/components/ui/liquid-glass-material.tsx
+  s_368cbfa1acb2d0::t_f36f6be2b7fdd9 19
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "d5bae0853bbd8816ed395927c6d7cfaa74a4daaf",
+  "prompts": {},
+  "sessions": {
+    "s_368cbfa1acb2d0": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1d442-42dc-74e2-a6be-406d4de121ae",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
