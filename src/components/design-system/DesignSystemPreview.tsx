@@ -3,6 +3,8 @@ import { Button, Link } from '@/components/ui/button';
 import { Button3D } from '@/components/ui/button-3d';
 import { Card3D } from '@/components/ui/card-3d';
 import { DevIdCard } from '@/components/portfolio/DevIdCard';
+import { ProjectCardReact } from '@/components/portfolio/ProjectCardReact';
+import blinkImage from '@/assets/projects/blink.png';
 import { Badge } from '@/components/ui/badge';
 import {
   Card,
@@ -353,8 +355,8 @@ export function DesignSystemPreview({
                   </h4>
                   <p className="text-muted-foreground mt-3 text-sm leading-relaxed">
                     {text(
-                      'Les projets, le parcours et le contact, avec des reflets plus fins.',
-                      'Projects, past experience and contact, with finer reflections.'
+                      'Le parcours et le contact, avec des reflets plus fins.',
+                      'Past experience and contact, with finer reflections.'
                     )}
                   </p>
                 </div>
@@ -383,6 +385,37 @@ export function DesignSystemPreview({
                   · {text('un accent par vue', 'one accent per view')}
                 </span>
               </span>
+            </div>
+          </Specimen>
+          <Specimen
+            title={text('Le verre liquide des projets', 'Project liquid glass')}
+            description={text(
+              'Une surface transparente, un bord bombé et des reflets sur la carte et son image.',
+              'A clear face, a rounded lens edge and reflections around the card and its artwork.'
+            )}
+          >
+            <div className="mx-auto max-w-sm py-4">
+              <ProjectCardReact
+                project={{
+                  title: 'Blink',
+                  description: text(
+                    'Un sélecteur de navigateur natif pour macOS qui route vos liens.',
+                    'A native macOS browser picker that routes your links.'
+                  ),
+                  techStack: ['Swift', 'SwiftUI', 'AppKit'],
+                  links: { repo: 'https://github.com/marek-e/blink' },
+                  image: blinkImage.src,
+                  imageAlt: 'Blink',
+                  objectFit: 'contain',
+                  imagePadding: 24,
+                }}
+                projectUrl={translatePath('/projects/blink')}
+                translations={{
+                  liveDemo: 'Live',
+                  code: 'Code',
+                  viewDetails: text('Voir les détails', 'View details'),
+                }}
+              />
             </div>
           </Specimen>
           <Specimen title={text('La carte développeur', 'Developer ID card')}>
