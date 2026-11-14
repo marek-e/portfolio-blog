@@ -16,7 +16,7 @@ export function LiquidGlassMaterial({
   const r = Math.min(radius, width / 2, height / 2);
   const bevel = Math.min(8, r * 0.24);
   const fill = (name: string) => `url(#${id}-${name})`;
-  const corner = `M4 ${r + 10}C4 14 14 4 ${r + 16} 4C${r + 2} 7 11 13 8 ${r + 3}C7 ${r + 10}5 ${r + 14}4 ${r + 10}Z`;
+  const corner = `M4 ${r + 10}C4 14 14 4 ${r + 16} 4C${r + 2} 7 11 13 8 ${r + 3}C7 ${r + 10} 5 ${r + 14} 4 ${r + 10}Z`;
 
   useEffect(() => {
     const surface = surfaceRef.current?.parentElement;
