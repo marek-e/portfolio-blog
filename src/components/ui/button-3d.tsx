@@ -4,6 +4,7 @@ import { forwardRef } from 'react';
 
 import { cn } from '@/lib/utils';
 import { GlassMaterial } from './glass-material';
+import { LiquidGlassMaterial } from './liquid-glass-material';
 import '@/styles/three-dimensional.css';
 
 const button3DVariants = cva(
@@ -25,20 +26,31 @@ const button3DVariants = cva(
   }
 );
 
-type Button3DProps = ButtonPrimitive.Props & VariantProps<typeof button3DVariants>;
+type Button3DProps = ButtonPrimitive.Props &
+  VariantProps<typeof button3DVariants> & { material?: 'default' | 'liquid' };
 
 const Button3D = forwardRef<HTMLButtonElement, Button3DProps>(
-  ({ className, variant, size, children, ...props }, ref) => (
+  ({ className, variant, size, material = 'default', children, ...props }, ref) => (
     <ButtonPrimitive
       ref={ref}
       data-slot="button-3d"
-      className={cn(button3DVariants({ variant, size }), className)}
+      className={cn(
+        button3DVariants({ variant, size }),
+        material === 'liquid' && 'liquid-glass-surface',
+        className
+      )}
       {...props}
     >
-      <GlassMaterial circular={size === 'icon'} />
-      <span className="button-3d-brightness" aria-hidden="true">
-        <GlassMaterial circular={size === 'icon'} />
-      </span>
+      {material === 'liquid' ? (
+        <LiquidGlassMaterial radius={999} circular={size === 'icon'} />
+      ) : (
+        <>
+          <GlassMaterial circular={size === 'icon'} />
+          <span className="button-3d-brightness" aria-hidden="true">
+            <GlassMaterial circular={size === 'icon'} />
+          </span>
+        </>
+      )}
       {children}
     </ButtonPrimitive>
   )

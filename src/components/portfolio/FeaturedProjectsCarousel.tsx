@@ -11,6 +11,7 @@ import { ProjectCardReact, type ProjectData } from './ProjectCardReact';
 import { cn } from '@/lib/utils';
 import { defaultLang, type Lang } from '@/i18n/config';
 import { useReducedMotion } from '@/lib/useReducedMotion';
+import { LiquidGlassMaterial } from '@/components/ui/liquid-glass-material';
 
 interface FeaturedProjectsCarouselProps {
   projects: Array<{
@@ -66,7 +67,7 @@ export function FeaturedProjectsCarousel({
     translations.slide.replace('{current}', String(index + 1)).replace('{count}', String(count));
 
   return (
-    <div className="relative">
+    <div className="project-carousel relative">
       <Carousel
         setApi={setApi}
         opts={{ align: 'start', loop: true, ...(reducedMotion ? { duration: 0 } : {}) }}
@@ -95,7 +96,8 @@ export function FeaturedProjectsCarousel({
         </CarouselContent>
         <div className="mt-4 flex items-center justify-between md:mt-0">
           <CarouselPrevious
-            className="static size-11 translate-y-0 md:absolute md:top-1/2 md:-left-14 md:-translate-y-1/2 [&_svg]:size-4.5"
+            material="liquid"
+            className="project-carousel-arrow static size-11 translate-y-0 md:absolute md:top-1/2 md:-left-14 md:-translate-y-1/2 [&_svg]:size-4.5"
             aria-label={translations.previous}
           />
           <p
@@ -106,13 +108,15 @@ export function FeaturedProjectsCarousel({
             {slideLabel(current)}
           </p>
           <CarouselNext
-            className="static size-11 translate-y-0 md:absolute md:top-1/2 md:-right-14 md:-translate-y-1/2 [&_svg]:size-4.5"
+            material="liquid"
+            className="project-carousel-arrow static size-11 translate-y-0 md:absolute md:top-1/2 md:-right-14 md:-translate-y-1/2 [&_svg]:size-4.5"
             aria-label={translations.next}
           />
         </div>
       </Carousel>
       <div className="mt-6 hidden justify-center md:flex">
-        <div className="glass flex items-center rounded-full px-2">
+        <div className="project-carousel-pagination liquid-glass-surface relative isolate flex items-center rounded-full px-2">
+          <LiquidGlassMaterial radius={999} />
           {Array.from({ length: count }).map((_, index) => (
             <button
               key={index}
@@ -124,7 +128,7 @@ export function FeaturedProjectsCarousel({
             >
               <span
                 className={cn(
-                  'block size-2 rounded-full',
+                  'relative block size-2 rounded-full',
                   current === index
                     ? 'bg-foreground'
                     : 'bg-foreground/35 group-hover/dot:bg-foreground/60'
