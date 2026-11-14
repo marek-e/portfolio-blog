@@ -2,3 +2,6 @@
 iterations/
 app-icon/preview/
 app-icon-v2/preview/
+neon-glass/preview/
+neon-glass/__pycache__/
+neon-glass/output/frames-*/

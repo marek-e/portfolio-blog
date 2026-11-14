@@ -31,3 +31,7 @@ When regenerating the app versions, run the V1 app-icon command without `-- --pr
 For a faster 512 px preview, append `-- --preview` to either app-icon command. V1 previews go into `app-icon/preview/`; V2 previews go into `app-icon-v2/preview/`. Preview runs do not save Blender scenes or ZIP bundles. Previews, iteration renders, and Blender backup files stay local.
 
 These are standalone assets. The website logo and favicon remain unchanged.
+
+## Editable neon-glass reconstruction
+
+[`neon-glass/`](neon-glass/README.md) contains a separate procedural reconstruction of the selected violet-glass image. Its six strokes stay independent, with adjustable geometry and materials in `design.json`, a saved Blender scene, a still render and a three-second light-sweep study.

@@ -1,0 +1,62 @@
+{
+  "roll_degrees": -21,
+  "thickness": 0.7,
+  "logo_scale": 1,
+  "bevel": 0.28,
+  "edge_strength": 60,
+  "roughness": 0.04,
+  "ior": 1.38,
+  "camera": [0, -26, 0],
+  "camera_scale": 10,
+  "strokes": [
+    {
+      "name": "M left",
+      "depth": 0,
+      "tint": "F4CEE8",
+      "edge": "DB79EC"
+    },
+    {
+      "name": "M inner",
+      "depth": 0.8,
+      "tint": "E8D2F5",
+      "edge": "CF80F8",
+      "show_through_glass": false
+    },
+    {
+      "name": "Shared spine",
+      "depth": -0.8,
+      "tint": "E4D8FF",
+      "edge": "AC78FF"
+    },
+    {
+      "name": "E top",
+      "depth": 1.6,
+      "tint": "D6DDFF",
+      "edge": "9E87FF",
+      "show_through_glass": false
+    },
+    {
+      "name": "E middle",
+      "depth": 1.6,
+      "tint": "D6DDFF",
+      "edge": "9E87FF"
+    },
+    {
+      "name": "E bottom",
+      "depth": 1.6,
+      "tint": "D6DDFF",
+      "edge": "9E87FF",
+      "show_through_glass": false
+    }
+  ],
+  "transmission": 1,
+  "layout": {
+    "height": 3.9,
+    "stroke_width": 1.68,
+    "diagonal_run": 3.3,
+    "diagonal_pitch": 2.3,
+    "spine_x": 1.8,
+    "right_x": 3.8,
+    "dot_diameter": 1.52
+  }
+}
