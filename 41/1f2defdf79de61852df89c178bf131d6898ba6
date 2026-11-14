@@ -1,0 +1,96 @@
+docs/DESIGN-SYSTEM.md
+  s_368cbfa1acb2d0::t_c80fa826def0e1 78
+  s_368cbfa1acb2d0::t_93bbd906e20a06 104
+src/styles/project-liquid-glass.css
+  s_368cbfa1acb2d0::t_3ffc02d691c726 40-44,52-53,58-59,76-85,88-91,100-106,108-114
+  s_368cbfa1acb2d0::t_f54cf2dbd533fc 54-57
+  s_368cbfa1acb2d0::t_1755c98c4aba18 14-20,69-71,93-99
+  s_368cbfa1acb2d0::t_22fb30a0106b2d 22-25
+  s_368cbfa1acb2d0::t_cb82291cede34d 1-3,6-9,11,26,86-87,92,115-131
+  s_368cbfa1acb2d0::t_e780fcd7e5880d 4-5,10,12-13,21,27-35,62-68,72-75,107
+  s_368cbfa1acb2d0::t_96e3b8d8e1e95b 36-39,45-51,60-61
+src/components/portfolio/FeaturedProjectsCarousel.tsx
+  s_368cbfa1acb2d0::t_f0364bcf720308 70,100,112,118
+  s_368cbfa1acb2d0::t_0dfea7b6f33634 14,99,111,119
+  s_368cbfa1acb2d0::t_f54cf2dbd533fc 131
+src/components/ui/button-3d.tsx
+  s_368cbfa1acb2d0::t_0dfea7b6f33634 7,29-30,33,37-41,44,46-53
+  s_368cbfa1acb2d0::t_0dd52327e6e9f3 45
+src/components/design-system/DesignSystemPreview.tsx
+  s_368cbfa1acb2d0::t_daa1fa2edf180c 6-7,390-413,415-418
+  s_368cbfa1acb2d0::t_cb82291cede34d 358-359,414
+  s_8ce16714b66c1d::t_9ac0402d3115d9 419-420
+artifacts/project-glass/README.md
+  s_368cbfa1acb2d0::t_12bdd58b6660c8 10,12
+  s_368cbfa1acb2d0::t_ae2b1d83306765 2,4,6,8
+  s_368cbfa1acb2d0::t_0f852db90c3245 14
+  s_368cbfa1acb2d0::t_8ef2203f7dc50b 15
+  s_368cbfa1acb2d0::t_c80fa826def0e1 7,11
+  s_368cbfa1acb2d0::t_d3fdd5f1ecea0a 1,3,5,9,13
+src/components/portfolio/ProjectCardReact.tsx
+  s_368cbfa1acb2d0::t_06a29c0d273804 63,65-66,68-88
+  s_368cbfa1acb2d0::t_e33743d2750cba 67
+  s_368cbfa1acb2d0::t_61b5d451960532 92
+  s_368cbfa1acb2d0::t_4c0be998cec441 101,105,120
+  s_368cbfa1acb2d0::t_f0364bcf720308 4,40-47,53,59-60,62,64,91,95
+src/styles/project-card.css
+  s_368cbfa1acb2d0::t_14dba9c1266153 24
+  s_368cbfa1acb2d0::t_83fe63888e1489 40,44-46,102-103,106,108
+  s_368cbfa1acb2d0::t_702c198d913ded 97-100
+  s_368cbfa1acb2d0::t_63dee2cbc25ed2 122,226-229
+  s_368cbfa1acb2d0::t_38a5bccbf8711b 1
+  s_8ce16714b66c1d::t_156961532aa152 157-158,171,178-180,188-189,230
+  s_368cbfa1acb2d0::t_438aedabc2cb73 134-138,151-155
+  s_368cbfa1acb2d0::t_2d18481e456c07 7,15,18-23,25-36,42-43,101,104-105,111-116,118-119
+  s_368cbfa1acb2d0::t_4bd5f7479752cf 5,8-9,11-12,16-17,125-126
+  s_368cbfa1acb2d0::t_0c5a36bd05c509 39,41
+  s_368cbfa1acb2d0::t_a33cb87433c9fe 10,13-14,109-110
+  s_368cbfa1acb2d0::t_96e3b8d8e1e95b 49-53,61-68,80-96,143,161,169-170,172-176,185-187,190,193-202,231
+  s_368cbfa1acb2d0::t_823dbf9d774759 37-38,107
+  s_368cbfa1acb2d0::t_8ef2203f7dc50b 191
+  s_368cbfa1acb2d0::t_daa1fa2edf180c 47-48,117,120-121,123-124
+  s_368cbfa1acb2d0::t_7ab49e9b6afb87 54-60,69-79,132-133,139-141,148-150,156,177,192
+  s_61448146b875b1::t_143af8300f8cb6 6
+src/components/ui/liquid-glass-material.tsx
+  s_368cbfa1acb2d0::t_0dd52327e6e9f3 4-10,13-15,105-132,180-181
+  s_368cbfa1acb2d0::t_22f08bbd81d604 38,94,147,159-172,174
+  s_368cbfa1acb2d0::t_daa1fa2edf180c 37
+  s_368cbfa1acb2d0::t_e780fcd7e5880d 1,11-12,16-33,36,39,41-78,86-92,182,193-194
+  s_368cbfa1acb2d0::t_1f5fc4ccdc999b 3,34,40,195-196
+  s_368cbfa1acb2d0::t_0c5a36bd05c509 35
+  s_368cbfa1acb2d0::t_63dee2cbc25ed2 2
+  s_368cbfa1acb2d0::t_1755c98c4aba18 79-85,93,95-104,133,148-158,173,175-179,183-192
+  s_368cbfa1acb2d0::t_2c89e6c6163772 134-146
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "411f2defdf79de61852df89c178bf131d6898ba6",
+  "prompts": {},
+  "sessions": {
+    "s_368cbfa1acb2d0": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1d442-42dc-74e2-a6be-406d4de121ae",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    },
+    "s_61448146b875b1": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1d97b-0962-7c33-9d56-05c4294a7041",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    },
+    "s_8ce16714b66c1d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "643786fb-6b6e-4569-b176-dc0909408720",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Marek Elmayan <melmayan.dev@gmail.com>"
+    }
+  }
+}
