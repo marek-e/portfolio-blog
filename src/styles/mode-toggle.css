@@ -11,7 +11,7 @@
   border-radius: 50%;
   background: transparent;
   color: oklch(from var(--foreground) l c h / 80%);
-  cursor: pointer;
+  cursor: var(--glass-cursor-pointer, pointer);
 }
 
 .mode-toggle:focus-visible {

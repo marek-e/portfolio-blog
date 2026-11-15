@@ -1,0 +1,113 @@
+@media (min-width: 768px) and (hover: hover) and (pointer: fine) and (forced-colors: none) and (prefers-contrast: no-preference) {
+  @layer base {
+    :root {
+      --glass-cursor: url('/cursors/glass-arrow-light.svg') 4 3, auto;
+      --glass-cursor-pointer: url('/cursors/glass-arrow-light-hover.svg') 4 3, pointer;
+      cursor: var(--glass-cursor);
+    }
+
+    :root.dark {
+      --glass-cursor: url('/cursors/glass-arrow-dark.svg') 4 3, auto;
+      --glass-cursor-pointer: url('/cursors/glass-arrow-dark-hover.svg') 4 3, pointer;
+    }
+
+    :where(
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      p,
+      span,
+      li,
+      dt,
+      dd,
+      blockquote,
+      figcaption,
+      pre,
+      code,
+      td,
+      th,
+      label
+    ) {
+      cursor: text;
+    }
+
+    :where(
+      a[href],
+      button,
+      summary,
+      label[for],
+      select,
+      [role='button'],
+      [role='link'],
+      [role='menuitem'],
+      [role='option'],
+      [role='checkbox'],
+      [role='radio'],
+      [role='switch'],
+      [role='tab'],
+      input[type='button'],
+      input[type='submit'],
+      input[type='reset'],
+      input[type='checkbox'],
+      input[type='radio'],
+      input[type='color'],
+      input[type='file']
+    ) {
+      cursor: var(--glass-cursor-pointer);
+    }
+
+    :where(
+        a[href],
+        button,
+        summary,
+        label[for],
+        select,
+        [role='button'],
+        [role='link'],
+        [role='menuitem'],
+        [role='option'],
+        [role='checkbox'],
+        [role='radio'],
+        [role='switch'],
+        [role='tab']
+      )
+      :where(*) {
+      cursor: inherit;
+    }
+
+    :where(
+      input:not([type]),
+      input[type='text'],
+      input[type='email'],
+      input[type='password'],
+      input[type='search'],
+      input[type='url'],
+      input[type='tel'],
+      input[type='number'],
+      textarea,
+      [contenteditable]:not([contenteditable='false']),
+      [role='textbox']
+    ) {
+      cursor: text;
+    }
+
+    :where([contenteditable]:not([contenteditable='false']), [role='textbox']) :where(*) {
+      cursor: text;
+    }
+  }
+
+  .cursor-pointer:where(:not(:disabled, [aria-disabled='true'], [data-disabled])) {
+    cursor: var(--glass-cursor-pointer);
+  }
+
+  .cursor-default:where(:not(:disabled, [aria-disabled='true'], [data-disabled])) {
+    cursor: var(--glass-cursor);
+  }
+
+  :where(:disabled, [aria-disabled='true'], [data-disabled]) {
+    cursor: not-allowed;
+  }
+}

@@ -1,6 +1,7 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 @import 'shadcn/tailwind.css';
+@import './glass-cursor.css';
 @import '@fontsource/geist/latin-400.css';
 @import '@fontsource/geist/latin-400-italic.css';
 @import '@fontsource/geist/latin-500.css';
@@ -561,6 +562,29 @@
   html,
   body {
     overflow-x: clip;
+  }
+  @media (forced-colors: none) {
+    html {
+      scrollbar-color: var(--primary) var(--background);
+      scrollbar-width: thin;
+    }
+
+    @supports not (scrollbar-color: auto) {
+      html::-webkit-scrollbar {
+        width: 12px;
+        height: 12px;
+      }
+
+      html::-webkit-scrollbar-track {
+        background: var(--background);
+      }
+
+      html::-webkit-scrollbar-thumb {
+        border: 3px solid var(--background);
+        border-radius: 999px;
+        background: var(--primary);
+      }
+    }
   }
   h1,
   h2 {
