@@ -1,0 +1,7 @@
+Mode: built-in image_gen
+
+Use case: precise-object-edit
+Asset type: transparent full-body illustrated avatar for the existing website DevIdCard.
+Input image: edit target, the attached full-body illustrated man in beige sweater and black trousers.
+Primary request: Remove only the silver necklace, including its complete chain around the neck and over the sweater and the small silver pendant at approximately x 46.7%, y 21.8%. Reconstruct the beige knit fabric and any neck skin underneath seamlessly.
+Constraints: Keep the sweater's ribbed mock-neck collar unchanged. Preserve the man's exact face, hair, beard, expression, body proportions, standing pose, hands, beige sweater, black trousers, sneakers, illustration style, lighting, framing and image dimensions. Change nothing else. Preserve genuine background transparency and clean alpha edges. No text or watermark.
