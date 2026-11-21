@@ -95,6 +95,22 @@ const text = (fr: string, en: string) => (lang === 'fr' ? fr : en);
             )
           }
         </p>
+        <p class="text-muted-foreground mt-4 hidden text-xs leading-relaxed md:block">
+          {
+            text(
+              'Sur ordinateur, le curseur en verre suit le thème et se colore sur les liens et boutons. Le texte conserve le curseur de sélection natif.',
+              'On desktop, the glass cursor follows the theme and gains colour over links and buttons. Text keeps the native selection cursor.'
+            )
+          }
+        </p>
+        <p class="text-muted-foreground mt-4 hidden text-xs leading-relaxed md:block">
+          {
+            text(
+              'La barre de défilement à droite trace un trait d’encre aux bords irréguliers et au grain de papier au fil de la page, puis disparaît au repos.',
+              'The scrollbar on the right draws a paper-grained ink trail with irregular edges as you scroll, then fades away when idle.'
+            )
+          }
+        </p>
       </aside>
       <div class="min-w-0 space-y-20 md:space-y-28">
         {

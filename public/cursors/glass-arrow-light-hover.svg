@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <linearGradient id="glass" x1="4" y1="3" x2="24" y2="26" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fff3dc" />
+      <stop offset=".48" stop-color="#ffd29f" />
+      <stop offset="1" stop-color="#eaa064" />
+    </linearGradient>
+    <radialGradient id="reflection" cx=".3" cy=".1" r=".85">
+      <stop stop-color="#fffef7" stop-opacity=".9" />
+      <stop offset=".6" stop-color="#fffef7" stop-opacity=".16" />
+      <stop offset="1" stop-color="#fffef7" stop-opacity="0" />
+    </radialGradient>
+    <filter id="shadow" x="-30%" y="-20%" width="170%" height="170%">
+      <feDropShadow dx=".3" dy="1" stdDeviation=".65" flood-color="#24152e" flood-opacity=".25" />
+    </filter>
+    <clipPath id="arrow">
+      <path
+        d="M4 3 24.4 12.9Q25.8 13.6 24.3 14.1L18 16.1 23.2 21.4Q24.3 22.6 23.1 23.9L21.8 25.2Q20.6 26.4 19.4 25.2L14.2 19.9 10.5 24.7Q9.5 26 9 24.4L3.4 4.1Q3.1 2.6 4 3Z"
+      />
+    </clipPath>
+  </defs>
+  <path
+    d="M4 3 24.4 12.9Q25.8 13.6 24.3 14.1L18 16.1 23.2 21.4Q24.3 22.6 23.1 23.9L21.8 25.2Q20.6 26.4 19.4 25.2L14.2 19.9 10.5 24.7Q9.5 26 9 24.4L3.4 4.1Q3.1 2.6 4 3Z"
+    fill="url(#glass)"
+    fill-opacity=".94"
+    filter="url(#shadow)"
+  />
+  <g clip-path="url(#arrow)">
+    <ellipse cx="10" cy="8" rx="11" ry="4.5" transform="rotate(27 10 8)" fill="url(#reflection)" />
+  </g>
+  <path
+    d="M4 3 24.4 12.9Q25.8 13.6 24.3 14.1L18 16.1 23.2 21.4Q24.3 22.6 23.1 23.9L21.8 25.2Q20.6 26.4 19.4 25.2L14.2 19.9 10.5 24.7Q9.5 26 9 24.4L3.4 4.1Q3.1 2.6 4 3Z"
+    fill="none"
+    stroke="#8b563e"
+    stroke-opacity=".75"
+    stroke-width=".9"
+    stroke-linejoin="round"
+  />
+</svg>
