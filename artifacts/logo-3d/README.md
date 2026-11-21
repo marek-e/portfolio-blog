@@ -16,6 +16,26 @@ V2 is a separate treatment inspired by the supplied glass reference. It preserve
 - `app-icon-v2/me-app-icon-v2.blend` is the editable V2 scene.
 - `app-icon-v2/me-app-icon-v2-pngs.zip` contains the 12 V2 PNG exports.
 
+## Melo palette
+
+`create_app_icon_melo.py` loads the preserved V1 scene and writes a separate Melo-colored treatment into `app-icon-melo/`. Its main body uses lavender, violet, and plum sampled from the supplied character board, with a gently luminous amber dot inspired by Orbi and Melo's gold accents. The sampled material colors are `#C39ADB`, `#9665B6`, `#7D6FB6`, `#50387D`, and `#FBA54D`. The warm key and lavender rim lights retain the existing rounded geometry and finish.
+
+- `app-icon-melo/me-melo-{transparent,cream,indigo}-{size}.png` contains all three variants at 1024, 512, 256, 128, 64, and 32 px.
+- `app-icon-melo/me-melo.blend` is the editable scene with separate body and amber-dot materials.
+- `app-icon-melo/me-melo-pngs.zip` contains all 18 PNGs.
+
+The cream and indigo compositor values are calibrated for the saved AgX view at exposure 0.6 to reproduce the sampled `#FEF6ED` and `#1D1535` backgrounds. V1/V2 sources and exports are unchanged. The Melo treatment does not modify the website.
+
+## Melo: defined letter structure
+
+`create_app_icon_melo_defined.py` loads the original Melo scene and writes a separate revision into `app-icon-melo-defined/`. Separate lavender and violet tints follow the M diagonals, while the E bars and a slightly raised rounded shared vertical use one indigo material. The raised vertical gives the letters a visible depth boundary without opening a gap through the M. The amber dot is preserved.
+
+- `app-icon-melo-defined/me-melo-defined-{transparent,cream,indigo}-{size}.png` contains 18 PNGs at the same six sizes.
+- `app-icon-melo-defined/me-melo-defined.blend` is the editable scene.
+- `app-icon-melo-defined/me-melo-defined-pngs.zip` contains the complete PNG set.
+
+Run the Melo command without `-- --preview` first to create the saved scene this revision requires. The original Melo outputs remain available for comparison, along with V1 and V2.
+
 ## Regenerate
 
 These scripts use the Blender 5.2 Python API. From the repository root on macOS:
@@ -24,10 +44,12 @@ These scripts use the Blender 5.2 Python API. From the repository root on macOS:
 /Applications/Blender.app/Contents/MacOS/Blender --background --python artifacts/logo-3d/create_logo.py
 /Applications/Blender.app/Contents/MacOS/Blender --background --python artifacts/logo-3d/create_app_icon.py
 /Applications/Blender.app/Contents/MacOS/Blender --background --python artifacts/logo-3d/create_app_icon_v2.py
+/Applications/Blender.app/Contents/MacOS/Blender --background --python artifacts/logo-3d/create_app_icon_melo.py
+/Applications/Blender.app/Contents/MacOS/Blender --background --python artifacts/logo-3d/create_app_icon_melo_defined.py
 ```
 
-When regenerating the app versions, run the V1 app-icon command without `-- --preview` before the V2 command. This creates or refreshes `app-icon/me-app-icon.blend`, which V2 loads. A V1 preview does not save this scene. The studio command can run independently.
+When regenerating the app versions, run the V1 app-icon command without `-- --preview` before the V2 or Melo command. This creates or refreshes `app-icon/me-app-icon.blend`, which V2 and Melo load. A V1 preview does not save this scene. The studio command can run independently.
 
-For a faster 512 px preview, append `-- --preview` to either app-icon command. V1 previews go into `app-icon/preview/`; V2 previews go into `app-icon-v2/preview/`. Preview runs do not save Blender scenes or ZIP bundles. Previews, iteration renders, and Blender backup files stay local.
+For a faster 512 px preview, append `-- --preview` to an app-icon command. V1 previews go into `app-icon/preview/`; V2 previews go into `app-icon-v2/preview/`; Melo previews go into `app-icon-melo/preview/`; the defined-letter revision uses `app-icon-melo-defined/preview/`. Preview runs do not save Blender scenes or ZIP bundles. Previews, iteration renders, and Blender backup files stay local.
 
 These are standalone assets. The website logo and favicon remain unchanged.
